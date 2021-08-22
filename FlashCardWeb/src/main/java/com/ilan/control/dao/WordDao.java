@@ -169,9 +169,9 @@ public class WordDao implements Dao<Word> {
 	//@Test
 	public void testAdd() {
 		Word w = new Word();
-		w.setW_id("e132");
-		w.setVocabulary("test8");
-		w.setTranslation("測驗8");
+		w.setW_id("e138");
+		w.setVocabulary("test10");
+		w.setTranslation("測驗10");
 		w.setExplanation("ttt1");
 		w.setExplanation2("ttt2");
 		w.setCreate_date(new Date(new java.util.Date().getTime()));
@@ -194,8 +194,9 @@ public class WordDao implements Dao<Word> {
 		WordDao dao = new WordDao();
 		Word w;
 		try {
-			w = dao.queryByID("e131");
+			w = dao.queryByID("e137");
 			System.out.println("query id:"+w.getW_id()+", "+w.getVocabulary());
+			System.out.println("query id:"+w.getW_id().length());
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
