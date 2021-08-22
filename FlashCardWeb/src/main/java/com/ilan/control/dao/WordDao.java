@@ -1,16 +1,17 @@
 package com.ilan.control.dao;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.junit.Test;
 
 import com.ilan.control.connection.MyConnection;
+import com.ilan.exception.ResultNullException;
 import com.ilan.model.words.Word;
 
 public class WordDao implements Dao<Word> {
@@ -49,7 +50,7 @@ public class WordDao implements Dao<Word> {
 	}
 
 	@Override
-	public Word queryByID(String id) {
+	public Word queryByID(String id) throws IOException {
 		Connection conn = MyConnection.getConnection();
 
 		String sql = "select * from word where w_id=?";
@@ -80,6 +81,10 @@ public class WordDao implements Dao<Word> {
 		} catch (SQLException e) {
 			// e.printStackTrace();
 			System.out.println(e.getMessage() + " : " + this.getClass().getName() + "::queryByID");
+		}
+		
+		if(r==null) {
+			throw new ResultNullException(id);
 		}
 
 		return r ;
@@ -157,8 +162,8 @@ public class WordDao implements Dao<Word> {
 	@Test
 	public void test() {
 		//testAdd(); 
-		//testQueryID();
-		testUpdate();
+		testQueryID();
+		//testUpdate();
 	}
 
 	//@Test
@@ -187,19 +192,29 @@ public class WordDao implements Dao<Word> {
 	//@Test
 	public void testQueryID() {
 		WordDao dao = new WordDao();
-		Word w= dao.queryByID("e131");
-		System.out.println("query id:"+w.getW_id()+", "+w.getVocabulary());
+		Word w;
+		try {
+			w = dao.queryByID("e131");
+			System.out.println("query id:"+w.getW_id()+", "+w.getVocabulary());
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
 		
 	}
 	//@Test
 	public void testUpdate() {
 		WordDao dao = new WordDao();
-		Word w = dao.queryByID("e135");
-		String id=w.getW_id();
-		w.setW_id("e137");
-
-
-		System.out.println("update:"+dao.update(id, w));
+		Word w;
+		try {
+			w = dao.queryByID("e135");
+			String id=w.getW_id();
+			w.setW_id("e137");
+			
+			
+			System.out.println("update:"+dao.update(id, w));
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
 		
 	}
 }

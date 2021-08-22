@@ -5,14 +5,12 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.junit.Test;
 
 import com.ilan.control.connection.MyConnection;
 import com.ilan.model.words.Card;
-import com.ilan.model.words.Word;
 
 public class CardDao implements Dao<Card> {
 
