@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.junit.Test;
@@ -20,7 +21,7 @@ public class WordDao implements Dao<Word> {
 
 		String sql = "insert into word (w_id,vocabulary,translation,explanation,"
 				+ "explanation2,create_date,update_date,creator,note,tag) values(?,?,?,?,?,?,?,?,?,?)";
-		boolean r = false;
+		int r = 0;
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, t.getW_id());
@@ -34,23 +35,54 @@ public class WordDao implements Dao<Word> {
 			ps.setString(9, t.getNote());
 			ps.setString(10, t.getTag());
 
-			r = ps.execute();
+			r = ps.executeUpdate();
 
 			ps.close();
 			conn.close();
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// e.printStackTrace();
+			System.out.println(e.getMessage() + " : " + this.getClass().getName() + "::add");
 		}
 
-		return r;
+		return r > 0 ? true : false;
 	}
 
 	@Override
 	public Word queryByID(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conn = MyConnection.getConnection();
+
+		String sql = "select * from word where w_id=?";
+		Word r = null;
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+
+
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				r=new Word();
+				r.setW_id(rs.getString("w_id"));
+				r.setVocabulary(rs.getString("vocabulary"));
+				r.setTranslation(rs.getString("translation"));
+				r.setExplanation(rs.getString("explanation"));
+				r.setExplanation2(rs.getString("explanation2"));
+				r.setCreate_date(rs.getDate("create_date"));
+				r.setUpdate_date(rs.getDate("update_date"));
+				r.setCreator(rs.getString("creator"));
+				r.setNote(rs.getString("note"));
+				r.setTag(rs.getString("tag"));
+			}
+
+			ps.close();
+			conn.close();
+
+		} catch (SQLException e) {
+			// e.printStackTrace();
+			System.out.println(e.getMessage() + " : " + this.getClass().getName() + "::queryByID");
+		}
+
+		return r ;
 	}
 
 	@Override
@@ -67,22 +99,74 @@ public class WordDao implements Dao<Word> {
 
 	@Override
 	public int update(String id, Word t) {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection conn = MyConnection.getConnection();
+
+		String sql = "update word set w_id=?,vocabulary=?,translation=?,explanation=?,"
+				+ "explanation2=?,create_date=?,update_date=?,creator=?,note=?,tag=? where w_id=?";
+		int r = 0;
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, t.getW_id());
+			ps.setString(2, t.getVocabulary());
+			ps.setString(3, t.getTranslation());
+			ps.setString(4, t.getExplanation());
+			ps.setString(5, t.getExplanation2());
+			ps.setDate(6, t.getCreate_date());
+			ps.setDate(7, t.getUpdate_date());
+			ps.setString(8, t.getCreator());
+			ps.setString(9, t.getNote());
+			ps.setString(10, t.getTag());
+			ps.setString(11, id);
+
+			r = ps.executeUpdate();
+
+			ps.close();
+			conn.close();
+
+		} catch (SQLException e) {
+			// e.printStackTrace();
+			System.out.println(e.getMessage() + " : " + this.getClass().getName() + "::update");
+		}
+
+		return r ;
 	}
 
 	@Override
 	public int delete(String id) {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection conn = MyConnection.getConnection();
+
+		String sql = "delete from word where w_id=?";
+		int r = 0;
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			r = ps.executeUpdate();
+
+			ps.close();
+			conn.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			// e.printStackTrace();
+			System.out.println(e.getMessage() + " : " + this.getClass().getName() + "::delete");
+		}
+
+		return r;
+	}
+	
+	@Test
+	public void test() {
+		//testAdd(); 
+		//testQueryID();
+		testUpdate();
 	}
 
-	@Test
+	//@Test
 	public void testAdd() {
 		Word w = new Word();
-		w.setW_id("e127");
-		w.setVocabulary("test3");
-		w.setTranslation("測驗3");
+		w.setW_id("e132");
+		w.setVocabulary("test8");
+		w.setTranslation("測驗8");
 		w.setExplanation("ttt1");
 		w.setExplanation2("ttt2");
 		w.setCreate_date(new Date(new java.util.Date().getTime()));
@@ -91,7 +175,31 @@ public class WordDao implements Dao<Word> {
 		w.setTag("null");
 
 		Dao<Word> dao = new WordDao();
-		System.out.println("result: " + dao.add(w));
+		System.out.println("add: " + dao.add(w));
 	}
 
+	//@Test
+	public void testDel() {
+		WordDao dao = new WordDao();
+		System.out.println("del:"+dao.delete("e129"));
+
+	}
+	//@Test
+	public void testQueryID() {
+		WordDao dao = new WordDao();
+		Word w= dao.queryByID("e131");
+		System.out.println("query id:"+w.getW_id()+", "+w.getVocabulary());
+		
+	}
+	//@Test
+	public void testUpdate() {
+		WordDao dao = new WordDao();
+		Word w = dao.queryByID("e135");
+		String id=w.getW_id();
+		w.setW_id("e137");
+
+
+		System.out.println("update:"+dao.update(id, w));
+		
+	}
 }
