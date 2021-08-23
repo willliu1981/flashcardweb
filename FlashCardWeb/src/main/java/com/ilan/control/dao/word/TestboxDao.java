@@ -20,22 +20,32 @@ public class TestboxDao implements Dao<Testbox> {
 	public boolean add(Testbox t) {
 		Connection conn = MyConnection.getConnection();
 
-		String sql = "insert into testbox (t_id,name,testtimes,testdate,"
-				+ "state,cards,create_date,update_date,creator,note,tag) values(?,?,?,?,?,?,?,?,?,?,?)";
+		String keys = String.format(
+				"insert into testbox (t_id,name,%s testdate,%s cards,create_date,update_date,creator,note,tag)",
+				t.getTesttimes() != null ? "testtimes," : "", t.getState() != null ? "state," : "");
+		String values = String.format("values(%s%s?,?,?,?,?,?,?,?,?)", t.getTesttimes() != null ? "?," : "",
+				t.getState() != null ? "?," : "");
+		String sql = keys + values;
+
 		int r = 0;
 		try {
+			int idx = 1;
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, t.getT_id());
-			ps.setString(2, t.getName());
-			ps.setInt(3, t.getTesttimes());
-			ps.setString(4, t.getTestdate());
-			ps.setInt(5, t.getState());
-			ps.setString(6, t.getCards());
-			ps.setDate(7, t.getCreate_date());
-			ps.setDate(8, t.getUpdate_date());
-			ps.setString(9, t.getCreator());
-			ps.setString(10, t.getNote());
-			ps.setString(11, t.getTag());
+			ps.setString(idx++, t.getT_id());
+			ps.setString(idx++, t.getName());
+			if (t.getTesttimes() != null) {
+				ps.setInt(idx++, t.getTesttimes());
+			}
+			ps.setString(idx++, t.getTestdate());
+			if (t.getState() != null) {
+				ps.setInt(idx++, t.getState());
+			}
+			ps.setString(idx++, t.getCards());
+			ps.setDate(idx++, t.getCreate_date());
+			ps.setDate(idx++, t.getUpdate_date());
+			ps.setString(idx++, t.getCreator());
+			ps.setString(idx++, t.getNote());
+			ps.setString(idx++, t.getTag());
 
 			r = ps.executeUpdate();
 
@@ -88,18 +98,19 @@ public class TestboxDao implements Dao<Testbox> {
 	// @Test
 	public void testAdd() {
 		Testbox box = new Testbox();
-		box.setT_id("t130");
-		box.setName("tb130");
+		box.setT_id("t137");
+		box.setName("tb137");
 		// String date=new SimpleDateFormat().format(new java.util.Date());
 		// box.setTestdate(date);
 		box.setCreate_date(new Date(new java.util.Date().getTime()));
-		 box.setCreator("u123");
+		box.setCreator("u123");
 		box.setNote("test測試2");
+		box.setTesttimes(3);
+		box.setState(4);
 
 		TestboxDao dao = new TestboxDao();
 		System.out.println("add:" + dao.add(box));
 
 	}
-	
 
 }

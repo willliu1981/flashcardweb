@@ -138,6 +138,7 @@ public class CardDao implements Dao<Card> {
 	
 	@Test
 	public void test() {
+		//testAdd();
 		testUpdate();
 	}
 
@@ -146,7 +147,7 @@ public class CardDao implements Dao<Card> {
 		Card c = new Card();
 		c.setC_id("c125");
 		c.setName("cc125");
-		c.setWord_id("e133");
+		c.setWord_id("e137");
 		c.setReferred(0);
 		c.setCreate_date(new Date(new java.util.Date().getTime()));
 		c.setCreator("u123");
@@ -158,9 +159,9 @@ public class CardDao implements Dao<Card> {
 	//@Test
 	public void testUpdate() {
 		CardDao dao=new CardDao();
-		Card c = dao.queryByID("c123");
+		Card c = dao.queryByID("c125");
 		String id=c.getC_id();
-		c.setWord_id("e135");
+		c.setWord_id("e139");
 
 		dao.update(id, c);
 	}

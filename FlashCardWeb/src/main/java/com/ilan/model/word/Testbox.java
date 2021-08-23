@@ -5,9 +5,9 @@ import java.sql.Date;
 public class Testbox {
 	private String t_id;
 	private String name;
-	private Integer testtimes=0;
+	private Integer testtimes;
 	private String testdate;
-	private Integer state=0;
+	private Integer state;
 	private Date create_date;
 	private Date update_date;
 	private String creator;
