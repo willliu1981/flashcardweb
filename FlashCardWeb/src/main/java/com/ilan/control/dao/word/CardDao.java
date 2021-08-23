@@ -1,4 +1,4 @@
-package com.ilan.control.dao;
+package com.ilan.control.dao.word;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -10,7 +10,8 @@ import java.util.List;
 import org.junit.Test;
 
 import com.ilan.control.connection.MyConnection;
-import com.ilan.model.words.Card;
+import com.ilan.control.dao.Dao;
+import com.ilan.model.word.Card;
 
 public class CardDao implements Dao<Card> {
 

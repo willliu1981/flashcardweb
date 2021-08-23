@@ -1,4 +1,4 @@
-package com.ilan.control.dao;
+package com.ilan.control.dao.word;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -11,7 +11,8 @@ import java.util.List;
 import org.junit.Test;
 
 import com.ilan.control.connection.MyConnection;
-import com.ilan.model.words.Testbox;
+import com.ilan.control.dao.Dao;
+import com.ilan.model.word.Testbox;
 
 public class TestboxDao implements Dao<Testbox> {
 
@@ -87,15 +88,18 @@ public class TestboxDao implements Dao<Testbox> {
 	// @Test
 	public void testAdd() {
 		Testbox box = new Testbox();
-		box.setT_id("t124");
-		box.setName("tb124");
+		box.setT_id("t130");
+		box.setName("tb130");
 		// String date=new SimpleDateFormat().format(new java.util.Date());
 		// box.setTestdate(date);
 		box.setCreate_date(new Date(new java.util.Date().getTime()));
-		// box.setCreator("u123");
+		 box.setCreator("u123");
+		box.setNote("test測試2");
 
 		TestboxDao dao = new TestboxDao();
 		System.out.println("add:" + dao.add(box));
 
 	}
+	
+
 }

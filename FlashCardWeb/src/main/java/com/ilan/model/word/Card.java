@@ -1,4 +1,4 @@
-package com.ilan.model.words;
+package com.ilan.model.word;
 
 import java.sql.Date;
 

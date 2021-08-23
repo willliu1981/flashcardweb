@@ -1,4 +1,4 @@
-package com.ilan.control.dao;
+package com.ilan.control.dao.word;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -11,8 +11,9 @@ import java.util.List;
 import org.junit.Test;
 
 import com.ilan.control.connection.MyConnection;
+import com.ilan.control.dao.Dao;
 import com.ilan.exception.ResultNullException;
-import com.ilan.model.words.Word;
+import com.ilan.model.word.Word;
 
 public class WordDao implements Dao<Word> {
 

@@ -1,5 +1,7 @@
 import java.util.Date;
 
+import org.junit.Test;
+
 public class Test1 {
 
 	public static void main(String[] args) {
@@ -8,6 +10,11 @@ public class Test1 {
 		
 		Test1 t=new Test1();
 		System.out.println(t.toString());
+	}
+	
+	@Test
+	public void test() {
+		
 	}
 
 }

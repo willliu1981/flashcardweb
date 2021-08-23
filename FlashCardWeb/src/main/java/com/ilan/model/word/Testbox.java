@@ -1,11 +1,11 @@
-package com.ilan.model.words;
+package com.ilan.model.word;
 
 import java.sql.Date;
 
 public class Testbox {
 	private String t_id;
 	private String name;
-	private Integer testtimes;
+	private Integer testtimes=0;
 	private String testdate;
 	private Integer state=0;
 	private Date create_date;
