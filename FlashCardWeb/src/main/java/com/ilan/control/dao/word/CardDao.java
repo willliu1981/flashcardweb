@@ -61,7 +61,6 @@ public class CardDao implements Dao<Card> {
 
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()) {
-				//c_id,word_id,name,referred,create_date,update_date,creator,note,tag
 				r=new Card();
 				r.setC_id(rs.getString("c_id"));
 				r.setWord_id(rs.getString("word_id"));

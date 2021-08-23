@@ -1,12 +1,13 @@
 package com.ilan.model.word;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Testbox {
 	private String t_id;
 	private String name;
 	private Integer testtimes;
-	private String testdate;
+	private Timestamp testdate;
 	private Integer state;
 	private Date create_date;
 	private Date update_date;
@@ -39,12 +40,12 @@ public class Testbox {
 		this.testtimes = testtimes;
 	}
 
-	public String getTestdate() {
+	public Timestamp getTestdate() {
 		return testdate;
 	}
 
-	public void setTestdate(String testdate) {
-		this.testdate = testdate;
+	public void setTestdate(Timestamp timestamp) {
+		this.testdate = timestamp;
 	}
 
 	public Integer getState() {

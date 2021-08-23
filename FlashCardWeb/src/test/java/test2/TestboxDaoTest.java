@@ -25,7 +25,7 @@ public class TestboxDaoTest extends TestboxDao {
 			ps.setString(1, t.getT_id());
 			ps.setString(2, t.getName());
 			ps.setInt(3, t.getTesttimes());
-			ps.setString(4, t.getTestdate());
+			ps.setTimestamp(4, t.getTestdate());
 			ps.setString(5, t.getCards());
 			ps.setDate(6, t.getCreate_date());
 			ps.setDate(7, t.getUpdate_date());
