@@ -9,7 +9,7 @@ public class User {
 	private String password;
 	private String email;
 	private String authority;
-	private String userdata;
+	private String userdata_id;
 	private Date create_date;
 	private Date update_date;
 	private String note;
@@ -63,12 +63,12 @@ public class User {
 		this.email = email;
 	}
 
-	public String getUserdata() {
-		return userdata;
+	public String getUserdata_id() {
+		return userdata_id;
 	}
 
-	public void setUserdata(String userdata) {
-		this.userdata = userdata;
+	public void setUserdata_id(String userdata_id) {
+		this.userdata_id = userdata_id;
 	}
 
 	public Date getCreate_date() {
