@@ -25,7 +25,7 @@ public class UserDao implements Dao<User> {
 		Connection conn = MyConnection.getConnection();
 
 		String sql = "insert into user (u_id,displayname,username,password,"
-				+ "email,authority,userdata_id, create_date,update_date,note,tag) values(?,?,?,?,?,?,?,?,?,?,?)";
+				+ "authority,userdata_id, create_date,update_date,note,tag) values(?,?,?,?,?,?,?,?,?,?)";
 		int r = 0;
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -33,13 +33,12 @@ public class UserDao implements Dao<User> {
 			ps.setString(2, t.getDisplayName());
 			ps.setString(3, t.getUsername());
 			ps.setString(4, t.getPassword());
-			ps.setString(5, t.getEmail());
-			ps.setString(6, t.getAuthority());
-			ps.setString(7, t.getUserdata_id());
-			ps.setDate(8, t.getCreate_date());
-			ps.setDate(9, t.getUpdate_date());
-			ps.setString(10, t.getNote());
-			ps.setString(11, t.getTag());
+			ps.setString(5, t.getAuthority());
+			ps.setString(6, t.getUserdata_id());
+			ps.setDate(7, t.getCreate_date());
+			ps.setDate(8, t.getUpdate_date());
+			ps.setString(9, t.getNote());
+			ps.setString(10, t.getTag());
 
 			r = ps.executeUpdate();
 
@@ -50,7 +49,6 @@ public class UserDao implements Dao<User> {
 			// e.printStackTrace();
 			System.out.println(e.getMessage() + " : " + this.getClass().getName() + "::add");
 		}
-
 		return r > 0 ? true : false;
 	}
 
@@ -71,7 +69,6 @@ public class UserDao implements Dao<User> {
 				r.setDisplayName(rs.getString("displayname"));
 				r.setUsername(rs.getString("username"));
 				r.setPassword(rs.getString("password"));
-				r.setEmail(rs.getString("email"));
 				r.setAuthority(rs.getString("authority"));
 				r.setUserdata_id(rs.getString("userdata_id"));
 				r.setCreate_date(rs.getDate("create_date"));
@@ -107,8 +104,7 @@ public class UserDao implements Dao<User> {
 	public int update(String id, User t) {
 		Connection conn = MyConnection.getConnection();
 
-		String sql = "update user set u_id=?,displayname=?,username=?,password=?,email=?,authority=?,"
-				+ "userdata_id=?,create_date=?,update_date=?,note=?,tag=? where u_id=?";
+		String sql = "update user set u_id=?,displayname=?,username=?,password=?,authority=?,userdata_id=?,create_date=?,update_date=?,note=?,tag=? where u_id=?";
 		int r = 0;
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -116,14 +112,13 @@ public class UserDao implements Dao<User> {
 			ps.setString(2, t.getDisplayName());
 			ps.setString(3, t.getUsername());
 			ps.setString(4, t.getPassword());
-			ps.setString(5, t.getEmail());
-			ps.setString(6, t.getAuthority());
-			ps.setString(7, t.getUserdata_id());
-			ps.setDate(8, t.getCreate_date());
-			ps.setDate(9, t.getUpdate_date());
-			ps.setString(10, t.getNote());
-			ps.setString(11, t.getTag());
-			ps.setString(12, id);
+			ps.setString(5, t.getAuthority());
+			ps.setString(6, t.getUserdata_id());
+			ps.setDate(7, t.getCreate_date());
+			ps.setDate(8, t.getUpdate_date());
+			ps.setString(9, t.getNote());
+			ps.setString(10, t.getTag());
+			ps.setString(11, id);
 
 			r = ps.executeUpdate();
 
@@ -165,8 +160,8 @@ public class UserDao implements Dao<User> {
 	public void test() {
 		// testAdd();
 		// testUpdate();
-		//testDel();
-		testAddAndUpdate();
+		testDel();
+		//testAddAndUpdate();
 	}
 
 	// @Test
@@ -176,7 +171,6 @@ public class UserDao implements Dao<User> {
 		user.setDisplayName("Tony");
 		user.setUsername("tony123");
 		user.setPassword("t1234");
-		user.setEmail("tony123@yahoo.com.tw");
 		user.setUserdata_id("temp_u123");
 
 		user.setCreate_date(new Date(new java.util.Date().getTime()));
@@ -212,7 +206,7 @@ public class UserDao implements Dao<User> {
 	// @Test
 	public void testDel() {
 		UserDao dao = new UserDao();
-		System.out.println("del:" + dao.delete("u124"));
+		System.out.println("del:" + dao.delete("uid1629796303564"));
 
 	}
 
@@ -221,33 +215,27 @@ public class UserDao implements Dao<User> {
 		UserDao daoUser = new UserDao();
 		UserdataDao daoUserdata = new UserdataDao();
 
+		String userID = "u125";
+		String userdataID = "ud999";
+
 		// create user
 		User user = new User();
-		user.setU_id("u124");
-		user.setDisplayName("Mary");
-		user.setUsername("mary123");
-		user.setPassword("m1234");
-		user.setEmail("mary246@yahoo.com.tw");
-		user.setUserdata_id("temp_" + user.getU_id());
+		user.setU_id(userID);
+		user.setDisplayName("Kevin");
+		user.setUsername("kevin123");
+		user.setPassword("k1234");
+		user.setUserdata_id(userdataID);
 
 		daoUser.add(user);
 
 		// create userdata
 		Userdata userdata = new Userdata();
-		userdata.setUd_id("ud512");
+		userdata.setUd_id(userdataID);
 		userdata.setUser_id(user.getU_id());
+		userdata.setName(user.getDisplayName());
+		userdata.setEmail("kevin123@yahoo.com.tw");
 
 		daoUserdata.add(userdata);
-
-		// update user -> userdata_id
-		User newUser = new User();
-		try {
-			newUser = daoUser.queryByID(user.getU_id());
-			newUser.setUserdata_id(userdata.getUd_id());
-			daoUser.update(newUser.getU_id(), newUser);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 
 	}
 

@@ -7,7 +7,6 @@ public class User {
 	private String displayName;
 	private String username;
 	private String password;
-	private String email;
 	private String authority;
 	private String userdata_id;
 	private Date create_date;
@@ -53,14 +52,6 @@ public class User {
 
 	public void setAuthority(String authority) {
 		this.authority = authority;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public String getUserdata_id() {

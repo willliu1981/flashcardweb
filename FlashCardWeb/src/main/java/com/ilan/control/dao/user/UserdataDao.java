@@ -20,13 +20,21 @@ public class UserdataDao implements Dao<Userdata> {
 	public boolean add(Userdata t) {
 		Connection conn = MyConnection.getConnection();
 
-		String sql = "insert into userdata (ud_id,user_id) values(?,?)";
+		String sql = "insert into userdata (ud_id,user_id,name,email,cardboxdata,scenedata,"
+				+ "create_date,update_date,note,tag) values(?,?,?,?,?,?,?,?,?,?)";
 		int r = 0;
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, t.getUd_id());
 			ps.setString(2, t.getUser_id());
-
+			ps.setString(3, t.getName());
+			ps.setString(4, t.getEmail());
+			ps.setString(5, t.getCardboxdata());
+			ps.setString(6, t.getScenedata());
+			ps.setDate(7, t.getCreate_date());
+			ps.setDate(8, t.getUpdate_date());
+			ps.setString(9, t.getNote());
+			ps.setString(10, t.getTag());
 
 			r = ps.executeUpdate();
 
@@ -70,7 +78,7 @@ public class UserdataDao implements Dao<Userdata> {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
+
 	@Test
 	public void test() {
 		testAdd();
@@ -81,8 +89,6 @@ public class UserdataDao implements Dao<Userdata> {
 		Userdata data = new Userdata();
 		data.setUd_id("ud256");
 		data.setUser_id("u123");
-
-
 
 		UserdataDao dao = new UserdataDao();
 		System.out.println("add:" + dao.add(data));
