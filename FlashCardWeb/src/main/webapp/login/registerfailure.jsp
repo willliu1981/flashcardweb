@@ -13,11 +13,11 @@ request.setAttribute("root", "http://" + request.getHeader("host") + request.get
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#reback").click(function() {
-			location.href = "login/register.jsp";
+			location.href = "${root}/login/register.jsp";
 		});
 
 		$("#home").click(function() {
-			location.href = "index.jsp";
+			location.href = "${root}/index.jsp";
 		});
 	});
 </script>
