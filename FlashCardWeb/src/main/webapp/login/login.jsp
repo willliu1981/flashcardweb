@@ -21,7 +21,7 @@
 <body>
 	<fieldset>
 		<legend>登入</legend>
-		<form action="" method="post">
+		<form action="../LoginServlet" method="post">
 			<table style="text-align:center">
 				<tr>
 					<td>帳號</td>
