@@ -207,7 +207,7 @@ public class UserDao implements Dao<User>,UserDaoExtension<User> {
 	// @Test
 	public void testDel() {
 		UserDao dao = new UserDao();
-		System.out.println("del:" + dao.delete("uid1629796303564"));
+		System.out.println("del:" + dao.delete("uid1629951570073"));
 
 	}
 

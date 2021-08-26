@@ -1,24 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>failure</title>
-<c:url var="jqueryUrl" value="/js/jquery-3.6.0.min.js"/>
-<c:url var="registerUrl" value="/login/register.jsp"/>
-<c:url var="indexUrl" value="/index.jsp"/>
-<script type="text/javascript" src="${jqueryUrl}"></script>
-
+<script type="text/javascript"
+	src="/FlashCardWeb/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#reback").click(function() {
-			location.href = "${registerUrl}";
+			location.href = "/FlashCardWeb/login/register.jsp";
 		});
 
 		$("#home").click(function() {
-			location.href = "${indexUrl}";
+			location.href = "/FlashCardWeb/index.jsp";
 		});
 	});
 </script>

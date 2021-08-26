@@ -9,6 +9,7 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
   <filter>
     <filter-name>EncodingFilter</filter-name>
     <filter-class>com.ilan.control.filter.EncodingFilter</filter-class>

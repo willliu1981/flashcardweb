@@ -1,7 +1,5 @@
 package com.ilan.control.dao.factory;
 
-import com.ilan.control.dao.user.UserDao;
-
 public class DaoFactory {
 
 	private DaoFactory() {
