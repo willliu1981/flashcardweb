@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+
+
+	<Resource name="daoFactory/UserDaoFactory" auth="Container"
+		type="com.ilan.control.dao.factory.UserDaoFactory"
+		factory="org.apache.naming.factory.BeanFactory"
+		daoType="com.ilan.control.dao.user.UserDao"/>
+
+</Context>
