@@ -1,9 +1,10 @@
-package com.ilan.control.dao.factory;
+package com.ilan.control.dao.factory.user;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import com.ilan.control.dao.Dao;
+import com.ilan.control.dao.factory.AbstractDaoFactory;
 import com.ilan.model.user.User;
 
 public class UserDaoFactory extends AbstractDaoFactory {

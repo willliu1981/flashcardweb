@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import com.ilan.control.connection.MyConnection;
 import com.ilan.control.dao.Dao;
-import com.ilan.control.dao.factory.UserDaoExtension;
+import com.ilan.control.dao.factory.user.UserDaoExtension;
 import com.ilan.control.dao.word.TestboxDao;
 import com.ilan.control.dao.word.WordDao;
 import com.ilan.model.user.User;

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ilan.control.dao.factory.DaoFactory;
-import com.ilan.control.dao.factory.UserDaoFactory;
+import com.ilan.control.dao.factory.user.UserDaoFactory;
 
 /**
  * Servlet implementation class LoginServlet
@@ -36,6 +36,8 @@ public class LoginServlet extends HttpServlet {
 		UserDaoFactory daoFactory=(UserDaoFactory) DaoFactory.getUserDaoFactory();
 		boolean identifyFlag=daoFactory.identifyUser(username, password);
 		
+		
+		
 		if(identifyFlag) {
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}else {
@@ -44,5 +46,4 @@ public class LoginServlet extends HttpServlet {
 		
 		
 	}
-
 }
