@@ -4,7 +4,7 @@ import org.junit.Test;
 
 public class Authorization {
 
-	public  enum Member implements EnumValue {
+	public  enum Member implements AuthorizationEnumValue {
 		CREATECARD, READCARD, EDITCARD, DELETECARD;
 
 		public int getValue() {
@@ -12,7 +12,7 @@ public class Authorization {
 		}
 	}
 
-	public  enum Administrator implements EnumValue  {
+	public  enum Administrator implements AuthorizationEnumValue  {
 		CREATEWORD, READWORD, EDITWORD, DELETEWORD, CREATEMEMBERCARD, READMEMBERCARD,
 		EDITMEMBERCARD, DELETEMEMBERCARD;
 
