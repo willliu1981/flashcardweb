@@ -13,13 +13,11 @@ import org.junit.Test;
 import com.ilan.control.connection.MyConnection;
 import com.ilan.control.dao.Dao;
 import com.ilan.control.dao.factory.user.UserDaoExtension;
-import com.ilan.control.dao.word.TestboxDao;
-import com.ilan.control.dao.word.WordDao;
+import com.ilan.exception.ResultNullException;
 import com.ilan.model.user.User;
 import com.ilan.model.user.Userdata;
-import com.ilan.model.word.Testbox;
 
-public class UserDao implements Dao<User>,UserDaoExtension<User> {
+public class UserDao implements Dao<User>, UserDaoExtension<User> {
 
 	@Override
 	public boolean add(User t) {
@@ -47,7 +45,6 @@ public class UserDao implements Dao<User>,UserDaoExtension<User> {
 			conn.close();
 
 		} catch (SQLException e) {
-			// e.printStackTrace();
 			System.out.println(e.getMessage() + " : " + this.getClass().getName() + "::add");
 		}
 		return r > 0 ? true : false;
@@ -55,38 +52,12 @@ public class UserDao implements Dao<User>,UserDaoExtension<User> {
 
 	@Override
 	public User queryByID(String id) throws IOException {
-		Connection conn = MyConnection.getConnection();
-
-		String sql = "select * from user where u_id=?";
-		User r = null;
-		try {
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, id);
-
-			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
-				r = new User();
-				r.setU_id(rs.getString("u_id"));
-				r.setDisplayName(rs.getString("displayname"));
-				r.setUsername(rs.getString("username"));
-				r.setPassword(rs.getString("password"));
-				r.setAuthority(rs.getString("authority"));
-				r.setUserdata_id(rs.getString("userdata_id"));
-				r.setCreate_date(rs.getDate("create_date"));
-				r.setUpdate_date(rs.getDate("update_date"));
-				r.setNote(rs.getString("note"));
-				r.setTag(rs.getString("tag"));
-			}
-
-			ps.close();
-			conn.close();
-
-		} catch (SQLException e) {
-			// e.printStackTrace();
-			System.out.println(e.getMessage() + " : " + this.getClass().getName() + "::queryByID");
+		User user = findByDefault("u_id=?", id);
+		if (user == null) {
+			throw new ResultNullException(
+					"Result is Null:" + this.getClass().getName() + "::queryByID:" + id);
 		}
-
-		return r;
+		return user;
 	}
 
 	@Override
@@ -149,95 +120,10 @@ public class UserDao implements Dao<User>,UserDaoExtension<User> {
 			conn.close();
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			// e.printStackTrace();
-			System.out.println(e.getMessage() + " : " + this.getClass().getName() + "::delete");
+			System.out.println(e.getMessage() + ":" + this.getClass().getName() + "::delete:" + id);
 		}
 
 		return r;
-	}
-
-	@Test
-	public void test() {
-		// testAdd();
-		// testUpdate();
-		testDel();
-		//testAddAndUpdate();
-	}
-
-	// @Test
-	public void testAdd() {
-		User user = new User();
-		user.setU_id("u123");
-		user.setDisplayName("Tony");
-		user.setUsername("tony123");
-		user.setPassword("t1234");
-		user.setUserdata_id("temp_u123");
-
-		user.setCreate_date(new Date(new java.util.Date().getTime()));
-
-		UserDao dao = new UserDao();
-		System.out.println("add:" + dao.add(user));
-
-	}
-
-	// @Test
-	public void testUpdate() {
-		UserDao dao = new UserDao();
-		User user;
-		try {
-			user = dao.queryByID("u123");
-			String id = user.getU_id();
-//				user.setDisplayName("Tony");
-//				user.setUsername("tony123");
-//				user.setPassword("t1234");
-//				user.setEmail("tony123@yahoo.com.tw");
-			user.setUserdata_id("ud256");
-
-			user.setCreate_date(new Date(new java.util.Date().getTime()));
-
-			System.out.println("update:" + dao.update(id, user));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-
-	// @Test
-	public void testDel() {
-		UserDao dao = new UserDao();
-		System.out.println("del:" + dao.delete("uid1629951570073"));
-
-	}
-
-	// @Test
-	public void testAddAndUpdate() {
-		UserDao daoUser = new UserDao();
-		UserdataDao daoUserdata = new UserdataDao();
-
-		String userID = "u125";
-		String userdataID = "ud999";
-
-		// create user
-		User user = new User();
-		user.setU_id(userID);
-		user.setDisplayName("Kevin");
-		user.setUsername("kevin123");
-		user.setPassword("k1234");
-		user.setUserdata_id(userdataID);
-
-		daoUser.add(user);
-
-		// create userdata
-		Userdata userdata = new Userdata();
-		userdata.setUd_id(userdataID);
-		userdata.setUser_id(user.getU_id());
-		userdata.setName(user.getDisplayName());
-		userdata.setEmail("kevin123@yahoo.com.tw");
-
-		daoUserdata.add(userdata);
-
 	}
 
 	@Override
@@ -270,11 +156,137 @@ public class UserDao implements Dao<User>,UserDaoExtension<User> {
 			conn.close();
 
 		} catch (SQLException e) {
-			// e.printStackTrace();
 			System.out.println(e.getMessage() + " : " + this.getClass().getName() + "::queryByID");
 		}
 
 		return r;
 	}
 
+	@Override
+	public User findByDefault(String sqlSegment, String... querys) throws ResultNullException {
+		Connection conn = MyConnection.getConnection();
+
+		String sql = "select * from user where " + sqlSegment;
+		User r = null;
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			for (int idx = 0; idx < querys.length; idx++) {
+				ps.setString(idx + 1, querys[idx]);
+			}
+
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				r = new User();
+				r.setU_id(rs.getString("u_id"));
+				r.setDisplayName(rs.getString("displayname"));
+				r.setUsername(rs.getString("username"));
+				r.setPassword(rs.getString("password"));
+				r.setAuthority(rs.getString("authority"));
+				r.setUserdata_id(rs.getString("userdata_id"));
+				r.setCreate_date(rs.getDate("create_date"));
+				r.setUpdate_date(rs.getDate("update_date"));
+				r.setNote(rs.getString("note"));
+				r.setTag(rs.getString("tag"));
+			}
+
+			ps.close();
+			conn.close();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage() + " : " + this.getClass().getName()
+					+ "::queryByDefault:" + sqlSegment);
+		}
+
+		return r;
+	}
+
+	@Test
+	public void test() {
+		new TestCls().testUpdate();
+	}
+
+	class TestCls {
+
+		// @Test
+		public void test() {
+			// testAdd();
+			testUpdate();
+			// testDel();
+			// testAddAndUpdate();
+		}
+
+		// @Test
+		public void testAdd() {
+			User user = new User();
+			user.setU_id("u123");
+			user.setDisplayName("Tony");
+			user.setUsername("tony123");
+			user.setPassword("t1234");
+			user.setUserdata_id("temp_u123");
+
+			user.setCreate_date(new Date(new java.util.Date().getTime()));
+
+			UserDao dao = new UserDao();
+			System.out.println("add:" + dao.add(user));
+
+		}
+
+		// @Test
+		public void testUpdate() {
+			UserDao dao = new UserDao();
+			User user;
+			try {
+				user = dao.queryByID("uid1629796406740");
+				String id = user.getU_id();
+//				user.setDisplayName("Tony");
+//				user.setUsername("tony123");
+				user.setPassword("mm123456");
+				// user.setUserdata_id("ud256");
+
+				user.setCreate_date(new Date(new java.util.Date().getTime()));
+
+				System.out.println("update:" + dao.update(id, user));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+
+		// @Test
+		public void testDel() {
+			UserDao dao = new UserDao();
+			System.out.println("del:" + dao.delete("uid1629951570073"));
+
+		}
+
+		// @Test
+		public void testAddAndUpdate() {
+			UserDao daoUser = new UserDao();
+			UserdataDao daoUserdata = new UserdataDao();
+
+			String userID = "u125";
+			String userdataID = "ud999";
+
+			// create user
+			User user = new User();
+			user.setU_id(userID);
+			user.setDisplayName("Kevin");
+			user.setUsername("kevin123");
+			user.setPassword("k1234");
+			user.setUserdata_id(userdataID);
+
+			daoUser.add(user);
+
+			// create userdata
+			Userdata userdata = new Userdata();
+			userdata.setUd_id(userdataID);
+			userdata.setUser_id(user.getU_id());
+			userdata.setName(user.getDisplayName());
+			userdata.setEmail("kevin123@yahoo.com.tw");
+
+			daoUserdata.add(userdata);
+
+		}
+	}
 }

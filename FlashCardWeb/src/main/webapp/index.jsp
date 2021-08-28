@@ -21,13 +21,11 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 <script type="text/javascript" language="javascript"
 	src="js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function(){
-		$("#login").click(function(){
-			location.href="login/login.jsp";		
+	$(document).ready(function() {
+		$("#login").click(function() {
+			location.href = "login/login.jsp";
 		});
 	});
-	
-	
 </script>
 </head>
 
