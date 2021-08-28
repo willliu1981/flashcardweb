@@ -101,11 +101,6 @@ public class TestboxDao implements Dao<Testbox> {
 		return r;
 	}
 
-	@Override
-	public Testbox queryByVocabulary(String vocabulary) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public List<Testbox> queryAll() {

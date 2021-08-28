@@ -5,7 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>login</title>
-<script type="text/javascript" src="../js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#forget").click(function() {
@@ -13,7 +14,11 @@
 		});
 
 		$("#register").click(function() {
-			location.href = "register.jsp";
+			location.href = "${pageContext.request.contextPath}/login/register.jsp";
+		});
+
+		$("#home").click(function() {
+			location.href = "${pageContext.request.contextPath}/index.jsp";
 		});
 	});
 </script>
@@ -46,6 +51,13 @@
 			<tr>
 				<td><button type="button" id="forget">忘記密碼</button></td>
 				<td><button type="button" id="register">註冊</button></td>
+			</tr>
+		</table>
+	</fieldset>
+	<fieldset>
+		<table>
+			<tr>
+				<td><button type="button" id="home">回首頁</button></td>
 			</tr>
 		</table>
 	</fieldset>

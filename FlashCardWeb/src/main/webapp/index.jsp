@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@page
+	import="com.ilan.model.user.*,com.ilan.control.authority.*,com.ilan.control.authority.Authorization.*"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -19,11 +21,11 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
 <script type="text/javascript" language="javascript"
-	src="js/jquery-3.6.0.min.js"></script>
+	src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#login").click(function() {
-			location.href = "login/login.jsp";
+			location.href = "${pageContext.request.contextPath}/login/login.jsp";
 		});
 	});
 </script>
@@ -33,7 +35,20 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 	Home
 	<br>
 
-
+	<%
+	User user = null;
+	if ((user = (User) session.getAttribute("user")) == null || !Authorites.hasAuthorization(
+			Authorites.toAuthority(user.getAuthority()).getAuthority_member(), Member.READCARD)) {
+	%>
 	<button type="button" id="login">登入</button>
+	<%
+	} else {
+	%>
+	<fieldset>
+		<legend><%=user.getDisplayName()%></legend>
+	</fieldset>
+	<%
+	}
+	%>
 </body>
 </html>

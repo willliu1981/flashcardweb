@@ -13,8 +13,6 @@ public interface Dao<T> {
 		throw new ResultNullException();
 	}
 
-	public T queryByVocabulary(String vocabulary);
-
 	public List<T> queryAll();
 
 	public int update(String id, T t);

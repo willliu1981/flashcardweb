@@ -84,11 +84,7 @@ public class CardDao implements Dao<Card> {
 		return r ;
 	}
 
-	@Override
-	public Card queryByVocabulary(String vocabulary) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public List<Card> queryAll() {

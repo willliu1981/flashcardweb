@@ -9,7 +9,7 @@
 <body>
 	<fieldset>
 		<legend>註冊帳號</legend>
-		<form action="/FlashCardWeb/RegisterServlet" method="post">
+		<form action="${pageContext.request.contextPath}/RegisterServlet" method="post">
 			<table style="text-align:center">
 				<tr>
 					<td>帳號</td>

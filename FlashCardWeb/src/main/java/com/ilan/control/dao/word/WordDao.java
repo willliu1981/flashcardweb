@@ -60,10 +60,9 @@ public class WordDao implements Dao<Word> {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
 
-
 			ResultSet rs = ps.executeQuery();
-			if(rs.next()) {
-				r=new Word();
+			if (rs.next()) {
+				r = new Word();
 				r.setW_id(rs.getString("w_id"));
 				r.setVocabulary(rs.getString("vocabulary"));
 				r.setTranslation(rs.getString("translation"));
@@ -83,18 +82,12 @@ public class WordDao implements Dao<Word> {
 			// e.printStackTrace();
 			System.out.println(e.getMessage() + " : " + this.getClass().getName() + "::queryByID");
 		}
-		
-		if(r==null) {
+
+		if (r == null) {
 			throw new ResultNullException(id);
 		}
 
-		return r ;
-	}
-
-	@Override
-	public Word queryByVocabulary(String vocabulary) {
-		// TODO Auto-generated method stub
-		return null;
+		return r;
 	}
 
 	@Override
@@ -134,7 +127,7 @@ public class WordDao implements Dao<Word> {
 			System.out.println(e.getMessage() + " : " + this.getClass().getName() + "::update");
 		}
 
-		return r ;
+		return r;
 	}
 
 	@Override
@@ -159,15 +152,15 @@ public class WordDao implements Dao<Word> {
 
 		return r;
 	}
-	
+
 	@Test
 	public void test() {
-		//testAdd(); 
+		// testAdd();
 		testQueryID();
-		//testUpdate();
+		// testUpdate();
 	}
 
-	//@Test
+	// @Test
 	public void testAdd() {
 		Word w = new Word();
 		w.setW_id("e138");
@@ -184,39 +177,40 @@ public class WordDao implements Dao<Word> {
 		System.out.println("add: " + dao.add(w));
 	}
 
-	//@Test
+	// @Test
 	public void testDel() {
 		WordDao dao = new WordDao();
-		System.out.println("del:"+dao.delete("e129"));
+		System.out.println("del:" + dao.delete("e129"));
 
 	}
-	//@Test
+
+	// @Test
 	public void testQueryID() {
 		WordDao dao = new WordDao();
 		Word w;
 		try {
 			w = dao.queryByID("e137");
-			System.out.println("query id:"+w.getW_id()+", "+w.getVocabulary());
-			System.out.println("query id:"+w.getW_id().length());
+			System.out.println("query id:" + w.getW_id() + ", " + w.getVocabulary());
+			System.out.println("query id:" + w.getW_id().length());
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
-		
+
 	}
-	//@Test
+
+	// @Test
 	public void testUpdate() {
 		WordDao dao = new WordDao();
 		Word w;
 		try {
 			w = dao.queryByID("e135");
-			String id=w.getW_id();
+			String id = w.getW_id();
 			w.setW_id("e137");
-			
-			
-			System.out.println("update:"+dao.update(id, w));
+
+			System.out.println("update:" + dao.update(id, w));
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
-		
+
 	}
 }

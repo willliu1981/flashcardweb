@@ -55,11 +55,7 @@ public class UserdataDao implements Dao<Userdata> {
 		return null;
 	}
 
-	@Override
-	public Userdata queryByVocabulary(String vocabulary) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public List<Userdata> queryAll() {

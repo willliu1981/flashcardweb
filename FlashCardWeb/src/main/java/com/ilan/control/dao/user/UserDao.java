@@ -61,9 +61,13 @@ public class UserDao implements Dao<User>, UserDaoExtension<User> {
 	}
 
 	@Override
-	public User queryByVocabulary(String vocabulary) {
-		// TODO Auto-generated method stub
-		return null;
+	public User findByUsername(String username) throws ResultNullException {
+		User user = findByDefault("username=?", username);
+		if (user == null) {
+			throw new ResultNullException("Result is Null:" + this.getClass().getName()
+					+ "::queryByUsername:" + username);
+		}
+		return user;
 	}
 
 	@Override
@@ -127,39 +131,14 @@ public class UserDao implements Dao<User>, UserDaoExtension<User> {
 	}
 
 	@Override
-	public User identifyUser(String username, String password) {
-		Connection conn = MyConnection.getConnection();
-
-		String sql = "select * from user where username=? and password=?";
-		User r = null;
-		try {
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, username);
-			ps.setString(2, password);
-
-			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
-				r = new User();
-				r.setU_id(rs.getString("u_id"));
-				r.setDisplayName(rs.getString("displayname"));
-				r.setUsername(rs.getString("username"));
-				r.setPassword(rs.getString("password"));
-				r.setAuthority(rs.getString("authority"));
-				r.setUserdata_id(rs.getString("userdata_id"));
-				r.setCreate_date(rs.getDate("create_date"));
-				r.setUpdate_date(rs.getDate("update_date"));
-				r.setNote(rs.getString("note"));
-				r.setTag(rs.getString("tag"));
-			}
-
-			ps.close();
-			conn.close();
-
-		} catch (SQLException e) {
-			System.out.println(e.getMessage() + " : " + this.getClass().getName() + "::queryByID");
+	public User identifyUser(String username, String password) throws ResultNullException {
+		User user = findByDefault("username=? and password=?", username, password);
+		if (user == null) {
+			throw new ResultNullException(
+					String.format("%s::queryByID:username=%s,password=%s",
+							this.getClass().getName(), username, password));
 		}
-
-		return r;
+		return user;
 	}
 
 	@Override
@@ -289,4 +268,5 @@ public class UserDao implements Dao<User>, UserDaoExtension<User> {
 
 		}
 	}
+
 }

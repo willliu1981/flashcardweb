@@ -6,15 +6,15 @@
 <meta charset="UTF-8">
 <title>failure</title>
 <script type="text/javascript"
-	src="/FlashCardWeb/js/jquery-3.6.0.min.js"></script>
+	src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#reback").click(function() {
-			location.href = "/FlashCardWeb/login/register.jsp";
+			location.href = "${pageContext.request.contextPath}/login/register.jsp";
 		});
 
 		$("#home").click(function() {
-			location.href = "/FlashCardWeb/index.jsp";
+			location.href = "${pageContext.request.contextPath}/index.jsp";
 		});
 	});
 </script>

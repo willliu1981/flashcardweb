@@ -7,8 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ilan.control.authority.Authority;
 import com.ilan.control.dao.factory.DaoFactory;
 import com.ilan.control.dao.factory.user.UserDaoFactory;
+import com.ilan.model.user.User;
 
 /**
  * Servlet implementation class LoginServlet
@@ -38,8 +40,7 @@ public class LoginServlet extends HttpServlet {
 		boolean identifyFlag = daoFactory.identifyUser(username, password);
 
 		if (identifyFlag) {
-			
-			request.getSession().setAttribute("authority", daoFactory);
+			request.getSession().setAttribute("user", daoFactory.findUserByUsername(username));
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else {
 			request.getRequestDispatcher("login/loginfailure.jsp").forward(request, response);
