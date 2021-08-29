@@ -24,5 +24,8 @@
 	<resource-env-ref>
 		<resource-env-ref-name>daoFactory/UserDaoFactory</resource-env-ref-name>
 	</resource-env-ref>
+	<resource-env-ref>
+		<resource-env-ref-name>authority/ConvertAuthority</resource-env-ref-name>
+	</resource-env-ref>
 
 </web-app>

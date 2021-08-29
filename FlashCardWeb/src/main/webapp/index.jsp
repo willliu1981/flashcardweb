@@ -37,8 +37,8 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 
 	<%
 	User user = null;
-	if ((user = (User) session.getAttribute("user")) == null || !Authorites.hasAuthorization(
-			Authorites.toAuthority(user.getAuthority()).getAuthority_member(), Member.READCARD)) {
+		if ((user = (User) session.getAttribute("user")) == null || !Authorities.hasAuthorization(
+		Authorities.toAuthority(user.getAuthority()).getAuthority_member(), Member.READCARD)) {
 	%>
 	<button type="button" id="login">登入</button>
 	<%

@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ilan.control.authority.Authorites;
+import com.ilan.control.authority.Authorities;
 import com.ilan.control.authority.Authority;
 import com.ilan.control.dao.user.UserDao;
 import com.ilan.control.dao.user.UserdataDao;
@@ -51,7 +51,7 @@ public class RegisterServlet extends HttpServlet {
 		user.setPassword(password);
 		user.setDisplayName(displayname);
 		user.setUserdata_id(userdata_id);
-		user.setAuthority(Authorites.toString(Authorites.getDefaultAuthority()));
+		user.setAuthority(Authorities.toString(Authorities.getDefaultAuthority()));
 
 		UserDao userDao = new UserDao();
 		if (!userDao.add(user)) {
