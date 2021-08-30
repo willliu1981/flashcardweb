@@ -1,14 +1,8 @@
 package com.ilan.control.dao.factory.user;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import com.ilan.control.connection.MyConnection;
 import com.ilan.control.dao.Dao;
 import com.ilan.control.dao.factory.AbstractDaoFactory;
 import com.ilan.exception.ResultNullException;

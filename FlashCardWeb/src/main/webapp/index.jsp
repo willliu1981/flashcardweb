@@ -1,6 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@page
-	import="com.ilan.model.user.*,com.ilan.control.authority.*,com.ilan.control.authority.Authorization.*"%>
+	import="com.ilan.model.user.*,com.ilan.control.authority.*,
+	com.ilan.control.authority.Authorization.*,com.ilan.control.authority.Authorization"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="auth"
+	uri="http://flashcard.ilan.com/tags/authorities"%>
+
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -32,23 +37,38 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 </head>
 
 <body>
-	Home
+	Home2
 	<br>
+	<%
+	request.setAttribute("ss", Authorization.Member.CREATECARD);
+	%>
 
-	<%
-	User user = null;
-		if ((user = (User) session.getAttribute("user")) == null || !Authorities.hasAuthorization(
-		Authorities.toAuthority(user.getAuthority()).getAuthority_member(), Member.READCARD)) {
-	%>
-	<button type="button" id="login">登入</button>
-	<%
-	} else {
-	%>
-	<fieldset>
-		<legend><%=user.getDisplayName()%></legend>
-	</fieldset>
-	<%
-	}
-	%>
+	<jsp:useBean id="a" class="com.ilan.control.authority.Authorization"></jsp:useBean>
+	<jsp:useBean id="o" class="com.ilan.control.authority.OutClass"></jsp:useBean>
+
+
+	auth1: ${auth:getMsg(ss)}
+	<br /> auth2: ${OutClass.InClass.msgHi }
+	<br /> auth3: ${OutClass.msgHello }
+	<br /> auth4: ${OutClass.getHello() }
+	<br /> auth5: ${Msg.Hello }
+	<br />
+
+
+
+	<c:choose>
+		<c:when test="${not empty user}">
+        	${user.displayName }
+        	
+    	</c:when>
+		<c:otherwise>
+			<button type="button" id="login">登入</button>
+		</c:otherwise>
+	</c:choose>
+
+
+
+
+
 </body>
 </html>

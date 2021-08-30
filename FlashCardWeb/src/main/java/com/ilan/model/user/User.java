@@ -2,9 +2,9 @@ package com.ilan.model.user;
 
 import java.sql.Date;
 
-import com.ilan.control.authority.IAuthority;
+import com.ilan.control.authority.HasAuthority;
 
-public class User implements IAuthority {
+public class User implements HasAuthority {
 	private String u_id;
 	private String displayName;
 	private String username;

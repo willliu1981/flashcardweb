@@ -9,7 +9,7 @@
 		
 	<Resource name="authority/ConvertAuthority" auth="Container"
 		type="com.ilan.control.authority.convert.AuthorityConverter"
-		factory="org.apache.naming.factory.BeanFactory" />
+		factory="org.apache.naming.factory.BeanFactory"  />
 
 
 </Context>

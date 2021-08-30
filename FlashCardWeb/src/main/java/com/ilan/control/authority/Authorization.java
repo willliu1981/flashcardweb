@@ -7,15 +7,17 @@ public class Authorization {
 	public  enum Member implements AuthorizationEnumValue {
 		CREATECARD, READCARD, EDITCARD, DELETECARD;
 
+		@Override
 		public int getValue() {
 			return static_getValue(this.ordinal());
 		}
 	}
 
-	public  enum Administrator implements AuthorizationEnumValue  {
+	public  enum Admin implements AuthorizationEnumValue  {
 		CREATEWORD, READWORD, EDITWORD, DELETEWORD, CREATEMEMBERCARD, READMEMBERCARD,
 		EDITMEMBERCARD, DELETEMEMBERCARD;
 
+		@Override
 		public int getValue() {
 			return static_getValue(this.ordinal());
 		}

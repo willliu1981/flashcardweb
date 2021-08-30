@@ -1,5 +1,5 @@
 package com.ilan.control.authority;
 
-public interface IAuthority {
+public interface HasAuthority {
  String getAuthority();
 }
