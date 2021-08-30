@@ -40,9 +40,22 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 
 	<c:choose>
 		<c:when test="${not empty user}">
-        	${user.displayName }<br />
-        	auth1: ${auth:hasAuthorization(user,Member.CREATECARD,Admin.CREATEMEMBERCARD)}
-    	</c:when>
+			<c:choose>
+				<c:when test="${auth:has(user,Member.READCARD)}">
+					<fieldset>
+						<legend>${user.displayName }</legend>
+						<c:choose>
+							<c:when test="${auth:has(user,Member.READCARD,Admin.READWORD)}">
+							您是檢視員
+							</c:when>
+							<c:when test="${auth:has(user,Member.READCARD,Admin.CREATEWORD)}">
+							您是管理員
+							</c:when>
+						</c:choose>
+					</fieldset>
+				</c:when>
+			</c:choose>
+		</c:when>
 		<c:otherwise>
 			<button type="button" id="login">登入</button>
 		</c:otherwise>

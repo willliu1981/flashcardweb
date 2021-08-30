@@ -10,9 +10,9 @@ import org.junit.Test;
 
 import com.ilan.control.authority.Authorities;
 import com.ilan.control.authority.Authority;
-import com.ilan.control.authority.AuthorizationEnumValue;
 import com.ilan.control.authority.HasAuthority;
 import com.ilan.control.authority.type.Admin;
+import com.ilan.control.authority.type.AuthorizationEnumValue;
 import com.ilan.control.authority.type.Member;
 import com.ilan.model.user.User;
 
@@ -44,7 +44,7 @@ public class AuthorityConverter implements ConvertAuthority {
 	@Override
 	public Authority getDefaultAuthority() {
 		Authority auth = new Authority();
-		auth.setAuthority_member(Authorities.addAuthorization(Member.CREATECARD, Member.READCARD,
+		auth.setAuthority_member(Authorities.combineAuthorization(Member.CREATECARD, Member.READCARD,
 				Member.EDITCARD, Member.DELETECARD));
 		return auth;
 	}
@@ -67,8 +67,8 @@ public class AuthorityConverter implements ConvertAuthority {
 	public void test() {
 		User user = new User();
 		Authority auth = new Authority();
-		auth.setAuthority_member(Authorities.addAuthorization(Member.CREATECARD, Member.EDITCARD));
-		auth.setAuthority_admin(Authorities.addAuthorization(Admin.CREATEWORD,
+		auth.setAuthority_member(Authorities.combineAuthorization(Member.CREATECARD, Member.EDITCARD));
+		auth.setAuthority_admin(Authorities.combineAuthorization(Admin.CREATEWORD,
 				Admin.DELETEMEMBERCARD, Admin.READMEMBERCARD));
 
 		String authStr = null;

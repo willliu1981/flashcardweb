@@ -1,5 +1,8 @@
 package com.ilan.control.authority;
 
 public interface HasAuthority {
- String getAuthority();
+	/*
+	 * used for model
+	 */
+	String getAuthority();
 }

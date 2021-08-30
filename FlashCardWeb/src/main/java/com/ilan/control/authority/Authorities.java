@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import com.ilan.control.authority.convert.ConvertAuthority;
 import com.ilan.control.authority.type.Admin;
+import com.ilan.control.authority.type.AuthorizationEnumValue;
 import com.ilan.control.authority.type.Member;
 
 public class Authorities {
@@ -52,8 +53,6 @@ public class Authorities {
 			AuthorizationEnumValue... authorizations) {
 		return authorityConverter.hasAuthorization(user, authorizations);
 	}
-	
-
 
 	private static int combineAuthorization(int... authorizations) {
 		if (authorizations == null) {
@@ -66,7 +65,7 @@ public class Authorities {
 		return add;
 	}
 
-	public static int addAuthorization(AuthorizationEnumValue... authorizations) {
+	public static int combineAuthorization(AuthorizationEnumValue... authorizations) {
 		return combineAuthorization(convertToArrInt(authorizations));
 	}
 
@@ -91,24 +90,20 @@ public class Authorities {
 		return authorityConverter.getDefaultAuthority();
 	}
 
-	public static String getMsg(AuthorizationEnumValue msg  ) {
-		return "hellooooo " + msg;
-	}
-
 	// @Test
 	public void test() {
 		Member m1 = Member.CREATECARD;
 		Member m2 = Member.EDITCARD;
 		Member m3 = Member.DELETECARD;
 
-		int authority_m = Authorities.addAuthorization(m1, m2, m1);
+		int authority_m = Authorities.combineAuthorization(m1, m2, m1);
 		System.out.println("" + authority_m);
 		System.out.println("" + Authorities.hasAuthorization(authority_m, m2));
 
 		Admin ma = Admin.CREATEMEMBERCARD;
 		Admin mb = Admin.DELETEWORD;
 
-		int authority_ad = Authorities.addAuthorization(ma, mb);
+		int authority_ad = Authorities.combineAuthorization(ma, mb);
 
 		Authority authority = new Authority();
 		authority.setAuthority_member(authority_m);

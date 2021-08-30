@@ -1,4 +1,4 @@
-package com.ilan.control.authority;
+package com.ilan.control.authority.type;
 
 public interface AuthorizationEnumValue {
 	int getValue();

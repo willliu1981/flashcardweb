@@ -1,8 +1,8 @@
 package com.ilan.control.authority.convert;
 
 import com.ilan.control.authority.Authority;
-import com.ilan.control.authority.AuthorizationEnumValue;
 import com.ilan.control.authority.HasAuthority;
+import com.ilan.control.authority.type.AuthorizationEnumValue;
 
 public interface ConvertAuthority {
 	String toString(Authority authority);

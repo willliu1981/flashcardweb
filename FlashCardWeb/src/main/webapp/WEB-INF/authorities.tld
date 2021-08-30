@@ -8,21 +8,13 @@
 
 	<function>
 		<description>has Authorization</description>
-		<name>hasAuthorization</name>
+		<name>has</name>
 		<function-class>com.ilan.control.authority.Authorities</function-class>
 		<function-signature>String
 			boolean
 			hasAuthorization(com.ilan.control.authority.HasAuthority
-			,com.ilan.control.authority.AuthorizationEnumValue[])
+			,com.ilan.control.authority.type.AuthorizationEnumValue[])
 		</function-signature>
 	</function>
 
-	<function>
-		<description>get msg</description>
-		<name>getMsg</name>
-		<function-class>com.ilan.control.authority.Authorities</function-class>
-		<function-signature>String
-			getMsg(com.ilan.control.authority.AuthorizationEnumValue)
-		</function-signature>
-	</function>
 </taglib>
