@@ -12,4 +12,5 @@ public interface ConvertAuthority {
 	Authority getDefaultAuthority();
 
 	boolean hasAuthorization(HasAuthority user, AuthorizationEnumValue... authorizations);
+
 }

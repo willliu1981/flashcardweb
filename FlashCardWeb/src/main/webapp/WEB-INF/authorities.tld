@@ -6,12 +6,23 @@
 	<short-name>auth</short-name>
 	<uri>http://flashcard.ilan.com/tags/authorities</uri>
 
+	<function>
+		<description>has Authorization</description>
+		<name>hasAuthorization</name>
+		<function-class>com.ilan.control.authority.Authorities</function-class>
+		<function-signature>String
+			boolean
+			hasAuthorization(com.ilan.control.authority.HasAuthority
+			,com.ilan.control.authority.AuthorizationEnumValue[])
+		</function-signature>
+	</function>
 
 	<function>
 		<description>get msg</description>
 		<name>getMsg</name>
 		<function-class>com.ilan.control.authority.Authorities</function-class>
 		<function-signature>String
-			getMsg(com.ilan.control.authority.AuthorizationEnumValue)</function-signature>
+			getMsg(com.ilan.control.authority.AuthorizationEnumValue)
+		</function-signature>
 	</function>
 </taglib>

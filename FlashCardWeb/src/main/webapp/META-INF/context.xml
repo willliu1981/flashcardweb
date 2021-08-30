@@ -5,11 +5,11 @@
 	<Resource name="daoFactory/UserDaoFactory" auth="Container"
 		type="com.ilan.control.dao.factory.user.UserDaoFactory"
 		factory="org.apache.naming.factory.BeanFactory"
-		daoType="com.ilan.control.dao.user.UserDao"/>
-		
+		daoType="com.ilan.control.dao.user.UserDao" />
+
 	<Resource name="authority/ConvertAuthority" auth="Container"
 		type="com.ilan.control.authority.convert.AuthorityConverter"
-		factory="org.apache.naming.factory.BeanFactory"  />
+		factory="org.apache.naming.factory.BeanFactory" />
 
 
 </Context>

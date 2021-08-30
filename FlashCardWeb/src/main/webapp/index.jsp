@@ -1,7 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@page
-	import="com.ilan.model.user.*,com.ilan.control.authority.*,
-	com.ilan.control.authority.Authorization.*,com.ilan.control.authority.Authorization"%>
+<%@page import="com.ilan.control.authority.type.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="auth"
 	uri="http://flashcard.ilan.com/tags/authorities"%>
@@ -37,37 +35,18 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 </head>
 
 <body>
-	Home2
+	Home1
 	<br>
-	<%
-	request.setAttribute("ss", Authorization.Member.CREATECARD);
-	%>
-
-	<jsp:useBean id="a" class="com.ilan.control.authority.Authorization"></jsp:useBean>
-	<jsp:useBean id="o" class="com.ilan.control.authority.OutClass"></jsp:useBean>
-
-
-	auth1: ${auth:getMsg(ss)}
-	<br /> auth2: ${OutClass.InClass.msgHi }
-	<br /> auth3: ${OutClass.msgHello }
-	<br /> auth4: ${OutClass.getHello() }
-	<br /> auth5: ${Msg.Hello }
-	<br />
-
-
 
 	<c:choose>
 		<c:when test="${not empty user}">
-        	${user.displayName }
-        	
+        	${user.displayName }<br />
+        	auth1: ${auth:hasAuthorization(user,Member.CREATECARD,Admin.CREATEMEMBERCARD)}
     	</c:when>
 		<c:otherwise>
 			<button type="button" id="login">登入</button>
 		</c:otherwise>
 	</c:choose>
-
-
-
 
 
 </body>

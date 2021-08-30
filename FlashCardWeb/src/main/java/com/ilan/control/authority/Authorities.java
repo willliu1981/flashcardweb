@@ -8,10 +8,9 @@ import javax.naming.NamingException;
 
 import org.junit.Test;
 
-import com.ilan.control.authority.Authorization.Admin;
-import com.ilan.control.authority.Authorization.Member;
-import com.ilan.control.authority.convert.AuthorityConverter;
 import com.ilan.control.authority.convert.ConvertAuthority;
+import com.ilan.control.authority.type.Admin;
+import com.ilan.control.authority.type.Member;
 
 public class Authorities {
 	private static ConvertAuthority authorityConverter;
@@ -53,6 +52,8 @@ public class Authorities {
 			AuthorizationEnumValue... authorizations) {
 		return authorityConverter.hasAuthorization(user, authorizations);
 	}
+	
+
 
 	private static int combineAuthorization(int... authorizations) {
 		if (authorizations == null) {
@@ -96,16 +97,16 @@ public class Authorities {
 
 	// @Test
 	public void test() {
-		Member m1 = Authorization.Member.CREATECARD;
-		Member m2 = Authorization.Member.EDITCARD;
-		Member m3 = Authorization.Member.DELETECARD;
+		Member m1 = Member.CREATECARD;
+		Member m2 = Member.EDITCARD;
+		Member m3 = Member.DELETECARD;
 
 		int authority_m = Authorities.addAuthorization(m1, m2, m1);
 		System.out.println("" + authority_m);
 		System.out.println("" + Authorities.hasAuthorization(authority_m, m2));
 
-		Admin ma = Authorization.Admin.CREATEMEMBERCARD;
-		Admin mb = Authorization.Admin.DELETEWORD;
+		Admin ma = Admin.CREATEMEMBERCARD;
+		Admin mb = Admin.DELETEWORD;
 
 		int authority_ad = Authorities.addAuthorization(ma, mb);
 

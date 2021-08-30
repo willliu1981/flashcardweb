@@ -1,5 +1,6 @@
 package com.ilan.control.authority.convert;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -9,10 +10,10 @@ import org.junit.Test;
 
 import com.ilan.control.authority.Authorities;
 import com.ilan.control.authority.Authority;
-import com.ilan.control.authority.Authorization.Admin;
-import com.ilan.control.authority.Authorization.Member;
 import com.ilan.control.authority.AuthorizationEnumValue;
 import com.ilan.control.authority.HasAuthority;
+import com.ilan.control.authority.type.Admin;
+import com.ilan.control.authority.type.Member;
 import com.ilan.model.user.User;
 
 public class AuthorityConverter implements ConvertAuthority {
