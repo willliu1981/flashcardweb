@@ -3,7 +3,6 @@ package com.ilan.control.authority;
 public class Authority {
 	private int authority_member;
 	private int authority_admin;
-	
 
 	public int getAuthority_member() {
 		return authority_member;
@@ -19,6 +18,11 @@ public class Authority {
 
 	public void setAuthority_admin(int authority_admin) {
 		this.authority_admin = authority_admin;
+	}
+
+	public String toString() {
+
+		return this.authority_member + ":" + this.authority_admin;
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.ilan.control.authority;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -52,6 +53,13 @@ public class Authorities {
 	public static boolean hasAuthorization(HasAuthority user,
 			AuthorizationEnumValue... authorizations) {
 		return authorityConverter.hasAuthorization(user, authorizations);
+	}
+	
+	public static boolean hasAuthorization(HasAuthority user,
+			HashSet<AuthorizationEnumValue> authorizations) {
+		AuthorizationEnumValue[] auths=new AuthorizationEnumValue[authorizations.size()];
+		authorizations.toArray(auths);
+		return authorityConverter.hasAuthorization(user, auths);
 	}
 
 	private static int combineAuthorization(int... authorizations) {

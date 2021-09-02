@@ -41,14 +41,14 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 	<c:choose>
 		<c:when test="${not empty user}">
 			<c:choose>
-				<c:when test="${auth:has(user,Member.READCARD)}">
+				<c:when test="${auth:has(user,{Member.READCARD})}">
 					<fieldset>
 						<legend>${user.displayName }</legend>
 						<c:choose>
-							<c:when test="${auth:has(user,Member.READCARD,Admin.READWORD)}">
+							<c:when test="${auth:has(user,{Admin.READWORD})}">
 							您是檢視員
 							</c:when>
-							<c:when test="${auth:has(user,Member.READCARD,Admin.CREATEWORD)}">
+							<c:when test="${auth:has(user,{Admin.CREATEWORD})}">
 							您是管理員
 							</c:when>
 						</c:choose>

@@ -13,8 +13,7 @@
 		<function-signature>String
 			boolean
 			hasAuthorization(com.ilan.control.authority.HasAuthority
-			,com.ilan.control.authority.type.AuthorizationEnumValue[])
-		</function-signature>
+			,java.util.HashSet)</function-signature>
 	</function>
 
 </taglib>
