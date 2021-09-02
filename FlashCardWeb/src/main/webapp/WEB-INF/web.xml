@@ -20,15 +20,20 @@
 		<filter-name>EncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-
 	<resource-env-ref>
 		<description>used to class UserDaoFactory</description>
 		<resource-env-ref-name>daoFactory/UserDaoFactory</resource-env-ref-name>
 	</resource-env-ref>
-
 	<resource-env-ref>
 		<description>used to class Authorities</description>
 		<resource-env-ref-name>authority/ConvertAuthority</resource-env-ref-name>
 	</resource-env-ref>
-
+	
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:applicationContext.xml</param-value>
+	</context-param>
 </web-app>

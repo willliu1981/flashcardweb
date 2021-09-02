@@ -30,6 +30,10 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 		$("#login").click(function() {
 			location.href = "${pageContext.request.contextPath}/login/login.jsp";
 		});
+		
+		$("#member").click(function() {
+			location.href = "${pageContext.request.contextPath}/servlet/MemberServlet";
+		});
 	});
 </script>
 </head>
@@ -44,6 +48,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				<c:when test="${auth:has(user,{Member.READCARD})}">
 					<fieldset>
 						<legend>${user.displayName }</legend>
+						<button type="button" id="member">查詢會員資料</button>
 						<c:choose>
 							<c:when test="${auth:has(user,{Admin.READWORD})}">
 							您是檢視員

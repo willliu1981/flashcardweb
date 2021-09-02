@@ -12,12 +12,13 @@ import org.junit.Test;
 
 import com.ilan.control.connection.MyConnection;
 import com.ilan.control.dao.Dao;
+import com.ilan.control.dao.factory.user.AbstractUserDao;
 import com.ilan.control.dao.factory.user.UserDaoExtension;
 import com.ilan.exception.ResultNullException;
 import com.ilan.model.user.User;
 import com.ilan.model.user.Userdata;
 
-public class UserDao implements Dao<User>, UserDaoExtension<User> {
+public class UserDao extends AbstractUserDao {
 
 	@Override
 	public boolean add(User t) {
