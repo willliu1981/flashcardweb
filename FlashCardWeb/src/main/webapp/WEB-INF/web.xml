@@ -1,39 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="https://jakarta.ee/xml/ns/jakartaee"
-	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
-	version="5.0">
-	<display-name>FlashCardWeb</display-name>
-	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
-		<welcome-file>index.htm</welcome-file>
-		<welcome-file>index.jsp</welcome-file>
-		<welcome-file>default.html</welcome-file>
-		<welcome-file>default.htm</welcome-file>
-		<welcome-file>default.jsp</welcome-file>
-	</welcome-file-list>
-	<filter>
-		<filter-name>EncodingFilter</filter-name>
-		<filter-class>com.ilan.control.filter.EncodingFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>EncodingFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-	<resource-env-ref>
-		<description>used to class UserDaoFactory</description>
-		<resource-env-ref-name>daoFactory/UserDaoFactory</resource-env-ref-name>
-	</resource-env-ref>
-	<resource-env-ref>
-		<description>used to class Authorities</description>
-		<resource-env-ref-name>authority/ConvertAuthority</resource-env-ref-name>
-	</resource-env-ref>
-	
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:config/config.xml</param-value>
-	</context-param>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd" version="5.0">
+  <display-name>FlashCardWeb</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <context-param>
+  <param-name>config</param-name>
+  <param-value>config/config.xml</param-value>
+  </context-param>
+  
+  <filter>
+    <filter-name>EncodingFilter</filter-name>
+    <filter-class>com.ilan.control.filter.EncodingFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>EncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <resource-env-ref>
+    <description>used to class UserDaoFactory</description>
+    <resource-env-ref-name>daoFactory/UserDaoFactory</resource-env-ref-name>
+  </resource-env-ref>
+  <resource-env-ref>
+    <description>used to class Authorities</description>
+    <resource-env-ref-name>authority/ConvertAuthority</resource-env-ref-name>
+  </resource-env-ref>
+  <listener>
+  <listener-class>com.ilan.control.listener.ContextInitListener</listener-class>
+  </listener>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:config/config.xml</param-value>
+  </context-param>
 </web-app>

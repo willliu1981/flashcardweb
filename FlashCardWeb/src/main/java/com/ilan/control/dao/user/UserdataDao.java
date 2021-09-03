@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.ilan.control.config.Config;
 import com.ilan.control.connection.MyConnection;
 import com.ilan.control.factory.daofactory.user.IUserdataDao;
 import com.ilan.exception.ResultNullException;
@@ -50,7 +51,7 @@ public class UserdataDao implements IUserdataDao {
 	}
 
 	@Override
-	public Userdata queryByID(String id) throws IOException {
+	public Userdata queryByID(String id) throws IOException, SQLException {
 		Userdata data = find("select * from userdata where ud_id=?", id);
 		if (data == null) {
 			throw new ResultNullException(
@@ -78,8 +79,8 @@ public class UserdataDao implements IUserdataDao {
 	}
 
 	@Override
-	public Userdata find(String sqlSegment, String... querys) throws ResultNullException {
-		Connection conn = MyConnection.getConnection();
+	public Userdata find(String sqlSegment, String... querys) throws ResultNullException, SQLException {
+		Connection conn = Config.config.getDataSource().getConnection();
 
 		String sql = sqlSegment;
 		Userdata r = null;
@@ -116,7 +117,7 @@ public class UserdataDao implements IUserdataDao {
 	}
 
 	@Override
-	public Userdata findByEmail(String email) throws ResultNullException {
+	public Userdata findByEmail(String email) throws ResultNullException, SQLException {
 		Userdata data = this.find("", email);
 		if (data == null) {
 			throw new ResultNullException(

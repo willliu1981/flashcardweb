@@ -8,7 +8,7 @@ import com.ilan.control.config.Config;
 public class Factory {
 
 	private static ApplicationContext factory = new ClassPathXmlApplicationContext(
-			IFactory.config.getFactory());
+			Config.config.getFactoryXml());
 
 	public static IFactory getFactory(String id, Class<? extends IFactory> clazz) {
 

@@ -1,26 +1,45 @@
 package com.ilan.control.config;
 
+import javax.sql.DataSource;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 public class Config {
+	public static Config config = null;
 
-	private String factory;
-	private String daoFactory;
-	
-	private Config() {}
+	private String factoryXml;
+	private String daoFactoryXml;
+	private DataSource dataSource;
 
-	public String getFactory() {
-		return factory;
+	public static void init(String configXml) {
+		config = new ClassPathXmlApplicationContext(configXml).getBean(Config.class);
 	}
 
-	public void setFactory(String factory) {
-		this.factory = factory;
+	private Config() {
 	}
 
-	public String getDaoFactory() {
-		return daoFactory;
+	public String getFactoryXml() {
+		return factoryXml;
 	}
 
-	public void setDaoFactory(String daoFactory) {
-		this.daoFactory = daoFactory;
+	public void setFactoryXml(String factoryXml) {
+		this.factoryXml = factoryXml;
+	}
+
+	public String getDaoFactoryXml() {
+		return daoFactoryXml;
+	}
+
+	public void setDaoFactoryXml(String daoFactoryXml) {
+		this.daoFactoryXml = daoFactoryXml;
+	}
+
+	public DataSource getDataSource() {
+		return dataSource;
+	}
+
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
 	}
 
 }

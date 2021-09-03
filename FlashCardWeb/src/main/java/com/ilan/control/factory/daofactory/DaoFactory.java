@@ -20,12 +20,16 @@ public final class DaoFactory implements IDaoFactory {
 	@Override
 	public IDao<?> getDao(String id, Class<? extends IDao> clazz) {
 
-		return factory.getBean(id, clazz);
+		return getApplicationContext().getBean(id, clazz);
 	}
 
 	@Override
-	public void init() {
-		factory = new ClassPathXmlApplicationContext(config.getDaoFactory());
+	public   ApplicationContext getApplicationContext() {
+		if(factory==null) {
+			factory = new ClassPathXmlApplicationContext(Config.config.getDaoFactoryXml());
+		}
+		
+		return factory;
 	}
 
 }
