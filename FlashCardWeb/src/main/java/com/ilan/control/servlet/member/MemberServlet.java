@@ -26,8 +26,6 @@ import com.ilan.model.user.Userdata;
 public class MemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	ApplicationContext factory = new ClassPathXmlApplicationContext("applicationContext.xml");
-
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */

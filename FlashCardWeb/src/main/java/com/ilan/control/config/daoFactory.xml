@@ -6,8 +6,6 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-	<bean id="daoFactory" class="com.ilan.control.factory.daofactory.DaoFactory" scope="singleton"></bean>
-	
 	<bean id="userDao" class="com.ilan.control.dao.user.UserDao"></bean>
 	<bean id="userdataDao" class="com.ilan.control.dao.user.UserdataDao"></bean>
 
