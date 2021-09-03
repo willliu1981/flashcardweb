@@ -1,16 +1,20 @@
-package com.ilan.control.dao.factory.user;
+package com.ilan.control.factory.deprecated;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import com.ilan.control.dao.Dao;
-import com.ilan.control.dao.factory.AbstractDaoFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.ilan.control.factory.daofactory.IDao;
+import com.ilan.control.factory.daofactory.user.UserDaoExtension;
 import com.ilan.exception.ResultNullException;
 import com.ilan.model.user.User;
 
 public class UserDaoFactory extends AbstractDaoFactory {
 	private static UserDaoFactory factory;
 	private Class<?> clazz;
+	
 
 	public UserDaoFactory() {
 	}
@@ -28,20 +32,24 @@ public class UserDaoFactory extends AbstractDaoFactory {
 
 	public static UserDaoFactory getInstance() {
 		if (factory == null) {
+			//*
 			try {
 				factory = (UserDaoFactory) new InitialContext()
 						.lookup("java:comp/env/daoFactory/UserDaoFactory");
 			} catch (NamingException e) {
 				e.printStackTrace();
 			}
+			//*/
+
+			
 		}
 		return factory;
 	}
 
 	@Override
-	public Dao<?> getDefaultDao() {
+	public IDao<?> getDefaultDao() {
 		try {
-			return (Dao<?>) clazz.newInstance();
+			return (IDao<?>) clazz.newInstance();
 		} catch (InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
 		}

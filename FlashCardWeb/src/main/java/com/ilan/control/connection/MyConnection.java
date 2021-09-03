@@ -16,8 +16,9 @@ public class MyConnection {
 		String password = "1234";
 		
 		try {
+			Class.forName("com.mysql.jdbc.Driver");
 			conn =DriverManager.getConnection(url, user, password);
-		} catch (SQLException  e) {
+		} catch (SQLException | ClassNotFoundException  e) {
 			e.printStackTrace();
 		}
 

@@ -11,14 +11,13 @@ import java.util.List;
 import org.junit.Test;
 
 import com.ilan.control.connection.MyConnection;
-import com.ilan.control.dao.Dao;
-import com.ilan.control.dao.factory.user.AbstractUserDao;
-import com.ilan.control.dao.factory.user.UserDaoExtension;
+import com.ilan.control.factory.daofactory.user.IUserDao;
 import com.ilan.exception.ResultNullException;
 import com.ilan.model.user.User;
 import com.ilan.model.user.Userdata;
 
-public class UserDao extends AbstractUserDao {
+public class UserDao implements IUserDao {
+	
 
 	@Override
 	public boolean add(User t) {
@@ -53,7 +52,7 @@ public class UserDao extends AbstractUserDao {
 
 	@Override
 	public User queryByID(String id) throws IOException {
-		User user = findByDefault("u_id=?", id);
+		User user = find("select * from user where u_id=?", id);
 		if (user == null) {
 			throw new ResultNullException(
 					"Result is Null:" + this.getClass().getName() + "::queryByID:" + id);
@@ -63,7 +62,7 @@ public class UserDao extends AbstractUserDao {
 
 	@Override
 	public User findByUsername(String username) throws ResultNullException {
-		User user = findByDefault("username=?", username);
+		User user = find("select * from user where username=?", username);
 		if (user == null) {
 			throw new ResultNullException("Result is Null:" + this.getClass().getName()
 					+ "::queryByUsername:" + username);
@@ -133,7 +132,7 @@ public class UserDao extends AbstractUserDao {
 
 	@Override
 	public User identifyUser(String username, String password) throws ResultNullException {
-		User user = findByDefault("username=? and password=?", username, password);
+		User user = find("select * from user where username=? and password=?", username, password);
 		if (user == null) {
 			throw new ResultNullException(
 					String.format("%s::queryByID:username=%s,password=%s",
@@ -143,13 +142,11 @@ public class UserDao extends AbstractUserDao {
 	}
 
 	@Override
-	public User findByDefault(String sqlSegment, String... querys) throws ResultNullException {
+	public User find(String sqlSegment, String... querys) throws ResultNullException {
 		Connection conn = MyConnection.getConnection();
-
-		String sql = "select * from user where " + sqlSegment;
 		User r = null;
 		try {
-			PreparedStatement ps = conn.prepareStatement(sql);
+			PreparedStatement ps = conn.prepareStatement(sqlSegment);
 			for (int idx = 0; idx < querys.length; idx++) {
 				ps.setString(idx + 1, querys[idx]);
 			}
@@ -174,10 +171,17 @@ public class UserDao extends AbstractUserDao {
 
 		} catch (SQLException e) {
 			System.out.println(e.getMessage() + " : " + this.getClass().getName()
-					+ "::queryByDefault:" + sqlSegment);
+					+ "::find:" + sqlSegment);
 		}
 
 		return r;
+	}
+	
+
+	@Override
+	public void setDefaultAuthority() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Test
@@ -269,5 +273,6 @@ public class UserDao extends AbstractUserDao {
 
 		}
 	}
+
 
 }

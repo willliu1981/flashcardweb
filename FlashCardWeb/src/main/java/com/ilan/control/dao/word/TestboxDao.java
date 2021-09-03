@@ -13,11 +13,12 @@ import java.util.List;
 import org.junit.Test;
 
 import com.ilan.control.connection.MyConnection;
-import com.ilan.control.dao.Dao;
+import com.ilan.control.factory.daofactory.IDao;
+import com.ilan.exception.ResultNullException;
 import com.ilan.model.word.Card;
 import com.ilan.model.word.Testbox;
 
-public class TestboxDao implements Dao<Testbox> {
+public class TestboxDao implements IDao<Testbox> {
 
 	@Override
 	public boolean add(Testbox t) {
@@ -154,6 +155,12 @@ public class TestboxDao implements Dao<Testbox> {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	@Override
+	public Testbox find(String sqlSegment, String... querys) throws ResultNullException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Test
 	public void test() {
@@ -202,5 +209,7 @@ public class TestboxDao implements Dao<Testbox> {
 		}
 
 	}
+
+
 
 }

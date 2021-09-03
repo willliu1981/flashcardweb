@@ -2,19 +2,19 @@ package com.ilan.control.dao.user;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 import org.junit.Test;
 
 import com.ilan.control.connection.MyConnection;
-import com.ilan.control.dao.Dao;
-import com.ilan.model.user.User;
+import com.ilan.control.factory.daofactory.user.IUserdataDao;
+import com.ilan.exception.ResultNullException;
 import com.ilan.model.user.Userdata;
 
-public class UserdataDao implements Dao<Userdata> {
+public class UserdataDao implements IUserdataDao {
 
 	@Override
 	public boolean add(Userdata t) {
@@ -51,11 +51,13 @@ public class UserdataDao implements Dao<Userdata> {
 
 	@Override
 	public Userdata queryByID(String id) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
+		Userdata data = find("select * from userdata where ud_id=?", id);
+		if (data == null) {
+			throw new ResultNullException(
+					"Result is Null:" + this.getClass().getName() + "::queryByID:" + id);
+		}
+		return data;
 	}
-
-
 
 	@Override
 	public List<Userdata> queryAll() {
@@ -73,6 +75,54 @@ public class UserdataDao implements Dao<Userdata> {
 	public int delete(String id) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public Userdata find(String sqlSegment, String... querys) throws ResultNullException {
+		Connection conn = MyConnection.getConnection();
+
+		String sql = sqlSegment;
+		Userdata r = null;
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			for (int idx = 0; idx < querys.length; idx++) {
+				ps.setString(idx + 1, querys[idx]);
+			}
+
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				r = new Userdata();
+				r.setUd_id(rs.getString("ud_id"));
+				r.setUser_id(rs.getString("user_id"));
+				r.setName(rs.getString("name"));
+				r.setEmail(rs.getString("email"));
+				r.setCardboxdata(rs.getString("cardboxdata"));
+				r.setScenedata(rs.getString("scenedata"));
+				r.setCreate_date(rs.getDate("create_date"));
+				r.setUpdate_date(rs.getDate("update_date"));
+				r.setNote(rs.getString("note"));
+				r.setTag(rs.getString("tag"));
+			}
+
+			ps.close();
+			conn.close();
+
+		} catch (SQLException e) {
+			System.out.println(
+					e.getMessage() + " : " + this.getClass().getName() + "::find:" + sqlSegment);
+		}
+
+		return r;
+	}
+
+	@Override
+	public Userdata findByEmail(String email) throws ResultNullException {
+		Userdata data = this.find("", email);
+		if (data == null) {
+			throw new ResultNullException(
+					"Result is Null:" + this.getClass().getName() + "::findByEmail:" + email);
+		}
+		return data;
 	}
 
 	@Test

@@ -11,11 +11,11 @@ import java.util.List;
 import org.junit.Test;
 
 import com.ilan.control.connection.MyConnection;
-import com.ilan.control.dao.Dao;
+import com.ilan.control.factory.daofactory.IDao;
 import com.ilan.exception.ResultNullException;
 import com.ilan.model.word.Word;
 
-public class WordDao implements Dao<Word> {
+public class WordDao implements IDao<Word> {
 
 	@Override
 	public boolean add(Word t) {
@@ -152,6 +152,12 @@ public class WordDao implements Dao<Word> {
 
 		return r;
 	}
+	
+	@Override
+	public Word find(String sqlSegment, String... querys) throws ResultNullException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Test
 	public void test() {
@@ -173,7 +179,7 @@ public class WordDao implements Dao<Word> {
 		w.setNote("nothing");
 		w.setTag("null");
 
-		Dao<Word> dao = new WordDao();
+		IDao<Word> dao = new WordDao();
 		System.out.println("add: " + dao.add(w));
 	}
 
@@ -213,4 +219,6 @@ public class WordDao implements Dao<Word> {
 		}
 
 	}
+
+
 }

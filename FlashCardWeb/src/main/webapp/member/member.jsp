@@ -12,15 +12,19 @@
 		<table>
 			<tr>
 				<td>名稱</td>
-				<td>${member.displayName }</td>
+				<td>${user.displayName }</td>
 			</tr>
 			<tr>
 				<td>帳號</td>
-				<td>${member.username }</td>
+				<td>${user.username }</td>
 			</tr>
 			<tr>
 				<td>權限</td>
-				<td>${member.authority }</td>
+				<td>${user.authority }</td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td>${data.email }</td>
 			</tr>
 		</table>
 	</fieldset>

@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ilan.control.authority.Authority;
-import com.ilan.control.dao.factory.DaoFactory;
-import com.ilan.control.dao.factory.user.UserDaoFactory;
+import com.ilan.control.factory.daofactory.DaoFactory;
+import com.ilan.control.factory.deprecated.UserDaoFactory;
 import com.ilan.model.user.User;
 
 /**

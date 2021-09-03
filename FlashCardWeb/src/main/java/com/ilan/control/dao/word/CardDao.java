@@ -10,10 +10,11 @@ import java.util.List;
 import org.junit.Test;
 
 import com.ilan.control.connection.MyConnection;
-import com.ilan.control.dao.Dao;
+import com.ilan.control.factory.daofactory.IDao;
+import com.ilan.exception.ResultNullException;
 import com.ilan.model.word.Card;
 
-public class CardDao implements Dao<Card> {
+public class CardDao implements IDao<Card> {
 
 	@Override
 	public boolean add(Card t) {
@@ -131,6 +132,13 @@ public class CardDao implements Dao<Card> {
 		return 0;
 	}
 	
+	@Override
+	public Card find(String sqlSegment, String... querys) throws ResultNullException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 	@Test
 	public void test() {
 		//testAdd();
@@ -160,5 +168,6 @@ public class CardDao implements Dao<Card> {
 
 		dao.update(id, c);
 	}
+
 
 }

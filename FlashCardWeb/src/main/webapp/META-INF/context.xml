@@ -3,7 +3,7 @@
 
 
 	<Resource name="daoFactory/UserDaoFactory" auth="Container"
-		type="com.ilan.control.dao.factory.user.UserDaoFactory"
+		type="com.ilan.control.factory.deprecated.UserDaoFactory"
 		factory="org.apache.naming.factory.BeanFactory"
 		daoType="com.ilan.control.dao.user.UserDao" />
 
