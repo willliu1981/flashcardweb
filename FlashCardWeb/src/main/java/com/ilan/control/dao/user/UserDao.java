@@ -11,12 +11,13 @@ import java.util.List;
 import org.junit.Test;
 
 import com.ilan.control.connection.MyConnection;
+import com.ilan.control.factory.daofactory.AbstractDao;
 import com.ilan.control.factory.daofactory.user.IUserDao;
 import com.ilan.exception.ResultNullException;
 import com.ilan.model.user.User;
 import com.ilan.model.user.Userdata;
 
-public class UserDao implements IUserDao {
+public class UserDao extends AbstractDao<User> implements IUserDao {
 	
 
 	@Override

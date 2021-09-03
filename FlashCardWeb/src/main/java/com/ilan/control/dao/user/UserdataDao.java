@@ -11,11 +11,12 @@ import org.junit.Test;
 
 import com.ilan.control.config.Config;
 import com.ilan.control.connection.MyConnection;
+import com.ilan.control.factory.daofactory.AbstractDao;
 import com.ilan.control.factory.daofactory.user.IUserdataDao;
 import com.ilan.exception.ResultNullException;
 import com.ilan.model.user.Userdata;
 
-public class UserdataDao implements IUserdataDao {
+public class UserdataDao extends AbstractDao<Userdata> implements IUserdataDao {
 
 	@Override
 	public boolean add(Userdata t) {
@@ -79,9 +80,9 @@ public class UserdataDao implements IUserdataDao {
 	}
 
 	@Override
-	public Userdata find(String sqlSegment, String... querys) throws ResultNullException, SQLException {
-		Connection conn = Config.config.getDataSource().getConnection();
-
+	public Userdata find(String sqlSegment, String... querys)
+			throws ResultNullException, SQLException {
+		Connection conn = this.dataSoucrce.getConnection();
 		String sql = sqlSegment;
 		Userdata r = null;
 		try {

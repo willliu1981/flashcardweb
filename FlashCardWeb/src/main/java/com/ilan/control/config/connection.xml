@@ -5,15 +5,21 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-
-	<bean id="config" class="com.ilan.control.config.Config"
-		scope="singleton">
-		<property name="factoryXml">
-			<value>com/ilan/control/config/factory.xml</value>
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="url">
+			<value>jdbc:mysql://localhost:3306/flashcard?useSSL=false&amp;serverTimezone=UTC&amp;characterEncoding=UTF-8
+			</value>
 		</property>
-		<property name="daoFactoryXml">
-			<value>com/ilan/control/config/daoFactory.xml</value>
+		<property name="username">
+			<value>root</value>
+		</property>
+		<property name="password">
+			<value>1234</value>
 		</property>
 	</bean>
+
+
+
 
 </beans>

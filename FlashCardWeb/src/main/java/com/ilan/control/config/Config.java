@@ -9,7 +9,7 @@ public class Config {
 
 	private String factoryXml;
 	private String daoFactoryXml;
-	private DataSource dataSource;
+
 
 	public static void init(String configXml) {
 		config = new ClassPathXmlApplicationContext(configXml).getBean(Config.class);
@@ -34,12 +34,6 @@ public class Config {
 		this.daoFactoryXml = daoFactoryXml;
 	}
 
-	public DataSource getDataSource() {
-		return dataSource;
-	}
 
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
 
 }
