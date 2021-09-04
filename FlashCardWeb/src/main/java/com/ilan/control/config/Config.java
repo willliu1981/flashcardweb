@@ -9,6 +9,7 @@ public class Config {
 
 	private String factoryXml;
 	private String daoFactoryXml;
+	private String connectionXml;
 
 
 	public static void init(String configXml) {
@@ -32,6 +33,14 @@ public class Config {
 
 	public void setDaoFactoryXml(String daoFactoryXml) {
 		this.daoFactoryXml = daoFactoryXml;
+	}
+
+	public String getConnectionXml() {
+		return connectionXml;
+	}
+
+	public void setConnectionXml(String connectionXml) {
+		this.connectionXml = connectionXml;
 	}
 
 

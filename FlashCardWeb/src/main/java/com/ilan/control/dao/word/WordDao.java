@@ -11,11 +11,13 @@ import java.util.List;
 import org.junit.Test;
 
 import com.ilan.control.connection.MyConnection;
+import com.ilan.control.factory.daofactory.AbstractDao;
 import com.ilan.control.factory.daofactory.IDao;
 import com.ilan.exception.ResultNullException;
+import com.ilan.model.user.User;
 import com.ilan.model.word.Word;
 
-public class WordDao implements IDao<Word> {
+public class WordDao extends AbstractDao<Word> implements IDao<Word> {
 
 	@Override
 	public boolean add(Word t) {

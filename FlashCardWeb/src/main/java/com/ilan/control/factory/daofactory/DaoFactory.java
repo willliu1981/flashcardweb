@@ -22,7 +22,7 @@ public final class DaoFactory implements IDaoFactory {
 
 	@Override
 	public IDao<?> getDao(String id, Class<? extends IDao> clazz) {
-		IDao dao = getApplicationContext().getBean(id, clazz);
+		IDao<?> dao = getApplicationContext().getBean(id, clazz);
 		dao.setDataSource(dataSource);
 		return dao;
 	}

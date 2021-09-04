@@ -14,6 +14,11 @@
 		<property name="daoFactoryXml">
 			<value>com/ilan/control/config/daoFactory.xml</value>
 		</property>
+		<property name="connectionXml">
+			<value>com/ilan/control/config/connection.xml</value>
+		</property>
 	</bean>
+
+
 
 </beans>

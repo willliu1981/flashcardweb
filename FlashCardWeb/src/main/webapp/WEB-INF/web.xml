@@ -10,10 +10,9 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <context-param>
-  <param-name>config</param-name>
-  <param-value>config/config.xml</param-value>
+    <param-name>config</param-name>
+    <param-value>config/config.xml</param-value>
   </context-param>
-  
   <filter>
     <filter-name>EncodingFilter</filter-name>
     <filter-class>com.ilan.control.filter.EncodingFilter</filter-class>
@@ -31,7 +30,7 @@
     <resource-env-ref-name>authority/ConvertAuthority</resource-env-ref-name>
   </resource-env-ref>
   <listener>
-  <listener-class>com.ilan.control.listener.ContextInitListener</listener-class>
+    <listener-class>com.ilan.control.listener.ContextInitListener</listener-class>
   </listener>
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

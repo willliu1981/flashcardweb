@@ -2,21 +2,31 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:p="http://www.springframework.org/schema/p"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<context:annotation-config />
+	<context:component-scan base-package="test" />
 
 
 	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="url">
-			<value>jdbc:mysql://localhost:3306/flashcard?useSSL=false&amp;serverTimezone=UTC&amp;characterEncoding=UTF-8
-			</value>
-		</property>
-		<property name="username">
-			<value>root</value>
-		</property>
-		<property name="password">
-			<value>1234</value>
-		</property>
+		class="com.ilan.control.connection.MyDataSource">
+		<property name="driverClassName"
+			value="com.mysql.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/flashcard?useSSL=false&amp;serverTimezone=UTC&amp;characterEncoding=UTF-8" />
+		<property name="username" value="root" />
+		<property name="password" value="1234" />
+
+	</bean>
+
+	<bean id="user" class="com.ilan.model.user.User">
+		<property name="displayName" value="Ken"></property>
+	</bean>
+
+	<bean id="book" class="com.ilan.control.connection.Book">
+		<property name="name" value="PHP"></property>
 	</bean>
 
 

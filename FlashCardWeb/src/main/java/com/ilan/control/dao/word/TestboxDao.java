@@ -13,12 +13,14 @@ import java.util.List;
 import org.junit.Test;
 
 import com.ilan.control.connection.MyConnection;
+import com.ilan.control.factory.daofactory.AbstractDao;
 import com.ilan.control.factory.daofactory.IDao;
 import com.ilan.exception.ResultNullException;
+import com.ilan.model.user.User;
 import com.ilan.model.word.Card;
 import com.ilan.model.word.Testbox;
 
-public class TestboxDao implements IDao<Testbox> {
+public class TestboxDao extends AbstractDao<Testbox> implements IDao<Testbox> {
 
 	@Override
 	public boolean add(Testbox t) {

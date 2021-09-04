@@ -52,7 +52,7 @@ public class UserDao extends AbstractDao<User> implements IUserDao {
 	}
 
 	@Override
-	public User queryByID(String id) throws IOException {
+	public User queryByID(String id) throws IOException, SQLException {
 		User user = find("select * from user where u_id=?", id);
 		if (user == null) {
 			throw new ResultNullException(
@@ -62,7 +62,7 @@ public class UserDao extends AbstractDao<User> implements IUserDao {
 	}
 
 	@Override
-	public User findByUsername(String username) throws ResultNullException {
+	public User findByUsername(String username) throws ResultNullException, SQLException {
 		User user = find("select * from user where username=?", username);
 		if (user == null) {
 			throw new ResultNullException("Result is Null:" + this.getClass().getName()
@@ -132,7 +132,7 @@ public class UserDao extends AbstractDao<User> implements IUserDao {
 	}
 
 	@Override
-	public User identifyUser(String username, String password) throws ResultNullException {
+	public User identifyUser(String username, String password) throws ResultNullException,SQLException {
 		User user = find("select * from user where username=? and password=?", username, password);
 		if (user == null) {
 			throw new ResultNullException(
@@ -143,8 +143,8 @@ public class UserDao extends AbstractDao<User> implements IUserDao {
 	}
 
 	@Override
-	public User find(String sqlSegment, String... querys) throws ResultNullException {
-		Connection conn = MyConnection.getConnection();
+	public User find(String sqlSegment, String... querys) throws ResultNullException ,SQLException{
+		Connection conn = this.getDataSource().getConnection();
 		User r = null;
 		try {
 			PreparedStatement ps = conn.prepareStatement(sqlSegment);
@@ -231,7 +231,7 @@ public class UserDao extends AbstractDao<User> implements IUserDao {
 				user.setCreate_date(new Date(new java.util.Date().getTime()));
 
 				System.out.println("update:" + dao.update(id, user));
-			} catch (IOException e) {
+			} catch (IOException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

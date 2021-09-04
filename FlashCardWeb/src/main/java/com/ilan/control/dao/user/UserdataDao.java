@@ -7,16 +7,33 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.ilan.control.config.Config;
+import com.ilan.control.connection.Book;
 import com.ilan.control.connection.MyConnection;
+import com.ilan.control.connection.MyDataSource;
+import com.ilan.control.factory.Factory;
 import com.ilan.control.factory.daofactory.AbstractDao;
+import com.ilan.control.factory.daofactory.IDaoFactory;
 import com.ilan.control.factory.daofactory.user.IUserdataDao;
 import com.ilan.exception.ResultNullException;
 import com.ilan.model.user.Userdata;
 
 public class UserdataDao extends AbstractDao<Userdata> implements IUserdataDao {
+	private MyDataSource dataSource = (MyDataSource) new ClassPathXmlApplicationContext(
+			Config.config.getConnectionXml()).getBean("dataSource", DataSource.class);
+
+	 //@Autowired
+	// DataSource dataSource;
+
+	@Autowired
+	Book book;
 
 	@Override
 	public boolean add(Userdata t) {
@@ -82,7 +99,10 @@ public class UserdataDao extends AbstractDao<Userdata> implements IUserdataDao {
 	@Override
 	public Userdata find(String sqlSegment, String... querys)
 			throws ResultNullException, SQLException {
-		Connection conn = this.dataSoucrce.getConnection();
+		// Connection conn = this.getDataSource().getConnection();
+		System.out.println("bbbb " + dataSource);
+
+		Connection conn = dataSource.getConnection();
 		String sql = sqlSegment;
 		Userdata r = null;
 		try {

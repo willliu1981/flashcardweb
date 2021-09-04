@@ -7,14 +7,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.junit.Test;
 
 import com.ilan.control.connection.MyConnection;
+import com.ilan.control.factory.daofactory.AbstractDao;
 import com.ilan.control.factory.daofactory.IDao;
 import com.ilan.exception.ResultNullException;
+import com.ilan.model.user.User;
 import com.ilan.model.word.Card;
 
-public class CardDao implements IDao<Card> {
+public class CardDao  extends AbstractDao<Card> implements IDao<Card> {
 
 	@Override
 	public boolean add(Card t) {
@@ -168,6 +172,8 @@ public class CardDao implements IDao<Card> {
 
 		dao.update(id, c);
 	}
+
+
 
 
 }

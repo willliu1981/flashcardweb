@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.ilan.control.config.Config;
+import com.ilan.control.dao.user.UserdataDao;
 import com.ilan.control.factory.Factory;
 import com.ilan.control.factory.daofactory.DaoFactory;
 import com.ilan.control.factory.daofactory.IDaoFactory;
@@ -39,7 +43,10 @@ public class MemberServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		IDaoFactory daoFactory = (DaoFactory) Factory.getFactory("daoFactory", IDaoFactory.class);
-		IUserdataDao dao = (IUserdataDao) daoFactory.getDao("userdataDao", IUserdataDao.class);
+		//IUserdataDao dao = (IUserdataDao) daoFactory.getDao("userdataDao", IUserdataDao.class);
+
+		UserdataDao dao = new ClassPathXmlApplicationContext(Config.config.getDaoFactoryXml())
+				.getBean("userdataDao", UserdataDao.class);
 
 		User user = (User) request.getSession().getAttribute("user");
 
