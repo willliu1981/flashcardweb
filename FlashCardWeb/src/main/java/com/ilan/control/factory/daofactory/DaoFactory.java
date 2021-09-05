@@ -10,6 +10,8 @@ import com.ilan.control.dao.user.UserDao;
 import com.ilan.control.factory.deprecated.UserDaoFactory;
 
 public final class DaoFactory implements IDaoFactory {
+	
+	
 	private static ApplicationContext factory = null;
 	private static DataSource dataSource;
 

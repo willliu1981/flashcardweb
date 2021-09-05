@@ -15,8 +15,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.ilan.appinitialization.Config;
 import com.ilan.control.dao.user.UserdataDao;
+import com.ilan.control.factory.BeanFactory;
 import com.ilan.control.factory.FactoryBuilder;
 import com.ilan.control.factory.daofactory.DaoFactory;
+import com.ilan.control.factory.daofactory.DaoFactoryType;
 import com.ilan.control.factory.daofactory.IDaoFactory;
 import com.ilan.control.factory.daofactory.user.IUserdataDao;
 import com.ilan.model.user.User;
@@ -33,7 +35,7 @@ public class MemberServlet extends HttpServlet {
 	ApplicationContext appFactory2 = new ClassPathXmlApplicationContext(
 			Config.config.getDaoFactoryXml());
 	private DataSource dataSource;
-	UserdataDao dao;
+	
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -50,17 +52,17 @@ public class MemberServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		IDaoFactory daoFactory = (DaoFactory) FactoryBuilder.getFactory("daoFactory", IDaoFactory.class);
-		 IUserdataDao dao = (IUserdataDao) daoFactory.getDao("userdataDao",
-		 IUserdataDao.class);
-		
-		//FactoryBuilder.getFactory(getServletInfo(), null)
+//		IDaoFactory daoFactory = (DaoFactory) FactoryBuilder.getFactory("daoFactory",
+//				IDaoFactory.class);
+//		IUserdataDao dao = (IUserdataDao) daoFactory.getDao("userdataDao", IUserdataDao.class);
 
-		dataSource = appFactory1.getBean("dataSource", DataSource.class);
+		// FactoryBuilder.getFactory(getServletInfo(), null)
 
-		dao = (UserdataDao) appFactory2.getBean("userdataDao", IUserdataDao.class);
-		//dao.setDataSource(dataSource);
-
+//		dataSource = appFactory1.getBean("dataSource", DataSource.class);
+//
+//		dao = (UserdataDao) appFactory2.getBean("userdataDao", IUserdataDao.class);
+		// dao.setDataSource(dataSource);
+		UserdataDao dao =(UserdataDao) BeanFactory.getBean(DaoFactoryType.USERDATADAO);
 
 		User user = (User) request.getSession().getAttribute("user");
 

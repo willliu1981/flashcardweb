@@ -11,6 +11,7 @@ import javax.sql.DataSource;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.ilan.control.connection.MyConnection;
 import com.ilan.control.factory.daofactory.AbstractDao;
@@ -20,11 +21,12 @@ import com.ilan.model.user.Userdata;
 
 public class UserdataDao extends AbstractDao<Userdata> implements IUserdataDao {
 	@Autowired
-	protected DataSource dataSource;
+	@Qualifier("dataSource")
+	protected DataSource dataSourceu;
 	
 	@Override
 	public boolean add(Userdata t) throws SQLException {
-		Connection conn = dataSource.getConnection();
+		Connection conn = dataSourceu.getConnection();
 
 		String sql = "insert into userdata (ud_id,user_id,name,email,cardboxdata,scenedata,"
 				+ "create_date,update_date,note,tag) values(?,?,?,?,?,?,?,?,?,?)";
@@ -87,7 +89,7 @@ public class UserdataDao extends AbstractDao<Userdata> implements IUserdataDao {
 	public Userdata find(String sqlSegment, String... querys)
 			throws ResultNullException, SQLException {
 		//Connection conn = this.getDataSource().getConnection();
-		Connection conn = dataSource.getConnection();
+		Connection conn = dataSourceu.getConnection();
 		String sql = sqlSegment;
 		Userdata r = null;
 		try {

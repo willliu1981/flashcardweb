@@ -49,10 +49,9 @@ public class ContextInitListener implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent sce) {
 		Config.init(sce.getServletContext().getInitParameter("config"));
 
-		FactoryConfig fconfig = new ClassPathXmlApplicationContext("config/config.xml")
-				.getBean(FactoryConfig.class);
-
-		Config.setFactoryConfig(fconfig);
+		System.out.println(
+				"xxxxx " + Stream.of(Config.config.getFactoryConfig().getBeansXmlReferers())
+						.collect(Collectors.toList()));
 
 	}
 

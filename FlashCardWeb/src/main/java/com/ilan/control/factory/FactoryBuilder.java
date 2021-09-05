@@ -8,10 +8,12 @@ import com.ilan.appinitialization.Config;
 public class FactoryBuilder {
 
 	private static ApplicationContext factory = new ClassPathXmlApplicationContext(
-			Config.config.getFactoryXml());
+			Factory.getBeansXmlReferers());
 
 	public static IFactory getFactory(String id, Class<? extends IFactory> clazz) {
 
 		return (IFactory) factory.getBean(clazz);
 	}
+	
+	
 }

@@ -1,19 +1,19 @@
 package com.ilan.appinitialization;
 
 public class ConfigClassTypeReference<T> {
-	private String name;
-	private Class<T> classType;
+	private String id;
+	private Class<? extends T> classType;
 
-	public ConfigClassTypeReference(String name, Class<T> classType) {
-		this.name = name;
+	public ConfigClassTypeReference(String id, Class<? extends T> classType) {
+		this.id = id;
 		this.classType = classType;
 	}
 
-	public String getName() {
-		return name;
+	public String getId() {
+		return id;
 	}
 
-	public Class<T> getClassType() {
+	public Class<? extends T> getClassType() {
 		return classType;
 	}
 

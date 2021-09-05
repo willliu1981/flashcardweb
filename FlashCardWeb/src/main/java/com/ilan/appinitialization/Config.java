@@ -64,7 +64,7 @@ public class Config {
 		return factoryConfig;
 	}
 
-	public static void setFactoryConfig(FactoryConfig factoryConfig) {
+	public  void setFactoryConfig(FactoryConfig factoryConfig) {
 		Config.factoryConfig = factoryConfig;
 	}
 
