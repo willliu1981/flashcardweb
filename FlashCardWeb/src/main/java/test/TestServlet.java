@@ -7,26 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import com.ilan.appinitialization.Config;
-
 /**
- * Servlet implementation class TestBookServlet
+ * Servlet implementation class TestServlet
  */
-@WebServlet("/TestBookServlet")
-public class TestBookServlet extends HttpServlet {
+@WebServlet(name = "servlet/TestServlet", urlPatterns = { "/servlet/TestServlet" })
+public class TestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	ApplicationContext factory=new ClassPathXmlApplicationContext(Config.config.getConnectionXml());
-	@Autowired
-	Author author;
-	
-	/**
+       
+    /**
      * @see HttpServlet#HttpServlet()
      */
-    public TestBookServlet() {
+    public TestServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,11 +26,8 @@ public class TestBookServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		Book book=factory.getBean("book",Book.class);
-		book.setAuthor(author);
-		
-		response.getWriter().append("Served at: book:").append(book.getBookName() +", author:"+book.getAuthor().getName());
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

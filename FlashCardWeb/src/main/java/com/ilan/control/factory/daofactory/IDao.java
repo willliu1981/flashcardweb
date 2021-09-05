@@ -13,7 +13,7 @@ public interface IDao<T> {
 	public void setDataSource(DataSource dataSource);
 	public DataSource getDataSource() throws SQLException;
 
-	public boolean add(T t);
+	public boolean add(T t) throws SQLException;
 
 	public T queryByID(String idSegment) throws IOException, SQLException;
 

@@ -3,9 +3,9 @@ package com.ilan.control.factory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.ilan.control.config.Config;
+import com.ilan.appinitialization.Config;
 
-public class Factory {
+public class FactoryBuilder {
 
 	private static ApplicationContext factory = new ClassPathXmlApplicationContext(
 			Config.config.getFactoryXml());

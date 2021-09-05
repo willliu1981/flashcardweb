@@ -8,12 +8,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.ilan.control.config.Config;
+import com.ilan.appinitialization.Config;
 import com.ilan.control.dao.user.UserdataDao;
-import com.ilan.control.factory.Factory;
+import com.ilan.control.factory.FactoryBuilder;
 import com.ilan.control.factory.daofactory.DaoFactory;
 import com.ilan.control.factory.daofactory.IDaoFactory;
 import com.ilan.control.factory.daofactory.user.IUserdataDao;
@@ -26,6 +28,12 @@ import com.ilan.model.user.Userdata;
 @WebServlet(name = "servlet/MemberServlet", urlPatterns = { "/servlet/MemberServlet" })
 public class MemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	ApplicationContext appFactory1 = new ClassPathXmlApplicationContext(
+			Config.config.getConnectionXml());
+	ApplicationContext appFactory2 = new ClassPathXmlApplicationContext(
+			Config.config.getDaoFactoryXml());
+	private DataSource dataSource;
+	UserdataDao dao;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -42,11 +50,17 @@ public class MemberServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		IDaoFactory daoFactory = (DaoFactory) Factory.getFactory("daoFactory", IDaoFactory.class);
-		//IUserdataDao dao = (IUserdataDao) daoFactory.getDao("userdataDao", IUserdataDao.class);
+		IDaoFactory daoFactory = (DaoFactory) FactoryBuilder.getFactory("daoFactory", IDaoFactory.class);
+		 IUserdataDao dao = (IUserdataDao) daoFactory.getDao("userdataDao",
+		 IUserdataDao.class);
+		
+		//FactoryBuilder.getFactory(getServletInfo(), null)
 
-		UserdataDao dao = new ClassPathXmlApplicationContext(Config.config.getDaoFactoryXml())
-				.getBean("userdataDao", UserdataDao.class);
+		dataSource = appFactory1.getBean("dataSource", DataSource.class);
+
+		dao = (UserdataDao) appFactory2.getBean("userdataDao", IUserdataDao.class);
+		//dao.setDataSource(dataSource);
+
 
 		User user = (User) request.getSession().getAttribute("user");
 

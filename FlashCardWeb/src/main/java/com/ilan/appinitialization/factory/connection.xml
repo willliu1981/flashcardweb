@@ -7,11 +7,11 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 	<context:annotation-config />
-	<context:component-scan base-package="test" />
+
 
 
 	<bean id="dataSource"
-		class="com.ilan.control.connection.MyDataSource">
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName"
 			value="com.mysql.jdbc.Driver" />
 		<property name="url"
@@ -19,14 +19,6 @@
 		<property name="username" value="root" />
 		<property name="password" value="1234" />
 
-	</bean>
-
-	<bean id="user" class="com.ilan.model.user.User">
-		<property name="displayName" value="Ken"></property>
-	</bean>
-
-	<bean id="book" class="com.ilan.control.connection.Book">
-		<property name="name" value="PHP"></property>
 	</bean>
 
 

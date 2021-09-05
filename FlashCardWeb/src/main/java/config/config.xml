@@ -6,16 +6,30 @@
 
 
 
-	<bean id="config" class="com.ilan.control.config.Config"
+	<bean id="config" class="com.ilan.appinitialization.Config"
 		scope="singleton">
 		<property name="factoryXml">
-			<value>com/ilan/control/config/factory.xml</value>
+			<value>com/ilan/appinitialization/factory/factory.xml</value>
 		</property>
 		<property name="daoFactoryXml">
-			<value>com/ilan/control/config/daoFactory.xml</value>
+			<value>com/ilan/appinitialization/factory/daoFactory.xml</value>
 		</property>
 		<property name="connectionXml">
-			<value>com/ilan/control/config/connection.xml</value>
+			<value>com/ilan/appinitialization/factory/connection.xml</value>
+		</property>
+	</bean>
+
+	<bean id="factoryConfig"
+		class="com.ilan.appinitialization.factory.FactoryConfig"
+		scope="singleton" init-method="init">
+		<property name="xmlRootReferer"
+			value="com/ilan/appinitialization/factory" />
+		<property name="addBeansXmlReferer">
+			<set>
+				<value>factory.xml</value>
+				<value>daoFactory.xml</value>
+				<value>connection.xml</value>
+			</set>
 		</property>
 	</bean>
 

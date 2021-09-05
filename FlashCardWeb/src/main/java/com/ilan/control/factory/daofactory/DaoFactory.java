@@ -5,7 +5,7 @@ import javax.sql.DataSource;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.ilan.control.config.Config;
+import com.ilan.appinitialization.Config;
 import com.ilan.control.dao.user.UserDao;
 import com.ilan.control.factory.deprecated.UserDaoFactory;
 

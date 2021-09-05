@@ -7,8 +7,8 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>src/main/java/com/ilan/control/config/daoFactory.xml</config>
-		<config>src/main/java/com/ilan/control/config/factory.xml</config>
+		<config>src/main/java/com/ilan/appinitialization/factory/daoFactory.xml</config>
+		<config>src/main/java/com/ilan/appinitialization/factory/factory.xml</config>
 	</configs>
 	<autoconfigs>
 		<config>src/main/java/config/config.xml</config>

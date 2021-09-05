@@ -270,7 +270,12 @@ public class UserDao extends AbstractDao<User> implements IUserDao {
 			userdata.setName(user.getDisplayName());
 			userdata.setEmail("kevin123@yahoo.com.tw");
 
-			daoUserdata.add(userdata);
+			try {
+				daoUserdata.add(userdata);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 		}
 	}

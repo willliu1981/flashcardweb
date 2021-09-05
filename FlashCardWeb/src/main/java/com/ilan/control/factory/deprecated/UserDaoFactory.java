@@ -7,33 +7,28 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 
-import com.ilan.control.config.Config;
-import com.ilan.control.connection.Book;
-import com.ilan.control.connection.MyDataSource;
+import com.ilan.appinitialization.Config;
 import com.ilan.control.factory.daofactory.IDao;
 import com.ilan.control.factory.daofactory.user.UserDaoExtension;
 import com.ilan.exception.ResultNullException;
 import com.ilan.model.user.User;
 
 public class UserDaoFactory extends AbstractDaoFactory {
+
 	private static UserDaoFactory factory;
 	private Class<?> clazz;
 	ApplicationContext appFactory = new ClassPathXmlApplicationContext(
 			Config.config.getConnectionXml());
 
-	@Autowired
-	Book book;
-	@Autowired
-	private MyDataSource dataSourcex;
-	private MyDataSource dataSource;
-	
+	private DataSource dataSource;
 
 	public UserDaoFactory() {
-		dataSource = (MyDataSource) appFactory.getBean("dataSource", DataSource.class);
+		dataSource = appFactory.getBean("dataSource", DataSource.class);
 	}
 
 	@Override
@@ -77,11 +72,6 @@ public class UserDaoFactory extends AbstractDaoFactory {
 	public boolean identifyUser(String username, String password) {
 		User user;
 		try {
-			System.out.println("rrrr " + ((MyDataSource) dataSource).getMsg());
-			System.out.println("xxxx " + dataSourcex);
-			System.out.println("ssss " + book);
-			System.out.println("datasource " + dataSource);
-
 			clazz.newInstance();
 			IDao<?> dao = (IDao<?>) clazz.newInstance();
 			dao.setDataSource(dataSource);

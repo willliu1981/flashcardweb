@@ -4,7 +4,7 @@ import javax.sql.DataSource;
 
 import org.springframework.context.ApplicationContext;
 
-import com.ilan.control.config.Config;
+import com.ilan.appinitialization.Config;
 import com.ilan.control.factory.IFactory;
 
 public interface IDaoFactory extends IFactory {

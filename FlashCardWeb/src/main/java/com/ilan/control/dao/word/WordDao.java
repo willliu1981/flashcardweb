@@ -182,7 +182,12 @@ public class WordDao extends AbstractDao<Word> implements IDao<Word> {
 		w.setTag("null");
 
 		IDao<Word> dao = new WordDao();
-		System.out.println("add: " + dao.add(w));
+		try {
+			System.out.println("add: " + dao.add(w));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	// @Test

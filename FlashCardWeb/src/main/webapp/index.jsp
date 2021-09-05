@@ -34,6 +34,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 		$("#member").click(function() {
 			location.href = "${pageContext.request.contextPath}/servlet/MemberServlet";
 		});
+		$("#test").click(function() {
+			location.href = "${pageContext.request.contextPath}/servlet/TestServlet";
+		});
 	});
 </script>
 </head>
@@ -65,6 +68,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 			<button type="button" id="login">登入</button>
 		</c:otherwise>
 	</c:choose>
+	
+	<br/>
+	<button type="button" id="test">Test</button>
 
 
 </body>

@@ -1,6 +1,8 @@
 package com.ilan.control.servlet.login;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -65,8 +67,12 @@ public class RegisterServlet extends HttpServlet {
 		userdata.setEmail(email);
 
 		UserdataDao userdataDao = new UserdataDao();
-		if (!userdataDao.add(userdata)) {
-			isSucceed = false;
+		try {
+			if (!userdataDao.add(userdata)) {
+				isSucceed = false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 
 		if (isSucceed) {
