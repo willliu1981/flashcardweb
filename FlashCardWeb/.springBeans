@@ -9,6 +9,7 @@
 	<configs>
 		<config>src/main/java/com/ilan/appinitialization/factory/daoFactory.xml</config>
 		<config>src/main/java/com/ilan/appinitialization/factory/factory.xml</config>
+		<config>src/main/java/com/ilan/appinitialization/factory/exception.xml</config>
 	</configs>
 	<autoconfigs>
 		<config>src/main/java/config/config.xml</config>

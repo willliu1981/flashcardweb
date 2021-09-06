@@ -12,13 +12,7 @@
 	<import
 		resource="classpath:com/ilan/appinitialization/factory/connection.xml" />
 
-	<bean id="daoFactory"
-		class="com.ilan.control.factory.daofactory.DaoFactory"
-		scope="singleton">
-		<property name="dataSource">
-			<ref bean="dataSource" />
-		</property>
-	</bean>
+
 
 
 

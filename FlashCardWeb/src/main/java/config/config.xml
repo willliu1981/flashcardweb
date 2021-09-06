@@ -4,17 +4,8 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="config" class="com.ilan.appinitialization.Config"
+	<bean id="config" class="com.ilan.appinitialization.AppConfig"
 		scope="singleton">
-		<property name="factoryXml">
-			<value>com/ilan/appinitialization/factory/factory.xml</value>
-		</property>
-		<property name="daoFactoryXml">
-			<value>com/ilan/appinitialization/factory/daoFactory.xml</value>
-		</property>
-		<property name="connectionXml">
-			<value>com/ilan/appinitialization/factory/connection.xml</value>
-		</property>
 		<property name="factoryConfig" ref="factoryConfig"></property>
 	</bean>
 
@@ -28,6 +19,7 @@
 				<value>factory.xml</value>
 				<value>daoFactory.xml</value>
 				<value>connection.xml</value>
+				<value>exception.xml</value>
 			</set>
 		</property>
 	</bean>

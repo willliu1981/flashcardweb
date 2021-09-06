@@ -5,20 +5,18 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	<context:annotation-config />
 
 
-	<import
-		resource="classpath:com/ilan/appinitialization/factory/connection.xml" />
-
-	<bean id="userDao" class="com.ilan.control.dao.user.UserDao"
-		scope="singleton">
-		<property name="dataSource" ref="dataSource"></property>
-	</bean>
-	<bean id="userdataDao"
-		class="com.ilan.control.dao.user.UserdataDao" scope="singleton">
-		<property name="dataSource" ref="dataSource"></property>
+	<bean id="resultNullException"
+		class="com.ilan.exception.ResultNullException" scope="singleton">
+		<property name="resultExceptionWrap"
+			ref="resultExceptionWrap"></property>
 	</bean>
 
-	
+
+	<bean id="resultExceptionWrap"
+		class="com.ilan.exception.ResultExceptionWrap" scope="singleton"></bean>
+
 
 </beans>

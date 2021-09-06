@@ -8,27 +8,31 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.junit.Test;
+import javax.sql.DataSource;
 
-import com.ilan.control.connection.MyConnection;
-import com.ilan.control.factory.daofactory.AbstractDao;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import com.ilan.control.factory.daofactory.user.IUserDao;
 import com.ilan.exception.ResultNullException;
 import com.ilan.model.user.User;
 import com.ilan.model.user.Userdata;
 
-public class UserDao extends AbstractDao<User> implements IUserDao {
-	
+public class UserDao implements IUserDao {
+	protected DataSource dataSource;
 
 	@Override
 	public boolean add(User t) {
-		Connection conn = MyConnection.getConnection();
+		Connection conn = null;
 
 		String sql = "insert into user (u_id,displayname,username,password,"
 				+ "authority,userdata_id, create_date,update_date,note,tag) values(?,?,?,?,?,?,?,?,?,?)";
 		int r = 0;
 		try {
-			PreparedStatement ps = conn.prepareStatement(sql);
+			PreparedStatement ps = (conn = dataSource.getConnection()).prepareStatement(sql);
 			ps.setString(1, t.getU_id());
 			ps.setString(2, t.getDisplayName());
 			ps.setString(3, t.getUsername());
@@ -79,12 +83,12 @@ public class UserDao extends AbstractDao<User> implements IUserDao {
 
 	@Override
 	public int update(String id, User t) {
-		Connection conn = MyConnection.getConnection();
+		Connection conn = null;
 
 		String sql = "update user set u_id=?,displayname=?,username=?,password=?,authority=?,userdata_id=?,create_date=?,update_date=?,note=?,tag=? where u_id=?";
 		int r = 0;
 		try {
-			PreparedStatement ps = conn.prepareStatement(sql);
+			PreparedStatement ps = (conn = dataSource.getConnection()).prepareStatement(sql);
 			ps.setString(1, t.getU_id());
 			ps.setString(2, t.getDisplayName());
 			ps.setString(3, t.getUsername());
@@ -112,12 +116,12 @@ public class UserDao extends AbstractDao<User> implements IUserDao {
 
 	@Override
 	public int delete(String id) {
-		Connection conn = MyConnection.getConnection();
+		Connection conn = null;
 
 		String sql = "delete from user where u_id=?";
 		int r = 0;
 		try {
-			PreparedStatement ps = conn.prepareStatement(sql);
+			PreparedStatement ps = (conn = dataSource.getConnection()).prepareStatement(sql);
 			ps.setString(1, id);
 			r = ps.executeUpdate();
 
@@ -132,22 +136,22 @@ public class UserDao extends AbstractDao<User> implements IUserDao {
 	}
 
 	@Override
-	public User identifyUser(String username, String password) throws ResultNullException,SQLException {
+	public User identifyUser(String username, String password)
+			throws ResultNullException, SQLException {
 		User user = find("select * from user where username=? and password=?", username, password);
 		if (user == null) {
-			throw new ResultNullException(
-					String.format("%s::queryByID:username=%s,password=%s",
-							this.getClass().getName(), username, password));
+			throw new ResultNullException(this.getClass(), "identifyUser",
+					String.format("username=%s,password=%s", username, password));
 		}
 		return user;
 	}
 
 	@Override
-	public User find(String sqlSegment, String... querys) throws ResultNullException ,SQLException{
-		Connection conn = this.getDataSource().getConnection();
+	public User find(String sqlSegment, String... querys) throws ResultNullException, SQLException {
+		Connection conn = null;
 		User r = null;
 		try {
-			PreparedStatement ps = conn.prepareStatement(sqlSegment);
+			PreparedStatement ps = (conn = dataSource.getConnection()).prepareStatement(sqlSegment);
 			for (int idx = 0; idx < querys.length; idx++) {
 				ps.setString(idx + 1, querys[idx]);
 			}
@@ -171,18 +175,23 @@ public class UserDao extends AbstractDao<User> implements IUserDao {
 			conn.close();
 
 		} catch (SQLException e) {
-			System.out.println(e.getMessage() + " : " + this.getClass().getName()
-					+ "::find:" + sqlSegment);
+			System.out.println(
+					e.getMessage() + " : " + this.getClass().getName() + "::find:" + sqlSegment);
 		}
 
 		return r;
 	}
-	
 
 	@Override
 	public void setDefaultAuthority() {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	@Override
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
+
 	}
 
 	@Test
@@ -279,6 +288,5 @@ public class UserDao extends AbstractDao<User> implements IUserDao {
 
 		}
 	}
-
 
 }

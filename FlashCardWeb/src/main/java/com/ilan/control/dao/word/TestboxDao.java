@@ -7,24 +7,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.List;
+
+import javax.sql.DataSource;
 
 import org.junit.Test;
 
-import com.ilan.control.connection.MyConnection;
-import com.ilan.control.factory.daofactory.AbstractDao;
 import com.ilan.control.factory.daofactory.IDao;
 import com.ilan.exception.ResultNullException;
-import com.ilan.model.user.User;
-import com.ilan.model.word.Card;
 import com.ilan.model.word.Testbox;
 
-public class TestboxDao extends AbstractDao<Testbox> implements IDao<Testbox> {
+public class TestboxDao implements IDao<Testbox> {
+	protected DataSource dataSource;
 
 	@Override
 	public boolean add(Testbox t) {
-		Connection conn = MyConnection.getConnection();
+		Connection conn = null;
 
 		boolean flag1 = t.getTesttimes() != null;
 		boolean flag2 = t.getState() != null;
@@ -32,14 +30,15 @@ public class TestboxDao extends AbstractDao<Testbox> implements IDao<Testbox> {
 				"insert into testbox (t_id,name,%s testdate,%s cards,create_date,update_date,creator,note,tag)",
 				flag1 ? "testtimes," : "", flag2 ? "state," : "");
 
-		String values = String.format("values(%s%s?,?,?,?,?,?,?,?,?)", flag1 ? "?," : "", flag2 ? "?," : "");
+		String values = String.format("values(%s%s?,?,?,?,?,?,?,?,?)", flag1 ? "?," : "",
+				flag2 ? "?," : "");
 
 		String sql = keys + values;
 
 		int r = 0;
 		try {
 			int idx = 1;
-			PreparedStatement ps = conn.prepareStatement(sql);
+			PreparedStatement ps =  (conn=dataSource.getConnection()).prepareStatement(sql);
 			ps.setString(idx++, t.getT_id());
 			ps.setString(idx++, t.getName());
 			if (flag1)
@@ -69,12 +68,12 @@ public class TestboxDao extends AbstractDao<Testbox> implements IDao<Testbox> {
 
 	@Override
 	public Testbox queryByID(String id) throws IOException {
-		Connection conn = MyConnection.getConnection();
+		Connection conn = null;
 
 		String sql = "select * from testbox where t_id=?";
 		Testbox r = null;
 		try {
-			PreparedStatement ps = conn.prepareStatement(sql);
+			PreparedStatement ps =  (conn=dataSource.getConnection()).prepareStatement(sql);
 			ps.setString(1, id);
 
 			ResultSet rs = ps.executeQuery();
@@ -104,7 +103,6 @@ public class TestboxDao extends AbstractDao<Testbox> implements IDao<Testbox> {
 		return r;
 	}
 
-
 	@Override
 	public List<Testbox> queryAll() {
 		// TODO Auto-generated method stub
@@ -113,17 +111,18 @@ public class TestboxDao extends AbstractDao<Testbox> implements IDao<Testbox> {
 
 	@Override
 	public int update(String id, Testbox t) {
-		Connection conn = MyConnection.getConnection();
+		Connection conn = null;
 
 		boolean flag1 = t.getTesttimes() != null;
 		boolean flag2 = t.getState() != null;
-		String sql = String
-				.format("update testbox set t_id=?,name=?,%s testdate=?,%s cards=?,create_date=?,update_date=?,"
-						+ "creator=?,note=?,tag=? where t_id=?", flag1 ? "testtimes=?," : "", flag2 ? "state=?," : "");
+		String sql = String.format(
+				"update testbox set t_id=?,name=?,%s testdate=?,%s cards=?,create_date=?,update_date=?,"
+						+ "creator=?,note=?,tag=? where t_id=?",
+				flag1 ? "testtimes=?," : "", flag2 ? "state=?," : "");
 		int r = 0;
 		try {
 			int idx = 1;
-			PreparedStatement ps = conn.prepareStatement(sql);
+			PreparedStatement ps =  (conn=dataSource.getConnection()).prepareStatement(sql);
 			ps.setString(idx++, t.getT_id());
 			ps.setString(idx++, t.getName());
 			if (flag1)
@@ -157,11 +156,16 @@ public class TestboxDao extends AbstractDao<Testbox> implements IDao<Testbox> {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
+
 	@Override
 	public Testbox find(String sqlSegment, String... querys) throws ResultNullException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
 	}
 
 	@Test
@@ -211,7 +215,5 @@ public class TestboxDao extends AbstractDao<Testbox> implements IDao<Testbox> {
 		}
 
 	}
-
-
 
 }

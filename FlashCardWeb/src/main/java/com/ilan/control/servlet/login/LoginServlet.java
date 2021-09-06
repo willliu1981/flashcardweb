@@ -1,18 +1,18 @@
 package com.ilan.control.servlet.login;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.ilan.control.authority.Authority;
-import com.ilan.control.factory.daofactory.DaoFactory;
-import com.ilan.control.factory.deprecated.UserDaoFactory;
+import com.ilan.control.factory.BeanFactory;
+import com.ilan.control.factory.daofactory.DaoFactoryType;
+import com.ilan.control.factory.daofactory.user.IUserDao;
+import com.ilan.exception.ResultNullException;
 import com.ilan.model.user.User;
 
 /**
@@ -39,11 +39,18 @@ public class LoginServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 
-		UserDaoFactory daoFactory = (UserDaoFactory) DaoFactory.getUserDaoFactory();
-		boolean identifyFlag = daoFactory.identifyUser(username, password);
+		IUserDao dao = (IUserDao) BeanFactory.getBean(DaoFactoryType.USERDAO);
+
+		User user = null;
+		boolean identifyFlag = false;
+		try {
+			identifyFlag = (user = dao.identifyUser(username, password)) != null ? true : false;
+		} catch (ResultNullException | SQLException e) {
+			System.out.println(e.getMessage());
+		}
 
 		if (identifyFlag) {
-			request.getSession().setAttribute("user", daoFactory.findUserByUsername(username));
+			request.getSession().setAttribute("user", user);
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else {
 			request.getRequestDispatcher("login/loginfailure.jsp").forward(request, response);

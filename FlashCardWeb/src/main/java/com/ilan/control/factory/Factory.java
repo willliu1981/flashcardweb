@@ -1,9 +1,9 @@
 package com.ilan.control.factory;
 
-import com.ilan.appinitialization.Config;
+import com.ilan.appinitialization.AppConfig;
 
 public class Factory {
 	public static String [] getBeansXmlReferers() {
-		return Config.getFactoryConfig().getBeansXmlReferers();
+		return AppConfig.getFactoryConfig().getBeansXmlReferers();
 	}
 }

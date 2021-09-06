@@ -8,26 +8,26 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.junit.Test;
 
-import com.ilan.control.connection.MyConnection;
-import com.ilan.control.factory.daofactory.AbstractDao;
 import com.ilan.control.factory.daofactory.IDao;
 import com.ilan.exception.ResultNullException;
-import com.ilan.model.user.User;
 import com.ilan.model.word.Word;
 
-public class WordDao extends AbstractDao<Word> implements IDao<Word> {
+public class WordDao  implements IDao<Word> {
+	protected DataSource dataSource;
 
 	@Override
 	public boolean add(Word t) {
-		Connection conn = MyConnection.getConnection();
+		Connection conn = null;
 
 		String sql = "insert into word (w_id,vocabulary,translation,explanation,"
 				+ "explanation2,create_date,update_date,creator,note,tag) values(?,?,?,?,?,?,?,?,?,?)";
 		int r = 0;
 		try {
-			PreparedStatement ps = conn.prepareStatement(sql);
+			PreparedStatement ps =  (conn=dataSource.getConnection()).prepareStatement(sql);
 			ps.setString(1, t.getW_id());
 			ps.setString(2, t.getVocabulary());
 			ps.setString(3, t.getTranslation());
@@ -54,12 +54,12 @@ public class WordDao extends AbstractDao<Word> implements IDao<Word> {
 
 	@Override
 	public Word queryByID(String id) throws IOException {
-		Connection conn = MyConnection.getConnection();
+		Connection conn = null;
 
 		String sql = "select * from word where w_id=?";
 		Word r = null;
 		try {
-			PreparedStatement ps = conn.prepareStatement(sql);
+			PreparedStatement ps =  (conn=dataSource.getConnection()).prepareStatement(sql);
 			ps.setString(1, id);
 
 			ResultSet rs = ps.executeQuery();
@@ -100,13 +100,13 @@ public class WordDao extends AbstractDao<Word> implements IDao<Word> {
 
 	@Override
 	public int update(String id, Word t) {
-		Connection conn = MyConnection.getConnection();
+		Connection conn = null;
 
 		String sql = "update word set w_id=?,vocabulary=?,translation=?,explanation=?,"
 				+ "explanation2=?,create_date=?,update_date=?,creator=?,note=?,tag=? where w_id=?";
 		int r = 0;
 		try {
-			PreparedStatement ps = conn.prepareStatement(sql);
+			PreparedStatement ps =  (conn=dataSource.getConnection()).prepareStatement(sql);
 			ps.setString(1, t.getW_id());
 			ps.setString(2, t.getVocabulary());
 			ps.setString(3, t.getTranslation());
@@ -134,12 +134,12 @@ public class WordDao extends AbstractDao<Word> implements IDao<Word> {
 
 	@Override
 	public int delete(String id) {
-		Connection conn = MyConnection.getConnection();
+		Connection conn = null;
 
 		String sql = "delete from word where w_id=?";
 		int r = 0;
 		try {
-			PreparedStatement ps = conn.prepareStatement(sql);
+			PreparedStatement ps =  (conn=dataSource.getConnection()).prepareStatement(sql);
 			ps.setString(1, id);
 			r = ps.executeUpdate();
 
@@ -154,11 +154,16 @@ public class WordDao extends AbstractDao<Word> implements IDao<Word> {
 
 		return r;
 	}
-	
+
 	@Override
 	public Word find(String sqlSegment, String... querys) throws ResultNullException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource=dataSource;
 	}
 
 	@Test
@@ -227,5 +232,6 @@ public class WordDao extends AbstractDao<Word> implements IDao<Word> {
 
 	}
 
+	
 
 }

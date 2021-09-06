@@ -11,24 +11,22 @@ import javax.sql.DataSource;
 
 import org.junit.Test;
 
-import com.ilan.control.connection.MyConnection;
-import com.ilan.control.factory.daofactory.AbstractDao;
 import com.ilan.control.factory.daofactory.IDao;
 import com.ilan.exception.ResultNullException;
-import com.ilan.model.user.User;
 import com.ilan.model.word.Card;
 
-public class CardDao  extends AbstractDao<Card> implements IDao<Card> {
+public class CardDao implements IDao<Card> {
+	protected DataSource dataSource;
 
 	@Override
 	public boolean add(Card t) {
-		Connection conn = MyConnection.getConnection();
+		Connection conn = null;
 
 		String sql = "insert into card (c_id,word_id,name,referred,create_date,update_date,"
 				+ "creator,note,tag) values(?,?,?,?,?,?,?,?,?)";
 		int r = 0;
 		try {
-			PreparedStatement ps = conn.prepareStatement(sql);
+			PreparedStatement ps =  (conn=dataSource.getConnection()).prepareStatement(sql);
 			ps.setString(1, t.getC_id());
 			ps.setString(2, t.getWord_id());
 			ps.setString(3, t.getName());
@@ -55,18 +53,17 @@ public class CardDao  extends AbstractDao<Card> implements IDao<Card> {
 
 	@Override
 	public Card queryByID(String id) {
-		Connection conn = MyConnection.getConnection();
+		Connection conn = null;
 
 		String sql = "select * from card where c_id=?";
 		Card r = null;
 		try {
-			PreparedStatement ps = conn.prepareStatement(sql);
+			PreparedStatement ps =  (conn=dataSource.getConnection()).prepareStatement(sql);
 			ps.setString(1, id);
 
-
 			ResultSet rs = ps.executeQuery();
-			if(rs.next()) {
-				r=new Card();
+			if (rs.next()) {
+				r = new Card();
 				r.setC_id(rs.getString("c_id"));
 				r.setWord_id(rs.getString("word_id"));
 				r.setName(rs.getString("name"));
@@ -86,10 +83,8 @@ public class CardDao  extends AbstractDao<Card> implements IDao<Card> {
 			System.out.println(e.getMessage() + " : " + this.getClass().getName() + "::queryByID");
 		}
 
-		return r ;
+		return r;
 	}
-
-
 
 	@Override
 	public List<Card> queryAll() {
@@ -99,13 +94,13 @@ public class CardDao  extends AbstractDao<Card> implements IDao<Card> {
 
 	@Override
 	public int update(String id, Card t) {
-		Connection conn = MyConnection.getConnection();
+		Connection conn = null;
 
 		String sql = "update card set c_id=?,word_id=?,name=?,referred=?,create_date=?,update_date=?,"
 				+ "creator=?,note=?,tag=? where c_id=?";
 		int r = 0;
 		try {
-			PreparedStatement ps = conn.prepareStatement(sql);
+			PreparedStatement ps =  (conn=dataSource.getConnection()).prepareStatement(sql);
 			ps.setString(1, t.getC_id());
 			ps.setString(2, t.getWord_id());
 			ps.setString(3, t.getName());
@@ -127,7 +122,7 @@ public class CardDao  extends AbstractDao<Card> implements IDao<Card> {
 			System.out.println(e.getMessage() + " : " + this.getClass().getName() + "::update");
 		}
 
-		return r ;
+		return r;
 	}
 
 	@Override
@@ -135,21 +130,25 @@ public class CardDao  extends AbstractDao<Card> implements IDao<Card> {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
+
 	@Override
 	public Card find(String sqlSegment, String... querys) throws ResultNullException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	
+	@Override
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
+	}
+
 	@Test
 	public void test() {
-		//testAdd();
+		// testAdd();
 		testUpdate();
 	}
 
-	//@Test
+	// @Test
 	public void testAdd() {
 		Card c = new Card();
 		c.setC_id("c125");
@@ -162,18 +161,15 @@ public class CardDao  extends AbstractDao<Card> implements IDao<Card> {
 		CardDao dao = new CardDao();
 		dao.add(c);
 	}
-	
-	//@Test
+
+	// @Test
 	public void testUpdate() {
-		CardDao dao=new CardDao();
+		CardDao dao = new CardDao();
 		Card c = dao.queryByID("c125");
-		String id=c.getC_id();
+		String id = c.getC_id();
 		c.setWord_id("e139");
 
 		dao.update(id, c);
 	}
-
-
-
 
 }

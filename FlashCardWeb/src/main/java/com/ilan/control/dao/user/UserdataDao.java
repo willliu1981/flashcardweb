@@ -10,23 +10,17 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
-import com.ilan.control.connection.MyConnection;
-import com.ilan.control.factory.daofactory.AbstractDao;
 import com.ilan.control.factory.daofactory.user.IUserdataDao;
 import com.ilan.exception.ResultNullException;
 import com.ilan.model.user.Userdata;
 
-public class UserdataDao extends AbstractDao<Userdata> implements IUserdataDao {
-	@Autowired
-	@Qualifier("dataSource")
-	protected DataSource dataSourceu;
-	
+public class UserdataDao implements IUserdataDao {
+	protected DataSource dataSource;
+
 	@Override
 	public boolean add(Userdata t) throws SQLException {
-		Connection conn = dataSourceu.getConnection();
+		Connection conn = dataSource.getConnection();
 
 		String sql = "insert into userdata (ud_id,user_id,name,email,cardboxdata,scenedata,"
 				+ "create_date,update_date,note,tag) values(?,?,?,?,?,?,?,?,?,?)";
@@ -88,8 +82,7 @@ public class UserdataDao extends AbstractDao<Userdata> implements IUserdataDao {
 	@Override
 	public Userdata find(String sqlSegment, String... querys)
 			throws ResultNullException, SQLException {
-		//Connection conn = this.getDataSource().getConnection();
-		Connection conn = dataSourceu.getConnection();
+		Connection conn = this.dataSource.getConnection();
 		String sql = sqlSegment;
 		Userdata r = null;
 		try {
@@ -133,6 +126,13 @@ public class UserdataDao extends AbstractDao<Userdata> implements IUserdataDao {
 		}
 		return data;
 	}
+
+	@Override
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
+	}
+
+
 
 	@Test
 	public void test() {

@@ -13,6 +13,8 @@ import com.ilan.control.authority.Authorities;
 import com.ilan.control.authority.Authority;
 import com.ilan.control.dao.user.UserDao;
 import com.ilan.control.dao.user.UserdataDao;
+import com.ilan.control.factory.BeanFactory;
+import com.ilan.control.factory.daofactory.DaoFactoryType;
 import com.ilan.model.user.User;
 import com.ilan.model.user.Userdata;
 
@@ -44,6 +46,8 @@ public class RegisterServlet extends HttpServlet {
 		String serial_id = "" + new java.util.Date().getTime();
 		String user_id = "uid" + serial_id;
 		String userdata_id = "udid" + serial_id;
+		
+		
 
 		boolean isSucceed = true;
 
@@ -55,7 +59,7 @@ public class RegisterServlet extends HttpServlet {
 		user.setUserdata_id(userdata_id);
 		user.setAuthority(Authorities.toString(Authorities.getDefaultAuthority()));
 
-		UserDao userDao = new UserDao();
+		UserDao userDao = (UserDao) BeanFactory.getBean(DaoFactoryType.USERDAO);
 		if (!userDao.add(user)) {
 			isSucceed = false;
 		}
@@ -66,7 +70,7 @@ public class RegisterServlet extends HttpServlet {
 		userdata.setName(user.getDisplayName());
 		userdata.setEmail(email);
 
-		UserdataDao userdataDao = new UserdataDao();
+		UserdataDao userdataDao = (UserdataDao) BeanFactory.getBean(DaoFactoryType.USERDATADAO);
 		try {
 			if (!userdataDao.add(userdata)) {
 				isSucceed = false;

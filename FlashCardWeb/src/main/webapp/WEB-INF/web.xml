@@ -30,7 +30,8 @@
     <resource-env-ref-name>authority/ConvertAuthority</resource-env-ref-name>
   </resource-env-ref>
   <listener>
-    <listener-class>com.ilan.control.listener.ContextInitListener</listener-class>
+  	<description>initalize application</description>
+    <listener-class>com.ilan.appinitialization.ContextInitListener</listener-class>
   </listener>
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

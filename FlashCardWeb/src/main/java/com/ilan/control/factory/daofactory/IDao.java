@@ -11,7 +11,7 @@ import com.ilan.exception.ResultNullException;
 public interface IDao<T> {
 
 	public void setDataSource(DataSource dataSource);
-	public DataSource getDataSource() throws SQLException;
+
 
 	public boolean add(T t) throws SQLException;
 
