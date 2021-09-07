@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.ilan.control.factory.BeanFactory;
 import com.ilan.control.factory.daofactory.DaoFactoryType;
@@ -26,16 +27,16 @@ public class JudgeUserController implements Controller {
 
 		IUserDao<User> dao = (IUserDao) BeanFactory.getBean(DaoFactoryType.USERDAO);
 		User user = null;
-		boolean isExist = true;
+		String valid = "false";
 		try {
 			user = dao.findByUsername(username);
 		} catch (ResultNullException | SQLException e) {
-			isExist = false;
+			valid = "true";
 		}
-		
-		//res.getWriter().print(isExist);
+		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
+		mv.addObject("valid", valid);
 
-		return new ModelAndView(this.viewPage, "valid", !isExist);
+		return mv;
 	}
 
 	public void setViewPage(String viewPage) {

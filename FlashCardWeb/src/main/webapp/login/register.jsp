@@ -20,10 +20,16 @@
                             + username,
                         type : 'GET',
                         success : function(result, status, xhr) {
-                          if ($.trim(result)=='true') {
-                            $('#usernameerrormsg').text('可用ID').css('color','green');
-                          }else{
-                            $('#usernameerrormsg').text('無效ID').css('color','red');
+                          var valid;
+                          $.each(result, function(key, value) {
+                            valid = value;
+                          });
+                          if ($.trim(valid) == 'true') {
+                            $('#usernameerrormsg').text('可用ID').css('color',
+                                'green');
+                          } else {
+                            $('#usernameerrormsg').text('無效ID').css('color',
+                                'red');
                           }
                         },
                         error : function(xhr, status, error) {
