@@ -15,7 +15,7 @@ import com.ilan.control.factory.daofactory.user.IUserdataDao;
 import com.ilan.exception.ResultNullException;
 import com.ilan.model.user.Userdata;
 
-public class UserdataDao implements IUserdataDao {
+public class UserdataDao implements IUserdataDao<Userdata> {
 	protected DataSource dataSource;
 
 	@Override

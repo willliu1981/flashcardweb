@@ -11,17 +11,13 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.ilan.control.factory.daofactory.user.IUserDao;
 import com.ilan.exception.ResultNullException;
 import com.ilan.model.user.User;
 import com.ilan.model.user.Userdata;
 
-public class UserDao implements IUserDao {
+public class UserDao implements IUserDao<User> {
 	protected DataSource dataSource;
 
 	@Override
@@ -136,17 +132,6 @@ public class UserDao implements IUserDao {
 	}
 
 	@Override
-	public User identifyUser(String username, String password)
-			throws ResultNullException, SQLException {
-		User user = find("select * from user where username=? and password=?", username, password);
-		if (user == null) {
-			throw new ResultNullException(this.getClass(), "identifyUser",
-					String.format("username=%s,password=%s", username, password));
-		}
-		return user;
-	}
-
-	@Override
 	public User find(String sqlSegment, String... querys) throws ResultNullException, SQLException {
 		Connection conn = null;
 		User r = null;
@@ -192,6 +177,17 @@ public class UserDao implements IUserDao {
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 
+	}
+
+	@Override
+	public User identifyUser(String username, String password)
+			throws ResultNullException, SQLException {
+		User user = find("select * from user where username=? and password=?", username, password);
+		if (user == null) {
+			throw new ResultNullException(this.getClass(), "identifyUser",
+					String.format("username=%s,password=%s", username, password));
+		}
+		return user;
 	}
 
 	@Test

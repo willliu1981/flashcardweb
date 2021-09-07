@@ -1,6 +1,6 @@
 package com.ilan.exception;
 
-public class ResultExceptionWrap implements IResultExceptionWrap {
+public class ResultExceptionWrap implements IExceptionWrap {
 
 	@Override
 	public String getMsg(Class<?> clazz, String methodName, String msg) {

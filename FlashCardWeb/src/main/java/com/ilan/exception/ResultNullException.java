@@ -2,16 +2,16 @@ package com.ilan.exception;
 
 import java.io.IOException;
 
-public class ResultNullException extends IOException implements IResultException {
+public class ResultNullException extends IOException implements IException {
 	private static final long serialVersionUID = 1L;
-	private static IResultExceptionWrap wrap;
+	private static IExceptionWrap wrap;
 
 	public ResultNullException() {
 		this("");
 	}
 
 	public ResultNullException(String msg) {
-		super("Result is null " + IResultException.processMsg(msg));
+		super("Result is null " + IException.processMsg(msg));
 
 	}
 
@@ -20,7 +20,7 @@ public class ResultNullException extends IOException implements IResultException
 	}
 
 	@Override
-	public void setResultExceptionWrap(IResultExceptionWrap wrap) {
+	public void setResultExceptionWrap(IExceptionWrap wrap) {
 		ResultNullException.wrap = wrap;
 	}
 

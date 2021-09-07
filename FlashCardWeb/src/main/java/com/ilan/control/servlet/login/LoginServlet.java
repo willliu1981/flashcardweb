@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 
-		IUserDao dao = (IUserDao) BeanFactory.getBean(DaoFactoryType.USERDAO);
+		IUserDao<User> dao = (IUserDao<User>) BeanFactory.getBean(DaoFactoryType.USERDAO);
 
 		User user = null;
 		boolean identifyFlag = false;

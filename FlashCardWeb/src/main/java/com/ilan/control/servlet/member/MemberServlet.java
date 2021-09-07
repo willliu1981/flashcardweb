@@ -42,7 +42,7 @@ public class MemberServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		IUserdataDao dao = (IUserdataDao) BeanFactory.getBean(DaoFactoryType.USERDATADAO);
+		IUserdataDao<Userdata> dao =  (IUserdataDao<Userdata>) BeanFactory.getBean(DaoFactoryType.USERDATADAO);
 
 		User user = (User) request.getSession().getAttribute("user");
 
