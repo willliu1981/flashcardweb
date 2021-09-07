@@ -11,6 +11,7 @@
 		<config>src/main/java/com/ilan/appinitialization/factory/factory.xml</config>
 		<config>src/main/java/com/ilan/appinitialization/factory/exception.xml</config>
 		<config>src/main/webapp/WEB-INF/mvc-config.xml</config>
+		<config>src/main/webapp/WEB-INF/config/serviceconfig.xml</config>
 	</configs>
 	<autoconfigs>
 		<config>src/main/java/config/config.xml</config>

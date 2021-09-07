@@ -65,8 +65,7 @@ public class UserDao implements IUserDao<User> {
 	public User findByUsername(String username) throws ResultNullException, SQLException {
 		User user = find("select * from user where username=?", username);
 		if (user == null) {
-			throw new ResultNullException("Result is Null:" + this.getClass().getName()
-					+ "::queryByUsername:" + username);
+			throw new ResultNullException(this.getClass(), "findByUsername", username);
 		}
 		return user;
 	}
