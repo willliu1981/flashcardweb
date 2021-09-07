@@ -7,13 +7,12 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>src/main/java/com/ilan/appinitialization/factory/daoFactory.xml</config>
-		<config>src/main/java/com/ilan/appinitialization/factory/factory.xml</config>
-		<config>src/main/java/com/ilan/appinitialization/factory/exception.xml</config>
 		<config>src/main/webapp/WEB-INF/config/serviceconfig.xml</config>
+		<config>src/main/java/com/flashcard/application/config/daoFactory.xml</config>
+		<config>src/main/java/com/flashcard/application/config/exception.xml</config>
+		<config>src/main/java/com/flashcard/application/config/appConfig.xml</config>
 	</configs>
 	<autoconfigs>
-		<config>src/main/java/config/config.xml</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>

@@ -22,11 +22,7 @@
   <servlet-name>dispatcherServlet</servlet-name>
   <url-pattern>*.do</url-pattern>
   </servlet-mapping>
-  
-  <context-param>
-    <param-name>config</param-name>
-    <param-value>config/config.xml</param-value>
-  </context-param>
+ 
   <filter>
     <filter-name>EncodingFilter</filter-name>
     <filter-class>com.ilan.control.filter.EncodingFilter</filter-class>
@@ -45,13 +41,13 @@
   </resource-env-ref>
   <listener>
   	<description>initalize application</description>
-    <listener-class>com.ilan.appinitialization.ContextInitListener</listener-class>
+    <listener-class>com.flashcard.listener.application.initialization.ContextInitListener</listener-class>
   </listener>
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:config/config.xml</param-value>
+    <param-value>classpath:com/flashcard/application/config/appConfig.xml</param-value>
   </context-param>
 </web-app>

@@ -1,4 +1,4 @@
-package com.ilan.appinitialization.factory;
+package com.flashcard.application.config;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -12,8 +12,8 @@ public class FactoryConfig {
 	private Set<String> beansXmlRefererSet = new HashSet<>();
 	private String[] beansXmlReferers;
 
-	public void setXmlRootReferer(String xmlRootreferer) {
-		xmlRootReferer = xmlRootreferer;
+	public void setXmlRootReferer(String xmlRootReferer) {
+		this.xmlRootReferer = xmlRootReferer;
 	}
 
 	public void setAddBeansXmlReferer(Set<String> beansXmlRefererSet) {

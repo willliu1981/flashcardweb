@@ -17,8 +17,6 @@ import com.ilan.model.user.User;
 
 public class JudgeUserController implements Controller {
 
-	private String viewPage;
-
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest req, HttpServletResponse res)
 			throws Exception {
@@ -26,10 +24,9 @@ public class JudgeUserController implements Controller {
 		String username = req.getParameter("username");
 
 		IUserDao<User> dao = (IUserDao) BeanFactory.getBean(DaoFactoryType.USERDAO);
-		User user = null;
 		String valid = "false";
 		try {
-			user = dao.findByUsername(username);
+			dao.findByUsername(username);
 		} catch (ResultNullException | SQLException e) {
 			valid = "true";
 		}
@@ -37,10 +34,6 @@ public class JudgeUserController implements Controller {
 		mv.addObject("valid", valid);
 
 		return mv;
-	}
-
-	public void setViewPage(String viewPage) {
-		this.viewPage = viewPage;
 	}
 
 }

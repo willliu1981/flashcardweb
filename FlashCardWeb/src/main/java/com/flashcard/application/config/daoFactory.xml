@@ -8,7 +8,7 @@
 
 
 	<import
-		resource="classpath:com/ilan/appinitialization/factory/connection.xml" />
+		resource="classpath:com/flashcard/application/config/connection.xml" />
 
 	<bean id="userDao" class="com.ilan.control.dao.user.UserDao"
 		scope="singleton">

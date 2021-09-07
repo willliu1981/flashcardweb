@@ -41,7 +41,7 @@ public class TestJNDIServlet extends HttpServlet {
 			Context ctx = new InitialContext();
 			Context env = (Context) ctx.lookup("java:comp/env");
 
-			final Book book = (Book) env.lookup("bean/Book");
+			final Book2 book = (Book2) env.lookup("bean/Book");
 
 			response.getWriter().append(" book : " + book.getBookName());
 

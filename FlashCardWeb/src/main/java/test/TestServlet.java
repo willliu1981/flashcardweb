@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ilan.control.factory.BeanFactory;
+
 /**
  * Servlet implementation class TestServlet
  */
@@ -26,8 +28,11 @@ public class TestServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		Book2 b=BeanFactory.getBean("book", Book2.class);
+		
+		
+		response.getWriter().append("Served at: ").append(b.getBookName());
 	}
 
 	/**

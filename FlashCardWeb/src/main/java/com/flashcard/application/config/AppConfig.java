@@ -1,13 +1,6 @@
-package com.ilan.appinitialization;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.sql.DataSource;
+package com.flashcard.application.config;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import com.ilan.appinitialization.factory.FactoryConfig;
 
 public class AppConfig {
 

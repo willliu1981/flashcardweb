@@ -1,4 +1,4 @@
-package com.ilan.appinitialization;
+package com.flashcard.listener.application.initialization;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -14,7 +14,8 @@ import javax.servlet.annotation.WebListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.ilan.appinitialization.factory.FactoryConfig;
+import com.flashcard.application.config.AppConfig;
+import com.flashcard.application.config.FactoryConfig;
 import com.ilan.control.factory.daofactory.user.IUserDao;
 import com.ilan.control.factory.daofactory.user.IUserdataDao;
 import com.ilan.model.user.User;
@@ -46,7 +47,7 @@ public class ContextInitListener implements ServletContextListener {
 	 */
 
 	public void contextInitialized(ServletContextEvent sce) {
-		AppConfig.init(sce.getServletContext().getInitParameter("config"));
+		AppConfig.init(sce.getServletContext().getInitParameter("contextConfigLocation"));
 
 	}
 

@@ -1,6 +1,6 @@
 package com.ilan.control.factory;
 
-import com.ilan.appinitialization.AppConfig;
+import com.flashcard.application.config.AppConfig;
 
 public class Factory {
 	public static String [] getBeansXmlReferers() {

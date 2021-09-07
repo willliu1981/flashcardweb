@@ -6,8 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.ilan.control.factory.type.IFactoryType;
 
 public class BeanFactory {
-	
-	
+
 	private static ApplicationContext factory = new ClassPathXmlApplicationContext(
 			Factory.getBeansXmlReferers());
 

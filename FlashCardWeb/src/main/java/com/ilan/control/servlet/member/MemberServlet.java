@@ -13,7 +13,7 @@ import javax.sql.DataSource;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.ilan.appinitialization.AppConfig;
+import com.flashcard.application.config.AppConfig;
 import com.ilan.control.factory.BeanFactory;
 import com.ilan.control.factory.daofactory.DaoFactoryType;
 import com.ilan.control.factory.daofactory.user.IUserdataDao;

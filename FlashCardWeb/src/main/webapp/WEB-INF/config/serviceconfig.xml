@@ -13,7 +13,6 @@
 
 	<bean name="/servlet/judgeUser.do"
 		class="com.flashcard.control.user.JudgeUserController">
-		<property name="viewPage" value="judgeUserResult" />
 	</bean>
 
 
