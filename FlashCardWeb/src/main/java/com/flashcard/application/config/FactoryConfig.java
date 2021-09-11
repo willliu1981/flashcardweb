@@ -17,7 +17,7 @@ public class FactoryConfig {
 	}
 
 	public String getXmlRootReferer() {
-		return String.format("%s/", xmlRootReferer);
+		return xmlRootReferer;
 	}
 
 	public void setAddBeansXmlReferer(Set<String> beansXmlRefererSet) {

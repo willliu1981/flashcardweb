@@ -12,7 +12,7 @@ public class UserAuthority extends Authority {
 	}
 
 	@Override
-	public int getAuthorityKey(String authName) {
+	public Integer getAuthorityKey(String authName) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

@@ -13,16 +13,23 @@ public class AdminAuthority extends Authority {
 	public static String EDITOR = "EDITOR";// 編輯管理員:USER 所有權限、修改會員資料
 	public static String ADMIN = "ADMIN";// 最高管理員:EDITOR 所有權限、刪除會員資料
 
-	private static Map<String, Integer> keyMap = new HashMap<>();
+	// private static Map<String, Integer> keyMap = new HashMap<>();
 
 	@Override
 	protected void setConfig() {
+		/*
 		keyMap.put(USER, Authorizations.combineKey(AdminAuthorization.CREATE_USER,
 				AdminAuthorization.MODIFY_USER, AdminAuthorization.READ_USER));
 		keyMap.put(EDITOR,
 				Authorizations.combineKey(keyMap.get(USER), AdminAuthorization.MODIFY_MEMBER_USER));
 		keyMap.put(ADMIN, Authorizations.combineKey(keyMap.get(EDITOR),
 				AdminAuthorization.DELETE_MEMBER_USER));
+		//*/
+
+		this.setKeys(USER, AdminAuthorization.CREATE_USER, AdminAuthorization.MODIFY_USER,
+				AdminAuthorization.READ_USER);
+		this.setKeys(EDITOR, USER, AdminAuthorization.MODIFY_MEMBER_USER);
+		this.setKeys(ADMIN, EDITOR, AdminAuthorization.DELETE_MEMBER_USER);
 
 	}
 
@@ -30,15 +37,14 @@ public class AdminAuthority extends Authority {
 	public void test() {
 		setConfig();
 
-		boolean r = Authorizations.hasKey(keyMap.get(ADMIN),
-				AdminAuthorization.DELETE_MEMBER_USER);
+		boolean r = Authorizations.hasKey(keyMap.get(ADMIN), AdminAuthorization.DELETE_MEMBER_USER);
 		System.out.println("" + r);
 
 	}
 
 	@Override
-	public int getAuthorityKey(String authName) {
-		return  this.keyMap.get(authName);
+	public Integer getAuthorityKey(String authName) {
+		return this.keyMap.get(authName);
 	}
 
 }

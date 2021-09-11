@@ -37,10 +37,10 @@ public class TestAuthority extends HttpServlet {
 			throws ServletException, IOException {
 
 		Authority auth = (Authority) BeanFactory.getApplicationContext(
-				AppConfig.config.getFactoryConfig().getXmlRootReferer() + "interception.xml")
+				AppConfig.getFactoryConfig().getXmlRootReferer() + "/interception.xml")
 				.getBean("authority");
 
-		int key = auth.getAuthorityKey(AdminAuthority.ADMIN);
+		Integer key = auth.getAuthorityKey(AdminAuthority.ADMIN);
 		System.out.println("keyyyyyyy " + key);
 		
 		boolean r=Authorizations.hasKey(key, AdminAuthorization.DELETE_MEMBER_USER);
