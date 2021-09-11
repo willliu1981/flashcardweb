@@ -1,4 +1,4 @@
-package com.flashcard.filter;
+package com.flashcard.security.filter;
 
 import java.io.IOException;
 import javax.servlet.Filter;

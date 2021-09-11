@@ -17,19 +17,12 @@ public class AdminAuthority extends Authority {
 
 	@Override
 	protected void setConfig() {
-		/*
-		keyMap.put(USER, Authorizations.combineKey(AdminAuthorization.CREATE_USER,
-				AdminAuthorization.MODIFY_USER, AdminAuthorization.READ_USER));
-		keyMap.put(EDITOR,
-				Authorizations.combineKey(keyMap.get(USER), AdminAuthorization.MODIFY_MEMBER_USER));
-		keyMap.put(ADMIN, Authorizations.combineKey(keyMap.get(EDITOR),
-				AdminAuthorization.DELETE_MEMBER_USER));
-		//*/
-
 		this.setKeys(USER, AdminAuthorization.CREATE_USER, AdminAuthorization.MODIFY_USER,
 				AdminAuthorization.READ_USER);
 		this.setKeys(EDITOR, USER, AdminAuthorization.MODIFY_MEMBER_USER);
 		this.setKeys(ADMIN, EDITOR, AdminAuthorization.DELETE_MEMBER_USER);
+		
+		
 
 	}
 

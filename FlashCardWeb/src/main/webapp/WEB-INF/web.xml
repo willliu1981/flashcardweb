@@ -22,14 +22,16 @@
     <servlet-name>dispatcherServlet</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
+  
   <filter>
     <filter-name>EncodingFilter</filter-name>
-    <filter-class>com.flashcard.filter.EncodingFilter</filter-class>
+    <filter-class>com.flashcard.security.filter.EncodingFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>EncodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  
   <resource-env-ref>
     <description>used to class UserDaoFactory</description>
     <resource-env-ref-name>daoFactory/UserDaoFactory</resource-env-ref-name>

@@ -45,7 +45,6 @@ public class MemberServlet extends HttpServlet {
 		IUserdataDao<Userdata> dao =  (IUserdataDao<Userdata>) BeanFactory.getBean(DaoFactoryType.USERDATADAO);
 
 		User user = (User) request.getSession().getAttribute("user");
-
 		Userdata data = null;
 		try {
 			data = dao.queryByID(user.getUserdata_id());

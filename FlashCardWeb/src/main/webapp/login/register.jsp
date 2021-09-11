@@ -16,7 +16,7 @@
                     function() {
                       var username = $("#username").val();
                       var settings = {
-                        url : 'http://localhost:8080/FlashCardWeb/servlet/judgeUser.do?username='
+                        url : 'http://localhost:8080/FlashCardWeb/account/judgeUser.do?username='
                             + username,
                         type : 'GET',
                         success : function(result, status, xhr) {

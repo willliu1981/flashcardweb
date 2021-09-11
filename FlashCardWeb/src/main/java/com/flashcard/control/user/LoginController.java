@@ -17,8 +17,6 @@ import com.flashcard.model.user.User;
 public class LoginController implements Controller {
 	private String viewPageSuccess;
 	private String viewPageFailure;
-	
-
 
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
@@ -29,18 +27,19 @@ public class LoginController implements Controller {
 		IUserDao<User> dao = (IUserDao<User>) BeanFactory.getBean(DaoFactoryType.USERDAO);
 
 		User user = null;
-		boolean identifyFlag = false;
+		boolean valid = false;
 		try {
-			identifyFlag = (user = dao.identifyUser(username, password)) != null ? true : false;
+			valid = (user = dao.identifyUser(username, password)) != null ? true : false;
+			request.getSession().setAttribute("user", user);
 		} catch (ResultNullException | SQLException e) {
 			System.out.println(e.getMessage());
 		}
 
-		return send(identifyFlag, user);
+		return send(valid, user);
 	}
 
-	protected ModelAndView send(boolean identifyFlag, User user) {
-		if (identifyFlag) {
+	protected ModelAndView send(boolean valid, User user) {
+		if (valid) {
 			return new ModelAndView(viewPageSuccess, "user", user);
 		} else {
 			return new ModelAndView(viewPageFailure, "userDisplayName", user.getDisplayName());

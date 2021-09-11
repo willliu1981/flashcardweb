@@ -26,7 +26,7 @@
 <body>
 	<fieldset>
 		<legend>登入</legend>
-		<form action="/FlashCardWeb/LoginServlet" method="post">
+		<form action="${pageContext.request.contextPath}/account/login.do" method="post">
 			<table style="text-align:center">
 				<tr>
 					<td>帳號</td>
