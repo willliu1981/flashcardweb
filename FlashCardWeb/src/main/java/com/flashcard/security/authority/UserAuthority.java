@@ -10,4 +10,10 @@ public class UserAuthority extends Authority {
 		// TODO Auto-generated method stub
 
 	}
+
+	@Override
+	public int getAuthorityKey(String authName) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

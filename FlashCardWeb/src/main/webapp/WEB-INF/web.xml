@@ -10,19 +10,18 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
-  	<servlet-name>dispatcherServlet</servlet-name>
-  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-  	<init-param>
+    <servlet-name>dispatcherServlet</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
       <param-name>contextConfigLocation</param-name>
       <param-value>/WEB-INF/config/serviceconfig.xml</param-value>
     </init-param>
-  	<load-on-startup>1</load-on-startup>
+    <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
-  <servlet-name>dispatcherServlet</servlet-name>
-  <url-pattern>*.do</url-pattern>
+    <servlet-name>dispatcherServlet</servlet-name>
+    <url-pattern>*.do</url-pattern>
   </servlet-mapping>
- 
   <filter>
     <filter-name>EncodingFilter</filter-name>
     <filter-class>com.flashcard.filter.EncodingFilter</filter-class>
@@ -40,7 +39,7 @@
     <resource-env-ref-name>authority/ConvertAuthority</resource-env-ref-name>
   </resource-env-ref>
   <listener>
-  	<description>initalize application</description>
+    <description>initalize application</description>
     <listener-class>com.flashcard.listener.application.initialization.ContextInitListener</listener-class>
   </listener>
   <listener>

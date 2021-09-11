@@ -16,6 +16,10 @@ public class FactoryConfig {
 		this.xmlRootReferer = xmlRootReferer;
 	}
 
+	public String getXmlRootReferer() {
+		return String.format("%s/", xmlRootReferer);
+	}
+
 	public void setAddBeansXmlReferer(Set<String> beansXmlRefererSet) {
 		this.beansXmlRefererSet = beansXmlRefererSet;
 	}

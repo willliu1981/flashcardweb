@@ -11,6 +11,7 @@
 		<config>src/main/java/com/flashcard/application/config/daoFactory.xml</config>
 		<config>src/main/java/com/flashcard/application/config/exception.xml</config>
 		<config>src/main/java/com/flashcard/application/config/appConfig.xml</config>
+		<config>src/main/java/com/flashcard/application/config/interception.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

@@ -16,6 +16,8 @@ public class BeanFactory {
 		return (T) factory.getBean(type.getId(), type.getClassType());
 	}
 	
-
+	public static ApplicationContext getApplicationContext(String xmlName) {
+		return new ClassPathXmlApplicationContext(xmlName);
+	}
 	
 }

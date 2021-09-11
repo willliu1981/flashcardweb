@@ -13,7 +13,7 @@ public class AdminAuthority extends Authority {
 	public static String EDITOR = "EDITOR";// 編輯管理員:USER 所有權限、修改會員資料
 	public static String ADMIN = "ADMIN";// 最高管理員:EDITOR 所有權限、刪除會員資料
 
-	public static Map<String, Integer> keyMap = new HashMap<>();
+	private static Map<String, Integer> keyMap = new HashMap<>();
 
 	@Override
 	protected void setConfig() {
@@ -34,6 +34,11 @@ public class AdminAuthority extends Authority {
 				AdminAuthorization.DELETE_MEMBER_USER);
 		System.out.println("" + r);
 
+	}
+
+	@Override
+	public int getAuthorityKey(String authName) {
+		return  this.keyMap.get(authName);
 	}
 
 }
