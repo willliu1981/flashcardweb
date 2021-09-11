@@ -2,8 +2,6 @@ package com.ilan.control.servlet.login;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,12 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ilan.control.factory.BeanFactory;
-import com.ilan.control.factory.Factory;
-import com.ilan.control.factory.daofactory.DaoFactoryType;
-import com.ilan.control.factory.daofactory.user.IUserDao;
-import com.ilan.exception.ResultNullException;
-import com.ilan.model.user.User;
+import com.flashcard.exception.ResultNullException;
+import com.flashcard.factory.BeanFactory;
+import com.flashcard.factory.dao.DaoFactoryType;
+import com.flashcard.factory.dao.user.IUserDao;
+import com.flashcard.model.user.User;
 
 /**
  * Servlet implementation class LoginServlet

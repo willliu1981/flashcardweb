@@ -9,11 +9,11 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
-import com.ilan.control.factory.BeanFactory;
-import com.ilan.control.factory.daofactory.DaoFactoryType;
-import com.ilan.control.factory.daofactory.user.IUserDao;
-import com.ilan.exception.ResultNullException;
-import com.ilan.model.user.User;
+import com.flashcard.exception.ResultNullException;
+import com.flashcard.factory.BeanFactory;
+import com.flashcard.factory.dao.DaoFactoryType;
+import com.flashcard.factory.dao.user.IUserDao;
+import com.flashcard.model.user.User;
 
 public class JudgeUserController implements Controller {
 

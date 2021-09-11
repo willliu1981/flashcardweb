@@ -14,11 +14,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.flashcard.application.config.AppConfig;
-import com.ilan.control.factory.BeanFactory;
-import com.ilan.control.factory.daofactory.DaoFactoryType;
-import com.ilan.control.factory.daofactory.user.IUserdataDao;
-import com.ilan.model.user.User;
-import com.ilan.model.user.Userdata;
+import com.flashcard.factory.BeanFactory;
+import com.flashcard.factory.dao.DaoFactoryType;
+import com.flashcard.factory.dao.user.IUserdataDao;
+import com.flashcard.model.user.User;
+import com.flashcard.model.user.Userdata;
 
 /**
  * Servlet implementation class MemberServlet

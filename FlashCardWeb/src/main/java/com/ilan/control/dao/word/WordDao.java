@@ -12,9 +12,9 @@ import javax.sql.DataSource;
 
 import org.junit.Test;
 
-import com.ilan.control.factory.daofactory.IDao;
-import com.ilan.exception.ResultNullException;
-import com.ilan.model.word.Word;
+import com.flashcard.exception.ResultNullException;
+import com.flashcard.factory.dao.IDao;
+import com.flashcard.model.word.Word;
 
 public class WordDao  implements IDao<Word> {
 	protected DataSource dataSource;

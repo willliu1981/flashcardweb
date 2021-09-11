@@ -6,16 +6,15 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-
 	<import
 		resource="classpath:com/flashcard/application/config/connection.xml" />
 
-	<bean id="userDao" class="com.ilan.control.dao.user.UserDao"
+	<bean id="userDao" class="com.flashcard.factory.dao.user.UserDao"
 		scope="singleton">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	<bean id="userdataDao"
-		class="com.ilan.control.dao.user.UserdataDao" scope="singleton">
+		class="com.flashcard.factory.dao.user.UserdataDao" scope="singleton">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 

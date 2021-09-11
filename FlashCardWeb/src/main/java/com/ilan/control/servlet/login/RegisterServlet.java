@@ -9,14 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.flashcard.factory.BeanFactory;
+import com.flashcard.factory.dao.DaoFactoryType;
+import com.flashcard.factory.dao.user.UserDao;
+import com.flashcard.factory.dao.user.UserdataDao;
+import com.flashcard.model.user.User;
+import com.flashcard.model.user.Userdata;
 import com.ilan.control.authority.Authorities;
 import com.ilan.control.authority.Authority;
-import com.ilan.control.dao.user.UserDao;
-import com.ilan.control.dao.user.UserdataDao;
-import com.ilan.control.factory.BeanFactory;
-import com.ilan.control.factory.daofactory.DaoFactoryType;
-import com.ilan.model.user.User;
-import com.ilan.model.user.Userdata;
 
 /**
  * Servlet implementation class RegisterServlet

@@ -8,13 +8,13 @@
 	<context:annotation-config />
 
 	<bean id="resultNullException"
-		class="com.ilan.exception.ResultNullException" scope="singleton">
+		class="com.flashcard.exception.ResultNullException" scope="singleton">
 		<property name="resultExceptionWrap"
 			ref="resultExceptionWrap"></property>
 	</bean>
 
 	<bean id="resultExceptionWrap"
-		class="com.ilan.exception.ResultExceptionWrap" scope="singleton"></bean>
+		class="com.flashcard.exception.ResultExceptionWrap" scope="singleton"></bean>
 
 
 </beans>

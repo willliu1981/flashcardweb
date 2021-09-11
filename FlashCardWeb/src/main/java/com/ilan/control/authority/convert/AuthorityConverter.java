@@ -8,13 +8,13 @@ import java.util.stream.Stream;
 
 import org.junit.Test;
 
+import com.flashcard.model.user.User;
 import com.ilan.control.authority.Authorities;
 import com.ilan.control.authority.Authority;
 import com.ilan.control.authority.HasAuthority;
 import com.ilan.control.authority.type.Admin;
 import com.ilan.control.authority.type.AuthorizationEnumValue;
 import com.ilan.control.authority.type.Member;
-import com.ilan.model.user.User;
 
 public class AuthorityConverter implements ConvertAuthority {
 	private static final String AuthorityStrSplitSymbol = ":";

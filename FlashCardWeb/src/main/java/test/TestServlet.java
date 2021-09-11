@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ilan.control.factory.BeanFactory;
+import com.flashcard.factory.BeanFactory;
 
 /**
  * Servlet implementation class TestServlet

@@ -14,7 +14,10 @@
 	<bean name="/servlet/judgeUser.do"
 		class="com.flashcard.control.user.JudgeUserController">
 	</bean>
-
-
+	<bean name="/servlet/login.do" class="com.flashcard.control.user.LoginController" >
+		<property name="viewPageSuccess" value=""/>
+		<property name="viewPageFailure" value=""/>
+	</bean>
+	
 
 </beans>
