@@ -8,7 +8,9 @@ import java.util.stream.Stream;
 public class Test1 {
 
 	public static void main(String[] args) {
-
+		Book2 b=null;
+		
+		System.out.println(b.getBookName());
 		
 
 	}
