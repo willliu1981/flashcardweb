@@ -21,8 +21,6 @@ public class AdminAuthority extends Authority {
 				AdminAuthorization.READ_USER);
 		this.setKeys(EDITOR, USER, AdminAuthorization.MODIFY_MEMBER_USER);
 		this.setKeys(ADMIN, EDITOR, AdminAuthorization.DELETE_MEMBER_USER);
-		
-		
 
 	}
 

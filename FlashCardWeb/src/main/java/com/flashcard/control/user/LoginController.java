@@ -17,6 +17,8 @@ import com.flashcard.model.user.User;
 public class LoginController implements Controller {
 	private String viewPageSuccess;
 	private String viewPageFailure;
+	private String sessionNameUser = "user";
+	private String userDisplayName = "userDisplayName";
 
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
@@ -30,19 +32,15 @@ public class LoginController implements Controller {
 		boolean valid = false;
 		try {
 			valid = (user = dao.identifyUser(username, password)) != null ? true : false;
-			request.getSession().setAttribute("user", user);
+			request.getSession().setAttribute(this.sessionNameUser, user);
 		} catch (ResultNullException | SQLException e) {
 			System.out.println(e.getMessage());
 		}
 
-		return send(valid, user);
-	}
-
-	protected ModelAndView send(boolean valid, User user) {
 		if (valid) {
-			return new ModelAndView(viewPageSuccess, "user", user);
+			return new ModelAndView(viewPageSuccess);
 		} else {
-			return new ModelAndView(viewPageFailure, "userDisplayName", user.getDisplayName());
+			return new ModelAndView(viewPageFailure, this.userDisplayName, user.getDisplayName());
 		}
 	}
 
@@ -52,6 +50,14 @@ public class LoginController implements Controller {
 
 	public void setViewPageFailure(String viewPageFailure) {
 		this.viewPageFailure = viewPageFailure;
+	}
+
+	public void setSessionNameUser(String sessionUser) {
+		this.sessionNameUser = sessionUser;
+	}
+
+	public void setUserDisplayName(String userDisplayName) {
+		this.userDisplayName = userDisplayName;
 	}
 
 }

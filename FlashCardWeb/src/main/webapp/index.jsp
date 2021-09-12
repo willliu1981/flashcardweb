@@ -26,18 +26,27 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 <script type="text/javascript" language="javascript"
 	src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-		$("#login").click(function() {
-			location.href = "${pageContext.request.contextPath}/login/login.jsp";
-		});
-		
-		$("#member").click(function() {
-			location.href = "${pageContext.request.contextPath}/servlet/MemberServlet";
-		});
-		$("#test").click(function() {
-			location.href = "${pageContext.request.contextPath}/servlet/TestServlet";
-		});
-	});
+  $(document)
+      .ready(
+          function() {
+            
+            $("#login")
+                .click(
+                    function() {
+                      location.href = "${pageContext.request.contextPath}/login/login.jsp";
+                    });
+
+            $("#member")
+                .click(
+                    function() {
+                      location.href = "${pageContext.request.contextPath}/servlet/MemberServlet";
+                    });
+            $("#test")
+                .click(
+                    function() {
+                      location.href = "${pageContext.request.contextPath}/servlet/TestServlet";
+                    });
+          });
 </script>
 </head>
 
@@ -47,29 +56,15 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 
 	<c:choose>
 		<c:when test="${not empty user}">
-			<c:choose>
-				<c:when test="${auth:has(user,{Member.READCARD})}">
-					<fieldset>
-						<legend>${user.displayName }</legend>
-						<button type="button" id="member">查詢會員資料</button>
-						<c:choose>
-							<c:when test="${auth:has(user,{Admin.READWORD})}">
-							您是檢視員
-							</c:when>
-							<c:when test="${auth:has(user,{Admin.CREATEWORD})}">
-							您是管理員
-							</c:when>
-						</c:choose>
-					</fieldset>
-				</c:when>
-			</c:choose>
+			${user.displayName}<br/>
+			<button type="button" id="member">查詢會員資料</button>
 		</c:when>
 		<c:otherwise>
 			<button type="button" id="login">登入</button>
 		</c:otherwise>
 	</c:choose>
-	
-	<br/>
+
+	<br />
 	<button type="button" id="test">Test</button>
 
 

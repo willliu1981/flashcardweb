@@ -46,7 +46,7 @@
 	<fieldset>
 		<legend>註冊帳號</legend>
 		<form id="formRegister"
-			action="${pageContext.request.contextPath}/RegisterServlet"
+			action="${pageContext.request.contextPath}/account/register.do"
 			method="post">
 			<table style="text-align:center">
 				<tr>

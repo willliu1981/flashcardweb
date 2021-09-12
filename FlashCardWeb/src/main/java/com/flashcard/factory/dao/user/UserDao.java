@@ -18,6 +18,7 @@ import com.flashcard.model.user.Userdata;
 
 public class UserDao implements IUserDao<User> {
 	protected DataSource dataSource;
+	private String authority;
 
 	@Override
 	public boolean add(User t) {
@@ -32,7 +33,7 @@ public class UserDao implements IUserDao<User> {
 			ps.setString(2, t.getDisplayName());
 			ps.setString(3, t.getUsername());
 			ps.setString(4, t.getPassword());
-			ps.setString(5, t.getAuthority());
+			ps.setString(5, this.authority);
 			ps.setString(6, t.getUserdata_id());
 			ps.setDate(7, t.getCreate_date());
 			ps.setDate(8, t.getUpdate_date());
@@ -165,10 +166,8 @@ public class UserDao implements IUserDao<User> {
 		return r;
 	}
 
-	@Override
-	public void setDefaultAuthority() {
-		// TODO Auto-generated method stub
-
+	public void setDefaultAuthority(String authority) {
+		this.authority = authority;
 	}
 
 	@Override
