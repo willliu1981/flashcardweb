@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+
+	<bean id="authorityFactory"
+		class="com.flashcard.security.authority.AuthorityFactory"
+		scope="singleton">
+		<property name="converter" ref="authorityConverter" />
+	</bean>
+
+	<bean id="authorityConverter"
+		class="com.flashcard.security.authority.AuthorityConverter">
+		<property name="adminAuthority" ref="adminAuthority"></property>
+		<property name="userAuthority" ref="userAuthority"></property>
+		<property name="nameUser" value="user"></property>
+		<property name="nameAdmin" value="admin"></property>
+	</bean>
+
+	<bean id="adminAuthority"
+		class="com.flashcard.security.authority.AdminAuthority"></bean>
+	<bean id="userAuthority"
+		class="com.flashcard.security.authority.UserAuthority"></bean>
+
+
+</beans>

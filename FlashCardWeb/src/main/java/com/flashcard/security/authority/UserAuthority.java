@@ -1,6 +1,6 @@
 package com.flashcard.security.authority;
 
-public class UserAuthority extends Authority {
+public class UserAuthority extends AuthorityAdapter {
 	private String READER;
 	private String EDITOR;
 	private String ADMIN;
@@ -11,9 +11,5 @@ public class UserAuthority extends Authority {
 
 	}
 
-	@Override
-	public Integer getAuthorityKey(String authName) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+
 }

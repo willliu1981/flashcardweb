@@ -1,2 +1,5 @@
 word 的 id 以e開頭,表系統的預設id,ex: e1234
 	自訂的詞彙 以 其它開頭並以底線連接序號,ex: cust_1234
+	
+user 的 authority 格式為 xxx,yyy ,ex:READER,USER
+	其定義在 Authority 的 subclass ,ex: AdminAuthority

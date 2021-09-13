@@ -18,7 +18,7 @@ public class LoginController implements Controller {
 	private String viewPageSuccess;
 	private String viewPageFailure;
 	private String sessionNameUser = "user";
-	private String userDisplayName = "userDisplayName";
+	private String userDisplayName = "displayName";
 
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
@@ -34,6 +34,7 @@ public class LoginController implements Controller {
 			valid = (user = dao.identifyUser(username, password)) != null ? true : false;
 			request.getSession().setAttribute(this.sessionNameUser, user);
 		} catch (ResultNullException | SQLException e) {
+			request.getSession().invalidate();
 			System.out.println(e.getMessage());
 		}
 

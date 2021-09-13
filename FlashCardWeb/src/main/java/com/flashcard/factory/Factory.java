@@ -6,4 +6,8 @@ public class Factory {
 	public static String [] getBeansXmlReferers() {
 		return AppConfig.getFactoryConfig().getBeansXmlReferers();
 	}
+	
+	public static String getConfigXmlPath() {
+		return AppConfig.config.getThisConfigXml();
+	}
 }

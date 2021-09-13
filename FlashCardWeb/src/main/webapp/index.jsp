@@ -38,7 +38,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
             $("#member")
                 .click(
                     function() {
-                      location.href = "${pageContext.request.contextPath}/servlet/MemberServlet";
+                      location.href = "${pageContext.request.contextPath}/account/member.do";
                     });
             $("#test")
                 .click(

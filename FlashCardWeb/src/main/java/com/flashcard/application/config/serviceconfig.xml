@@ -25,12 +25,18 @@
 		class="com.flashcard.control.user.LoginController">
 		<property name="viewPageSuccess" value="../../index" />
 		<property name="viewPageFailure" value="account/loginfailure" />
+		<property name="sessionNameUser" value="user" />
 	</bean>
 	<bean name="/account/register.do"
 		class="com.flashcard.control.user.RegisterController">
 		<property name="viewPageSuccess" value="../../login/login" />
 		<property name="viewPageFailure"
 			value="account/registerfailure" />
+	</bean>
+	<bean name="/account/member.do"
+		class="com.flashcard.control.user.MemberController">
+		<property name="viewPageTarget" value="../../member/member" />
+		<property name="sessionNameUserdata" value="userdata" />
 	</bean>
 
 

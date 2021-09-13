@@ -11,8 +11,8 @@ public class Authorizations {
 		return cmbK;
 	}
 
-	public static boolean hasKey(Integer source, Integer key) {
-		return (source & key) == key;
+	public static boolean hasKey(Integer ownKey, Integer key) {
+		return (ownKey & key) == key;
 	}
 
 
