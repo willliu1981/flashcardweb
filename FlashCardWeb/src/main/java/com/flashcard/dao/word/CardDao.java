@@ -1,4 +1,4 @@
-package com.ilan.control.dao.word;
+package com.flashcard.dao.word;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -11,8 +11,8 @@ import javax.sql.DataSource;
 
 import org.junit.Test;
 
+import com.flashcard.dao.IDao;
 import com.flashcard.exception.ResultNullException;
-import com.flashcard.factory.dao.IDao;
 import com.flashcard.model.word.Card;
 
 public class CardDao implements IDao<Card> {

@@ -6,7 +6,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-	
+
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName"
@@ -18,16 +18,16 @@
 	</bean>
 
 
-	<bean id="userDao" class="com.flashcard.factory.dao.user.UserDao"
+	<bean id="userDao" class="com.flashcard.dao.user.UserDao"
 		scope="singleton">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="defaultAuthority" value="READER,USER"></property>
 	</bean>
-	<bean id="userdataDao"
-		class="com.flashcard.factory.dao.user.UserdataDao" scope="singleton">
+	<bean id="userdataDao" class="com.flashcard.dao.user.UserdataDao"
+		scope="singleton">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 
-	
+
 
 </beans>

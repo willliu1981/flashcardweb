@@ -2,14 +2,12 @@ package com.flashcard.model.user;
 
 import java.sql.Date;
 
-import com.ilan.control.authority.HasAuthority;
-
-public class User implements HasAuthority {
+public class User {
 	private String u_id;
 	private String displayName;
 	private String username;
 	private String password;
-	private String authority;//member:admin
+	private String authority;// member:admin
 	private String userdata_id;
 	private Date create_date;
 	private Date update_date;

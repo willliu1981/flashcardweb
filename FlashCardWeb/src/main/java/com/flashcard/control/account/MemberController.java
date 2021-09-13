@@ -1,4 +1,4 @@
-package com.flashcard.control.user;
+package com.flashcard.control.account;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
+import com.flashcard.dao.user.IUserdataDao;
 import com.flashcard.factory.BeanFactory;
 import com.flashcard.factory.dao.DaoFactoryType;
-import com.flashcard.factory.dao.user.IUserdataDao;
 import com.flashcard.model.user.User;
 import com.flashcard.model.user.Userdata;
 import com.flashcard.security.authority.AdminAuthority;
@@ -49,12 +49,11 @@ public class MemberController implements Controller {
 		mv.setViewName(viewPageTarget);
 		mv.addObject(sessionNameUser, user);
 		mv.addObject(sessionNameUserdata, data);
-		user.getAuthority();
-		boolean isAdmin = AuthorityFactory
-				.createAuthorityGroup(user.getAuthority())
-				.hasKey("admin", AdminAuthority.ADMIN);
+
+		boolean isAdmin = AuthorityFactory.hasKey(user.getAuthority(), "admin",
+				AdminAuthority.EDITOR);
 		if (isAdmin) {
-			System.out.println("membercontroller ** " + user.getAuthority());
+			System.out.println("membercontroller *** " + user.getAuthority());
 
 		}
 

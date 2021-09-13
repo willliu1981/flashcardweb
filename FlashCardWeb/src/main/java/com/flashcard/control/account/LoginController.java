@@ -1,4 +1,4 @@
-package com.flashcard.control.user;
+package com.flashcard.control.account;
 
 import java.sql.SQLException;
 
@@ -8,10 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
+import com.flashcard.dao.user.IUserDao;
 import com.flashcard.exception.ResultNullException;
 import com.flashcard.factory.BeanFactory;
 import com.flashcard.factory.dao.DaoFactoryType;
-import com.flashcard.factory.dao.user.IUserDao;
 import com.flashcard.model.user.User;
 
 public class LoginController implements Controller {

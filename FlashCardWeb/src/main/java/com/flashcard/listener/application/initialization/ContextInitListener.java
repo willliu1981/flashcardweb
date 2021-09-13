@@ -16,8 +16,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.flashcard.application.config.AppConfig;
 import com.flashcard.application.config.FactoryConfig;
-import com.flashcard.factory.dao.user.IUserDao;
-import com.flashcard.factory.dao.user.IUserdataDao;
+import com.flashcard.dao.user.IUserDao;
+import com.flashcard.dao.user.IUserdataDao;
 import com.flashcard.model.user.User;
 import com.flashcard.model.user.Userdata;
 

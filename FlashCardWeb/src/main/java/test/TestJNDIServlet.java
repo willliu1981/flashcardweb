@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.flashcard.factory.dao.user.UserDao;
+import com.flashcard.dao.user.UserDao;
 
 /**
  * Servlet implementation class TestJNDIServlet

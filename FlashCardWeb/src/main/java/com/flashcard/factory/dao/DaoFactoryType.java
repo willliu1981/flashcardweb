@@ -1,8 +1,9 @@
 package com.flashcard.factory.dao;
 
+import com.flashcard.dao.IDao;
+import com.flashcard.dao.user.IUserDao;
+import com.flashcard.dao.user.IUserdataDao;
 import com.flashcard.factory.IFactoryType;
-import com.flashcard.factory.dao.user.IUserDao;
-import com.flashcard.factory.dao.user.IUserdataDao;
 
 public enum DaoFactoryType implements IFactoryType<IDao> {
 	//USERDAO("userDao", IUserDao.class), USERDATADAO("userdataDao", IUserdataDao.class);

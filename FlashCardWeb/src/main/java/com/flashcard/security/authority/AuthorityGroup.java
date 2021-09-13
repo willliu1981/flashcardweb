@@ -35,14 +35,16 @@ public class AuthorityGroup {
 		}
 	}
 
-	private Map<String, Pair<Authority, Integer>> groupMap = new HashMap<>();
+	private Map<String, Pair<Authority, String>> groupMap = new HashMap<>();
 
-	public boolean hasKey(String group, String key) {
-		return Authorizations.hasKey(groupMap.get(group).getV(),
-				groupMap.get(group).getK().getAuthorityKey(key));
+	public boolean hasKey(String group, String matchKey) {
+		Authority auth = groupMap.get(group).getK();
+		return Authorizations.hasKey(
+				auth.getAuthorityKey(groupMap.get(group).getV()),
+				auth.getAuthorityKey(matchKey));
 	}
 
-	public void setGroup(String authName, Authority auth, Integer key) {
-		this.groupMap.put(authName, new Pair<Authority, Integer>(auth, key));
+	public void setGroup(String groupName, Authority authority, String ownKey) {
+		this.groupMap.put(groupName, new Pair<Authority, String>(authority, ownKey));
 	}
 }

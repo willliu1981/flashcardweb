@@ -1,43 +1,27 @@
-package com.ilan.control.servlet.login;
+package com.flashcard.control.account;
 
-import java.io.IOException;
 import java.sql.SQLException;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.Controller;
+
+import com.flashcard.dao.user.UserDao;
+import com.flashcard.dao.user.UserdataDao;
 import com.flashcard.factory.BeanFactory;
 import com.flashcard.factory.dao.DaoFactoryType;
-import com.flashcard.factory.dao.user.UserDao;
-import com.flashcard.factory.dao.user.UserdataDao;
 import com.flashcard.model.user.User;
 import com.flashcard.model.user.Userdata;
-import com.ilan.control.authority.Authorities;
-import com.ilan.control.authority.Authority;
 
-/**
- * Servlet implementation class RegisterServlet
- */
-@WebServlet("/RegisterServlet")
-public class RegisterServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+public class RegisterController implements Controller {
+	private String viewPageSuccess;
+	private String viewPageFailure;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public RegisterServlet() {
-		super();
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	@Override
+	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
 		String username = request.getParameter("username");
 		String displayname = request.getParameter("displayname");
 		String password = request.getParameter("password");
@@ -46,8 +30,6 @@ public class RegisterServlet extends HttpServlet {
 		String serial_id = "" + new java.util.Date().getTime();
 		String user_id = "uid" + serial_id;
 		String userdata_id = "udid" + serial_id;
-		
-		
 
 		boolean isSucceed = true;
 
@@ -57,7 +39,7 @@ public class RegisterServlet extends HttpServlet {
 		user.setPassword(password);
 		user.setDisplayName(displayname);
 		user.setUserdata_id(userdata_id);
-		user.setAuthority(Authorities.toString(Authorities.getDefaultAuthority()));
+		//user.setAuthority(Authorities.toString(Authorities.getDefaultAuthority()));
 
 		UserDao userDao = (UserDao) BeanFactory.getBean(DaoFactoryType.USERDAO);
 		if (!userDao.add(user)) {
@@ -78,13 +60,23 @@ public class RegisterServlet extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		ModelAndView mv = new ModelAndView();
 
 		if (isSucceed) {
-			request.getRequestDispatcher("login/login.jsp").forward(request, response);
+			mv.setViewName(viewPageSuccess);
 		} else {
-			request.getRequestDispatcher("login/registerfailure.jsp").forward(request, response);
+			mv.setViewName(viewPageFailure);
 		}
 
+		return mv;
+	}
+
+	public void setViewPageSuccess(String viewPageSuccess) {
+		this.viewPageSuccess = viewPageSuccess;
+	}
+
+	public void setViewPageFailure(String viewPageFailure) {
+		this.viewPageFailure = viewPageFailure;
 	}
 
 }

@@ -15,7 +15,9 @@ public class AuthorityFactory {
 	public static AuthorityGroup createAuthorityGroup(String userAuthority) {
 		return factory.converter.convertToAuthority(userAuthority);
 	}
-	
 
+	public static boolean hasKey(String authority, String group, String matchKey) {
+		return createAuthorityGroup(authority).hasKey(group, matchKey);
+	}
 
 }

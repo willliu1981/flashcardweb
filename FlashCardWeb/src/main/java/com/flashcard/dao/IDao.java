@@ -1,4 +1,4 @@
-package com.flashcard.factory.dao;
+package com.flashcard.dao;
 
 import java.io.IOException;
 import java.sql.SQLException;
