@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -28,7 +29,8 @@ public class UserDao implements IUserDao<User> {
 				+ "authority,userdata_id, create_date,update_date,note,tag) values(?,?,?,?,?,?,?,?,?,?)";
 		int r = 0;
 		try {
-			PreparedStatement ps = (conn = dataSource.getConnection()).prepareStatement(sql);
+			PreparedStatement ps = (conn = dataSource.getConnection())
+					.prepareStatement(sql);
 			ps.setString(1, t.getU_id());
 			ps.setString(2, t.getDisplayName());
 			ps.setString(3, t.getUsername());
@@ -46,7 +48,8 @@ public class UserDao implements IUserDao<User> {
 			conn.close();
 
 		} catch (SQLException e) {
-			System.out.println(e.getMessage() + " : " + this.getClass().getName() + "::add");
+			System.out.println(e.getMessage() + " : "
+					+ this.getClass().getName() + "::add");
 		}
 		return r > 0 ? true : false;
 	}
@@ -55,25 +58,27 @@ public class UserDao implements IUserDao<User> {
 	public User queryByID(String id) throws IOException, SQLException {
 		User user = find("select * from user where u_id=?", id);
 		if (user == null) {
-			throw new ResultNullException(
-					"Result is Null:" + this.getClass().getName() + "::queryByID:" + id);
+			throw new ResultNullException("Result is Null:"
+					+ this.getClass().getName() + "::queryByID:" + id);
 		}
 		return user;
 	}
 
 	@Override
-	public User findByUsername(String username) throws ResultNullException, SQLException {
+	public User findByUsername(String username)
+			throws ResultNullException, SQLException {
 		User user = find("select * from user where username=?", username);
 		if (user == null) {
-			throw new ResultNullException(this.getClass(), "findByUsername", username);
+			throw new ResultNullException(this.getClass(), "findByUsername",
+					username);
 		}
 		return user;
 	}
 
 	@Override
-	public List<User> queryAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<User> queryAll() throws SQLException, ResultNullException {
+		List<User> users = this.finds("select * from user", null);
+		return users;
 	}
 
 	@Override
@@ -83,7 +88,8 @@ public class UserDao implements IUserDao<User> {
 		String sql = "update user set u_id=?,displayname=?,username=?,password=?,authority=?,userdata_id=?,create_date=?,update_date=?,note=?,tag=? where u_id=?";
 		int r = 0;
 		try {
-			PreparedStatement ps = (conn = dataSource.getConnection()).prepareStatement(sql);
+			PreparedStatement ps = (conn = dataSource.getConnection())
+					.prepareStatement(sql);
 			ps.setString(1, t.getU_id());
 			ps.setString(2, t.getDisplayName());
 			ps.setString(3, t.getUsername());
@@ -103,7 +109,8 @@ public class UserDao implements IUserDao<User> {
 
 		} catch (SQLException e) {
 			// e.printStackTrace();
-			System.out.println(e.getMessage() + " : " + this.getClass().getName() + "::update");
+			System.out.println(e.getMessage() + " : "
+					+ this.getClass().getName() + "::update");
 		}
 
 		return r;
@@ -116,7 +123,8 @@ public class UserDao implements IUserDao<User> {
 		String sql = "delete from user where u_id=?";
 		int r = 0;
 		try {
-			PreparedStatement ps = (conn = dataSource.getConnection()).prepareStatement(sql);
+			PreparedStatement ps = (conn = dataSource.getConnection())
+					.prepareStatement(sql);
 			ps.setString(1, id);
 			r = ps.executeUpdate();
 
@@ -124,18 +132,21 @@ public class UserDao implements IUserDao<User> {
 			conn.close();
 
 		} catch (SQLException e) {
-			System.out.println(e.getMessage() + ":" + this.getClass().getName() + "::delete:" + id);
+			System.out.println(e.getMessage() + ":" + this.getClass().getName()
+					+ "::delete:" + id);
 		}
 
 		return r;
 	}
 
 	@Override
-	public User find(String sqlSegment, String... querys) throws ResultNullException, SQLException {
+	public User find(String sqlSegment, String... querys)
+			throws ResultNullException, SQLException {
 		Connection conn = null;
 		User r = null;
 		try {
-			PreparedStatement ps = (conn = dataSource.getConnection()).prepareStatement(sqlSegment);
+			PreparedStatement ps = (conn = dataSource.getConnection())
+					.prepareStatement(sqlSegment);
 			for (int idx = 0; idx < querys.length; idx++) {
 				ps.setString(idx + 1, querys[idx]);
 			}
@@ -159,11 +170,51 @@ public class UserDao implements IUserDao<User> {
 			conn.close();
 
 		} catch (SQLException e) {
-			System.out.println(
-					e.getMessage() + " : " + this.getClass().getName() + "::find:" + sqlSegment);
+			System.out.println(e.getMessage() + " : "
+					+ this.getClass().getName() + "::find:" + sqlSegment);
 		}
 
 		return r;
+	}
+
+	@Override
+	public List<User> finds(String sqlSegment, String... querys)
+			throws ResultNullException, SQLException {
+		Connection conn = null;
+		List<User> users = new ArrayList<>();
+		User r = null;
+		try {
+			PreparedStatement ps = (conn = dataSource.getConnection())
+					.prepareStatement(sqlSegment);
+			for (int idx = 0; querys != null && idx < querys.length; idx++) {
+				ps.setString(idx + 1, querys[idx]);
+			}
+
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				r = new User();
+				r.setU_id(rs.getString("u_id"));
+				r.setDisplayName(rs.getString("displayname"));
+				r.setUsername(rs.getString("username"));
+				r.setPassword(rs.getString("password"));
+				r.setAuthority(rs.getString("authority"));
+				r.setUserdata_id(rs.getString("userdata_id"));
+				r.setCreate_date(rs.getDate("create_date"));
+				r.setUpdate_date(rs.getDate("update_date"));
+				r.setNote(rs.getString("note"));
+				r.setTag(rs.getString("tag"));
+				users.add(r);
+			}
+
+			ps.close();
+			conn.close();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage() + " : "
+					+ this.getClass().getName() + "::finds:" + sqlSegment);
+		}
+
+		return users;
 	}
 
 	public void setDefaultAuthority(String authority) {
@@ -179,10 +230,12 @@ public class UserDao implements IUserDao<User> {
 	@Override
 	public User identifyUser(String username, String password)
 			throws ResultNullException, SQLException {
-		User user = find("select * from user where username=? and password=?", username, password);
+		User user = find("select * from user where username=? and password=?",
+				username, password);
 		if (user == null) {
 			throw new ResultNullException(this.getClass(), "identifyUser",
-					String.format("username=%s,password=%s", username, password));
+					String.format("username=%s,password=%s", username,
+							password));
 		}
 		return user;
 	}

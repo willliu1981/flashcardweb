@@ -19,5 +19,8 @@ public class AuthorityFactory {
 	public static boolean hasKey(String authority, String group, String matchKey) {
 		return createAuthorityGroup(authority).hasKey(group, matchKey);
 	}
+	public static boolean hasKey(String authority, String group, Integer matchKey) {
+		return createAuthorityGroup(authority).hasKey(group, matchKey);
+	}
 
 }

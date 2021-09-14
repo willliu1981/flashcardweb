@@ -44,7 +44,14 @@ public class AuthorityGroup {
 				auth.getAuthorityKey(matchKey));
 	}
 
+	public boolean hasKey(String group, Integer matchKey) {
+		Authority auth = groupMap.get(group).getK();
+		return Authorizations.hasKey(
+				auth.getAuthorityKey(groupMap.get(group).getV()), matchKey);
+	}
+
 	public void setGroup(String groupName, Authority authority, String ownKey) {
-		this.groupMap.put(groupName, new Pair<Authority, String>(authority, ownKey));
+		this.groupMap.put(groupName,
+				new Pair<Authority, String>(authority, ownKey));
 	}
 }

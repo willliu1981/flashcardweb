@@ -12,16 +12,22 @@ public interface IDao<T> {
 
 	public void setDataSource(DataSource dataSource);
 
-
 	public boolean add(T t) throws SQLException;
 
 	public T queryByID(String idSegment) throws IOException, SQLException;
 
-	public List<T> queryAll();
+	public List<T> queryAll() throws SQLException, ResultNullException;
 
 	public int update(String id, T t);
 
 	public int delete(String id);
 
-	T find(String sqlSegment, String... querys) throws ResultNullException, SQLException;
+	T find(String sqlSegment, String... querys)
+			throws ResultNullException, SQLException;
+
+	default List<T> finds(String sqlSegment, String... querys)
+			throws ResultNullException, SQLException {
+
+		return null;
+	}
 }

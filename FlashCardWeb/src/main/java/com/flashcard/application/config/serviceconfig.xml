@@ -36,13 +36,19 @@
 	<bean name="/account/member.do"
 		class="com.flashcard.control.account.MemberController">
 		<property name="viewPageTarget" value="../../member/member" />
-		<property name="sessionNameUserdata" value="userdata" />
+		<property name="sessionNameUser" value="user" />
+		<property name="nameUsers" value="users" />
+		<property name="nameUserdatas" value="userdatas" />
+		<property name="nameToken" value="token" />
+		<property name="valueTokenValueUser" value="tokenEditer" />
+		<property name="valueTokenValueEditer" value="tokenUser" />
+		<property name="valueTokenValueAdmin" value="tokenAdmin" />
 	</bean>
 
 
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/**" />
+			<mvc:mapping path="/account/member.do" />
 			<bean
 				class="com.flashcard.security.interceptor.AuthorityInterceptor" />
 		</mvc:interceptor>

@@ -3,7 +3,11 @@
 	
 .	user 的 authority 格式為 xxx,yyy ,ex:READER,USER
 	其定義在 Authority 的 subclass ,ex: AdminAuthority
+	UserAuthority:對word 的使用權限
+	AdminAuthority:對會員帳號的管理權限
 
 .	model/dao 的 user 指 使用者帳號資料; word 是 詞彙相關資料
+
+
 
   
