@@ -26,6 +26,10 @@
 				<td>Email</td>
 				<td>${data.email }</td>
 			</tr>
+			<tr>
+				<td>test users</td>
+				<td>${users[0].displayName }</td>
+			</tr>
 		</table>
 	</fieldset>
 </body>

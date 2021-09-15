@@ -35,14 +35,15 @@
 	</bean>
 	<bean name="/account/member.do"
 		class="com.flashcard.control.account.MemberController">
-		<property name="viewPageTarget" value="../../member/member" />
-		<property name="sessionNameUser" value="user" />
-		<property name="nameUsers" value="users" />
-		<property name="nameUserdatas" value="userdatas" />
-		<property name="nameToken" value="token" />
-		<property name="valueTokenValueUser" value="tokenEditer" />
-		<property name="valueTokenValueEditer" value="tokenUser" />
-		<property name="valueTokenValueAdmin" value="tokenAdmin" />
+		<property name="setName">
+			<props>
+			<prop key="target">../../member/member</prop>
+			<prop key="sessionUser">user</prop>
+			<prop key="varUsers">users</prop>
+			<prop key="varUserdatas">userdatas</prop>
+			</props>
+		</property>
+
 	</bean>
 
 
