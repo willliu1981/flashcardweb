@@ -77,7 +77,7 @@ public class UserDao implements IUserDao<User> {
 
 	@Override
 	public List<User> queryAll() throws SQLException, ResultNullException {
-		List<User> users = this.finds("select * from user", null);
+		 List<User> users = this.finds("select * from user", null);
 		return users;
 	}
 
@@ -182,17 +182,18 @@ public class UserDao implements IUserDao<User> {
 			throws ResultNullException, SQLException {
 		Connection conn = null;
 		List<User> users = new ArrayList<>();
-		User r = null;
+
 		try {
 			PreparedStatement ps = (conn = dataSource.getConnection())
 					.prepareStatement(sqlSegment);
+			
 			for (int idx = 0; querys != null && idx < querys.length; idx++) {
 				ps.setString(idx + 1, querys[idx]);
 			}
 
 			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
-				r = new User();
+			while (rs.next()) {
+				User r = new User();
 				r.setU_id(rs.getString("u_id"));
 				r.setDisplayName(rs.getString("displayname"));
 				r.setUsername(rs.getString("username"));
@@ -242,7 +243,7 @@ public class UserDao implements IUserDao<User> {
 
 	@Test
 	public void test() {
-		new TestCls().testUpdate();
+		new TestCls().testQueryAll();
 	}
 
 	class TestCls {
@@ -269,6 +270,16 @@ public class UserDao implements IUserDao<User> {
 			UserDao dao = new UserDao();
 			System.out.println("add:" + dao.add(user));
 
+		}
+
+		public void testQueryAll() {
+			UserDao dao = new UserDao();
+			try {
+				dao.queryAll();
+			} catch (ResultNullException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		// @Test

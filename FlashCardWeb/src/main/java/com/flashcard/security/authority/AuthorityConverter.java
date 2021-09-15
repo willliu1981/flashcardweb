@@ -34,11 +34,11 @@ public class AuthorityConverter implements IAuthorityConverter {
 		AuthorityConverter.nameAdmin = nameAdmin;
 	}
 
-	public static String getNameUser() {
+	public static String getGroupNameUser() {
 		return nameUser;
 	}
 
-	public static String getNameAdmin() {
+	public static String getGroupNameAdmin() {
 		return nameAdmin;
 	}
 	

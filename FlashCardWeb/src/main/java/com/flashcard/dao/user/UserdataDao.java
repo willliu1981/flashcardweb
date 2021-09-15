@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -12,6 +13,7 @@ import javax.sql.DataSource;
 import org.junit.Test;
 
 import com.flashcard.exception.ResultNullException;
+import com.flashcard.model.user.User;
 import com.flashcard.model.user.Userdata;
 
 public class UserdataDao implements IUserdataDao<Userdata> {
@@ -44,7 +46,8 @@ public class UserdataDao implements IUserdataDao<Userdata> {
 
 		} catch (SQLException e) {
 			// e.printStackTrace();
-			System.out.println(e.getMessage() + " : " + this.getClass().getName() + "::add");
+			System.out.println(e.getMessage() + " : "
+					+ this.getClass().getName() + "::add");
 		}
 
 		return r > 0 ? true : false;
@@ -54,16 +57,16 @@ public class UserdataDao implements IUserdataDao<Userdata> {
 	public Userdata queryByID(String id) throws IOException, SQLException {
 		Userdata data = find("select * from userdata where ud_id=?", id);
 		if (data == null) {
-			throw new ResultNullException(
-					"Result is Null:" + this.getClass().getName() + "::queryByID:" + id);
+			throw new ResultNullException("Result is Null:"
+					+ this.getClass().getName() + "::queryByID:" + id);
 		}
 		return data;
 	}
 
 	@Override
-	public List<Userdata> queryAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Userdata> queryAll() throws ResultNullException, SQLException {
+		List<Userdata> userdatas = this.finds("select * from userdata", null);
+		return userdatas;
 	}
 
 	@Override
@@ -109,19 +112,20 @@ public class UserdataDao implements IUserdataDao<Userdata> {
 			conn.close();
 
 		} catch (SQLException e) {
-			System.out.println(
-					e.getMessage() + " : " + this.getClass().getName() + "::find:" + sqlSegment);
+			System.out.println(e.getMessage() + " : "
+					+ this.getClass().getName() + "::find:" + sqlSegment);
 		}
 
 		return r;
 	}
 
 	@Override
-	public Userdata findByEmail(String email) throws ResultNullException, SQLException {
+	public Userdata findByEmail(String email)
+			throws ResultNullException, SQLException {
 		Userdata data = this.find("", email);
 		if (data == null) {
-			throw new ResultNullException(
-					"Result is Null:" + this.getClass().getName() + "::findByEmail:" + email);
+			throw new ResultNullException("Result is Null:"
+					+ this.getClass().getName() + "::findByEmail:" + email);
 		}
 		return data;
 	}
@@ -131,7 +135,45 @@ public class UserdataDao implements IUserdataDao<Userdata> {
 		this.dataSource = dataSource;
 	}
 
+	@Override
+	public List<Userdata> finds(String sqlSegment, String... querys)
+			throws ResultNullException, SQLException {
+		Connection conn = this.dataSource.getConnection();
+		List<Userdata> userdatas = new ArrayList<>();
+		String sql = sqlSegment;
+		Userdata r = null;
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			for (int idx = 0; querys != null && idx < querys.length; idx++) {
+				ps.setString(idx + 1, querys[idx]);
+			}
 
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				r = new Userdata();
+				r.setUd_id(rs.getString("ud_id"));
+				r.setUser_id(rs.getString("user_id"));
+				r.setName(rs.getString("name"));
+				r.setEmail(rs.getString("email"));
+				r.setCardboxdata(rs.getString("cardboxdata"));
+				r.setScenedata(rs.getString("scenedata"));
+				r.setCreate_date(rs.getDate("create_date"));
+				r.setUpdate_date(rs.getDate("update_date"));
+				r.setNote(rs.getString("note"));
+				r.setTag(rs.getString("tag"));
+				userdatas.add(r);
+			}
+
+			ps.close();
+			conn.close();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage() + " : "
+					+ this.getClass().getName() + "::finds:" + sqlSegment);
+		}
+
+		return userdatas;
+	}
 
 	@Test
 	public void test() {

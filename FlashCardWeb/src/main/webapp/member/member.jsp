@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,11 +27,32 @@
 				<td>Email</td>
 				<td>${data.email }</td>
 			</tr>
-			<tr>
-				<td>test users</td>
-				<td>${users[0].displayName }</td>
-			</tr>
 		</table>
 	</fieldset>
+	<br />
+	<c:if test="${token =='admin'}">
+		<fieldset>
+			<legend>管理會員資料 (${users.size() }) </legend>
+			<table style="border: 3px #cccccc solid" cellpadding="10" border="1">
+				<tr>
+					<th>id</th>
+					<th>username</th>
+					<th>display name</th>
+					<th>email</th>
+					<th>authority</th>
+				</tr>
+				<c:forEach var="i" begin="0" end="${users.size() }">
+					<tr>
+						<td><c:out value="${users[i].getObject('user').u_id }" /></td>
+						<td><c:out value="${users[i].getObject('user').username }" /></td>
+						<td><c:out value="${users[i].getObject('user').displayName }" /></td>
+						<td><c:out value="${users[i].getObject('userdata').email }" /></td>
+						<td><c:out value="${users[i].getObject('user').authority }" /></td>
+					</tr>
+				</c:forEach>
+			</table>
+		</fieldset>
+	</c:if>
+
 </body>
 </html>

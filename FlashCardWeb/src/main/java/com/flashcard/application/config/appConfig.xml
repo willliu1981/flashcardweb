@@ -17,6 +17,7 @@
 		<property name="addBeansXmlReferer">
 			<set>
 				<value>daoFactory.xml</value>
+				<value>modelFactory.xml</value>
 				<value>exception.xml</value>
 				<value>security.xml</value>
 			</set>
