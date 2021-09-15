@@ -36,9 +36,17 @@
 
 	<bean name="/account/register.do"
 		class="com.flashcard.control.account.RegisterController">
-		<property name="viewPageSuccess" value="../../login/login" />
-		<property name="viewPageFailure"
-			value="account/registerfailure" />
+		<property name="addTarget">
+			<props>
+				<prop key="success">../../login/login</prop>
+				<prop key="failure">account/registerfailure</prop>
+			</props>
+		</property>
+		<property name="addName">
+			<props>
+				<prop key="valueDefaultAuthority">READER,USER</prop>
+			</props>
+		</property>
 	</bean>
 
 	<bean name="/account/member.do"

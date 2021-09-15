@@ -53,16 +53,17 @@ public class MemberController extends Controller {
 			IDao<?> userDao = BeanFactory.getBean(DaoFactoryType.USERDAO);
 			IDao<?> userdataDao = BeanFactory
 					.getBean(DaoFactoryType.USERDATADAO);
-			List<?> users = userDao.queryAll();
-			List<?> userdatas = userdataDao.queryAll();
+			List<User> users = (List<User>) userDao.queryAll();
+			List<Userdata> userdatas = (List<Userdata>) userdataDao.queryAll();
 			List<UserWrap> userWraps = new ArrayList<>();
 			users.forEach(x -> {
 				UserWrap wrap = BeanFactory.getBean("userWrap", UserWrap.class);
-				
-				wrap.addObject("user", x);
-				Userdata d = (Userdata) userdatas.stream().filter(y -> true)
+
+				wrap.add("user", x);
+				Userdata d = (Userdata) userdatas.stream()
+						.filter(y -> y.getUser_id().equals(x.getU_id()))
 						.findFirst().get();
-				wrap.addObject("userdata", d);
+				wrap.add("userdata", d);
 				userWraps.add(wrap);
 			});
 			mv.addObject(name("varToken"), name("valueTokenAdmin"));

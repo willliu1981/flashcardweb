@@ -1,13 +1,9 @@
 package com.flashcard.control.account;
 
 import java.sql.SQLException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.Controller;
-
 import com.flashcard.dao.user.UserDao;
 import com.flashcard.dao.user.UserdataDao;
 import com.flashcard.factory.BeanFactory;
@@ -15,13 +11,11 @@ import com.flashcard.factory.dao.DaoFactoryType;
 import com.flashcard.model.user.User;
 import com.flashcard.model.user.Userdata;
 
-public class RegisterController implements Controller {
-	private String viewPageSuccess;
-	private String viewPageFailure;
+public class RegisterController extends Controller {
 
 	@Override
-	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public ModelAndView handleRequest(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		String username = request.getParameter("username");
 		String displayname = request.getParameter("displayname");
 		String password = request.getParameter("password");
@@ -39,7 +33,7 @@ public class RegisterController implements Controller {
 		user.setPassword(password);
 		user.setDisplayName(displayname);
 		user.setUserdata_id(userdata_id);
-		//user.setAuthority(Authorities.toString(Authorities.getDefaultAuthority()));
+		user.setAuthority(name("valueDefaultAuthority"));
 
 		UserDao userDao = (UserDao) BeanFactory.getBean(DaoFactoryType.USERDAO);
 		if (!userDao.add(user)) {
@@ -52,7 +46,8 @@ public class RegisterController implements Controller {
 		userdata.setName(user.getDisplayName());
 		userdata.setEmail(email);
 
-		UserdataDao userdataDao = (UserdataDao) BeanFactory.getBean(DaoFactoryType.USERDATADAO);
+		UserdataDao userdataDao = (UserdataDao) BeanFactory
+				.getBean(DaoFactoryType.USERDATADAO);
 		try {
 			if (!userdataDao.add(userdata)) {
 				isSucceed = false;
@@ -63,20 +58,12 @@ public class RegisterController implements Controller {
 		ModelAndView mv = new ModelAndView();
 
 		if (isSucceed) {
-			mv.setViewName(viewPageSuccess);
+			mv.setViewName(target("success"));
 		} else {
-			mv.setViewName(viewPageFailure);
+			mv.setViewName(target("failure"));
 		}
 
 		return mv;
-	}
-
-	public void setViewPageSuccess(String viewPageSuccess) {
-		this.viewPageSuccess = viewPageSuccess;
-	}
-
-	public void setViewPageFailure(String viewPageFailure) {
-		this.viewPageFailure = viewPageFailure;
 	}
 
 }

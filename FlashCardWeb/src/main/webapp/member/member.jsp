@@ -43,11 +43,11 @@
 				</tr>
 				<c:forEach var="i" begin="0" end="${users.size() }">
 					<tr>
-						<td><c:out value="${users[i].getObject('user').u_id }" /></td>
-						<td><c:out value="${users[i].getObject('user').username }" /></td>
-						<td><c:out value="${users[i].getObject('user').displayName }" /></td>
-						<td><c:out value="${users[i].getObject('userdata').email }" /></td>
-						<td><c:out value="${users[i].getObject('user').authority }" /></td>
+						<td><c:out value="${users[i].get('user').u_id }" /></td>
+						<td><c:out value="${users[i].get('user').username }" /></td>
+						<td><c:out value="${users[i].get('user').displayName }" /></td>
+						<td><c:out value="${users[i].get('userdata').email }" /></td>
+						<td><c:out value="${users[i].get('user').authority }" /></td>
 					</tr>
 				</c:forEach>
 			</table>

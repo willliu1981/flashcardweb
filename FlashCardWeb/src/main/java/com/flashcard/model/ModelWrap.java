@@ -18,11 +18,11 @@ public abstract class ModelWrap {
 		}
 	}
 
-	public Object getObject(String key) {
+	public Object get(String key) {
 		return map.get(key);
 	}
 
-	public void addObject(String proxyKey, Object obj) {
+	public void add(String proxyKey, Object obj) {
 		this.map.put(this.key.getProperty(proxyKey), obj);
 	}
 
