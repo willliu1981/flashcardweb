@@ -16,6 +16,7 @@ import com.flashcard.factory.BeanFactory;
 import com.flashcard.factory.dao.DaoFactoryType;
 import com.flashcard.model.user.User;
 import com.flashcard.model.user.Userdata;
+import com.flashcard.security.authority.AuthorityConverter;
 import com.flashcard.security.authority.AuthorityFactory;
 import com.flashcard.security.authorization.AdminAuthorization;
 
@@ -29,8 +30,7 @@ public class MemberController extends Controller {
 
 		User user = null;
 
-		user = (User) request.getSession(false)
-				.getAttribute(name("sessionUser"));
+		user = (User) request.getSession(false).getAttribute(session("user"));
 		Userdata data = null;
 
 		try {
@@ -42,9 +42,10 @@ public class MemberController extends Controller {
 		}
 
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName(name("target"));
+		mv.setViewName(target("target"));
 
-		boolean isAdmin = AuthorityFactory.hasKey(user.getAuthority(), "admin",
+		boolean isAdmin = AuthorityFactory.hasKey(user.getAuthority(),
+				AuthorityConverter.getNameAdmin(),
 				AdminAuthorization.READ_MEMBER_USER);
 		if (isAdmin) {
 			IDao<?> userDao = BeanFactory.getBean(DaoFactoryType.USERDAO);

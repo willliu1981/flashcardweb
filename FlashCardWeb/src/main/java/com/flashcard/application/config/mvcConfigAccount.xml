@@ -9,50 +9,60 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
-
-
-	<bean id="viewResolver"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/jsp/" />
-		<property name="suffix" value=".jsp" />
-
-	</bean>
-
 	<bean name="/account/judgeUser.do"
 		class="com.flashcard.control.account.JudgeUserController">
 	</bean>
 	<bean name="/account/login.do"
 		class="com.flashcard.control.account.LoginController">
-		<property name="viewPageSuccess" value="../../index" />
-		<property name="viewPageFailure" value="account/loginfailure" />
-		<property name="sessionNameUser" value="user" />
+		<property name="addTarget">
+			<props>
+				<prop key="success">../../index</prop>
+				<prop key="failure">account/loginfailure</prop>
+			</props>
+		</property>
+		<property name="addSession">
+			<props>
+				<prop key="user">user</prop>
+			</props>
+		</property>
+		<property name="addName">
+			<props>
+				<prop key="varDisplayName">displayName</prop>
+				<prop key="valueParamUsername">username</prop>
+				<prop key="valueParamPassword">password</prop>
+			</props>
+		</property>
 	</bean>
+
 	<bean name="/account/register.do"
 		class="com.flashcard.control.account.RegisterController">
 		<property name="viewPageSuccess" value="../../login/login" />
 		<property name="viewPageFailure"
 			value="account/registerfailure" />
 	</bean>
+
 	<bean name="/account/member.do"
 		class="com.flashcard.control.account.MemberController">
-		<property name="setName">
+		<property name="addTarget">
 			<props>
-			<prop key="target">../../member/member</prop>
-			<prop key="sessionUser">user</prop>
-			<prop key="varUsers">users</prop>
-			<prop key="varUserdatas">userdatas</prop>
+				<prop key="target">../../member/member</prop>
 			</props>
 		</property>
-
+		<property name="addSession">
+			<props>
+				<prop key="user">user</prop>
+			</props>
+		</property>
+		<property name="addName">
+			<props>
+				<prop key="varUsers">users</prop>
+				<prop key="varUserdatas">userdatas</prop>
+				<prop key="varToken">token</prop>
+				<prop key="valueTokenUser">user</prop>
+				<prop key="valueTokenAdmin">admin</prop>
+			</props>
+		</property>
 	</bean>
 
-
-	<mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/account/member.do" />
-			<bean
-				class="com.flashcard.security.interceptor.AuthorityInterceptor" />
-		</mvc:interceptor>
-	</mvc:interceptors>
 
 </beans>

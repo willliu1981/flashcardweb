@@ -16,8 +16,8 @@
 		class="com.flashcard.security.authority.AuthorityConverter">
 		<property name="adminAuthority" ref="adminAuthority"></property>
 		<property name="userAuthority" ref="userAuthority"></property>
-		<property name="nameUser" value="user"></property>
-		<property name="nameAdmin" value="admin"></property>
+		<property name="groupNameUser" value="user"></property>
+		<property name="groupNameAdmin" value="admin"></property>
 	</bean>
 
 	<bean id="adminAuthority"

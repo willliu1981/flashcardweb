@@ -26,12 +26,22 @@ public class AuthorityConverter implements IAuthorityConverter {
 		this.userAuthority = userAuthority;
 	}
 
-	public static void setNameUser(String nameUser) {
+	public static void setGroupNameUser(String nameUser) {
 		AuthorityConverter.nameUser = nameUser;
 	}
 
-	public static void setNameAdmin(String nameAdmin) {
+	public static void setGroupNameAdmin(String nameAdmin) {
 		AuthorityConverter.nameAdmin = nameAdmin;
 	}
+
+	public static String getNameUser() {
+		return nameUser;
+	}
+
+	public static String getNameAdmin() {
+		return nameAdmin;
+	}
+	
+	
 
 }
