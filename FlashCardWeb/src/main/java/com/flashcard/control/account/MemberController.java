@@ -15,6 +15,7 @@ import com.flashcard.control.Controller;
 import com.flashcard.dao.IDao;
 import com.flashcard.dao.user.IUserDao;
 import com.flashcard.dao.user.IUserdataDao;
+import com.flashcard.exception.ResultNullException;
 import com.flashcard.factory.BeanFactory;
 import com.flashcard.factory.dao.DaoFactoryType;
 import com.flashcard.model.ModelWrap;
@@ -24,6 +25,7 @@ import com.flashcard.model.user.Userdata;
 import com.flashcard.security.authority.AuthorityConverter;
 import com.flashcard.security.authority.AuthorityFactory;
 import com.flashcard.security.authorization.AdminAuthorization;
+import com.flashcard.tool.Pages;
 
 public class MemberController extends Controller {
 
@@ -66,8 +68,23 @@ public class MemberController extends Controller {
 					.getBean(DaoFactoryType.USERDAO);
 			IUserdataDao<Userdata> userdataDao = (IUserdataDao<Userdata>) BeanFactory
 					.getBean(DaoFactoryType.USERDATADAO);
+			int maxData = userDao.count();
+			if (Pages.isLast(maxData, intPage, maxPage)) {
+				mv.addObject(name("varIsLast"), true);
+			} else if (intPage == 1) {
+				mv.addObject(name("varIsFirst"), true);
+			} else {
+				mv.addObject(name("varIsLast"), false);
+				mv.addObject(name("varIsFirst"), false);
+			}
 
-			List<User> users = userDao.findsLimit(intPage, maxPage);
+			List<User> users = null;
+			try {
+				users = userDao.findsLimit(intPage, maxPage);
+			} catch (ResultNullException e) {
+				System.out.println(e.getMessage());
+			}
+
 			List<Userdata> userdatas = new ArrayList<>();
 
 			users.stream().forEach(x -> {
@@ -84,6 +101,7 @@ public class MemberController extends Controller {
 			mv.addObject(name("varUsers"), users);
 			mv.addObject(name("varUserdatas"), userdatas);
 			mv.addObject(name("varPage"), intPage);
+			mv.addObject(name("varMaxData"), maxData);
 		} else {
 			mv.addObject(name("varToken"), name("valueTokenUser"));
 		}

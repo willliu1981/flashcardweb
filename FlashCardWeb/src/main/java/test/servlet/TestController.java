@@ -16,7 +16,9 @@ public class TestController extends Controller {
 		String v = request.getParameter("v");
 
 		System.out.println("xxxxx " + v);
-		return null;
+		ModelAndView mv = new ModelAndView();
+		mv.addObject(null, true);
+		return mv;
 	}
 
 }

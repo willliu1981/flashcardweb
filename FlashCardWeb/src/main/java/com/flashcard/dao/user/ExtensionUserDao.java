@@ -13,7 +13,7 @@ public class ExtensionUserDao extends UserDao {
 			throws ResultNullException, SQLException {
 		String sqlSegment = String.format("select * from user limit %d,%d",
 				(page - 1) * maxPage, maxPage);
-
+		
 		return this.finds(sqlSegment);
 	}
 

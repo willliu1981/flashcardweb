@@ -77,7 +77,7 @@ public class UserDao implements IUserDao<User> {
 
 	@Override
 	public List<User> queryAll() throws SQLException, ResultNullException {
-		 List<User> users = this.finds("select * from user", null);
+		List<User> users = this.finds("select * from user", null);
 		return users;
 	}
 
@@ -186,7 +186,7 @@ public class UserDao implements IUserDao<User> {
 		try {
 			PreparedStatement ps = (conn = dataSource.getConnection())
 					.prepareStatement(sqlSegment);
-			
+
 			for (int idx = 0; querys != null && idx < querys.length; idx++) {
 				ps.setString(idx + 1, querys[idx]);
 			}
@@ -215,6 +215,10 @@ public class UserDao implements IUserDao<User> {
 					+ this.getClass().getName() + "::finds:" + sqlSegment);
 		}
 
+		if (users == null) {
+			throw new ResultNullException(this.getClass(), "finds", sqlSegment);
+		}
+
 		return users;
 	}
 
@@ -239,6 +243,29 @@ public class UserDao implements IUserDao<User> {
 							password));
 		}
 		return user;
+	}
+
+	@Override
+	public int count() {
+		Connection conn = null;
+		List<User> users = new ArrayList<>();
+
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ps = (conn = dataSource.getConnection())
+					.prepareStatement("select count(*) from user");
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				return rs.getInt(1);
+			}
+			rs.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return 0;
 	}
 
 	@Test

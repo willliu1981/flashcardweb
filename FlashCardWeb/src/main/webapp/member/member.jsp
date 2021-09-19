@@ -55,11 +55,13 @@
 	<br />
 	<c:if test="${token =='admin'}">
 		<fieldset>
-			<legend>管理會員資料 (${users.size() }) </legend>
-			<span>
-				<button type="button" id="previous">上一頁</button> <input type="text"
-				readonly id="page" value="${page }" />
-				<button type="button" id="next">下一頁</button>
+			<legend>管理會員資料 (${max }) </legend>
+			<span> <c:if test="${ isFirst!=true}">
+					<button type="button" id="previous">上一頁</button>
+				</c:if> <input style="text-align: center" type="text" readonly id="page"
+				size="3" value="${page }" /> <c:if test="${isLast!=true }">
+					<button type="button" id="next">下一頁</button>
+				</c:if>
 			</span>
 			<table style="border: 3px #cccccc solid" cellpadding="10" border="1">
 				<tr>

@@ -35,6 +35,8 @@
 				<prop key="varUserdatas">userdatas</prop>
 				<prop key="varToken">token</prop>
 				<prop key="varPage">page</prop>
+				<prop key="varIsLast">isLast</prop>
+				<prop key="varIsFirst">isFirst</prop>
 				<prop key="valueTokenUser">user</prop>
 				<prop key="valueTokenAdmin">admin</prop>
 				<prop key="valueMaxPage">5</prop>
