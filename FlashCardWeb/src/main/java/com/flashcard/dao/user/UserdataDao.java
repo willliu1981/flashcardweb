@@ -71,8 +71,38 @@ public class UserdataDao implements IUserdataDao<Userdata> {
 
 	@Override
 	public int update(String id, Userdata t) {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection conn = null;
+
+		String sql = "update userdata set ud_id=?,user_id=?,name=?,email=?,"
+				+ "cardboxdata=?,scenedata=?,create_date=?,update_date=?,note=?,tag=? where ud_id=?";
+		int r = 0;
+		try {
+			conn = dataSource.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, t.getUd_id());
+			ps.setString(2, t.getUser_id());
+			ps.setString(3, t.getName());
+			ps.setString(4, t.getEmail());
+			ps.setString(5, t.getCardboxdata());
+			ps.setString(6, t.getScenedata());
+			ps.setDate(7, t.getCreate_date());
+			ps.setDate(8, t.getUpdate_date());
+			ps.setString(9, t.getNote());
+			ps.setString(10, t.getTag());
+			ps.setString(11, id);
+
+			r = ps.executeUpdate();
+
+			ps.close();
+			conn.close();
+
+		} catch (SQLException e) {
+			// e.printStackTrace();
+			System.out.println(e.getMessage() + " : "
+					+ this.getClass().getName() + "::update");
+		}
+
+		return r;
 	}
 
 	@Override

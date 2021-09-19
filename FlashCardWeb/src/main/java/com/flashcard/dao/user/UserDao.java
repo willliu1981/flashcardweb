@@ -85,7 +85,8 @@ public class UserDao implements IUserDao<User> {
 	public int update(String id, User t) {
 		Connection conn = null;
 
-		String sql = "update user set u_id=?,displayname=?,username=?,password=?,authority=?,userdata_id=?,create_date=?,update_date=?,note=?,tag=? where u_id=?";
+		String sql = "update user set u_id=?,displayname=?,username=?,password=?,"
+				+ "authority=?,userdata_id=?,create_date=?,update_date=?,note=?,tag=? where u_id=?";
 		int r = 0;
 		try {
 			PreparedStatement ps = (conn = dataSource.getConnection())

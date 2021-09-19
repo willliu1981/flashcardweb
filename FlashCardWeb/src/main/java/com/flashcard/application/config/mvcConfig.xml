@@ -16,9 +16,8 @@
 
 	</bean>
 
-	
-<bean name="/test/test.do"
-		class="test.servlet.TestController">
+
+	<bean name="/test/test.do" class="test.servlet.TestController">
 		<property name="addTarget">
 			<props>
 				<prop key="target">../../member/member</prop>

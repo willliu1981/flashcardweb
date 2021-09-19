@@ -30,12 +30,12 @@
 			$("#home")
 				.click(
 					function() {
-					  location.href = "${pageContext.request.contextPath}/index.jsp";
+					  location.href = "${pageContext.request.contextPath}/index.jsp;
 					});
 			$("#edit")
 				.click(
 					function() {
-					  location.href = "${pageContext.request.contextPath}/account/editMemberTransit.do";
+					  location.href = "${pageContext.request.contextPath}/member/editmemeber.jsp;
 					});
 		  });
 </script>

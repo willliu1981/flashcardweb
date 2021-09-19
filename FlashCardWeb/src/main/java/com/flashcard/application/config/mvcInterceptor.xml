@@ -12,6 +12,8 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/account/member.do" />
+			<mvc:mapping path="/account/editMemberTransit.do" />
+			<mvc:mapping path="/account/editMember.do" />
 			<bean
 				class="com.flashcard.security.interceptor.AuthorityInterceptor" />
 		</mvc:interceptor>

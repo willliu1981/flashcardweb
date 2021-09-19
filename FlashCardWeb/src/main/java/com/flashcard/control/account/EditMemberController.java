@@ -1,0 +1,64 @@
+package com.flashcard.control.account;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.servlet.ModelAndView;
+
+import com.flashcard.control.Controller;
+import com.flashcard.dao.user.IUserDao;
+import com.flashcard.dao.user.IUserdataDao;
+import com.flashcard.factory.BeanFactory;
+import com.flashcard.factory.dao.DaoFactoryType;
+import com.flashcard.model.user.User;
+import com.flashcard.model.user.Userdata;
+
+public class EditMemberController extends Controller {
+
+	@Override
+	public ModelAndView handleRequest(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		String displayName = request.getParameter(name("varDisplayName"));
+		String password = request.getParameter(name("varPassword"));
+		String email = request.getParameter(name("varEmail"));
+
+		IUserDao<User> userDao = (IUserDao<User>) BeanFactory
+				.getBean(DaoFactoryType.USERDAO);
+		IUserdataDao<Userdata> userdataDao = (IUserdataDao<Userdata>) BeanFactory
+				.getBean(DaoFactoryType.USERDATADAO);
+
+		User user = (User) request.getSession().getAttribute(session("user"));
+		Userdata userdata = userdataDao.queryByID(user.getUserdata_id());
+
+		user.setDisplayName(displayName);
+		user.setPassword(password);
+
+		userdata.setName(displayName);
+		userdata.setEmail(email);
+
+		boolean r = true;
+		try {
+			if (userDao.update(user.getU_id(), user) == 0) {
+				r = false;
+			}
+
+			if (userdataDao.update(userdata.getUd_id(), userdata) == 0) {
+				r = false;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		ModelAndView mv = new ModelAndView();
+		mv.setStatus(null);
+		if (r) {
+			request.getSession().setAttribute(session("user"), user);
+			mv.setViewName(target("success"));
+		} else {
+			mv.setViewName(target("failure"));
+		}
+
+		return mv;
+	}
+
+}

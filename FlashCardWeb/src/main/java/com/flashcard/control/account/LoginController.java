@@ -39,8 +39,7 @@ public class LoginController extends Controller {
 		if (valid) {
 			return new ModelAndView(target("success"));
 		} else {
-			return new ModelAndView(target("failure"), name("varDisplayName"),
-					user.getDisplayName());
+			return new ModelAndView(target("failure"));
 		}
 	}
 
