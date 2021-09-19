@@ -12,9 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.flashcard.dao.IDao;
+import com.flashcard.dao.user.IUserDao;
 import com.flashcard.dao.user.IUserdataDao;
 import com.flashcard.factory.BeanFactory;
 import com.flashcard.factory.dao.DaoFactoryType;
+import com.flashcard.model.ModelWrap;
 import com.flashcard.model.UserWrap;
 import com.flashcard.model.user.User;
 import com.flashcard.model.user.Userdata;
@@ -27,6 +29,15 @@ public class MemberController extends Controller {
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		String page = request.getParameter(name("page"));
+		Integer intPage = null;
+		if (page == null) {
+			intPage = 0;
+		} else {
+			intPage = Integer.parseInt(page);
+		}
+		Integer maxPage = Integer.parseInt(name("valueMaxPage"));
+
 		IUserdataDao<Userdata> dao = (IUserdataDao<Userdata>) BeanFactory
 				.getBean(DaoFactoryType.USERDATADAO);
 
@@ -50,24 +61,27 @@ public class MemberController extends Controller {
 				AuthorityConverter.getGroupNameAdmin(),
 				AdminAuthorization.READ_MEMBER_USER);
 		if (isAdmin) {
-			IDao<?> userDao = BeanFactory.getBean(DaoFactoryType.USERDAO);
-			IDao<?> userdataDao = BeanFactory
+			IUserDao<User> userDao = (IUserDao<User>) BeanFactory
+					.getBean(DaoFactoryType.USERDAO);
+			IUserdataDao<Userdata> userdataDao = (IUserdataDao<Userdata>) BeanFactory
 					.getBean(DaoFactoryType.USERDATADAO);
-			List<User> users = (List<User>) userDao.queryAll();
-			List<Userdata> userdatas = (List<Userdata>) userdataDao.queryAll();
-			List<UserWrap> userWraps = new ArrayList<>();
-			users.forEach(x -> {
-				UserWrap wrap = BeanFactory.getBean("userWrap", UserWrap.class);
 
-				wrap.add("user", x);
-				Userdata d = (Userdata) userdatas.stream()
-						.filter(y -> y.getUser_id().equals(x.getU_id()))
-						.findFirst().get();
-				wrap.add("userdata", d);
-				userWraps.add(wrap);
+			List<User> users = userDao.findsLimit(intPage, maxPage);
+			List<Userdata> userdatas = new ArrayList<>();
+
+			users.stream().forEach(x -> {
+				try {
+					Userdata ud = (Userdata) userdataDao
+							.queryByID(x.getUserdata_id());
+					userdatas.add(ud);
+				} catch (IOException | SQLException e) {
+					e.printStackTrace();
+				}
 			});
+
 			mv.addObject(name("varToken"), name("valueTokenAdmin"));
-			mv.addObject(name("varUsers"), userWraps);
+			mv.addObject(name("varUsers"), users);
+			mv.addObject(name("varUserdatas"), userdatas);
 		} else {
 			mv.addObject(name("varToken"), name("valueTokenUser"));
 		}

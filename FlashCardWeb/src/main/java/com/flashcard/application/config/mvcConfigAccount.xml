@@ -66,8 +66,10 @@
 				<prop key="varUsers">users</prop>
 				<prop key="varUserdatas">userdatas</prop>
 				<prop key="varToken">token</prop>
+				<prop key="varPage">page</prop>
 				<prop key="valueTokenUser">user</prop>
 				<prop key="valueTokenAdmin">admin</prop>
+				<prop key="valueMaxPage">5</prop>
 			</props>
 		</property>
 	</bean>

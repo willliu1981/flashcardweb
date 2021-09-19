@@ -8,6 +8,10 @@
 
 .	model/dao 的 user 指 使用者帳號資料; word 是 詞彙相關資料
 
+.	beans 的property 的 element 有些 props ,key 用在 controller, 
+	value 則用在 .jsp 的 EL 語法,例如: MemberController 和 member.jsp
+	 
+
 
 
   

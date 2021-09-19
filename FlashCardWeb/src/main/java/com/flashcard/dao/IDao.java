@@ -30,4 +30,7 @@ public interface IDao<T> {
 
 		return null;
 	}
+
+
+
 }
