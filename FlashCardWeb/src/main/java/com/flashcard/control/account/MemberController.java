@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.flashcard.control.Controller;
 import com.flashcard.dao.IDao;
 import com.flashcard.dao.user.IUserDao;
 import com.flashcard.dao.user.IUserdataDao;
@@ -29,10 +30,10 @@ public class MemberController extends Controller {
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		String page = request.getParameter(name("page"));
+		String page = request.getParameter(name("varPage"));
 		Integer intPage = null;
 		if (page == null) {
-			intPage = 0;
+			intPage = 1;
 		} else {
 			intPage = Integer.parseInt(page);
 		}
@@ -82,6 +83,7 @@ public class MemberController extends Controller {
 			mv.addObject(name("varToken"), name("valueTokenAdmin"));
 			mv.addObject(name("varUsers"), users);
 			mv.addObject(name("varUserdatas"), userdatas);
+			mv.addObject(name("varPage"), intPage);
 		} else {
 			mv.addObject(name("varToken"), name("valueTokenUser"));
 		}

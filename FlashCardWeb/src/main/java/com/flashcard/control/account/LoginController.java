@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
+
+import com.flashcard.control.Controller;
 import com.flashcard.dao.user.IUserDao;
 import com.flashcard.exception.ResultNullException;
 import com.flashcard.factory.BeanFactory;

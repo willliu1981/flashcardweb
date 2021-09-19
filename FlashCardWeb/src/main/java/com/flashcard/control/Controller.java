@@ -1,4 +1,4 @@
-package com.flashcard.control.account;
+package com.flashcard.control;
 
 import java.util.Properties;
 

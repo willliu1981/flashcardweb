@@ -6,6 +6,29 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" language="javascript"
+	src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+  $(document)
+	  .ready(
+		  function() {
+			$("#previous")
+				.click(
+					function() {
+					  var page = parseInt($("#page").val());
+					  location.href = "${pageContext.request.contextPath}/account/member.do?page="
+						  + (page - 1);
+					});
+
+			$("#next")
+				.click(
+					function() {
+					  var page = parseInt($("#page").val());
+					  location.href = "${pageContext.request.contextPath}/account/member.do?page="
+						  + (page + 1);
+					});
+		  });
+</script>
 </head>
 <body>
 	<fieldset>
@@ -33,6 +56,11 @@
 	<c:if test="${token =='admin'}">
 		<fieldset>
 			<legend>管理會員資料 (${users.size() }) </legend>
+			<span>
+				<button type="button" id="previous">上一頁</button> <input type="text"
+				readonly id="page" value="${page }" />
+				<button type="button" id="next">下一頁</button>
+			</span>
 			<table style="border: 3px #cccccc solid" cellpadding="10" border="1">
 				<tr>
 					<th>id</th>

@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.flashcard.control.Controller;
 import com.flashcard.dao.user.UserDao;
 import com.flashcard.dao.user.UserdataDao;
 import com.flashcard.factory.BeanFactory;
