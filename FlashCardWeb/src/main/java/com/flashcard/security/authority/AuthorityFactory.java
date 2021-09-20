@@ -1,5 +1,7 @@
 package com.flashcard.security.authority;
 
+import java.util.Properties;
+
 import com.flashcard.factory.BeanFactory;
 
 public class AuthorityFactory {
@@ -7,6 +9,7 @@ public class AuthorityFactory {
 			.getBean("authorityFactory", AuthorityFactory.class);
 	private AuthorityGroup group;
 	private IAuthorityConverter converter;
+	private static Properties groupName;
 
 	public void setConverter(IAuthorityConverter converter) {
 		this.converter = converter;
@@ -16,11 +19,24 @@ public class AuthorityFactory {
 		return factory.converter.convertToAuthority(userAuthority);
 	}
 
-	public static boolean hasKey(String authority, String group, String matchKey) {
-		return createAuthorityGroup(authority).hasKey(group, matchKey);
-	}
-	public static boolean key(String authority, String group, Integer matchKey) {
+	public static boolean key(String authority, String group, String matchKey) {
+		/*
+		  String authority 來自於 model 的 authotiry
+		  其它類似method略
+		 */
 		return createAuthorityGroup(authority).hasKey(group, matchKey);
 	}
 
+	public static boolean key(String authority, String group,
+			Integer matchKey) {
+		return createAuthorityGroup(authority).hasKey(group, matchKey);
+	}
+
+	public static String getGroupName(String name) {
+		return groupName.getProperty(name);
+	}
+
+	public void setGroupNames(Properties groupName) {
+		AuthorityFactory.groupName = groupName;
+	}
 }

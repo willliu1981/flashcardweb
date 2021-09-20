@@ -10,20 +10,26 @@
 		class="com.flashcard.security.authority.AuthorityFactory"
 		scope="singleton">
 		<property name="converter" ref="authorityConverter" />
+		<property name="groupNames">
+			<props>
+				<prop key="user">user</prop>
+				<prop key="admin">admin</prop>
+			</props>
+		</property>
 	</bean>
 
 	<bean id="authorityConverter"
 		class="com.flashcard.security.authority.AuthorityConverter">
 		<property name="adminAuthority" ref="adminAuthority"></property>
 		<property name="userAuthority" ref="userAuthority"></property>
-		<property name="groupNameUser" value="user"></property>
-		<property name="groupNameAdmin" value="admin"></property>
 	</bean>
 
 	<bean id="adminAuthority"
 		class="com.flashcard.security.authority.AdminAuthority"></bean>
 	<bean id="userAuthority"
 		class="com.flashcard.security.authority.UserAuthority"></bean>
+
+
 
 
 </beans>

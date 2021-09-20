@@ -23,7 +23,6 @@ public class AdminAuthority extends AuthorityAdapter {
 		this.setKeys(READER, USER, AdminAuthorization.READ_MEMBER_USER);
 		this.setKeys(EDITOR, READER, AdminAuthorization.MODIFY_MEMBER_USER);
 		this.setKeys(ADMIN, EDITOR, AdminAuthorization.DELETE_MEMBER_USER);
-
 	}
 
 	@Test

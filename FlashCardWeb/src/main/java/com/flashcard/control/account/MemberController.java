@@ -25,6 +25,7 @@ import com.flashcard.model.user.User;
 import com.flashcard.model.user.Userdata;
 import com.flashcard.security.authority.AuthorityConverter;
 import com.flashcard.security.authority.AuthorityFactory;
+import com.flashcard.security.authority.AuthorityGroup;
 import com.flashcard.security.authorization.AdminAuthorization;
 import com.flashcard.tool.Pages;
 
@@ -61,8 +62,12 @@ public class MemberController extends Controller {
 		mv.setViewName(target("target"));
 
 		boolean isAdmin = AuthorityFactory.key(user.getAuthority(),
-				AuthorityConverter.ADMIN,
+				AuthorityFactory.getGroupName("admin"),
 				AdminAuthorization.READ_MEMBER_USER);
+
+		AuthorityGroup group = AuthorityFactory
+				.createAuthorityGroup(user.getAuthority());
+
 		if (isAdmin) {
 			IUserDao<User> userDao = (IUserDao<User>) BeanFactory
 					.getBean(DaoFactoryType.USERDAO);

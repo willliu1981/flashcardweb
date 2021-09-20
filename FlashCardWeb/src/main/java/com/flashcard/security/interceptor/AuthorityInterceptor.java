@@ -48,7 +48,7 @@ public class AuthorityInterceptor extends HandlerInterceptorAdapter
 		} else {
 			User user = (User) sess
 					.getAttribute(Factory.getSessionName("user"));
-			return AuthorityFactory.hasKey(user.getAuthority(), name("admin"),
+			return AuthorityFactory.key(user.getAuthority(), name("admin"),
 					AdminAuthority.USER);
 
 		}
