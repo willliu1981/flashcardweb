@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 
 public abstract class Controller
-		implements org.springframework.web.servlet.mvc.Controller {
+		implements IController, org.springframework.web.servlet.mvc.Controller {
 	protected Properties session;
 	protected Properties target;
 	protected Properties name;

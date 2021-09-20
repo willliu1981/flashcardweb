@@ -74,6 +74,7 @@
 				<prop key="isLast">isLast</prop>
 				<prop key="isFirst">isFirst</prop>
 				<prop key="tokenUser">user</prop>
+				<prop key="tokenUser">editor</prop>
 				<prop key="tokenAdmin">admin</prop>
 				<prop key="maxPage">5</prop>
 			</props>

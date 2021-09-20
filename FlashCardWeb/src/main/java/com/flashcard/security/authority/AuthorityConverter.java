@@ -3,8 +3,8 @@ package com.flashcard.security.authority;
 public class AuthorityConverter implements IAuthorityConverter {
 	private static Authority adminAuthority;
 	private static Authority userAuthority;
-	private static String nameUser = "user";
-	private static String nameAdmin = "admin";
+	public static String USER = "user";
+	public  static String ADMIN = "admin";
 
 	@Override
 	public AuthorityGroup convertToAuthority(String authority) {
@@ -12,8 +12,8 @@ public class AuthorityConverter implements IAuthorityConverter {
 		String[] auths = authority.split(",");
 
 		AuthorityGroup group = new AuthorityGroup();
-		group.setGroup(nameUser, userAuthority, auths[0]);
-		group.setGroup(nameAdmin, adminAuthority, auths[1]);
+		group.setGroup(USER, userAuthority, auths[0]);
+		group.setGroup(ADMIN, adminAuthority, auths[1]);
 
 		return group;
 	}
@@ -27,20 +27,14 @@ public class AuthorityConverter implements IAuthorityConverter {
 	}
 
 	public static void setGroupNameUser(String nameUser) {
-		AuthorityConverter.nameUser = nameUser;
+		AuthorityConverter.USER = nameUser;
 	}
 
 	public static void setGroupNameAdmin(String nameAdmin) {
-		AuthorityConverter.nameAdmin = nameAdmin;
+		AuthorityConverter.ADMIN = nameAdmin;
 	}
 
-	public static String getGroupNameUser() {
-		return nameUser;
-	}
 
-	public static String getGroupNameAdmin() {
-		return nameAdmin;
-	}
 	
 	
 

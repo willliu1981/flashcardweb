@@ -60,8 +60,8 @@ public class MemberController extends Controller {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName(target("target"));
 
-		boolean isAdmin = AuthorityFactory.hasKey(user.getAuthority(),
-				AuthorityConverter.getGroupNameAdmin(),
+		boolean isAdmin = AuthorityFactory.key(user.getAuthority(),
+				AuthorityConverter.ADMIN,
 				AdminAuthorization.READ_MEMBER_USER);
 		if (isAdmin) {
 			IUserDao<User> userDao = (IUserDao<User>) BeanFactory
