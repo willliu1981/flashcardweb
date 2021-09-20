@@ -8,8 +8,9 @@ import java.util.stream.Stream;
 public class Test1 {
 
 	public static void main(String[] args) throws ClassNotFoundException {
-		Class<?> c=Class.forName("com.flashcard.security.authority.AdminAuthority");
-		
+		String ss = "a,b,c";
+
+		System.out.println("" + ss.contains("ab"));
 
 	}
 

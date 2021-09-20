@@ -61,14 +61,24 @@ public class MemberController extends Controller {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName(target("target"));
 
-		boolean isAdmin = AuthorityFactory.key(user.getAuthority(),
-				AuthorityFactory.getGroupName("admin"),
-				AdminAuthorization.READ_MEMBER_USER);
-
 		AuthorityGroup group = AuthorityFactory
 				.createAuthorityGroup(user.getAuthority());
+		String token = null;
+		String ownKey = AuthorityFactory.getGroupName("admin");
+		if (group.hasKey(ownKey, AdminAuthorization.DELETE_MEMBER_USER)) {
+			token += "," + name("tokenAdmin");
+		}
+		if (group.hasKey(ownKey, AdminAuthorization.MODIFY_MEMBER_USER)) {
+			token += "," + name("tokenEditor");
+		}
+		if (group.hasKey(ownKey, AdminAuthorization.READ_MEMBER_USER)) {
+			token += "," + name("tokenReader");
+		}
+		if (group.hasKey(ownKey, AdminAuthorization.READ_USER)) {
+			token += "," + name("tokenUser");
+		}
 
-		if (isAdmin) {
+		if (token.contains(name("tokenReader"))) {
 			IUserDao<User> userDao = (IUserDao<User>) BeanFactory
 					.getBean(DaoFactoryType.USERDAO);
 			IUserdataDao<Userdata> userdataDao = (IUserdataDao<Userdata>) BeanFactory
@@ -102,7 +112,7 @@ public class MemberController extends Controller {
 				}
 			});
 
-			mv.addObject(name("token"), name("tokenAdmin"));
+			mv.addObject(name("token"), token);
 			mv.addObject(name("users"), users);
 			mv.addObject(name("userdatas"), userdatas);
 			mv.addObject(name("page"), intPage);

@@ -27,11 +27,9 @@
 					  location.href = "${pageContext.request.contextPath}/account/member.do?page="
 						  + (page + 1);
 					});
-			$("#home")
-				.click(
-					function() {
-					  location.href = "${pageContext.request.contextPath}/index.jsp";
-					});
+			$("#home").click(function() {
+			  location.href = "${pageContext.request.contextPath}/index.jsp";
+			});
 			$("#edit")
 				.click(
 					function() {
@@ -63,11 +61,11 @@
 		</table>
 	</fieldset>
 	<fieldset>
-		<button type="button"  id="home">回首頁</button>
-		<button type="button"  id="edit">修改會員資料</button>
+		<button type="button" id="home">回首頁</button>
+		<button type="button" id="edit">修改會員資料</button>
 	</fieldset>
 	<br />
-	<c:if test="${token =='admin'}">
+	<c:if test="${token.contains('reader')}">
 		<fieldset>
 			<legend>管理會員資料 (${max }) </legend>
 			<span> <c:if test="${ isFirst!=true}">
@@ -84,6 +82,7 @@
 					<th>display name</th>
 					<th>email</th>
 					<th>authority</th>
+					<th>oper</th>
 				</tr>
 				<c:forEach var="i" begin="0" end="${users.size()-1 }">
 					<tr>
@@ -92,6 +91,9 @@
 						<td><c:out value="${users[i].displayName }" /></td>
 						<td><c:out value="${userdatas[i].email }" /></td>
 						<td><c:out value="${users[i].authority }" /></td>
+						<c:if test="${token.contains('editor') }">
+							<td><button type="button" id="editMember">修改</button></td>
+						</c:if>
 					</tr>
 				</c:forEach>
 			</table>
