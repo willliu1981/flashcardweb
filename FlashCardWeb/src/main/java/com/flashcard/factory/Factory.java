@@ -10,4 +10,8 @@ public class Factory {
 	public static String getConfigXmlPath() {
 		return AppConfig.config.getThisConfigXml();
 	}
+	
+	public static String getSessionName(String key) {
+		return AppConfig.getFactoryConfig().getSessionName(key);
+	}
 }

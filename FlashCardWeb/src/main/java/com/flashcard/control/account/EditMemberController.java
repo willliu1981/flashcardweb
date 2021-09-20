@@ -9,6 +9,7 @@ import com.flashcard.control.Controller;
 import com.flashcard.dao.user.IUserDao;
 import com.flashcard.dao.user.IUserdataDao;
 import com.flashcard.factory.BeanFactory;
+import com.flashcard.factory.Factory;
 import com.flashcard.factory.dao.DaoFactoryType;
 import com.flashcard.model.user.User;
 import com.flashcard.model.user.Userdata;
@@ -18,16 +19,17 @@ public class EditMemberController extends Controller {
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		String displayName = request.getParameter(name("varDisplayName"));
-		String password = request.getParameter(name("varPassword"));
-		String email = request.getParameter(name("varEmail"));
+		String displayName = request.getParameter(name("displayName"));
+		String password = request.getParameter(name("password"));
+		String email = request.getParameter(name("email"));
 
 		IUserDao<User> userDao = (IUserDao<User>) BeanFactory
 				.getBean(DaoFactoryType.USERDAO);
 		IUserdataDao<Userdata> userdataDao = (IUserdataDao<Userdata>) BeanFactory
 				.getBean(DaoFactoryType.USERDATADAO);
 
-		User user = (User) request.getSession().getAttribute(session("user"));
+		User user = (User) request.getSession()
+				.getAttribute(Factory.getSessionName("user"));
 		Userdata userdata = userdataDao.queryByID(user.getUserdata_id());
 
 		user.setDisplayName(displayName);
@@ -50,9 +52,9 @@ public class EditMemberController extends Controller {
 		}
 
 		ModelAndView mv = new ModelAndView();
-		mv.setStatus(null);
 		if (r) {
-			request.getSession().setAttribute(session("user"), user);
+			request.getSession().setAttribute(Factory.getSessionName("user"),
+					user);
 			mv.setViewName(target("success"));
 		} else {
 			mv.setViewName(target("failure"));

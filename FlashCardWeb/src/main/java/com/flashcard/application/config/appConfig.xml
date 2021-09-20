@@ -22,6 +22,11 @@
 				<value>security.xml</value>
 			</set>
 		</property>
+		<property name="sessionNames">
+			<props>
+				<prop key="user">user</prop>
+			</props>
+		</property>
 	</bean>
 
 

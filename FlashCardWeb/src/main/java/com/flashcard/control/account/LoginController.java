@@ -11,6 +11,7 @@ import com.flashcard.control.Controller;
 import com.flashcard.dao.user.IUserDao;
 import com.flashcard.exception.ResultNullException;
 import com.flashcard.factory.BeanFactory;
+import com.flashcard.factory.Factory;
 import com.flashcard.factory.dao.DaoFactoryType;
 import com.flashcard.model.user.User;
 
@@ -19,8 +20,8 @@ public class LoginController extends Controller {
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		String username = request.getParameter(name("valueParamUsername"));
-		String password = request.getParameter(name("valueParamPassword"));
+		String username = request.getParameter(name("username"));
+		String password = request.getParameter(name("password"));
 
 		IUserDao<User> dao = (IUserDao<User>) BeanFactory
 				.getBean(DaoFactoryType.USERDAO);
@@ -30,7 +31,7 @@ public class LoginController extends Controller {
 		try {
 			valid = (user = dao.identifyUser(username, password)) != null ? true
 					: false;
-			request.getSession().setAttribute(session("user"), user);
+			request.getSession().setAttribute(Factory.getSessionName("user") , user);
 		} catch (ResultNullException | SQLException e) {
 			request.getSession().invalidate();
 			System.out.println(e.getMessage());

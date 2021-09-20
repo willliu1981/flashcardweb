@@ -13,15 +13,15 @@ public abstract class Controller
 	protected Properties target;
 	protected Properties name;
 
-	public void setAddSession(Properties session) {
+	public void setSessions(Properties session) {
 		this.session = session;
 	}
 
-	public void setAddTarget(Properties target) {
+	public void setTargets(Properties target) {
 		this.target = target;
 	}
 
-	public void setAddName(Properties name) {
+	public void setNames(Properties name) {
 		this.name = name;
 	}
 

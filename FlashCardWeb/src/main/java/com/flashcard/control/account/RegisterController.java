@@ -18,10 +18,10 @@ public class RegisterController extends Controller {
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		String username = request.getParameter("username");
-		String displayname = request.getParameter("displayname");
-		String password = request.getParameter("password");
-		String email = request.getParameter("email");
+		String username = name("username");
+		String displayname = name("displayname");
+		String password = name("password");
+		String email = name("email");
 
 		String serial_id = "" + new java.util.Date().getTime();
 		String user_id = "uid" + serial_id;
@@ -35,7 +35,7 @@ public class RegisterController extends Controller {
 		user.setPassword(password);
 		user.setDisplayName(displayname);
 		user.setUserdata_id(userdata_id);
-		user.setAuthority(name("valueDefaultAuthority"));
+		user.setAuthority(name("defaultAuthority"));
 
 		UserDao userDao = (UserDao) BeanFactory.getBean(DaoFactoryType.USERDAO);
 		if (!userDao.add(user)) {

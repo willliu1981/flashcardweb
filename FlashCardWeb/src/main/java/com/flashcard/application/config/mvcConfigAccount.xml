@@ -11,75 +11,78 @@
 
 	<bean name="/account/judgeUser.do"
 		class="com.flashcard.control.account.JudgeUserController">
+		<property name="names">
+			<props>
+				<!-- var -->
+				<prop key="username">username</prop>
+				<prop key="valid">valid</prop>
+				<!-- value -->
+				<prop key="true">true</prop>
+				<prop key="false">false</prop>
+			</props>
+		</property>
 	</bean>
 	<bean name="/account/login.do"
 		class="com.flashcard.control.account.LoginController">
-		<property name="addTarget">
+		<property name="targets">
 			<props>
 				<prop key="success">../../index</prop>
 				<prop key="failure">account/loginfailure</prop>
 			</props>
 		</property>
-		<property name="addSession">
+		<property name="names">
 			<props>
-				<prop key="user">user</prop>
-			</props>
-		</property>
-		<property name="addName">
-			<props>
-				<prop key="varDisplayName">displayName</prop>
-				<prop key="valueParamUsername">username</prop>
-				<prop key="valueParamPassword">password</prop>
+				<prop key="username">username</prop>
+				<prop key="password">password</prop>
 			</props>
 		</property>
 	</bean>
 
 	<bean name="/account/register.do"
 		class="com.flashcard.control.account.RegisterController">
-		<property name="addTarget">
+		<property name="targets">
 			<props>
 				<prop key="success">../../login/login</prop>
 				<prop key="failure">account/registerfailure</prop>
 			</props>
 		</property>
-		<property name="addName">
+		<property name="names">
 			<props>
-				<prop key="valueDefaultAuthority">READER,USER</prop>
+				<prop key="username">username</prop>
+				<prop key="displayName">displayName</prop>
+				<prop key="password">password</prop>
+				<prop key="email">email</prop>
+				<prop key="defaultAuthority">READER,USER</prop>
 			</props>
 		</property>
 	</bean>
 
 	<bean name="/account/member.do"
 		class="com.flashcard.control.account.MemberController">
-		<property name="addTarget">
+		<property name="targets">
 			<props>
 				<prop key="target">../../member/member</prop>
 			</props>
 		</property>
-		<property name="addSession">
+		<property name="names">
 			<props>
-				<prop key="user">user</prop>
-			</props>
-		</property>
-		<property name="addName">
-			<props>
-				<prop key="varUsers">users</prop>
-				<prop key="varUserdatas">userdatas</prop>
-				<prop key="varToken">token</prop>
-				<prop key="varMaxData">max</prop>
-				<prop key="varPage">page</prop>
-				<prop key="varIsLast">isLast</prop>
-				<prop key="varIsFirst">isFirst</prop>
-				<prop key="valueTokenUser">user</prop>
-				<prop key="valueTokenAdmin">admin</prop>
-				<prop key="valueMaxPage">5</prop>
+				<prop key="users">users</prop>
+				<prop key="userdatas">userdatas</prop>
+				<prop key="token">token</prop>
+				<prop key="maxData">max</prop>
+				<prop key="page">page</prop>
+				<prop key="isLast">isLast</prop>
+				<prop key="isFirst">isFirst</prop>
+				<prop key="tokenUser">user</prop>
+				<prop key="tokenAdmin">admin</prop>
+				<prop key="maxPage">5</prop>
 			</props>
 		</property>
 	</bean>
 
 	<bean name="/account/editMemberTransit.do"
 		class="com.flashcard.control.account.EditMemberTransitController">
-		<property name="addTarget">
+		<property name="targets">
 			<props>
 				<prop key="target">account/editmember</prop>
 			</props>
@@ -88,22 +91,17 @@
 
 	<bean name="/account/editMember.do"
 		class="com.flashcard.control.account.EditMemberController">
-		<property name="addSession">
+		<property name="targets">
 			<props>
-				<prop key="user">user</prop>
-			</props>
-		</property>
-		<property name="addTarget">
-			<props>
-				<prop key="success">../../member/member</prop>
+				<prop key="success">account/membertransit</prop>
 				<prop key="failure">account/editmemberfailure</prop>
 			</props>
 		</property>
-		<property name="addName">
+		<property name="names">
 			<props>
-				<prop key="varDisplayName">displayName</prop>
-				<prop key="varPassword">password</prop>
-				<prop key="varEmail">email</prop>
+				<prop key="displayName">displayName</prop>
+				<prop key="password">password</prop>
+				<prop key="email">email</prop>
 			</props>
 		</property>
 	</bean>

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.flashcard.factory.Factory;
 import com.flashcard.model.user.User;
 import com.flashcard.security.authority.AdminAuthority;
 import com.flashcard.security.authority.AuthorityFactory;
@@ -38,7 +39,8 @@ public class AuthorityInterceptor extends HandlerInterceptorAdapter {
 		if (sess == null) {
 			return false;
 		} else {
-			User user = (User) sess.getAttribute("user");
+			User user = (User) sess
+					.getAttribute(Factory.getSessionName("user"));
 			return AuthorityFactory.hasKey(user.getAuthority(), "admin",
 					AdminAuthority.USER);
 

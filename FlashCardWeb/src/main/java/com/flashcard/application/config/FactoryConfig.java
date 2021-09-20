@@ -2,6 +2,7 @@ package com.flashcard.application.config;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Properties;
 import java.util.Set;
 
 import org.springframework.stereotype.Component;
@@ -11,6 +12,7 @@ public class FactoryConfig {
 	private String xmlRootReferer;
 	private Set<String> beansXmlRefererSet = new HashSet<>();
 	private String[] beansXmlReferers;
+	private  Properties sessionNames;
 
 	public void setXmlRootReferer(String xmlRootReferer) {
 		this.xmlRootReferer = xmlRootReferer;
@@ -50,5 +52,13 @@ public class FactoryConfig {
 		if (this.beansXmlReferers == null) {
 			this.beansXmlReferers = this.processBeansXmlReferers();
 		}
+	}
+
+	public void setSessionNames(Properties prop) {
+		this.sessionNames = prop;
+	}
+
+	public  String getSessionName(String key) {
+		return this.sessionNames.getProperty(key);
 	}
 }

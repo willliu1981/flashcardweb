@@ -18,27 +18,15 @@
 
 
 	<bean name="/test/test.do" class="test.servlet.TestController">
-		<property name="addTarget">
+		<property name="targets">
 			<props>
 				<prop key="target">../../member/member</prop>
 			</props>
 		</property>
-		<property name="addSession">
+
+		<property name="names">
 			<props>
-				<prop key="user">user</prop>
-			</props>
-		</property>
-		<property name="addName">
-			<props>
-				<prop key="varUsers">users</prop>
-				<prop key="varUserdatas">userdatas</prop>
-				<prop key="varToken">token</prop>
-				<prop key="varPage">page</prop>
-				<prop key="varIsLast">isLast</prop>
-				<prop key="varIsFirst">isFirst</prop>
-				<prop key="valueTokenUser">user</prop>
-				<prop key="valueTokenAdmin">admin</prop>
-				<prop key="valueMaxPage">5</prop>
+
 			</props>
 		</property>
 	</bean>

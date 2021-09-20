@@ -17,6 +17,7 @@ import com.flashcard.dao.user.IUserDao;
 import com.flashcard.dao.user.IUserdataDao;
 import com.flashcard.exception.ResultNullException;
 import com.flashcard.factory.BeanFactory;
+import com.flashcard.factory.Factory;
 import com.flashcard.factory.dao.DaoFactoryType;
 import com.flashcard.model.ModelWrap;
 import com.flashcard.model.UserWrap;
@@ -32,21 +33,20 @@ public class MemberController extends Controller {
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		String page = request.getParameter(name("varPage"));
+		String page = request.getParameter(name("page"));
 		Integer intPage = null;
 		if (page == null) {
 			intPage = 1;
 		} else {
 			intPage = Integer.parseInt(page);
 		}
-		Integer maxPage = Integer.parseInt(name("valueMaxPage"));
+		Integer maxPage = Integer.parseInt(name("maxPage"));
 
 		IUserdataDao<Userdata> dao = (IUserdataDao<Userdata>) BeanFactory
 				.getBean(DaoFactoryType.USERDATADAO);
 
-		User user = null;
-
-		user = (User) request.getSession(false).getAttribute(session("user"));
+		User user = (User) request.getSession(false)
+				.getAttribute(Factory.getSessionName("user"));
 		Userdata data = null;
 
 		try {
@@ -70,12 +70,12 @@ public class MemberController extends Controller {
 					.getBean(DaoFactoryType.USERDATADAO);
 			int maxData = userDao.count();
 			if (Pages.isLast(maxData, intPage, maxPage)) {
-				mv.addObject(name("varIsLast"), true);
+				mv.addObject(name("isLast"), true);
 			} else if (intPage == 1) {
-				mv.addObject(name("varIsFirst"), true);
+				mv.addObject(name("isFirst"), true);
 			} else {
-				mv.addObject(name("varIsLast"), false);
-				mv.addObject(name("varIsFirst"), false);
+				mv.addObject(name("isLast"), false);
+				mv.addObject(name("isFirst"), false);
 			}
 
 			List<User> users = null;
@@ -97,13 +97,13 @@ public class MemberController extends Controller {
 				}
 			});
 
-			mv.addObject(name("varToken"), name("valueTokenAdmin"));
-			mv.addObject(name("varUsers"), users);
-			mv.addObject(name("varUserdatas"), userdatas);
-			mv.addObject(name("varPage"), intPage);
-			mv.addObject(name("varMaxData"), maxData);
+			mv.addObject(name("token"), name("tokenAdmin"));
+			mv.addObject(name("users"), users);
+			mv.addObject(name("userdatas"), userdatas);
+			mv.addObject(name("page"), intPage);
+			mv.addObject(name("maxData"), maxData);
 		} else {
-			mv.addObject(name("varToken"), name("valueTokenUser"));
+			mv.addObject(name("token"), name("tokenUser"));
 		}
 
 		return mv;

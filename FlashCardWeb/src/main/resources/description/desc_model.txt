@@ -1,3 +1,5 @@
+.	class construction 資料夾描畫 重要 class 的結構,使用 FreeMind 軟體開啟
+
 .	word 的 id 以e開頭,表系統的預設id,ex: e1234
 	自訂的詞彙 以 其它開頭並以底線連接序號,ex: cust_1234
 	
