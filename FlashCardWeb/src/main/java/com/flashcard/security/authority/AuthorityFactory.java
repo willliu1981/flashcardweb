@@ -32,11 +32,14 @@ public class AuthorityFactory {
 		return createAuthorityGroup(authority).hasKey(group, matchKey);
 	}
 
-	public static String getGroupName(String name) {
+	public static String getGroupDefinitionOfName(String name) {
 		return groupName.getProperty(name);
 	}
 
 	public void setGroupNames(Properties groupName) {
 		AuthorityFactory.groupName = groupName;
 	}
+	
+
+	
 }

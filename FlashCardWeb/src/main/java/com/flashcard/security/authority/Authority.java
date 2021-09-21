@@ -2,35 +2,33 @@ package com.flashcard.security.authority;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Stream;
 
-import com.flashcard.security.authorization.Authorizations;
+public abstract class Authority<T> {
 
-public abstract class Authority {
+	private Map<String, T> keyMap = new HashMap<>();
 
-	protected Map<String, Integer> keyMap = new HashMap<>();
-
-	protected Authority() {
+	public void init() {
 		setConfig();
 	}
 
-	protected void setKeys(String name, Integer... keys) {
-		this.keyMap.put(name, Authorizations.combineKey(keys));
+	public void put(String key, T t) {
+		this.keyMap.put(key, t);
 	}
 
-	protected void setKeys(String name, String inheritedAuthority,
-			Integer... keys) {
-
-		this.keyMap.put(name,
-				Authorizations.combineKey(Stream
-						.of(Stream.of(this.keyMap.get(inheritedAuthority)),
-								Stream.of(keys))
-						.flatMap(x -> x)
-						.toArray(x -> new Integer[keys.length + 1])));
+	public T get(String key) {
+		return this.keyMap.get(key);
 	}
+
+	abstract protected void setKeys(String name, T... keys);
+
+	abstract protected void setKeys(String name, String inheritedAuthority,
+			T... keys);
 
 	abstract protected void setConfig();
 
-	abstract public Integer getAuthorityKey(String authName);
+	abstract public T getKey(String authName);
+	
+	public abstract boolean hasKey(String authorityName, T matchKey);
+	public abstract boolean hasKey(String authorityName, String matchKey);
 
 }

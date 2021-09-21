@@ -14,6 +14,7 @@ import com.flashcard.control.IController;
 import com.flashcard.factory.Factory;
 import com.flashcard.model.user.User;
 import com.flashcard.security.authority.AdminAuthority;
+import com.flashcard.security.authority.AdminAuthority2;
 import com.flashcard.security.authority.AuthorityFactory;
 
 public class AuthorityInterceptor extends HandlerInterceptorAdapter
@@ -47,10 +48,10 @@ public class AuthorityInterceptor extends HandlerInterceptorAdapter
 			return false;
 		} else {
 			User user = (User) sess
-					.getAttribute(Factory.getSessionName("user"));
-			return AuthorityFactory.key(user.getAuthority(), name("admin"),
-					AdminAuthority.USER);
-
+					.getAttribute(Factory.getSessionDefinitionOfName("user"));
+			return AuthorityFactory.key(user.getAuthority(),
+					AuthorityFactory.getGroupDefinitionOfName("admin"),
+					name("allowedKey"));
 		}
 	}
 

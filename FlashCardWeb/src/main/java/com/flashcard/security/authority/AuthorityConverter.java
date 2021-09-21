@@ -1,19 +1,19 @@
 package com.flashcard.security.authority;
 
 public class AuthorityConverter implements IAuthorityConverter {
-
 	private static Authority adminAuthority;
 	private static Authority userAuthority;
+	private static String separator;
 
 	@Override
 	public AuthorityGroup convertToAuthority(String authority) {
 
-		String[] auths = authority.split(",");
+		String[] auths = authority.split(separator);
 
 		AuthorityGroup group = new AuthorityGroup();
-		group.setGroup(AuthorityFactory.getGroupName("user"), userAuthority,
+		group.setGroup(AuthorityFactory.getGroupDefinitionOfName("user"), userAuthority,
 				auths[0]);
-		group.setGroup(AuthorityFactory.getGroupName("admin"), adminAuthority,
+		group.setGroup(AuthorityFactory.getGroupDefinitionOfName("admin"), adminAuthority,
 				auths[1]);
 
 		return group;
@@ -25,6 +25,10 @@ public class AuthorityConverter implements IAuthorityConverter {
 
 	public void setUserAuthority(Authority userAuthority) {
 		this.userAuthority = userAuthority;
+	}
+
+	public static void setSeparator(String separator) {
+		AuthorityConverter.separator = separator;
 	}
 
 }

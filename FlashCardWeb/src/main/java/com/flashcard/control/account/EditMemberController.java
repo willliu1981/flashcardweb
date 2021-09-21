@@ -29,7 +29,7 @@ public class EditMemberController extends Controller {
 				.getBean(DaoFactoryType.USERDATADAO);
 
 		User user = (User) request.getSession()
-				.getAttribute(Factory.getSessionName("user"));
+				.getAttribute(Factory.getSessionDefinitionOfName("user"));
 		Userdata userdata = userdataDao.queryByID(user.getUserdata_id());
 
 		user.setDisplayName(displayName);
@@ -53,7 +53,7 @@ public class EditMemberController extends Controller {
 
 		ModelAndView mv = new ModelAndView();
 		if (r) {
-			request.getSession().setAttribute(Factory.getSessionName("user"),
+			request.getSession().setAttribute(Factory.getSessionDefinitionOfName("user"),
 					user);
 			mv.setViewName(target("success"));
 		} else {

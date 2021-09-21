@@ -2,7 +2,6 @@ package com.flashcard.security.authority;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
 import com.flashcard.security.authorization.Authorizations;
 
@@ -43,24 +42,31 @@ public class AuthorityGroup {
 		  String matchKey 來自於Authority,ex:AdminAuthority.USER
 		  是AdminAuthorization 的複數keys 組合
 		 */
-		Authority auth = groupMap.get(group).getK();
-		return Authorizations.hasKey(
-				auth.getAuthorityKey(groupMap.get(group).getV()),
-				auth.getAuthorityKey(matchKey));
+		Authority<Integer> auth = groupMap.get(group).getK();
+
+		return auth.hasKey(groupMap.get(group).getV(), matchKey);
 	}
 
 	public boolean hasKey(String group, Integer matchKey) {
 		/*
 		  Integer matchKey 來自於Authorization,ex:AdminAuthorization.CREATE_USER
 		 */
-		Authority auth = groupMap.get(group).getK();
-		return Authorizations.hasKey(
-				auth.getAuthorityKey(groupMap.get(group).getV()), matchKey);
+		Authority<Integer> auth = groupMap.get(group).getK();
+
+		return auth.hasKey(groupMap.get(group).getV(), matchKey);
 	}
 
 	public void setGroup(String groupName, Authority authority, String ownKey) {
 		this.groupMap.put(groupName,
 				new Pair<Authority, String>(authority, ownKey));
+	}
+
+	public String getAuthorityName(String groupName) {
+		return this.groupMap.get(groupName).getV();
+	}
+
+	public Authority getAuthority(String groupName) {
+		return this.groupMap.get(groupName).getK();
 	}
 
 }

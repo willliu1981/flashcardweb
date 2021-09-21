@@ -11,7 +11,7 @@ public class Factory {
 		return AppConfig.config.getThisConfigXml();
 	}
 	
-	public static String getSessionName(String key) {
+	public static String getSessionDefinitionOfName(String key) {
 		return AppConfig.getFactoryConfig().getSessionName(key);
 	}
 }

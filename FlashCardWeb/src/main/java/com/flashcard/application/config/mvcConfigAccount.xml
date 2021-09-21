@@ -58,7 +58,7 @@
 	</bean>
 
 	<bean name="/account/member.do"
-		class="com.flashcard.control.account.MemberController">
+		class="com.flashcard.control.account.MemberController2">
 		<property name="targets">
 			<props>
 				<prop key="target">../../member/member</prop>
@@ -74,7 +74,7 @@
 				<prop key="isLast">isLast</prop>
 				<prop key="isFirst">isFirst</prop>
 				<prop key="tokenUser">user</prop>
-				<prop key="tokenReader">reader</prop>
+				<prop key="tokenReader">read-user</prop>
 				<prop key="tokenEditor">editor</prop>
 				<prop key="tokenAdmin">admin</prop>
 				<prop key="maxPage">5</prop>

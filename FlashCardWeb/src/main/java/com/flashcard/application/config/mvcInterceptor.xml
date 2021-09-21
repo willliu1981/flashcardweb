@@ -18,7 +18,7 @@
 				class="com.flashcard.security.interceptor.AuthorityInterceptor">
 				<property name="names">
 				<props>
-				<prop key="admin">admin</prop>
+				<prop key="allowedKey">read-user</prop>
 				</props>
 				</property>
 			</bean>

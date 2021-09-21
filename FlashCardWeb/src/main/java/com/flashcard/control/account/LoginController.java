@@ -31,7 +31,7 @@ public class LoginController extends Controller {
 		try {
 			valid = (user = dao.identifyUser(username, password)) != null ? true
 					: false;
-			request.getSession().setAttribute(Factory.getSessionName("user") , user);
+			request.getSession().setAttribute(Factory.getSessionDefinitionOfName("user") , user);
 		} catch (ResultNullException | SQLException e) {
 			request.getSession().invalidate();
 			System.out.println(e.getMessage());

@@ -65,7 +65,7 @@
 		<button type="button" id="edit">修改會員資料</button>
 	</fieldset>
 	<br />
-	<c:if test="${token.contains('reader')}">
+	<c:if test="${token.contains('read-user')}">
 		<fieldset>
 			<legend>管理會員資料 (${max }) </legend>
 			<span> <c:if test="${ isFirst!=true}">
@@ -91,7 +91,7 @@
 						<td><c:out value="${users[i].displayName }" /></td>
 						<td><c:out value="${userdatas[i].email }" /></td>
 						<td><c:out value="${users[i].authority }" /></td>
-						<c:if test="${token.contains('editor') }">
+						<c:if test="${token.contains('modify-member-user') }">
 							<td><button type="button" id="editMember">修改</button></td>
 						</c:if>
 					</tr>

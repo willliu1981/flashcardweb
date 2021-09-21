@@ -23,13 +23,14 @@ import com.flashcard.model.ModelWrap;
 import com.flashcard.model.UserWrap;
 import com.flashcard.model.user.User;
 import com.flashcard.model.user.Userdata;
+import com.flashcard.security.authority.Authority;
 import com.flashcard.security.authority.AuthorityConverter;
 import com.flashcard.security.authority.AuthorityFactory;
 import com.flashcard.security.authority.AuthorityGroup;
 import com.flashcard.security.authorization.AdminAuthorization;
 import com.flashcard.tool.Pages;
 
-public class MemberController extends Controller {
+public class MemberController2 extends Controller {
 
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request,
@@ -63,20 +64,9 @@ public class MemberController extends Controller {
 
 		AuthorityGroup group = AuthorityFactory
 				.createAuthorityGroup(user.getAuthority());
-		String token = null;
 		String groupName = AuthorityFactory.getGroupDefinitionOfName("admin");
-		if (group.hasKey(groupName, AdminAuthorization.DELETE_MEMBER_USER)) {
-			token += "," + name("tokenAdmin");
-		}
-		if (group.hasKey(groupName, AdminAuthorization.MODIFY_MEMBER_USER)) {
-			token += "," + name("tokenEditor");
-		}
-		if (group.hasKey(groupName, AdminAuthorization.READ_MEMBER_USER)) {
-			token += "," + name("tokenReader");
-		}
-		if (group.hasKey(groupName, AdminAuthorization.READ_USER)) {
-			token += "," + name("tokenUser");
-		}
+		String authName = group.getAuthorityName(groupName);
+		String token = (String) group.getAuthority(groupName).getKey(authName);
 
 		if (token.contains(name("tokenReader"))) {
 			IUserDao<User> userDao = (IUserDao<User>) BeanFactory
@@ -112,14 +102,12 @@ public class MemberController extends Controller {
 				}
 			});
 
-			mv.addObject(name("token"), token);
 			mv.addObject(name("users"), users);
 			mv.addObject(name("userdatas"), userdatas);
 			mv.addObject(name("page"), intPage);
 			mv.addObject(name("maxData"), maxData);
-		} else {
-			mv.addObject(name("token"), name("tokenUser"));
 		}
+		mv.addObject(name("token"), token);
 
 		return mv;
 	}

@@ -11,5 +11,17 @@ public class UserAuthority extends AuthorityAdapter {
 
 	}
 
+	@Override
+	public boolean hasKey(String authorityName, Integer matchKey) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean hasKey(String authorityName, String matchKey) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 
 }
