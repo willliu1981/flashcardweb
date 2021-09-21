@@ -62,11 +62,8 @@ public class MemberController2 extends Controller {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName(target("target"));
 
-		AuthorityGroup group = AuthorityFactory
-				.createAuthorityGroup(user.getAuthority());
-		String groupName = AuthorityFactory.getGroupDefinitionOfName("admin");
-		String authName = group.getAuthorityName(groupName);
-		String token = (String) group.getAuthority(groupName).getKey(authName);
+		String token = AuthorityFactory.getKey(user.getAuthority(),
+				AuthorityFactory.getGroupDefinitionOfName("admin"));
 
 		if (token.contains(name("tokenReader"))) {
 			IUserDao<User> userDao = (IUserDao<User>) BeanFactory

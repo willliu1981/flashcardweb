@@ -1,8 +1,8 @@
 package com.flashcard.security.authority;
 
 public class AuthorityConverter implements IAuthorityConverter {
-	private static Authority adminAuthority;
-	private static Authority userAuthority;
+	private static Authority<?> adminAuthority;
+	private static Authority<?> userAuthority;
 	private static String separator;
 
 	@Override
@@ -19,11 +19,11 @@ public class AuthorityConverter implements IAuthorityConverter {
 		return group;
 	}
 
-	public void setAdminAuthority(Authority adminAuthority) {
+	public void setAdminAuthority(Authority<?> adminAuthority) {
 		this.adminAuthority = adminAuthority;
 	}
 
-	public void setUserAuthority(Authority userAuthority) {
+	public void setUserAuthority(Authority<?> userAuthority) {
 		this.userAuthority = userAuthority;
 	}
 

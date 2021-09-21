@@ -20,25 +20,22 @@
 
 	<bean id="authorityConverter"
 		class="com.flashcard.security.authority.AuthorityConverter">
-		<property name="adminAuthority" ref="adminAuthority2"></property>
+		<property name="adminAuthority" ref="adminAuthority"></property>
 		<property name="userAuthority" ref="userAuthority"></property>
 		<property name="separator" value="," />
 	</bean>
 
-	<bean id="adminAuthority"
-		class="com.flashcard.security.authority.AdminAuthority"></bean>
+
 	<bean id="userAuthority"
 		class="com.flashcard.security.authority.UserAuthority"></bean>
-
-	<bean id="adminAuthority2"
+	<bean id="adminAuthority"
 		class="com.flashcard.security.authority.AdminAuthority2"
 		init-method="init">
 		<property name="separator" value="," />
-		<property name="authorizationConfig"
-			ref="AdminAuthorization2" />
+		<property name="authorizationConfig" ref="AdminAuthorization" />
 	</bean>
 
-	<bean id="AdminAuthorization2"
+	<bean id="AdminAuthorization"
 		class="com.flashcard.security.authorization.AdminAuthorization2"
 		init-method="init">
 		<property name="keys">

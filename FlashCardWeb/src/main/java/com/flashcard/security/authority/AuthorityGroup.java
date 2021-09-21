@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.flashcard.security.authorization.Authorizations;
 
-public class AuthorityGroup {
+public class AuthorityGroup<T> {
 	private static class Pair<K, V> {
 		private K k;
 		private V v;
@@ -56,7 +56,7 @@ public class AuthorityGroup {
 		return auth.hasKey(groupMap.get(group).getV(), matchKey);
 	}
 
-	public void setGroup(String groupName, Authority authority, String ownKey) {
+	public void setGroup(String groupName, Authority<T> authority, String ownKey) {
 		this.groupMap.put(groupName,
 				new Pair<Authority, String>(authority, ownKey));
 	}
@@ -65,7 +65,7 @@ public class AuthorityGroup {
 		return this.groupMap.get(groupName).getV();
 	}
 
-	public Authority getAuthority(String groupName) {
+	public Authority<T> getAuthority(String groupName) {
 		return this.groupMap.get(groupName).getK();
 	}
 

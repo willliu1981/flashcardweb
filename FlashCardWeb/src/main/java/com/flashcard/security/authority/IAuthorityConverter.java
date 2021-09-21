@@ -1,5 +1,5 @@
 package com.flashcard.security.authority;
 
-public interface IAuthorityConverter {
-	AuthorityGroup convertToAuthority(String authority);
+public interface IAuthorityConverter<T> {
+	AuthorityGroup<T> convertToAuthority(String authority);
 }
