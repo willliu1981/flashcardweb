@@ -22,14 +22,23 @@ public class EditMemberController extends Controller {
 		String displayName = request.getParameter(name("displayName"));
 		String password = request.getParameter(name("password"));
 		String email = request.getParameter(name("email"));
+		boolean isAdmin = Boolean
+				.parseBoolean(request.getParameter(name("isAdmin")));
+		String uid = request.getParameter(name("uid"));
 
 		IUserDao<User> userDao = (IUserDao<User>) BeanFactory
 				.getBean(DaoFactoryType.USERDAO);
 		IUserdataDao<Userdata> userdataDao = (IUserdataDao<Userdata>) BeanFactory
 				.getBean(DaoFactoryType.USERDATADAO);
 
-		User user = (User) request.getSession()
-				.getAttribute(Factory.getSessionDefinitionOfName("user"));
+		User user = null;
+		if (isAdmin) {
+			user = userDao.queryByID(uid);
+		} else {
+			user = (User) request.getSession()
+					.getAttribute(Factory.getSessionDefinitionOfName("user"));
+		}
+
 		Userdata userdata = userdataDao.queryByID(user.getUserdata_id());
 
 		user.setDisplayName(displayName);
@@ -53,8 +62,11 @@ public class EditMemberController extends Controller {
 
 		ModelAndView mv = new ModelAndView();
 		if (r) {
-			request.getSession().setAttribute(Factory.getSessionDefinitionOfName("user"),
-					user);
+
+			if (!isAdmin) {
+				request.getSession().setAttribute(
+						Factory.getSessionDefinitionOfName("user"), user);
+			}
 			mv.setViewName(target("success"));
 		} else {
 			mv.setViewName(target("failure"));

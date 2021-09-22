@@ -89,6 +89,14 @@
 				<prop key="target">account/editmember</prop>
 			</props>
 		</property>
+		<property name="names">
+		<props>
+		<prop key="id">id</prop>
+		<prop key="user">user</prop>
+		<prop key="userdata">data</prop>
+		<prop key="isAdmin">isAdmin</prop>
+		</props>
+		</property>
 	</bean>
 
 	<bean name="/account/editMember.do"
@@ -104,6 +112,8 @@
 				<prop key="displayName">displayName</prop>
 				<prop key="password">password</prop>
 				<prop key="email">email</prop>
+				<prop key="isAdmin">isAdmin</prop>
+				<prop key="uid">id</prop>
 			</props>
 		</property>
 	</bean>

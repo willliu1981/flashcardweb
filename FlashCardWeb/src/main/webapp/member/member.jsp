@@ -6,6 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.admin_member
+</style>
 <script type="text/javascript" language="javascript"
 	src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
@@ -34,6 +37,12 @@
 				.click(
 					function() {
 					  location.href = "${pageContext.request.contextPath}/account/editMemberTransit.do";
+					});
+			$(".admin_member")
+				.click(
+					function(event) {
+					  location.href = "${pageContext.request.contextPath}/account/editMemberTransit.do?id="
+						  + $(event.target).attr("id");
 					});
 		  });
 </script>
@@ -92,7 +101,7 @@
 						<td><c:out value="${userdatas[i].email }" /></td>
 						<td><c:out value="${users[i].authority }" /></td>
 						<c:if test="${token.contains('modify-member-user') }">
-							<td><button type="button" id="editMember">修改</button></td>
+							<td><button class="admin_member" type="button" id="${users[i].u_id}">修改</button></td>
 						</c:if>
 					</tr>
 				</c:forEach>

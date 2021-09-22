@@ -43,7 +43,9 @@
 <body>
 	<fieldset>
 		<legend>修改會員資料</legend>
-		<form action="${pageContext.request.contextPath}/account/editMember.do" method="post">
+		<form
+			action="${pageContext.request.contextPath}/account/editMember.do"
+			method="post">
 			<table>
 				<tr>
 					<td>名稱</td>
@@ -60,6 +62,8 @@
 					<td><input type="text" value="${data.email }" name="email" /></td>
 				</tr>
 			</table>
+			<input type="hidden" name="isAdmin" value="${isAdmin}" />
+			<input type="hidden" name="id" value="${user.u_id}" />
 			<input type="submit" value="確定修改" />
 		</form>
 
