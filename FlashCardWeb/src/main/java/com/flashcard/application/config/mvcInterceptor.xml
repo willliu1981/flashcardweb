@@ -13,12 +13,22 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/account/member.do" />
 			<mvc:mapping path="/account/editMemberTransit.do" />
-			<mvc:mapping path="/account/editMember.do" />
 			<bean
 				class="com.flashcard.security.interceptor.AuthorityInterceptor">
 				<property name="names">
 				<props>
 				<prop key="allowedKey">read-user</prop>
+				</props>
+				</property>
+			</bean>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/account/editMemberWithAdmin.do" />
+			<bean
+				class="com.flashcard.security.interceptor.AuthorityWithAdminInterceptor">
+				<property name="names">
+				<props>
+				<prop key="allowedKey">modify-member-user</prop>
 				</props>
 				</property>
 			</bean>

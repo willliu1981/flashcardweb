@@ -61,10 +61,17 @@
 					<td>Email</td>
 					<td><input type="text" value="${data.email }" name="email" /></td>
 				</tr>
+				<c:if test="${isAdmin==true} }">
+					<tr>
+						<td>權限</td>
+						<td><input type="text" value="${user.authority }"
+							name="authority" /></td>
+					</tr>
+				</c:if>
 			</table>
-			<input type="hidden" name="isAdmin" value="${isAdmin}" />
-			<input type="hidden" name="id" value="${user.u_id}" />
-			<input type="submit" value="確定修改" />
+			<input type="hidden" name="isAdmin" value="${isAdmin}" /> <input
+				type="hidden" name="id" value="${user.u_id}" /> <input
+				type="submit" value="確定修改" />
 		</form>
 
 	</fieldset>

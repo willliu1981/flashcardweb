@@ -17,7 +17,7 @@ import com.flashcard.security.authority.AdminAuthority;
 import com.flashcard.security.authority.AdminAuthority2;
 import com.flashcard.security.authority.AuthorityFactory;
 
-public class AuthorityInterceptor extends HandlerInterceptorAdapter
+public class AuthorityWithAdminInterceptor extends HandlerInterceptorAdapter
 		implements ControllerAdapter {
 
 	private Properties names = new Properties();

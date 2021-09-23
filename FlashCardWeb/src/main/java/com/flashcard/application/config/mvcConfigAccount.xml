@@ -67,7 +67,7 @@
 		<property name="names">
 			<props>
 				<prop key="users">users</prop>
-				<prop key="userdatas">userdatas</prop>
+				<prop key="userdatas">datas</prop>
 				<prop key="token">token</prop>
 				<prop key="maxData">max</prop>
 				<prop key="page">page</prop>
@@ -86,7 +86,8 @@
 		class="com.flashcard.control.account.EditMemberTransitController">
 		<property name="targets">
 			<props>
-				<prop key="target">account/editmember</prop>
+				<prop key="member">account/editmember</prop>
+				<prop key="withAdmin">account/editmemberWithAdmin</prop>
 			</props>
 		</property>
 		<property name="names">
@@ -101,6 +102,25 @@
 
 	<bean name="/account/editMember.do"
 		class="com.flashcard.control.account.EditMemberController">
+		<property name="targets">
+			<props>
+				<prop key="success">account/membertransit</prop>
+				<prop key="failure">account/editmemberfailure</prop>
+			</props>
+		</property>
+		<property name="names">
+			<props>
+				<prop key="displayName">displayName</prop>
+				<prop key="password">password</prop>
+				<prop key="email">email</prop>
+				<prop key="isAdmin">isAdmin</prop>
+				<prop key="uid">id</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean name="/account/editMemberWithAdmin.do"
+		class="com.flashcard.control.account.EditMemberWithAdminController">
 		<property name="targets">
 			<props>
 				<prop key="success">account/membertransit</prop>

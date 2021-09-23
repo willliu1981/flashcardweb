@@ -34,10 +34,11 @@ public class EditMemberTransitController extends Controller {
 			mv.addObject(name("userdata"), userdata);
 
 			mv.addObject(name("isAdmin"), true);
+			//mv.setViewName(target("withAdmin"));
 		} else {
 			mv.addObject(name("isAdmin"), false);
 		}
-		mv.setViewName(target("target"));
+		mv.setViewName(target("member"));
 		return mv;
 	}
 
