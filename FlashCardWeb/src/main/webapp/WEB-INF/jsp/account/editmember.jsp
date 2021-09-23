@@ -9,16 +9,25 @@
 <script type="text/javascript" language="javascript"
 	src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-  $(document).ready(function() {
-	$("#member").click(function() {
-	  var page = parseInt($("#page").val());
-	  location.href = "${pageContext.request.contextPath}/account/member.do";
-	});
+  $(document).ready(
+	  function() {
+		$("#member").click(
+			function() {
+			  var page = parseInt($("#page").val());
+			  location.href = "${pageContext.request.contextPath}"
+				  + "/account/member.do";
+			});
 
-	$("#home").click(function() {
-	  location.href = "${pageContext.request.contextPath}/index.jsp";
-	});
-  });
+		$("#home").click(function() {
+		  location.href = "${pageContext.request.contextPath}/index.jsp";
+		});
+
+		$("#delete").click(
+			function() {
+			  location.href = "${pageContext.request.contextPath}"
+				  + "/account/deleteMember.do?id=" + "${user.u_id}";
+			});
+	  });
 </script>
 </head>
 <body>
@@ -40,9 +49,10 @@
 				</tr>
 				<tr>
 					<td>Email</td>
-					<td><input type="text" value="${data.email }" name="email" /></td>
+					<td><input type="text" id="" value="${data.email }"
+						name="email" /></td>
 				</tr>
-				<c:if test="${isAdmin==true} }">
+				<c:if test="${isAdmin==true}">
 					<tr>
 						<td>權限</td>
 						<td><input type="text" value="${user.authority }"
@@ -52,7 +62,8 @@
 			</table>
 			<input type="hidden" name="isAdmin" value="${isAdmin}" /> <input
 				type="hidden" name="id" value="${user.u_id}" /> <input
-				type="submit" value="確定修改" />
+				type="submit" value="修改資料" /><input type=button id="delete"
+				value="刪除資料" />
 		</form>
 
 	</fieldset>

@@ -1,1 +1,3 @@
 .	權限命名不太恰當,需修改
+.	user 和 userdata 的增刪修需作 Transaction AutoCommit
+.	spring mvc 查,如何派送 view  到 controller

@@ -145,6 +145,21 @@
 			</props>
 		</property>
 	</bean>
+	
+	<bean name="/account/deleteMember.do"
+		class="com.flashcard.control.account.DeleteMemberController">
+		<property name="targets">
+			<props>
+				<prop key="success">account/membertransit</prop>
+				<prop key="failure">account/deletememberfailure</prop>
+			</props>
+		</property>
+		<property name="names">
+			<props>
+				<prop key="uid">id</prop>
+			</props>
+		</property>
+	</bean>
 
 
 </beans>

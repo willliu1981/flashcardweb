@@ -107,7 +107,11 @@ public class UserdataDao implements IUserdataDao<Userdata> {
 
 	@Override
 	public int delete(String id) {
-		// TODO Auto-generated method stub
+		/*
+		 * 無法刪除 userdaat
+		 * 此為連鎖刪除,應由 user dao 刪除 user
+		 */
+
 		return 0;
 	}
 

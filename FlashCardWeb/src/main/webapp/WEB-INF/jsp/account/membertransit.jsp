@@ -8,6 +8,7 @@
 <script type="text/javascript" language="javascript"
 	src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
+	//由於未知如何使用 spring mvc 派送view 到 controller ,因此做個中轉 轉送到 controller
   $(document).ready(function() {
 	location.href = "${pageContext.request.contextPath}/account/member.do";
   });
