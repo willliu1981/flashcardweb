@@ -34,6 +34,11 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                     function() {
                       location.href = "${pageContext.request.contextPath}/login/login.jsp";
                     });
+            $("#logout")
+                .click(
+                    function() {
+                      location.href = "${pageContext.request.contextPath}/account/logout.do";
+                    });
 
             $("#member")
                 .click(
@@ -55,7 +60,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 
 	<c:choose>
 		<c:when test="${not empty user}">
-			${user.displayName}<br/>
+			${user.displayName} 
+			<button type ="button" id="logout" >登出</button>
+			<br/>
 			<button type="button" id="member">查詢會員資料</button>
 		</c:when>
 		<c:otherwise>

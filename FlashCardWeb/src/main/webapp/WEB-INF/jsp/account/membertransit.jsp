@@ -9,7 +9,7 @@
 	src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function() {
-	location.href = "${pageContext.request.contextPath}/account/member.do?";
+	location.href = "${pageContext.request.contextPath}/account/member.do";
   });
 </script>
 </head>

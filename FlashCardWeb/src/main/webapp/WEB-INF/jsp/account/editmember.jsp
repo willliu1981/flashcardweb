@@ -9,35 +9,16 @@
 <script type="text/javascript" language="javascript"
 	src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-  $(document)
-	  .ready(
-		  function() {
-			$("#previous")
-				.click(
-					function() {
-					  var page = parseInt($("#page").val());
-					  location.href = "${pageContext.request.contextPath}/account/member.do?page="
-						  + (page - 1);
-					});
+  $(document).ready(function() {
+	$("#member").click(function() {
+	  var page = parseInt($("#page").val());
+	  location.href = "${pageContext.request.contextPath}/account/member.do";
+	});
 
-			$("#next")
-				.click(
-					function() {
-					  var page = parseInt($("#page").val());
-					  location.href = "${pageContext.request.contextPath}/account/member.do?page="
-						  + (page + 1);
-					});
-			$("#home")
-				.click(
-					function() {
-					  location.href = "${pageContext.request.contextPath}/index.jsp;
-					});
-			$("#edit")
-				.click(
-					function() {
-					  location.href = "${pageContext.request.contextPath}/account/editMemberTransit.do;
-					});
-		  });
+	$("#home").click(function() {
+	  location.href = "${pageContext.request.contextPath}/index.jsp";
+	});
+  });
 </script>
 </head>
 <body>
