@@ -108,7 +108,7 @@ public class UserdataDao implements IUserdataDao<Userdata> {
 	@Override
 	public int delete(String id) {
 		/*
-		 * 無法刪除 userdaat
+		 * 無法刪除 userdata
 		 * 此為連鎖刪除,應由 user dao 刪除 user
 		 */
 
