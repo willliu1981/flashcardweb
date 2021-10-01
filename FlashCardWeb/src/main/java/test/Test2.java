@@ -1,26 +1,27 @@
 package test;
 
-import java.util.ArrayList;
-import java.util.HashSet;
+
+
+
+
 import java.util.List;
-import java.util.Scanner;
-import java.util.stream.Collectors;
+import java.util.Map;
+import java.util.Set;
 
 import org.junit.Test;
 
 public class Test2 {
+	
+	public void TMethod() {
+		
+	}
 
 	@Test
 	public void test() {
-		List<String> list = new ArrayList<>();
-		/*
-		list.add("A");
-		list.add("B");
-		list.add("C");
-		//*/
-		String s = list.stream().findAny().orElse("-");
-
-		System.out.println("xxx " + s);
+		Set s;
+		List ss;
+		Map sss;
+		
 
 	}
 
