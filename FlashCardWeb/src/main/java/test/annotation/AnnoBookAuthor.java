@@ -7,11 +7,10 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface MyAnnotation {
+public @interface AnnoBookAuthor {
 
-	MyType myType();
-	
+	String author();
+	String name() default "null";
+
+
 }
-
-
-
