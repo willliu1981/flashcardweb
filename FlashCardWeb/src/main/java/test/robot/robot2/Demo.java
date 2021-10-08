@@ -1,4 +1,4 @@
-package test.robot;
+package test.robot.robot2;
 
 public class Demo {
 
@@ -10,7 +10,7 @@ public class Demo {
 		RobotDemoView view=new RobotDemoView();
 		view.setVisible(true);
 		robot.setPosition(0, 0);
-		view.setRobot(robot);
+		view.addRobot(robot);
 		view.repaintRobot();
 		
 		

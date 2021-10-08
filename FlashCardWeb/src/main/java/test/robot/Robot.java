@@ -1,6 +1,9 @@
 package test.robot;
 
-public class Robot {
+import java.awt.Point;
+import java.util.List;
+
+public class Robot extends GameObject {
 	String name;
 	Component spine;
 
@@ -18,6 +21,31 @@ public class Robot {
 
 	public void setSpine(Component spine) {
 		this.spine = spine;
+	}
+
+	@Override
+	public Component getComponent() {
+		return this.spine;
+	}
+
+	@Override
+	public Component getSuperComponent() {
+		return this.spine;
+	}
+
+	@Override
+	public List<Component> getAttachs() {
+		return this.spine.getAttachs();
+	}
+
+	@Override
+	public boolean hasChilds() {
+		return this.spine.hasChilds();
+	}
+
+	@Override
+	public Point getAbsolute() {
+		return this.getAbsolute();
 	}
 
 }
