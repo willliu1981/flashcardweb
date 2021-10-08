@@ -1,5 +1,7 @@
 package test.robot.robot2;
 
+import java.awt.Rectangle;
+
 public class RobotFactory {
 
 	static Robot createRobot() {
@@ -39,15 +41,18 @@ public class RobotFactory {
 		lfoot.setName("lfoot");
 		spine.attachComponent(lfoot);
 
-		robot.setComponent(spine);
+		robot.attachComponent(spine);
 		return robot;
 	}
 
-	public static void paintRobot(GameObject robot) {
-		if (robot.getComponent().hasChilds() ) {
-			System.out.println("xxx1 " + robot.getName());
-			//Paints.Paint(robot.getComponent());
-			//paintRobot(robot);
+	public static void paintRobot(Component robot) {
+		if (robot.hasChilds()) {
+			for (Component c : robot.getAttachs()) {
+				System.out.println("xxx " + c.getName());
+				 Rectangle rect=ComponentFactory.getRect(c);
+				 System.out.printf("paints ** %s ,(%s)\n",c.getName(),rect);
+				paintRobot(c);
+			}
 
 		}
 

@@ -40,6 +40,7 @@ public class Component {
 
 	public void attachComponent(Component component) {
 		this.attachments.add(component);
+		component.setSuperComponent(this);
 	}
 
 	public Point getPosition() {
