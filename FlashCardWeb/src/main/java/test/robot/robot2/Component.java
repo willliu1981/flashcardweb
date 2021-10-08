@@ -80,9 +80,10 @@ public class Component {
 	}
 
 	public Point getAbsolute() {
-//		if (this.absolute == null) {
-//			return SceneFactory.getScene().getAbsolute();
-//		}
+		if (this.superAttach == SceneFactory.getScene()) {
+			this.absolute = Points.subtract(SceneFactory.getScene().getAbsolute(),
+					this.position);
+		}
 		return absolute;
 	}
 

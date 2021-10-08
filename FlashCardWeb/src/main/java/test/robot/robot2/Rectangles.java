@@ -9,7 +9,7 @@ public class Rectangles {
 		Rectangle newRect = new Rectangle();
 		Point p = rect.getLocation();
 		newRect.setLocation(Points.add(p, offset));
-		newRect.setSize(newRect.getSize());
+		newRect.setSize(rect.getSize());
 
 		return newRect;
 	}

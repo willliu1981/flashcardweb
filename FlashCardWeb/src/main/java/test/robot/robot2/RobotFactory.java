@@ -6,7 +6,6 @@ public class RobotFactory {
 
 	static Robot createRobot() {
 		Robot robot = new Robot();
-		robot.setName("robot1");
 
 		Component spine = new Component();
 		spine.setName("spine");
@@ -42,15 +41,15 @@ public class RobotFactory {
 		spine.attachComponent(lfoot);
 
 		robot.attachComponent(spine);
+		robot.setSuperComponent(SceneFactory.getScene());
 		return robot;
 	}
 
 	public static void paintRobot(Component robot) {
 		if (robot.hasChilds()) {
 			for (Component c : robot.getAttachs()) {
-				System.out.println("xxx " + c.getName());
-				 Rectangle rect=ComponentFactory.getRect(c);
-				 System.out.printf("paints ** %s ,(%s)\n",c.getName(),rect);
+				Rectangle rect = ComponentFactory.getRect(c);
+				System.out.printf("paints ** %s ,(%s)\n", c.getName(), rect);
 				paintRobot(c);
 			}
 

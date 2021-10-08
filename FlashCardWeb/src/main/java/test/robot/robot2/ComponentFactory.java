@@ -7,7 +7,6 @@ public class ComponentFactory {
 
 	public static Rectangle getRect(Component thisComp) {
 		Point superAbsolute = thisComp.getSuperComponent().getAbsolute();
-		System.out.println("yyyy " + superAbsolute);
 		Point pivotAbsoulte = Points.subtract(superAbsolute, thisComp.getPosition());
 		thisComp.setAbsolute(superAbsolute);
 		Point offset = Points.subtract(thisComp.getRect().getLocation(),

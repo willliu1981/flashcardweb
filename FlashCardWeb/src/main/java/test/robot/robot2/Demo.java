@@ -10,6 +10,7 @@ public class Demo {
 		RobotDemoView view=new RobotDemoView();
 		view.setVisible(true);
 		robot.setPosition(0, 0);
+		robot.setName("robot1");
 		view.addRobot(robot);
 		view.repaintRobot();
 		
