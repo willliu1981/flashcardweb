@@ -58,7 +58,7 @@
 		<property name="names">
 			<props>
 				<prop key="username">username</prop>
-				<prop key="displayName">displayName</prop>
+				<prop key="displayname">displayname</prop>
 				<prop key="password">password</prop>
 				<prop key="email">email</prop>
 				<prop key="defaultAuthority">READER,USER</prop>
