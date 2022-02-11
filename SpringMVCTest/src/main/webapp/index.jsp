@@ -16,6 +16,14 @@
 
 	request.setAttribute("username1", u.getUsername());
 	%>
-	<a href="hello?user=<%=u%>">test spring mvc</a>
+	<a
+		href="hello?username=<%=u.getUsername()%>&password=<%=u.getPassword()%>">test
+		spring mvc</a>
+
+	<form action="hello" method="post">
+	<input type="text" name="username" value="<%=u.getUsername()%>" />
+	<input type="text" name="password" value="<%=u.getPassword()%>" />
+		<input type="submit" value="test"></input>
+	</form>
 </body>
 </html>
