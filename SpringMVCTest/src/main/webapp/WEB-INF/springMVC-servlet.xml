@@ -12,8 +12,7 @@
         http://www.springframework.org/schema/mvc
         https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-	<context:component-scan
-		base-package="idv.kwl.test"></context:component-scan>
+	<context:component-scan base-package="idv.kwl"></context:component-scan>
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
