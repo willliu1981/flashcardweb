@@ -13,15 +13,9 @@ public class TestController {
 
 	@RequestMapping(path = "spring/hello")
 	public String helloTest(String username, String password) {
-		ApplicationContext factory = new ClassPathXmlApplicationContext(
-				"classpath:idv/kwl/springMVC-servlet.xml");
-		factory.getBean("userFactory", UserFactory.class);
-
 		User u = UserFactory.getUser("u_1001");
-		System.out.println("username :" + u.getUsername());
+		System.out.println(TestController.class);
 		System.out.println("user :" + u.toString());
-		System.out.println(TestController.class + ":" + "hello spring mvc test");
-		System.out.println(TestController.class + ":" + username + ":" + password);
 		return "hellospringmvc";
 	}
 

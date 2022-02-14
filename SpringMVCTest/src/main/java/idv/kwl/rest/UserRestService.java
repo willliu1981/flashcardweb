@@ -19,13 +19,8 @@ public class UserRestService {
 	@GET
 	@Produces("text/plain")
 	public String testrest(@PathParam("pid") String pid) {
-		ApplicationContext factory = new ClassPathXmlApplicationContext(
-				"classpath:idv/kwl/springMVC-servlet.xml");
-		factory.getBean("userFactory", UserFactory.class);
-
-		System.out.println("pid :" + pid);
 		User u = UserFactory.getUser(pid);
-		System.out.println("user :" + u.toString());
+		System.out.println("rest test : user =" + u.toString());
 		return "query user =" + u.toString();
 	}
 

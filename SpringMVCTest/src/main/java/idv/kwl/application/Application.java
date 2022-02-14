@@ -13,10 +13,10 @@ public class Application implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
 
-//		ApplicationContext factory = new ClassPathXmlApplicationContext(
-//				"springMVC-servlet.xml");
-//		UserFactory userFactory = (UserFactory) factory.getBean("userFactory");
-//		userFactory.initializeDefaultUsers();
+		ApplicationContext factory = new ClassPathXmlApplicationContext(
+				"classpath:idv/kwl/springmvc/springMVC-servlet.xml");
+		factory.getBean("userFactory");
+
 	}
 
 }

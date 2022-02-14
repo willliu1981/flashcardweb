@@ -10,9 +10,9 @@
 <script type="text/javascript">
   $(document).ready(function() {
 	$("#testajax").click(function() {
-	  alert("start ajax");
+	  var uid = $("#uid").val();
 	  $.ajax({
-		url : "http://localhost:8080/SpringMVCTest/rest/user/u_1001",
+		url : "http://localhost:8080/SpringMVCTest/rest/user/" + uid,
 		type : "GET",
 		dataType : "text",
 		success : function(res) {
@@ -28,10 +28,11 @@
 </head>
 <body>
 	<h1>hello java xxx2</h1>
+	<input type="text" id="uid" value="u_1001" />
 	<button type="button" id="testajax">test ajax</button>
 	<br />
-	<a href="spring/hello?username=admin&password=123456">test
-		spring mvc</a>
+	<a href="spring/hello?username=admin&password=123456">test spring
+		mvc</a>
 
 	<form action="hello" method="post">
 		<input type="text" name="username" value="abc" /> <input type="text"
