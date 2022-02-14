@@ -27,9 +27,13 @@ public class UserFactory {
 				.orElseThrow(RuntimeException::new);
 	}
 
-	public static void Update(String id, User user) {
+	public static void update(String id, User user) {
 		User u = getUser(id);
 		u = user;
+	}
+
+	public static boolean delete(String uid) {
+	return 	defaultUsers.removeIf(x -> x.getUid().equals(uid));
 	}
 
 }

@@ -8,41 +8,58 @@
 <title>Inserttitlehere</title>
 <script src="javascript/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-  $(document).ready(
-	  function() {
-		var uid = $("#uid").val();
-		var name = $("#name").val();
-		var pass = $("#password").val();
-		$("#testajax").click(function() {
-		  $.ajax({
-			url : "http://localhost:8080/SpringMVCTest/rest/user/" + uid,
-			type : "GET",
-			dataType : "text",
-			success : function(res) {
-			  alert(res);
-			},
-			error : function(error) {
-			  console.log(error);
-			}
-		  });
-		});
-
-		$("#testajax2").click(
-			function() {
-			  $.ajax({
-				url : "http://localhost:8080/SpringMVCTest/spring/user?uid="
-					+ uid + "&name=" + name + "&password=" + pass,
-				type : "PUT",
-				dataType : "text",
-				success : function(res) {
-				  alert(res);
-				},
-				error : function(error) {
-				  console.log(error);
-				}
-			  });
-			});
+  $(document).ready(function() {
+	var _uid = $("#uid").val();
+	var _name = $("#name").val();
+	var _pass = $("#password").val();
+	$("#testajaxrestquery").click(function() {
+	  $.ajax({
+		url : "http://localhost:8080/SpringMVCTest/rest/user/" + _uid,
+		type : "GET",
+		dataType : "text",
+		success : function(res) {
+		  alert(res);
+		},
+		error : function(error) {
+		  console.log(error);
+		}
 	  });
+	});
+
+	$("#testajaxput").click(function() {
+	  $.ajax({
+		url : "spring/user",
+		data : JSON.stringify({
+		  "uid" : _uid,
+		  "name" : _name,
+		  "password" : _pass
+		}),
+		type : "PUT",
+		dataType : "json",
+		success : function(res) {
+		  alert(res);
+		},
+		error : function(error) {
+		  console.log(error);
+		}
+	  });
+	});
+
+	$("#testajaxdelete").click(function() {
+	  $.ajax({
+		url : "spring/user",
+		data : _uid,
+		type : "DELETE",
+		dataType : "text",
+		success : function(res) {
+		  alert(res);
+		},
+		error : function(error) {
+		  console.log(error);
+		}
+	  });
+	});
+  });
 </script>
 </head>
 <body>
@@ -54,9 +71,11 @@
 	</br> password
 	<input type="text" id="password" value="kw123456" />
 	</br>
-	<button type="button" id="testajax">test ajax</button>
+	<button type="button" id="testajaxrestquery">test rest query</button>
 	<br />
-	<button type="button" id="testajax2">test ajax 2</button>
+	<button type="button" id="testajaxput">test sprint put</button>
+	<br />
+	<button type="button" id="testajaxdelete">test sprint delete</button>
 	<br />
 	<a href="spring/hello?username=admin&password=123456">test spring
 		mvc</a>
