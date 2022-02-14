@@ -1,7 +1,7 @@
 package idv.kwl.model;
 
 public class User {
-	private String id;
+	private String uid;
 	private String name;
 	private String username;
 	private String password;
@@ -22,12 +22,12 @@ public class User {
 		this.password = password;
 	}
 
-	public String getId() {
-		return id;
+	public String getUid() {
+		return uid;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setUid(String id) {
+		this.uid = id;
 	}
 
 	public String getName() {
@@ -40,7 +40,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", username=" + username
+		return "User [id=" + uid + ", name=" + name + ", username=" + username
 				+ ", password=" + password + "]";
 	}
 

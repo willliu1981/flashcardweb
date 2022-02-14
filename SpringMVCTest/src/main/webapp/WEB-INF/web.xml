@@ -9,12 +9,6 @@
 	</welcome-file-list>
 
 
-<!--  
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:idv/kwl/springMVC-servlet.xml</param-value>
-	</context-param>
--->
 
 	<servlet>
 		<servlet-name>springMVC</servlet-name>
@@ -27,7 +21,10 @@
 	</servlet>
 
 
-
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.js</url-pattern>
+	</servlet-mapping>
 
 
 	<servlet-mapping>
@@ -39,11 +36,7 @@
 		<listener-class>idv.kwl.application.Application</listener-class>
 	</listener>
 
-<!--  
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
--->
+
 
 
 

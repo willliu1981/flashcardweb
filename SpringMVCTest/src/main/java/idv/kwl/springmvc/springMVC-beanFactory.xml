@@ -12,15 +12,13 @@
         http://www.springframework.org/schema/mvc
         https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
+
 	<context:component-scan base-package="idv.kwl"></context:component-scan>
 
 
-	<bean id="viewResolver"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/view/"></property>
-		<property name="suffix" value=".jsp"></property>
+	<bean id="userFactory" class="idv.kwl.model.UserFactory"
+		init-method="initializeDefaultUsers">
 	</bean>
-
 
 
 

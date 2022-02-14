@@ -14,7 +14,7 @@ public class Application implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent sce) {
 
 		ApplicationContext factory = new ClassPathXmlApplicationContext(
-				"classpath:idv/kwl/springmvc/springMVC-servlet.xml");
+				"classpath:idv/kwl/springmvc/springMVC-beanFactory.xml");
 		factory.getBean("userFactory");
 
 	}
