@@ -6,6 +6,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 import idv.kwl.model.User;
@@ -18,11 +19,9 @@ public class UserRestService {
 	@GET
 	@Produces("text/plain")
 	public String testrest(@PathParam("pid") String pid) {
-		ApplicationContext factory = new FileSystemXmlApplicationContext(
-				"SpringMVCTest/WEB-INF/springMVC-servlet.xml");
-//		ApplicationContext factory = new ClassPathXmlApplicationContext(
-//				"webRoot/WEB-INF/springMVC-servlet.xml");
-		factory.getBean("userFactory");
+		ApplicationContext factory = new ClassPathXmlApplicationContext(
+				"classpath:idv/kwl/springMVC-servlet.xml");
+		factory.getBean("userFactory", UserFactory.class);
 
 		System.out.println("pid :" + pid);
 		User u = UserFactory.getUser(pid);

@@ -30,7 +30,7 @@
 	<h1>hello java xxx2</h1>
 	<button type="button" id="testajax">test ajax</button>
 	<br />
-	<a href="spring/hello.do?username=admin&password=123456">test
+	<a href="spring/hello?username=admin&password=123456">test
 		spring mvc</a>
 
 	<form action="hello" method="post">
