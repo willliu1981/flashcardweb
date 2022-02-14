@@ -11,11 +11,12 @@ import idv.kwl.model.UserFactory;
 @Controller
 public class TestController {
 
-	@RequestMapping(path = "spring/hello")
+	@RequestMapping(path = "spring/hello.do")
 	public String helloTest(String username, String password) {
+		System.out.println("user :" + "xxx");
 		ApplicationContext factory = new ClassPathXmlApplicationContext(
 				"classpath:idv/kwl/springMVC_servlet.xml");
-		factory.getBean("userFactory");
+		factory.getBean("userFactory", UserFactory.class);
 
 		User u = UserFactory.getUser("u_1001");
 		System.out.println("username :" + u.getUsername());

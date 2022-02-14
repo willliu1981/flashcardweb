@@ -12,9 +12,10 @@
         http://www.springframework.org/schema/mvc
         https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-	<!-- 搭配 mvc:resources 使用 -->
+	<!-- 搭配 mvc:resources 使用 
 	<mvc:annotation-driven />
 	<mvc:resources location="/js/" mapping="/js/**" />
+-->
 
 	<context:component-scan base-package="idv.kwl"></context:component-scan>
 

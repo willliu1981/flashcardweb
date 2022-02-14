@@ -15,10 +15,10 @@
 	<context:component-scan base-package="idv.kwl"></context:component-scan>
 	
 	<!-- 搭配 mvc:resources 使用 -->
-	<!--  -->
+	<!-- 
 	<mvc:annotation-driven />
-	<mvc:resources location="/js/" mapping="/js/**" />
-
+	<mvc:resources location="/resources/" mapping="/js/**" />
+ -->
 
 
 

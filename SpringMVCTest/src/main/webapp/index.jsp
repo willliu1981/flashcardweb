@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Inserttitlehere</title>
-<script src="js/jquery-3.6.0.min.js"></script>
+<script src="javascript/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function() {
 	$("#testajax").click(function() {
@@ -30,8 +30,8 @@
 	<h1>hello java xxx2</h1>
 	<button type="button" id="testajax">test ajax</button>
 	<br />
-	<a href="spring/hello?username=admin&password=123456">test spring
-		mvc</a>
+	<a href="spring/hello.do?username=admin&password=123456">test
+		spring mvc</a>
 
 	<form action="hello" method="post">
 		<input type="text" name="username" value="abc" /> <input type="text"
