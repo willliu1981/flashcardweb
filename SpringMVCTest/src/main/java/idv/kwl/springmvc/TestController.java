@@ -1,16 +1,25 @@
 package idv.kwl.springmvc;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import idv.kwl.model.User;
+import idv.kwl.model.UserFactory;
 
 @Controller
 public class TestController {
 
 	@RequestMapping(path = "spring/hello")
 	public String helloTest(String username, String password) {
+		ApplicationContext factory = new ClassPathXmlApplicationContext(
+				"classpath:idv/kwl/springMVC_servlet.xml");
+		factory.getBean("userFactory");
+
+		User u = UserFactory.getUser("u_1001");
+		System.out.println("username :" + u.getUsername());
+		System.out.println("user :" + u.toString());
 		System.out.println(TestController.class + ":" + "hello spring mvc test");
 		System.out.println(TestController.class + ":" + username + ":" + password);
 		return "hellospringmvc";

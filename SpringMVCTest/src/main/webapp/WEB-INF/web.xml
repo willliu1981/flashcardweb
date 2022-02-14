@@ -16,6 +16,17 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 	</servlet>
 
+
+
+
+<!-- 與 springMVC-servlet.xml 的 mvc:resources 擇一使用  -->
+<!--  	
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.js</url-pattern>
+	</servlet-mapping>
+-->
+
 	<servlet-mapping>
 		<servlet-name>springMVC</servlet-name>
 		<url-pattern>/</url-pattern>
@@ -24,7 +35,8 @@
 
 
 
-
-
+	<listener>
+		<listener-class>idv.kwl.application.Application</listener-class>
+	</listener>
 
 </web-app>

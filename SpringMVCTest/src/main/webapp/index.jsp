@@ -5,11 +5,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Inserttitlehere</title>
+<script src="js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+	$("#testajax").click(function() {
+	  alert("start ajax");
+	  $.ajax({
+		url : "http://localhost:8080/SpringMVCTest/rest/user/u_1001",
+		type : "GET",
+		dataType : "text",
+		success : function(res) {
+		  alert(res);
+		},
+		error : function(error) {
+		  console.log(error);
+		}
+	  });
+	});
+  });
+</script>
 </head>
 <body>
 	<h1>hello java xxx2</h1>
-
+	<button type="button" id="testajax">test ajax</button>
+	<br />
 	<a href="spring/hello?username=admin&password=123456">test spring
 		mvc</a>
 
