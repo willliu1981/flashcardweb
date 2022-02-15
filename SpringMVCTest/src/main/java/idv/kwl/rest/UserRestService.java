@@ -19,7 +19,7 @@ public class UserRestService {
 	@GET
 	@Produces("text/plain")
 	public String testrest(@PathParam("pid") String pid) {
-		User u = UserFactory.getUser(pid);
+		User u = UserFactory.getUserByID(pid);
 		System.out.println("rest test : user =" + u.toString());
 		return "query user =" + u.toString();
 	}

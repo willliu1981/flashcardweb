@@ -64,6 +64,8 @@
 </head>
 <body>
 	<h1>hello java xxx2</h1>
+
+	<a href="spring/hello">spring get all</a>
 	</br> id
 	<input type="text" id="uid" value="u_1001" />
 	</br> name
@@ -80,9 +82,15 @@
 	<a href="spring/hello?username=admin&password=123456">test spring
 		mvc</a>
 
-	<form action="hello" method="post">
-		<input type="text" name="username" value="abc" /> <input type="text"
-			name="password" value="123" /> <input type="submit" value="test"></input>
+	<form action="spring/hello" method="post">
+		<input type="text" name="username" value="abc" />
+		<input type="text" name="password" value="123" />
+		<input type="submit" value="test"></input>
+	</form>
+	<form action="spring/hello/u_1003" method="post">
+		<input type="text" name="username" value="Peter" />
+		<input type="text" name="password" value="p1234" />
+		<input type="submit" value="test"></input>
 	</form>
 </body>
 </html>

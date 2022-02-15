@@ -2,6 +2,7 @@ package idv.kwl.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class UserFactory {
 	private static List<User> defaultUsers = new ArrayList<>();
@@ -22,18 +23,58 @@ public class UserFactory {
 		defaultUsers.add(u2);
 	}
 
-	public static User getUser(String id) {
+	public static User login(String username, String password) {
+		Optional<User> userOP = defaultUsers.stream()
+				.filter(x -> x.getUsername().equals(username)
+						&& x.getPassword().equals(password))
+				.findFirst();
+		if (userOP.isPresent()) {
+			return userOP.get();
+		}
+		return null;
+	}
+
+	public static boolean add(User user) {
+		boolean res = true;
+		try {
+			getUserByID(user.getUid());
+			res = false;
+		} catch (RuntimeException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			getUserByUsername(user.getUsername());
+			res = false;
+		} catch (RuntimeException e) {
+			System.out.println(e.getMessage());
+		}
+		if (res) {
+			defaultUsers.add(user);
+		}
+		return res;
+	}
+
+	public static User getUserByID(String id) {
 		return defaultUsers.stream().filter(x -> x.getUid().equals(id)).findFirst()
 				.orElseThrow(RuntimeException::new);
 	}
 
+	public static User getUserByUsername(String username) {
+		return defaultUsers.stream().filter(x -> x.getUsername().equals(username))
+				.findFirst().orElseThrow(RuntimeException::new);
+	}
+
 	public static void update(String id, User user) {
-		User u = getUser(id);
+		User u = getUserByID(id);
 		u = user;
 	}
 
 	public static boolean delete(String uid) {
-	return 	defaultUsers.removeIf(x -> x.getUid().equals(uid));
+		return defaultUsers.removeIf(x -> x.getUid().equals(uid));
+	}
+	
+	public static List<User>  getAll(){
+		return defaultUsers;
 	}
 
 }
