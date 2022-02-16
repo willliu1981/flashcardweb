@@ -20,7 +20,7 @@ public abstract class Process<T> implements IProcess<T> {
 		}
 	}
 
-	public <T extends IProcess> T create(ProcessorBuilder builder) {
+	public <T extends IProcess> T create(ProcessBuilder builder) {
 
 		return null;
 	}

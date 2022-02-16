@@ -13,8 +13,8 @@ public class UserFactory {
 		u1.setName("Kevin");
 		u1.setUsername("k1001");
 		u1.setPassword("k1234");
-		u1.setAge(22);
-		u1.setMoney(8000);
+		u1.setAge(52);
+		u1.setMoney(8000000);
 		defaultUsers.add(u1);
 
 		User u2 = new User();
@@ -23,7 +23,7 @@ public class UserFactory {
 		u2.setUsername("j1002");
 		u2.setPassword("j1234");
 		u2.setAge(26);
-		u2.setMoney(7000);
+		u2.setMoney(1700000);
 		defaultUsers.add(u2);
 
 		User u3 = new User();

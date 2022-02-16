@@ -1,5 +1,7 @@
 package responsibilitytest.process;
 
+import responsibilitytest.process.ProcessBuilder.Processor;
+
 public interface IProcess<T> {
 	boolean process(T t);
 
@@ -8,4 +10,6 @@ public interface IProcess<T> {
 	IProcess getNextProcess();
 	
 	void loopProcess(T t);
+	
+	 void setProcessor(Processor<?> processor) ;
 }

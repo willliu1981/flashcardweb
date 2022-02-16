@@ -1,21 +1,25 @@
 package responsibilitytest.concrete;
 
 import idv.kwl.model.User;
+import responsibilitytest.concrete.UserProcessor.State;
 import responsibilitytest.process.Process;
+import responsibilitytest.process.ProcessBuilder.Processor;
 
 public abstract class UserProcess extends Process<User> {
-	enum State {
-		YoungRich, ElderRich, Default
-	}
 
-	private static State state;
+	private UserProcessor processor;
 
 	protected void setState(State state) {
-		UserProcess.state = state;
+		processor.setState(state);
 	}
 
 	protected State getState() {
-		return UserProcess.state;
+		return processor.getState();
+	}
+
+	@Override
+	public void setProcessor(Processor<?> processor) {
+		this.processor = (UserProcessor) processor;
 	}
 
 }

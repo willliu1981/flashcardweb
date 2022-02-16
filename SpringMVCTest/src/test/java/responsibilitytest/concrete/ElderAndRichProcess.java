@@ -1,6 +1,7 @@
 package responsibilitytest.concrete;
 
 import idv.kwl.model.User;
+import responsibilitytest.concrete.UserProcessor.State;
 
 public class ElderAndRichProcess extends UserProcess {
 

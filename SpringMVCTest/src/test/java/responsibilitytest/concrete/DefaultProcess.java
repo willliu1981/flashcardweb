@@ -1,7 +1,7 @@
 package responsibilitytest.concrete;
 
 import idv.kwl.model.User;
-import responsibilitytest.process.IProcess;
+import responsibilitytest.concrete.UserProcessor.State;
 
 public class DefaultProcess extends UserProcess {
 
