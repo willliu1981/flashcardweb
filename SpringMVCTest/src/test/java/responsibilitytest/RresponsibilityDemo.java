@@ -21,7 +21,7 @@ public class RresponsibilityDemo {
 		UserProcessor processor = new UserProcessor(builder);
 
 		UserFactory.initializeDefaultUsers();
-		User user = UserFactory.getUserByID("u_1001");
+		User user = UserFactory.getUserByID("u_1002");
 
 		processor.process(user);
 

@@ -139,130 +139,120 @@
     <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="19">    
-    <bendpoint x="838" y="545"/>    
-    <bendpoint x="801" y="322"/>    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="10"/>  
-  </dependency>  
-  <association id="20">    
+  <association id="19">    
     <bendpoint x="643" y="801"/>    
     <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="21" name="state"/>      
-      <multiplicity id="22" minimum="0" maximum="1"/>    
+      <attribute id="20" name="state"/>      
+      <multiplicity id="21" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="11" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="23">    
+  <dependency id="22">    
     <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="11"/>  
   </dependency>  
-  <dependency id="24">    
+  <dependency id="23">    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="6"/>  
   </dependency>  
-  <association id="25">    
+  <association id="24">    
     <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="26" name="process"/>      
-      <multiplicity id="27" minimum="0" maximum="1"/>    
+      <attribute id="25" name="process"/>      
+      <multiplicity id="26" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="28">    
+  <dependency id="27">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="11"/>  
   </dependency>  
-  <association id="29">    
+  <association id="28">    
     <bendpoint x="887" y="208"/>    
     <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="30" name="nextProcess"/>      
-      <multiplicity id="31" minimum="0" maximum="1"/>    
+      <attribute id="29" name="nextProcess"/>      
+      <multiplicity id="30" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <nesting id="32">    
+  <nesting id="31">    
     <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="8"/>  
   </nesting>  
-  <generalization id="33">    
+  <generalization id="32">    
     <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="2"/>  
   </generalization>  
-  <generalization id="34">    
+  <generalization id="33">    
     <end type="SOURCE" refId="12"/>    
     <end type="TARGET" refId="7"/>  
   </generalization>  
-  <dependency id="35">    
+  <dependency id="34">    
     <bendpoint x="495" y="1082"/>    
     <bendpoint x="780" y="1022"/>    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="4"/>  
   </dependency>  
-  <dependency id="36">    
+  <dependency id="35">    
     <bendpoint x="508" y="1057"/>    
     <bendpoint x="740" y="1011"/>    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="3"/>  
   </dependency>  
-  <dependency id="37">    
+  <dependency id="36">    
     <end type="SOURCE" refId="12"/>    
     <end type="TARGET" refId="6"/>  
   </dependency>  
-  <association id="38">    
+  <association id="37">    
     <bendpoint x="416" y="231"/>    
     <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="39" name="firstProcess"/>      
-      <multiplicity id="40" minimum="0" maximum="1"/>    
+      <attribute id="38" name="firstProcess"/>      
+      <multiplicity id="39" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="41">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="8"/>  
-  </dependency>  
-  <dependency id="42">    
+  <dependency id="40">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="11"/>  
   </dependency>  
-  <generalization id="43">    
+  <generalization id="41">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="2"/>  
   </generalization>  
-  <generalization id="44">    
+  <generalization id="42">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="9"/>  
   </generalization>  
-  <dependency id="45">    
+  <dependency id="43">    
     <bendpoint x="483" y="1095"/>    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="5"/>  
   </dependency>  
-  <dependency id="46">    
+  <dependency id="44">    
     <end type="SOURCE" refId="10"/>    
     <end type="TARGET" refId="7"/>  
   </dependency>  
-  <dependency id="47">    
+  <dependency id="45">    
     <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="11"/>  
   </dependency>  
-  <dependency id="48">    
+  <dependency id="46">    
     <bendpoint x="257" y="675"/>    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="11"/>  
   </dependency>  
-  <generalization id="49">    
+  <generalization id="47">    
     <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="2"/>  
   </generalization>  
-  <nesting id="50">    
+  <nesting id="48">    
     <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="7"/>  
   </nesting>  
-  <dependency id="51">    
+  <dependency id="49">    
     <end type="SOURCE" refId="8"/>    
     <end type="TARGET" refId="10"/>  
   </dependency>  

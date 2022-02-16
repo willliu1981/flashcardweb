@@ -1,19 +1,32 @@
 package responsibilitytest.process;
 
+import responsibilitytest.process.ProcessBuilder.Processors;
+
 public class ProcessBuilder {
 	public static class Processor<T> {
 		private IProcess<T, Processor<T>> process;
+		private Object object;
+
+		public Object getObject() {
+			return object;
+		}
+
+		public void setObject(Object object) {
+			this.object = object;
+		}
 
 		public Processor(ProcessBuilder builder) {
 			this.setProcess(builder.firstProcess);
+			Processors.setProcessor(this.getProcess(), this);
 		}
 
 		private void setProcess(IProcess<T, Processor<T>> process) {
 			this.process = process;
 		}
 
-		public void process(T t) {
+		public Object process(T t) {
 			process.loopProcess(t);
+			return this.object;
 		}
 
 		protected IProcess<T, Processor<T>> getProcess() {

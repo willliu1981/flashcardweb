@@ -15,8 +15,6 @@ public class UserProcessor extends Processor<User> {
 
 	public UserProcessor(ProcessBuilder builder) {
 		super(builder);
-
-		Processors.setProcessor(this.getProcess(), this);
 	}
 
 	public void setState(State state) {
