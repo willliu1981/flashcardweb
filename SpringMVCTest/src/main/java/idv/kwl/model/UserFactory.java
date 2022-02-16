@@ -13,6 +13,8 @@ public class UserFactory {
 		u1.setName("Kevin");
 		u1.setUsername("k1001");
 		u1.setPassword("k1234");
+		u1.setAge(22);
+		u1.setMoney(8000);
 		defaultUsers.add(u1);
 
 		User u2 = new User();
@@ -20,7 +22,27 @@ public class UserFactory {
 		u2.setName("John");
 		u2.setUsername("j1002");
 		u2.setPassword("j1234");
+		u2.setAge(26);
+		u2.setMoney(7000);
 		defaultUsers.add(u2);
+
+		User u3 = new User();
+		u3.setUid("u_1011");
+		u3.setName("John11");
+		u3.setUsername("j1011");
+		u3.setPassword("j1234");
+		u3.setAge(25);
+		u3.setMoney(12000);
+		defaultUsers.add(u3);
+
+		User u4 = new User();
+		u4.setUid("u_1012");
+		u4.setName("John12");
+		u4.setUsername("j1014");
+		u4.setPassword("j1234");
+		u4.setAge(23);
+		u4.setMoney(13500);
+		defaultUsers.add(u4);
 	}
 
 	public static User login(String username, String password) {
@@ -72,8 +94,8 @@ public class UserFactory {
 	public static boolean delete(String uid) {
 		return defaultUsers.removeIf(x -> x.getUid().equals(uid));
 	}
-	
-	public static List<User>  getAll(){
+
+	public static List<User> getAll() {
 		return defaultUsers;
 	}
 

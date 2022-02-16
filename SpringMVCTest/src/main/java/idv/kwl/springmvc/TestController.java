@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 
 import com.google.gson.Gson;
 
@@ -22,7 +23,7 @@ public class TestController {
 	}
 
 	@RequestMapping(path = "hello/{un}/{pw}")
-	public @ResponseBody String helloTest(@PathVariable("un") String username,
+	public @ResponseBody String helloLogin(@PathVariable("un") String username,
 			@PathVariable("pw") String password) {
 		User u = UserFactory.login(username, password);
 		System.out.println(TestController.class);
@@ -42,6 +43,22 @@ public class TestController {
 		boolean res = UserFactory.add(u);
 		System.out.println("user :" + u.toString());
 		return "spring add: " + u.toString() + " res=" + res;
+	}
+
+	@RequestMapping(path = "hello/{key}/{key2}/{key3}", method = RequestMethod.DELETE)
+	public @ResponseBody String springDelete(@PathVariable("key") String key,
+			@PathVariable("key2") String key2, @PathVariable("key3") String key3,
+			String id) {
+		HiddenHttpMethodFilter f;
+		System.out.println("spring delete key :" + key);
+		System.out.println("spring delete key2 :" + key2);
+		System.out.println("spring delete key3 :" + key3);
+		boolean res = UserFactory.delete(id);
+		if (res) {
+			System.out.println(TestController.class + ":" + id + " deleted");
+			return "Delete success";
+		}
+		return "Delete error";
 	}
 
 	@RequestMapping(value = "user", method = RequestMethod.PUT)

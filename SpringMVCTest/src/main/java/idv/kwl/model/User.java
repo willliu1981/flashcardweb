@@ -7,7 +7,33 @@ public class User implements Serializable {
 	private String name;
 	private String username;
 	private String password;
-	
+	private Address address;
+	private int age;
+	private int money;
+
+	public int getMoney() {
+		return money;
+	}
+
+	public void setMoney(int money) {
+		this.money = money;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 
 	public String getUsername() {
 		return username;
@@ -43,8 +69,8 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return "User [id=" + uid + ", name=" + name + ", username=" + username
-				+ ", password=" + password + "]";
+		return "User [uid=" + uid + ", name=" + name + ", username=" + username
+				+ ", password=" + password + ", address=" + address + "]";
 	}
 
 }

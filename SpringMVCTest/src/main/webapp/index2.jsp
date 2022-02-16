@@ -65,37 +65,19 @@
 <body>
 	<h1>hello java xxx2</h1>
 
-	<a href="spring/hello">spring get all</a>
+	<a href="spring2/test3?name=Ken&password=123&name=David">spring get
+		all</a>
 	</br> id
-	<input type="text" id="uid" value="u_1001" />
-	</br> name
-	<input type="text" id="name" value="Kevin Wu" />
-	</br> password
-	<input type="text" id="password" value="kw123456" />
-	</br>
-	<button type="button" id="testajaxrestquery">test rest query</button>
-	<br />
-	<button type="button" id="testajaxput">test sprint put</button>
-	<br />
-	<button type="button" id="testajaxdelete">test sprint delete</button>
-	<br />
-	<a href="spring/hello?username=admin&password=123456">test spring
-		mvc</a>
 
-	<form action="spring/hello" method="post">
-		<input type="text" name="username" value="abc" />
-		<input type="text" name="password" value="123" />
-		<input type="submit" value="test"></input>
-	</form>
-	<form action="spring/hello/u_1003" method="post">
-		<input type="text" name="username" value="Peter" />
-		<input type="text" name="password" value="p1234" />
-		<input type="submit" value="add u_1003"></input>
-	</form>
-	<form action="spring/hello/default/default/default" method="post">
-		<input type="text" name="id" value="u_1003" />
-		<input type="hidden" name="_method" value="DELETe" />
-		<input type="submit" value="spring delete"></input>
+	<form action="spring2/test4" method="post">
+		<input type="text" name="uid" value="u_1004" />
+		<input type="text" name="name" value="Lili" />
+		<input type="text" name="username" value="l123456" />
+		<input type="text" name="password" value="li1234" />
+		<input type="text" name="address.address1" value="ilan1" />
+		<input type="text" name="address.address2" value="ilan2" />
+
+		<input type="submit" value="spring create"></input>
 	</form>
 </body>
 </html>
