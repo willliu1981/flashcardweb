@@ -1,15 +1,28 @@
 package responsibilitytest.process;
 
-public abstract class Process<T> implements IProcess<T> {
-	private IProcess nextProcess;
+import responsibilitytest.process.ProcessBuilder.Processor;
+
+public abstract class Process<T, E extends Processor<T>> implements IProcess<T, E> {
+	private IProcess<T, E> nextProcess;
+	private E processor;
 
 	@Override
-	public void setNextProcess(IProcess processor) {
+	public void setProcessor(E processor) {
+		this.processor = processor;
+	}
+
+	@Override
+	public E getProcessor() {
+		return this.processor;
+	}
+
+	@Override
+	public void setNextProcess(IProcess<T, E> processor) {
 		this.nextProcess = processor;
 	}
 
 	@Override
-	public IProcess getNextProcess() {
+	public IProcess<T, E> getNextProcess() {
 		return this.nextProcess;
 	}
 
@@ -18,11 +31,6 @@ public abstract class Process<T> implements IProcess<T> {
 		if (!this.process(t)) {
 			this.nextProcess.loopProcess(t);
 		}
-	}
-
-	public <T extends IProcess> T create(ProcessBuilder builder) {
-
-		return null;
 	}
 
 }

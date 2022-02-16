@@ -2,14 +2,16 @@ package responsibilitytest.process;
 
 import responsibilitytest.process.ProcessBuilder.Processor;
 
-public interface IProcess<T> {
+public interface IProcess<T, E extends Processor<T>> {
 	boolean process(T t);
 
-	void setNextProcess(IProcess process);
+	void setNextProcess(IProcess<T, E> process);
 
-	IProcess getNextProcess();
-	
+	IProcess<T, E> getNextProcess();
+
 	void loopProcess(T t);
-	
-	 void setProcessor(Processor<?> processor) ;
+
+	void setProcessor(E processor);
+
+	E getProcessor();
 }

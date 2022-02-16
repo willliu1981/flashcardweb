@@ -10,24 +10,12 @@ import responsibilitytest.concrete.user.YoungAndRichProcess;
 import responsibilitytest.concrete.user.UserProcessor.State;
 import responsibilitytest.process.ProcessBuilder;
 
-public class RresponsibilityDemo {
+public class RresponsibilityDemo2 {
 
 	public static void main(String[] args) {
 
-		ProcessBuilder builder = ProcessBuilder.instance();
-		builder.addProcess(new YoungAndRichProcess())
-				.addProcess(new ElderAndRichProcess()).addProcess(new DefaultProcess());
 
-		UserProcessor processor = new UserProcessor(builder);
 
-		UserFactory.initializeDefaultUsers();
-		User user = UserFactory.getUserByID("u_1001");
-
-		processor.process(user);
-
-		State state = processor.getState();
-
-		System.out.println(state);
 
 	}
 

@@ -1,4 +1,4 @@
-package responsibilitytest.concrete;
+package responsibilitytest.concrete.user;
 
 import idv.kwl.model.User;
 import responsibilitytest.process.ProcessBuilder;
