@@ -13,8 +13,19 @@
         http://www.springframework.org/schema/mvc
         https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-	<context:component-scan base-package="idv.kwl"></context:component-scan>
+<!--  
+	<mvc:annotation-driven />
 	<context:annotation-config />
+	-->
+	
+	 <!-- Spring MVC不處理靜態資源 -->
+	 <!--  
+	<mvc:default-servlet-handler />
+-->
+
+	<context:component-scan
+		base-package="idv.kwl,spring"></context:component-scan>
+
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -22,10 +33,10 @@
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 
-	<bean name="/test"
-		class="idv.kwl.handle.spring.controller.TestController">
+	<bean name="/test" class="spring.TestController"></bean>
 
-	</bean>
+
+
 
 
 

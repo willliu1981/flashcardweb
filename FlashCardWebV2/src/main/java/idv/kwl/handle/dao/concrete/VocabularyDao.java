@@ -16,8 +16,8 @@ public class VocabularyDao extends Dao<Vocabulary> {
 		try {
 			PreparedStatement ps = Connection.getMysqlConnection()
 					.prepareStatement(sql);
-			ps.setString(1, t.getVid());
-			ps.setString(2, t.getVocabulary());
+			ps.setString(1, t.getVid().trim());
+			ps.setString(2, t.getVocabulary().trim());
 			ps.setString(3, t.getTranslation());
 			ps.setDate(4, t.getCreate_date());
 

@@ -1,4 +1,4 @@
-package idv.kwl.handle.spring.controller;
+package spring;
 
 import java.sql.Date;
 import java.time.LocalDate;
