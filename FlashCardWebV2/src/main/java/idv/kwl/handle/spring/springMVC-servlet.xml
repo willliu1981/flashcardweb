@@ -36,7 +36,13 @@
 	<bean name="/test" class="spring.TestController"></bean>
 
 
-
+	<bean id="dataSource" class="idv.kwl.connection.DataSource">
+		<property name="username" value="root" />
+		<property name="password" value="1234" />
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/flashcardv2?useSSL=false&amp;serverTimezone=UTC&amp;characterEncoding=UTF-8" />
+		<property name="driver" value="com.mysql.jdbc.Driver" />
+	</bean>
 
 
 

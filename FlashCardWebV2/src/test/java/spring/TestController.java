@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
-import idv.kwl.handle.connection.Connection;
 import idv.kwl.handle.dao.concrete.VocabularyDao;
 import idv.kwl.model.Vocabulary;
 
@@ -19,7 +18,6 @@ public class TestController implements Controller {
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		java.sql.Connection conn = Connection.getMysqlConnection();
 		VocabularyDao dao = new VocabularyDao();
 		Vocabulary voca = new Vocabulary();
 
