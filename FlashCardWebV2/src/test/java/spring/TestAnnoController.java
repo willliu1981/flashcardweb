@@ -1,23 +1,24 @@
 package spring;
 
+import java.util.HashMap;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+
+import idv.kwl.model.Vocabulary;
 
 @Controller
 @RequestMapping("spring")
 public class TestAnnoController {
 
-	String testx;
+	@RequestMapping(value = "add", method = RequestMethod.POST)
+	public String test1(HashMap model, Vocabulary voca) {
+		model.put("a", voca.getVocabulary());
+		model.put("b", voca.getTranslation());
 
-	@RequestMapping(method = RequestMethod.GET)
-	public String test1(ModelAndView mv) {
-		System.out.println(this.getClass() + " :test1 :" + this.testx);
+		System.out.println(this.getClass() + " :test1 ");
 		return "testresult";
 	}
 
-	public void setTestx(String str) {
-		this.testx = str;
-	}
 }

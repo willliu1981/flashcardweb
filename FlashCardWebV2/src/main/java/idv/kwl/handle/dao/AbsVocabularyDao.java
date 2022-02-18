@@ -1,16 +1,27 @@
 package idv.kwl.handle.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
-import idv.kwl.component.SpringUtil;
-import idv.kwl.connection.DataSource;
+public abstract class AbsVocabularyDao<T> extends AbsDao implements IDao<T> {
 
-public abstract class AbsVocabularyDao<T> implements IDao<T> {
+	@Override
+	public void delete(Object id) {
+		String sql = "delete from  vocabulary where vid=?";
 
-	private DataSource dataSource = (DataSource) SpringUtil.getBean("dataSource");
+		Connection conn = this.getConnection();
 
-	protected Connection getConnection() {
-		return this.dataSource.getConnection();
+		try {
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setObject(1, id);
+			st.execute();
+
+			this.closeResources(st, conn);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }
