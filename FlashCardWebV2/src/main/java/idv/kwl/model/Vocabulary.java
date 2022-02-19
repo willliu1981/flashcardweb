@@ -7,6 +7,15 @@ public class Vocabulary {
 	private String vocabulary;
 	private String translation;
 	private Date create_date;
+	private String tag;
+
+	public String getTag() {
+		return tag;
+	}
+
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
 
 	public String getVid() {
 		return vid;

@@ -43,7 +43,9 @@
 	<bean name="/spring/delete"
 		class="idv.kwl.handle.spring.controller.DeleteVocabularyController"></bean>
 
-	<bean id="dataSource" class="idv.kwl.connection.DataSource">
+
+	<bean id="DataSource" class="idv.kwl.connection.DataSource"
+		scope="prototype">
 		<property name="username" value="root" />
 		<property name="password" value="1234" />
 		<property name="url"

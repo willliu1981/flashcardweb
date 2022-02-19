@@ -10,7 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.Controller;
 
-import idv.kwl.handle.dao.concrete.VocabularyDao;
+import idv.kwl.component.SpringUtil;
+import idv.kwl.dao.concrete.VocabularyDao;
 import idv.kwl.model.Vocabulary;
 
 public class CreateVocabularyController implements Controller {
@@ -18,7 +19,7 @@ public class CreateVocabularyController implements Controller {
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		VocabularyDao dao = new VocabularyDao();
+		VocabularyDao dao = (VocabularyDao) SpringUtil.getBean("VocabularyDao");
 		Vocabulary voca = new Vocabulary();
 
 		String qVoca = request.getParameter("vocabulary");

@@ -1,4 +1,4 @@
-package idv.kwl.handle.dao;
+package idv.kwl.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

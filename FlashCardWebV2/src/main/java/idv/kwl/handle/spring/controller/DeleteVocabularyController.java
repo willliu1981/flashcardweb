@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.Controller;
 
-import idv.kwl.handle.dao.concrete.VocabularyDao;
+import idv.kwl.dao.concrete.VocabularyDao;
 import idv.kwl.model.Vocabulary;
 
 public class DeleteVocabularyController implements Controller {

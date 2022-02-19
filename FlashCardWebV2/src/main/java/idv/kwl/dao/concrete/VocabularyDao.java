@@ -1,11 +1,11 @@
-package idv.kwl.handle.dao.concrete;
+package idv.kwl.dao.concrete;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-import idv.kwl.handle.dao.AbsVocabularyDao;
+import idv.kwl.dao.AbsVocabularyDao;
 import idv.kwl.model.Vocabulary;
 
 public class VocabularyDao extends AbsVocabularyDao<Vocabulary> {

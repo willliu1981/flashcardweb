@@ -16,7 +16,10 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath:idv/kwl/handle/spring/springMVC-servlet.xml</param-value>
+			<param-value>
+			classpath:idv/kwl/handle/spring/springMVC-servlet.xml,
+			classpath:idv/kwl/handle/spring/dao.xml
+			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
