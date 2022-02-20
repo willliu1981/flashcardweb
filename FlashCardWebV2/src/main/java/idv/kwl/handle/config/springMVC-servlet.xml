@@ -33,15 +33,39 @@
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 
+<!-- 搜索不到 test package -->
 <!-- 
 	<bean name="/test" class="spring.TestController"></bean>
  -->
 
-	<bean name="/spring/add"
-		class="idv.kwl.handle.spring.controller.CreateVocabularyController"></bean>
+	<bean name="/word/vocabulary/test"
+		class="idv.kwl.handle.controller.concrete.TestController">
+		<property name="viewName" value="testresult" />
+		<property name="dao" ref="VocabularyDao" />
+		<property name="model" ref="VocabularyModel" />
 
-	<bean name="/spring/delete"
-		class="idv.kwl.handle.spring.controller.DeleteVocabularyController"></bean>
+	</bean>
+
+	<bean name="/word/vocabulary/add"
+		class="idv.kwl.handle.controller.concrete.CreateVocabularyController">
+		<property name="viewName" value="testresult" />
+		<property name="dao" ref="VocabularyDao" />
+		<property name="model" ref="VocabularyModel" />
+	</bean>
+
+	<bean name="/word/vocabulary/delete"
+		class="idv.kwl.handle.controller.concrete.DeleteVocabularyController">
+		<property name="viewName">
+			<value>testresult</value>
+		</property>
+	</bean>
+
+	<bean name="/word/vocabulary/update"
+		class="idv.kwl.handle.controller.concrete.UpdateVocabularyController">
+		<property name="viewName">
+			<value>testresult</value>
+		</property>
+	</bean>
 
 
 	<bean id="DataSource" class="idv.kwl.connection.DataSource"

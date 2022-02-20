@@ -1,4 +1,4 @@
-package idv.kwl.handle.spring.controller;
+package idv.kwl.handle.controller.concrete;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -10,27 +10,21 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.Controller;
 
-import idv.kwl.component.SpringUtil;
 import idv.kwl.dao.concrete.VocabularyDao;
+import idv.kwl.handle.controller.AttributeController;
 import idv.kwl.model.Vocabulary;
 
-public class CreateVocabularyController implements Controller {
+public class DeleteVocabularyController extends AttributeController implements Controller {
 
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		VocabularyDao dao = (VocabularyDao) SpringUtil.getBean("VocabularyDao");
+		VocabularyDao dao = new VocabularyDao();
 		Vocabulary voca = new Vocabulary();
 
-		String qVoca = request.getParameter("vocabulary");
-		String qTrans = request.getParameter("translation");
+		String qID = request.getParameter("vid");
 
-		voca.setVid("v_" + qVoca);
-		voca.setVocabulary(qVoca);
-		voca.setTranslation(qTrans);
-		voca.setCreate_date(Date.valueOf(LocalDate.now()));
-
-		dao.create(voca);
+		dao.delete(qID);
 
 		ModelAndView mv = new ModelAndView();
 

@@ -5,9 +5,9 @@ import java.sql.Timestamp;
 
 public class Card {
 	private String cid;
-	private String name;
+	private String name;//not null
 	private String vid;
-	private Date create_date;
+	private Date create_date;//not null
 	private Timestamp last_time;// 上次複習時間
 	private Integer usage_count;// 複習次數
 	private String tag;

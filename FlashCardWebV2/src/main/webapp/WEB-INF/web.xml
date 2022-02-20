@@ -9,6 +9,7 @@
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 		<welcome-file>test.jsp</welcome-file>
+		<welcome-file>test2.jsp</welcome-file>
 	</welcome-file-list>
 
 	<servlet>
@@ -17,8 +18,9 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
-			classpath:idv/kwl/handle/spring/springMVC-servlet.xml,
-			classpath:idv/kwl/handle/spring/dao.xml
+			classpath:idv/kwl/handle/config/springMVC-servlet.xml,
+			classpath:idv/kwl/handle/config/dao.xml
+			classpath:idv/kwl/handle/config/model.xml
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>

@@ -4,9 +4,9 @@ import java.sql.Date;
 
 public class Vocabulary {
 	private String vid;
-	private String vocabulary;
-	private String translation;
-	private Date create_date;
+	private String vocabulary;//not null, unique
+	private String translation;//not null
+	private Date create_date;//not null
 	private String tag;
 
 	public String getTag() {

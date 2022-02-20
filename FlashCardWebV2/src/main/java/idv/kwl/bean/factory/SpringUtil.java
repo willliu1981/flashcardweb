@@ -1,4 +1,4 @@
-package idv.kwl.component;
+package idv.kwl.bean.factory;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

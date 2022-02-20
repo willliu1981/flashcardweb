@@ -1,10 +1,11 @@
 package idv.kwl.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import idv.kwl.component.SpringUtil;
+import idv.kwl.bean.factory.SpringUtil;
 import idv.kwl.connection.DataSource;
 
 public abstract class AbsDao {
@@ -29,6 +30,20 @@ public abstract class AbsDao {
 		try {
 			st.close();
 			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	protected void delete(Object id, String sql) {
+		Connection conn = this.getConnection();
+
+		try {
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setObject(1, id);
+			st.execute();
+
+			this.closeResources(st, conn);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -34,7 +34,24 @@ public class VocabularyDao extends AbsVocabularyDao<Vocabulary> {
 
 	@Override
 	public void update(Vocabulary t, Object id) {
-		// TODO Auto-generated method stub
+		String sql = "update vocabulary set vid=?,vocabulary=?,translation=?"
+				+ ",tag=? where vid=?";
+
+		Connection conn = this.getConnection();
+		try {
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, t.getVid().trim());
+			st.setString(2, t.getVocabulary().trim());
+			st.setString(3, t.getTranslation());
+			st.setString(4, t.getTag());
+			st.setString(5, id.toString());
+
+			st.execute();
+
+			this.closeResources(st, conn);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 	}
 

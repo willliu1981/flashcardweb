@@ -19,10 +19,9 @@
 		base-package="idv.kwl,spring"></context:component-scan>
 
 
-	<bean id="VocabularyDao"
-		class="idv.kwl.dao.concrete.VocabularyDao" >
-		<property name="dataSource" ref="DataSource"></property>
+	<bean id="VocabularyModel" class="idv.kwl.model.Vocabulary" scope="prototype">
 	</bean>
+
 
 
 
