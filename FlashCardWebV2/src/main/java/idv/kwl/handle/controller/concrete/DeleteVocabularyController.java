@@ -12,25 +12,22 @@ import org.springframework.web.servlet.mvc.Controller;
 
 import idv.kwl.dao.concrete.VocabularyDao;
 import idv.kwl.handle.controller.AttributeController;
+import idv.kwl.handle.controller.VocabularyController;
 import idv.kwl.model.Vocabulary;
 
-public class DeleteVocabularyController extends AttributeController implements Controller {
+public class DeleteVocabularyController extends VocabularyController<Vocabulary> {
 
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		VocabularyDao dao = new VocabularyDao();
-		Vocabulary voca = new Vocabulary();
 
 		String qID = request.getParameter("vid");
 
-		dao.delete(qID);
-
-		ModelAndView mv = new ModelAndView();
+		this.getDao().delete(qID);
 
 		System.out.println(this.getClass() + ": ");
-		mv.setViewName("testresult");
-		return mv;
+
+		return super.handleRequest(request, response);
 	}
 
 }

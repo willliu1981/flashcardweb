@@ -13,31 +13,27 @@ import org.springframework.web.servlet.mvc.Controller;
 import idv.kwl.bean.factory.SpringUtil;
 import idv.kwl.dao.concrete.VocabularyDao;
 import idv.kwl.handle.controller.AttributeController;
+import idv.kwl.handle.controller.VocabularyController;
 import idv.kwl.model.Vocabulary;
 
-public class UpdateVocabularyController extends AttributeController implements Controller {
+public class UpdateVocabularyController extends VocabularyController<Vocabulary> {
 
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		VocabularyDao dao = (VocabularyDao) SpringUtil.getBean("VocabularyDao");
-		Vocabulary voca = new Vocabulary();
 
 		String qVid = request.getParameter("vid");
 		String qVoca = request.getParameter("vocabulary");
 		String qTrans = request.getParameter("translation");
 
-		voca.setVid("v_" + qVoca.trim());
-		voca.setVocabulary(qVoca);
-		voca.setTranslation(qTrans);
+		this.getModel().setVid("v_" + qVoca.trim());
+		this.getModel().setVocabulary(qVoca);
+		this.getModel().setTranslation(qTrans);
 
-		dao.update(voca, qVid);
-
-		ModelAndView mv = new ModelAndView();
+		this.getDao().update(this.getModel(), qVid);
 
 		System.out.println(this.getClass() + ": ");
-		mv.setViewName("testresult");
-		return mv;
+		return super.handleRequest(request, response);
 	}
 
 }

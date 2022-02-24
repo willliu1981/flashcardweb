@@ -13,8 +13,9 @@ import idv.kwl.bean.factory.SpringUtil;
 import idv.kwl.dao.concrete.VocabularyDao;
 import idv.kwl.handle.controller.VocabularyController;
 import idv.kwl.model.Vocabulary;
+import idv.kwl.model.proxy.VocabularyProxy;
 
-public class CreateVocabularyController extends VocabularyController<Vocabulary> {
+public class CreateVocabularyController extends VocabularyController<VocabularyProxy> {
 
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request,
