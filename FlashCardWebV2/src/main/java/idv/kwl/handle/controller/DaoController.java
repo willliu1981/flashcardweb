@@ -3,14 +3,14 @@ package idv.kwl.handle.controller;
 import idv.kwl.dao.IDao;
 
 public class DaoController<T> extends AttributeController {
-	private IDao<T> dao;
+	private IDao dao;
 	private T model;
 
-	public IDao<T> getDao() {
+	public IDao getDao() {
 		return dao;
 	}
 
-	public void setDao(IDao<T> dao) {
+	public void setDao(IDao dao) {
 		this.dao = dao;
 	}
 

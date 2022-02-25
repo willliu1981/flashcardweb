@@ -7,6 +7,7 @@ import java.util.List;
 
 import idv.kwl.dao.AbsVocabularyDao;
 import idv.kwl.model.Vocabulary;
+import idv.kwl.model.proxy.IVocabulary;
 
 public class VocabularyDao extends AbsVocabularyDao<Vocabulary> {
 

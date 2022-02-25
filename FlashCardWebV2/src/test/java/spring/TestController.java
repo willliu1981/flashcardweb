@@ -11,6 +11,7 @@ import org.springframework.web.servlet.mvc.Controller;
 
 import idv.kwl.dao.concrete.VocabularyDao;
 import idv.kwl.model.Vocabulary;
+import idv.kwl.model.proxy.IVocabulary;
 
 public class TestController implements Controller {
 
@@ -19,7 +20,7 @@ public class TestController implements Controller {
 			HttpServletResponse response) throws Exception {
 
 		VocabularyDao dao = new VocabularyDao();
-		Vocabulary voca = new Vocabulary();
+		IVocabulary voca = new Vocabulary();
 
 		String qVoca = request.getParameter("vocabulary");
 		String qTrans = request.getParameter("translation");
