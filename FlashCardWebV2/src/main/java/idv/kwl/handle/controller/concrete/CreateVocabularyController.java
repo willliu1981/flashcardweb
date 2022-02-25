@@ -21,15 +21,6 @@ public class CreateVocabularyController extends VocabularyController<VocabularyP
 		String qVoca = request.getParameter("vocabulary");
 		String qTrans = request.getParameter("translation");
 
-		/*
-		this.getModel().vid("v_" + qVoca.trim());
-		this.getModel().vocabulary(qVoca);
-		this.getModel().translation(qTrans);
-		this.getModel().create_date(Date.valueOf(LocalDate.now()));
-		
-		this.getDao().create(this.getModel());
-		// */
-
 		this.getModel().vid("v_" + qVoca.trim()).vocabulary(qVoca).translation(qTrans)
 				.create_date(Date.valueOf(LocalDate.now())).create(this.getDao());
 

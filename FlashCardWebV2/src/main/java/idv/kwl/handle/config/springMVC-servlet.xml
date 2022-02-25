@@ -64,7 +64,7 @@
 		class="idv.kwl.handle.controller.concrete.UpdateVocabularyController">
 		<property name="viewName" value="testresult" />
 		<property name="dao" ref="VocabularyDao" />
-		<property name="model" ref="VocabularyModel" />
+		<property name="model" ref="VocabularyProxy" />
 	</bean>
 
 

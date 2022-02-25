@@ -100,4 +100,10 @@ public class VocabularyProxy implements IVocabulary {
 	public void create(IDao dao) {
 		dao.create(this.voca);
 	}
+
+	public void update(IDao dao, Object id) {
+		System.out.println(this.getClass() + ": " + this.voca);
+		System.out.println(this.getClass() + ": " + dao);
+		dao.update(this.voca, id);
+	}
 }

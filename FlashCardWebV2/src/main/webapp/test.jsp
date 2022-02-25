@@ -64,8 +64,12 @@
 	<form action="word/vocabulary/update" method="post">
 		<table>
 			<tr>
-				<td>vocabulary id</td>
-				<td><input type="text" name="vid" /></td>
+				<td>from vocabulary id</td>
+				<td><input type="text" name="from-vid" /></td>
+			</tr>
+			<tr>
+				<td>to vocabulary id</td>
+				<td><input type="text" name="to-vid" /></td>
 			</tr>
 			<tr>
 				<td>vocabulary</td>
@@ -74,6 +78,10 @@
 			<tr>
 				<td>translation</td>
 				<td><input type="text" name="translation" /></td>
+			</tr>
+			<tr>
+				<td>tag</td>
+				<td><input type="text" name="tag" /></td>
 			</tr>
 			<tr>
 				<td style="text-align: center" colspan="2"><input type="submit"

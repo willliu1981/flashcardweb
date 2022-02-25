@@ -20,7 +20,7 @@ public class TestController implements Controller {
 			HttpServletResponse response) throws Exception {
 
 		VocabularyDao dao = new VocabularyDao();
-		IVocabulary voca = new Vocabulary();
+		Vocabulary voca = new Vocabulary();
 
 		String qVoca = request.getParameter("vocabulary");
 		String qTrans = request.getParameter("translation");
