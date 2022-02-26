@@ -5,12 +5,22 @@ import java.sql.Timestamp;
 
 public class Card {
 	private String cid;
-	private String name;//not null
+	private String name;// not null
 	private String vid;
-	private Date create_date;//not null
+	private Date create_date;// not null
 	private Timestamp last_time;// 上次複習時間
 	private Integer usage_count;// 複習次數
+	private Integer percentage;// 答對百分率
+
 	private String tag;
+
+	public Integer getPercentage() {
+		return percentage;
+	}
+
+	public void setPercentage(Integer percentage) {
+		this.percentage = percentage;
+	}
 
 	public String getTag() {
 		return tag;

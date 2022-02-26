@@ -5,10 +5,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
-import idv.kwl.handle.controller.VocabularyController;
+import idv.kwl.handle.controller.DataProcessController;
 import idv.kwl.model.proxy.VocabularyProxy;
 
-public class UpdateVocabularyController extends VocabularyController<VocabularyProxy> {
+public class UpdateVocabularyController extends DataProcessController<VocabularyProxy> {
 
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request,

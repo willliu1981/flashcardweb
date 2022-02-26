@@ -2,7 +2,7 @@ package idv.kwl.handle.controller;
 
 import idv.kwl.dao.IDao;
 
-public class DaoController<T> extends AttributeController {
+public class DataProcessController<T> extends AttributeController {
 	private IDao dao;
 	private T model;
 

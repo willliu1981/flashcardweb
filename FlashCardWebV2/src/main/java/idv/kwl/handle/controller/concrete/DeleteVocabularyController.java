@@ -1,21 +1,14 @@
 package idv.kwl.handle.controller.concrete;
 
-import java.sql.Date;
-import java.time.LocalDate;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
-import org.springframework.web.servlet.mvc.Controller;
 
-import idv.kwl.dao.concrete.VocabularyDao;
-import idv.kwl.handle.controller.AttributeController;
-import idv.kwl.handle.controller.VocabularyController;
+import idv.kwl.handle.controller.DataProcessController;
 import idv.kwl.model.Vocabulary;
 
-public class DeleteVocabularyController extends VocabularyController<Vocabulary> {
+public class DeleteVocabularyController extends DataProcessController<Vocabulary> {
 
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request,
