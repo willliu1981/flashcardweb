@@ -23,7 +23,6 @@ public class UpdateVocabularyController extends DataProcessController<Vocabulary
 		this.getModel().vid(qToVid).vocabulary(qVoca).translation(qTrans).tag(qTag)
 				.update(getDao(), qFromVid);
 
-		System.out.println(this.getClass() + ": ");
 		return super.handleRequest(request, response);
 	}
 

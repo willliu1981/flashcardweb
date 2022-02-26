@@ -24,7 +24,6 @@ public class CreateVocabularyController extends  DataProcessController<Vocabular
 		this.getModel().vid("v_" + qVoca.trim()).vocabulary(qVoca).translation(qTrans)
 				.create_date(Date.valueOf(LocalDate.now())).create(this.getDao());
 
-		System.out.println(this.getClass() + ": ");
 		return super.handleRequest(request, response);
 	}
 

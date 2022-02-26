@@ -4,13 +4,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(value = "word")
+@RequestMapping(value = "page")
 public class RouteMultiController {
 
-	
-	@RequestMapping(value = "add")
+	@RequestMapping(value = "vocabulary")
 	public String route() {
 		
-		return null;
+		return "vocabulary";
+	}
+	
+	@RequestMapping(value = "vocabulary/add")
+	public String route1() {
+
+		return "createVocabulary";
 	}
 }

@@ -18,7 +18,6 @@ public class DeleteVocabularyController extends DataProcessController<Vocabulary
 
 		this.getDao().delete(qID);
 
-		System.out.println(this.getClass() + ": ");
 
 		return super.handleRequest(request, response);
 	}

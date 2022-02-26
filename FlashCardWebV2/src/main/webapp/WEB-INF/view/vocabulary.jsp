@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>flash card v2</title>
+<title>Vocabulary</title>
 </head>
 <body>
-	
-	<h1>Welcome to FlashCard</h1>
-	<h2><a href="page/vocabulary">vocabulary</a></h2>
-	
+	<h1>Vocabulary</h1>
+	<h2>
+		<a href="<%=request.getContextPath()%>/page/vocabulary/add">add</a>
+	</h2>
 </body>
 </html>

@@ -38,6 +38,7 @@
 	<bean name="/test" class="spring.TestController"></bean>
  -->
 
+<!--  
 	<bean name="/word/vocabulary/test"
 		class="idv.kwl.handle.controller.concrete.TestController">
 		<property name="viewName" value="testresult" />
@@ -45,8 +46,9 @@
 		<property name="model" ref="VocabularyModel" />
 
 	</bean>
+-->
 
-	<bean name="/word/vocabulary/add"
+	<bean name="/word/vocabulary/add,/vocabulary/add"
 		class="idv.kwl.handle.controller.concrete.CreateVocabularyController">
 		<property name="viewName" value="testresult" />
 		<property name="dao" ref="VocabularyDao" />
