@@ -8,14 +8,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RouteMultiController {
 
 	@RequestMapping(value = "vocabulary")
-	public String route() {
-		
-		return "vocabulary";
-	}
-	
-	@RequestMapping(value = "vocabulary/add")
-	public String route1() {
+	public String vocabulary() {
 
-		return "createVocabulary";
+		return "vocabulary/vocabulary";
+	}
+
+	@RequestMapping(value = "vocabulary/add")
+	public String vocabularyAdd() {
+
+		return "vocabulary/createVocabulary";
+	}
+
+	@RequestMapping(value = "vocabulary/update")
+	public String vocabularyUpdate() {
+
+		return "vocabulary/updateVocabulary";
+	}
+
+	@RequestMapping(value = "vocabulary/delete")
+	public String vocabularyDelete() {
+
+		return "vocabulary/deleteVocabulary";
+	}
+
+	@RequestMapping(value = "vocabulary/query")
+	public String vocabularyQueryAll() {
+
+		return "vocabulary/queryVocabulary";
 	}
 }

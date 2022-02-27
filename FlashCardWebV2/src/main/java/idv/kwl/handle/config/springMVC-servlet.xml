@@ -55,15 +55,22 @@
 		<property name="model" ref="VocabularyProxy" />
 	</bean>
 
-	<bean name="/word/vocabulary/delete"
+	<bean name="/word/vocabulary/delete,/vocabulary/delete"
 		class="idv.kwl.handle.controller.concrete.DeleteVocabularyController">
 		<property name="viewName" value="testresult" />
 		<property name="dao" ref="VocabularyDao" />
 		<property name="model" ref="VocabularyModel" />
 	</bean>
 
-	<bean name="/word/vocabulary/update"
+	<bean name="/word/vocabulary/update,/vocabulary/update"
 		class="idv.kwl.handle.controller.concrete.UpdateVocabularyController">
+		<property name="viewName" value="testresult" />
+		<property name="dao" ref="VocabularyDao" />
+		<property name="model" ref="VocabularyProxy" />
+	</bean>
+
+	<bean name="/vocabulary/query"
+		class="idv.kwl.handle.controller.concrete.QueryVocabularyController">
 		<property name="viewName" value="testresult" />
 		<property name="dao" ref="VocabularyDao" />
 		<property name="model" ref="VocabularyProxy" />

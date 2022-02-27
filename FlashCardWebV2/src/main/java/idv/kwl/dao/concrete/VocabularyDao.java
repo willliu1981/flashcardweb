@@ -2,12 +2,13 @@ package idv.kwl.dao.concrete;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import idv.kwl.dao.AbsVocabularyDao;
 import idv.kwl.model.Vocabulary;
-import idv.kwl.model.proxy.IVocabulary;
 
 public class VocabularyDao extends AbsVocabularyDao<Vocabulary> {
 
@@ -64,8 +65,30 @@ public class VocabularyDao extends AbsVocabularyDao<Vocabulary> {
 
 	@Override
 	public List<Vocabulary> queryAll() {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from vocabulary ";
+
+		Connection conn = this.getConnection();
+		List<Vocabulary> list = new ArrayList<>();
+		try {
+			PreparedStatement st = conn.prepareStatement(sql);
+			ResultSet rs = st.executeQuery();
+			Vocabulary model = null;
+			while (rs.next()) {
+				model = new Vocabulary();
+				model.setVid(rs.getString("vid"));
+				model.setVocabulary(rs.getString("vocabulary"));
+				model.setTranslation(rs.getString("translation"));
+				model.setCreate_date(rs.getDate("create_date"));
+				model.setTag(rs.getString("tag"));
+				list.add(model);
+			}
+
+			this.closeResources(st, conn);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return list;
 	}
 
 }
