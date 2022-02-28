@@ -20,6 +20,8 @@ public class QueryVocabularyController extends DataProcessController<VocabularyP
 			this.getModelAndView().addObject("list", this.getDao().queryAll());
 			this.setViewName("testlist");
 		}
+		
+		System.out.println(this.getClass() + ":" );
 
 		return super.handleRequest(request, response);
 	}
