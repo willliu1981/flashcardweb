@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>Create Vocabulary</h1>
-	<form action="<%=request.getContextPath()%>/vocabulary/add"
+	<form action="<%=request.getContextPath()%>/process/vocabulary/add"
 		method="post">
 		<table>
 			<tr>

@@ -11,7 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 import idv.kwl.handle.controller.DataProcessController;
 import idv.kwl.model.proxy.VocabularyProxy;
 
-public class CreateVocabularyController extends  DataProcessController<VocabularyProxy> {
+public class CreateVocabularyController extends DataProcessController<VocabularyProxy> {
+
 
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request,
@@ -24,7 +25,10 @@ public class CreateVocabularyController extends  DataProcessController<Vocabular
 		this.getModel().vid("v_" + qVoca.trim()).vocabulary(qVoca).translation(qTrans)
 				.create_date(Date.valueOf(LocalDate.now())).create(this.getDao());
 
+
 		return super.handleRequest(request, response);
 	}
+
+	
 
 }

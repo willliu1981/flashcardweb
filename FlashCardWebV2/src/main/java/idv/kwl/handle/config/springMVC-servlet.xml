@@ -25,6 +25,9 @@
 
 	<context:component-scan
 		base-package="idv.kwl,spring"></context:component-scan>
+	
+	<context:property-placeholder location="classpath:idv/kwl/handle/config/path.properties"/>
+
 
 
 	<bean id="viewResolver"
@@ -48,28 +51,28 @@
 	</bean>
 -->
 
-	<bean name="/word/vocabulary/add,/vocabulary/add"
+	<bean name="/process/vocabulary/add"
 		class="idv.kwl.handle.controller.concrete.CreateVocabularyController">
 		<property name="viewName" value="testresult" />
 		<property name="dao" ref="VocabularyDao" />
 		<property name="model" ref="VocabularyProxy" />
 	</bean>
 
-	<bean name="/word/vocabulary/delete,/vocabulary/delete"
+	<bean name="/process/vocabulary/delete"
 		class="idv.kwl.handle.controller.concrete.DeleteVocabularyController">
 		<property name="viewName" value="testresult" />
 		<property name="dao" ref="VocabularyDao" />
 		<property name="model" ref="VocabularyModel" />
 	</bean>
 
-	<bean name="/word/vocabulary/update,/vocabulary/update"
+	<bean name="/process/vocabulary/update"
 		class="idv.kwl.handle.controller.concrete.UpdateVocabularyController">
 		<property name="viewName" value="testresult" />
 		<property name="dao" ref="VocabularyDao" />
 		<property name="model" ref="VocabularyProxy" />
 	</bean>
 
-	<bean name="/vocabulary/query"
+	<bean name="/process/vocabulary/query"
 		class="idv.kwl.handle.controller.concrete.QueryVocabularyController">
 		<property name="viewName" value="testresult" />
 		<property name="dao" ref="VocabularyDao" />

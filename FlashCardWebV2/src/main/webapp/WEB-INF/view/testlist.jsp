@@ -9,6 +9,7 @@
 <body>
 	<h1>test lest</h1>
 
+	<br /> vocabulary=${vocabulary}
 	<br /> list=${list}
 
 </body>

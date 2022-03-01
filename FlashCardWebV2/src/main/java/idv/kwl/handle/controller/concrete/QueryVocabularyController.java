@@ -18,10 +18,13 @@ public class QueryVocabularyController extends DataProcessController<VocabularyP
 
 		if (qID == null || qID.equals("")) {
 			this.getModelAndView().addObject("list", this.getDao().queryAll());
-			this.setViewName("testlist");
+		} else {
+			this.getModelAndView().addObject("vocabulary",
+					this.getDao().queryById(qID));
 		}
-		
-		System.out.println(this.getClass() + ":" );
+		this.setViewName("testlist");
+
+		System.out.println(this.getClass() + ":" + qID);
 
 		return super.handleRequest(request, response);
 	}

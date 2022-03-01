@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>Update Vocabulary</h1>
-	<form action="<%=request.getContextPath()%>/vocabulary/update"
+	<form action="<%=request.getContextPath()%>/process/vocabulary/update"
 		method="post">
 		<table>
 			<tr>

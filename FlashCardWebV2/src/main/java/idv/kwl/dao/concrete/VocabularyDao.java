@@ -59,8 +59,28 @@ public class VocabularyDao extends AbsVocabularyDao<Vocabulary> {
 
 	@Override
 	public Vocabulary queryById(Object id) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from vocabulary where vid=?";
+
+		Connection conn = this.getConnection();
+		Vocabulary model = null;
+		try {
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, id.toString());
+			ResultSet rs = st.executeQuery();
+
+			model = new Vocabulary();
+			model.setVid(rs.getString("vid"));
+			model.setVocabulary(rs.getString("vocabulary"));
+			model.setTranslation(rs.getString("translation"));
+			model.setCreate_date(rs.getDate("create_date"));
+			model.setTag(rs.getString("tag"));
+
+			this.closeResources(st, conn);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return model;
 	}
 
 	@Override

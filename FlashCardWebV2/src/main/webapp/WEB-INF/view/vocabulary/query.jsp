@@ -5,20 +5,22 @@
 <head>
 <meta charset="UTF-8">
 <title>flash card v2</title>
+
 </head>
 <body>
-	<h1>Delete Vocabulary</h1>
-	<form action="<%=request.getContextPath()%>/vocabulary/delete" method="post">
+	<h1>Query Vocabulary</h1>
+	<form action="<%=request.getContextPath()%>/process/vocabulary/query"
+		method="post">
 		<table>
 			<tr>
 				<td>vocabulary id</td>
-				<td><input type="text" name="vid" value="${vid}"/></td>
+				<td><input type="text" name="vid" value="${vid}" /></td>
 			</tr>
 			<tr>
-				<td style="text-align: center" colspan="2"><input type="submit"
-						value="send" /></td>
+				<td><input type="submit" value="send" /></td>
 			</tr>
 		</table>
 	</form>
+
 </body>
 </html>

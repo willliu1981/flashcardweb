@@ -19,31 +19,24 @@ public class RouteMultiController {
 	@RequestMapping(value = "vocabulary/add")
 	public String vocabularyAdd() {
 
-		return "vocabulary/createVocabulary";
+		return "vocabulary/create";
 	}
 
 	@RequestMapping(value = "vocabulary/update")
 	public String vocabularyUpdate() {
 
-		return "vocabulary/updateVocabulary";
+		return "vocabulary/update";
 	}
 
 	@RequestMapping(value = "vocabulary/delete")
 	public String vocabularyDelete() {
-	
-		return "vocabulary/deleteVocabulary";
+
+		return "vocabulary/delete";
 	}
 
 	@RequestMapping(value = "vocabulary/query")
-	public String vocabularyQueryAll() {
-		System.out.println(this.getClass() + ":xxxyyy:" );
-		return "vocabulary/queryVocabulary";
-	}
-
-	@RequestMapping(value = "vocabulary/query/{vid}")
-	public String vocabularyQueryById(HashMap<String, String> model,
-			@PathVariable("vid") String vid) {
-		System.out.println(this.getClass() + ":xxx:" + vid);
+	public String vocabularyQuery() {
 		return "vocabulary/query";
 	}
+
 }
