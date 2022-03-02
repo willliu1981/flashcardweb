@@ -19,7 +19,7 @@ public abstract class AttributeController implements Controller {
 		return mv;
 	}
 
-	public String getViewName() {
+	protected String getViewName() {
 		return viewName;
 	}
 
@@ -32,6 +32,10 @@ public abstract class AttributeController implements Controller {
 			this.mv = new ModelAndView();
 		}
 		return mv;
+	}
+
+	protected void start() {
+		this.mv = null;
 	}
 
 }

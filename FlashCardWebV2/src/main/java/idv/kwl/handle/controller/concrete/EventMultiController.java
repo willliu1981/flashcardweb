@@ -27,6 +27,9 @@ public class EventMultiController {
 		case 500:
 			errorMsg = "500:Internal Server Error";
 			break;
+			default:
+				errorMsg="other error";
+				break;
 		}
 
 		model.put("errorMsg", errorMsg);

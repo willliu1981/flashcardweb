@@ -16,13 +16,15 @@ public class Test1 {
 	}
 
 	public static void main(String[] args) {
-		Book b = new Book();
-		b.setName("java");
+	
+
+		System.out.println("xxxx");
+
+	}
+	
+	public static void test() {
+		System.out.println("xxxx1");
 		
-		m(b);
-
-		System.out.println(b.getName());
-
 	}
 
 	public static String m(Book b) {

@@ -67,15 +67,15 @@ public class VocabularyDao extends AbsVocabularyDao<Vocabulary> {
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1, id.toString());
 			ResultSet rs = st.executeQuery();
-
-			model = new Vocabulary();
-			model.setVid(rs.getString("vid"));
-			model.setVocabulary(rs.getString("vocabulary"));
-			model.setTranslation(rs.getString("translation"));
-			model.setCreate_date(rs.getDate("create_date"));
-			model.setTag(rs.getString("tag"));
-
-			this.closeResources(st, conn);
+			if (rs.next()) {
+				model = new Vocabulary();
+				model.setVid(rs.getString("vid"));
+				model.setVocabulary(rs.getString("vocabulary"));
+				model.setTranslation(rs.getString("translation"));
+				model.setCreate_date(rs.getDate("create_date"));
+				model.setTag(rs.getString("tag"));
+			}
+			this.closeResources(rs, st, conn);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

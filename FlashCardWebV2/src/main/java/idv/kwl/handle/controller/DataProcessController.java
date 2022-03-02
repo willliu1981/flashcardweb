@@ -1,24 +1,33 @@
 package idv.kwl.handle.controller;
 
+import idv.kwl.bean.factory.SpringUtil;
 import idv.kwl.dao.IDao;
 
 public class DataProcessController<T> extends AttributeController {
-	private IDao dao;
+	private IDao<?> dao;
+	private String modelStr;
 	private T model;
 
-	public IDao getDao() {
+	public IDao<?> getDao() {
 		return dao;
 	}
 
-	public void setDao(IDao dao) {
+	public void setDao(IDao<?> dao) {
 		this.dao = dao;
 	}
 
-	public T getModel() {
-		return model;
+	public String getModel() {
+		return modelStr;
 	}
 
-	public void setModel(T model) {
-		this.model = model;
+	public void setModel(String modelStr) {
+		this.modelStr = modelStr;
 	}
+
+	@Override
+	protected void start() {
+		super.start();
+		this.model = (T) SpringUtil.getBean(modelStr);
+	}
+
 }

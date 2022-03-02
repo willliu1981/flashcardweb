@@ -2,6 +2,7 @@ package idv.kwl.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -27,10 +28,19 @@ public abstract class AbsDao {
 	}
 
 	protected void closeResources(Statement st, Connection conn) {
+		closeResources(null, st, conn);
+	}
+
+	protected void closeResources(ResultSet rs, Statement st, Connection conn) {
 		try {
+			if (rs != null) {
+				rs.close();
+			}
 			st.close();
 			conn.close();
-		} catch (SQLException e) {
+		} catch (
+
+		SQLException e) {
 			e.printStackTrace();
 		}
 	}
