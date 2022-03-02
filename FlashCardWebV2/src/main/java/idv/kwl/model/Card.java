@@ -4,12 +4,14 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 public class Card {
-	private String cid;
+	private Integer cid;
 	private String name;// not null
 	private String vid;
 	private Date create_date;// not null
 	private Timestamp last_time;// 上次複習時間
 	private Integer usage_count;// 複習次數
+	private Integer exam_count;// 測驗次數
+	private Integer pass_count;// 通過測驗 次數
 
 	private String tag;
 
@@ -21,11 +23,27 @@ public class Card {
 		this.tag = tag;
 	}
 
-	public String getCid() {
+	public Integer getExam_count() {
+		return exam_count;
+	}
+
+	public void setExam_count(Integer exam_count) {
+		this.exam_count = exam_count;
+	}
+
+	public Integer getPass_count() {
+		return pass_count;
+	}
+
+	public void setPass_count(Integer pass_count) {
+		this.pass_count = pass_count;
+	}
+
+	public Integer getCid() {
 		return cid;
 	}
 
-	public void setCid(String cid) {
+	public void setCid(Integer cid) {
 		this.cid = cid;
 	}
 

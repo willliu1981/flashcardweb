@@ -20,10 +20,9 @@ public class QueryVocabularyController extends DataProcessController<Object> {
 			if (qID == null || qID.equals("")) {
 				this.getModelAndView().addObject("list", this.getDao().queryAll());
 			} else {
-				this.getModelAndView().addObject("vocabulary",
+				this.getModelAndView().addObject("model",
 						this.getDao().queryById(qID));
 			}
-			System.out.println(this.getClass() + ":" + qID);
 
 			return super.handleRequest(request, response);
 		}

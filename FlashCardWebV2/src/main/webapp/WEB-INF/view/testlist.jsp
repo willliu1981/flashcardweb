@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" isELIgnored="false"%>
+	pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +9,7 @@
 <body>
 	<h1>test lest</h1>
 
-	<br /> vocabulary=${vocabulary}
+	<br /> model=${model}
 	<br /> list=${list}
 
 </body>

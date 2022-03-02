@@ -103,7 +103,7 @@ public class VocabularyDao extends AbsVocabularyDao<Vocabulary> {
 				list.add(model);
 			}
 
-			this.closeResources(st, conn);
+			this.closeResources(rs, st, conn);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -12,12 +12,12 @@
 		method="post">
 		<table>
 			<tr>
-				<td>vocabulary</td>
-				<td><input type="text" name="vocabulary" value="${vocabulary}"/></td>
+				<td>name</td>
+				<td><input type="text" name="name" value="${name}"/></td>
 			</tr>
 			<tr>
-				<td>translation</td>
-				<td><input type="text" name="translation" value="${translation}"/></td>
+				<td>vid</td>
+				<td><input type="text" name="vid" value="${vid}"/></td>
 			</tr>
 			<tr>
 				<td style="text-align: center" colspan="2"><input type="submit"

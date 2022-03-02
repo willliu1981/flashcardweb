@@ -7,30 +7,41 @@
 <title>flash card v2</title>
 </head>
 <body>
-	<h1>Update Vocabulary</h1>
-	<form action="<%=request.getContextPath()%>/process/vocabulary/update"
+	<h1>Update Card</h1>
+	<form action="<%=request.getContextPath()%>/process/card/update"
 		method="post">
 		<table>
 			<tr>
-				<td>from vocabulary id</td>
-				<td><input type="text" name="from-vid" value="${fromVid}" /></td>
+				<td>card id</td>
+				<td><input type="text" name="cid" value="${cid}" /></td>
 			</tr>
 			<tr>
-				<td>to vocabulary id</td>
-				<td><input type="text" name="to-vid" value="${toVid}" /></td>
+				<td>name</td>
+				<td><input type="text" name="name" value="${name}" /></td>
 			</tr>
 			<tr>
-				<td>vocabulary</td>
-				<td><input type="text" name="vocabulary" value="${vocabulary}" /></td>
+				<td>vocabulary id</td>
+				<td><input type="text" name="vid" value="${vid}" /></td>
 			</tr>
 			<tr>
-				<td>translation</td>
-				<td><input type="text" name="translation"
-						value="${translation}" /></td>
+				<td>last time</td>
+				<td><input type="text" name="last_time" value="${last_time}" /></td>
+			</tr>
+			<tr>
+				<td>usage count</td>
+				<td><input type="text" name="usage_count" value="${usage_count}" /></td>
 			</tr>
 			<tr>
 				<td>tag</td>
 				<td><input type="text" name="tag" value="${tag}" /></td>
+			</tr>
+			<tr>
+				<td>exam count</td>
+				<td><input type="text" name="exam_count" value="${exam_count}" /></td>
+			</tr>
+			<tr>
+				<td>pass count</td>
+				<td><input type="text" name="pass_count" value="${pass_count}" /></td>
 			</tr>
 			<tr>
 				<td style="text-align: center" colspan="2"><input type="submit"

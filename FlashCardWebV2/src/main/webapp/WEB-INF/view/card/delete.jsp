@@ -7,12 +7,12 @@
 <title>flash card v2</title>
 </head>
 <body>
-	<h1>Delete Vocabulary</h1>
-	<form action="<%=request.getContextPath()%>/process/vocabulary/delete" method="post">
+	<h1>Delete Card</h1>
+	<form action="<%=request.getContextPath()%>/process/card/delete" method="post">
 		<table>
 			<tr>
-				<td>vocabulary id</td>
-				<td><input type="text" name="vid" value="${vid}"/></td>
+				<td>card id</td>
+				<td><input type="text" name="cid" value="${cid}"/></td>
 			</tr>
 			<tr>
 				<td style="text-align: center" colspan="2"><input type="submit"

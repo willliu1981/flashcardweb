@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import idv.kwl.bean.factory.SpringUtil;
 import idv.kwl.connection.DataSource;
+import idv.kwl.tool.SpringUtil;
 
 public abstract class AbsDao {
 	private DataSource dataSource;

@@ -1,7 +1,7 @@
 package idv.kwl.handle.controller;
 
-import idv.kwl.bean.factory.SpringUtil;
 import idv.kwl.dao.IDao;
+import idv.kwl.tool.SpringUtil;
 
 public class DataProcessController<T> extends AttributeController {
 	private IDao<?> dao;

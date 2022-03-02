@@ -6,18 +6,35 @@
 <meta charset="UTF-8">
 <title>flash card v2</title>
 
+<script
+	src="<%=request.getContextPath()%>/webjars/jquery/3.4.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+  $(document)
+	  .ready(
+		  function() {
+			$("#send")
+				.click(
+					function() {
+					  var $cid = $("#cid").val();
+					  window.location.href =
+<%out.print(String.format("'%s'", request.getContextPath()));%>
+  + "/process/card/query/" + $cid;
+					});
+		  });
+</script>
 </head>
 <body>
-	<h1>Query Vocabulary</h1>
-	<form action="<%=request.getContextPath()%>/process/vocabulary/query"
+	<h1>Query Card</h1>
+	<form action="<%=request.getContextPath()%>/process/card/query"
 		method="post">
 		<table>
 			<tr>
-				<td>vocabulary id</td>
-				<td><input type="text" name="vid" value="${vid}" /></td>
+				<td>card id</td>
+				<td><input type="text" name="cid" id="cid" value="${cid}" /></td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="send" /></td>
+				<td><input type="button" id="send" value="send" /></td>
 			</tr>
 		</table>
 	</form>

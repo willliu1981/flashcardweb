@@ -15,7 +15,7 @@
 		<a href="<%=request.getContextPath()%>/page/card/update">update</a>
 	</h2>
 	<h2>
-		<a href="<%=request.getContextPath()%>/page/vcard/delete">delete</a>
+		<a href="<%=request.getContextPath()%>/page/card/delete">delete</a>
 	</h2>
 	<h2>
 		<a href="<%=request.getContextPath()%>/page/card/query">query</a>

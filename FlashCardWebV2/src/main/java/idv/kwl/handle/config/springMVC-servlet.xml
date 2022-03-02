@@ -22,6 +22,8 @@
 	 <!--  
 	<mvc:default-servlet-handler />
 -->
+	<mvc:annotation-driven
+		conversion-service="converterUtil" />
 
 	<context:component-scan
 		base-package="idv.kwl,spring"></context:component-scan>
@@ -51,6 +53,15 @@
 
 	</bean>
 -->
+
+	<bean id="converterUtil"
+		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="converters">
+			<list>
+				<bean class="idv.kwl.tool.TimestampConverter" />
+			</list>
+		</property>
+	</bean>
 
 	<bean name="/process/vocabulary/add"
 		class="idv.kwl.handle.controller.concrete.CreateVocabularyController">
