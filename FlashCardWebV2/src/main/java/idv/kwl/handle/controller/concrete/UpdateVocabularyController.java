@@ -13,17 +13,19 @@ public class UpdateVocabularyController extends DataProcessController<Vocabulary
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-
 		String qFromVid = request.getParameter("from-vid");
 		String qToVid = request.getParameter("to-vid");
 		String qVoca = request.getParameter("vocabulary");
 		String qTrans = request.getParameter("translation");
 		String qTag = request.getParameter("tag");
 
-		this.getModel().vid(qToVid).vocabulary(qVoca).translation(qTrans).tag(qTag)
-				.update(getDao(), qFromVid);
+		synchronized (this.getClass()) {
+			this.start();
+			this.getModel().vid(qToVid).vocabulary(qVoca).translation(qTrans).tag(qTag)
+					.update(getDao(), qFromVid);
 
-		return super.handleRequest(request, response);
+			return super.handleRequest(request, response);
+		}
 	}
 
 }

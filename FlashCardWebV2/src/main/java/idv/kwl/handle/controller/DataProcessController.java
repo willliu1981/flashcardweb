@@ -16,8 +16,11 @@ public class DataProcessController<T> extends AttributeController {
 		this.dao = dao;
 	}
 
-	public String getModel() {
-		return modelStr;
+	public T getModel() {
+		if (this.modelStr != null && this.model == null) {
+			this.model = (T) SpringUtil.getBean(modelStr);
+		}
+		return this.model;
 	}
 
 	public void setModel(String modelStr) {
@@ -27,7 +30,7 @@ public class DataProcessController<T> extends AttributeController {
 	@Override
 	protected void start() {
 		super.start();
-		this.model = (T) SpringUtil.getBean(modelStr);
+		this.model = null;
 	}
 
 }

@@ -10,6 +10,7 @@
 	
 	<h1>Welcome to FlashCard</h1>
 	<h2><a href="page/vocabulary">vocabulary</a></h2>
+	<h2><a href="page/card">card</a></h2>
 	
 </body>
 </html>

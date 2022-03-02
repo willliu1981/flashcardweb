@@ -39,4 +39,33 @@ public class RouteMultiController {
 		return "vocabulary/query";
 	}
 
+	@RequestMapping(value = "card")
+	public String card() {
+
+		return "card/card";
+	}
+
+	@RequestMapping(value = "card/add")
+	public String cardAdd() {
+
+		return "card/create";
+	}
+
+	@RequestMapping(value = "card/update")
+	public String cardUpdate() {
+
+		return "card/update";
+	}
+
+	@RequestMapping(value = "card/delete")
+	public String cardDelete() {
+
+		return "card/delete";
+	}
+
+	@RequestMapping(value = "card/query")
+	public String cardQuery() {
+		return "card/query";
+	}
+
 }

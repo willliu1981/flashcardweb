@@ -12,11 +12,11 @@ public class QueryVocabularyController extends DataProcessController<Object> {
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		this.start();
 		
 		String qID = request.getParameter("vid");
 
 		synchronized (this.getClass()) {
+			this.start();
 			if (qID == null || qID.equals("")) {
 				this.getModelAndView().addObject("list", this.getDao().queryAll());
 			} else {
