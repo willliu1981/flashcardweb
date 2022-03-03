@@ -5,20 +5,34 @@
 <head>
 <meta charset="UTF-8">
 <title>flash card v2</title>
+<script
+	src="<%=request.getContextPath()%>/webjars/jquery/3.4.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+  $(document)
+	  .ready(
+		  function() {
+			$("#send")
+				.click(
+					function() {
+					  var $cid = $("#cid").val();
+					  window.location.href =
+<%out.print(String.format("'%s'", request.getContextPath()));%>
+  + "/process/card/delete/" + $cid;
+					});
+		  });
+</script>
 </head>
 <body>
 	<h1>Delete Card</h1>
-	<form action="<%=request.getContextPath()%>/process/card/delete" method="post">
-		<table>
-			<tr>
-				<td>card id</td>
-				<td><input type="text" name="cid" value="${cid}"/></td>
-			</tr>
-			<tr>
-				<td style="text-align: center" colspan="2"><input type="submit"
-						value="send" /></td>
-			</tr>
-		</table>
-	</form>
+	<table>
+		<tr>
+			<td>card id</td>
+			<td><input type="text" name="cid" id="cid" value="${cid}" /></td>
+		</tr>
+		<tr>
+			<td><input type="button" id="send" value="send" /></td>
+		</tr>
+	</table>
 </body>
 </html>

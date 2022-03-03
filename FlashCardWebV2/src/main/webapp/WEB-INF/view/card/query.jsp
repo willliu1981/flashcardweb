@@ -26,18 +26,15 @@
 </head>
 <body>
 	<h1>Query Card</h1>
-	<form action="<%=request.getContextPath()%>/process/card/query"
-		method="post">
-		<table>
-			<tr>
-				<td>card id</td>
-				<td><input type="text" name="cid" id="cid" value="${cid}" /></td>
-			</tr>
-			<tr>
-				<td><input type="button" id="send" value="send" /></td>
-			</tr>
-		</table>
-	</form>
+	<table>
+		<tr>
+			<td>card id</td>
+			<td><input type="text" name="cid" id="cid" value="${cid}" /></td>
+		</tr>
+		<tr>
+			<td><input type="button" id="send" value="send" /></td>
+		</tr>
+	</table>
 
 </body>
 </html>
