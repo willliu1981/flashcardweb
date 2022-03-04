@@ -37,7 +37,7 @@ public class CardDao extends AbsCardDao {
 	@Override
 	public void update(Card t, Object id) {
 		String sql = "update card set name=?,vid=?,last_time=?,usage_count=?,"
-				+ "tag=?,exam_count=?,pass_count=? where cid=?";
+				+ "tag=?,exam_count=?,pass_count=?,step=?,step_time=? where cid=?";
 
 		Connection conn = this.getConnection();
 		try {
@@ -49,7 +49,9 @@ public class CardDao extends AbsCardDao {
 			st.setString(5, t.getTag());
 			st.setInt(6, t.getExam_count());
 			st.setInt(7, t.getPass_count());
-			st.setInt(8, Integer.parseInt(id.toString()));
+			st.setInt(8, t.getStep());
+			st.setTimestamp(9, t.getStep_time());
+			st.setInt(10, Integer.parseInt(id.toString()));
 
 			st.execute();
 
@@ -71,16 +73,7 @@ public class CardDao extends AbsCardDao {
 			st.setInt(1, Integer.valueOf(id.toString()));
 			ResultSet rs = st.executeQuery();
 			if (rs.next()) {
-				model = new Card();
-				model.setCid(rs.getInt("cid"));
-				model.setName(rs.getString("name"));
-				model.setVid(rs.getString("vid"));
-				model.setCreate_date(rs.getDate("create_date"));
-				model.setLast_time(rs.getTimestamp("create_date"));
-				model.setUsage_count(rs.getInt("usage_count"));
-				model.setTag(rs.getString("tag"));
-				model.setExam_count(rs.getInt("exam_count"));
-				model.setPass_count(rs.getInt("pass_count"));
+				model = this.createModel(rs);
 			}
 
 			this.closeResources(rs, st, conn);
@@ -102,16 +95,7 @@ public class CardDao extends AbsCardDao {
 			ResultSet rs = st.executeQuery();
 			Card model = null;
 			while (rs.next()) {
-				model = new Card();
-				model.setCid(rs.getInt("cid"));
-				model.setName(rs.getString("name"));
-				model.setVid(rs.getString("vid"));
-				model.setCreate_date(rs.getDate("create_date"));
-				model.setLast_time(rs.getTimestamp("create_date"));
-				model.setUsage_count(rs.getInt("usage_count"));
-				model.setTag(rs.getString("tag"));
-				model.setExam_count(rs.getInt("exam_count"));
-				model.setPass_count(rs.getInt("pass_count"));
+				model = this.createModel(rs);
 				list.add(model);
 			}
 

@@ -8,12 +8,29 @@ public class Card {
 	private String name;// not null
 	private String vid;
 	private Date create_date;// not null
-	private Timestamp last_time;// 上次複習時間
-	private Integer usage_count;// 複習次數
+	private Timestamp last_time;// 上次使用時間
+	private Integer usage_count;// 使用次數
 	private Integer exam_count;// 測驗次數
 	private Integer pass_count;// 通過測驗 次數
-
 	private String tag;
+	private Integer step;// 階段
+	private Timestamp step_time;// 當前階段時間
+
+	public Integer getStep() {
+		return step;
+	}
+
+	public void setStep(Integer step) {
+		this.step = step;
+	}
+
+	public Timestamp getStep_time() {
+		return step_time;
+	}
+
+	public void setStep_time(Timestamp step_time) {
+		this.step_time = step_time;
+	}
 
 	public String getTag() {
 		return tag;

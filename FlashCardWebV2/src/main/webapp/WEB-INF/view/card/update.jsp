@@ -29,7 +29,8 @@
 			</tr>
 			<tr>
 				<td>usage count</td>
-				<td><input type="text" name="usage_count" value="${usage_count}" /></td>
+				<td><input type="text" name="usage_count"
+						value="${usage_count}" /></td>
 			</tr>
 			<tr>
 				<td>tag</td>
@@ -42,6 +43,14 @@
 			<tr>
 				<td>pass count</td>
 				<td><input type="text" name="pass_count" value="${pass_count}" /></td>
+			</tr>
+			<tr>
+				<td>step</td>
+				<td><input type="text" name="step" value="${step}" /></td>
+			</tr>
+			<tr>
+				<td>step time</td>
+				<td><input type="text" name="step_time" value="${step_time}" /></td>
 			</tr>
 			<tr>
 				<td style="text-align: center" colspan="2"><input type="submit"
