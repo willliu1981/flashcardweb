@@ -28,6 +28,7 @@ public abstract class AbsCardDao extends AbsDao implements IDao<Card> {
 		model.setPass_count(rs.getInt("pass_count"));
 		model.setStep(rs.getInt("step"));
 		model.setStep_time(rs.getTimestamp("step_time"));
+		model.setUid(rs.getString("uid"));
 
 		return model;
 	}

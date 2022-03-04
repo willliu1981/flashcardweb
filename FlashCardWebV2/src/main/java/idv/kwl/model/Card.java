@@ -6,7 +6,8 @@ import java.sql.Timestamp;
 public class Card {
 	private Integer cid;
 	private String name;// not null
-	private String vid;
+	private String vid;//voicabulary id
+	private String uid;//user id
 	private Date create_date;// not null
 	private Timestamp last_time;// 上次使用時間
 	private Integer usage_count;// 使用次數
@@ -15,6 +16,16 @@ public class Card {
 	private String tag;
 	private Integer step;// 階段
 	private Timestamp step_time;// 當前階段時間
+
+	
+	
+	public String getUid() {
+		return uid;
+	}
+
+	public void setUid(String uid) {
+		this.uid = uid;
+	}
 
 	public Integer getStep() {
 		return step;

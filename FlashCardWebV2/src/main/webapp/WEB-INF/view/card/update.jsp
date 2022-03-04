@@ -20,6 +20,10 @@
 				<td><input type="text" name="name" value="${name}" /></td>
 			</tr>
 			<tr>
+				<td>user id</td>
+				<td><input type="text" name="uid" value="${uid}" /></td>
+			</tr>
+			<tr>
 				<td>vocabulary id</td>
 				<td><input type="text" name="vid" value="${vid}" /></td>
 			</tr>

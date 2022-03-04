@@ -16,14 +16,16 @@ public class CardDao extends AbsCardDao {
 
 	@Override
 	public void create(Card t) {
-		String sql = "insert into card (name,vid,create_date)" + " values (?,?,?)";
+		String sql = "insert into card (name,vid,uid,create_date)"
+				+ " values (?,?,?,?)";
 
 		Connection conn = this.getConnection();
 		try {
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1, t.getName().trim());
 			st.setString(2, t.getVid().trim());
-			st.setDate(3, t.getCreate_date());
+			st.setString(3, t.getUid().trim());
+			st.setDate(4, t.getCreate_date());
 
 			st.execute();
 
@@ -37,7 +39,7 @@ public class CardDao extends AbsCardDao {
 	@Override
 	public void update(Card t, Object id) {
 		String sql = "update card set name=?,vid=?,last_time=?,usage_count=?,"
-				+ "tag=?,exam_count=?,pass_count=?,step=?,step_time=? where cid=?";
+				+ "tag=?,exam_count=?,pass_count=?,step=?,step_time=?,uid=? where cid=?";
 
 		Connection conn = this.getConnection();
 		try {
@@ -51,7 +53,8 @@ public class CardDao extends AbsCardDao {
 			st.setInt(7, t.getPass_count());
 			st.setInt(8, t.getStep());
 			st.setTimestamp(9, t.getStep_time());
-			st.setInt(10, Integer.parseInt(id.toString()));
+			st.setString(10, t.getUid());
+			st.setInt(11, Integer.parseInt(id.toString()));
 
 			st.execute();
 
