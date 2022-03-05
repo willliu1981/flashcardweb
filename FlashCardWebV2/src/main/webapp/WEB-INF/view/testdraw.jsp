@@ -10,18 +10,24 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
+	var $vocabulary;
+	var $translation;
+	var $flipIndex;
+	var $flip = $("#flip");
+
 	$("#draw").click(function() {
-	  var $show = $("#show");
-	  var $show2 = $("#show2");
+	  var $msg = $("#msg");
 	  $.ajax({
 		type : "post",
 		url : "${pageContext.request.contextPath}/process/card/draw",
 		dataType : "json",
 		success : function(data) {
 		  //alert(data.name);
-		  $show.val(data.name);
+		  $flip.val($vocabulary = data.vocabulary);
+		  $translation = data.translation;
+		  $flipIndex = 0;
 		  if (data.isLast) {
-			$show2.val("最後一筆了");
+			$msg.val("最後一筆了");
 		  }
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -30,34 +36,54 @@
 	  });
 
 	});
+
+	$flip.click(function() {
+	  $flipIndex = 1 - $flipIndex;
+	  if ($flipIndex == 0) {
+		$(this).val($vocabulary);
+	  } else {
+		$(this).val($translation);
+	  }
+
+	});
   });
 </script>
+
 <style type="text/css">
 .table_draw {
 	border: 3px #0000FF solid;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 12px;
 }
 
 .table_draw input {
 	font-size: 36px;
 	color: blue;
-}
-
-.table_draw input.red {
-	color: red;
+	width: 100%;
 }
 </style>
+
 </head>
 <body>
-	<h1>test draw</h1>
+	<h1 style="text-align: center">test draw</h1>
 	<table class="table_draw">
 		<tr>
-			<td><input type="button" id="draw" value="draw" /></td>
+			<td colspan="2" align="right"><input type="button" id="draw"
+					value="draw" /></td>
 		</tr>
 		<tr>
-			<td><input type="text" id="show" /></td>
+			<td colspan="2"><input type="text" id="flip"
+					style="height: 240px; text-align: center" readonly /></td>
 		</tr>
 		<tr>
-			<td><input type="text" id="show2" class="red" /></td>
+			<td><input type="button" id="move-left" value="✘"
+					style="color: red" /></td>
+			<td><input type="button" id="move-right" value="✔"
+					style="color: green" /></td>
+		</tr>
+		<tr>
+			<td colspan="2"><input type="text" id="msg" style="color: red" /></td>
 		</tr>
 	</table>
 </body>

@@ -8,9 +8,27 @@ import idv.kwl.model.Card;
 public class CardProxy implements ICard {
 	private Card card;
 	private boolean isLast = false;
+	private String vocabulary;
+	private String translation;
 
 	public CardProxy(Card card) {
 		this.card = card;
+	}
+
+	public String getVocabulary() {
+		return vocabulary;
+	}
+
+	public void setVocabulary(String vocabulary) {
+		this.vocabulary = vocabulary;
+	}
+
+	public String getTranslation() {
+		return translation;
+	}
+
+	public void setTranslation(String translation) {
+		this.translation = translation;
 	}
 
 	public boolean getIsLast() {
