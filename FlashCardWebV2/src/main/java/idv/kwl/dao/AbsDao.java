@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import idv.kwl.connection.DataSource;
-import idv.kwl.model.Card;
+import idv.kwl.model.proxy.ICard;
 import idv.kwl.tool.SpringUtil;
 
 public abstract class AbsDao {
@@ -60,6 +60,6 @@ public abstract class AbsDao {
 		}
 	}
 
-	abstract protected Card createModel(ResultSet rs)throws SQLException ;
+	abstract protected ICard createModel(ResultSet rs)throws SQLException ;
 
 }

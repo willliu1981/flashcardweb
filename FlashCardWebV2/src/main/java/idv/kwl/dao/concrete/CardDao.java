@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import idv.kwl.model.Card;
 import idv.kwl.model.Vocabulary;
+import idv.kwl.model.proxy.ICard;
 
 public class CardDao extends AbsCardDao {
 
@@ -85,6 +86,30 @@ public class CardDao extends AbsCardDao {
 		}
 
 		return model;
+	}
+
+	public List<Card> queryByUserId(Object id) {
+		String sql = "select * from card where uid=? ";
+
+		Connection conn = this.getConnection();
+		List<Card> list = new ArrayList<>();
+		try {
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, id.toString());
+
+			ResultSet rs = st.executeQuery();
+			Card model = null;
+			while (rs.next()) {
+				model = this.createModel(rs);
+				list.add(model);
+			}
+
+			this.closeResources(rs, st, conn);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return list;
 	}
 
 	@Override
