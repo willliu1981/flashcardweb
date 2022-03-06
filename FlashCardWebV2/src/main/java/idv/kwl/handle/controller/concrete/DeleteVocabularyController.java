@@ -11,15 +11,11 @@ import idv.kwl.model.Vocabulary;
 public class DeleteVocabularyController extends DataProcessController<Vocabulary> {
 
 	@Override
-	public ModelAndView handleRequest(HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-
+	public void handleRequestImpl(HttpServletRequest request,
+			HttpServletResponse response, ModelAndView mv) throws Exception {
 		String qID = request.getParameter("vid");
 
 		this.getDao().delete(qID);
-
-
-		return super.handleRequest(request, response);
 	}
 
 }

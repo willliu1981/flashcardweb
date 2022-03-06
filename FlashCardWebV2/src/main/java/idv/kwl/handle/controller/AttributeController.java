@@ -9,7 +9,6 @@ import org.springframework.web.servlet.mvc.Controller;
 public abstract class AttributeController implements Controller {
 
 	private String viewName;
-	private ModelAndView mv;
 
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request,
@@ -31,15 +30,8 @@ public abstract class AttributeController implements Controller {
 		this.viewName = viewName;
 	}
 
-	protected ModelAndView getModelAndView() {
-		if (this.mv == null) {
-			this.mv = new ModelAndView();
-		}
+	private ModelAndView getModelAndView() {
 		return new ModelAndView();
-	}
-
-	protected void start() {
-		this.mv = null;
 	}
 
 }

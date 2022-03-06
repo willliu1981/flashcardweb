@@ -15,7 +15,6 @@ public class QueryVocabularyController extends DataProcessController<Object> {
 
 		String qID = request.getParameter("vid");
 
-		this.start();
 		if (qID == null || qID.equals("")) {
 			mv.addObject("list", this.getDao().queryAll());
 		} else {
