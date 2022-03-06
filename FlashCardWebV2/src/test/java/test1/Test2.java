@@ -20,13 +20,13 @@ public class Test2 {
 		System.out.println(reviews.contains(c2));
 		
 		DrawCardHandler dch=new DrawCardHandler(new DrawCardCase(new ArrayList<>()));
-		dch.addReview(c);
-		dch.addReview(c2);
+		//dch.addReview(c);
+		//dch.addReview(c2);
 		
 		Card c3=new Card();
 		c2.setCid(2);
 		
-		dch.addReview(c3);
+		//dch.addReview(c3);
 		
 		//System.out.println(dch.getTest());
 		

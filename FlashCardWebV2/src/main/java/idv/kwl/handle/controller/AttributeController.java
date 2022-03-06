@@ -14,10 +14,14 @@ public abstract class AttributeController implements Controller {
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		this.getModelAndView().setViewName(this.getViewName());
-
+		ModelAndView mv = this.getModelAndView();
+		mv.setViewName(this.getViewName());
+		handleRequestImpl(request, response, mv);
 		return mv;
 	}
+
+	public abstract void handleRequestImpl(HttpServletRequest request,
+			HttpServletResponse response, ModelAndView mv) throws Exception;
 
 	protected String getViewName() {
 		return viewName;
@@ -31,7 +35,7 @@ public abstract class AttributeController implements Controller {
 		if (this.mv == null) {
 			this.mv = new ModelAndView();
 		}
-		return mv;
+		return new ModelAndView();
 	}
 
 	protected void start() {

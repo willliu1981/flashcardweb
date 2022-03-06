@@ -1,9 +1,14 @@
 package idv.kwl.handle.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.servlet.ModelAndView;
+
 import idv.kwl.dao.IDao;
 import idv.kwl.tool.SpringUtil;
 
-public class DataProcessController<T> extends AttributeController {
+public  class DataProcessController<T> extends AttributeController {
 	private IDao<?> dao;
 	private String modelStr;
 	private T model;
@@ -31,6 +36,13 @@ public class DataProcessController<T> extends AttributeController {
 	protected void start() {
 		super.start();
 		this.model = null;
+	}
+
+	@Override
+	public void handleRequestImpl(HttpServletRequest request, HttpServletResponse response,
+			ModelAndView mv) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
