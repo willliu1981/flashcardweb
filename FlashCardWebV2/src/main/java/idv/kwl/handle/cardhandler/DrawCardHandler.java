@@ -1,19 +1,20 @@
-package idv.kwl.handle.card.handler;
+package idv.kwl.handle.cardhandler;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import idv.kwl.dao.concrete.CardDao;
 import idv.kwl.exception.FindErrorException;
+import idv.kwl.handle.cardhandler.drawcardcase.DrawRule;
 import idv.kwl.model.Card;
 import idv.kwl.tool.SpringUtil;
 
-public class DrawCardHandler {
-	private DrawCardCase cardCase;
+public class DrawCardHandler implements HandleCase<Card> {
+	private HandleCase<Card> cardCase;
 	private List<Card> reviews = new ArrayList<>();
 	private List<Card> passes = new ArrayList<>();
 
-	public DrawCardHandler(DrawCardCase cardCase) {
+	public DrawCardHandler(HandleCase<Card> cardCase) {
 		this.cardCase = cardCase;
 	}
 
@@ -23,7 +24,7 @@ public class DrawCardHandler {
 
 	public void addReview(Integer id) {
 		try {
-			Card card = this.cardCase.getCardByID(id);
+			Card card = this.getCardByID(id);
 			if (!(this.reviews.contains(card) || this.passes.contains(card))) {
 				this.reviews.add(card);
 				card.addUsageCount();
@@ -50,11 +51,11 @@ public class DrawCardHandler {
 
 	public Card drawNext() {
 
-		if (!this.cardCase.hasNext()) {
+		if (!this.hasNext()) {
 			throw new FindErrorException("沒有資料");
 		}
 
-		return this.cardCase.draw();
+		return this.draw();
 	}
 
 	public int count() {
@@ -67,5 +68,34 @@ public class DrawCardHandler {
 
 	public Card getLastCard() {
 		return this.cardCase.getLastCard();
+	}
+
+	public void setDrawMax(int count) {
+		this.cardCase.setDrawMax(count);
+	}
+
+	@Override
+	public Card draw() {
+		return this.cardCase.draw();
+	}
+
+	@Override
+	public Card getCardByID(Integer id) throws FindErrorException {
+		return this.cardCase.getCardByID(id);
+	}
+
+	@Override
+	public boolean hasNext() {
+		return this.cardCase.hasNext();
+	}
+
+	@Override
+	public void setCardList(List<Card> cards) {
+		throw new UnsupportedOperationException(this.getClass()+":不支持 set card list");
+	}
+
+	@Override
+	public void setDrawRule(DrawRule<Card> rule) {
+		throw new UnsupportedOperationException(this.getClass()+":不支持 set card list");
 	}
 }

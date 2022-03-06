@@ -3,8 +3,8 @@ package test1;
 import java.util.ArrayList;
 import java.util.List;
 
-import idv.kwl.handle.card.handler.DrawCardCase;
-import idv.kwl.handle.card.handler.DrawCardHandler;
+import idv.kwl.handle.cardhandler.DrawCardHandler;
+import idv.kwl.handle.cardhandler.drawcardcase.DrawCardCase;
 import idv.kwl.model.Card;
 
 public class Test2 {

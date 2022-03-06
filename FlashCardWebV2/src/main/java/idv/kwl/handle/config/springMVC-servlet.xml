@@ -99,6 +99,17 @@
 		<property name="driver" value="com.mysql.jdbc.Driver" />
 	</bean>
 
+	<bean id="handleCase"
+		class="idv.kwl.handle.cardhandler.drawcardcase.DrawCardCase"
+		scope="prototype">
+		<property name="drawRule" ref="drawRule"/>
+	</bean>
+
+	<bean id="drawRule"
+		class="idv.kwl.handle.cardhandler.drawcardcase.Rule1"
+		scope="prototype">
+	</bean>
+
 
 
 

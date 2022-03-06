@@ -1,5 +1,7 @@
 package idv.kwl.handle.controller.concrete;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -10,8 +12,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import idv.kwl.dao.concrete.CardDao;
 import idv.kwl.dao.concrete.VocabularyDao;
 import idv.kwl.exception.FindErrorException;
-import idv.kwl.handle.card.handler.DrawCardCase;
-import idv.kwl.handle.card.handler.DrawCardHandler;
+import idv.kwl.handle.cardhandler.DrawCardHandler;
+import idv.kwl.handle.cardhandler.HandleCase;
+import idv.kwl.handle.cardhandler.drawcardcase.DrawCardCase;
+import idv.kwl.model.Card;
 import idv.kwl.model.Vocabulary;
 import idv.kwl.model.proxy.CardProxy;
 import idv.kwl.model.proxy.ICard;
@@ -20,14 +24,15 @@ import idv.kwl.tool.SpringUtil;
 @Controller
 @RequestMapping(value = "process/exam")
 public class ExamMultiController {
+	private static final String CARDDAO = "CardDao";
+	private static final String VOCABULARYDAO = "VocabularyDao";
+	private static final String HANDLECASE = "handleCase";
+	private static final String DRAWCARDHANDLER = "drawCardHandler";
 	private CardDao cardDao;
-	// @Autowired
-	// @Qualifier("CardDao")
-	// private CardDao dao;
 
 	private CardDao getCardDao() {
 		if (cardDao == null) {
-			cardDao = (CardDao) SpringUtil.getBean("CardDao");
+			cardDao = (CardDao) SpringUtil.getBean(CARDDAO);
 		}
 		return this.cardDao;
 	}
@@ -39,9 +44,11 @@ public class ExamMultiController {
 				.getAttribute("drawCardHandler");
 		if ((drawCardHandler = (DrawCardHandler) session
 				.getAttribute("drawCardHandler")) == null) {
-			drawCardHandler = new DrawCardHandler(
-					new DrawCardCase(getCardDao().queryByUserId(userId)));
-			session.setAttribute("drawCardHandler", drawCardHandler);
+			List<Card> cards = getCardDao().queryByUserId(userId);
+			HandleCase handleCase = (HandleCase) SpringUtil.getBean(HANDLECASE);
+			handleCase.setCardList(cards);
+			drawCardHandler = new DrawCardHandler(handleCase);
+			session.setAttribute(DRAWCARDHANDLER, drawCardHandler);
 		}
 
 		return drawCardHandler;
@@ -60,7 +67,7 @@ public class ExamMultiController {
 			cardProxy = new CardProxy(drawCardHandler.getLastCard());
 			cardProxy.setIsLast();
 		} finally {
-			vocabulary = ((VocabularyDao) SpringUtil.getBean("VocabularyDao"))
+			vocabulary = ((VocabularyDao) SpringUtil.getBean(VOCABULARYDAO))
 					.queryById(cardProxy.getVid());
 			cardProxy.setVocabulary(vocabulary.getVocabulary());
 			cardProxy.setTranslation(vocabulary.getTranslation());
@@ -81,6 +88,13 @@ public class ExamMultiController {
 	public void flipLeft(HttpSession session, @PathVariable("cid") Integer id) {
 		DrawCardHandler drawCardHandler = getDrawCardHandler(session);
 		drawCardHandler.addReview(id);
+	}
+
+	@RequestMapping(value = "count/{number}")
+	public String count(HttpSession session, @PathVariable("number") Integer number) {
+		DrawCardHandler drawCardHandler = getDrawCardHandler(session);
+		drawCardHandler.setDrawMax(number);
+		return "exam/draw";
 	}
 
 }

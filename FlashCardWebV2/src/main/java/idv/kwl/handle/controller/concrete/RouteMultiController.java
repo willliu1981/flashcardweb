@@ -68,9 +68,9 @@ public class RouteMultiController {
 		return "card/query";
 	}
 
-	@RequestMapping(value = "exam/draw")
-	public String cardDraw() {
-		return "exam/draw";
+	@RequestMapping(value = "exam")
+	public String exam() {
+		return "exam/exam";
 	}
 
 }
