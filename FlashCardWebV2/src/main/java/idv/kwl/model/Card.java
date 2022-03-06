@@ -79,6 +79,10 @@ public class Card implements ICard {
 		this.pass_count = pass_count;
 	}
 
+	public void addPass_count() {
+		this.setPass_count(this.getPass_count() + 1);
+	}
+
 	@Override
 	public Integer getCid() {
 		return cid;
@@ -142,6 +146,33 @@ public class Card implements ICard {
 	@Override
 	public void setCreate_date(Date create_date) {
 		this.create_date = create_date;
+	}
+
+	@Override
+	public int hashCode() {
+		int prime = 31;
+		int res = 7;
+		res = res * prime + this.cid;
+		return res;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (obj == null) {
+			return false;
+		}
+
+		if (this.getClass() != obj.getClass()) {
+			return false;
+		}
+
+		Card other = (Card) obj;
+		return other.getCid().equals(this.getCid());
+
 	}
 
 	@Override
