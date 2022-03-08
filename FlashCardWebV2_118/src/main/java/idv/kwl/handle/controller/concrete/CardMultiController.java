@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import idv.fc.dao.concrete.CardDao;
+import idv.fc.dao.CardDao;
 import idv.fc.model.Card;
 import idv.fc.tool.SpringUtil;
 
@@ -44,7 +44,7 @@ public class CardMultiController {
 
 	@RequestMapping(value = "update")
 	public String update(Card card) {
-		getDao().update(card, card.getCid());
+		getDao().update(card, card.getId());
 
 		return "testresult";
 	}

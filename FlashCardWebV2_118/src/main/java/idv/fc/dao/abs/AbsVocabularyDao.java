@@ -1,4 +1,4 @@
-package idv.fc.dao;
+package idv.fc.dao.abs;
 
 public abstract class AbsVocabularyDao<T> extends AbsDao implements IDao<T> {
 

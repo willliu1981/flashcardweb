@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
-import idv.fc.dao.IDao;
+import idv.fc.dao.abs.IDao;
 import idv.fc.tool.SpringUtil;
 
 public abstract class DataProcessController<T> extends AttributeController {

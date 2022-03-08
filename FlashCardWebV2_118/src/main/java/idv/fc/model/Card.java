@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 import idv.kwl.model.proxy.ICard;
 
 public class Card {
-	private Integer cid;
+	private Integer id;
 	private String name;// not null
 	private String vid;// voicabulary id
 	private String uid;// user id
@@ -71,12 +71,12 @@ public class Card {
 		this.setPass_count(this.getPass_count() + 1);
 	}
 
-	public Integer getCid() {
-		return cid;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setCid(Integer cid) {
-		this.cid = cid;
+	public void setId(Integer cid) {
+		this.id = cid;
 	}
 
 	public void addUsageCount() {
@@ -126,7 +126,7 @@ public class Card {
 	public int hashCode() {
 		int prime = 31;
 		int res = 7;
-		res = res * prime + this.cid;
+		res = res * prime + this.id;
 		return res;
 	}
 
@@ -144,7 +144,7 @@ public class Card {
 		}
 
 		Card other = (Card) obj;
-		return other.getCid().equals(this.getCid());
+		return other.getId().equals(this.getId());
 
 	}
 

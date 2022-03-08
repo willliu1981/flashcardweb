@@ -114,13 +114,13 @@ public class CardProxy implements ICard {
 	@Override
 	public Integer getCid() {
 		// TODO Auto-generated method stub
-		return this.card.getCid();
+		return this.card.getId();
 	}
 
 	@Override
 	public void setCid(Integer cid) {
 		// TODO Auto-generated method stub
-		this.card.setCid(cid);
+		this.card.setId(cid);
 	}
 
 	@Override

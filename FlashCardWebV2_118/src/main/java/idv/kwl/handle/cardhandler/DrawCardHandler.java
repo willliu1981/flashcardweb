@@ -3,7 +3,7 @@ package idv.kwl.handle.cardhandler;
 import java.util.ArrayList;
 import java.util.List;
 
-import idv.fc.dao.concrete.CardDao;
+import idv.fc.dao.CardDao;
 import idv.fc.model.Card;
 import idv.fc.tool.SpringUtil;
 import idv.kwl.exception.FindErrorException;

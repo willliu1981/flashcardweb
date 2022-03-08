@@ -2,7 +2,7 @@ package idv.kwl.model.proxy;
 
 import java.sql.Date;
 
-import idv.fc.dao.IDao;
+import idv.fc.dao.abs.IDao;
 import idv.fc.model.Vocabulary;
 
 public class VocabularyProxy implements IVocabulary {
@@ -32,13 +32,13 @@ public class VocabularyProxy implements IVocabulary {
 	@Override
 	public String getVid() {
 		// TODO Auto-generated method stub
-		return this.voca.getVid();
+		return this.voca.getId();
 	}
 
 	@Override
 	public void setVid(String vid) {
 		// TODO Auto-generated method stub
-		this.voca.setVid(vid);
+		this.voca.setId(vid);
 	}
 
 	public VocabularyProxy vid(String vid) {

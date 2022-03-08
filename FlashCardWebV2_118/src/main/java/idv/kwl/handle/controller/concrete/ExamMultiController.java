@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import idv.fc.dao.concrete.CardDao;
-import idv.fc.dao.concrete.VocabularyDao;
+import idv.fc.dao.CardDao;
+import idv.fc.dao.VocabularyDao;
 import idv.fc.model.Card;
 import idv.fc.model.Vocabulary;
 import idv.fc.tool.SpringUtil;

@@ -20,12 +20,12 @@
 
 
 	<bean id="VocabularyDao"
-		class="idv.fc.dao.concrete.VocabularyDao" >
+		class="idv.fc.dao.VocabularyDao" >
 		<property name="dataSource" ref="DataSource"></property>
 	</bean>
 	
 	<bean id="CardDao"
-		class="idv.fc.dao.concrete.CardDao" >
+		class="idv.fc.dao.CardDao" >
 		<property name="dataSource" ref="DataSource"></property>
 	</bean>
 	

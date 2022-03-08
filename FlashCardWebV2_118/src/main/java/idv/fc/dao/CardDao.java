@@ -1,4 +1,4 @@
-package idv.fc.dao.concrete;
+package idv.fc.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,11 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
-
+import idv.fc.dao.abs.AbsCardDao;
 import idv.fc.model.Card;
-import idv.fc.model.Vocabulary;
-import idv.kwl.model.proxy.ICard;
 
 public class CardDao extends AbsCardDao {
 

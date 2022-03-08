@@ -3,7 +3,7 @@ package idv.fc.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import idv.fc.dao.concrete.VocabularyDao;
+import idv.fc.dao.VocabularyDao;
 import idv.fc.tool.SpringUtil;
 
 @Controller

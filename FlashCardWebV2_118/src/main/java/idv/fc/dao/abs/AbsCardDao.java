@@ -1,10 +1,8 @@
-package idv.fc.dao.concrete;
+package idv.fc.dao.abs;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import idv.fc.dao.AbsDao;
-import idv.fc.dao.IDao;
 import idv.fc.model.Card;
 
 public abstract class AbsCardDao extends AbsDao implements IDao<Card> {
@@ -17,7 +15,7 @@ public abstract class AbsCardDao extends AbsDao implements IDao<Card> {
 
 	protected Card createModel(ResultSet rs) throws SQLException {
 		Card model = new Card();
-		model.setCid(rs.getInt("cid"));
+		model.setId(rs.getInt("cid"));
 		model.setName(rs.getString("name"));
 		model.setVid(rs.getString("vid"));
 		model.setCreate_date(rs.getDate("create_date"));

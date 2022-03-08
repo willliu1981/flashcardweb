@@ -52,7 +52,7 @@ public class DrawCardCase implements HandleableCase<Card> {
 
 	@Override
 	public Card getCardByID(Integer id) throws FindErrorException {
-		return this.cards.stream().filter(x -> x.getCid().equals(id)).findFirst()
+		return this.cards.stream().filter(x -> x.getId().equals(id)).findFirst()
 				.orElseThrow(() -> new FindErrorException(this.getClass() + ":" + id));
 	}
 

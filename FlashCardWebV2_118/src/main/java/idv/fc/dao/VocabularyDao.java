@@ -1,4 +1,4 @@
-package idv.fc.dao.concrete;
+package idv.fc.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import idv.fc.dao.AbsVocabularyDao;
+import idv.fc.dao.abs.AbsVocabularyDao;
 import idv.fc.model.Vocabulary;
 import idv.kwl.model.proxy.ICard;
 
@@ -21,7 +21,7 @@ public class VocabularyDao extends AbsVocabularyDao<Vocabulary> {
 		Connection conn = this.getConnection();
 		try {
 			PreparedStatement st = conn.prepareStatement(sql);
-			st.setString(1, t.getVid().trim());
+			st.setString(1, t.getId().trim());
 			st.setString(2, t.getVocabulary().trim());
 			st.setString(3, t.getTranslation());
 			st.setDate(4, t.getCreate_date());
@@ -43,7 +43,7 @@ public class VocabularyDao extends AbsVocabularyDao<Vocabulary> {
 		Connection conn = this.getConnection();
 		try {
 			PreparedStatement st = conn.prepareStatement(sql);
-			st.setString(1, t.getVid().trim());
+			st.setString(1, t.getId().trim());
 			st.setString(2, t.getVocabulary().trim());
 			st.setString(3, t.getTranslation());
 			st.setString(4, t.getTag());
@@ -70,7 +70,7 @@ public class VocabularyDao extends AbsVocabularyDao<Vocabulary> {
 			ResultSet rs = st.executeQuery();
 			if (rs.next()) {
 				model = new Vocabulary();
-				model.setVid(rs.getString("vid"));
+				model.setId(rs.getString("vid"));
 				model.setVocabulary(rs.getString("vocabulary"));
 				model.setTranslation(rs.getString("translation"));
 				model.setCreate_date(rs.getDate("create_date"));
@@ -96,7 +96,7 @@ public class VocabularyDao extends AbsVocabularyDao<Vocabulary> {
 			Vocabulary model = null;
 			while (rs.next()) {
 				model = new Vocabulary();
-				model.setVid(rs.getString("vid"));
+				model.setId(rs.getString("vid"));
 				model.setVocabulary(rs.getString("vocabulary"));
 				model.setTranslation(rs.getString("translation"));
 				model.setCreate_date(rs.getDate("create_date"));

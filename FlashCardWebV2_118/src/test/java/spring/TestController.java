@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
-import idv.fc.dao.concrete.VocabularyDao;
+import idv.fc.dao.VocabularyDao;
 import idv.fc.model.Vocabulary;
 import idv.kwl.model.proxy.IVocabulary;
 
@@ -25,7 +25,7 @@ public class TestController implements Controller {
 		String qVoca = request.getParameter("vocabulary");
 		String qTrans = request.getParameter("translation");
 
-		voca.setVid("v_" + qVoca);
+		voca.setId("v_" + qVoca);
 		voca.setVocabulary(qVoca);
 		voca.setTranslation(qTrans);
 		voca.setCreate_date(Date.valueOf(LocalDate.now()));
