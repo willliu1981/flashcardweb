@@ -8,10 +8,20 @@ import java.sql.Statement;
 
 import javax.sql.DataSource;
 
+import idv.fc.model.Vocabulary;
 import idv.fc.tool.SpringUtil;
 
-public abstract class AbsDao {
+public abstract class BaseDao{
 	private DataSource dataSource;
+	private String tableName;
+
+	public String getTableName() {
+		return tableName;
+	}
+
+	protected void setTableName(String name) {
+		this.tableName = name;
+	}
 
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
@@ -48,7 +58,7 @@ public abstract class AbsDao {
 		}
 	}
 
-	protected void delete(Object id, String sql) {
+	public void delete(Object id, String sql) {
 		Connection conn = this.getConnection();
 
 		try {
@@ -61,5 +71,12 @@ public abstract class AbsDao {
 			e.printStackTrace();
 		}
 	}
+
+	public void delete(Object id) {
+		String sql = String.format("delete from  %s where id=?", this.tableName);
+		this.delete(id, sql);
+	}
+	
+
 
 }

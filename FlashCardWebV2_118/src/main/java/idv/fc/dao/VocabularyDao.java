@@ -11,11 +11,11 @@ import idv.fc.dao.abs.AbsVocabularyDao;
 import idv.fc.model.Vocabulary;
 import idv.kwl.model.proxy.ICard;
 
-public class VocabularyDao extends AbsVocabularyDao<Vocabulary> {
+public class VocabularyDao extends AbsVocabularyDao {
 
 	@Override
 	public void create(Vocabulary t) {
-		String sql = "insert into vocabulary (vid,vocabulary,translation,create_date)"
+		String sql = "insert into vocabulary (id,vocabulary,translation,create_date)"
 				+ " values (?,?,?,?)";
 
 		Connection conn = this.getConnection();
@@ -37,8 +37,8 @@ public class VocabularyDao extends AbsVocabularyDao<Vocabulary> {
 
 	@Override
 	public void update(Vocabulary t, Object id) {
-		String sql = "update vocabulary set vid=?,vocabulary=?,translation=?"
-				+ ",tag=? where vid=?";
+		String sql = "update vocabulary set id=?,vocabulary=?,translation=?"
+				+ ",tag=? where id=?";
 
 		Connection conn = this.getConnection();
 		try {
@@ -60,7 +60,7 @@ public class VocabularyDao extends AbsVocabularyDao<Vocabulary> {
 
 	@Override
 	public Vocabulary queryById(Object id) {
-		String sql = "select * from vocabulary where vid=?";
+		String sql = "select * from vocabulary where id=?";
 
 		Connection conn = this.getConnection();
 		Vocabulary model = null;
@@ -69,12 +69,7 @@ public class VocabularyDao extends AbsVocabularyDao<Vocabulary> {
 			st.setString(1, id.toString());
 			ResultSet rs = st.executeQuery();
 			if (rs.next()) {
-				model = new Vocabulary();
-				model.setId(rs.getString("vid"));
-				model.setVocabulary(rs.getString("vocabulary"));
-				model.setTranslation(rs.getString("translation"));
-				model.setCreate_date(rs.getDate("create_date"));
-				model.setTag(rs.getString("tag"));
+				model = this.createModel(rs);
 			}
 			this.closeResources(rs, st, conn);
 		} catch (SQLException e) {
@@ -95,12 +90,7 @@ public class VocabularyDao extends AbsVocabularyDao<Vocabulary> {
 			ResultSet rs = st.executeQuery();
 			Vocabulary model = null;
 			while (rs.next()) {
-				model = new Vocabulary();
-				model.setId(rs.getString("vid"));
-				model.setVocabulary(rs.getString("vocabulary"));
-				model.setTranslation(rs.getString("translation"));
-				model.setCreate_date(rs.getDate("create_date"));
-				model.setTag(rs.getString("tag"));
+				model = this.createModel(rs);
 				list.add(model);
 			}
 

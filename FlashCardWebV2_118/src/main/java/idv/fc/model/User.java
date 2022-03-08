@@ -1,14 +1,17 @@
 package idv.fc.model;
 
+import java.sql.Date;
+
 public class User {
-	private String id;// not null
-	private String username;// not null
-	private String password;// not null
-	private String dsiplay_name;// not null
-	private Integer gender;// not null
-	private Integer age;// not null
-	private Integer authority;
+	private String id;// {pk,not null,unique}
+	private String username;// {not null,unique}
+	private String password;// {not null}
+	private String dsiplay_name;
+	private Integer gender;
+	private Integer age;
+	private String authority;
 	private String tag;
+	private Date create_date;
 
 	public String getId() {
 		return id;
@@ -16,6 +19,14 @@ public class User {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public Date getCreate_date() {
+		return create_date;
+	}
+
+	public void setCreate_date(Date create_date) {
+		this.create_date = create_date;
 	}
 
 	public Integer getAge() {
@@ -58,11 +69,11 @@ public class User {
 		this.gender = gender;
 	}
 
-	public Integer getAuthority() {
+	public String getAuthority() {
 		return authority;
 	}
 
-	public void setAuthority(Integer authority) {
+	public void setAuthority(String authority) {
 		this.authority = authority;
 	}
 

@@ -5,17 +5,19 @@ import java.sql.SQLException;
 
 import idv.fc.model.Card;
 
-public abstract class AbsCardDao extends AbsDao implements IDao<Card> {
+public abstract class AbsCardDao extends BaseDao
+		implements Dao<Card>, ProcessData<Card> {
 	@Override
 	public void delete(Object id) {
-		String sql = "delete from  card where cid=?";
+		String sql = "delete from  card where id=?";
 
 		this.delete(id, sql);
 	}
 
-	protected Card createModel(ResultSet rs) throws SQLException {
+	@Override
+	public Card createModel(ResultSet rs) throws SQLException {
 		Card model = new Card();
-		model.setId(rs.getInt("cid"));
+		model.setId(rs.getInt("id"));
 		model.setName(rs.getString("name"));
 		model.setVid(rs.getString("vid"));
 		model.setCreate_date(rs.getDate("create_date"));

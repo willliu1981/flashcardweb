@@ -2,7 +2,7 @@ package idv.kwl.model.proxy;
 
 import java.sql.Date;
 
-import idv.fc.dao.abs.IDao;
+import idv.fc.dao.abs.Dao;
 import idv.fc.model.Vocabulary;
 
 public class VocabularyProxy implements IVocabulary {
@@ -97,11 +97,11 @@ public class VocabularyProxy implements IVocabulary {
 		return this;
 	}
 
-	public void create(IDao dao) {
+	public void create(Dao dao) {
 		dao.create(this.voca);
 	}
 
-	public void update(IDao dao, Object id) {
+	public void update(Dao dao, Object id) {
 		System.out.println(this.getClass() + ": " + this.voca);
 		System.out.println(this.getClass() + ": " + dao);
 		dao.update(this.voca, id);

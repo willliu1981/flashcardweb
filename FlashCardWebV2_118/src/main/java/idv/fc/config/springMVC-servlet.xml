@@ -25,8 +25,7 @@
 	<mvc:annotation-driven
 		conversion-service="converterUtil" />
 
-	<context:component-scan
-		base-package="idv.fc"></context:component-scan>
+	<context:component-scan base-package="idv.fc"></context:component-scan>
 
 	<context:property-placeholder
 		location="classpath:idv/fc/config/jdbc.properties" />
@@ -47,6 +46,8 @@
 			</list>
 		</property>
 	</bean>
+	
+	
 
 <!--  
 	<bean name="/process/vocabulary/add"
@@ -75,6 +76,8 @@
 		<property name="dao" ref="VocabularyDao" />
 	</bean>
 -->
+
+
 
 	<bean id="DataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">

@@ -5,18 +5,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
-import idv.fc.dao.abs.IDao;
+import idv.fc.dao.abs.Dao;
 import idv.fc.tool.SpringUtil;
 
 public abstract class DataProcessController<T> extends AttributeController {
-	private IDao<?> dao;
+	private Dao<?> dao;
 	private String modelStr;
 
-	public IDao<?> getDao() {
+	public Dao<?> getDao() {
 		return dao;
 	}
 
-	public void setDao(IDao<?> dao) {
+	public void setDao(Dao<?> dao) {
 		this.dao = dao;
 	}
 

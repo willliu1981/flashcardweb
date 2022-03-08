@@ -5,7 +5,7 @@ import java.sql.Date;
 import idv.kwl.model.proxy.IVocabulary;
 
 public class Vocabulary {
-	private String id;
+	private String id;// {pk,not null,unique}
 	private String vocabulary;// not null, unique
 	private String translation;// not null
 	private Date create_date;// not null

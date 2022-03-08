@@ -37,7 +37,7 @@ public class CardDao extends AbsCardDao {
 	@Override
 	public void update(Card t, Object id) {
 		String sql = "update card set name=?,vid=?,last_time=?,usage_count=?,"
-				+ "tag=?,exam_count=?,pass_count=?,step=?,step_time=?,uid=? where cid=?";
+				+ "tag=?,exam_count=?,pass_count=?,step=?,step_time=?,uid=? where id=?";
 
 		Connection conn = this.getConnection();
 		try {
@@ -65,7 +65,7 @@ public class CardDao extends AbsCardDao {
 
 	@Override
 	public Card queryById(Object id) {
-		String sql = "select * from card where cid=?";
+		String sql = "select * from card where id=?";
 
 		Connection conn = this.getConnection();
 		Card model = null;

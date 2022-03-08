@@ -15,20 +15,20 @@
 
 
 
-	<context:component-scan
-		base-package="idv.fc"></context:component-scan>
+	<context:component-scan base-package="idv.fc"></context:component-scan>
 
 
-	<bean id="VocabularyDao"
-		class="idv.fc.dao.VocabularyDao" >
+	<bean id="VocabularyDao" class="idv.fc.dao.VocabularyDao2">
+		<property name="dataSource" ref="DataSource"></property>
+		<property name="tableName">
+			<value>vocabulary</value>
+		</property>
+	</bean>
+
+	<bean id="CardDao" class="idv.fc.dao.CardDao">
 		<property name="dataSource" ref="DataSource"></property>
 	</bean>
-	
-	<bean id="CardDao"
-		class="idv.fc.dao.CardDao" >
-		<property name="dataSource" ref="DataSource"></property>
-	</bean>
-	
+
 
 
 

@@ -6,11 +6,11 @@ import java.sql.Timestamp;
 import idv.kwl.model.proxy.ICard;
 
 public class Card {
-	private Integer id;
-	private String name;// not null
+	private Integer id;// {pk,not null,unique,unsigned,ai}
+	private String name;// {not null}
 	private String vid;// voicabulary id
-	private String uid;// user id
-	private Date create_date;// not null
+	private String uid;// {not null}, user id
+	private Date create_date;// {not null}
 	private Timestamp last_time;// 上次使用時間
 	private Integer usage_count;// 使用次數
 	private Integer exam_count;// 測驗次數(亦增加 使用次數)
@@ -147,11 +147,5 @@ public class Card {
 		return other.getId().equals(this.getId());
 
 	}
-
-
-
-
-
-
 
 }

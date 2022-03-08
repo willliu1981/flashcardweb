@@ -1,22 +1,30 @@
-package idv.fc.dao.abs;
+package idv.fc.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import idv.fc.dao.abs.BaseDao2;
 import idv.fc.model.Vocabulary;
 
-public abstract class AbsVocabularyDao extends BaseDao
-		implements Dao<Vocabulary>, ProcessData<Vocabulary> {
+public class VocabularyDao2 extends BaseDao2<Vocabulary> {
 
-	@Override
-	public void delete(Object id) {
-		String sql = "delete from  vocabulary where id=?";
-
-		this.delete(id, sql);
+	private VocabularyDao2() {
 	}
 
 	@Override
-	public Vocabulary createModel(ResultSet rs) throws SQLException {
+	public void create(Vocabulary t) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void update(Vocabulary t, Object id) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public Vocabulary createModelForQuery(ResultSet rs) throws SQLException {
 		Vocabulary model = new Vocabulary();
 		model.setId(rs.getString("id"));
 		model.setVocabulary(rs.getString("vocabulary"));

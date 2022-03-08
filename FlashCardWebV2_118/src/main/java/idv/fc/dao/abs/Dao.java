@@ -2,7 +2,7 @@ package idv.fc.dao.abs;
 
 import java.util.List;
 
-public interface IDao<T> {
+public interface Dao<T> {
 	void create(T t);
 
 	void update(T t, Object id);
