@@ -22,9 +22,9 @@ public class TestController {
 	public String add() {
 		Dao<Vocabulary> dao = (Dao<Vocabulary>) SpringUtil.getBean("VocabularyDao");
 		Vocabulary v = new Vocabulary();
-		v.setId("xxx");
-		v.setVocabulary("xx1");
-		v.setTranslation("yy2");
+		v.setId("v_give");
+		v.setVocabulary("give");
+		v.setTranslation("授予");
 		dao.create(v);
 		return "test/test";
 	}

@@ -1,5 +1,7 @@
 package idv.fc.dao.abs;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,6 +10,16 @@ import java.util.Map;
 import idv.fc.tool.StringConstructor;
 
 public abstract class CommonDao<T> extends BaseDao<T> {
+	StringConstructor stringConstructor;
+
+	protected StringConstructor getStringConstructor() {
+		return stringConstructor;
+	}
+
+	public void setStringConstructor(StringConstructor stringConstructor) {
+		this.stringConstructor = stringConstructor;
+	}
+
 	@Override
 	public void create(T model) {
 		Map<String, Object> map = new HashMap<>();
@@ -24,9 +36,9 @@ public abstract class CommonDao<T> extends BaseDao<T> {
 		String[] keyArr = keys.toArray(new String[keys.size()]);
 		Object[] valueArr = values.toArray(new Object[values.size()]);
 
-		String cols = StringConstructor.join(keyArr);
+		String cols = getStringConstructor().join(keyArr);
 
-		String questionMarks = StringConstructor.join("%s?", keyArr, false);
+		String questionMarks = getStringConstructor().join("%s?", keyArr, false);
 
 		String sql = String.format("insert into %s (%s) values (%s)",
 				this.getTableName(), cols, questionMarks);
@@ -53,7 +65,7 @@ public abstract class CommonDao<T> extends BaseDao<T> {
 		String[] keyArr = keys.toArray(new String[keys.size()]);
 		Object[] valueArr = values.toArray(new Object[values.size()]);
 
-		String fragment = StringConstructor.join("%s=?", keyArr);
+		String fragment = getStringConstructor().join("%s=?", keyArr);
 
 		String sql = String.format("update %s set %s where id=?", this.getTableName(),
 				fragment);
@@ -79,4 +91,8 @@ public abstract class CommonDao<T> extends BaseDao<T> {
 		String sql = String.format("select * from %s", this.getTableName());
 		return querySQL(sql);
 	}
+
+	protected abstract void createMapForCreate(T model, Map<String, Object> cols);
+
+	protected abstract void createMapForUpdate(T model, Map<String, Object> cols);
 }

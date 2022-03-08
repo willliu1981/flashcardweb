@@ -20,7 +20,8 @@
 			<param-value>
 				classpath:idv/fc/config/springMVC-servlet.xml,
 				classpath:idv/fc/config/dao.xml
-				classpath:idv/fc/config/model.xml
+				classpath:idv/fc/config/model.xml,
+				classpath:idv/fc/config/tool.xml
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>

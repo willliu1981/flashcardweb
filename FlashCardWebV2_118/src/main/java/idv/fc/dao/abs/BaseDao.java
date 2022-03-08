@@ -108,10 +108,6 @@ public abstract class BaseDao<T> implements Dao<T> {
 		}
 	}
 
-	protected abstract void createMapForCreate(T model, Map<String, Object> cols);
-
-	protected abstract void createMapForUpdate(T model, Map<String, Object> cols);
-
 	public int executeSQL(String sql, Object[] params) {
 		Connection conn = this.getConnection();
 		PreparedStatement st = null;
@@ -133,5 +129,4 @@ public abstract class BaseDao<T> implements Dao<T> {
 	}
 
 	protected abstract T createModelForQuery(ResultSet rs) throws SQLException;
-
 }
