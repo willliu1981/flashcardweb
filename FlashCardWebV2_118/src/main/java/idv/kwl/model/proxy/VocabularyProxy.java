@@ -3,7 +3,7 @@ package idv.kwl.model.proxy;
 import java.sql.Date;
 
 import idv.fc.dao.IDao;
-import idv.kwl.model.Vocabulary;
+import idv.fc.model.Vocabulary;
 
 public class VocabularyProxy implements IVocabulary {
 	private Vocabulary voca;

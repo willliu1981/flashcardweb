@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import idv.fc.dao.concrete.CardDao;
+import idv.fc.model.Card;
 import idv.fc.tool.SpringUtil;
-import idv.kwl.model.Card;
 
 @Controller
 @RequestMapping(value = "process/card")

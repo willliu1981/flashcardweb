@@ -14,7 +14,6 @@
         https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 <!--  
-	<mvc:annotation-driven />
 	<context:annotation-config />
 	-->
 	
@@ -22,11 +21,12 @@
 	 <!--  
 	<mvc:default-servlet-handler />
 -->
+
 	<mvc:annotation-driven
 		conversion-service="converterUtil" />
 
 	<context:component-scan
-		base-package="idv.fc,spring"></context:component-scan>
+		base-package="idv.fc"></context:component-scan>
 
 	<context:property-placeholder
 		location="classpath:idv/fc/config/jdbc.properties" />
@@ -39,21 +39,6 @@
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 
-<!-- 搜索不到 test package -->
-<!-- 
-	<bean name="/test" class="spring.TestController"></bean>
- -->
-
-<!--  
-	<bean name="/word/vocabulary/test"
-		class="idv.kwl.handle.controller.concrete.TestController">
-		<property name="viewName" value="testresult" />
-		<property name="dao" ref="VocabularyDao" />
-		<property name="model" ref="VocabularyModel" />
-
-	</bean>
--->
-
 	<bean id="converterUtil"
 		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
 		<property name="converters">
@@ -63,6 +48,7 @@
 		</property>
 	</bean>
 
+<!--  
 	<bean name="/process/vocabulary/add"
 		class="idv.kwl.handle.controller.concrete.CreateVocabularyController">
 		<property name="viewName" value="testresult" />
@@ -88,6 +74,7 @@
 		<property name="viewName" value="testlist" />
 		<property name="dao" ref="VocabularyDao" />
 	</bean>
+-->
 
 	<bean id="DataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">

@@ -5,8 +5,7 @@ import java.sql.SQLException;
 
 import idv.fc.dao.AbsDao;
 import idv.fc.dao.IDao;
-import idv.kwl.model.Card;
-import idv.kwl.model.proxy.ICard;
+import idv.fc.model.Card;
 
 public abstract class AbsCardDao extends AbsDao implements IDao<Card> {
 	@Override

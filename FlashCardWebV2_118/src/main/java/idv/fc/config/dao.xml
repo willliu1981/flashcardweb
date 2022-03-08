@@ -16,7 +16,7 @@
 
 
 	<context:component-scan
-		base-package="idv.kwl"></context:component-scan>
+		base-package="idv.fc"></context:component-scan>
 
 
 	<bean id="VocabularyDao"

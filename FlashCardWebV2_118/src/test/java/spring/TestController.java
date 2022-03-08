@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
 import idv.fc.dao.concrete.VocabularyDao;
-import idv.kwl.model.Vocabulary;
+import idv.fc.model.Vocabulary;
 import idv.kwl.model.proxy.IVocabulary;
 
 public class TestController implements Controller {

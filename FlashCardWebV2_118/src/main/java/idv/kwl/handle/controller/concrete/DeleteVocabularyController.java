@@ -5,8 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import idv.fc.model.Vocabulary;
 import idv.kwl.handle.controller.DataProcessController;
-import idv.kwl.model.Vocabulary;
 
 public class DeleteVocabularyController extends DataProcessController<Vocabulary> {
 

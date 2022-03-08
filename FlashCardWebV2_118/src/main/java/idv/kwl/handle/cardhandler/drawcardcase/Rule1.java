@@ -3,7 +3,7 @@ package idv.kwl.handle.cardhandler.drawcardcase;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import idv.kwl.model.Card;
+import idv.fc.model.Card;
 
 public class Rule1 implements DrawRule<Card> {
 

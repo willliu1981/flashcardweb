@@ -1,4 +1,4 @@
-package idv.kwl.model;
+package idv.fc.model;
 
 import java.sql.Date;
 

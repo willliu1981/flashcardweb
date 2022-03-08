@@ -3,7 +3,7 @@ package idv.kwl.model.proxy;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-import idv.kwl.model.Card;
+import idv.fc.model.Card;
 
 public class CardProxy implements ICard {
 	private Card card;

@@ -9,8 +9,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import idv.kwl.model.Card;
-import idv.kwl.model.Vocabulary;
+import idv.fc.model.Card;
+import idv.fc.model.Vocabulary;
 import idv.kwl.model.proxy.ICard;
 
 public class CardDao extends AbsCardDao {

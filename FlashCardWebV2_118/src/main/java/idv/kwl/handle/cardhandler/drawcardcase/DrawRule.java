@@ -2,7 +2,7 @@ package idv.kwl.handle.cardhandler.drawcardcase;
 
 import java.util.List;
 
-import idv.kwl.model.Card;
+import idv.fc.model.Card;
 
 public interface DrawRule<T> {
 

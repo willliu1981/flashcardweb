@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import idv.fc.dao.concrete.CardDao;
+import idv.fc.model.Card;
 import idv.fc.tool.SpringUtil;
 import idv.kwl.exception.FindErrorException;
 import idv.kwl.handle.cardhandler.drawcardcase.DrawRule;
-import idv.kwl.model.Card;
 
 public class DrawCardHandler implements HandleableCase<Card> {
 	private HandleableCase<Card> cardCase;

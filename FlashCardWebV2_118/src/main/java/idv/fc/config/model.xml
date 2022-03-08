@@ -15,19 +15,19 @@
 
 
 
-	<context:component-scan
-		base-package="idv.kwl,spring"></context:component-scan>
+	<context:component-scan base-package="idv.fc"></context:component-scan>
 
 
-	<bean id="VocabularyModel" class="idv.kwl.model.Vocabulary"
+	<bean id="VocabularyModel" class="idv.fc.model.Vocabulary"
 		scope="prototype">
 	</bean>
 
+<!--  
 	<bean id="VocabularyProxy"
-		class="idv.kwl.model.proxy.VocabularyProxy" scope="prototype">
+		class="idv.fc.model.proxy.VocabularyProxy" scope="prototype">
 		<constructor-arg ref="VocabularyModel" />
 	</bean>
-
+-->
 
 
 </beans>

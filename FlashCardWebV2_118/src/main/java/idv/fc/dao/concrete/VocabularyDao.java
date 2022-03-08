@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import idv.fc.dao.AbsVocabularyDao;
-import idv.kwl.model.Vocabulary;
+import idv.fc.model.Vocabulary;
 import idv.kwl.model.proxy.ICard;
 
 public class VocabularyDao extends AbsVocabularyDao<Vocabulary> {
@@ -110,11 +110,6 @@ public class VocabularyDao extends AbsVocabularyDao<Vocabulary> {
 		}
 
 		return list;
-	}
-
-	@Override
-	protected ICard createModel(ResultSet rs) throws SQLException {
-		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 }

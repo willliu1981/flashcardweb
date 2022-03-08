@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import idv.fc.dao.concrete.CardDao;
 import idv.fc.dao.concrete.VocabularyDao;
+import idv.fc.model.Card;
+import idv.fc.model.Vocabulary;
 import idv.fc.tool.SpringUtil;
 import idv.kwl.exception.FindErrorException;
 import idv.kwl.handle.cardhandler.DrawCardHandler;
 import idv.kwl.handle.cardhandler.HandleableCase;
 import idv.kwl.handle.cardhandler.drawcardcase.DrawCardCase;
-import idv.kwl.model.Card;
-import idv.kwl.model.Vocabulary;
 import idv.kwl.model.proxy.CardProxy;
 import idv.kwl.model.proxy.ICard;
 

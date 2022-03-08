@@ -9,7 +9,6 @@ import java.sql.Statement;
 import javax.sql.DataSource;
 
 import idv.fc.tool.SpringUtil;
-import idv.kwl.model.proxy.ICard;
 
 public abstract class AbsDao {
 	private DataSource dataSource;
@@ -19,9 +18,6 @@ public abstract class AbsDao {
 	}
 
 	public DataSource getDataSource() {
-		if (this.dataSource == null) {
-			this.dataSource = (DataSource) SpringUtil.getBean("DataSource");
-		}
 		return dataSource;
 	}
 
@@ -65,7 +61,5 @@ public abstract class AbsDao {
 			e.printStackTrace();
 		}
 	}
-
-	abstract protected ICard createModel(ResultSet rs)throws SQLException ;
 
 }
