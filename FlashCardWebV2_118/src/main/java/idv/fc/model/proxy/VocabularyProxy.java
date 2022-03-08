@@ -1,4 +1,4 @@
-package idv.kwl.model.proxy;
+package idv.fc.model.proxy;
 
 import java.sql.Date;
 
@@ -106,4 +106,13 @@ public class VocabularyProxy implements IVocabulary {
 		System.out.println(this.getClass() + ": " + dao);
 		dao.update(this.voca, id);
 	}
+
+	@Override
+	public String toString() {
+		return "VocabularyProxy [getTag()=" + getTag() + ", getVid()=" + getVid()
+				+ ", getVocabulary()=" + getVocabulary() + ", getTranslation()="
+				+ getTranslation() + ", getCreate_date()=" + getCreate_date() + "]";
+	}
+	
+	
 }

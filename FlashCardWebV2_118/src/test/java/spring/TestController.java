@@ -11,7 +11,7 @@ import org.springframework.web.servlet.mvc.Controller;
 
 import idv.fc.dao.VocabularyDao;
 import idv.fc.model.Vocabulary;
-import idv.kwl.model.proxy.IVocabulary;
+import idv.fc.model.proxy.IVocabulary;
 
 public class TestController implements Controller {
 

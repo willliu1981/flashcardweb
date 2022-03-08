@@ -1,7 +1,10 @@
 package idv.fc.dao;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.Map;
 
 import idv.fc.dao.abs.BaseDao2;
 import idv.fc.model.Vocabulary;
@@ -9,12 +12,6 @@ import idv.fc.model.Vocabulary;
 public class VocabularyDao2 extends BaseDao2<Vocabulary> {
 
 	private VocabularyDao2() {
-	}
-
-	@Override
-	public void create(Vocabulary t) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -33,6 +30,15 @@ public class VocabularyDao2 extends BaseDao2<Vocabulary> {
 		model.setTag(rs.getString("tag"));
 
 		return model;
+	}
+
+	@Override
+	public void createMapForCreateOrUpdate(Vocabulary model, Map<String, Object> cols) {
+		cols.put("id", model.getId());
+		cols.put("vocabulary", model.getVocabulary());
+		cols.put("translation", model.getTranslation());
+		cols.put("create_date", Date.valueOf(LocalDate.now()));
+
 	}
 
 }

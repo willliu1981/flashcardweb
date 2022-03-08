@@ -1,4 +1,4 @@
-package idv.kwl.model.proxy;
+package idv.fc.model.proxy;
 
 import java.sql.Date;
 

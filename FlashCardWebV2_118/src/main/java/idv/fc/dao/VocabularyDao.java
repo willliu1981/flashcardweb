@@ -9,7 +9,7 @@ import java.util.List;
 
 import idv.fc.dao.abs.AbsVocabularyDao;
 import idv.fc.model.Vocabulary;
-import idv.kwl.model.proxy.ICard;
+import idv.fc.model.proxy.ICard;
 
 public class VocabularyDao extends AbsVocabularyDao {
 

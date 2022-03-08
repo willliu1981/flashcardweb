@@ -13,13 +13,13 @@ import idv.fc.dao.CardDao;
 import idv.fc.dao.VocabularyDao;
 import idv.fc.model.Card;
 import idv.fc.model.Vocabulary;
+import idv.fc.model.proxy.CardProxy;
+import idv.fc.model.proxy.ICard;
 import idv.fc.tool.SpringUtil;
 import idv.kwl.exception.FindErrorException;
 import idv.kwl.handle.cardhandler.DrawCardHandler;
 import idv.kwl.handle.cardhandler.HandleableCase;
 import idv.kwl.handle.cardhandler.drawcardcase.DrawCardCase;
-import idv.kwl.model.proxy.CardProxy;
-import idv.kwl.model.proxy.ICard;
 
 @Controller
 @RequestMapping(value = "process/exam")

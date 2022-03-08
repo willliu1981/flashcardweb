@@ -2,7 +2,7 @@ package idv.fc.model;
 
 import java.sql.Date;
 
-import idv.kwl.model.proxy.IVocabulary;
+import idv.fc.model.proxy.IVocabulary;
 
 public class Vocabulary {
 	private String id;// {pk,not null,unique}
