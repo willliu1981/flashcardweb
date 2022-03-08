@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import idv.fc.model.Vocabulary;
 
-public abstract class AbsVocabularyDao extends BaseDao
+public abstract class AbsVocabularyDao extends OldBaseDao
 		implements Dao<Vocabulary>, ProcessData<Vocabulary> {
 
 	@Override

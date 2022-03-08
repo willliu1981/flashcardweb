@@ -1,39 +1,53 @@
 package idv.fc.tool;
 
 public class StringConstructor {
-	private static final String DEFAULT_APPENDIX = ",";
+	private static final String DEFAULT_SEPARATOR = ",";
 
-	public static String join(String contextExpression, String[] insertDatas,
-			boolean insertData, String appendix, boolean lastAppendix) {
-		if (appendix == null || appendix.equals("")) {
-			appendix = DEFAULT_APPENDIX;
+	public static String join(String contextFormatExpression, String[] insertDatas,
+			boolean insertData, String separator, boolean lastSeparatorAppend) {
+		if (separator == null || separator.equals("")) {
+			separator = DEFAULT_SEPARATOR;
 		}
 
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < insertDatas.length; i++) {
 			String data = insertData ? insertDatas[i] : "";
-			String ap = appendix;
-			if (i == insertDatas.length - 1 && !lastAppendix) {
+			String ap = separator;
+			if (i == insertDatas.length - 1 && !lastSeparatorAppend) {
 				ap = "";
 			}
 
-			sb.append(String.format(contextExpression, data) + ap);
+			sb.append(String.format(contextFormatExpression, data) + ap);
 		}
 
 		return sb.toString();
 	}
 
-	public static String join(String contextExpression, String[] datas,
-			String appendix) {
-		return join(contextExpression, datas, true, appendix, false);
+	public static String join(String contextFormatExpression, String[] insertDatas,
+			String separator) {
+		return join(contextFormatExpression, insertDatas, true, separator, false);
 	}
 
-	public static String join(String contextExpression, String[] datas,
-			boolean insertData, String appendix) {
-		return join(contextExpression, datas, insertData, appendix, false);
+	public static String join(String contextFormatExpression, String[] insertDatas) {
+		return join(contextFormatExpression, insertDatas, DEFAULT_SEPARATOR);
 	}
 
-	public static String join(String[] datas, String appendix) {
-		return join("%s", datas, true, appendix, false);
+	public static String join(String contextFormatExpression, String[] insertDatas,
+			boolean insertData, String separator) {
+		return join(contextFormatExpression, insertDatas, insertData, separator, false);
+	}
+
+	public static String join(String contextFormatExpression, String[] insertDatas,
+			boolean insertData) {
+		return join(contextFormatExpression, insertDatas, insertData,
+				DEFAULT_SEPARATOR);
+	}
+
+	public static String join(String[] insertDatas, String separator) {
+		return join("%s", insertDatas, true, separator, false);
+	}
+
+	public static String join(String[] insertDatas) {
+		return join(insertDatas, DEFAULT_SEPARATOR);
 	}
 }

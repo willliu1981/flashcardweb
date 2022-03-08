@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import idv.fc.model.Card;
 
-public abstract class AbsCardDao extends BaseDao
+public abstract class AbsCardDao extends OldBaseDao
 		implements Dao<Card>, ProcessData<Card> {
 	@Override
 	public void delete(Object id) {

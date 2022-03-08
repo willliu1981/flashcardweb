@@ -6,16 +6,16 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Map;
 
-import idv.fc.dao.abs.BaseDao2;
+import idv.fc.dao.abs.CommonDao;
 import idv.fc.model.Vocabulary;
 
-public class VocabularyDao2 extends BaseDao2<Vocabulary> {
+public class VocabularyDao2 extends CommonDao<Vocabulary> {
 
 	private VocabularyDao2() {
 	}
 
 	@Override
-	public Vocabulary createModelForQuery(ResultSet rs) throws SQLException {
+	protected Vocabulary createModelForQuery(ResultSet rs) throws SQLException {
 		Vocabulary model = new Vocabulary();
 		model.setId(rs.getString("id"));
 		model.setVocabulary(rs.getString("vocabulary"));
@@ -27,7 +27,7 @@ public class VocabularyDao2 extends BaseDao2<Vocabulary> {
 	}
 
 	@Override
-	public void createMapForCreate(Vocabulary model, Map<String, Object> cols) {
+	protected void createMapForCreate(Vocabulary model, Map<String, Object> cols) {
 		cols.put("id", model.getId());
 		cols.put("vocabulary", model.getVocabulary());
 		cols.put("translation", model.getTranslation());
@@ -36,7 +36,7 @@ public class VocabularyDao2 extends BaseDao2<Vocabulary> {
 	}
 
 	@Override
-	public void createMapForUpdate(Vocabulary model, Map<String, Object> cols) {
+	protected void createMapForUpdate(Vocabulary model, Map<String, Object> cols) {
 		cols.put("id", model.getId());
 		cols.put("vocabulary", model.getVocabulary());
 		cols.put("translation", model.getTranslation());
