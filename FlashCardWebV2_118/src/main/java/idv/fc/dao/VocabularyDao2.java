@@ -15,12 +15,6 @@ public class VocabularyDao2 extends BaseDao2<Vocabulary> {
 	}
 
 	@Override
-	public void update(Vocabulary t, Object id) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public Vocabulary createModelForQuery(ResultSet rs) throws SQLException {
 		Vocabulary model = new Vocabulary();
 		model.setId(rs.getString("id"));
@@ -33,11 +27,19 @@ public class VocabularyDao2 extends BaseDao2<Vocabulary> {
 	}
 
 	@Override
-	public void createMapForCreateOrUpdate(Vocabulary model, Map<String, Object> cols) {
+	public void createMapForCreate(Vocabulary model, Map<String, Object> cols) {
 		cols.put("id", model.getId());
 		cols.put("vocabulary", model.getVocabulary());
 		cols.put("translation", model.getTranslation());
 		cols.put("create_date", Date.valueOf(LocalDate.now()));
+
+	}
+
+	@Override
+	public void createMapForUpdate(Vocabulary model, Map<String, Object> cols) {
+		cols.put("id", model.getId());
+		cols.put("vocabulary", model.getVocabulary());
+		cols.put("translation", model.getTranslation());
 
 	}
 

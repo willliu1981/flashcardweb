@@ -12,8 +12,6 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
-import idv.fc.model.Vocabulary;
-import idv.fc.model.proxy.VocabularyProxy;
 import idv.fc.tool.StringConstructor;
 
 public abstract class BaseDao2<T> implements Dao<T> {
@@ -72,7 +70,7 @@ public abstract class BaseDao2<T> implements Dao<T> {
 	@Override
 	public void create(T model) {
 		Map<String, Object> map = new HashMap<>();
-		this.createMapForCreateOrUpdate(model, map);
+		this.createMapForCreate(model, map);
 
 		List<String> keys = new ArrayList<>();
 		List<Object> values = new ArrayList<>();
@@ -87,12 +85,38 @@ public abstract class BaseDao2<T> implements Dao<T> {
 
 		String cols = StringConstructor.join(keyArr, ",");
 
-		String params = StringConstructor.join("%s?", keyArr, false, ",");
+		String questionMarks = StringConstructor.join("%s?", keyArr, false, ",");
 
 		String sql = String.format("insert into %s (%s) values (%s)", this.tableName,
-				cols, params);
+				cols, questionMarks);
 
-		System.out.println(this.getClass() + ":sql = " + sql);
+		this.executeSQL(sql, valueArr);
+	}
+
+	@Override
+	public void update(T model, Object id) {
+		Map<String, Object> map = new HashMap<>();
+		this.createMapForCreate(model, map);
+
+		List<String> keys = new ArrayList<>();
+		List<Object> values = new ArrayList<>();
+
+		map.forEach((k, v) -> {
+			keys.add(k);
+			values.add(v);
+		});
+
+		// sql : where id=? 將id 追加到最後一個元素
+		values.add(id);
+
+		String[] keyArr = keys.toArray(new String[keys.size()]);
+		Object[] valueArr = values.toArray(new Object[values.size()]);
+
+		String fragment = StringConstructor.join("%s=?", keyArr, ",");
+
+		String sql = String.format("update %s set %s where id=?", this.tableName,
+				fragment);
+
 		this.executeSQL(sql, valueArr);
 
 	}
@@ -111,29 +135,36 @@ public abstract class BaseDao2<T> implements Dao<T> {
 		}
 	}
 
-	public T queryById(Object id, String sql) {
-		Connection conn = this.getConnection();
-		T model = null;
-		try {
-			PreparedStatement st = conn.prepareStatement(sql);
-			st.setString(1, id.toString());
-			ResultSet rs = st.executeQuery();
-			if (rs.next()) {
-				model = this.createModelForQuery(rs);
-			}
-			this.closeResources(rs, st, conn);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return model;
+	@Override
+	public void delete(Object id) {
+		String sql = String.format("delete from  %s where id=?", this.tableName);
+		this.delete(id, sql);
 	}
 
-	public List<T> queryAll(String sql) {
+	@Override
+	public T queryById(Object id) {
+		String sql = String.format("select * from %s where id=?", this.tableName, id);
+		return query(sql, id).get(0);
+	}
+
+	@Override
+	public List<T> queryAll() {
+		String sql = String.format("select * from %s", this.tableName);
+		return query(sql);
+	}
+
+	public List<T> query(String sql) {
+		return query(sql, null);
+	}
+
+	public List<T> query(String sql, Object id) {
 		Connection conn = this.getConnection();
 		List<T> list = new ArrayList<>();
 		try {
 			PreparedStatement st = conn.prepareStatement(sql);
+			if (id != null) {
+				st.setObject(1, id);
+			}
 			ResultSet rs = st.executeQuery();
 			T model = null;
 			while (rs.next()) {
@@ -149,25 +180,9 @@ public abstract class BaseDao2<T> implements Dao<T> {
 		return list;
 	}
 
-	@Override
-	public void delete(Object id) {
-		String sql = String.format("delete from  %s where id=?", this.tableName);
-		this.delete(id, sql);
-	}
+	public abstract void createMapForCreate(T model, Map<String, Object> cols);
 
-	@Override
-	public T queryById(Object id) {
-		String sql = String.format("select * from %s where id=?", this.tableName, id);
-		return queryById(id, sql);
-	}
-
-	@Override
-	public List<T> queryAll() {
-		String sql = String.format("select * from %s", this.tableName);
-		return queryAll(sql);
-	}
-
-	public abstract void createMapForCreateOrUpdate(T model, Map<String, Object> cols);
+	public abstract void createMapForUpdate(T model, Map<String, Object> cols);
 
 	public int executeSQL(String sql, Object[] params) {
 		Connection conn = this.getConnection();

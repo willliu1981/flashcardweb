@@ -25,7 +25,7 @@ public class StringConstructor {
 
 	public static String join(String contextExpression, String[] datas,
 			String appendix) {
-		return join(contextExpression, datas, false, appendix, false);
+		return join(contextExpression, datas, true, appendix, false);
 	}
 
 	public static String join(String contextExpression, String[] datas,
