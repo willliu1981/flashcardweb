@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import idv.kwl.dao.concrete.CardDao;
-import idv.kwl.dao.concrete.VocabularyDao;
+import idv.fc.dao.concrete.CardDao;
+import idv.fc.dao.concrete.VocabularyDao;
+import idv.fc.tool.SpringUtil;
 import idv.kwl.exception.FindErrorException;
 import idv.kwl.handle.cardhandler.DrawCardHandler;
 import idv.kwl.handle.cardhandler.HandleableCase;
@@ -19,7 +20,6 @@ import idv.kwl.model.Card;
 import idv.kwl.model.Vocabulary;
 import idv.kwl.model.proxy.CardProxy;
 import idv.kwl.model.proxy.ICard;
-import idv.kwl.tool.SpringUtil;
 
 @Controller
 @RequestMapping(value = "process/exam")

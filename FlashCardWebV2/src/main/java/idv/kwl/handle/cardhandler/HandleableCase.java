@@ -6,7 +6,7 @@ import idv.kwl.exception.FindErrorException;
 import idv.kwl.handle.cardhandler.drawcardcase.DrawRule;
 import idv.kwl.model.Card;
 
-public interface HandleCase<T> {
+public interface HandleableCase<T> {
 	
 	public void setCardList(List<T> cards) ;
 

@@ -26,10 +26,10 @@
 		conversion-service="converterUtil" />
 
 	<context:component-scan
-		base-package="idv.kwl,spring"></context:component-scan>
+		base-package="idv.fc,spring"></context:component-scan>
 
 	<context:property-placeholder
-		location="classpath:idv/kwl/handle/config/path.properties" />
+		location="classpath:idv/fc/config/jdbc.properties" />
 
 
 
@@ -58,7 +58,7 @@
 		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
 		<property name="converters">
 			<list>
-				<bean class="idv.kwl.tool.TimestampConverter" />
+				<bean class="idv.fc.tool.TimestampConverter" />
 			</list>
 		</property>
 	</bean>
@@ -89,20 +89,29 @@
 		<property name="dao" ref="VocabularyDao" />
 	</bean>
 
+	<bean id="DataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName">
+			<value>${jdbc.driverClassName}</value>
+		</property>
+		<property name="url">
+			<value>${jdbc.url}</value>
+		</property>
+		<property name="username">
+			<value>${jdbc.username}</value>
+		</property>
+		<property name="password">
+			<value>${jdbc.password}</value>
+		</property>
 
-	<bean id="DataSource" class="idv.kwl.connection.DataSource"
-		scope="prototype">
-		<property name="username" value="root" />
-		<property name="password" value="1234" />
-		<property name="url"
-			value="jdbc:mysql://localhost:3306/flashcardv2?useSSL=false&amp;serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=UTF-8" />
-		<property name="driver" value="com.mysql.jdbc.Driver" />
 	</bean>
+
+
 
 	<bean id="handleableCase"
 		class="idv.kwl.handle.cardhandler.drawcardcase.DrawCardCase"
 		scope="prototype">
-		<property name="drawRule" ref="drawRule"/>
+		<property name="drawRule" ref="drawRule" />
 	</bean>
 
 	<bean id="drawRule"
