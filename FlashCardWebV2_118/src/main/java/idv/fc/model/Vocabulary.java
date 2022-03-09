@@ -2,8 +2,6 @@ package idv.fc.model;
 
 import java.sql.Date;
 
-import idv.fc.model.proxy.IVocabulary;
-
 public class Vocabulary {
 	private String id;// {pk,not null,unique}
 	private String vocabulary;// not null, unique

@@ -18,6 +18,14 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import idv.fc.tool.StringJoiner;
 
+/**
+ * 實作類必須填寫T型別,或者空參數建構子,否則使用SQL query 可能會報錯
+ * 當table 名稱與 對應的類別名稱不同時,須於 -servlet.xml 加入屬性 tableName 
+ * 如果T型別(除了 Object)不是最上層型別, 須加入建構子,並以 T 的實際類別當作參數傳入 
+ * @author KuanWei
+ *
+ * @param <T>
+ */
 public abstract class CommonDao<T> extends BaseDao<T> {
 	@Autowired
 	@Qualifier("JDBCStringJoiner")
@@ -36,7 +44,7 @@ public abstract class CommonDao<T> extends BaseDao<T> {
 	}
 
 	/**
-	 * 取得泛型除了 Object 類別的最上層類別名稱
+	 * 取得泛型除了 Object 類別的最上層類別型別
 	 * 
 	 * @return
 	 */

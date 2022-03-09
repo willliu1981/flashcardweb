@@ -8,17 +8,18 @@ import idv.fc.dao.abs.CommonDao;
 import idv.fc.model.User;
 
 public class UserCommonDao extends CommonDao<User> {
-//	private UserCommonDao() {
-//		super(User.class);
-//	}
+	private UserCommonDao() {
+		super(User.class);
+	}
 
 	@Override
 	protected void createModelForQuery(ResultSet rs, User model) throws SQLException {
 		model.setId(rs.getString("id"));
 		model.setUsername(rs.getString("username"));
 		model.setPassword(rs.getString("password"));
-		model.setDsiplay_name(rs.getString("display_name"));
+		model.setDisplay_name(rs.getString("display_name"));
 		model.setGender(rs.getInt("gender"));
+		model.setAge(rs.getInt("age"));
 		model.setAuthority(rs.getString("authority"));
 		model.setCreate_date(rs.getDate("create_date"));
 		model.setTag(rs.getString("tag"));

@@ -6,7 +6,7 @@ public class User {
 	private String id;// {pk,not null,unique}
 	private String username;// {not null,unique}
 	private String password;// {not null}
-	private String dsiplay_name;
+	private String display_name;
 	private Integer gender;
 	private Integer age;
 	private String authority;
@@ -53,12 +53,12 @@ public class User {
 		this.password = password;
 	}
 
-	public String getDsiplay_name() {
-		return dsiplay_name;
+	public String getDisplay_name() {
+		return display_name;
 	}
 
-	public void setDsiplay_name(String dsiplay_name) {
-		this.dsiplay_name = dsiplay_name;
+	public void setDisplay_name(String dsiplay_name) {
+		this.display_name = dsiplay_name;
 	}
 
 	public Integer getGender() {

@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import deprecated.model.proxy.CardProxy;
+import deprecated.model.proxy.ICard;
 import idv.fc.dao.CardDao;
 import idv.fc.dao.VocabularyDao;
 import idv.fc.model.Card;
 import idv.fc.model.Vocabulary;
-import idv.fc.model.proxy.CardProxy;
-import idv.fc.model.proxy.ICard;
 import idv.fc.tool.SpringUtil;
 import idv.kwl.exception.FindErrorException;
 import idv.kwl.handle.cardhandler.DrawCardHandler;

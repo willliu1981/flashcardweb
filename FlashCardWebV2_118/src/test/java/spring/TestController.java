@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
+import deprecated.model.proxy.IVocabulary;
 import idv.fc.dao.VocabularyDao;
 import idv.fc.model.Vocabulary;
-import idv.fc.model.proxy.IVocabulary;
 
 public class TestController implements Controller {
 

@@ -1,4 +1,4 @@
-package idv.fc.model.proxy;
+package deprecated.model.proxy;
 
 import java.sql.Date;
 

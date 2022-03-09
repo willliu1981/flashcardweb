@@ -3,8 +3,6 @@ package idv.fc.model;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-import idv.fc.model.proxy.ICard;
-
 public class Card {
 	private Integer id;// {pk,not null,unique,unsigned,ai}
 	private String name;// {not null}
