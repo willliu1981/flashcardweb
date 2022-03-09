@@ -1,23 +1,70 @@
 package idv.fc.dao.abs;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import idv.fc.tool.StringConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
+import idv.fc.tool.StringJoiner;
 
 public abstract class CommonDao<T> extends BaseDao<T> {
-	StringConstructor stringConstructor;
+	@Autowired
+	@Qualifier("JDBCStringJoiner")
+	StringJoiner stringConstructor;
+	private String tableName;
 
-	protected StringConstructor getStringConstructor() {
-		return stringConstructor;
+	protected CommonDao() {
+		this.tableName = getGenericTypeSuperClassName().toLowerCase();
 	}
 
-	public void setStringConstructor(StringConstructor stringConstructor) {
-		this.stringConstructor = stringConstructor;
+	/**
+	 * 取得泛型除了 Object 類別的最上層類別名稱
+	 * @return
+	 */
+	protected String getGenericTypeSuperClassName() {
+		ParameterizedType pt = (ParameterizedType) this.getClass()
+				.getGenericSuperclass();
+		Type[] type = pt.getActualTypeArguments();
+		Class<?> clazz = (Class<?>) type[0];
+
+		Deque<String> names = new LinkedList<>();
+
+		do {
+			names.offerFirst(clazz.getSimpleName());
+			if (names.size() > 2) {
+				names.pollLast();
+			}
+
+		} while ((clazz = clazz.getSuperclass()) != null);
+
+		if (names.peekLast().equalsIgnoreCase("object")) {
+			return names.peekFirst();
+		} else {
+			return names.peekLast();
+		}
+	}
+
+	protected String getTableName() {
+		return tableName;
+	}
+
+	public void setTableName(String name) {
+		this.tableName = name;
+	}
+
+	protected StringJoiner getStringConstructor() {
+		return stringConstructor;
 	}
 
 	@Override
@@ -91,6 +138,35 @@ public abstract class CommonDao<T> extends BaseDao<T> {
 		String sql = String.format("select * from %s", this.getTableName());
 		return querySQL(sql);
 	}
+
+	public List<T> querySQL(String sql) {
+		return querySQL(sql, null);
+	}
+
+	public List<T> querySQL(String sql, Object id) {
+		Connection conn = this.getConnection();
+		List<T> list = new ArrayList<>();
+		try {
+			PreparedStatement st = conn.prepareStatement(sql);
+			if (id != null) {
+				st.setObject(1, id);
+			}
+			ResultSet rs = st.executeQuery();
+			T model = null;
+			while (rs.next()) {
+				model = this.createModelForQuery(rs);
+				list.add(model);
+			}
+
+			this.closeResources(rs, st, conn);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
+	protected abstract T createModelForQuery(ResultSet rs) throws SQLException;
 
 	protected abstract void createMapForCreate(T model, Map<String, Object> cols);
 

@@ -9,9 +9,9 @@ import java.util.Map;
 import idv.fc.dao.abs.CommonDao;
 import idv.fc.model.Vocabulary;
 
-public class VocabularyDao2 extends CommonDao<Vocabulary> {
+public class VocabularyCommonDao extends CommonDao<Vocabulary> {
 
-	private VocabularyDao2() {
+	private VocabularyCommonDao() {
 	}
 
 	@Override

@@ -12,19 +12,10 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
-import idv.fc.tool.StringConstructor;
+import idv.fc.tool.StringJoiner;
 
 public abstract class BaseDao<T> implements Dao<T> {
 	private DataSource dataSource;
-	private String tableName;
-
-	protected String getTableName() {
-		return tableName;
-	}
-
-	public void setTableName(String name) {
-		this.tableName = name;
-	}
 
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
@@ -67,32 +58,7 @@ public abstract class BaseDao<T> implements Dao<T> {
 		}
 	}
 
-	public List<T> querySQL(String sql) {
-		return querySQL(sql, null);
-	}
-
-	public List<T> querySQL(String sql, Object id) {
-		Connection conn = this.getConnection();
-		List<T> list = new ArrayList<>();
-		try {
-			PreparedStatement st = conn.prepareStatement(sql);
-			if (id != null) {
-				st.setObject(1, id);
-			}
-			ResultSet rs = st.executeQuery();
-			T model = null;
-			while (rs.next()) {
-				model = this.createModelForQuery(rs);
-				list.add(model);
-			}
-
-			this.closeResources(rs, st, conn);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return list;
-	}
+	
 
 	public void deleteSQL(Object id, String sql) {
 		Connection conn = this.getConnection();
@@ -128,5 +94,5 @@ public abstract class BaseDao<T> implements Dao<T> {
 		return 0;
 	}
 
-	protected abstract T createModelForQuery(ResultSet rs) throws SQLException;
+	
 }

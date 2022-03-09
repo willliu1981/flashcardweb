@@ -1,6 +1,6 @@
 package idv.fc.tool;
 
-public class StringConstructor {
+public class StringJoiner {
 	private static final String DEFAULT_SEPARATOR = ",";
 	private String defaultSeparator = DEFAULT_SEPARATOR;
 	private boolean defaultLastSeparatorAppend = false;// default false

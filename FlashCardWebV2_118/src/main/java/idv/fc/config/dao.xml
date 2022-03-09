@@ -18,12 +18,8 @@
 	<context:component-scan base-package="idv.fc"></context:component-scan>
 
 
-	<bean id="VocabularyDao" class="idv.fc.dao.VocabularyDao2">
+	<bean id="VocabularyDao" class="idv.fc.dao.VocabularyCommonDao">
 		<property name="dataSource" ref="DataSource"></property>
-		<property name="stringConstructor" ref="StringConstructor" />
-		<property name="tableName">
-			<value>vocabulary</value>
-		</property>
 	</bean>
 
 	<bean id="CardDao" class="idv.fc.dao.CardDao">
