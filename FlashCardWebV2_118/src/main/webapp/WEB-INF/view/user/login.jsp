@@ -10,6 +10,7 @@
 </head>
 <body>
 	<h1>LOGIN</h1>
+	<hr>
 	<form action="${pageContext.request.contextPath}/page/login"
 		method="post">
 		<table class="evenTable">

@@ -1,5 +1,5 @@
 @charset "UTF-8";
-     
+
 .evenTable {
 	border-collapse: collapse;
 	width: 400px;
@@ -11,7 +11,7 @@
 	border: 0px solid #888888;
 	padding: 10px;
 }
-     
+
 .evenTable tr:nth-child(even) {
 	background-color: #FFC286;
 }
@@ -24,7 +24,7 @@
 .evenTable tr:nth-child(1) {
 	background-color: #FF80C0;
 	color: #000000;
-	font-weight:bold;
+	font-weight: bold;
 }
 
 .evenTable th:first-child, .evenTable td:first-child {
@@ -35,4 +35,11 @@
 .evenTable th:last-child, .evenTable td:last-child {
 	border-bottom-right-radius: 8px;
 	border-top-right-radius: 8px;
+}
+
+body {
+	background-image: url("../picture/tile4.jpg");
+	background-repeat: repeat;
+	background-color: #ffffff;
+	background-repeat: repeat;
 }
