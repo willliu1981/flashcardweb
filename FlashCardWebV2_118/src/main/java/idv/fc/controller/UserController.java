@@ -19,6 +19,12 @@ public class UserController {
 	@Qualifier("UserCommonDao")
 	private Dao<User> userCommonDao;
 
+	/**
+	 * toXXX 表示轉發,以下類推
+	 * 
+	 * @param user
+	 * @return
+	 */
 	@RequestMapping(value = "toLogin", method = RequestMethod.GET)
 	public String toLogin(User user) {
 		return "user/login";
@@ -26,16 +32,16 @@ public class UserController {
 
 	@RequestMapping(value = "toQuery", method = RequestMethod.GET)
 	public String toQuery() {
-		List<User> users = userCommonDao.queryAll();
-		users.forEach(System.out::println);
-
 		return "test/test";
 	}
 
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String login(User user) {
+		List<User> users = userCommonDao.querySQL(
+				"select * from user where username=? and password=? ",
+				user.getUsername(), user.getPassword());
 
-		System.out.println(this.getClass() + ":");
+		System.out.println(this.getClass() + ":" + users.isEmpty());
 
 		return "test/test";
 	}
