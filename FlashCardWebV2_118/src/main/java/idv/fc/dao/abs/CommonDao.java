@@ -18,15 +18,15 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import idv.fc.tool.StringJoiner;
 
-public abstract class  CommonDao<T> extends BaseDao<T> {
+public abstract class CommonDao<T> extends BaseDao<T> {
 	@Autowired
 	@Qualifier("JDBCStringJoiner")
 	StringJoiner stringConstructor;
 	private String tableName;
 	private Class<T> clazz;
 
-	protected CommonDao(Class<T> klass) {
-		this.clazz = klass;
+	protected CommonDao(Class<T> classNameForTable) {
+		this.clazz = classNameForTable;
 		this.tableName = this.clazz.getSimpleName();
 	}
 

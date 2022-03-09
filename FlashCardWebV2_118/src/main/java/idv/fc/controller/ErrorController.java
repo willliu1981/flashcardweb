@@ -32,6 +32,6 @@ public class ErrorController {
 		}
 
 		model.put("errorMsg", errorMsg);
-		return "errorPage";
+		return "error/errorPage";
 	}
 }
