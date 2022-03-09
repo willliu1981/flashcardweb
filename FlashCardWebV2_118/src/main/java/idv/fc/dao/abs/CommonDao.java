@@ -23,6 +23,12 @@ public abstract class CommonDao<T> extends BaseDao<T> {
 	@Qualifier("JDBCStringJoiner")
 	StringJoiner stringConstructor;
 	private String tableName;
+	private Class<T> clazz;
+
+	protected CommonDao(Class<T> klass) {
+		this.clazz = klass;
+		this.tableName = this.clazz.getSimpleName();
+	}
 
 	protected CommonDao() {
 		this.tableName = getGenericTypeSuperClassName().toLowerCase();
@@ -30,6 +36,7 @@ public abstract class CommonDao<T> extends BaseDao<T> {
 
 	/**
 	 * 取得泛型除了 Object 類別的最上層類別名稱
+	 * 
 	 * @return
 	 */
 	protected String getGenericTypeSuperClassName() {
@@ -70,7 +77,7 @@ public abstract class CommonDao<T> extends BaseDao<T> {
 	@Override
 	public void create(T model) {
 		Map<String, Object> map = new HashMap<>();
-		this.createMapForCreate(model, map);
+		this.createMapForCreate(map, model);
 
 		List<String> keys = new ArrayList<>();
 		List<Object> values = new ArrayList<>();
@@ -96,7 +103,7 @@ public abstract class CommonDao<T> extends BaseDao<T> {
 	@Override
 	public void update(T model, Object id) {
 		Map<String, Object> map = new HashMap<>();
-		this.createMapForCreate(model, map);
+		this.createMapForCreate(map, model);
 
 		List<String> keys = new ArrayList<>();
 		List<Object> values = new ArrayList<>();
@@ -154,21 +161,23 @@ public abstract class CommonDao<T> extends BaseDao<T> {
 			ResultSet rs = st.executeQuery();
 			T model = null;
 			while (rs.next()) {
-				model = this.createModelForQuery(rs);
+				model = this.clazz.newInstance();
+				this.createModelForQuery(rs, model);
 				list.add(model);
 			}
 
 			this.closeResources(rs, st, conn);
-		} catch (SQLException e) {
+		} catch (SQLException | InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
 		}
 
 		return list;
 	}
 
-	protected abstract T createModelForQuery(ResultSet rs) throws SQLException;
+	protected abstract void createModelForQuery(ResultSet rs, T model)
+			throws SQLException;
 
-	protected abstract void createMapForCreate(T model, Map<String, Object> cols);
+	protected abstract void createMapForCreate(Map<String, Object> cols, T model);
 
-	protected abstract void createMapForUpdate(T model, Map<String, Object> cols);
+	protected abstract void createMapForUpdate(Map<String, Object> cols, T model);
 }

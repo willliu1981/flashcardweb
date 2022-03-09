@@ -75,7 +75,7 @@ public class UserDao extends AbsVocabularyDao<User> {
 
 		return model;
 	}
-
+ 
 	@Override
 	public List<User> queryAll() {
 		String sql = "select * from vocabulary ";

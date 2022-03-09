@@ -12,22 +12,22 @@ import idv.fc.model.Vocabulary;
 public class VocabularyCommonDao extends CommonDao<Vocabulary> {
 
 	private VocabularyCommonDao() {
+		super(Vocabulary.class);
 	}
 
 	@Override
-	protected Vocabulary createModelForQuery(ResultSet rs) throws SQLException {
-		Vocabulary model = new Vocabulary();
+	protected void createModelForQuery(ResultSet rs, Vocabulary model)
+			throws SQLException {
 		model.setId(rs.getString("id"));
 		model.setVocabulary(rs.getString("vocabulary"));
 		model.setTranslation(rs.getString("translation"));
 		model.setCreate_date(rs.getDate("create_date"));
 		model.setTag(rs.getString("tag"));
 
-		return model;
 	}
 
 	@Override
-	protected void createMapForCreate(Vocabulary model, Map<String, Object> cols) {
+	protected void createMapForCreate(Map<String, Object> cols, Vocabulary model) {
 		cols.put("id", model.getId());
 		cols.put("vocabulary", model.getVocabulary());
 		cols.put("translation", model.getTranslation());
@@ -36,7 +36,7 @@ public class VocabularyCommonDao extends CommonDao<Vocabulary> {
 	}
 
 	@Override
-	protected void createMapForUpdate(Vocabulary model, Map<String, Object> cols) {
+	protected void createMapForUpdate(Map<String, Object> cols, Vocabulary model) {
 		cols.put("id", model.getId());
 		cols.put("vocabulary", model.getVocabulary());
 		cols.put("translation", model.getTranslation());
