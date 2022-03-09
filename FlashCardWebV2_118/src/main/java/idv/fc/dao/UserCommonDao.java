@@ -8,9 +8,9 @@ import idv.fc.dao.abs.CommonDao;
 import idv.fc.model.User;
 
 public class UserCommonDao extends CommonDao<User> {
-	private UserCommonDao() {
-		super(User.class);
-	}
+//	private UserCommonDao() {
+//		super(User.class);
+//	}
 
 	@Override
 	protected void createModelForQuery(ResultSet rs, User model) throws SQLException {

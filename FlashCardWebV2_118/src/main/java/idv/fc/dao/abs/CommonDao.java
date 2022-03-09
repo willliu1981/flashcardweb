@@ -27,11 +27,12 @@ public abstract class CommonDao<T> extends BaseDao<T> {
 
 	protected CommonDao(Class<T> classNameForTable) {
 		this.clazz = classNameForTable;
-		this.tableName = this.clazz.getSimpleName();
+		this.tableName = this.clazz.getSimpleName().toLowerCase();
 	}
 
 	protected CommonDao() {
-		this.tableName = getGenericTypeSuperClassName().toLowerCase();
+		this.clazz = getGenericTypeSuperClass();
+		this.tableName = clazz.getSimpleName().toLowerCase();
 	}
 
 	/**
@@ -39,26 +40,26 @@ public abstract class CommonDao<T> extends BaseDao<T> {
 	 * 
 	 * @return
 	 */
-	protected String getGenericTypeSuperClassName() {
+	protected Class<T> getGenericTypeSuperClass() {
 		ParameterizedType pt = (ParameterizedType) this.getClass()
 				.getGenericSuperclass();
 		Type[] type = pt.getActualTypeArguments();
-		Class<?> clazz = (Class<?>) type[0];
+		Class<T> clazz = (Class<T>) type[0];
 
-		Deque<String> names = new LinkedList<>();
+		Deque<Class<T>> classes = new LinkedList<>();
 
 		do {
-			names.offerFirst(clazz.getSimpleName());
-			if (names.size() > 2) {
-				names.pollLast();
+			classes.offerFirst(clazz);
+			if (classes.size() > 2) {
+				classes.pollLast();
 			}
 
-		} while ((clazz = clazz.getSuperclass()) != null);
+		} while ((clazz = (Class<T>) clazz.getSuperclass()) != null);
 
-		if (names.peekLast().equalsIgnoreCase("object")) {
-			return names.peekFirst();
+		if (classes.peekLast() == Object.class) {
+			return classes.peekFirst();
 		} else {
-			return names.peekLast();
+			return classes.peekLast();
 		}
 	}
 
