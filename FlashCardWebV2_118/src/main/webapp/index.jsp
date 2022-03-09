@@ -14,7 +14,7 @@
 	<h2><a href="page/vocabulary">vocabulary</a></h2>
 	<h2><a href="page/card">card</a></h2>
 	<h2><a href="page/exam">exam</a></h2>
-	<h2><a href="page/toLogin">login</a></h2>
+	<h2><a href="user/toLogin">login</a></h2>
 	
 </body>
 </html>
