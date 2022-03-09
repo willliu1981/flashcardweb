@@ -13,15 +13,9 @@
         http://www.springframework.org/schema/mvc
         https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-<!--  
-	<context:annotation-config />
-	-->
-	
-	 <!-- Spring MVC不處理靜態資源 -->
-	 <!--  
-	<mvc:default-servlet-handler />
--->
 
+
+	<mvc:default-servlet-handler />
 	<mvc:annotation-driven
 		conversion-service="converterUtil" />
 

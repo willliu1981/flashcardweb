@@ -9,7 +9,6 @@ import java.util.List;
 
 import idv.fc.dao.abs.AbsVocabularyDao;
 import idv.fc.model.Vocabulary;
-import idv.fc.model.proxy.ICard;
 
 public class VocabularyDao extends AbsVocabularyDao {
 
@@ -101,5 +100,25 @@ public class VocabularyDao extends AbsVocabularyDao {
 
 		return list;
 	}
+
+	@Override
+	public int executeSQL(String sql, Object[] params) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<Vocabulary> querySQL(String sql) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Vocabulary> querySQL(String sql, Object... params) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 }

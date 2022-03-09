@@ -5,14 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.sql.DataSource;
-
-import idv.fc.tool.StringJoiner;
 
 public abstract class BaseDao<T> implements Dao<T> {
 	private DataSource dataSource;
@@ -58,8 +53,6 @@ public abstract class BaseDao<T> implements Dao<T> {
 		}
 	}
 
-	
-
 	public void deleteSQL(Object id, String sql) {
 		Connection conn = this.getConnection();
 
@@ -74,25 +67,46 @@ public abstract class BaseDao<T> implements Dao<T> {
 		}
 	}
 
-	public int executeSQL(String sql, Object[] params) {
+	@Override
+	public int executeSQL(String sql, Object... params) {
 		Connection conn = this.getConnection();
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
 			st = conn.prepareStatement(sql);
-			if (params != null) {
-				for (int i = 0; i < params.length; i++) {
-					st.setObject(i + 1, params[i]);
-				}
-			}
-			st.execute();
+			prepareStatementSetObjects(st, params);
+			rs = st.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			this.closeResources(rs, st, conn);
 		}
+
 		return 0;
 	}
 
-	
+	protected void prepareStatementSetObjects(PreparedStatement st, Object... params) {
+		if (params != null) {
+			for (int i = 0; i < params.length; i++) {
+				try {
+					st.setObject(i + 1, params[i]);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	@Override
+	public List<T> querySQL(String sql) {
+		throw new UnsupportedOperationException(
+				String.format("%s:\"%s\"", this.getClass(), sql));
+	}
+
+	@Override
+	public List<T> querySQL(String sql, Object... params) {
+		throw new UnsupportedOperationException(
+				String.format("%s:\"%s\"", this.getClass(), sql));
+	}
+
 }

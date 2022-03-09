@@ -1,0 +1,38 @@
+@charset "UTF-8";
+     
+.evenTable {
+	border-collapse: collapse;
+	width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.evenTable td {
+	border: 0px solid #888888;
+	padding: 10px;
+}
+     
+.evenTable tr:nth-child(even) {
+	background-color: #FFC286;
+}
+
+.evenTable tr:nth-child(odd) {
+	background-color: #FF8040;
+	color: #ffffff;
+}
+
+.evenTable tr:nth-child(1) {
+	background-color: #FF80C0;
+	color: #000000;
+	font-weight:bold;
+}
+
+.evenTable th:first-child, .evenTable td:first-child {
+	border-bottom-left-radius: 8px;
+	border-top-left-radius: 8px;
+}
+
+.evenTable th:last-child, .evenTable td:last-child {
+	border-bottom-right-radius: 8px;
+	border-top-right-radius: 8px;
+}

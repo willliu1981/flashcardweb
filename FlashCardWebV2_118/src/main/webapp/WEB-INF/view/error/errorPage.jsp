@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Error</title>
+<title>FLASH CARD</title>
 </head>
 <body>
+	<h1>Error</h1>
 	<h1>${errorMsg }</h1>
 </body>
 </html>

@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import idv.fc.tool.StringJoiner;
 
-public abstract class CommonDao<T> extends BaseDao<T> {
+public abstract class  CommonDao<T> extends BaseDao<T> {
 	@Autowired
 	@Qualifier("JDBCStringJoiner")
 	StringJoiner stringConstructor;
@@ -150,15 +150,15 @@ public abstract class CommonDao<T> extends BaseDao<T> {
 		return querySQL(sql, null);
 	}
 
-	public List<T> querySQL(String sql, Object id) {
+	public List<T> querySQL(String sql, Object... params) {
 		Connection conn = this.getConnection();
 		List<T> list = new ArrayList<>();
+		PreparedStatement st = null;
+		ResultSet rs = null;
 		try {
-			PreparedStatement st = conn.prepareStatement(sql);
-			if (id != null) {
-				st.setObject(1, id);
-			}
-			ResultSet rs = st.executeQuery();
+			st = conn.prepareStatement(sql);
+			prepareStatementSetObjects(st, params);
+			rs = st.executeQuery();
 			T model = null;
 			while (rs.next()) {
 				model = this.clazz.newInstance();
@@ -166,7 +166,7 @@ public abstract class CommonDao<T> extends BaseDao<T> {
 				list.add(model);
 			}
 
-			this.closeResources(rs, st, conn);
+			this.closeResources(rs, null, conn);
 		} catch (SQLException | InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
 		}

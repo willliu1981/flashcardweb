@@ -25,6 +25,10 @@
 	<bean id="CardDao" class="idv.fc.dao.CardDao">
 		<property name="dataSource" ref="DataSource"></property>
 	</bean>
+	
+	<bean id="TestVocabularyBaseDao" class="idv.fc.dao.TestVocabularyBaseDao">
+		<property name="dataSource" ref="DataSource"></property>
+	</bean>
 
 
 

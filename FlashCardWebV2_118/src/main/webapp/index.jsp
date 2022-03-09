@@ -10,9 +10,11 @@
 	
 	<h1>Welcome to FlashCard</h1>
 	<h2><a href="test/query">test</a></h2>
+	<h2><a href="test/querySQL">test2</a></h2>
 	<h2><a href="page/vocabulary">vocabulary</a></h2>
 	<h2><a href="page/card">card</a></h2>
 	<h2><a href="page/exam">exam</a></h2>
+	<h2><a href="page/toLogin">login</a></h2>
 	
 </body>
 </html>
