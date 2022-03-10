@@ -14,7 +14,10 @@
 	<form action="${pageContext.request.contextPath}/user" method="POST">
 		<table class="evenTable">
 			<tr>
-				<td colspan="2">CREATE USER</td>
+				<td><font size="6" color="blue">CREATE USER</font></td>
+				<td style="text-align: right"><a
+					href="${pageContext.request.contextPath}/index.jsp"><font
+						size="5" color="BlueViolet">cencel</font> </a></td>
 			</tr>
 			<tr>
 				<td>username</td>
@@ -39,7 +42,7 @@
 			</tr>
 			<tr>
 				<td style="text-align: center" colspan="2"><input type="submit"
-						value="login" /></td>
+						value="CREATE" /></td>
 			</tr>
 		</table>
 	</form>

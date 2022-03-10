@@ -21,11 +21,11 @@
 			</tr>
 			<tr>
 				<td>username</td>
-				<td><input type="text" name="username" value="${username}" /></td>
+				<td><input type="text" name="username" value="${user.username}" /></td>
 			</tr>
 			<tr>
 				<td>password</td>
-				<td><input type="text" name="password" value="${password}" /></td>
+				<td><input type="text" name="password" value="" /></td>
 			</tr>
 			<tr>
 				<td style="text-align: center" colspan="2"><input type="submit"

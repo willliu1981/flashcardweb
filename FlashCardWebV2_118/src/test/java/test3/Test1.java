@@ -9,11 +9,10 @@ public class Test1 {
 	public static void main(String[] args) {
 		String[] ss = { "A", "B" };
 		
-		Object oo=ss;
+		Object oo=Test1.class;
 		
-		
-
-		Debug.test(Test1.class, oo);
+		//System.out.println(oo);
+		Debug.test(Test1.class, "xxx");
 
 	}
 

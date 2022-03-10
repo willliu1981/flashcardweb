@@ -122,6 +122,7 @@ public class UserFaker {
 
 	public void create() {
 		dao.create(this.user);
+		this.queryByUsernameAndPassword();
 	}
 
 	public void update(Object id) {

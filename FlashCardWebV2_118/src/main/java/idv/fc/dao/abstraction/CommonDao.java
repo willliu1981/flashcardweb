@@ -16,7 +16,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import idv.fc.tool.Debug;
 import idv.fc.tool.StringJoiner;
 
 /**
@@ -88,8 +87,7 @@ public abstract class CommonDao<T> extends BaseDao<T> {
 	public void create(T model) {
 		Map<String, Object> map = new HashMap<>();
 		this.createMapForCreate(map, model);
-		Debug.test(this, map);
-
+		
 		List<String> keys = new ArrayList<>();
 		List<Object> values = new ArrayList<>();
 
@@ -107,8 +105,6 @@ public abstract class CommonDao<T> extends BaseDao<T> {
 
 		String sql = String.format("insert into %s (%s) values (%s)",
 				this.getTableName(), cols, questionMarks);
-		Debug.test(this, sql);
-		Debug.test(this, valueArr);
 		this.executeSQL(sql, valueArr);
 	}
 

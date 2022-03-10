@@ -41,10 +41,10 @@ public class UserController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "user", method = RequestMethod.POST)
-	public String create(UserFaker userFaker) {
-		System.out.println(this.getClass()+":"+userFaker.getUsername());
+	public String create(UserFaker userFaker, HashMap<String, User> map) {
 		userFaker.create();
-		return "user/create";
+		map.put("user", userFaker.getUser());
+		return "user/login";
 	}
 
 	/**
@@ -64,6 +64,8 @@ public class UserController extends BaseController {
 
 	/**
 	 * query by id
+	 * 為隱藏id ,傳入引數使用 RedirectAttributes
+	 * 接數參數 注解 ModelAttribute
 	 * @param userFaker
 	 * @param session
 	 * @param map

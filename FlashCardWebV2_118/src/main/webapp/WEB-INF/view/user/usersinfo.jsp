@@ -38,7 +38,7 @@
 		</tr>
 		<tr>
 			<td style="text-align: center" colspan="2"><input type="submit"
-					value="login" /></td>
+					value="HOME" /></td>
 		</tr>
 	</table>
 

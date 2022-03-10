@@ -9,6 +9,8 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import idv.fc.tool.Debug;
+
 public abstract class BaseDao<T> implements Dao<T> {
 	private DataSource dataSource;
 
@@ -71,18 +73,18 @@ public abstract class BaseDao<T> implements Dao<T> {
 	public int executeSQL(String sql, Object... params) {
 		Connection conn = this.getConnection();
 		PreparedStatement st = null;
-		ResultSet rs = null;
+		int r = 0;
 		try {
 			st = conn.prepareStatement(sql);
 			prepareStatementSetObjects(st, params);
-			rs = st.executeQuery();
+			r = st.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			this.closeResources(rs, st, conn);
+			this.closeResources(st, conn);
 		}
 
-		return 0;
+		return r;
 	}
 
 	protected void prepareStatementSetObjects(PreparedStatement st, Object... params) {
