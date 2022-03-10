@@ -18,8 +18,24 @@
 	<context:component-scan base-package="idv.fc"></context:component-scan>
 
 
+	<bean id="UserFake" class="idv.fc.model.UserFake"
+		scope="prototype">
+	</bean>
+
 	<bean id="VocabularyModel" class="idv.fc.model.Vocabulary"
 		scope="prototype">
+	</bean>
+
+	<bean id="EmptyUser" class="idv.fc.model.User" scope="prototype">
+	</bean>
+
+	<bean id="User2" class="idv.fc.model.User" scope="prototype">
+		<property name="username">
+			<value>tony</value>
+		</property>
+		<property name="password">
+			<value>1234</value>
+		</property>
 	</bean>
 
 <!--  

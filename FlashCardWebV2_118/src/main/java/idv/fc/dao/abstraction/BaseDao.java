@@ -1,4 +1,4 @@
-package idv.fc.dao.abs;
+package idv.fc.dao.abstraction;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -53,7 +53,7 @@ public abstract class BaseDao<T> implements Dao<T> {
 		}
 	}
 
-	public void deleteSQL(Object id, String sql) {
+	public void deleteSQL(String sql, Object id) {
 		Connection conn = this.getConnection();
 
 		try {

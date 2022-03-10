@@ -1,4 +1,4 @@
-package idv.fc.dao.abs;
+package idv.fc.dao.abstraction;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -139,7 +139,7 @@ public abstract class CommonDao<T> extends BaseDao<T> {
 	@Override
 	public void delete(Object id) {
 		String sql = String.format("delete from  %s where id=?", this.getTableName());
-		this.deleteSQL(id, sql);
+		this.deleteSQL(sql, id);
 	}
 
 	@Override

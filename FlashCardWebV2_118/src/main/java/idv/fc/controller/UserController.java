@@ -1,7 +1,6 @@
 package idv.fc.controller;
 
 import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,9 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import idv.fc.dao.abs.Dao;
-import idv.fc.dao.proxy.UserDaoProxy;
+import idv.fc.dao.abstraction.Dao;
 import idv.fc.model.User;
+import idv.fc.model.UserFake;
 
 @Controller
 @RequestMapping(value = "user")
@@ -39,14 +38,14 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "login", method = RequestMethod.POST)
-	public String login(User queryUser, HttpSession session,
+	public String login(UserFake userFake, HttpSession session,
 			HashMap<String, User> map) {
-		UserDaoProxy proxy = new UserDaoProxy(queryUser, this.userCommonDao);
 
-		if (proxy.queryByUsernameAndPassword()) {
+		if (userFake.queryByUsernameAndPassword()) {
 			User sessUser = (User) session.getAttribute("userSession");
-			if (sessUser == null || !sessUser.getId().equals(proxy.getUser().getId())) {
-				sessUser = proxy.getUser();
+			if (sessUser == null
+					|| !sessUser.getId().equals(userFake.getUser().getId())) {
+				sessUser = userFake.getUser();
 				session.setAttribute("userSession", sessUser);
 			}
 			map.put("user", sessUser);
@@ -57,24 +56,4 @@ public class UserController {
 		}
 	}
 
-//	@RequestMapping(value = "login", method = RequestMethod.POST)
-//	public String login(User user, HttpSession session, HashMap<String, User> map) {
-//
-//		List<User> users = userCommonDao.querySQL(
-//				"select * from user where username=? and password=? ",
-//				user.getUsername(), user.getPassword());
-//
-//		if (!users.isEmpty()) {
-//			User sessUser = (User) session.getAttribute("userSession");
-//			if (sessUser == null || !sessUser.getId().equals(users.get(0).getId())) {
-//				sessUser = users.get(0);
-//				session.setAttribute("userSession", sessUser);
-//			}
-//			map.put("user", sessUser);
-//			return "user/userinfo";
-//		} else {
-//			session.invalidate();
-//			return "user/login";
-//		}
-//	}
 }

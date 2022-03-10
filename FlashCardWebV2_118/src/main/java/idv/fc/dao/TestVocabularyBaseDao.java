@@ -2,7 +2,7 @@ package idv.fc.dao;
 
 import java.util.List;
 
-import idv.fc.dao.abs.BaseDao;
+import idv.fc.dao.abstraction.BaseDao;
 import idv.fc.model.Vocabulary;
 
 public class TestVocabularyBaseDao extends BaseDao<Vocabulary> {

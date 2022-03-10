@@ -9,7 +9,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import idv.fc.dao.abs.BaseDao;
+import idv.fc.dao.abstraction.BaseDao;
 import idv.fc.model.Vocabulary;
 
 public class test1 {

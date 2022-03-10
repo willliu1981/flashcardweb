@@ -33,6 +33,8 @@
 	<bean id="TestVocabularyBaseDao" class="idv.fc.dao.TestVocabularyBaseDao">
 		<property name="dataSource" ref="DataSource"></property>
 	</bean>
+	
+
 
 
 

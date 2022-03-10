@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import idv.fc.dao.abs.AbsCardDao;
+import idv.fc.dao.abstraction.AbsCardDao;
 import idv.fc.model.Card;
 
 public class CardDao extends AbsCardDao {

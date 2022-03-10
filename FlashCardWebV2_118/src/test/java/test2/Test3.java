@@ -2,7 +2,7 @@ package test2;
 
 import java.util.List;
 
-import idv.fc.dao.abs.Dao;
+import idv.fc.dao.abstraction.Dao;
 
 public class Test3 {
 

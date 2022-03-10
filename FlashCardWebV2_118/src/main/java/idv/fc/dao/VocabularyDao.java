@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import idv.fc.dao.abs.AbsVocabularyDao;
+import idv.fc.dao.abstraction.AbsVocabularyDao;
 import idv.fc.model.Vocabulary;
 
 public class VocabularyDao extends AbsVocabularyDao {

@@ -1,19 +1,26 @@
-package idv.fc.dao.proxy;
+package idv.fc.model;
 
 import java.sql.Date;
 import java.util.List;
 
-import idv.fc.dao.abs.Dao;
-import idv.fc.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 
-public class UserDaoProxy {
+import idv.fc.dao.abstraction.Dao;
+import idv.fc.tool.SpringUtil;
+
+public class UserFake {
+
 	private User user;
+
 	Dao<User> dao;
 
-	public UserDaoProxy(User user, Dao<User> dao) {
-		super();
-		this.user = user;
-		this.dao = dao;
+	public UserFake() {
+		user = (User) SpringUtil.getBean("EmptyUser");
+		dao = (Dao<User>) SpringUtil.getBean("UserCommonDao");
+
 	}
 
 	public User getUser() {
@@ -36,7 +43,7 @@ public class UserDaoProxy {
 		return user.getId();
 	}
 
-	public UserDaoProxy setId(String id) {
+	public UserFake setId(String id) {
 		user.setId(id);
 		return this;
 	}
@@ -45,7 +52,7 @@ public class UserDaoProxy {
 		return user.getCreate_date();
 	}
 
-	public UserDaoProxy setCreate_date(Date create_date) {
+	public UserFake setCreate_date(Date create_date) {
 		user.setCreate_date(create_date);
 		return this;
 	}
@@ -54,7 +61,7 @@ public class UserDaoProxy {
 		return user.getAge();
 	}
 
-	public UserDaoProxy setAge(Integer age) {
+	public UserFake setAge(Integer age) {
 		user.setAge(age);
 		return this;
 	}
@@ -63,7 +70,7 @@ public class UserDaoProxy {
 		return user.getUsername();
 	}
 
-	public UserDaoProxy setUsername(String username) {
+	public UserFake setUsername(String username) {
 		user.setUsername(username);
 		return this;
 	}
@@ -72,7 +79,7 @@ public class UserDaoProxy {
 		return user.getPassword();
 	}
 
-	public UserDaoProxy setPassword(String password) {
+	public UserFake setPassword(String password) {
 		user.setPassword(password);
 		return this;
 	}
@@ -81,7 +88,7 @@ public class UserDaoProxy {
 		return user.getDisplay_name();
 	}
 
-	public UserDaoProxy setDisplay_name(String dsiplay_name) {
+	public UserFake setDisplay_name(String dsiplay_name) {
 		user.setDisplay_name(dsiplay_name);
 		return this;
 	}
@@ -90,7 +97,7 @@ public class UserDaoProxy {
 		return user.getGender();
 	}
 
-	public UserDaoProxy setGender(Integer gender) {
+	public UserFake setGender(Integer gender) {
 		user.setGender(gender);
 		return this;
 	}
@@ -99,7 +106,7 @@ public class UserDaoProxy {
 		return user.getAuthority();
 	}
 
-	public UserDaoProxy setAuthority(String authority) {
+	public UserFake setAuthority(String authority) {
 		user.setAuthority(authority);
 		return this;
 	}
@@ -108,7 +115,7 @@ public class UserDaoProxy {
 		return user.getTag();
 	}
 
-	public UserDaoProxy setTag(String age) {
+	public UserFake setTag(String age) {
 		user.setTag(age);
 		return this;
 	}

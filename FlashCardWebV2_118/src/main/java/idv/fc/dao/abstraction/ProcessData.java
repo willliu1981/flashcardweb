@@ -1,4 +1,4 @@
-package idv.fc.dao.abs;
+package idv.fc.dao.abstraction;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

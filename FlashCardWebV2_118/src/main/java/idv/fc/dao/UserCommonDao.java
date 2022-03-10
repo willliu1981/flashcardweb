@@ -4,11 +4,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
-import idv.fc.dao.abs.CommonDao;
+import idv.fc.dao.abstraction.CommonDao;
 import idv.fc.model.User;
 
 public class UserCommonDao extends CommonDao<User> {
-	private UserCommonDao() {
+	protected UserCommonDao() {
 		super(User.class);
 	}
 

@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-import idv.fc.dao.abs.Dao;
+import idv.fc.dao.abstraction.Dao;
+import idv.fc.model.UserFake;
 import idv.fc.model.Vocabulary;
 import idv.fc.tool.SpringUtil;
 
@@ -13,20 +15,22 @@ import idv.fc.tool.SpringUtil;
 @RequestMapping(value = "test")
 public class TestController {
 
-	@RequestMapping(value = "addx")
-	public String query() {
-		Dao<Vocabulary> dao = (Dao<Vocabulary>) SpringUtil.getBean("VocabularyDao");
-		
-		
-		System.out.println(dao.queryById("v_as").getTranslation());
-		return "test/test";
+	@RequestMapping(value = "query")
+	public ModelAndView query() {
+
+		UserFake uf = (UserFake) SpringUtil.getBean("UserFake");
+
+		boolean r = uf.setUsername("admin").setPassword("1234")
+				.queryByUsernameAndPassword();
+		System.out.println(this.getClass() + ":" + uf.getUsername());
+		return new ModelAndView("user/userinfo").addObject("user", uf.getUser());
 	}
 
 	@RequestMapping(value = "querySQL")
 	public String querySQL() {
 		Dao<Vocabulary> dao = (Dao<Vocabulary>) SpringUtil.getBean("VocabularyDao");
-		List<Vocabulary> list = dao
-				.querySQL("select * from vocabulary where id=? and vocabulary=?","v_by", "by");
+		List<Vocabulary> list = dao.querySQL(
+				"select * from vocabulary where id=? and vocabulary=?", "v_by", "by");
 		System.out.println(list.get(0).getTranslation());
 		return "test/test";
 	}

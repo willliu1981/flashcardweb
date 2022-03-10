@@ -2,7 +2,7 @@ package deprecated.model.proxy;
 
 import java.sql.Date;
 
-import idv.fc.dao.abs.Dao;
+import idv.fc.dao.abstraction.Dao;
 import idv.fc.model.Vocabulary;
 
 public class VocabularyProxy implements IVocabulary {
