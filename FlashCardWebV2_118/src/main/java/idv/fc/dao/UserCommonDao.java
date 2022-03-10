@@ -1,7 +1,9 @@
 package idv.fc.dao;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Map;
 
 import idv.fc.dao.abstraction.CommonDao;
@@ -27,7 +29,13 @@ public class UserCommonDao extends CommonDao<User> {
 
 	@Override
 	protected void createMapForCreate(Map<String, Object> cols, User model) {
-		// TODO Auto-generated method stub
+		cols.put("id", "u_" + model.getUsername().trim());
+		cols.put("display_name", model.getDisplay_name().trim());
+		cols.put("username", model.getUsername().trim());
+		cols.put("password", model.getPassword().trim());
+		cols.put("age", model.getAge());
+		cols.put("gender", model.getGender());
+		cols.put("create_date", Date.valueOf(LocalDate.now()));
 
 	}
 

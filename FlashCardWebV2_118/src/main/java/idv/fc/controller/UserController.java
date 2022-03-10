@@ -30,7 +30,7 @@ public class UserController extends BaseController {
 		return "user/login";
 	}
 
-	@RequestMapping(value = "user/create", method = RequestMethod.GET)
+	@RequestMapping(value = "register", method = RequestMethod.GET)
 	public String toCreate() {
 		return "user/create";
 	}
@@ -42,6 +42,7 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping(value = "user", method = RequestMethod.POST)
 	public String create(UserFaker userFaker) {
+		System.out.println(this.getClass()+":"+userFaker.getUsername());
 		userFaker.create();
 		return "user/create";
 	}

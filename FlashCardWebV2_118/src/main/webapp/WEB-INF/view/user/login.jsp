@@ -11,11 +11,13 @@
 <body>
 	<h1>LOGIN</h1>
 	<hr>
-	<form action="${pageContext.request.contextPath}/login"
-		method="post">
+	<form action="${pageContext.request.contextPath}/login" method="post">
 		<table class="evenTable">
 			<tr>
-				<td colspan="2">LOGIN</td>
+				<td><font size="6" color="blue">LOGIN</font></td>
+				<td style="text-align: right"><a
+					href="${pageContext.request.contextPath}/register"><font
+						size="5" color="BlueViolet">register</font> </a></td>
 			</tr>
 			<tr>
 				<td>username</td>
@@ -27,7 +29,7 @@
 			</tr>
 			<tr>
 				<td style="text-align: center" colspan="2"><input type="submit"
-						value="login" /></td>
+						value="LOGIN" /></td>
 			</tr>
 		</table>
 	</form>

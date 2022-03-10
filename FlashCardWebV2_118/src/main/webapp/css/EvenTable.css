@@ -7,13 +7,25 @@
 	margin-right: auto;
 }
 
+.evenTable input[type=text] {
+	font-size: 30px;
+}
+
+.evenTable input[type=submit] {
+	width: 10em;
+	height: 2em;
+	font-size: 20px;
+}
+
 .evenTable td {
 	border: 0px solid #888888;
 	padding: 10px;
+	font-size: 30px;
 }
 
 .evenTable tr:nth-child(even) {
 	background-color: #FFC286;
+	color: #555555;
 }
 
 .evenTable tr:nth-child(odd) {
