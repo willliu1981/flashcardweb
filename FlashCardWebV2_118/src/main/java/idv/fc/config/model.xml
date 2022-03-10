@@ -18,7 +18,7 @@
 	<context:component-scan base-package="idv.fc"></context:component-scan>
 
 
-	<bean id="UserFake" class="idv.fc.model.UserFake"
+	<bean id="UserFaker" class="idv.fc.model.UserFaker"
 		scope="prototype">
 	</bean>
 

@@ -5,24 +5,19 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import idv.fc.dao.abstraction.Dao;
+import idv.fc.controller.abstraction.BaseController;
 import idv.fc.model.User;
-import idv.fc.model.UserFake;
+import idv.fc.model.UserFaker;
 
 @Controller
 //@RequestMapping(value = "user")
-public class UserController {
-	@Autowired
-	@Qualifier("UserCommonDao")
-	private Dao<User> userCommonDao;
+public class UserController extends BaseController {
 
 	/**
 	 * toXXX 表示轉發,以下類推
@@ -30,21 +25,45 @@ public class UserController {
 	 * @param user
 	 * @return
 	 */
-	@RequestMapping(value = "toLogin", method = RequestMethod.GET)
-	public String toLogin(User user) {
+	@RequestMapping(value = "login", method = RequestMethod.GET)
+	public String toLogin() {
 		return "user/login";
 	}
 
+	@RequestMapping(value = "user/create", method = RequestMethod.GET)
+	public String toCreate() {
+		return "user/create";
+	}
+
+	/**
+	 * create user
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping(value = "user", method = RequestMethod.POST)
+	public String create(UserFaker userFaker) {
+		userFaker.create();
+		return "user/create";
+	}
+
+	/**
+	 * query all
+	 * @param session
+	 * @param map
+	 * @return
+	 */
 	@RequestMapping(value = "users", method = RequestMethod.GET)
 	public String queryAll(HttpSession session, HashMap<String, List<User>> map) {
-		List<User> users = userCommonDao.queryAll();
+		List<User> users = this.getUserCommonDao().queryAll();
 		map.put("users", users);
+		System.out.println(this.getClass() + ":");
+		users.forEach(System.out::println);
 		return "user/usersinfo";
 	}
 
 	/**
 	 * query by id
-	 * @param userFake
+	 * @param userFaker
 	 * @param session
 	 * @param map
 	 * @return
@@ -52,27 +71,27 @@ public class UserController {
 	@RequestMapping(value = "user", method = RequestMethod.GET)
 	public String query(@ModelAttribute("id") String id, HttpSession session,
 			HashMap<String, User> map) {
-		User user = this.userCommonDao.queryById(id);
+		User user = this.getUserCommonDao().queryById(id);
 		map.put("user", user);
 		return "user/userinfo";
 	}
 
 	/**
 	 * check username and password
-	 * @param userFake
+	 * @param userFaker
 	 * @param session
 	 * @param map
 	 * @return
 	 */
 	@RequestMapping(value = "login", method = RequestMethod.POST)
-	public String login(UserFake userFake, HttpSession session,
-			HashMap<String, String> map, RedirectAttributes rdAttr) {
+	public String login(UserFaker userFaker, HttpSession session,
+			RedirectAttributes rdAttr) {
 
-		if (userFake.queryByUsernameAndPassword()) {
+		if (userFaker.queryByUsernameAndPassword()) {
 			User sessUser = (User) session.getAttribute("userSession");
 			if (sessUser == null
-					|| !sessUser.getId().equals(userFake.getUser().getId())) {
-				sessUser = userFake.getUser();
+					|| !sessUser.getId().equals(userFaker.getUser().getId())) {
+				sessUser = userFaker.getUser();
 				session.setAttribute("userSession", sessUser);
 			}
 			rdAttr.addFlashAttribute("id", sessUser.getId());

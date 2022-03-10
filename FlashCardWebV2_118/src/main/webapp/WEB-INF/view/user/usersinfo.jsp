@@ -18,23 +18,23 @@
 		<tr>
 			<td>name</td>
 			<td><input type="text" name="display_name"
-					value="${user[0].display_name}" /></td>
+					value="${users[0].display_name}" /></td>
 		</tr>
 		<tr>
 			<td>username</td>
-			<td><input type="text" name="username" value="${user[0].username}" /></td>
+			<td><input type="text" name="username" value="${users[0].username}" /></td>
 		</tr>
 		<tr>
 			<td>password</td>
-			<td><input type="text" name="password" value="${user[0].password}" /></td>
+			<td><input type="text" name="password" value="${users[0].password}" /></td>
 		</tr>
 		<tr>
 			<td>age</td>
-			<td><input type="text" name="age" value="${user[0].age}" /></td>
+			<td><input type="text" name="age" value="${users[0].age}" /></td>
 		</tr>
 		<tr>
 			<td>dender</td>
-			<td><input type="text" name="gender" value="${user[0].gender}" /></td>
+			<td><input type="text" name="gender" value="${users[0].gender}" /></td>
 		</tr>
 		<tr>
 			<td style="text-align: center" colspan="2"><input type="submit"

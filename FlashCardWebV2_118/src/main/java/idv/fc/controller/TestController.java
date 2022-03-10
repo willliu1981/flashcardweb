@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import idv.fc.dao.abstraction.Dao;
-import idv.fc.model.UserFake;
+import idv.fc.model.UserFaker;
 import idv.fc.model.Vocabulary;
 import idv.fc.tool.SpringUtil;
 

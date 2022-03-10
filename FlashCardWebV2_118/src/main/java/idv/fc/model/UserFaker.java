@@ -11,13 +11,13 @@ import org.springframework.stereotype.Component;
 import idv.fc.dao.abstraction.Dao;
 import idv.fc.tool.SpringUtil;
 
-public class UserFake {
+public class UserFaker {
 
 	private User user;
 
 	Dao<User> dao;
 
-	public UserFake() {
+	public UserFaker() {
 		user = (User) SpringUtil.getBean("EmptyUser");
 		dao = (Dao<User>) SpringUtil.getBean("UserCommonDao");
 
@@ -43,7 +43,7 @@ public class UserFake {
 		return user.getId();
 	}
 
-	public UserFake setId(String id) {
+	public UserFaker setId(String id) {
 		user.setId(id);
 		return this;
 	}
@@ -52,7 +52,7 @@ public class UserFake {
 		return user.getCreate_date();
 	}
 
-	public UserFake setCreate_date(Date create_date) {
+	public UserFaker setCreate_date(Date create_date) {
 		user.setCreate_date(create_date);
 		return this;
 	}
@@ -61,7 +61,7 @@ public class UserFake {
 		return user.getAge();
 	}
 
-	public UserFake setAge(Integer age) {
+	public UserFaker setAge(Integer age) {
 		user.setAge(age);
 		return this;
 	}
@@ -70,7 +70,7 @@ public class UserFake {
 		return user.getUsername();
 	}
 
-	public UserFake setUsername(String username) {
+	public UserFaker setUsername(String username) {
 		user.setUsername(username);
 		return this;
 	}
@@ -79,7 +79,7 @@ public class UserFake {
 		return user.getPassword();
 	}
 
-	public UserFake setPassword(String password) {
+	public UserFaker setPassword(String password) {
 		user.setPassword(password);
 		return this;
 	}
@@ -88,7 +88,7 @@ public class UserFake {
 		return user.getDisplay_name();
 	}
 
-	public UserFake setDisplay_name(String dsiplay_name) {
+	public UserFaker setDisplay_name(String dsiplay_name) {
 		user.setDisplay_name(dsiplay_name);
 		return this;
 	}
@@ -97,7 +97,7 @@ public class UserFake {
 		return user.getGender();
 	}
 
-	public UserFake setGender(Integer gender) {
+	public UserFaker setGender(Integer gender) {
 		user.setGender(gender);
 		return this;
 	}
@@ -106,7 +106,7 @@ public class UserFake {
 		return user.getAuthority();
 	}
 
-	public UserFake setAuthority(String authority) {
+	public UserFaker setAuthority(String authority) {
 		user.setAuthority(authority);
 		return this;
 	}
@@ -115,7 +115,7 @@ public class UserFake {
 		return user.getTag();
 	}
 
-	public UserFake setTag(String age) {
+	public UserFaker setTag(String age) {
 		user.setTag(age);
 		return this;
 	}
