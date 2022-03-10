@@ -128,12 +128,12 @@ public class UserFake {
 		dao.update(this.user, id);
 	}
 
-	public void delete(Object id) {
-		dao.delete(id);
+	public void delete() {
+		dao.delete(this.user.getId());
 	}
 
-	public User queryById(Object id) {
-		return dao.queryById(id);
+	public User queryById() {
+		return dao.queryById(this.user.getId());
 	}
 
 	public boolean queryByUsernameAndPassword() {

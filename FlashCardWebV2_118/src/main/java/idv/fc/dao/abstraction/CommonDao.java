@@ -29,7 +29,7 @@ import idv.fc.tool.StringJoiner;
 public abstract class CommonDao<T> extends BaseDao<T> {
 	@Autowired
 	@Qualifier("JDBCStringJoiner")
-	StringJoiner stringConstructor;
+	StringJoiner stringJoiner;
 	private String tableName;
 	private Class<T> clazz;
 
@@ -79,8 +79,8 @@ public abstract class CommonDao<T> extends BaseDao<T> {
 		this.tableName = name;
 	}
 
-	protected StringJoiner getStringConstructor() {
-		return stringConstructor;
+	protected StringJoiner getStringJoiner() {
+		return stringJoiner;
 	}
 
 	@Override
@@ -99,9 +99,9 @@ public abstract class CommonDao<T> extends BaseDao<T> {
 		String[] keyArr = keys.toArray(new String[keys.size()]);
 		Object[] valueArr = values.toArray(new Object[values.size()]);
 
-		String cols = getStringConstructor().join(keyArr);
+		String cols = getStringJoiner().join(keyArr);
 
-		String questionMarks = getStringConstructor().join("%s?", keyArr, false);
+		String questionMarks = getStringJoiner().join("%s?", keyArr, false);
 
 		String sql = String.format("insert into %s (%s) values (%s)",
 				this.getTableName(), cols, questionMarks);
@@ -128,10 +128,10 @@ public abstract class CommonDao<T> extends BaseDao<T> {
 		String[] keyArr = keys.toArray(new String[keys.size()]);
 		Object[] valueArr = values.toArray(new Object[values.size()]);
 
-		String fragment = getStringConstructor().join("%s=?", keyArr);
+		String columnFragment = getStringJoiner().join("%s=?", keyArr);
 
 		String sql = String.format("update %s set %s where id=?", this.getTableName(),
-				fragment);
+				columnFragment);
 
 		this.executeSQL(sql, valueArr);
 	}
