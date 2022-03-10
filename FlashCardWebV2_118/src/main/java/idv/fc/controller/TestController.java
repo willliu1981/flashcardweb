@@ -2,6 +2,8 @@ package idv.fc.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,14 +18,11 @@ import idv.fc.tool.SpringUtil;
 public class TestController {
 
 	@RequestMapping(value = "query")
-	public ModelAndView query() {
+	public String query(HttpSession session) {
 
-		UserFake uf = (UserFake) SpringUtil.getBean("UserFake");
-
-		boolean r = uf.setUsername("admin").setPassword("1234")
-				.queryByUsernameAndPassword();
-		System.out.println(this.getClass() + ":" + uf.getUsername());
-		return new ModelAndView("user/userinfo").addObject("user", uf.getUser());
+		System.out.println(this.getClass() + ":");
+		String cp = session.getServletContext().getContextPath();
+		return "redirect:/users";
 	}
 
 	@RequestMapping(value = "querySQL")

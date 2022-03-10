@@ -11,7 +11,7 @@
 <body>
 	<h1>LOGIN</h1>
 	<hr>
-	<form action="${pageContext.request.contextPath}/user/login"
+	<form action="${pageContext.request.contextPath}/login"
 		method="post">
 		<table class="evenTable">
 			<tr>
