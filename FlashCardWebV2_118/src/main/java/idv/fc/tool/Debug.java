@@ -7,6 +7,11 @@ import java.util.Map;
 public class Debug {
 
 	public static void test(Object o, Object msg) {
+		if (msg == null) {
+			System.out.println(o + ": " + msg);
+			return;
+		}
+
 		if (msg instanceof Map) {
 			Map<?, ?> map = (Map<?, ?>) msg;
 			System.out.println(o + ": foreach...");
