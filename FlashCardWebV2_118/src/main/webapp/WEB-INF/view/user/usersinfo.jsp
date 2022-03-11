@@ -22,11 +22,13 @@
 		</tr>
 		<tr>
 			<td>username</td>
-			<td><input type="text" name="username" value="${users[0].username}" /></td>
+			<td><input type="text" name="username"
+					value="${users[0].username}" /></td>
 		</tr>
 		<tr>
 			<td>password</td>
-			<td><input type="text" name="password" value="${users[0].password}" /></td>
+			<td><input type="text" name="password"
+					value="${users[0].password}" /></td>
 		</tr>
 		<tr>
 			<td>age</td>
@@ -35,6 +37,11 @@
 		<tr>
 			<td>dender</td>
 			<td><input type="text" name="gender" value="${users[0].gender}" /></td>
+		</tr>
+		<tr>
+			<td>authority</td>
+			<td><input type="text" name="gender"
+					value="${users[0].authority}" /></td>
 		</tr>
 		<tr>
 			<td style="text-align: center" colspan="2"><input type="submit"

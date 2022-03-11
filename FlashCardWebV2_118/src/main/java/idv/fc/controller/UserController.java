@@ -19,12 +19,6 @@ import idv.fc.model.UserFaker;
 //@RequestMapping(value = "user")
 public class UserController extends BaseController {
 
-	/**
-	 * toXXX 表示轉發,以下類推
-	 * 
-	 * @param user
-	 * @return
-	 */
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public String toLogin() {
 		return "user/login";
@@ -35,6 +29,11 @@ public class UserController extends BaseController {
 		return "user/create";
 	}
 
+	@RequestMapping(value = "edit", method = RequestMethod.GET)
+	public String toUpdate() {
+		return "user/update";
+	}
+
 	/**
 	 * create user
 	 * @param user
@@ -43,6 +42,13 @@ public class UserController extends BaseController {
 	@RequestMapping(value = "user", method = RequestMethod.POST)
 	public String create(UserFaker userFaker, HashMap<String, User> map) {
 		userFaker.create();
+		map.put("user", userFaker.getUser());
+		return "user/login";
+	}
+
+	@RequestMapping(value = "user", method = RequestMethod.PUT)
+	public String update(UserFaker userFaker, HashMap<String, User> map) {
+		userFaker.update(map);
 		map.put("user", userFaker.getUser());
 		return "user/login";
 	}
