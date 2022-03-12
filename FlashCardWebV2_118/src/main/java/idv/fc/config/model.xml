@@ -22,6 +22,14 @@
 		scope="prototype">
 	</bean>
 
+	<bean id="NewUserFaker" class="idv.fc.test.NewUserFaker"
+		scope="prototype">
+		<constructor-arg value="" />
+
+		<property name="user" ref="EmptyUser" />
+		<property name="dao" ref="UserCommonDao" />
+	</bean>
+
 	<bean id="VocabularyModel" class="idv.fc.model.Vocabulary"
 		scope="prototype">
 	</bean>

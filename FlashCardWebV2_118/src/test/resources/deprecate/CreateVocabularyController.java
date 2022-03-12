@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
-import deprecated.model.proxy.VocabularyProxy;
+import idv.fc.model.Vocabulary;
 import idv.kwl.handle.controller.DataProcessController;
 
 public class CreateVocabularyController extends DataProcessController<VocabularyProxy> {

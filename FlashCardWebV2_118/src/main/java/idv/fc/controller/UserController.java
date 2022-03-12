@@ -46,6 +46,13 @@ public class UserController extends BaseController {
 		return "user/login";
 	}
 
+	
+	/**
+	 * update user
+	 * @param userFaker
+	 * @param map
+	 * @return
+	 */
 	@RequestMapping(value = "user", method = RequestMethod.PUT)
 	public String update(UserFaker userFaker, HashMap<String, User> map) {
 		userFaker.update(map);

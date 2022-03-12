@@ -1,4 +1,4 @@
-package idv.kwl.exception;
+package idv.fc.exception;
 
 public class FindErrorException extends RuntimeException {
 

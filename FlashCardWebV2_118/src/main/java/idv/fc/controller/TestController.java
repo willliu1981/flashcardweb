@@ -1,36 +1,56 @@
 package idv.fc.controller;
 
-import java.util.List;
+import java.lang.reflect.Method;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import idv.fc.dao.abstraction.Dao;
-import idv.fc.model.UserFaker;
+import idv.fc.model.User;
 import idv.fc.model.Vocabulary;
+import idv.fc.proxy.InterceptorAdapter;
+import idv.fc.proxy.ProxyFactory;
+import idv.fc.test.Faker;
+import idv.fc.test.NewUserFaker;
+import idv.fc.tool.Debug;
 import idv.fc.tool.SpringUtil;
+import net.sf.cglib.proxy.MethodProxy;
 
 @Controller
 @RequestMapping(value = "test")
 public class TestController {
 
-	@RequestMapping(value = "query")
+	@RequestMapping(value = "test")
 	public String query(HttpSession session) {
 
-		System.out.println(this.getClass() + ":");
-		String cp = session.getServletContext().getContextPath();
-		return "redirect:/users";
+		NewUserFaker faker = (NewUserFaker) SpringUtil.getBean("NewUserFaker");
+		faker.setDisplay_name("Dennis");
+
+		Debug.test(null, faker.getDisplay_name());
+		Debug.test(null, faker.getUser().getDisplay_name());
+		return "test/test";
 	}
 
-	@RequestMapping(value = "querySQL")
+	@RequestMapping(value = "test2")
 	public String querySQL() {
-		Dao<Vocabulary> dao = (Dao<Vocabulary>) SpringUtil.getBean("VocabularyDao");
-		List<Vocabulary> list = dao.querySQL(
-				"select * from vocabulary where id=? and vocabulary=?", "v_by", "by");
-		System.out.println(list.get(0).getTranslation());
+		User user = new User();
+		User userProxy = (User) ProxyFactory
+				.getProxyInstance(new InterceptorAdapter<User>() {
+
+					@Override
+					public Object intercept(Object obj, Method method, Object[] args,
+							MethodProxy proxy) throws Throwable {
+
+						Debug.test(null, proxy.getSignature().getName());
+
+						return method.invoke(this.getTarget(), args);
+					}
+
+				}.setTarget(user));
+
+		userProxy.setDisplay_name("aaa");
 		return "test/test";
 	}
 

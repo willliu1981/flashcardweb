@@ -1,15 +1,14 @@
 package idv.fc.model;
 
+import java.lang.reflect.Method;
 import java.sql.Date;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Component;
-
 import idv.fc.dao.abstraction.Dao;
+import idv.fc.proxy.InterceptorAdapter;
+import idv.fc.proxy.ProxyFactory;
 import idv.fc.tool.SpringUtil;
+import net.sf.cglib.proxy.MethodProxy;
 
 public class UserFaker {
 
@@ -18,9 +17,35 @@ public class UserFaker {
 	Dao<User> dao;
 
 	public UserFaker() {
-		user = (User) SpringUtil.getBean("EmptyUser");
+		init();
+	}
+
+	private void init() {
+		User user = (User) SpringUtil.getBean("EmptyUser");
 		dao = (Dao<User>) SpringUtil.getBean("UserCommonDao");
 
+		this.user = (User) ProxyFactory
+				.getProxyInstance(new InterceptorAdapter<User>() {
+
+					@Override
+					public Object intercept(Object obj, Method method, Object[] args,
+							MethodProxy proxy) throws Throwable {
+						boolean flag = true;
+						Object value = null;
+
+						if (proxy.getSignature().getName().equals("setAuthority")) {
+
+							flag = false;
+						}
+
+						if (flag) {
+							value = method.invoke(this.getTarget(), args);
+						}
+
+						return value;
+					}
+
+				}.setTarget(user));
 	}
 
 	public User getUser() {

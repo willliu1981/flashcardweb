@@ -1,10 +1,10 @@
-package test3;
+package idv.fc.proxy;
 
 import net.sf.cglib.proxy.Enhancer;
 
 public class ProxyFactory {
 
-	public Object getProxyInstance(AbsInterceptor instance) {
+	public static Object getProxyInstance(AbsInterceptor<?> instance) {
 
 		Enhancer enhancer = new Enhancer();
 		enhancer.setSuperclass(instance.getTarget().getClass());
