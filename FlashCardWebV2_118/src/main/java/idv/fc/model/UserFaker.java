@@ -6,7 +6,7 @@ import java.util.List;
 
 import idv.fc.dao.abstraction.Dao;
 import idv.fc.proxy.InterceptorAdapter;
-import idv.fc.proxy.ProxyFactory;
+import idv.fc.proxy.OldProxyFactory;
 import idv.fc.tool.SpringUtil;
 import net.sf.cglib.proxy.MethodProxy;
 
@@ -24,7 +24,7 @@ public class UserFaker {
 		User user = (User) SpringUtil.getBean("EmptyUser");
 		dao = (Dao<User>) SpringUtil.getBean("UserCommonDao");
 
-		this.user = (User) ProxyFactory
+		this.user = (User) OldProxyFactory
 				.getProxyInstance(new InterceptorAdapter<User>() {
 
 					@Override

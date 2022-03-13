@@ -11,8 +11,7 @@ import idv.fc.dao.abstraction.Dao;
 import idv.fc.model.User;
 import idv.fc.model.Vocabulary;
 import idv.fc.proxy.InterceptorAdapter;
-import idv.fc.proxy.ProxyFactory;
-import idv.fc.test.Faker;
+import idv.fc.proxy.OldProxyFactory;
 import idv.fc.test.NewUserFaker;
 import idv.fc.tool.Debug;
 import idv.fc.tool.SpringUtil;
@@ -36,7 +35,7 @@ public class TestController {
 	@RequestMapping(value = "test2")
 	public String querySQL() {
 		User user = new User();
-		User userProxy = (User) ProxyFactory
+		User userProxy = (User) OldProxyFactory
 				.getProxyInstance(new InterceptorAdapter<User>() {
 
 					@Override

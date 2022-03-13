@@ -2,14 +2,14 @@ package idv.fc.proxy;
 
 import net.sf.cglib.proxy.Enhancer;
 
-public class ProxyFactory {
+public class OldProxyFactory {
 
-	private ProxyFactory instance;
+	private OldProxyFactory instance;
 	private Object target;
 
-	private ProxyFactory getInstance() {
+	private OldProxyFactory getInstance() {
 		if (this.instance == null) {
-			instance = new ProxyFactory();
+			instance = new OldProxyFactory();
 		}
 
 		return this.instance;
@@ -23,17 +23,15 @@ public class ProxyFactory {
 		this.target = target;
 	}
 
-	public static ProxyFactory createNewFactoryInstance(Object target) {
-		ProxyFactory instance = new ProxyFactory();
+	public static OldProxyFactory createNewFactoryInstance(Object target) {
+		OldProxyFactory instance = new OldProxyFactory();
 		instance.setTarget(target);
 		return instance;
 	}
 
-	public Object getProxyInstance(BaseInterceptor instance) {
+	public static Object getProxyInstance(AbsInterceptor instance) {
 		Enhancer enhancer = new Enhancer();
-		if(instance.getTarget()==null) {
-			instance.setTarget(this.getTarget());
-		}
+
 		enhancer.setSuperclass(instance.getTarget().getClass());
 		enhancer.setCallback(instance);
 

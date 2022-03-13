@@ -1,25 +1,27 @@
-package idv.fc.proxy.concretion;
+package idv.fc.proxy;
 
 import java.lang.reflect.Method;
 
+import idv.fc.exception.FindErrorException;
 import idv.fc.model.User;
-import idv.fc.proxy.AbsInterceptor;
 import idv.fc.tool.Debug;
+import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 
-public class UserInterceptor extends AbsInterceptor<User> {
+public abstract class BaseInterceptor implements MethodInterceptor {
 
-	private User target;
+	private Object target;
 
-	@Override
-	public AbsInterceptor setTarget(User target) {
+	public BaseInterceptor(Object target) {
 		this.target = target;
-		return this;
 	}
 
-	@Override
-	public User getTarget() {
-		return this.target;
+	protected Object getTarget() {
+		return target;
+	}
+
+	public void setTarget(Object target) {
+		this.target = target;
 	}
 
 	@Override
@@ -30,14 +32,14 @@ public class UserInterceptor extends AbsInterceptor<User> {
 		Object value = null;
 		boolean excuteInvoke = true;
 		if (method.getName().substring(0, 3).equals("set")) {
-			Debug.test(this,"ui..."+ obj.getClass());
+			Debug.test(this, "ui..." + obj.getClass());
 			value = obj;
-			method.invoke(target, args);
+			method.invoke(getTarget(), args);
 			excuteInvoke = false;
 		}
 
 		if (excuteInvoke) {
-			value = method.invoke(target, args);
+			value = method.invoke(getTarget(), args);
 		}
 
 		return value;
