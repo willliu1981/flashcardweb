@@ -7,9 +7,13 @@ import net.sf.cglib.proxy.MethodProxy;
 
 public class InterceptHandlerWrap {
 
-	private int handlerIndex;
+	private int handlerIndex = -1;
 	private List<InterceptHandler> interceptHandlers = new ArrayList<>();
 
+	/**
+	 * 強制設一個default handler
+	 * @param defaultInterceptHandler
+	 */
 	public InterceptHandlerWrap(InterceptHandler defaultInterceptHandler) {
 		this.interceptHandlers.add(defaultInterceptHandler);
 	}
@@ -19,13 +23,15 @@ public class InterceptHandlerWrap {
 	}
 
 	public boolean doPreHandler(MethodProxy methodProxy) {
-		handlerIndex = 0;
+		int index = 0;
 		for (InterceptHandler interceptHandler : interceptHandlers) {
 			if (!interceptHandler.doPreHandle(methodProxy)) {
 				return false;
+			} else {
+				handlerIndex = index;
 			}
 		}
-		handlerIndex++;
+		index++;
 
 		return true;
 	}
@@ -37,6 +43,10 @@ public class InterceptHandlerWrap {
 			handlerIndex--;
 		}
 
+	}
+
+	public boolean isHandlerEmptyExceptDefault() {
+		return this.interceptHandlers.size() > 0;
 	}
 
 }
