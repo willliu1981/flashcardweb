@@ -21,8 +21,8 @@ public class UserFaker {
 	}
 
 	private void init() {
-		User user = (User) SpringUtil.getBean("EmptyUser");
-		dao = (Dao<User>) SpringUtil.getBean("UserCommonDao");
+		User user = new User();
+		dao = (Dao<User>) SpringUtil.getBean("UserDao");
 
 		this.user = (User) OldProxyFactory
 				.getProxyInstance(new InterceptorAdapter<User>() {

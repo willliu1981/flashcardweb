@@ -14,17 +14,11 @@
         https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 
-
 	<mvc:default-servlet-handler />
 	<mvc:annotation-driven
 		conversion-service="converterUtil" />
 
 	<context:component-scan base-package="idv.fc"></context:component-scan>
-
-	<context:property-placeholder
-		location="classpath:idv/fc/config/jdbc.properties" />
-
-
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -40,6 +34,18 @@
 			</list>
 		</property>
 	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="idv.fc.exception.FindErrorException">redirect:/error</prop>
+			</props>
+		</property>
+	</bean>
+
+
+	<bean id="DaoFactory" class="idv.fc.dao.factory.DaoFactory"></bean>
 	
 	
 
@@ -73,22 +79,6 @@
 
 
 
-	<bean id="DataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName">
-			<value>${jdbc.driverClassName}</value>
-		</property>
-		<property name="url">
-			<value>${jdbc.url}</value>
-		</property>
-		<property name="username">
-			<value>${jdbc.username}</value>
-		</property>
-		<property name="password">
-			<value>${jdbc.password}</value>
-		</property>
-
-	</bean>
 
 
 

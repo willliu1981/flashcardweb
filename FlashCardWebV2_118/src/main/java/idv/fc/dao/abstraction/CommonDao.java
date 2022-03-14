@@ -16,6 +16,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import idv.fc.exception.FindErrorException;
 import idv.fc.tool.StringJoiner;
 
 /**
@@ -87,7 +88,7 @@ public abstract class CommonDao<T> extends BaseDao<T> {
 	public void create(T model) {
 		Map<String, Object> map = new HashMap<>();
 		this.createMapForCreate(map, model);
-		
+
 		List<String> keys = new ArrayList<>();
 		List<Object> values = new ArrayList<>();
 
@@ -145,7 +146,11 @@ public abstract class CommonDao<T> extends BaseDao<T> {
 	public T queryById(Object id) {
 		String sql = String.format("select * from %s where id=?", this.getTableName(),
 				id);
-		return querySQL(sql, id).get(0);
+		List<T> res = querySQL(sql, id);
+		if (res.isEmpty()) {
+			throw new FindErrorException(this.getClass() + ":" + id);
+		}
+		return res.get(0);
 	}
 
 	@Override

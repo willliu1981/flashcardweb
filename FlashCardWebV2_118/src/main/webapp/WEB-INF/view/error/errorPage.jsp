@@ -9,5 +9,6 @@
 <body>
 	<h1>Error</h1>
 	<h1>${errorMsg }</h1>
+	<h2>${exception }</h2>
 </body>
 </html>

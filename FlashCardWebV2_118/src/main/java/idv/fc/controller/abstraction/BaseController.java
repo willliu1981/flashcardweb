@@ -9,19 +9,19 @@ import idv.fc.dao.abstraction.Dao;
 import idv.fc.model.User;
 
 public abstract class BaseController {
-	private static Dao<User> staticUserCommonDao;
+	private static Dao<User> staticUserDao;
 
 	@Autowired
-	@Qualifier("UserCommonDao")
-	private Dao<User> userCommonDao;
+	@Qualifier("UserDao")
+	private Dao<User> userDao;
 
-	protected Dao<User> getUserCommonDao() {
-		return staticUserCommonDao;
+	protected Dao<User> getUserDao() {
+		return staticUserDao;
 	}
 
 	@PostConstruct
 	private void initStaticDao() {
-		staticUserCommonDao = this.userCommonDao;
+		staticUserDao = this.userDao;
 	}
 
 }

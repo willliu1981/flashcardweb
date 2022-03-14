@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import idv.fc.controller.abstraction.BaseController;
+import idv.fc.dao.factory.DaoFactory;
 import idv.fc.model.User;
 import idv.fc.model.UserFaker;
+import idv.fc.tool.Debug;
 
 @Controller
 //@RequestMapping(value = "user")
@@ -46,7 +48,6 @@ public class UserController extends BaseController {
 		return "user/login";
 	}
 
-	
 	/**
 	 * update user
 	 * @param userFaker
@@ -68,7 +69,7 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping(value = "users", method = RequestMethod.GET)
 	public String queryAll(HttpSession session, HashMap<String, List<User>> map) {
-		List<User> users = this.getUserCommonDao().queryAll();
+		List<User> users = DaoFactory.getUserDao().queryAll();
 		map.put("users", users);
 		System.out.println(this.getClass() + ":");
 		users.forEach(System.out::println);
@@ -87,7 +88,7 @@ public class UserController extends BaseController {
 	@RequestMapping(value = "user", method = RequestMethod.GET)
 	public String query(@ModelAttribute("id") String id, HttpSession session,
 			HashMap<String, User> map) {
-		User user = this.getUserCommonDao().queryById(id);
+		User user = DaoFactory.getUserDao().queryById(id);
 		map.put("user", user);
 		return "user/userinfo";
 	}

@@ -26,11 +26,10 @@ public class ErrorController {
 		case 500:
 			errorMsg = "500:Internal Server Error";
 			break;
-			default:
-				errorMsg="other error";
-				break;
+		default:
+			errorMsg = "other error";
+			break;
 		}
-
 		model.put("errorMsg", errorMsg);
 		return "error/errorPage";
 	}

@@ -18,10 +18,7 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
-				classpath:idv/fc/config/springMVC-servlet.xml,
-				classpath:idv/fc/config/dao.xml
-				classpath:idv/fc/config/model.xml,
-				classpath:idv/fc/config/tool.xml
+				classpath:springmvc/springMVC-servlet.xml
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
@@ -66,5 +63,20 @@
 	<error-page>
 		<location>/error</location>
 	</error-page>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath:spring/dao.xml,
+			classpath:spring/model.xml,
+			classpath:spring/tool.xml
+		</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>
+			org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+	</listener>
 
 </web-app>

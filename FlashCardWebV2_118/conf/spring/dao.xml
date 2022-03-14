@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+
+	<context:component-scan base-package="idv.fc"></context:component-scan>
+
+	<context:property-placeholder
+		location="classpath:property/jdbc.properties" />
+
+
+	<bean id="DataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName">
+			<value>${jdbc.driverClassName}</value>
+		</property>
+		<property name="url">
+			<value>${jdbc.url}</value>
+		</property>
+		<property name="username">
+			<value>${jdbc.username}</value>
+		</property>
+		<property name="password">
+			<value>${jdbc.password}</value>
+		</property>
+
+	</bean>
+
+	<bean id="UserDao" class="idv.fc.dao.UserCommonDao">
+		<property name="dataSource" ref="DataSource"></property>
+	</bean>
+
+	<bean id="VocabularyDao" class="idv.fc.dao.VocabularyCommonDao">
+		<property name="dataSource" ref="DataSource"></property>
+	</bean>
+
+	<bean id="CardDao" class="idv.fc.dao.CardDao">
+		<property name="dataSource" ref="DataSource"></property>
+	</bean>
+
+	<bean id="TestVocabularyBaseDao"
+		class="idv.fc.dao.TestVocabularyBaseDao">
+		<property name="dataSource" ref="DataSource"></property>
+	</bean>
+
+
+
+
+
+
+
+</beans>

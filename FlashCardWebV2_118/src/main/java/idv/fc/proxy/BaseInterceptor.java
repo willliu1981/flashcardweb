@@ -2,17 +2,19 @@ package idv.fc.proxy;
 
 import java.lang.reflect.Method;
 
-import idv.fc.exception.FindErrorException;
-import idv.fc.model.User;
 import idv.fc.tool.Debug;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 
-public abstract class BaseInterceptor implements MethodInterceptor {
+public abstract class BaseInterceptor<T> implements MethodInterceptor {
 
-	private Object target;
+	private T target;
 
-	public BaseInterceptor(Object target) {
+	public BaseInterceptor() {
+
+	}
+
+	public BaseInterceptor(T target) {
 		this.target = target;
 	}
 
@@ -20,29 +22,28 @@ public abstract class BaseInterceptor implements MethodInterceptor {
 		return target;
 	}
 
-	public void setTarget(Object target) {
+	public void setTarget(T target) {
 		this.target = target;
 	}
 
 	@Override
 	public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy)
 			throws Throwable {
-		User user = (User) obj;
 
-		Object value = null;
-		boolean excuteInvoke = true;
-		if (method.getName().substring(0, 3).equals("set")) {
-			Debug.test(this, "ui..." + obj.getClass());
-			value = obj;
-			method.invoke(getTarget(), args);
-			excuteInvoke = false;
-		}
+		return this.intercept((T) obj, method, args, proxy, false);
+	}
 
-		if (excuteInvoke) {
-			value = method.invoke(getTarget(), args);
-		}
+	public Object intercept(T proxy, Method method, Object[] args,
+			MethodProxy methodProxy, boolean any) throws Throwable {
+//		Object value = null;
+//		boolean excuteInvoke = true;
+//
+//		if (excuteInvoke) {
+//			value = method.invoke(getTarget(), args);
+//		}
 
-		return value;
+		return method.invoke(getTarget(), args);
+
 	}
 
 }

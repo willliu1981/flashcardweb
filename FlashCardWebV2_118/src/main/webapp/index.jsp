@@ -10,7 +10,7 @@
 
 	<h1>Welcome to FlashCard</h1>
 	<h2>
-		<a href="test/test">test</a>
+		<a href="test/test?username=david2">test</a>
 	</h2>
 	<h2>
 		<a href="test/test2">test2</a>
@@ -30,6 +30,17 @@
 	<h2>
 		<a href="user/toQuery">query user</a>
 	</h2>
+
+	<form action="test/test" mthod="post">
+		<table>
+			<tr>
+				<input type="text" value="david" name="username"></input>
+			</tr>
+			<tr>
+				<input type="submit" value="send">
+			</tr>
+		</table>
+	</form>
 
 </body>
 </html>

@@ -1,21 +1,19 @@
 package idv.fc.controller;
 
-import java.lang.reflect.Method;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import idv.fc.dao.UserCommonDao;
 import idv.fc.dao.abstraction.Dao;
+import idv.fc.dao.factory.DaoFactory;
 import idv.fc.model.User;
 import idv.fc.model.Vocabulary;
-import idv.fc.proxy.InterceptorAdapter;
-import idv.fc.proxy.OldProxyFactory;
-import idv.fc.test.NewUserFaker;
+import idv.fc.proxy.BaseInterceptor;
+import idv.fc.proxy.ProxyFactory;
 import idv.fc.tool.Debug;
 import idv.fc.tool.SpringUtil;
-import net.sf.cglib.proxy.MethodProxy;
 
 @Controller
 @RequestMapping(value = "test")
@@ -24,32 +22,19 @@ public class TestController {
 	@RequestMapping(value = "test")
 	public String query(HttpSession session) {
 
-		NewUserFaker faker = (NewUserFaker) SpringUtil.getBean("NewUserFaker");
-		faker.setDisplay_name("Dennis");
+		UserCommonDao dao = SpringUtil.getBean("UserCommonDao", UserCommonDao.class);
+		User qryUser = dao.queryById("u_apple");
+		session.setAttribute("user", qryUser);
 
-		Debug.test(null, faker.getDisplay_name());
-		Debug.test(null, faker.getUser().getDisplay_name());
-		return "test/test";
+		return "user/test";
 	}
 
 	@RequestMapping(value = "test2")
 	public String querySQL() {
-		User user = new User();
-		User userProxy = (User) OldProxyFactory
-				.getProxyInstance(new InterceptorAdapter<User>() {
 
-					@Override
-					public Object intercept(Object obj, Method method, Object[] args,
-							MethodProxy proxy) throws Throwable {
+		User user = DaoFactory.getUserDao().queryById("u_apple666");
 
-						Debug.test(null, proxy.getSignature().getName());
-
-						return method.invoke(this.getTarget(), args);
-					}
-
-				}.setTarget(user));
-
-		userProxy.setDisplay_name("aaa");
+		Debug.test(this, user.getUsername());
 		return "test/test";
 	}
 

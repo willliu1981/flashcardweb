@@ -14,31 +14,23 @@
         https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 
-
 	<context:component-scan base-package="idv.fc"></context:component-scan>
 
 
-	<bean id="UserCommonDao" class="idv.fc.dao.UserCommonDao">
-		<property name="dataSource" ref="DataSource"></property>
-	</bean>
-	
-	<bean id="VocabularyDao" class="idv.fc.dao.VocabularyCommonDao">
-		<property name="dataSource" ref="DataSource"></property>
+	<bean id="UserFaker" class="idv.fc.model.UserFaker"
+		scope="prototype">
 	</bean>
 
-	<bean id="CardDao" class="idv.fc.dao.CardDao">
-		<property name="dataSource" ref="DataSource"></property>
+	<bean id="VocabularyModel" class="idv.fc.model.Vocabulary"
+		scope="prototype">
 	</bean>
-	
-	<bean id="TestVocabularyBaseDao" class="idv.fc.dao.TestVocabularyBaseDao">
-		<property name="dataSource" ref="DataSource"></property>
+
+<!--  
+	<bean id="VocabularyProxy"
+		class="idv.fc.model.proxy.VocabularyProxy" scope="prototype">
+		<constructor-arg ref="VocabularyModel" />
 	</bean>
-	
-
-
-
-
-
+-->
 
 
 </beans>

@@ -14,44 +14,20 @@
         https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 
-
 	<context:component-scan base-package="idv.fc"></context:component-scan>
+	
 
-
-	<bean id="UserFaker" class="idv.fc.model.UserFaker"
-		scope="prototype">
-	</bean>
-
-	<bean id="NewUserFaker" class="idv.fc.test.NewUserFaker"
-		scope="prototype">
-		<constructor-arg value="" />
-
-		<property name="user" ref="EmptyUser" />
-		<property name="dao" ref="UserCommonDao" />
-	</bean>
-
-	<bean id="VocabularyModel" class="idv.fc.model.Vocabulary"
-		scope="prototype">
-	</bean>
-
-	<bean id="EmptyUser" class="idv.fc.model.User" scope="prototype">
-	</bean>
-
-	<bean id="User2" class="idv.fc.model.User" scope="prototype">
-		<property name="username">
-			<value>tony</value>
-		</property>
-		<property name="password">
-			<value>1234</value>
+	<bean id="JDBCStringJoiner" class="idv.fc.tool.StringJoiner">
+		<property name="defaultSeparator">
+			<value>,</value>
 		</property>
 	</bean>
 
-<!--  
-	<bean id="VocabularyProxy"
-		class="idv.fc.model.proxy.VocabularyProxy" scope="prototype">
-		<constructor-arg ref="VocabularyModel" />
-	</bean>
--->
+
+
+
+
+
 
 
 </beans>

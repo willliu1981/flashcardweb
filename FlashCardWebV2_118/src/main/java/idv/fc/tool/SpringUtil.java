@@ -27,7 +27,7 @@ public class SpringUtil implements ApplicationContextAware {
 		return getApplicationContext().getBean(name);
 	}
 
-	public static Object getBean(String name, Class<?> clazz) {
+	public static <T> T getBean(String name, Class<T> clazz) {
 		return getApplicationContext().getBean(name, clazz);
 	}
 }
