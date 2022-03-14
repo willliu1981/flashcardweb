@@ -26,6 +26,17 @@
 		scope="prototype">
 	</bean>
 
+
+	<bean id="UserInterceptor"
+		class="idv.fc.proxy.interceptor.CommonInterceptor">
+		<property name="interceptHandler" ref="UserHandler" />
+
+	</bean>
+
+	<bean id="UserHandler"
+		class="idv.fc.proxy.interceptor.concretion.UserHandler">
+	</bean>
+
 <!--  
 	<bean id="VocabularyProxy"
 		class="idv.fc.model.proxy.VocabularyProxy" scope="prototype">

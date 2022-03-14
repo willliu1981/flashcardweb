@@ -2,12 +2,14 @@ package idv.fc.proxy.interceptor.concretion;
 
 import idv.fc.proxy.interceptor.InterceptHandler;
 import idv.fc.tool.Debug;
+import net.sf.cglib.proxy.MethodProxy;
 
-public class UserHandler implements InterceptHandler {
+public class UserHandler extends InterceptHandler {
 
 	@Override
-	public boolean preHandle() {
-		Debug.test(this, "pre...");
+	public boolean preHandle(MethodProxy methodProxy) {
+
+		Debug.test(this, "pre..." + methodProxy.getSignature().getName());
 		return true;
 	}
 

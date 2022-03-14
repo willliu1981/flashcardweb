@@ -2,12 +2,14 @@ package idv.fc.proxy;
 
 import idv.fc.exception.FindErrorException;
 import idv.fc.proxy.interceptor.BaseInterceptor;
+import idv.fc.proxy.interceptor.InterceptHandler;
 import net.sf.cglib.proxy.Enhancer;
 
 public class ProxyFactory<T> {
 
 	private T target;
 	private BaseInterceptor<T> interceptor;
+	private InterceptHandler interceptHandler;
 
 	public T getTarget() {
 		return target;
@@ -28,7 +30,7 @@ public class ProxyFactory<T> {
 	}
 
 	public static <T> ProxyFactory<T> createWithTarget(T target) {
-		ProxyFactory<T> instance = new ProxyFactory();
+		ProxyFactory<T> instance = new ProxyFactory<T>();
 		instance.setTarget(target);
 		return instance;
 	}
@@ -60,6 +62,11 @@ public class ProxyFactory<T> {
 		enhancer.setCallback(this.getInterceptor());
 
 		return enhancer.create();
+	}
+
+	public static Object createProxyInstance() {
+
+		return null;
 	}
 
 }

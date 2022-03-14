@@ -25,10 +25,11 @@ public class TestController {
 		User proxy = (User) ProxyFactory
 				.createWithInterceptor(new CommonInterceptor<User>(new UserHandler()))
 				.setTarget(user).getProxyInstance();
-
+		proxy.setUsername("root");
+		proxy.setPassword("1234");
 		Debug.test(this, proxy.getUsername());
 
-		return "user/test";
+		return "user/userinfo";
 	}
 
 	@RequestMapping(value = "test2")
