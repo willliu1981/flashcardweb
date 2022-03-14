@@ -10,7 +10,7 @@ import idv.fc.dao.factory.DaoFactory;
 import idv.fc.model.User;
 import idv.fc.model.Vocabulary;
 import idv.fc.proxy.ProxyFactory;
-import idv.fc.proxy.interceptor.CommonInterceptor;
+import idv.fc.proxy.interceptor.InterceptorImpl;
 import idv.fc.proxy.interceptor.concretion.UserHandler;
 import idv.fc.tool.Debug;
 import idv.fc.tool.SpringUtil;
@@ -23,7 +23,7 @@ public class TestController {
 	public String query(User user, HttpSession session) {
 
 		User proxy = (User) ProxyFactory
-				.createWithInterceptor(new CommonInterceptor<User>(new UserHandler()))
+				.createWithInterceptor(new InterceptorImpl<User>(new UserHandler()))
 				.setTarget(user).getProxyInstance();
 		proxy.setUsername("root");
 		proxy.setPassword("1234");

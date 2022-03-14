@@ -1,45 +1,38 @@
 package idv.fc.proxy.interceptor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import idv.fc.tool.Debug;
 import net.sf.cglib.proxy.MethodProxy;
 
 public abstract class InterceptHandler {
-	private static String FINALIZE = "finalize";// GC 回收
-	private String methodName = "setUsername";
+	public static String FINALIZE = "finalize";// GC 回收
+	private MethodFilter methodFilter = new MethodFilter();
 
-	private static InterceptHandler defaultInterceptHandler = new InterceptHandler() {
+	public static class MethodFilter {
+		private List<String> methodNames = new ArrayList<>();
 
-		@Override
-		protected boolean preHandle(MethodProxy methodProxy) {
-			Debug.test(this, "default pre..." + methodProxy.getSignature().getName());
-			return true;
+		public MethodFilter filterMethod(String name) {
+			methodNames.add(name);
+			return this;
 		}
 
-		@Override
-		public void postHandle() {
-			Debug.test(this, "default pre...");
+		public boolean isContain(String name) {
+			return methodNames.contains(name);
 		}
 
-	}.setMethodName(FINALIZE);
-
-	public String getMethodName() {
-		return methodName;
 	}
 
-	public InterceptHandler setMethodName(String methodName) {
-		this.methodName = methodName;
-		return this;
-	}
-
-	public static InterceptHandler getDefaultInterceptHandler() {
-		return defaultInterceptHandler;
+	public MethodFilter filterMethod(String name) {
+		return methodFilter.filterMethod(name);
 	}
 
 	protected abstract boolean preHandle(MethodProxy methodProxy);
 
 	public boolean doPreHandle(MethodProxy methodProxy) {
-
-		boolean allow = methodProxy.getSignature().getName().equals(methodName);
+		Debug.test(this, methodProxy.getSignature().getName());
+		boolean allow = methodFilter.isContain(methodProxy.getSignature().getName());
 		return allow && preHandle(methodProxy);
 	}
 

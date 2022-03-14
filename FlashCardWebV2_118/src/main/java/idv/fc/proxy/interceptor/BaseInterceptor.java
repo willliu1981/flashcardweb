@@ -35,12 +35,6 @@ public abstract class BaseInterceptor<T> implements MethodInterceptor {
 
 	public Object intercept(T proxy, Method method, Object[] args,
 			MethodProxy methodProxy, boolean any) throws Throwable {
-//		Object value = null;
-//		boolean excuteInvoke = true;
-//
-//		if (excuteInvoke) {
-//			value = method.invoke(getTarget(), args);
-//		}
 
 		return method.invoke(getTarget(), args);
 
