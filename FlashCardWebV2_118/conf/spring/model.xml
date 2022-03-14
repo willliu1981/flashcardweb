@@ -21,6 +21,7 @@
 		scope="prototype">
 	</bean>
 
+
 	<bean id="VocabularyModel" class="idv.fc.model.Vocabulary"
 		scope="prototype">
 	</bean>

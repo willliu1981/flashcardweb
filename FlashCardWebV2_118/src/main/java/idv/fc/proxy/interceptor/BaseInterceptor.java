@@ -1,4 +1,4 @@
-package idv.fc.proxy;
+package idv.fc.proxy.interceptor;
 
 import java.lang.reflect.Method;
 
@@ -18,7 +18,7 @@ public abstract class BaseInterceptor<T> implements MethodInterceptor {
 		this.target = target;
 	}
 
-	protected Object getTarget() {
+	public Object getTarget() {
 		return target;
 	}
 

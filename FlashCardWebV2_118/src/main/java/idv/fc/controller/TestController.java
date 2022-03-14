@@ -5,13 +5,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import idv.fc.dao.UserCommonDao;
 import idv.fc.dao.abstraction.Dao;
 import idv.fc.dao.factory.DaoFactory;
 import idv.fc.model.User;
 import idv.fc.model.Vocabulary;
-import idv.fc.proxy.BaseInterceptor;
 import idv.fc.proxy.ProxyFactory;
+import idv.fc.proxy.interceptor.CommonInterceptor;
+import idv.fc.proxy.interceptor.concretion.UserHandler;
 import idv.fc.tool.Debug;
 import idv.fc.tool.SpringUtil;
 
@@ -20,11 +20,13 @@ import idv.fc.tool.SpringUtil;
 public class TestController {
 
 	@RequestMapping(value = "test")
-	public String query(HttpSession session) {
+	public String query(User user, HttpSession session) {
 
-		UserCommonDao dao = SpringUtil.getBean("UserCommonDao", UserCommonDao.class);
-		User qryUser = dao.queryById("u_apple");
-		session.setAttribute("user", qryUser);
+		User proxy = (User) ProxyFactory
+				.createWithInterceptor(new CommonInterceptor<User>(new UserHandler()))
+				.setTarget(user).getProxyInstance();
+
+		Debug.test(this, proxy.getUsername());
 
 		return "user/test";
 	}

@@ -1,39 +1,41 @@
 package idv.fc.proxy;
 
 import idv.fc.exception.FindErrorException;
+import idv.fc.proxy.interceptor.BaseInterceptor;
 import net.sf.cglib.proxy.Enhancer;
 
-public class ProxyFactory {
+public class ProxyFactory<T> {
 
-	private Object target;
-	private BaseInterceptor interceptor;
+	private T target;
+	private BaseInterceptor<T> interceptor;
 
-	public Object getTarget() {
+	public T getTarget() {
 		return target;
 	}
 
-	public ProxyFactory setTarget(Object target) {
+	public ProxyFactory<T> setTarget(T target) {
 		this.target = target;
 		return this;
 	}
 
-	public BaseInterceptor getInterceptor() {
+	public BaseInterceptor<T> getInterceptor() {
 		return interceptor;
 	}
 
-	public ProxyFactory setInterceptor(BaseInterceptor interceptor) {
+	public ProxyFactory<T> setInterceptor(BaseInterceptor<T> interceptor) {
 		this.interceptor = interceptor;
 		return this;
 	}
 
-	public static ProxyFactory createWithTarget(Object target) {
-		ProxyFactory instance = new ProxyFactory();
+	public static <T> ProxyFactory<T> createWithTarget(T target) {
+		ProxyFactory<T> instance = new ProxyFactory();
 		instance.setTarget(target);
 		return instance;
 	}
 
-	public static ProxyFactory createWithInterceptor(BaseInterceptor interceptor) {
-		ProxyFactory instance = new ProxyFactory();
+	public static <T> ProxyFactory<T> createWithInterceptor(
+			BaseInterceptor<T> interceptor) {
+		ProxyFactory<T> instance = new ProxyFactory<>();
 		instance.setInterceptor(interceptor);
 		return instance;
 	}
