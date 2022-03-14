@@ -9,40 +9,37 @@ import net.sf.cglib.proxy.MethodProxy;
 
 public class InterceptorImpl<T> extends BaseInterceptor<T> {
 
-	private InterceptHandler interceptHandler;
 	private static final InterceptHandler DEFAULTINTERCEPTHANDLER = new InterceptHandler() {
 
 		@Override
 		protected boolean preHandle(MethodProxy methodProxy) {
+			Debug.test(this, "defult pre:" + methodProxy.getSignature().getName());
 			return true;
 		}
 
 		@Override
 		public void postHandle() {
+			Debug.test(this, "defult post");
+
+		}
+
+		@Override
+		protected void init(MethodFilter methodFilter) {
+			methodFilter.filterMethod(FINALIZE);
 		}
 	};
-
-	{
-		DEFAULTINTERCEPTHANDLER.filterMethod(InterceptHandler.FINALIZE);
-	}
 
 	private InterceptHandlerWrap interceptHandlerWrap = new InterceptHandlerWrap(
 			DEFAULTINTERCEPTHANDLER);
 
+	public InterceptorImpl(InterceptHandler... interceptHandlers) {
+		for (InterceptHandler interceptHandler : interceptHandlers) {
+			interceptHandlerWrap.addInterceptHandler(interceptHandler);
+		}
+	}
+
 	public InterceptorImpl() {
 
-	}
-
-	public InterceptorImpl(InterceptHandler handler) {
-		this.interceptHandler = handler;
-	}
-
-	public InterceptHandler getInterceptHandler() {
-		return interceptHandler;
-	}
-
-	public void setInterceptHandler(InterceptHandler interceptHandler) {
-		this.interceptHandler = interceptHandler;
 	}
 
 	@Override

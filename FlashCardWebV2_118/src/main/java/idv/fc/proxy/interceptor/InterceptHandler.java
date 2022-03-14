@@ -19,21 +19,48 @@ public abstract class InterceptHandler {
 		}
 
 		public boolean isContain(String name) {
-			return methodNames.contains(name);
+			if (methodNames.contains(name)) {
+				return true;
+			}
+
+			if (name.startsWith("set") || name.startsWith("set")) {
+				char head = name.charAt(3);
+
+				if (Character.isUpperCase(head)) {
+
+					return methodNames
+							.contains(Character.toLowerCase(head) + name.substring(4));
+				}
+			}
+
+			return false;
 		}
 
 	}
 
-	public MethodFilter filterMethod(String name) {
+	public InterceptHandler() {
+		init(this.methodFilter);
+	}
+
+	abstract protected void init(MethodFilter methodFilter);
+
+	protected MethodFilter filterMethod(String name) {
 		return methodFilter.filterMethod(name);
 	}
 
 	protected abstract boolean preHandle(MethodProxy methodProxy);
 
 	public boolean doPreHandle(MethodProxy methodProxy) {
+		boolean contain = methodFilter.isContain(methodProxy.getSignature().getName());
 		Debug.test(this, methodProxy.getSignature().getName());
-		boolean allow = methodFilter.isContain(methodProxy.getSignature().getName());
-		return allow && preHandle(methodProxy);
+		Debug.test(this, contain);
+
+		if (contain) {
+			return preHandle(methodProxy);
+		}
+
+		return true;
+
 	}
 
 	public abstract void postHandle();

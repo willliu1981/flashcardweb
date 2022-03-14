@@ -18,4 +18,9 @@ public class UserHandler extends InterceptHandler {
 		Debug.test(this, "post...");
 	}
 
+	@Override
+	protected void init(MethodFilter methodFilter) {
+		methodFilter.filterMethod("username");
+	}
+
 }
