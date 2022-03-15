@@ -1,6 +1,8 @@
 package idv.fc.proxy.interceptor;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.web.servlet.ModelAndView;
 
@@ -8,6 +10,8 @@ import idv.fc.tool.Debug;
 import net.sf.cglib.proxy.MethodProxy;
 
 public class InterceptorImpl<T> extends BaseInterceptor<T> {
+	private InterceptHandlerWrap interceptHandlerWrap = new InterceptHandlerWrap(
+			DEFAULTINTERCEPTHANDLER);
 
 	private static final InterceptHandler DEFAULTINTERCEPTHANDLER = new InterceptHandler() {
 
@@ -29,13 +33,15 @@ public class InterceptorImpl<T> extends BaseInterceptor<T> {
 		}
 	};
 
-	private InterceptHandlerWrap interceptHandlerWrap = new InterceptHandlerWrap(
-			DEFAULTINTERCEPTHANDLER);
-
 	public InterceptorImpl(InterceptHandler... interceptHandlers) {
+		this(Arrays.asList(interceptHandlers));
+	}
+
+	public InterceptorImpl(List<InterceptHandler> interceptHandlers) {
 		for (InterceptHandler interceptHandler : interceptHandlers) {
 			interceptHandlerWrap.addInterceptHandler(interceptHandler);
 		}
+		Debug.test(this, this.interceptHandlerWrap);
 	}
 
 	public InterceptorImpl() {
@@ -56,6 +62,11 @@ public class InterceptorImpl<T> extends BaseInterceptor<T> {
 		interceptHandlerWrap.doPostHandler(methodProxy);
 
 		return returnValue;
+	}
+
+	@Override
+	public boolean isHandlerEmptyExceptDefault() {
+		return this.interceptHandlerWrap.isHandlerEmptyExceptDefault();
 	}
 
 }

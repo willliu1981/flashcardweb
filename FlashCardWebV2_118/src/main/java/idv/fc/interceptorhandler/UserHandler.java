@@ -1,4 +1,4 @@
-package idv.fc.proxy.interceptor.concretion;
+package idv.fc.interceptorhandler;
 
 import idv.fc.proxy.interceptor.InterceptHandler;
 import idv.fc.tool.Debug;
@@ -8,7 +8,7 @@ public class UserHandler extends InterceptHandler {
 
 	@Override
 	public boolean preHandle(MethodProxy methodProxy) {
-
+	
 		Debug.test(this, "pre..." + methodProxy.getSignature().getName());
 		return true;
 	}
@@ -20,7 +20,7 @@ public class UserHandler extends InterceptHandler {
 
 	@Override
 	protected void init(MethodFilter methodFilter) {
-		methodFilter.filterMethod("username");
+		methodFilter.filterMethod("username").filterMethod("password");
 	}
 
 }

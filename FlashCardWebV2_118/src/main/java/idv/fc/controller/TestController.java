@@ -7,11 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import idv.fc.dao.abstraction.Dao;
 import idv.fc.dao.factory.DaoFactory;
+import idv.fc.interceptorhandler.UserHandler;
 import idv.fc.model.User;
 import idv.fc.model.Vocabulary;
 import idv.fc.proxy.ProxyFactory;
+import idv.fc.proxy.ProxyFactory.ProxyBuilder;
 import idv.fc.proxy.interceptor.InterceptorImpl;
-import idv.fc.proxy.interceptor.concretion.UserHandler;
 import idv.fc.tool.Debug;
 import idv.fc.tool.SpringUtil;
 
@@ -22,22 +23,24 @@ public class TestController {
 	@RequestMapping(value = "test")
 	public String query(User user, HttpSession session) {
 
-		User proxy = (User) ProxyFactory
-				.createWithInterceptor(new InterceptorImpl<User>(new UserHandler()))
-				.setTarget(user).getProxyInstance();
+		User proxy = ProxyFactory.setInterceptor(new InterceptorImpl<User>())
+				.setTarget(user).addInterceptHandler(new UserHandler())
+				.getProxyInstance();
 		proxy.setUsername("root");
 		proxy.setPassword("1234");
-		Debug.test(this, proxy.getUsername());
+
+		Debug.test(this, "user:====>" + proxy.getClass());
 
 		return "user/userinfo";
 	}
 
 	@RequestMapping(value = "test2")
-	public String querySQL() {
+	public String querySQL(User user, HttpSession session) {
 
-		User user = DaoFactory.getUserDao().queryById("u_apple666");
+		User proxy =   ProxyFactory.getProxyInstance("UserProxyFactory", user);
+		proxy.setPassword("1234");
 
-		Debug.test(this, user.getUsername());
+		Debug.test(this, proxy);
 		return "test/test";
 	}
 

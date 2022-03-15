@@ -26,6 +26,8 @@ public abstract class BaseInterceptor<T> implements MethodInterceptor {
 		this.target = target;
 	}
 
+	public abstract boolean isHandlerEmptyExceptDefault();
+
 	@Override
 	public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy)
 			throws Throwable {

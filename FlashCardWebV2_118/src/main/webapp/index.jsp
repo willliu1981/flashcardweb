@@ -13,7 +13,7 @@
 		<a href="test/test?username=david2">test</a>
 	</h2>
 	<h2>
-		<a href="test/test2">test2</a>
+		<a href="test/test2?username=mary">test2</a>
 	</h2>
 	<h2>
 		<a href="page/vocabulary">vocabulary</a>

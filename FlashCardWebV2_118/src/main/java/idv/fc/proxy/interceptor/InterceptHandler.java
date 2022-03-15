@@ -6,6 +6,11 @@ import java.util.List;
 import idv.fc.tool.Debug;
 import net.sf.cglib.proxy.MethodProxy;
 
+/**
+ * 應用於 InterceptorImpl
+ * @author KuanWei
+ *
+ */
 public abstract class InterceptHandler {
 	public static String FINALIZE = "finalize";// GC 回收
 	private MethodFilter methodFilter = new MethodFilter();
@@ -18,7 +23,7 @@ public abstract class InterceptHandler {
 			return this;
 		}
 
-		public boolean isContain(String name) {
+		protected boolean isContain(String name) {
 			if (methodNames.contains(name)) {
 				return true;
 			}
