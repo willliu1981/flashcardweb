@@ -110,9 +110,10 @@ public class ProxyFactory<T> {
 		this.interceptHandlers = handlers;
 	}
 
-	public static <T> T getProxyInstance(String name, T target) {
+	public static <T> T getProxyInstance(String proxyFactoryName, T target) {
 
-		ProxyFactory<T> factory = SpringUtil.getBean(name, ProxyFactory.class);
+		ProxyFactory<T> factory = SpringUtil.getBean(proxyFactoryName,
+				ProxyFactory.class);
 
 		return setInterceptHandler(factory.proxyBuilder, factory.interceptHandlers)
 				.setTarget(target).getProxyInstance();

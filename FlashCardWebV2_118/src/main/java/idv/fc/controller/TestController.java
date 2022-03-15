@@ -37,7 +37,7 @@ public class TestController {
 	@RequestMapping(value = "test2")
 	public String querySQL(User user, HttpSession session) {
 
-		User proxy =   ProxyFactory.getProxyInstance("UserProxyFactory", user);
+		User proxy = ProxyFactory.getProxyInstance("UserProxyFactory", user);
 		proxy.setPassword("1234");
 
 		Debug.test(this, proxy);
@@ -46,7 +46,7 @@ public class TestController {
 
 	@RequestMapping(value = "add")
 	public String add() {
-		Dao<Vocabulary> dao = (Dao<Vocabulary>) SpringUtil.getBean("VocabularyDao");
+		Dao<Vocabulary> dao = SpringUtil.getBean("VocabularyDao", Dao.class);
 		Vocabulary v = new Vocabulary();
 		v.setId("v_find");
 		v.setVocabulary("find");
@@ -57,7 +57,7 @@ public class TestController {
 
 	@RequestMapping(value = "update")
 	public String update() {
-		Dao<Vocabulary> dao = (Dao<Vocabulary>) SpringUtil.getBean("VocabularyDao");
+		Dao<Vocabulary> dao = SpringUtil.getBean("VocabularyDao", Dao.class);
 		Vocabulary v = new Vocabulary();
 		v.setId("v_such");
 		v.setVocabulary("such");
