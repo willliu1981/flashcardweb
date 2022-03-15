@@ -21,7 +21,7 @@
 		class="idv.fc.annotation.AnnotationFactory">
 		<property name="annotationMapping">
 			<map>
-				<entry key="Authority">
+				<entry key="Authorized">
 					<value>idv.fc.proxy.annotation.Authorized</value>
 				</entry>
 			</map>

@@ -29,10 +29,13 @@ public class TestController {
 				session);
 
 		Debug.test(this, "before username:" + proxy.getUsername());
+		Debug.test(this, "before password:" + proxy.getPassword());
 		Debug.test(this, "before auth:" + proxy.getAuth());
 		proxy.setUsername("helen");
+		proxy.setPassword("666");
 		proxy.setAuth("common");
 		Debug.test(this, "after username:" + proxy.getUsername());
+		Debug.test(this, "agter password:" + proxy.getPassword());
 		Debug.test(this, "after auth:" + proxy.getAuth());
 
 		return "test/test";
@@ -44,6 +47,8 @@ public class TestController {
 
 		session.setAttribute("token", "admin");
 		rdAttr.addAttribute("auth", user.getAuth());
+		rdAttr.addAttribute("username", user.getUsername());
+		rdAttr.addAttribute("password", user.getPassword());
 
 		return "redirect:/test/test";
 	}

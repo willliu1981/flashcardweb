@@ -5,39 +5,62 @@ import java.util.List;
 import java.util.Map;
 
 public class Debug {
+	private static String PREFIXSEPARATOR = " : ";
 
 	public static void test(Object msg) {
-		test(null, msg);
+		test(null, null, msg, false);
 	}
 
-	public static void test(Object o, Object msg) {
-		String objStr = o == null ? "" : o.toString() + ": ";
+	public static void test(Object prefix, Object msg) {
+		test(null, prefix, msg, false);
+	}
+
+	public static void test(Object objForClassInfo, Object prefixObj, Object msg) {
+		test(objForClassInfo, prefixObj, msg, false);
+	}
+
+	public static void test(String prefixString, Object prefixObj, Object msg) {
+		test(null, String.format("%s(%s)", prefixString, prefixObj), msg, false);
+	}
+
+	public static void test(Object objForClassInfo, Object prefix, Object msg,
+			boolean any) {
+		String head = objForClassInfo == null ? "" : objForClassInfo.toString() + ":";
+
+		String prefixString = "";
+		if (prefix == null) {
+			prefixString = "" + prefix + PREFIXSEPARATOR;
+		} else {
+			prefixString = prefix.toString() + PREFIXSEPARATOR;
+		}
+
+		head += prefixString;
 
 		if (msg == null) {
-			System.out.println(objStr + msg);
+			System.out.println(head + ":" + msg);
 			return;
 		}
 
 		if (msg instanceof Map) {
 			Map<?, ?> map = (Map<?, ?>) msg;
-			System.out.println(objStr + "foreach...");
-			map.forEach((k, v) -> System.out.printf("key=%s , value=%s\n", k, v));
+			System.out.println(head + "foreach...");
+			map.forEach((k, v) -> System.out.printf("  key= %s , value= %s\n", k, v));
 
 		} else if (msg instanceof List) {
 			List<?> list = (List<?>) msg;
-			System.out.println(objStr + "foreach...");
-			list.forEach((x) -> System.out.printf("key=%s\n", x));
+			System.out.println(head + "foreach...");
+			list.forEach((x) -> System.out.printf("  %s\n", x));
 
 		} else if (msg.getClass().isArray()) {
-			System.out.println(objStr + "foreach...");
+			System.out.println(head + "foreach...");
 			Object[] os = (Object[]) msg;
-			Arrays.asList(os).forEach(System.out::println);
+			Arrays.asList(os).forEach((x) -> System.out.printf("  %s\n", x));
 
 		} else if (msg instanceof String) {
-			System.out.println(objStr + msg);
+			System.out.println(head + msg);
 
 		} else {
-			System.out.println(objStr + msg);
+			System.out.println(head + msg);
 		}
 	}
 

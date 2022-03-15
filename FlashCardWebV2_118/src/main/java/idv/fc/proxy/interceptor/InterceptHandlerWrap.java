@@ -77,7 +77,9 @@ public class InterceptHandlerWrap {
 	 * @param defaultInterceptHandler
 	 */
 	public InterceptHandlerWrap(InterceptHandler defaultInterceptHandler) {
-		this.interceptHandlers.add(defaultInterceptHandler);
+		if (defaultInterceptHandler != null) {
+			this.interceptHandlers.add(defaultInterceptHandler);
+		}
 	}
 
 	public void addInterceptHandler(InterceptHandler interceptHandler) {
@@ -92,8 +94,8 @@ public class InterceptHandlerWrap {
 			} else {
 				handlerIndex = index;
 			}
+			index++;
 		}
-		index++;
 
 		return true;
 	}

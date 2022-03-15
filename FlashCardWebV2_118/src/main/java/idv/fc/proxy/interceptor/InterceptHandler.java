@@ -6,6 +6,7 @@ import java.util.List;
 
 import idv.fc.annotation.AnnotationFactory;
 import idv.fc.proxy.interceptor.InterceptHandlerWrap.ParamWrap;
+import idv.fc.tool.Debug;
 
 /**
  * 應用於 InterceptorImpl
@@ -13,7 +14,7 @@ import idv.fc.proxy.interceptor.InterceptHandlerWrap.ParamWrap;
  *
  */
 public abstract class InterceptHandler {
-	public static String FINALIZE = "finalize";// GC 回收
+	protected String name = "base";
 	private MethodFilter methodFilter = new MethodFilter();
 
 	public static class MethodFilter {
@@ -45,11 +46,19 @@ public abstract class InterceptHandler {
 	}
 
 	public InterceptHandler() {
+		this.name = this.getClass().getSimpleName();
 		init(this.methodFilter);
 	}
 
 	abstract protected void init(MethodFilter methodFilter);
 
+	public String getName() {
+		return name;
+	}
+
+	/*
+	 * notice:使用 MethodFilter 會與 annotation 疊加過瀘
+	 */
 	protected MethodFilter filterMethod(String name) {
 		return methodFilter.filter(name);
 	}
@@ -57,17 +66,21 @@ public abstract class InterceptHandler {
 	protected abstract boolean preHandle(ParamWrap paramWrap);
 
 	public boolean doPreHandle(ParamWrap paramWrap) {
-		boolean match = false;
+		boolean matchAnnotation = false;
 		for (Annotation anno : paramWrap.getMethod().getAnnotations()) {
-			match = anno.annotationType().getCanonicalName()
-					.equals(AnnotationFactory.getAnnotationPathString("Authority"));
+			matchAnnotation = anno.annotationType().getCanonicalName()
+					.equals(AnnotationFactory.getAnnotationPathString("Authorized"));
 			break;
 		}
 
-		boolean contain = methodFilter
+		boolean methodFilterContain = methodFilter
 				.isContain(paramWrap.getMethodProxy().getSignature().getName());
 
-		if (contain) {
+//		Debug.test("handler name", this.getName(),
+//				paramWrap.getMethodProxy().getSignature().getName() + String.format(
+//						" ; matchAnnotation=%s , methodFilterContain=%s",
+//						matchAnnotation, methodFilterContain));
+		if (matchAnnotation || methodFilterContain) {
 			return preHandle(paramWrap);
 		}
 

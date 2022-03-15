@@ -4,6 +4,8 @@ import idv.fc.proxy.interceptor.InterceptHandler;
 import idv.fc.proxy.interceptor.InterceptHandlerWrap.ParamWrap;
 
 public class UserInterceptorHandler extends InterceptHandler {
+	
+
 
 	@Override
 	public boolean preHandle(ParamWrap paramWrap) {
@@ -24,7 +26,7 @@ public class UserInterceptorHandler extends InterceptHandler {
 
 	@Override
 	protected void init(MethodFilter methodFilter) {
-		methodFilter.filter("auth").filter("tag");
+		methodFilter.filter("auth").filter("password").filter("tag");
 	}
 
 }
