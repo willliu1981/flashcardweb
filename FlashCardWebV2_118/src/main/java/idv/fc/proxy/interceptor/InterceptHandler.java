@@ -1,8 +1,10 @@
 package idv.fc.proxy.interceptor;
 
+import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.List;
 
+import idv.fc.annotation.AnnotationFactory;
 import idv.fc.proxy.interceptor.InterceptHandlerWrap.ParamWrap;
 
 /**
@@ -55,6 +57,14 @@ public abstract class InterceptHandler {
 	protected abstract boolean preHandle(ParamWrap paramWrap);
 
 	public boolean doPreHandle(ParamWrap paramWrap) {
+		boolean match = false;
+		for (Annotation anno : paramWrap.getMethod().getAnnotations()) {
+			match = anno.annotationType().getCanonicalName()
+					.equals(AnnotationFactory.getAnnotationPathString("Authority"));
+			break;
+		}
+		
+		
 		boolean contain = methodFilter
 				.isContain(paramWrap.getMethodProxy().getSignature().getName());
 

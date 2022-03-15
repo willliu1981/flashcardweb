@@ -69,7 +69,8 @@
 		<param-value>
 			classpath:spring/dao.xml,
 			classpath:spring/model.xml,
-			classpath:spring/tool.xml
+			classpath:spring/tool.xml,
+			classpath:spring/annotation.xml
 		</param-value>
 	</context-param>
 

@@ -55,30 +55,15 @@ public class InterceptorImpl extends BaseInterceptor {
 	public Object intercept(Object proxy, Method method, Object[] args,
 			MethodProxy methodProxy, HttpSession session) throws Throwable {
 		Object returnValue = null;
-		ParamWrap wrap = new ParamWrap(proxy, method, args, methodProxy, session);
+		ParamWrap paramWrap = new ParamWrap(proxy, method, args, methodProxy, session);
 
-		if (methodProxy.getSignature().getName().equals("setAuthority")) {
-			Class<?> userClazz = (Class<?>) ClassUtils.getUserClass(proxy.getClass());
-			Debug.test(this, "class:" + proxy.getClass());
-			Debug.test(this, "user class:" + userClazz);
-			Debug.test(this, "super class:" + userClazz.getSuperclass());
-			Annotation[] annos = userClazz.getClass().getAnnotations();
-			// Annotation[] annos = method.getAnnotations();
-			Annotation anno = null;
-			if (annos.length > 0) {
-				anno = annos[0];
-			}
-			Debug.test(this, "anno: " + anno);
-
-		}
-
-		boolean allowance = interceptHandlerWrap.doPreHandler(wrap);
+		boolean allowance = interceptHandlerWrap.doPreHandler(paramWrap);
 
 		if (allowance) {
 			returnValue = method.invoke(getTarget(), args);
 		}
 
-		interceptHandlerWrap.doPostHandler(wrap);
+		interceptHandlerWrap.doPostHandler(paramWrap);
 
 		return returnValue;
 	}
