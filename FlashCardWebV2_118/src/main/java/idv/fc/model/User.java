@@ -2,6 +2,9 @@ package idv.fc.model;
 
 import java.sql.Date;
 
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+
+@EnableAspectJAutoProxy(proxyTargetClass = true)
 public class User {
 	private String id;// {pk,not null,unique}
 	private String username;// {not null,unique}
@@ -73,6 +76,7 @@ public class User {
 		return authority;
 	}
 
+	@idv.fc.proxy.annotation.Authority(idv.fc.enums.Authority.ADMIN)
 	public void setAuthority(String authority) {
 		this.authority = authority;
 	}

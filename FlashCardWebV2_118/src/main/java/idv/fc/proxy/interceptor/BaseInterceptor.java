@@ -7,16 +7,16 @@ import javax.servlet.http.HttpSession;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 
-public abstract class BaseInterceptor<T> implements MethodInterceptor {
+public abstract class BaseInterceptor implements MethodInterceptor {
 
-	private T target;
+	private Object target;
 	private HttpSession session;
 
 	public BaseInterceptor() {
 
 	}
 
-	public BaseInterceptor(T target) {
+	public BaseInterceptor(Object target) {
 		this.target = target;
 	}
 
@@ -24,7 +24,7 @@ public abstract class BaseInterceptor<T> implements MethodInterceptor {
 		return target;
 	}
 
-	public void setTarget(T target) {
+	public void setTarget(Object target) {
 		this.target = target;
 	}
 
@@ -42,10 +42,10 @@ public abstract class BaseInterceptor<T> implements MethodInterceptor {
 	public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy)
 			throws Throwable {
 
-		return this.intercept((T) obj, method, args, proxy, this.session);
+		return this.intercept(obj, method, args, proxy, this.session);
 	}
 
-	public Object intercept(T proxy, Method method, Object[] args,
+	public Object intercept(Object proxy, Method method, Object[] args,
 			MethodProxy methodProxy, HttpSession session) throws Throwable {
 
 		return method.invoke(getTarget(), args);

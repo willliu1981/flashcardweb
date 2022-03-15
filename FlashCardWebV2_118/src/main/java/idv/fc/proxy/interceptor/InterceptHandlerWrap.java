@@ -13,6 +13,65 @@ public class InterceptHandlerWrap {
 	private int handlerIndex = -1;
 	private List<InterceptHandler> interceptHandlers = new ArrayList<>();
 
+	public static class ParamWrap {
+		Object proxy;
+		Method method;
+		Object[] args;
+		MethodProxy methodProxy;
+		HttpSession session;
+
+		public ParamWrap(Object proxy, Method method, Object[] args,
+				MethodProxy methodProxy, HttpSession session) {
+			super();
+			this.proxy = proxy;
+			this.method = method;
+			this.args = args;
+			this.methodProxy = methodProxy;
+			this.session = session;
+		}
+
+		public Object getProxy() {
+			return proxy;
+		}
+
+		public void setProxy(Object proxy) {
+			this.proxy = proxy;
+		}
+
+		public Method getMethod() {
+			return method;
+		}
+
+		public void setMethod(Method method) {
+			this.method = method;
+		}
+
+		public Object[] getArgs() {
+			return args;
+		}
+
+		public void setArgs(Object[] args) {
+			this.args = args;
+		}
+
+		public MethodProxy getMethodProxy() {
+			return methodProxy;
+		}
+
+		public void setMethodProxy(MethodProxy methodProxy) {
+			this.methodProxy = methodProxy;
+		}
+
+		public HttpSession getSession() {
+			return session;
+		}
+
+		public void setSession(HttpSession session) {
+			this.session = session;
+		}
+
+	}
+
 	/**
 	 * 強制設一個default handler
 	 * @param defaultInterceptHandler
@@ -25,10 +84,10 @@ public class InterceptHandlerWrap {
 		this.interceptHandlers.add(interceptHandler);
 	}
 
-	public boolean doPreHandler(MethodProxy methodProxy, HttpSession session) {
+	public boolean doPreHandler(ParamWrap paramWrap) {
 		int index = 0;
 		for (InterceptHandler interceptHandler : interceptHandlers) {
-			if (!interceptHandler.doPreHandle(methodProxy,session)) {
+			if (!interceptHandler.doPreHandle(paramWrap)) {
 				return false;
 			} else {
 				handlerIndex = index;
@@ -39,10 +98,10 @@ public class InterceptHandlerWrap {
 		return true;
 	}
 
-	public void doPostHandler(MethodProxy methodProxy, HttpSession session) {
+	public void doPostHandler(ParamWrap paramWrap) {
 		int handlerIndex = this.handlerIndex;
 		while (handlerIndex >= 0) {
-			interceptHandlers.get(handlerIndex).doPostHandle(methodProxy,session);
+			interceptHandlers.get(handlerIndex).doPostHandle(paramWrap);
 			handlerIndex--;
 		}
 

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import idv.fc.dao.abstraction.Dao;
-import idv.fc.interceptorhandler.UserHandler;
+import idv.fc.interceptorhandler.UserInterceptorHandler;
 import idv.fc.model.User;
 import idv.fc.model.UserFaker;
 import idv.fc.model.Vocabulary;

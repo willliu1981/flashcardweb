@@ -29,14 +29,14 @@
 	<bean id="UserProxyFactory" class="idv.fc.proxy.ProxyFactory">
 		<property name="handlers">
 			<list>
-				<ref bean="UserHandler" />
+				<ref bean="UserInterceptorHandler" />
 			</list>
 		</property>
 
 	</bean>
 
-	<bean id="UserHandler"
-		class="idv.fc.interceptorhandler.UserHandler">
+	<bean id="UserInterceptorHandler"
+		class="idv.fc.interceptorhandler.UserInterceptorHandler">
 
 	</bean>
 

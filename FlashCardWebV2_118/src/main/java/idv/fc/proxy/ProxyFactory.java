@@ -13,13 +13,13 @@ import idv.fc.tool.SpringUtil;
 import net.sf.cglib.proxy.Enhancer;
 
 public class ProxyFactory<T> {
-	public static final String USERPROXYFACTORY="UserProxyFactory";
+	public static final String USERPROXYFACTORY = "UserProxyFactory";
 	private ProxyBuilder<T> proxyBuilder = new ProxyBuilder<>();
 	private List<InterceptHandler> interceptHandlers = new ArrayList<>();
 
 	public static class ProxyBuilder<T2> {
 		private T2 target;
-		private BaseInterceptor<T2> interceptor;
+		private BaseInterceptor interceptor;
 		private List<InterceptHandler> interceptHandlers = new ArrayList<>();
 		private HttpSession session;
 
@@ -41,11 +41,11 @@ public class ProxyFactory<T> {
 			return this;
 		}
 
-		public BaseInterceptor<T2> getInterceptor() {
+		public BaseInterceptor getInterceptor() {
 			return interceptor;
 		}
 
-		public ProxyBuilder<T2> setInterceptor(BaseInterceptor<T2> interceptor) {
+		public ProxyBuilder<T2> setInterceptor(BaseInterceptor interceptor) {
 			this.interceptor = interceptor;
 			return this;
 		}
@@ -63,8 +63,7 @@ public class ProxyFactory<T> {
 
 			if (this.getInterceptor() == null
 					|| this.getInterceptor().isHandlerEmptyExceptDefault()) {
-				this.setInterceptor(
-						new InterceptorImpl<T2>(this.getInterceptHandlers()));
+				this.setInterceptor(new InterceptorImpl(this.getInterceptHandlers()));
 			}
 
 			// 以 factory 的 target 為主,覆寫 interceptor 的 target
@@ -95,7 +94,7 @@ public class ProxyFactory<T> {
 		return new ProxyFactory<T>().getProxyBuilder().setTarget(target);
 	}
 
-	public static <T> ProxyBuilder<T> setInterceptor(BaseInterceptor<T> interceptor) {
+	public static <T> ProxyBuilder<T> setInterceptor(BaseInterceptor interceptor) {
 		return new ProxyFactory<T>().getProxyBuilder().setInterceptor(interceptor);
 	}
 

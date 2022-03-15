@@ -1,13 +1,9 @@
 package idv.fc.proxy.interceptor;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
-import idv.fc.tool.Debug;
-import net.sf.cglib.proxy.MethodProxy;
+import idv.fc.proxy.interceptor.InterceptHandlerWrap.ParamWrap;
 
 /**
  * 應用於 InterceptorImpl
@@ -56,24 +52,23 @@ public abstract class InterceptHandler {
 		return methodFilter.filterMethod(name);
 	}
 
-	protected abstract boolean preHandle(MethodProxy methodProxy, HttpSession session);
+	protected abstract boolean preHandle(ParamWrap paramWrap);
 
-	public boolean doPreHandle(MethodProxy methodProxy, HttpSession session) {
-		boolean contain = methodFilter.isContain(methodProxy.getSignature().getName());
-		// Debug.test(this, methodProxy.getSignature().getName());
-		// Debug.test(this, contain);
+	public boolean doPreHandle(ParamWrap paramWrap) {
+		boolean contain = methodFilter
+				.isContain(paramWrap.getMethodProxy().getSignature().getName());
 
 		if (contain) {
-			return preHandle(methodProxy, session);
+			return preHandle(paramWrap);
 		}
 
 		return true;
 
 	}
 
-	public abstract void postHandle(MethodProxy methodProxy, HttpSession session);
+	public abstract void postHandle(ParamWrap paramWrap);
 
-	public void doPostHandle(MethodProxy methodProxy, HttpSession session) {
-		postHandle(methodProxy, session);
+	public void doPostHandle(ParamWrap paramWrap) {
+		postHandle(paramWrap);
 	}
 }
