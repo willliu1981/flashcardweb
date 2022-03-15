@@ -4,6 +4,9 @@ import java.sql.Date;
 
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
+import idv.fc.enums.Authority;
+import idv.fc.proxy.annotation.Authorized;
+
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 public class User {
 	private String id;// {pk,not null,unique}
@@ -12,7 +15,7 @@ public class User {
 	private String display_name;
 	private Integer gender;
 	private Integer age;
-	private String authority;
+	private String auth;
 	private String tag;
 	private Date create_date;
 
@@ -44,6 +47,7 @@ public class User {
 		return username;
 	}
 
+	@Authorized(Authority.ADMIN)
 	public void setUsername(String username) {
 		this.username = username;
 	}
@@ -72,13 +76,13 @@ public class User {
 		this.gender = gender;
 	}
 
-	public String getAuthority() {
-		return authority;
+	public String getAuth() {
+		return auth;
 	}
 
-	@idv.fc.proxy.annotation.Authority(idv.fc.enums.Authority.ADMIN)
-	public void setAuthority(String authority) {
-		this.authority = authority;
+	@Authorized(Authority.ADMIN)
+	public void setAuth(String authority) {
+		this.auth = authority;
 	}
 
 	public String getTag() {

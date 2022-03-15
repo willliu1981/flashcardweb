@@ -22,7 +22,7 @@
 		<property name="annotationMapping">
 			<map>
 				<entry key="Authority">
-					<value>idv.fc.proxy.annotation.Authority</value>
+					<value>idv.fc.proxy.annotation.Authorized</value>
 				</entry>
 			</map>
 

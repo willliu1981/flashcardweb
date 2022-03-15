@@ -1,6 +1,6 @@
 package idv.fc.model;
 
-public class Authority {
+public class Auth {
 	private Integer id;
 	private String name;
 	private String value;

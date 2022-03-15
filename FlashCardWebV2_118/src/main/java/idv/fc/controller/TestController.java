@@ -28,19 +28,23 @@ public class TestController {
 		User proxy = ProxyFactory.getProxyInstance(ProxyFactory.USERPROXYFACTORY, user,
 				session);
 
-		Debug.test(this, "before :" + proxy.getAuthority());
-		proxy.setAuthority("common");
-		Debug.test(this, "after :" + proxy.getAuthority());
+		Debug.test(this, "before username:" + proxy.getUsername());
+		Debug.test(this, "before auth:" + proxy.getAuth());
+		proxy.setUsername("helen");
+		proxy.setAuth("common");
+		Debug.test(this, "after username:" + proxy.getUsername());
+		Debug.test(this, "after auth:" + proxy.getAuth());
 
 		return "test/test";
 	}
 
 	@RequestMapping(value = "test2")
 	public String querySQL(User user, HttpSession session, RedirectAttributes rdAttr) {
-		Debug.test(this, "test2...");
+		Debug.test(this, "test2..." + user.getUsername());
 
-		session.setAttribute("auth", "admin");
-		rdAttr.addAttribute("authority", user.getAuthority());
+		session.setAttribute("token", "admin");
+		rdAttr.addAttribute("auth", user.getAuth());
+
 		return "redirect:/test/test";
 	}
 

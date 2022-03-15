@@ -40,8 +40,7 @@
 		</tr>
 		<tr>
 			<td>authority</td>
-			<td><input type="text" name="gender"
-					value="${users[0].authority}" /></td>
+			<td><input type="text" name="gender" value="${users[0].auth}" /></td>
 		</tr>
 		<tr>
 			<td style="text-align: center" colspan="2"><input type="submit"

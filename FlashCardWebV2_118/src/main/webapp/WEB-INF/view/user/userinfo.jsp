@@ -38,7 +38,7 @@
 		</tr>
 		<tr>
 			<td>authority</td>
-			<td><input type="text" name="gender" value="${user.authority}" /></td>
+			<td><input type="text" name="gender" value="${user.auth}" /></td>
 		</tr>
 		<tr>
 			<td style="text-align: center" colspan="2"><input type="submit"

@@ -9,6 +9,6 @@ import java.lang.annotation.Target;
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.METHOD })
-public @interface Authority {
+public @interface Authorized {
 	idv.fc.enums.Authority value() default idv.fc.enums.Authority.DEFAULT;
 }

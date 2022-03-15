@@ -21,7 +21,7 @@ public class InterceptorImpl extends BaseInterceptor {
 
 		@Override
 		protected void init(MethodFilter methodFilter) {
-			methodFilter.filterMethod(FINALIZE);
+			methodFilter.filter(FINALIZE);
 		}
 
 		@Override

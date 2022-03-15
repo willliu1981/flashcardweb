@@ -22,7 +22,7 @@ public class UserCommonDao extends CommonDao<User> {
 		model.setDisplay_name(rs.getString("display_name"));
 		model.setGender(rs.getInt("gender"));
 		model.setAge(rs.getInt("age"));
-		model.setAuthority(rs.getString("authority"));
+		model.setAuth(rs.getString("auth"));
 		model.setCreate_date(rs.getDate("create_date"));
 		model.setTag(rs.getString("tag"));
 	}
@@ -45,7 +45,7 @@ public class UserCommonDao extends CommonDao<User> {
 		cols.put("password", model.getPassword().trim());
 		cols.put("age", model.getAge());
 		cols.put("gender", model.getGender());
-		cols.put("authority", model.getAuthority());
+		cols.put("auth", model.getAuth());
 
 	}
 

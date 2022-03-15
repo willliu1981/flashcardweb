@@ -19,8 +19,8 @@ public abstract class InterceptHandler {
 	public static class MethodFilter {
 		private List<String> methodNames = new ArrayList<>();
 
-		public MethodFilter filterMethod(String name) {
-			methodNames.add(name);
+		public MethodFilter filter(String filed) {
+			methodNames.add(filed);
 			return this;
 		}
 
@@ -51,7 +51,7 @@ public abstract class InterceptHandler {
 	abstract protected void init(MethodFilter methodFilter);
 
 	protected MethodFilter filterMethod(String name) {
-		return methodFilter.filterMethod(name);
+		return methodFilter.filter(name);
 	}
 
 	protected abstract boolean preHandle(ParamWrap paramWrap);
@@ -63,8 +63,7 @@ public abstract class InterceptHandler {
 					.equals(AnnotationFactory.getAnnotationPathString("Authority"));
 			break;
 		}
-		
-		
+
 		boolean contain = methodFilter
 				.isContain(paramWrap.getMethodProxy().getSignature().getName());
 

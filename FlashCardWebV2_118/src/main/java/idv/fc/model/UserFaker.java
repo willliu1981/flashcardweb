@@ -103,12 +103,12 @@ public class UserFaker {
 		return this;
 	}
 
-	public String getAuthority() {
-		return user.getAuthority();
+	public String getAuth() {
+		return user.getAuth();
 	}
 
-	public UserFaker setAuthority(String authority) {
-		user.setAuthority(authority);
+	public UserFaker setAuth(String auth) {
+		user.setAuth(auth);
 		return this;
 	}
 
