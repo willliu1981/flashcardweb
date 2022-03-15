@@ -1,7 +1,10 @@
 package idv.fc.proxy.interceptor;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import net.sf.cglib.proxy.MethodProxy;
 
@@ -22,10 +25,10 @@ public class InterceptHandlerWrap {
 		this.interceptHandlers.add(interceptHandler);
 	}
 
-	public boolean doPreHandler(MethodProxy methodProxy) {
+	public boolean doPreHandler(MethodProxy methodProxy, HttpSession session) {
 		int index = 0;
 		for (InterceptHandler interceptHandler : interceptHandlers) {
-			if (!interceptHandler.doPreHandle(methodProxy)) {
+			if (!interceptHandler.doPreHandle(methodProxy,session)) {
 				return false;
 			} else {
 				handlerIndex = index;
@@ -36,10 +39,10 @@ public class InterceptHandlerWrap {
 		return true;
 	}
 
-	public void doPostHandler(MethodProxy methodProxy) {
+	public void doPostHandler(MethodProxy methodProxy, HttpSession session) {
 		int handlerIndex = this.handlerIndex;
 		while (handlerIndex >= 0) {
-			interceptHandlers.get(handlerIndex).postHandle();
+			interceptHandlers.get(handlerIndex).doPostHandle(methodProxy,session);
 			handlerIndex--;
 		}
 

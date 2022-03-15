@@ -3,6 +3,8 @@ package idv.fc.proxy;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import idv.fc.exception.FindErrorException;
 import idv.fc.proxy.interceptor.BaseInterceptor;
 import idv.fc.proxy.interceptor.InterceptHandler;
@@ -11,6 +13,7 @@ import idv.fc.tool.SpringUtil;
 import net.sf.cglib.proxy.Enhancer;
 
 public class ProxyFactory<T> {
+	public static final String USERPROXYFACTORY="UserProxyFactory";
 	private ProxyBuilder<T> proxyBuilder = new ProxyBuilder<>();
 	private List<InterceptHandler> interceptHandlers = new ArrayList<>();
 
@@ -18,6 +21,7 @@ public class ProxyFactory<T> {
 		private T2 target;
 		private BaseInterceptor<T2> interceptor;
 		private List<InterceptHandler> interceptHandlers = new ArrayList<>();
+		private HttpSession session;
 
 		public T2 getTarget() {
 			return target;
@@ -25,6 +29,15 @@ public class ProxyFactory<T> {
 
 		public ProxyBuilder<T2> setTarget(T2 target) {
 			this.target = target;
+			return this;
+		}
+
+		public HttpSession getSession() {
+			return session;
+		}
+
+		public ProxyBuilder<T2> setSession(HttpSession session) {
+			this.session = session;
 			return this;
 		}
 
@@ -57,6 +70,7 @@ public class ProxyFactory<T> {
 			// 以 factory 的 target 為主,覆寫 interceptor 的 target
 			if (this.getTarget() != null) {
 				this.getInterceptor().setTarget(this.getTarget());
+				this.getInterceptor().setSession(session);
 			} else {
 				if (this.getInterceptor().getTarget() == null) {
 					throw new FindErrorException(
@@ -111,12 +125,17 @@ public class ProxyFactory<T> {
 	}
 
 	public static <T> T getProxyInstance(String proxyFactoryName, T target) {
+		return getProxyInstance(proxyFactoryName, target, null);
+	}
+
+	public static <T> T getProxyInstance(String proxyFactoryName, T target,
+			HttpSession session) {
 
 		ProxyFactory<T> factory = SpringUtil.getBean(proxyFactoryName,
 				ProxyFactory.class);
 
 		return setInterceptHandler(factory.proxyBuilder, factory.interceptHandlers)
-				.setTarget(target).getProxyInstance();
+				.setTarget(target).setSession(session).getProxyInstance();
 	}
 
 }

@@ -3,15 +3,16 @@ package idv.fc.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import idv.fc.dao.abstraction.Dao;
-import idv.fc.dao.factory.DaoFactory;
 import idv.fc.interceptorhandler.UserHandler;
 import idv.fc.model.User;
+import idv.fc.model.UserFaker;
 import idv.fc.model.Vocabulary;
 import idv.fc.proxy.ProxyFactory;
-import idv.fc.proxy.ProxyFactory.ProxyBuilder;
 import idv.fc.proxy.interceptor.InterceptorImpl;
 import idv.fc.tool.Debug;
 import idv.fc.tool.SpringUtil;
@@ -21,26 +22,31 @@ import idv.fc.tool.SpringUtil;
 public class TestController {
 
 	@RequestMapping(value = "test")
-	public String query(User user, HttpSession session) {
+	public String query(@ModelAttribute("user") User user, HttpSession session) {
+		Debug.test(this, "test...");
 
-		User proxy = ProxyFactory.setInterceptor(new InterceptorImpl<User>())
-				.setTarget(user).addInterceptHandler(new UserHandler())
-				.getProxyInstance();
-		proxy.setUsername("root");
-		proxy.setPassword("1234");
+		User proxy = ProxyFactory.getProxyInstance(ProxyFactory.USERPROXYFACTORY, user,
+				session);
 
-		Debug.test(this, "user:====>" + proxy.getClass());
+		Debug.test(this, "before :" + proxy.getAuthority());
+		proxy.setAuthority("common");
+		Debug.test(this, "after :" + proxy.getAuthority());
 
-		return "user/userinfo";
+		return "test/test";
 	}
 
 	@RequestMapping(value = "test2")
-	public String querySQL(User user, HttpSession session) {
+	public String querySQL(User user, HttpSession session, RedirectAttributes rdAttr) {
+		Debug.test(this, "test2...");
 
-		User proxy = ProxyFactory.getProxyInstance("UserProxyFactory", user);
-		proxy.setPassword("1234");
+		session.setAttribute("auth", "admin");
+		rdAttr.addAttribute("authority", user.getAuthority());
+		return "redirect:/test/test";
+	}
 
-		Debug.test(this, proxy);
+	@RequestMapping(value = "testsession")
+	public String testSession(User user, HttpSession session) {
+
 		return "test/test";
 	}
 

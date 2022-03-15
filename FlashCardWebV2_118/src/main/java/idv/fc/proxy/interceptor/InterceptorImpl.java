@@ -4,6 +4,8 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import idv.fc.tool.Debug;
 import net.sf.cglib.proxy.MethodProxy;
 
@@ -14,14 +16,14 @@ public class InterceptorImpl<T> extends BaseInterceptor<T> {
 	private static final InterceptHandler DEFAULTINTERCEPTHANDLER = new InterceptHandler() {
 
 		@Override
-		protected boolean preHandle(MethodProxy methodProxy) {
-			Debug.test(this, "defult pre:" + methodProxy.getSignature().getName());
+		protected boolean preHandle(MethodProxy methodProxy, HttpSession session) {
+			// Debug.test(this, "defult pre:" + methodProxy.getSignature().getName());
 			return true;
 		}
 
 		@Override
-		public void postHandle() {
-			Debug.test(this, "defult post");
+		public void postHandle(MethodProxy methodProxy, HttpSession session) {
+			// Debug.test(this, "defult post");
 
 		}
 
@@ -39,7 +41,6 @@ public class InterceptorImpl<T> extends BaseInterceptor<T> {
 		for (InterceptHandler interceptHandler : interceptHandlers) {
 			interceptHandlerWrap.addInterceptHandler(interceptHandler);
 		}
-		Debug.test(this, this.interceptHandlerWrap);
 	}
 
 	public InterceptorImpl() {
@@ -48,16 +49,18 @@ public class InterceptorImpl<T> extends BaseInterceptor<T> {
 
 	@Override
 	public Object intercept(T proxy, Method method, Object[] args,
-			MethodProxy methodProxy, boolean any) throws Throwable {
+			MethodProxy methodProxy, HttpSession session) throws Throwable {
 		Object returnValue = null;
 
-		boolean allow = interceptHandlerWrap.doPreHandler(methodProxy);
+		// Debug.test(this, proxy.getClass().getAnnotation(null));
 
-		if (allow) {
+		boolean allowance = interceptHandlerWrap.doPreHandler(methodProxy, session);
+
+		if (allowance) {
 			returnValue = method.invoke(getTarget(), args);
 		}
 
-		interceptHandlerWrap.doPostHandler(methodProxy);
+		interceptHandlerWrap.doPostHandler(methodProxy, session);
 
 		return returnValue;
 	}

@@ -1,7 +1,10 @@
 package idv.fc.proxy.interceptor;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import idv.fc.tool.Debug;
 import net.sf.cglib.proxy.MethodProxy;
@@ -53,20 +56,24 @@ public abstract class InterceptHandler {
 		return methodFilter.filterMethod(name);
 	}
 
-	protected abstract boolean preHandle(MethodProxy methodProxy);
+	protected abstract boolean preHandle(MethodProxy methodProxy, HttpSession session);
 
-	public boolean doPreHandle(MethodProxy methodProxy) {
+	public boolean doPreHandle(MethodProxy methodProxy, HttpSession session) {
 		boolean contain = methodFilter.isContain(methodProxy.getSignature().getName());
-		Debug.test(this, methodProxy.getSignature().getName());
-		Debug.test(this, contain);
+		// Debug.test(this, methodProxy.getSignature().getName());
+		// Debug.test(this, contain);
 
 		if (contain) {
-			return preHandle(methodProxy);
+			return preHandle(methodProxy, session);
 		}
 
 		return true;
 
 	}
 
-	public abstract void postHandle();
+	public abstract void postHandle(MethodProxy methodProxy, HttpSession session);
+
+	public void doPostHandle(MethodProxy methodProxy, HttpSession session) {
+		postHandle(methodProxy, session);
+	}
 }
