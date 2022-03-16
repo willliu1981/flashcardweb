@@ -72,7 +72,7 @@ public class TestController {
 		// user.setAuth("admin");
 
 		Debug.test(this, "5..." + user.getAuth());
-
+ 
 		return "test/test";
 	}
 
