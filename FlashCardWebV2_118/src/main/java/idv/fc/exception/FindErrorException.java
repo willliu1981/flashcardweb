@@ -1,6 +1,6 @@
 package idv.fc.exception;
 
-public class FindErrorException extends RuntimeException {
+public class FindErrorException extends Exception {
 
 	public FindErrorException(String msg) {
 		super(msg);

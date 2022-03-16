@@ -23,21 +23,15 @@ import idv.fc.tool.SpringUtil;
 public class TestController {
 
 	@RequestMapping(value = "test")
-	public String query(@ModelAttribute("user") User user, HttpSession session) {
+	public String query(UserFaker proxy, HttpSession session) {
 		Debug.test(this, "test...");
-
-		Shuttle shuttle = new Shuttle();
-		shuttle.put("session", session);
-		session.setAttribute("token", "admin");
-		User proxy = ProxyFactory.getProxyInstance(ProxyFactory.USERPROXYFACTORY, user,
-				shuttle);
 
 		Debug.test(this, "before username:" + proxy.getUsername());
 		Debug.test(this, "before password:" + proxy.getPassword());
 		Debug.test(this, "before auth:" + proxy.getAuth());
 		proxy.setUsername("helen");
 		proxy.setPassword("666");
-		proxy.setAuth("common");
+		proxy.setAuth("admin");
 		Debug.test(this, "after username:" + proxy.getUsername());
 		Debug.test(this, "agter password:" + proxy.getPassword());
 		Debug.test(this, "after auth:" + proxy.getAuth());

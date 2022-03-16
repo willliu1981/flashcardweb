@@ -49,7 +49,7 @@ public class DrawCardHandler implements HandleableCase<Card> {
 		}
 	}
 
-	public Card drawNext() {
+	public Card drawNext() throws FindErrorException {
 
 		if (!this.hasNext()) {
 			throw new FindErrorException("沒有資料");

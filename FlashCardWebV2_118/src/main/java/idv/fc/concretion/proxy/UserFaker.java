@@ -6,18 +6,21 @@ import java.util.List;
 import java.util.Map;
 
 import idv.fc.dao.abstraction.Dao;
+import idv.fc.exception.FindErrorException;
 import idv.fc.model.User;
 import idv.fc.proxy.ProxyFactory;
+import idv.fc.proxy.interceptor.Shuttle;
+import idv.fc.tool.Debug;
 import idv.fc.tool.SpringUtil;
 
 public class UserFaker {
 
 	private User user;
-	private String token;
+	private Shuttle shuttle = new Shuttle();
 
 	Dao<User> dao;
-	
-	private Map<String,String> sessionValues=new HashMap<>();
+
+	private Map<String, String> sessionValues = new HashMap<>();
 
 	public UserFaker() {
 		init();
@@ -27,17 +30,23 @@ public class UserFaker {
 		User user = new User();
 		dao = (Dao<User>) SpringUtil.getBean("UserDao");
 
-		this.user = ProxyFactory.getProxyInstance("UserProxyFactory", user);
+		try {
+			this.user = ProxyFactory.getProxyInstance("UserProxyFactory", user,
+					this.shuttle);
+		} catch (FindErrorException e) {
+			e.printStackTrace();
+		}
+
 	}
-
-
 
 	public String getToken() {
-		return token;
+		return (String) this.shuttle.get("token");
 	}
 
-	public void setToken(String token) {
-		this.token = token;
+	public UserFaker setToken(String token) {
+		Debug.test(this, "user faker ", token);
+		this.shuttle.put("token", token);
+		return this;
 	}
 
 	public User getUser() {
@@ -150,7 +159,7 @@ public class UserFaker {
 		dao.delete(this.user.getId());
 	}
 
-	public User queryById() {
+	public User queryById() throws FindErrorException {
 		return dao.queryById(this.user.getId());
 	}
 

@@ -38,13 +38,16 @@
 
 
 
-	<form action="test/test4" method="post">
+	<form action="test/test" method="post">
 		<table>
 			<tr>
 				<input type="text" value="david" name="username"></input>
 			</tr>
 			<tr>
 				<input type="text" value="1234" name="password"></input>
+			</tr>
+			<tr>
+				<input type="text" value="tk123456" name="token"></input>
 			</tr>
 			<tr>
 				<input type="text" value="common" name="auth"></input>

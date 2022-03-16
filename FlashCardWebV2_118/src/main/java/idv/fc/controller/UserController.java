@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import idv.fc.concretion.proxy.UserFaker;
 import idv.fc.controller.abstraction.BaseController;
 import idv.fc.dao.factory.DaoFactory;
+import idv.fc.exception.FindErrorException;
 import idv.fc.model.User;
 import idv.fc.tool.Debug;
 
@@ -88,8 +89,17 @@ public class UserController extends BaseController {
 	@RequestMapping(value = "user", method = RequestMethod.GET)
 	public String query(@ModelAttribute("id") String id, HttpSession session,
 			HashMap<String, User> map) {
-		User user = DaoFactory.getUserDao().queryById(id);
-		map.put("user", user);
+		User user=null;
+		try {
+			user = DaoFactory.getUserDao().queryById(id);
+			map.put("user", user);
+		} catch (FindErrorException e) {
+			e.printStackTrace();
+		}
+		if(user==null) {
+			return "test/test";
+		}
+		
 		return "user/userinfo";
 	}
 

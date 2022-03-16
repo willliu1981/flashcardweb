@@ -4,8 +4,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
+import idv.fc.exception.FindErrorException;
 import net.sf.cglib.proxy.MethodProxy;
 
 public class InterceptHandlerWrap {
@@ -62,7 +61,10 @@ public class InterceptHandlerWrap {
 			this.methodProxy = methodProxy;
 		}
 
-		public Shuttle getShuttle() {
+		public Shuttle getShuttle() throws FindErrorException {
+			if(this.shuttle==null) {
+				throw new FindErrorException(this.getArgs()+": no Shuttle");
+			}
 			return shuttle;
 		}
 

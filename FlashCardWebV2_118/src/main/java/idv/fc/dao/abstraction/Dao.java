@@ -3,6 +3,8 @@ package idv.fc.dao.abstraction;
 import java.sql.ResultSet;
 import java.util.List;
 
+import idv.fc.exception.FindErrorException;
+
 public interface Dao<T> {
 	void create(T model);
 
@@ -10,7 +12,7 @@ public interface Dao<T> {
 
 	void delete(Object id);
 
-	T queryById(Object id);
+	T queryById(Object id) throws FindErrorException;
 
 	List<T> queryAll();
 

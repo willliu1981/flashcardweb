@@ -143,7 +143,7 @@ public abstract class CommonDao<T> extends BaseDao<T> {
 	}
 
 	@Override
-	public T queryById(Object id) {
+	public T queryById(Object id) throws FindErrorException {
 		String sql = String.format("select * from %s where id=?", this.getTableName(),
 				id);
 		List<T> res = querySQL(sql, id);
