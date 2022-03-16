@@ -69,7 +69,7 @@ public class TestController {
 		Debug.test(this, "3..." + vocabulary.getId());
 
 		Debug.test(this, "4..." + user.getAuth());
-	//user.setAuth("admin");  
+	user.setAuth("admin");  
 
 		Debug.test(this, "5..." + user.getAuth());
    
