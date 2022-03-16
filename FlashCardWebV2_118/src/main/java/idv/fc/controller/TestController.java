@@ -42,9 +42,8 @@ public class TestController {
 	}
 
 	@RequestMapping(value = "test3")
-	public String test3(UserFaker userFaker, HttpSession session,
-			RedirectAttributes rdAttr, HttpServletRequest req,
-			HttpServletResponse resp) {
+	public String test3(User user, HttpSession session, RedirectAttributes rdAttr,
+			HttpServletRequest req, HttpServletResponse resp) {
 		// Debug.test(this, "test3..." + userFaker.getUsername());
 
 		Vocabulary v = new Vocabulary();
@@ -53,18 +52,19 @@ public class TestController {
 		rdAttr.addAttribute("auth", "admin");
 		rdAttr.addAttribute("gender", 1);
 		rdAttr.addAttribute("vocabulary", v);
+		// session.setAttribute("session", this);
 
 		return "redirect:/test/test4";
 	}
 
 	@RequestMapping(value = "test4")
-	public String test4(UserFaker userFaker, Vocabulary vocabulary, HttpSession session,
+	public String test4(User user, Vocabulary vocabulary, HttpSession session,
 			RedirectAttributes rdAttr) {
 
 		// userFaker.setUsername("John");
 
-		Debug.test(this, "test4..." + userFaker.getAuth());
-		Debug.test(this, "test4..." + userFaker.getGender());
+		Debug.test(this, "test4..." + user.getAuth());
+		Debug.test(this, "test4..." + user.getGender());
 		Debug.test(this, "test4..." + vocabulary.getVocabulary());
 
 		return "test/test";

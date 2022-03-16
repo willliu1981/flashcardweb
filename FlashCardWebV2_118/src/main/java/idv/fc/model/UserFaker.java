@@ -27,6 +27,14 @@ public class UserFaker {
 		this.user = ProxyFactory.getProxyInstance("UserProxyFactory", user);
 	}
 
+	protected HttpSession getSession() {
+		return session;
+	}
+
+	protected void setSession(HttpSession session) {
+		this.session = session;
+	}
+
 	public User getUser() {
 		return user;
 	}

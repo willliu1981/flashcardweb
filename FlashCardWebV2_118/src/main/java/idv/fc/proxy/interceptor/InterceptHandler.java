@@ -76,10 +76,6 @@ public abstract class InterceptHandler {
 		boolean methodFilterContain = methodFilter
 				.isContain(paramWrap.getMethodProxy().getSignature().getName());
 
-//		Debug.test("handler name", this.getName(),
-//				paramWrap.getMethodProxy().getSignature().getName() + String.format(
-//						" ; matchAnnotation=%s , methodFilterContain=%s",
-//						matchAnnotation, methodFilterContain));
 		if (matchAnnotation || methodFilterContain) {
 			return preHandle(paramWrap);
 		}
