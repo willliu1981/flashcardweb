@@ -65,7 +65,7 @@ public class TestController {
 		// session.setAttribute("token", token);
 
 		Debug.test(this, "1..." + user.getAuth());
-		Debug.test(this, "2..." + user.getId());
+		//Debug.test(this, "2..." + user.getId());
 		//Debug.test(this, "3..." + vocabulary.getId());
 
 		//Debug.test(this, "4..." + user.getAuth());
