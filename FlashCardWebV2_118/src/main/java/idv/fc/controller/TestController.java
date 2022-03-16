@@ -1,5 +1,7 @@
 package idv.fc.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -8,12 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import idv.fc.dao.abstraction.Dao;
-import idv.fc.interceptorhandler.UserInterceptorHandler;
 import idv.fc.model.User;
 import idv.fc.model.UserFaker;
 import idv.fc.model.Vocabulary;
 import idv.fc.proxy.ProxyFactory;
-import idv.fc.proxy.interceptor.InterceptorImpl;
 import idv.fc.tool.Debug;
 import idv.fc.tool.SpringUtil;
 
@@ -37,6 +37,35 @@ public class TestController {
 		Debug.test(this, "after username:" + proxy.getUsername());
 		Debug.test(this, "agter password:" + proxy.getPassword());
 		Debug.test(this, "after auth:" + proxy.getAuth());
+
+		return "test/test";
+	}
+
+	@RequestMapping(value = "test3")
+	public String test3(UserFaker userFaker, HttpSession session,
+			RedirectAttributes rdAttr, HttpServletRequest req,
+			HttpServletResponse resp) {
+		// Debug.test(this, "test3..." + userFaker.getUsername());
+
+		Vocabulary v = new Vocabulary();
+		v.setVocabulary("apple");
+
+		rdAttr.addAttribute("auth", "admin");
+		rdAttr.addAttribute("gender", 1);
+		rdAttr.addAttribute("vocabulary", v);
+
+		return "redirect:/test/test4";
+	}
+
+	@RequestMapping(value = "test4")
+	public String test4(UserFaker userFaker, Vocabulary vocabulary, HttpSession session,
+			RedirectAttributes rdAttr) {
+
+		// userFaker.setUsername("John");
+
+		Debug.test(this, "test4..." + userFaker.getAuth());
+		Debug.test(this, "test4..." + userFaker.getGender());
+		Debug.test(this, "test4..." + vocabulary.getVocabulary());
 
 		return "test/test";
 	}

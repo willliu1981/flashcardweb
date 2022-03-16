@@ -3,6 +3,8 @@ package idv.fc.model;
 import java.sql.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import idv.fc.dao.abstraction.Dao;
 import idv.fc.proxy.ProxyFactory;
 import idv.fc.tool.SpringUtil;
@@ -10,6 +12,7 @@ import idv.fc.tool.SpringUtil;
 public class UserFaker {
 
 	private User user;
+	private HttpSession session;
 
 	Dao<User> dao;
 

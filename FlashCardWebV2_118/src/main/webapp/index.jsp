@@ -10,11 +10,16 @@
 
 	<h1>Welcome to FlashCard</h1>
 	<h2>
-		<a href="test/test?username=david2">test</a>
+		<a href="test/test4?">test</a>
 	</h2>
 	<h2>
 		<a href="test/test2?username=mary&password=1234&auth=default">test2</a>
 	</h2>
+
+	<h2>
+		<a href="test/test3?username=david&password=1234&auth=default">test3</a>
+	</h2>
+
 	<h2>
 		<a href="page/vocabulary">vocabulary</a>
 	</h2>
@@ -28,13 +33,21 @@
 		<a href="login">login</a>
 	</h2>
 	<h2>
-		<a href="user/toQuery">query user</a>
+		<a href="user/test3">query user</a>
 	</h2>
 
-	<form action="test/test" mthod="post">
+
+
+	<form action="test/test4" method="post">
 		<table>
 			<tr>
 				<input type="text" value="david" name="username"></input>
+			</tr>
+			<tr>
+				<input type="text" value="1234" name="password"></input>
+			</tr>
+			<tr>
+				<input type="text" value="common" name="auth"></input>
 			</tr>
 			<tr>
 				<input type="submit" value="send">

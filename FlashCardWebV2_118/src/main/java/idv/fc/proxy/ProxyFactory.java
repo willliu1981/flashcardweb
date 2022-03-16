@@ -14,20 +14,20 @@ import net.sf.cglib.proxy.Enhancer;
 
 public class ProxyFactory<T> {
 	public static final String USERPROXYFACTORY = "UserProxyFactory";
-	//private ProxyBuilder<T> proxyBuilder = new ProxyBuilder<>();
 	private List<InterceptHandler> interceptHandlers = new ArrayList<>();
+	//應用於spring xml 自動注入
 
-	public static class ProxyBuilder<T2> {
-		private T2 target;
+	public static class ProxyBuilder<E> {
+		private E target;
 		private BaseInterceptor interceptor;
 		private List<InterceptHandler> interceptHandlers = new ArrayList<>();
 		private HttpSession session;
 
-		public T2 getTarget() {
+		public E getTarget() {
 			return target;
 		}
 
-		public ProxyBuilder<T2> setTarget(T2 target) {
+		public ProxyBuilder<E> setTarget(E target) {
 			this.target = target;
 			return this;
 		}
@@ -36,7 +36,7 @@ public class ProxyFactory<T> {
 			return session;
 		}
 
-		public ProxyBuilder<T2> setSession(HttpSession session) {
+		public ProxyBuilder<E> setSession(HttpSession session) {
 			this.session = session;
 			return this;
 		}
@@ -45,12 +45,12 @@ public class ProxyFactory<T> {
 			return interceptor;
 		}
 
-		public ProxyBuilder<T2> setInterceptor(BaseInterceptor interceptor) {
+		public ProxyBuilder<E> setInterceptor(BaseInterceptor interceptor) {
 			this.interceptor = interceptor;
 			return this;
 		}
 
-		public ProxyBuilder<T2> addInterceptHandler(InterceptHandler interceptHandler) {
+		public ProxyBuilder<E> addInterceptHandler(InterceptHandler interceptHandler) {
 			this.interceptHandlers.add(interceptHandler);
 			return this;
 		}
@@ -59,7 +59,7 @@ public class ProxyFactory<T> {
 			return this.interceptHandlers;
 		}
 
-		public T2 getProxyInstance() {
+		public E getProxyInstance() {
 
 			if (this.getInterceptor() == null
 					|| this.getInterceptor().isHandlerEmptyExceptDefault()) {
@@ -81,7 +81,7 @@ public class ProxyFactory<T> {
 			enhancer.setSuperclass(this.getInterceptor().getTarget().getClass());
 			enhancer.setCallback(this.getInterceptor());
 
-			return (T2) enhancer.create();
+			return (E) enhancer.create();
 		}
 
 	}
@@ -104,15 +104,12 @@ public class ProxyFactory<T> {
 				.addInterceptHandler(interceptHandler);
 	}
 
-	public static <T> ProxyBuilder<T> setInterceptHandler(ProxyBuilder<T> builder,
-			List<InterceptHandler> handlers) {
-		handlers.forEach(x -> builder.addInterceptHandler(x));
-
-		return builder;
-	}
-
 	public void setHandlers(List<InterceptHandler> handlers) {
 		this.interceptHandlers = handlers;
+	}
+
+	public List<InterceptHandler> getHandlers() {
+		return this.interceptHandlers;
 	}
 
 	public static <T> T getProxyInstance(String proxyFactoryName, T target) {
@@ -121,12 +118,14 @@ public class ProxyFactory<T> {
 
 	public static <T> T getProxyInstance(String proxyFactoryName, T target,
 			HttpSession session) {
-
-		ProxyFactory<T> factory = SpringUtil.getBean(proxyFactoryName,
+		ProxyFactory<T> factory = SpringUtil.getBean("UserProxyFactory",
 				ProxyFactory.class);
+		ProxyBuilder<T> builder = new ProxyBuilder<T>();
+		factory.getHandlers().forEach(x -> builder.addInterceptHandler(x));
 
-		return setInterceptHandler(new ProxyBuilder<T>(), factory.interceptHandlers)
-				.setTarget(target).setSession(session).getProxyInstance();
+		builder.setTarget(target).setSession(session);
+
+		return builder.getProxyInstance();
 	}
 
 }
