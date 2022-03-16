@@ -14,7 +14,7 @@ import net.sf.cglib.proxy.Enhancer;
 
 public class ProxyFactory<T> {
 	public static final String USERPROXYFACTORY = "UserProxyFactory";
-	private ProxyBuilder<T> proxyBuilder = new ProxyBuilder<>();
+	//private ProxyBuilder<T> proxyBuilder = new ProxyBuilder<>();
 	private List<InterceptHandler> interceptHandlers = new ArrayList<>();
 
 	public static class ProxyBuilder<T2> {
@@ -87,7 +87,7 @@ public class ProxyFactory<T> {
 	}
 
 	protected ProxyBuilder<T> getProxyBuilder() {
-		return proxyBuilder;
+		return new ProxyBuilder<T>();
 	}
 
 	public static <T> ProxyBuilder<T> setTarget(T target) {
@@ -103,14 +103,6 @@ public class ProxyFactory<T> {
 		return new ProxyFactory<T>().getProxyBuilder()
 				.addInterceptHandler(interceptHandler);
 	}
-
-//	public static <T> ProxyBuilder<T> setInterceptHandler(
-//			List<InterceptHandler> handlers) {
-//		ProxyBuilder<T> builder = new ProxyFactory<T>().getProxyBuilder();
-//		handlers.forEach(x -> builder.addInterceptHandler(x));
-//
-//		return builder;
-//	}
 
 	public static <T> ProxyBuilder<T> setInterceptHandler(ProxyBuilder<T> builder,
 			List<InterceptHandler> handlers) {
@@ -133,7 +125,7 @@ public class ProxyFactory<T> {
 		ProxyFactory<T> factory = SpringUtil.getBean(proxyFactoryName,
 				ProxyFactory.class);
 
-		return setInterceptHandler(factory.proxyBuilder, factory.interceptHandlers)
+		return setInterceptHandler(new ProxyBuilder<T>(), factory.interceptHandlers)
 				.setTarget(target).setSession(session).getProxyInstance();
 	}
 
