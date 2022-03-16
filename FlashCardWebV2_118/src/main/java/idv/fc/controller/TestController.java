@@ -47,25 +47,30 @@ public class TestController {
 		// Debug.test(this, "test3..." + userFaker.getUsername());
 
 		Vocabulary v = new Vocabulary();
-		v.setVocabulary("apple");
 
-		rdAttr.addAttribute("auth", "admin");
-		rdAttr.addAttribute("gender", 1);
-		rdAttr.addAttribute("vocabulary", v);
-		// session.setAttribute("session", this);
+		rdAttr.addAttribute("auth", "common");
+		rdAttr.addAttribute("id", 1111);
+
+		rdAttr.addAttribute("token", "admin");
 
 		return "redirect:/test/test4";
 	}
 
 	@RequestMapping(value = "test4")
-	public String test4(User user, Vocabulary vocabulary, HttpSession session,
-			RedirectAttributes rdAttr) {
+	public String test4(UserFaker user, String token, Vocabulary vocabulary,
+			HttpSession session, RedirectAttributes rdAttr) {
 
-		// userFaker.setUsername("John");
+		session.setAttribute("token", token);
 
-		Debug.test(this, "test4..." + user.getAuth());
-		Debug.test(this, "test4..." + user.getGender());
-		Debug.test(this, "test4..." + vocabulary.getVocabulary());
+		Debug.test(this, "1..." + user.getAuth());
+		Debug.test(this, "2..." + user.getId());
+		Debug.test(this, "3..." + vocabulary.getId());
+
+		user.setSession(session);
+		Debug.test(this, "4..." + user.getAuth());
+		user.setAuth("admin");
+
+		Debug.test(this, "5..." + user.getAuth());
 
 		return "test/test";
 	}

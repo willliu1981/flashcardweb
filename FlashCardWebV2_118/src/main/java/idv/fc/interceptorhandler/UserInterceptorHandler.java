@@ -14,8 +14,10 @@ public class UserInterceptorHandler extends InterceptHandler {
 			if (auth.equals("admin")) {
 				return true;
 			}
+		} else {
+			return false;
 		}
-		//*/
+		// */
 
 		return true;
 	}
@@ -26,7 +28,7 @@ public class UserInterceptorHandler extends InterceptHandler {
 
 	@Override
 	protected void init(MethodFilter methodFilter) {
-		methodFilter.filter("auth").filter("password").filter("tag");
+		methodFilter.filter("auth").filter("tag");
 	}
 
 }

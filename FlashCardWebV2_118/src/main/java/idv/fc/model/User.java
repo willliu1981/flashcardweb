@@ -47,7 +47,6 @@ public class User {
 		return username;
 	}
 
-	@Authorized(Authority.ADMIN)
 	public void setUsername(String username) {
 		this.username = username;
 	}
@@ -89,6 +88,7 @@ public class User {
 		return tag;
 	}
 
+	@Authorized(Authority.ADMIN)
 	public void setTag(String age) {
 		this.tag = age;
 	}
