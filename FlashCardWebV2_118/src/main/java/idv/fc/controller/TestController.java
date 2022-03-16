@@ -62,7 +62,7 @@ public class TestController {
 	public String test4(UserFaker user, String token, Vocabulary vocabulary,
 			HttpSession session, RedirectAttributes rdAttr) {
 
-		 session.setAttribute("token", token);
+		// session.setAttribute("token", token);
 
 		Debug.test(this, "1..." + user.getAuth());
 		Debug.test(this, "2..." + user.getId());
