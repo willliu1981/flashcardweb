@@ -18,16 +18,16 @@ public class InterceptHandlerWrap {
 		Method method;
 		Object[] args;
 		MethodProxy methodProxy;
-		HttpSession session;
+		Shuttle shuttle;
 
 		public ParamWrap(Object proxy, Method method, Object[] args,
-				MethodProxy methodProxy, HttpSession session) {
+				MethodProxy methodProxy, Shuttle shuttle) {
 			super();
 			this.proxy = proxy;
 			this.method = method;
 			this.args = args;
 			this.methodProxy = methodProxy;
-			this.session = session;
+			this.shuttle = shuttle;
 		}
 
 		public Object getProxy() {
@@ -62,12 +62,12 @@ public class InterceptHandlerWrap {
 			this.methodProxy = methodProxy;
 		}
 
-		public HttpSession getSession() {
-			return session;
+		public Shuttle getShuttle() {
+			return shuttle;
 		}
 
-		public void setSession(HttpSession session) {
-			this.session = session;
+		public void setShuttle(Shuttle shuttle) {
+			this.shuttle = shuttle;
 		}
 
 	}

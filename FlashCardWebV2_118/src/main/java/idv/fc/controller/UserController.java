@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import idv.fc.concretion.proxy.UserFaker;
 import idv.fc.controller.abstraction.BaseController;
 import idv.fc.dao.factory.DaoFactory;
 import idv.fc.model.User;
-import idv.fc.model.UserFaker;
 import idv.fc.tool.Debug;
 
 @Controller

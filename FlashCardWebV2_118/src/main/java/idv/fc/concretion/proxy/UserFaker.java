@@ -1,20 +1,23 @@
-package idv.fc.model;
+package idv.fc.concretion.proxy;
 
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 import idv.fc.dao.abstraction.Dao;
+import idv.fc.model.User;
 import idv.fc.proxy.ProxyFactory;
 import idv.fc.tool.SpringUtil;
 
 public class UserFaker {
 
 	private User user;
-	private HttpSession session;
+	private String token;
 
 	Dao<User> dao;
+	
+	private Map<String,String> sessionValues=new HashMap<>();
 
 	public UserFaker() {
 		init();
@@ -27,12 +30,14 @@ public class UserFaker {
 		this.user = ProxyFactory.getProxyInstance("UserProxyFactory", user);
 	}
 
-	public HttpSession getSession() {
-		return session;
+
+
+	public String getToken() {
+		return token;
 	}
 
-	public void setSession(HttpSession session) {
-		this.session = session;
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 	public User getUser() {

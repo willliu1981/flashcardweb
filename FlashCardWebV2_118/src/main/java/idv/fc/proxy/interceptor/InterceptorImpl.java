@@ -28,9 +28,10 @@ public class InterceptorImpl extends BaseInterceptor {
 
 	@Override
 	public Object intercept(Object proxy, Method method, Object[] args,
-			MethodProxy methodProxy, HttpSession session) throws Throwable {
+			MethodProxy methodProxy, Shuttle shuttle) throws Throwable {
 		Object returnValue = null;
-		ParamWrap paramWrap = new ParamWrap(proxy, method, args, methodProxy, session);
+		ParamWrap paramWrap = new ParamWrap(proxy, method, args, methodProxy,
+				this.getShuttle());
 
 		boolean allowance = interceptHandlerWrap.doPreHandler(paramWrap);
 

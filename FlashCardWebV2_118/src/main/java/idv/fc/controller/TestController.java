@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import idv.fc.concretion.proxy.UserFaker;
 import idv.fc.dao.abstraction.Dao;
 import idv.fc.model.User;
-import idv.fc.model.UserFaker;
 import idv.fc.model.Vocabulary;
 import idv.fc.proxy.ProxyFactory;
+import idv.fc.proxy.interceptor.Shuttle;
 import idv.fc.tool.Debug;
 import idv.fc.tool.SpringUtil;
 
@@ -25,8 +26,11 @@ public class TestController {
 	public String query(@ModelAttribute("user") User user, HttpSession session) {
 		Debug.test(this, "test...");
 
+		Shuttle shuttle = new Shuttle();
+		shuttle.put("session", session);
+		session.setAttribute("token", "admin");
 		User proxy = ProxyFactory.getProxyInstance(ProxyFactory.USERPROXYFACTORY, user,
-				session);
+				shuttle);
 
 		Debug.test(this, "before username:" + proxy.getUsername());
 		Debug.test(this, "before password:" + proxy.getPassword());
@@ -51,9 +55,9 @@ public class TestController {
 		rdAttr.addAttribute("auth", "common");
 		rdAttr.addAttribute("id", 1111);
 
-		session.setAttribute("token", "admin");
+		// session.setAttribute("token", "admin");
 
-		//rdAttr.addAttribute("user.auth", "admin");
+		rdAttr.addAttribute("token", "admin");
 
 		return "redirect:/test/test4";
 	}
@@ -66,13 +70,11 @@ public class TestController {
 
 		Debug.test(this, "1..." + user.getAuth());
 		Debug.test(this, "2..." + user.getId());
-		//Debug.test(this, "3..." + vocabulary.getId());
+		// Debug.test(this, "3..." + vocabulary.getId());
 
-		//Debug.test(this, "4..." + user.getAuth());
-		//user.setAuth("admin");  
+		// Debug.test(this, "4..." + user.getAuth());
+		// user.setAuth("admin");
 
-
-   
 		return "test/test";
 	}
 

@@ -9,19 +9,20 @@ import idv.fc.exception.FindErrorException;
 import idv.fc.proxy.interceptor.BaseInterceptor;
 import idv.fc.proxy.interceptor.InterceptHandler;
 import idv.fc.proxy.interceptor.InterceptorImpl;
+import idv.fc.proxy.interceptor.Shuttle;
 import idv.fc.tool.SpringUtil;
 import net.sf.cglib.proxy.Enhancer;
 
 public class ProxyFactory<T> {
 	public static final String USERPROXYFACTORY = "UserProxyFactory";
 	private List<InterceptHandler> interceptHandlers = new ArrayList<>();
-	//應用於spring xml 自動注入
+	// 應用於spring xml 自動注入
 
 	public static class ProxyBuilder<E> {
 		private E target;
 		private BaseInterceptor interceptor;
 		private List<InterceptHandler> interceptHandlers = new ArrayList<>();
-		private HttpSession session;
+		private Shuttle shuttle;
 
 		public E getTarget() {
 			return target;
@@ -32,12 +33,12 @@ public class ProxyFactory<T> {
 			return this;
 		}
 
-		public HttpSession getSession() {
-			return session;
+		public Shuttle getSession() {
+			return this.shuttle;
 		}
 
-		public ProxyBuilder<E> setSession(HttpSession session) {
-			this.session = session;
+		public ProxyBuilder<E> setSession(Shuttle shuttle) {
+			this.shuttle = shuttle;
 			return this;
 		}
 
@@ -69,7 +70,7 @@ public class ProxyFactory<T> {
 			// 以 factory 的 target 為主,覆寫 interceptor 的 target
 			if (this.getTarget() != null) {
 				this.getInterceptor().setTarget(this.getTarget());
-				this.getInterceptor().setSession(session);
+				this.getInterceptor().setShuttle(shuttle);
 			} else {
 				if (this.getInterceptor().getTarget() == null) {
 					throw new FindErrorException(
@@ -117,13 +118,13 @@ public class ProxyFactory<T> {
 	}
 
 	public static <T> T getProxyInstance(String proxyFactoryName, T target,
-			HttpSession session) {
+			Shuttle shuttle) {
 		ProxyFactory<T> factory = SpringUtil.getBean("UserProxyFactory",
 				ProxyFactory.class);
 		ProxyBuilder<T> builder = new ProxyBuilder<T>();
 		factory.getHandlers().forEach(x -> builder.addInterceptHandler(x));
 
-		builder.setTarget(target).setSession(session);
+		builder.setTarget(target).setSession(shuttle);
 
 		return builder.getProxyInstance();
 	}

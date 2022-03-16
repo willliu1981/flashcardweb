@@ -10,7 +10,7 @@ import net.sf.cglib.proxy.MethodProxy;
 public abstract class BaseInterceptor implements MethodInterceptor {
 
 	private Object target;
-	private HttpSession session;
+	private Shuttle shuttle;
 
 	public BaseInterceptor() {
 
@@ -28,12 +28,12 @@ public abstract class BaseInterceptor implements MethodInterceptor {
 		this.target = target;
 	}
 
-	public HttpSession getSession() {
-		return session;
+	public Shuttle getShuttle() {
+		return shuttle;
 	}
 
-	public void setSession(HttpSession session) {
-		this.session = session;
+	public void setShuttle(Shuttle shuttle) {
+		this.shuttle = shuttle;
 	}
 
 	public abstract boolean isHandlerEmptyExceptDefault();
@@ -42,11 +42,11 @@ public abstract class BaseInterceptor implements MethodInterceptor {
 	public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy)
 			throws Throwable {
 
-		return this.intercept(obj, method, args, proxy, this.session);
+		return this.intercept(obj, method, args, proxy, this.shuttle);
 	}
 
 	public Object intercept(Object proxy, Method method, Object[] args,
-			MethodProxy methodProxy, HttpSession session) throws Throwable {
+			MethodProxy methodProxy, Shuttle shuttle) throws Throwable {
 
 		return method.invoke(getTarget(), args);
 

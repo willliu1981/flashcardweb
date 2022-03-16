@@ -13,7 +13,7 @@
 		<a href="test/test4?">test</a>
 	</h2>
 	<h2>
-		<a href="test/test2?username=mary&password=1234&auth=default">test2</a>
+		<a href="test/test?username=mary&password=1234&auth=default">test2</a>
 	</h2>
 
 	<h2>
