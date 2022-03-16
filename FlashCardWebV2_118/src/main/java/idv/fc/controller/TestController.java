@@ -51,7 +51,9 @@ public class TestController {
 		rdAttr.addAttribute("auth", "common");
 		rdAttr.addAttribute("id", 1111);
 
-		rdAttr.addAttribute("token", "admin");
+		session.setAttribute("token", "admin");
+
+		//rdAttr.addAttribute("user.auth", "admin");
 
 		return "redirect:/test/test4";
 	}
@@ -60,15 +62,14 @@ public class TestController {
 	public String test4(UserFaker user, String token, Vocabulary vocabulary,
 			HttpSession session, RedirectAttributes rdAttr) {
 
-		session.setAttribute("token", token);
+		// session.setAttribute("token", token);
 
 		Debug.test(this, "1..." + user.getAuth());
 		Debug.test(this, "2..." + user.getId());
 		Debug.test(this, "3..." + vocabulary.getId());
 
-		user.setSession(session);
 		Debug.test(this, "4..." + user.getAuth());
-		user.setAuth("admin");
+		// user.setAuth("admin");
 
 		Debug.test(this, "5..." + user.getAuth());
 
