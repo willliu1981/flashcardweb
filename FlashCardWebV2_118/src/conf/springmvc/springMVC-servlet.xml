@@ -19,7 +19,7 @@
 	<mvc:annotation-driven
 		conversion-service="converterUtil" />
 
-	<context:component-scan base-package="idv.fc"></context:component-scan>
+	<context:component-scan base-package="idv.fc,idv.tool"></context:component-scan>
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -31,7 +31,7 @@
 		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
 		<property name="converters">
 			<list>
-				<bean class="idv.fc.tool.TimestampConverter" />
+				<bean class="idv.tool.TimestampConverter" />
 			</list>
 		</property>
 	</bean>

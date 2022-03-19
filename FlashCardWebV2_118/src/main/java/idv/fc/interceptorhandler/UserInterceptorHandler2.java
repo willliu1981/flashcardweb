@@ -5,7 +5,7 @@ import javax.servlet.http.HttpSession;
 import idv.fc.exception.FindErrorException;
 import idv.fc.proxy.interceptor.InterceptHandler;
 import idv.fc.proxy.interceptor.InterceptHandlerWrap.ParamWrap;
-import idv.fc.tool.Debug;
+import idv.tool.Debug;
 
 public class UserInterceptorHandler2 extends InterceptHandler {
 

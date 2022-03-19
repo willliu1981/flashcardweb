@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import idv.fc.dao.CardDao;
 import idv.fc.model.Card;
-import idv.fc.tool.SpringUtil;
+import idv.tool.spring.SpringUtil;
 
 @Controller
 @RequestMapping(value = "process/card")

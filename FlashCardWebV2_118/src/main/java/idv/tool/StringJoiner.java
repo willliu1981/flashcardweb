@@ -1,4 +1,4 @@
-package idv.fc.tool;
+package idv.tool;
 
 public class StringJoiner {
 	private static final String DEFAULT_SEPARATOR = ",";

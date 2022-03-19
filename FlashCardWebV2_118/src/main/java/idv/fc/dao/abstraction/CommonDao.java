@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import idv.fc.exception.FindErrorException;
-import idv.fc.tool.StringJoiner;
+import idv.tool.StringJoiner;
 
 /**
  * 實作類必須填寫T型別,或者空參數建構子,否則使用SQL query 可能會報錯

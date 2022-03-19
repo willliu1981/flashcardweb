@@ -18,8 +18,8 @@ import idv.fc.model.User;
 import idv.fc.model.Vocabulary;
 import idv.fc.proxy.ProxyFactory;
 import idv.fc.proxy.interceptor.Shuttle;
-import idv.fc.tool.Debug;
-import idv.fc.tool.SpringUtil;
+import idv.tool.Debug;
+import idv.tool.spring.SpringUtil;
 
 @Controller
 @RequestMapping(value = "test")
@@ -31,17 +31,14 @@ public class TestController {
 		User user = new User();
 		Shuttle shuttle = new Shuttle();
 		try {
-//			ProxyFactory<User> factory = SpringUtil.getBean("UserProxyFactory",
-//					ProxyFactory.class);
-
-			// User userProxy = factory.getProxyInstance(user, shuttle);
-			User userProxy = ProxyFactory.getProxyInstance("UserProxyFactory", user,
+			User userProxy = ProxyFactory.getProxyInstance("UserProxyFactory2", user,
 					shuttle);
 
 			shuttle.put("token", "tk123456");
 
 			userProxy.setAuth("admin");
 			Debug.test(this, userProxy);
+		
 
 		} catch (FindErrorException e) {
 			e.printStackTrace();

@@ -6,7 +6,7 @@ import java.util.List;
 
 import idv.fc.annotation.AnnotationFactory;
 import idv.fc.proxy.interceptor.InterceptHandlerWrap.ParamWrap;
-import idv.fc.tool.Debug;
+import idv.tool.Debug;
 
 /**
  * 應用於 InterceptorImpl

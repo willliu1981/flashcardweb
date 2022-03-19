@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 
 import idv.fc.dao.abstraction.Dao;
-import idv.fc.tool.SpringUtil;
+import idv.tool.spring.SpringUtil;
 
 public abstract class DataProcessController<T> extends AttributeController {
 	private Dao<?> dao;

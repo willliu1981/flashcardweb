@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import idv.fc.model.User;
-import idv.fc.tool.Debug;
+import idv.tool.Debug;
 
 public class Test2 {
 

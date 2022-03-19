@@ -11,8 +11,8 @@ import idv.fc.exception.FindErrorException;
 import idv.fc.model.User;
 import idv.fc.proxy.ProxyFactory;
 import idv.fc.proxy.interceptor.Shuttle;
-import idv.fc.tool.Debug;
-import idv.fc.tool.SpringUtil;
+import idv.tool.Debug;
+import idv.tool.spring.SpringUtil;
 
 public class UserFaker {
 

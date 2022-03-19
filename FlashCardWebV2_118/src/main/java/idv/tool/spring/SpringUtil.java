@@ -1,4 +1,4 @@
-package idv.fc.tool;
+package idv.tool.spring;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

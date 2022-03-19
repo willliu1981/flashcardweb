@@ -6,6 +6,7 @@
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="
         http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd
@@ -38,7 +39,7 @@
 	</bean>
 
 	<bean id="UserProxyFactory2" class="idv.fc.proxy.ProxyFactory"
-		p:handlers-ref="UserInterceptorHandler">
+		p:handlers-ref="handlers2">
 	</bean>
 
 	<bean id="UserInterceptorHandler"
@@ -50,6 +51,35 @@
 		class="idv.fc.interceptorhandler.UserInterceptorHandler2">
 
 	</bean>
+
+	<bean id="handlers" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<ref bean="UserInterceptorHandler" />
+				<ref bean="UserInterceptorHandler2" />
+			</list>
+		</constructor-arg>
+	</bean>
+
+
+	<bean id="handlers2" class="idv.util.spring.CustomList">
+		<property name="list">
+			<list>
+				<ref bean="UserInterceptorHandler"></ref>
+				<ref bean="UserInterceptorHandler2"></ref>
+			</list>
+
+		</property>
+
+	</bean>
+
+<!--  	
+	<util:list id="handlers"
+		value-type="idv.fc.proxy.interceptor.InterceptHandler">
+<ref bean=""></ref>
+
+	</util:list>
+-->
 
 
 

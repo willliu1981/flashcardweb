@@ -14,10 +14,10 @@
         https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 
-	<context:component-scan base-package="idv.fc"></context:component-scan>
+	<context:component-scan base-package="idv.tool"></context:component-scan>
 	
 
-	<bean id="JDBCStringJoiner" class="idv.fc.tool.StringJoiner">
+	<bean id="JDBCStringJoiner" class="idv.tool.StringJoiner">
 		<property name="defaultSeparator">
 			<value>,</value>
 		</property>

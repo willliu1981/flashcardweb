@@ -10,7 +10,7 @@ import idv.fc.proxy.interceptor.BaseInterceptor;
 import idv.fc.proxy.interceptor.InterceptHandler;
 import idv.fc.proxy.interceptor.InterceptorImpl;
 import idv.fc.proxy.interceptor.Shuttle;
-import idv.fc.tool.SpringUtil;
+import idv.tool.spring.SpringUtil;
 import net.sf.cglib.proxy.Enhancer;
 
 public class ProxyFactory<T> {

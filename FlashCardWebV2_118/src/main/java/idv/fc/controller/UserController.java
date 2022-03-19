@@ -17,7 +17,7 @@ import idv.fc.controller.abstraction.BaseController;
 import idv.fc.dao.factory.DaoFactory;
 import idv.fc.exception.FindErrorException;
 import idv.fc.model.User;
-import idv.fc.tool.Debug;
+import idv.tool.Debug;
 
 @Controller
 //@RequestMapping(value = "user")

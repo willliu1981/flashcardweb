@@ -1,6 +1,6 @@
 package test3;
 
-import idv.fc.tool.Debug;
+import idv.tool.Debug;
 
 public class Test3 {
 
