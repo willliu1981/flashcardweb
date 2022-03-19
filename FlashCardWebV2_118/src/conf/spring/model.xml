@@ -32,46 +32,35 @@
 		<property name="handlers">
 			<list>
 				<ref bean="UserInterceptorHandler" />
-				<ref bean="UserInterceptorHandler2" />
 			</list>
 		</property>
 
 	</bean>
 
 	<bean id="UserProxyFactory2" class="idv.fc.proxy.ProxyFactory"
-		p:handlers-ref="handlers2">
-	</bean>
-
-	<bean id="UserInterceptorHandler"
-		class="idv.fc.interceptorhandler.UserInterceptorHandler">
-
-	</bean>
-
-	<bean id="UserInterceptorHandler2"
-		class="idv.fc.interceptorhandler.UserInterceptorHandler2">
-
-	</bean>
-
-	<bean id="handlers" class="java.util.ArrayList">
-		<constructor-arg>
-			<list>
-				<ref bean="UserInterceptorHandler" />
-				<ref bean="UserInterceptorHandler2" />
-			</list>
-		</constructor-arg>
+		p:handlers-ref="userHandlers">
 	</bean>
 
 
-	<bean id="handlers2" class="idv.util.spring.CustomList">
+	<bean id="userHandlers" class="idv.util.spring.CustomList">
 		<property name="list">
 			<list>
 				<ref bean="UserInterceptorHandler"></ref>
-				<ref bean="UserInterceptorHandler2"></ref>
 			</list>
 
 		</property>
 
 	</bean>
+
+<!--  
+	<bean id="userHandlers" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<ref bean="UserInterceptorHandler" />
+			</list>
+		</constructor-arg>
+	</bean>
+-->
 
 <!--  	
 	<util:list id="handlers"
