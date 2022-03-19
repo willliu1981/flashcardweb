@@ -7,10 +7,11 @@ import idv.fc.proxy.interceptor.InterceptHandler;
 import idv.fc.proxy.interceptor.InterceptHandlerWrap.ParamWrap;
 import idv.fc.tool.Debug;
 
-public class UserInterceptorHandler extends InterceptHandler {
+public class UserInterceptorHandler2 extends InterceptHandler {
 
 	@Override
 	public boolean preHandle(ParamWrap paramWrap) {
+
 		// *
 		String token = null;
 		try {

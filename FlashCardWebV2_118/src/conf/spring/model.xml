@@ -31,6 +31,7 @@
 		<property name="handlers">
 			<list>
 				<ref bean="UserInterceptorHandler" />
+				<ref bean="UserInterceptorHandler2" />
 			</list>
 		</property>
 
@@ -42,6 +43,11 @@
 
 	<bean id="UserInterceptorHandler"
 		class="idv.fc.interceptorhandler.UserInterceptorHandler">
+
+	</bean>
+
+	<bean id="UserInterceptorHandler2"
+		class="idv.fc.interceptorhandler.UserInterceptorHandler2">
 
 	</bean>
 
