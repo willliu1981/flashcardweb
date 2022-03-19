@@ -31,8 +31,12 @@ public class TestController {
 		User user = new User();
 		Shuttle shuttle = new Shuttle();
 		try {
-			User userProxy = ProxyFactory.getProxyInstance("UserProxyFactory", user,
-					shuttle);
+			ProxyFactory<User> factory = SpringUtil.getBean("UserProxyFactory2",
+					ProxyFactory.class);
+			User userProxy = factory.getProxyInstance(user, shuttle);
+
+//			User userProxy = ProxyFactory.getProxyInstance("UserProxyFactory2", user,
+//					shuttle);
 			shuttle.put("token", "tk123456");
 
 			userProxy.setAuth("admin");

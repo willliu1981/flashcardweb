@@ -118,12 +118,9 @@ public class ProxyFactory<T> {
 //		return getProxyInstance(proxyFactoryName, target, null);
 //	}
 
-	public static <T> T getProxyInstance(String proxyFactoryName, T target,
-			Shuttle shuttle) throws FindErrorException {
-		ProxyFactory<T> factory = SpringUtil.getBean("UserProxyFactory",
-				ProxyFactory.class);
+	public <T> T getProxyInstance(T target, Shuttle shuttle) throws FindErrorException {
 		ProxyBuilder<T> builder = new ProxyBuilder<T>();
-		factory.getHandlers().forEach(x -> builder.addInterceptHandler(x));
+		this.getHandlers().forEach(x -> builder.addInterceptHandler(x));
 
 		if (shuttle == null) {
 			shuttle = new Shuttle();
@@ -132,6 +129,14 @@ public class ProxyFactory<T> {
 		builder.setTarget(target).setShuttle(shuttle);
 
 		return builder.getProxyInstance();
+	}
+
+	public static <T> T getProxyInstance(String proxyFactoryName, T target,
+			Shuttle shuttle) throws FindErrorException {
+		ProxyFactory<T> factory = SpringUtil.getBean("UserProxyFactory",
+				ProxyFactory.class);
+
+		return factory.getProxyInstance(target, shuttle);
 	}
 
 }

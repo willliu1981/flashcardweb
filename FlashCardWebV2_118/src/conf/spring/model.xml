@@ -36,6 +36,10 @@
 
 	</bean>
 
+	<bean id="UserProxyFactory2" class="idv.fc.proxy.ProxyFactory"
+		p:handlers-ref="UserInterceptorHandler">
+	</bean>
+
 	<bean id="UserInterceptorHandler"
 		class="idv.fc.interceptorhandler.UserInterceptorHandler">
 
