@@ -1,5 +1,6 @@
 package idv.fc.controller;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -41,11 +42,15 @@ public class UserController extends BaseController {
 	 * create user
 	 * @param user
 	 * @return
+	 * @throws FindErrorException 
+	 * @throws SQLException 
 	 */
 	@RequestMapping(value = "user", method = RequestMethod.POST)
-	public String create(UserFaker userFaker, HashMap<String, User> map) {
+	public String create(UserFaker userFaker, HashMap<String, User> map)
+			throws SQLException {
 		userFaker.create();
 		map.put("user", userFaker.getUser());
+
 		return "user/login";
 	}
 
@@ -57,7 +62,12 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping(value = "user", method = RequestMethod.PUT)
 	public String update(UserFaker userFaker, HashMap<String, User> map) {
-		userFaker.update(map);
+		try {
+			userFaker.update(map);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		map.put("user", userFaker.getUser());
 		return "user/login";
 	}
@@ -89,17 +99,17 @@ public class UserController extends BaseController {
 	@RequestMapping(value = "user", method = RequestMethod.GET)
 	public String query(@ModelAttribute("id") String id, HttpSession session,
 			HashMap<String, User> map) {
-		User user=null;
+		User user = null;
 		try {
 			user = DaoFactory.getUserDao().queryById(id);
 			map.put("user", user);
 		} catch (FindErrorException e) {
 			e.printStackTrace();
 		}
-		if(user==null) {
+		if (user == null) {
 			return "test/test";
 		}
-		
+
 		return "user/userinfo";
 	}
 

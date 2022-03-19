@@ -37,6 +37,7 @@ public class UserCommonDao extends CommonDao<User> {
 		cols.put("gender", model.getGender());
 		cols.put("create_date", Date.valueOf(LocalDate.now()));
 
+		cols.put("auth", model.getAuth());
 	}
 
 	@Override

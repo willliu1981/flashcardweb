@@ -7,20 +7,24 @@ import java.util.Map;
 public class Debug {
 	private static String PREFIXSEPARATOR = " : ";
 
+	private static class NoParam {
+
+	}
+
 	public static void test(Object msg) {
-		test(null, null, msg, false);
+		test(null, new NoParam(), msg, false);
 	}
 
 	public static void test(Object prefix, Object msg) {
 		test(null, prefix, msg, false);
 	}
 
-	public static void test(Object objForClassInfo, Object prefixObj, Object msg) {
-		test(objForClassInfo, prefixObj, msg, false);
-	}
-
 	public static void test(String prefixString, Object prefixObj, Object msg) {
 		test(null, String.format("%s(%s)", prefixString, prefixObj), msg, false);
+	}
+
+	public static void test(Object objForClassInfo, Object prefixObj, Object msg) {
+		test(objForClassInfo, prefixObj, msg, false);
 	}
 
 	public static void test(Object objForClassInfo, Object prefix, Object msg,
@@ -30,6 +34,8 @@ public class Debug {
 		String prefixString = "";
 		if (prefix == null) {
 			prefixString = "" + prefix + PREFIXSEPARATOR;
+		} else if (prefix.getClass() == NoParam.class) {
+			prefixString = "";
 		} else {
 			prefixString = prefix.toString() + PREFIXSEPARATOR;
 		}
@@ -37,7 +43,7 @@ public class Debug {
 		head += prefixString;
 
 		if (msg == null) {
-			System.out.println(head + ":" + msg);
+			System.out.println(head + msg);
 			return;
 		}
 

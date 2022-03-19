@@ -85,7 +85,7 @@ public abstract class CommonDao<T> extends BaseDao<T> {
 	}
 
 	@Override
-	public void create(T model) {
+	public void create(T model) throws SQLException {
 		Map<String, Object> map = new HashMap<>();
 		this.createMapForCreate(map, model);
 
@@ -110,7 +110,7 @@ public abstract class CommonDao<T> extends BaseDao<T> {
 	}
 
 	@Override
-	public void update(T model, Object id) {
+	public void update(T model, Object id) throws SQLException {
 		Map<String, Object> map = new HashMap<>();
 		this.createMapForCreate(map, model);
 

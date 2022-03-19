@@ -70,7 +70,7 @@ public abstract class BaseDao<T> implements Dao<T> {
 	}
 
 	@Override
-	public int executeSQL(String sql, Object... params) {
+	public int executeSQL(String sql, Object... params) throws SQLException {
 		Connection conn = this.getConnection();
 		PreparedStatement st = null;
 		int r = 0;
@@ -79,7 +79,7 @@ public abstract class BaseDao<T> implements Dao<T> {
 			prepareStatementSetObjects(st, params);
 			r = st.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException(e);
 		} finally {
 			this.closeResources(st, conn);
 		}

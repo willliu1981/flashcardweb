@@ -113,10 +113,10 @@ public class ProxyFactory<T> {
 		return this.interceptHandlers;
 	}
 
-	public static <T> T getProxyInstance(String proxyFactoryName, T target)
-			throws FindErrorException {
-		return getProxyInstance(proxyFactoryName, target, null);
-	}
+//	public static <T> T getProxyInstance(String proxyFactoryName, T target)
+//			throws FindErrorException {
+//		return getProxyInstance(proxyFactoryName, target, null);
+//	}
 
 	public static <T> T getProxyInstance(String proxyFactoryName, T target,
 			Shuttle shuttle) throws FindErrorException {

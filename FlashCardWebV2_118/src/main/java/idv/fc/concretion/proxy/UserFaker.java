@@ -1,6 +1,7 @@
 package idv.fc.concretion.proxy;
 
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,11 +40,11 @@ public class UserFaker {
 
 	}
 
-	public String getToken() {
+	public String getaatoken() {
 		return (String) this.shuttle.get("token");
 	}
 
-	public UserFaker setToken(String token) {
+	public UserFaker setaatoken(String token) {
 		Debug.test(this, "user faker ", token);
 		this.shuttle.put("token", token);
 		return this;
@@ -146,12 +147,12 @@ public class UserFaker {
 		return this;
 	}
 
-	public void create() {
+	public void create() throws SQLException {
 		dao.create(this.user);
 		this.queryByUsernameAndPassword();
 	}
 
-	public void update(Object id) {
+	public void update(Object id) throws SQLException {
 		dao.update(this.user, id);
 	}
 
@@ -178,6 +179,12 @@ public class UserFaker {
 
 	public List<User> queryAll() {
 		return dao.queryAll();
+	}
+
+	@Override
+	public String toString() {
+		return "UserFaker [user=" + user + ", shuttle=" + shuttle + ", dao=" + dao
+				+ ", sessionValues=" + sessionValues + "]";
 	}
 
 }

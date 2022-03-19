@@ -73,7 +73,7 @@ public abstract class InterceptHandler {
 			break;
 		}
 
-		Debug.test(this, paramWrap.getMethodProxy().getSignature().getName());
+		//Debug.test(this, paramWrap.getMethodProxy().getSignature().getName());
 
 		boolean methodFilterContain = methodFilter
 				.isContain(paramWrap.getMethodProxy().getSignature().getName());

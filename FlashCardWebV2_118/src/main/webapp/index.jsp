@@ -10,7 +10,7 @@
 
 	<h1>Welcome to FlashCard</h1>
 	<h2>
-		<a href="test/test4?">test</a>
+		<a href="test/test?">test</a>
 	</h2>
 	<h2>
 		<a href="test/test?username=mary&password=1234&auth=default">test2</a>
@@ -38,7 +38,7 @@
 
 
 
-	<form action="test/test" method="post">
+	<form action="test/test" method="get">
 		<table>
 			<tr>
 				<input type="text" value="david" name="username"></input>
@@ -47,7 +47,10 @@
 				<input type="text" value="1234" name="password"></input>
 			</tr>
 			<tr>
-				<input type="text" value="tk123456" name="token"></input>
+				<input type="text" value="tk1234567" name="aatoken"></input>
+			</tr>
+			<tr>
+				<input type="text" value="aaa" name="age"></input>
 			</tr>
 			<tr>
 				<input type="text" value="common" name="auth"></input>

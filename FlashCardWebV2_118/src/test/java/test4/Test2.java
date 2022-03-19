@@ -10,14 +10,11 @@ public class Test2 {
 
 	public static void main(String[] args) {
 		Map<String, Object> map = new HashMap<>();
+		 map.put("xx", null);
 
-		try {
-			Debug.test("xxx");
-			throw new Exception("xxx");
-
-		} catch (Exception e) {
-			e.getStackTrace();
-		}
+		 String ss=(String) map.get("xx");
+		 
+		Debug.test(ss);
 	}
 
 }

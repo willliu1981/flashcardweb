@@ -1,16 +1,19 @@
 package idv.fc.controller;
 
+import java.sql.SQLException;
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import idv.fc.concretion.proxy.UserFaker;
 import idv.fc.dao.abstraction.Dao;
+import idv.fc.exception.FindErrorException;
 import idv.fc.model.User;
 import idv.fc.model.Vocabulary;
 import idv.fc.proxy.ProxyFactory;
@@ -24,36 +27,33 @@ public class TestController {
 
 	@RequestMapping(value = "test")
 	public String query(UserFaker proxy, HttpSession session) {
-		Debug.test(this, "test...");
 
-		Debug.test(this, "before username:" + proxy.getUsername());
-		Debug.test(this, "before password:" + proxy.getPassword());
-		Debug.test(this, "before auth:" + proxy.getAuth());
-		proxy.setUsername("helen");
-		proxy.setPassword("666");
-		proxy.setAuth("admin");
-		Debug.test(this, "after username:" + proxy.getUsername());
-		Debug.test(this, "agter password:" + proxy.getPassword());
-		Debug.test(this, "after auth:" + proxy.getAuth());
+		User user = new User();
+		Shuttle shuttle = new Shuttle();
+		try {
+			User userProxy = ProxyFactory.getProxyInstance("UserProxyFactory", user,
+					shuttle);
+			shuttle.put("token", "tk123456");
+
+			userProxy.setAuth("admin");
+			Debug.test(this, userProxy);
+
+		} catch (FindErrorException e) {
+			e.printStackTrace();
+		}
 
 		return "test/test";
 	}
 
 	@RequestMapping(value = "test3")
 	public String test3(User user, HttpSession session, RedirectAttributes rdAttr,
-			HttpServletRequest req, HttpServletResponse resp) {
-		// Debug.test(this, "test3..." + userFaker.getUsername());
+			HttpServletRequest req, HttpServletResponse resp,
+			HashMap<String, User> map) {
 
-		Vocabulary v = new Vocabulary();
+		User sessuser = (User) session.getAttribute("userSession");
+		map.put("user", sessuser);
 
-		rdAttr.addAttribute("auth", "common");
-		rdAttr.addAttribute("id", 1111);
-
-		// session.setAttribute("token", "admin");
-
-		rdAttr.addAttribute("token", "admin");
-
-		return "redirect:/test/test4";
+		return "user/userinfo";
 	}
 
 	@RequestMapping(value = "test4")
@@ -97,7 +97,12 @@ public class TestController {
 		v.setId("v_find");
 		v.setVocabulary("find");
 		v.setTranslation("查找");
-		dao.create(v);
+		try {
+			dao.create(v);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "test/test";
 	}
 
@@ -108,7 +113,12 @@ public class TestController {
 		v.setId("v_such");
 		v.setVocabulary("such");
 		v.setTranslation("這種");
-		dao.update(v, "xxx");
+		try {
+			dao.update(v, "xxx");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "test/test";
 	}
 }

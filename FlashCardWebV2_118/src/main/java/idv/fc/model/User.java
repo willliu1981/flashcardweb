@@ -79,7 +79,7 @@ public class User {
 		return auth;
 	}
 
-	@Authorized(Authority.ADMIN)
+	//@Authorized(Authority.ADMIN)
 	public void setAuth(String authority) {
 		this.auth = authority;
 	}
@@ -88,9 +88,17 @@ public class User {
 		return tag;
 	}
 
-	@Authorized(Authority.ADMIN)
+	//@Authorized(Authority.ADMIN)
 	public void setTag(String age) {
 		this.tag = age;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password
+				+ ", display_name=" + display_name + ", gender=" + gender + ", age="
+				+ age + ", auth=" + auth + ", tag=" + tag + ", create_date="
+				+ create_date + "]";
 	}
 
 }
