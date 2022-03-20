@@ -31,7 +31,7 @@ public class TestController {
 		User user = new User();
 		Shuttle shuttle = new Shuttle();
 		try {
-			User userProxy = ProxyFactory.getProxyInstance("UserProxyFactory2", user,
+			User userProxy = ProxyFactory.getProxyInstance("UserProxyFactory", user,
 					shuttle);
 
 			shuttle.put("token", "tk123456");

@@ -13,7 +13,9 @@
         http://www.springframework.org/schema/context
         https://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc
-        https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+        https://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util-4.0.xsd">
 
 
 	<context:component-scan base-package="idv.fc"></context:component-scan>
@@ -23,74 +25,16 @@
 		scope="prototype">
 	</bean>
 
-
 	<bean id="VocabularyModel" class="idv.fc.model.Vocabulary"
 		scope="prototype">
 	</bean>
 
-	<bean id="UserProxyFactory" class="idv.fc.proxy.ProxyFactory">
-		<property name="handlers">
-			<list>
-				<ref bean="UserInterceptorHandler" />
-			</list>
-		</property>
-
-	</bean>
-
-	<bean id="UserProxyFactory2" class="idv.fc.proxy.ProxyFactory"
+	<bean id="UserProxyFactory" class="idv.fc.proxy.ProxyFactory"
 		p:handlers-ref="userHandlers">
 	</bean>
 
-
-	<bean id="userHandlers" class="idv.util.spring.CustomList">
-		<property name="list">
-			<list>
-				<ref bean="UserInterceptorHandler"></ref>
-			</list>
-
-		</property>
-
-	</bean>
-
-<!--  
-	<bean id="userHandlers" class="java.util.ArrayList">
-		<constructor-arg>
-			<list>
-				<ref bean="UserInterceptorHandler" />
-			</list>
-		</constructor-arg>
-	</bean>
--->
-
-<!--  	
-	<util:list id="handlers"
-		value-type="idv.fc.proxy.interceptor.InterceptHandler">
-<ref bean=""></ref>
-
+	<util:list id="userHandlers">
+		<ref bean="UserInterceptorHandler" />
 	</util:list>
--->
-
-
-
-
-
- <!-- 
-	<bean id="UserInterceptor"
-		class="idv.fc.proxy.interceptor.CommonInterceptor">
-		<property name="interceptHandler" ref="UserHandler" />
-
-	</bean>
-
-	<bean id="UserHandler"
-		class="idv.fc.proxy.interceptor.concretion.UserHandler">
-	</bean>
- -->
-<!--  
-	<bean id="VocabularyProxy"
-		class="idv.fc.model.proxy.VocabularyProxy" scope="prototype">
-		<constructor-arg ref="VocabularyModel" />
-	</bean>
--->
-
 
 </beans>

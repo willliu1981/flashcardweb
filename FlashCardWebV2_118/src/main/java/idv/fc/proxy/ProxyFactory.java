@@ -3,8 +3,6 @@ package idv.fc.proxy;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import idv.fc.exception.FindErrorException;
 import idv.fc.proxy.interceptor.BaseInterceptor;
 import idv.fc.proxy.interceptor.InterceptHandler;
