@@ -13,6 +13,7 @@ public class UserInterceptorHandler extends InterceptHandler {
 	public boolean preHandle(ParamWrap paramWrap) {
 		// *
 		String token = null;
+		Debug.test(this, "xxx", paramWrap.getMethodProxy().getSignature().getName());
 		try {
 			token = (String) paramWrap.getShuttle().getValue("token");
 			Debug.test(this.getClass(), "token", token);

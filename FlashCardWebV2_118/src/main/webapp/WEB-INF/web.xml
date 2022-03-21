@@ -71,6 +71,7 @@
 			classpath:spring/model.xml,
 			classpath:spring/tool.xml,
 			classpath:spring/annotation.xml,
+			classpath:spring/test.xml,
 			classpath:spring/interceptor.xml
 		</param-value>
 	</context-param>

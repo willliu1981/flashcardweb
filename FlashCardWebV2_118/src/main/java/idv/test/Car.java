@@ -4,8 +4,9 @@ public class Car {
 
 	private String name;
 
+
 	Car() {
-		this.name = "xxx";
+		this.name = "default";
 	}
 
 	Car(String name) {
@@ -13,7 +14,7 @@ public class Car {
 	}
 
 	Car(String name, String name2) {
-		this.name = name + ":" + name2;
+		this.name = name + "-" + name2;
 	}
 
 	public String getName() {

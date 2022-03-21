@@ -91,11 +91,11 @@ public class DrawCardHandler implements HandleableCase<Card> {
 
 	@Override
 	public void setCardList(List<Card> cards) {
-		throw new UnsupportedOperationException(this.getClass()+":不支持 set card list");
+		throw new UnsupportedOperationException(this.getClass() + ":不支持 set card list");
 	}
 
 	@Override
 	public void setDrawRule(DrawRule<Card> rule) {
-		throw new UnsupportedOperationException(this.getClass()+":不支持 set card list");
+		throw new UnsupportedOperationException(this.getClass() + ":不支持 set card list");
 	}
 }

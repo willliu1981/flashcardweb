@@ -18,6 +18,7 @@ import idv.fc.model.User;
 import idv.fc.model.Vocabulary;
 import idv.fc.proxy.ProxyFactory;
 import idv.fc.proxy.interceptor.Shuttle;
+import idv.test.Car;
 import idv.tool.Debug;
 import idv.tool.spring.SpringUtil;
 
@@ -28,21 +29,8 @@ public class TestController {
 	@RequestMapping(value = "test")
 	public String query(UserFaker proxy, HttpSession session) {
 
-		User user = new User();
-		Shuttle shuttle = new Shuttle();
-		try {
-			User userProxy = ProxyFactory.getProxyInstance("UserProxyFactory", user,
-					shuttle);
-
-			shuttle.put("token", "tk123456");
-
-			userProxy.setAuth("admin");
-			Debug.test(this, userProxy);
-		
-
-		} catch (FindErrorException e) {
-			e.printStackTrace();
-		}
+		Car car = SpringUtil.getBean("Car", Car.class);
+		Debug.test(this, "class", car.getClass().getTypeName());
 
 		return "test/test";
 	}

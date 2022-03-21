@@ -29,7 +29,7 @@ public class Debug {
 
 	public static void test(Object objForClassInfo, Object prefix, Object msg,
 			boolean any) {
-		String head = objForClassInfo == null ? "" : objForClassInfo.toString() + ":";
+		String head = objForClassInfo == null ? "" : objForClassInfo.toString() + " : ";
 
 		String prefixString = "";
 		if (prefix == null) {
