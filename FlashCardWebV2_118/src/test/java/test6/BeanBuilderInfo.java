@@ -18,6 +18,14 @@ public class BeanBuilderInfo {
 		property.setValueType(BeanProperty.BASE);
 		this.properties.add(property);
 	}
+	
+	public void setClassProperty(String name, String id) {
+		ClassProperty property = new ClassProperty();
+		property.setName(name);
+		property.setValue(id);
+		property.setValueType(BeanProperty.CLASS);
+		this.properties.add(property);
+	}
 
 	public String getId() {
 		return id;

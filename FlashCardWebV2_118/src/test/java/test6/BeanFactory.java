@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import idv.tool.Debug;
+
 public class BeanFactory {
 
 	List<BeanBuilderInfo> builderInfos = new ArrayList<>();
@@ -26,17 +28,28 @@ public class BeanFactory {
 			Object action = instances.get(x.getId());
 			x.getProperties().forEach((p) -> {
 				String type = p.getValueType();
-				if (type.equals(BaseProperty.BASE)) {
-					try {
-						Method method = action.getClass().getMethod(p.getName(),
-								String.class);
+				Method method = null;
+				try {
+					switch (type) {
+					case BeanProperty.BASE:
+						method = action.getClass().getMethod(p.getName(), String.class);
 						method.invoke(action, p.getValue());
+						break;
+					case BeanProperty.CLASS:
+						Object value = instances.get(p.getValue());
+						method = action.getClass().getMethod(p.getName(),
+								value.getClass());
+						method.invoke(action, value);
+						break;
 
-					} catch (NoSuchMethodException | SecurityException
-							| IllegalAccessException | IllegalArgumentException
-							| InvocationTargetException e) {
-						e.printStackTrace();
+					default:
+						break;
 					}
+
+				} catch (NoSuchMethodException | SecurityException
+						| IllegalAccessException | IllegalArgumentException
+						| InvocationTargetException e) {
+					e.printStackTrace();
 				}
 
 			});
@@ -45,11 +58,11 @@ public class BeanFactory {
 	}
 
 	private void createInstance() {
-		this.builderInfos.forEach(x -> {
+		this.builderInfos.forEach(info -> {
 			try {
-				Class<?> clazz = Class.forName(x.getClassString());
+				Class<?> clazz = Class.forName(info.getClassString());
 				Object instance = clazz.newInstance();
-				instances.put(x.getId(), instance);
+				instances.put(info.getId(), instance);
 			} catch (ClassNotFoundException | InstantiationException
 					| IllegalAccessException e) {
 				e.printStackTrace();
