@@ -1,5 +1,7 @@
-package idv.fc.concretion.proxy;
+package idv.fc.proxy.concretion;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -16,7 +18,8 @@ import idv.tool.spring.SpringUtil;
 
 public class UserFaker {
 
-	private User user;
+	private User primeUser;
+	private User finalUser = null;
 	private Shuttle shuttle = new Shuttle();
 
 	Dao<User> dao;
@@ -32,30 +35,69 @@ public class UserFaker {
 		dao = (Dao<User>) SpringUtil.getBean("UserDao");
 
 		try {
-			this.user = ProxyFactory.getProxyInstance("UserProxyFactory", user,
-					this.shuttle);
+			this.primeUser = ProxyFactory.getProxyInstance("PreparedUserProxyFactory",
+					user, this.shuttle);
+
 		} catch (FindErrorException e) {
 			e.printStackTrace();
 		}
 
 	}
 
-	public String getaatoken() {
+	public String getToken() {
 		return (String) this.shuttle.get("token");
 	}
 
-	public UserFaker setaatoken(String token) {
-		Debug.test(this, "user faker ", token);
+	public UserFaker setToken(String token) {
+		// Debug.test(UserFaker.class, "set Token ", token);
 		this.shuttle.put("token", token);
 		return this;
 	}
 
-	public User getUser() {
-		return user;
+	protected void processUser() {
+
+		try {
+			finalUser = ProxyFactory.getProxyInstance("FilteredUserProxyFactory",
+					new User(), this.shuttle);
+
+			Map<String, Object> methods = (Map<String, Object>) this.shuttle
+					.getValue("methods");
+			methods.forEach((k, v) -> {
+				try {
+					Method method = null;
+					try {
+						method = this.finalUser.getClass().getMethod(k, String.class);
+					} catch (NoSuchMethodException e) {
+						try {
+							method = this.finalUser.getClass().getMethod(k,
+									Integer.class);
+						} catch (NoSuchMethodException e1) {
+							e1.printStackTrace();
+						}
+					}
+					method.invoke(finalUser, v);
+				} catch (SecurityException | IllegalAccessException
+						| IllegalArgumentException | InvocationTargetException e) {
+					e.printStackTrace();
+				}
+
+			});
+
+		} catch (FindErrorException e) {
+			e.printStackTrace();
+		}
+
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public User getPrimeUser() {
+		return this.primeUser;
+	}
+
+	public User getUser() {
+		if (this.finalUser == null) {
+			processUser();
+		}
+		return this.finalUser;
 	}
 
 	public Dao<User> getDao() {
@@ -67,112 +109,112 @@ public class UserFaker {
 	}
 
 	public String getId() {
-		return user.getId();
+		return primeUser.getId();
 	}
 
 	public UserFaker setId(String id) {
-		user.setId(id);
+		primeUser.setId(id);
 		return this;
 	}
 
 	public Date getCreate_date() {
-		return user.getCreate_date();
+		return primeUser.getCreate_date();
 	}
 
 	public UserFaker setCreate_date(Date create_date) {
-		user.setCreate_date(create_date);
+		primeUser.setCreate_date(create_date);
 		return this;
 	}
 
 	public Integer getAge() {
-		return user.getAge();
+		return primeUser.getAge();
 	}
 
 	public UserFaker setAge(Integer age) {
-		user.setAge(age);
+		primeUser.setAge(age);
 		return this;
 	}
 
 	public String getUsername() {
-		return user.getUsername();
+		return primeUser.getUsername();
 	}
 
 	public UserFaker setUsername(String username) {
-		user.setUsername(username);
+		primeUser.setUsername(username);
 		return this;
 	}
 
 	public String getPassword() {
-		return user.getPassword();
+		return primeUser.getPassword();
 	}
 
 	public UserFaker setPassword(String password) {
-		user.setPassword(password);
+		primeUser.setPassword(password);
 		return this;
 	}
 
 	public String getDisplay_name() {
-		return user.getDisplay_name();
+		return primeUser.getDisplay_name();
 	}
 
 	public UserFaker setDisplay_name(String dsiplay_name) {
-		user.setDisplay_name(dsiplay_name);
+		primeUser.setDisplay_name(dsiplay_name);
 		return this;
 	}
 
 	public Integer getGender() {
-		return user.getGender();
+		return primeUser.getGender();
 	}
 
 	public UserFaker setGender(Integer gender) {
-		user.setGender(gender);
+		primeUser.setGender(gender);
 		return this;
 	}
 
 	public String getAuth() {
-		return user.getAuth();
+		return primeUser.getAuth();
 	}
 
 	public UserFaker setAuth(String auth) {
-		user.setAuth(auth);
+		primeUser.setAuth(auth);
 		return this;
 	}
 
 	public String getTag() {
-		return user.getTag();
+		return primeUser.getTag();
 	}
 
 	public UserFaker setTag(String age) {
-		user.setTag(age);
+		primeUser.setTag(age);
 		return this;
 	}
 
 	public void create() throws SQLException {
-		dao.create(this.user);
+		dao.create(this.primeUser);
 		this.queryByUsernameAndPassword();
 	}
 
 	public void update(Object id) throws SQLException {
-		dao.update(this.user, id);
+		dao.update(this.primeUser, id);
 	}
 
 	public void delete() {
-		dao.delete(this.user.getId());
+		dao.delete(this.primeUser.getId());
 	}
 
 	public User queryById() throws FindErrorException {
-		return dao.queryById(this.user.getId());
+		return dao.queryById(this.primeUser.getId());
 	}
 
 	public boolean queryByUsernameAndPassword() {
 		List<User> list = dao.querySQL(
 				"select * from user where username=? and password=? ",
-				user.getUsername(), user.getPassword());
+				primeUser.getUsername(), primeUser.getPassword());
 		boolean isEmpty = list.isEmpty();
 		if (isEmpty) {
 			return false;
 		} else {
-			this.user = list.get(0);
+			this.primeUser = list.get(0);
 			return true;
 		}
 	}
@@ -183,7 +225,7 @@ public class UserFaker {
 
 	@Override
 	public String toString() {
-		return "UserFaker [user=" + user + ", shuttle=" + shuttle + ", dao=" + dao
+		return "UserFaker [user=" + primeUser + ", shuttle=" + shuttle + ", dao=" + dao
 				+ ", sessionValues=" + sessionValues + "]";
 	}
 

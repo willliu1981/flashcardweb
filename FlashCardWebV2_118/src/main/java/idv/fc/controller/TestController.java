@@ -11,12 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import idv.fc.concretion.proxy.UserFaker;
 import idv.fc.dao.abstraction.Dao;
 import idv.fc.exception.FindErrorException;
 import idv.fc.model.User;
 import idv.fc.model.Vocabulary;
 import idv.fc.proxy.ProxyFactory;
+import idv.fc.proxy.concretion.UserFaker;
 import idv.fc.proxy.interceptor.Shuttle;
 import idv.test.Car;
 import idv.tool.Debug;
@@ -47,17 +47,12 @@ public class TestController {
 	}
 
 	@RequestMapping(value = "test4")
-	public String test4(UserFaker user, String token, Vocabulary vocabulary,
-			HttpSession session, RedirectAttributes rdAttr) {
+	public String test4(UserFaker user, HttpSession session,
+			RedirectAttributes rdAttr) {
 
-		// session.setAttribute("token", token);
+		Debug.test(this, "before", user);
 
-		Debug.test(this, "1..." + user.getAuth());
-		Debug.test(this, "2..." + user.getId());
-		// Debug.test(this, "3..." + vocabulary.getId());
-
-		// Debug.test(this, "4..." + user.getAuth());
-		// user.setAuth("admin");
+		Debug.test(this, "after", user.getUser());
 
 		return "test/test";
 	}

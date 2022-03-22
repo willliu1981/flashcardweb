@@ -30,7 +30,7 @@ public abstract class InterceptHandler {
 				return true;
 			}
 
-			if (name.startsWith("set") || name.startsWith("set")) {
+			if (name.startsWith("set") || name.startsWith("get")) {
 				char head = name.charAt(3);
 
 				if (Character.isUpperCase(head)) {

@@ -10,7 +10,7 @@ public class Shuttle extends HashMap<String, Object> {
 		Object o = this.get(key);
 
 		if (o == null) {
-			throw new FindErrorException(this.getClass() + ":");
+			throw new FindErrorException(this.getClass() + ":value=null,key=" + key);
 		}
 
 		return o;

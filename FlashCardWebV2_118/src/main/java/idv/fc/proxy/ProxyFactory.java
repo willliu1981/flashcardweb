@@ -8,6 +8,7 @@ import idv.fc.proxy.interceptor.BaseInterceptor;
 import idv.fc.proxy.interceptor.InterceptHandler;
 import idv.fc.proxy.interceptor.InterceptorImpl;
 import idv.fc.proxy.interceptor.Shuttle;
+import idv.tool.Debug;
 import idv.tool.spring.SpringUtil;
 import net.sf.cglib.proxy.Enhancer;
 
@@ -131,7 +132,7 @@ public class ProxyFactory<T> {
 
 	public static <T> T getProxyInstance(String proxyFactoryName, T target,
 			Shuttle shuttle) throws FindErrorException {
-		ProxyFactory<T> factory = SpringUtil.getBean("UserProxyFactory",
+		ProxyFactory<T> factory = SpringUtil.getBean(proxyFactoryName,
 				ProxyFactory.class);
 
 		return factory.getProxyInstance(target, shuttle);

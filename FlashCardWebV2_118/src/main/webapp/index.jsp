@@ -38,7 +38,7 @@
 
 
 
-	<form action="test/test" method="get">
+	<form action="test/test4" method="post">
 		<table>
 			<tr>
 				<input type="text" value="david" name="username"></input>
@@ -47,10 +47,10 @@
 				<input type="text" value="1234" name="password"></input>
 			</tr>
 			<tr>
-				<input type="text" value="tk1234567" name="aatoken"></input>
+				<input type="text" value="tk123456" name="token"></input>
 			</tr>
 			<tr>
-				<input type="text" value="aaa" name="age"></input>
+				<input type="text" value="33" name="age"></input>
 			</tr>
 			<tr>
 				<input type="text" value="common" name="auth"></input>

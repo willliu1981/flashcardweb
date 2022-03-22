@@ -25,8 +25,13 @@
 
 
 
-	<bean id="UserInterceptorHandler"
-		class="idv.fc.interceptorhandler.UserInterceptorHandler">
+	<bean id="PostMethodsInterceptorHandler"
+		class="idv.fc.interceptorhandler.PostMethodsInterceptorHandler">
+
+	</bean>
+	
+	<bean id="FilteredInterceptorHandler"
+		class="idv.fc.interceptorhandler.FilteredInterceptorHandler">
 
 	</bean>
 

@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import idv.fc.proxy.interceptor.InterceptHandlerWrap.ParamWrap;
+import idv.tool.Debug;
 import net.sf.cglib.proxy.MethodProxy;
 
 public class InterceptorImpl extends BaseInterceptor {
@@ -23,12 +24,14 @@ public class InterceptorImpl extends BaseInterceptor {
 	}
 
 	public InterceptorImpl() {
-
+StringBuffer s;
 	}
 
 	@Override
 	public Object intercept(Object proxy, Method method, Object[] args,
 			MethodProxy methodProxy, Shuttle shuttle) throws Throwable {
+		//Debug.test(this, "method name", methodProxy.getSignature().getName());
+
 		Object returnValue = null;
 		ParamWrap paramWrap = new ParamWrap(proxy, method, args, methodProxy,
 				this.getShuttle());

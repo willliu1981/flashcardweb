@@ -21,20 +21,33 @@
 	<context:component-scan base-package="idv.fc"></context:component-scan>
 
 
-	<bean id="UserFaker" class="idv.fc.concretion.proxy.UserFaker"
+	<bean id="UserFaker" class="idv.fc.proxy.concretion.UserFaker"
 		scope="prototype">
 	</bean>
+
 
 	<bean id="VocabularyModel" class="idv.fc.model.Vocabulary"
 		scope="prototype">
 	</bean>
 
 	<bean id="UserProxyFactory" class="idv.fc.proxy.ProxyFactory"
-		p:handlers-ref="userHandlers">
+		p:handlers-ref="PostMethodsInterceptorHandler">
+	</bean>
+	
+	<bean id="PreparedUserProxyFactory" class="idv.fc.proxy.ProxyFactory"
+		p:handlers-ref="PostMethodsHandlers">
 	</bean>
 
-	<util:list id="userHandlers">
-		<ref bean="UserInterceptorHandler" />
+	<bean id="FilteredUserProxyFactory" class="idv.fc.proxy.ProxyFactory"
+		p:handlers-ref="FilteredUserHandlers">
+	</bean>
+
+	<util:list id="PostMethodsHandlers">
+		<ref bean="PostMethodsInterceptorHandler" />
+	</util:list>
+
+	<util:list id="FilteredUserHandlers">
+		<ref bean="FilteredInterceptorHandler" />
 	</util:list>
 
 </beans>
