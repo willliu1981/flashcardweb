@@ -18,6 +18,8 @@ import idv.fc.exception.FindErrorException;
 import idv.fc.model.User;
 import idv.fc.proxy.concretion.UserFaker;
 import idv.tool.Debug;
+import idv.tool.JWTUtils;
+import io.jsonwebtoken.Claims;
 
 @Controller
 //@RequestMapping(value = "user")
@@ -97,11 +99,23 @@ public class UserController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "user", method = RequestMethod.GET)
-	public String query(@ModelAttribute("id") String id, HttpSession session,
-			HashMap<String, User> map) {
+	public String query(@ModelAttribute("jwt") String jwt, UserFaker userFaker,
+			HttpSession session, HashMap<String, User> map) {
+		Debug.test(this, jwt);
+		Claims claims = null;
+		try {
+			claims = JWTUtils.parseJWT(jwt);
+			System.out.println("解析成功:" + claims.getSubject());
+
+		} catch (Exception exception) {
+			System.out.println("解析失敗:");
+			return "user/failure/failure.jsp";
+		}
+
 		User user = null;
 		try {
-			user = DaoFactory.getUserDao().queryById(id);
+			userFaker.setId(claims.getSubject());
+			user = userFaker.queryById();
 			map.put("user", user);
 		} catch (FindErrorException e) {
 			e.printStackTrace();
@@ -114,7 +128,7 @@ public class UserController extends BaseController {
 	}
 
 	/**
-	 * check username and password
+	 * login, check username and password
 	 * @param userFaker
 	 * @param session
 	 * @param map
@@ -132,6 +146,7 @@ public class UserController extends BaseController {
 				session.setAttribute("userSession", sessUser);
 			}
 			rdAttr.addFlashAttribute("id", sessUser.getId());
+			rdAttr.addFlashAttribute("jwt", JWTUtils.creatJWT(userFaker.getId()));
 			return "redirect:/user";
 		} else {
 			session.invalidate();

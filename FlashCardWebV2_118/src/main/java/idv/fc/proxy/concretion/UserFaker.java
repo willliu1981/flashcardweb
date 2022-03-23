@@ -54,6 +54,15 @@ public class UserFaker {
 		return this;
 	}
 
+	public String getJwt() {
+		return (String) this.shuttle.get("token");
+	}
+
+	public UserFaker setJwt(String jwt) {
+		this.shuttle.put("jwt", jwt);
+		return this;
+	}
+
 	public void intercept() {
 
 		try {
@@ -196,7 +205,8 @@ public class UserFaker {
 	}
 
 	public User queryById() throws FindErrorException {
-		return dao.queryById(this.getUser().getId());
+		this.user = dao.queryById(this.getUser().getId());
+		return this.user;
 	}
 
 	public boolean queryByUsernameAndPasswordIsPresentThenSetUser() {

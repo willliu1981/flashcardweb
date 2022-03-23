@@ -38,8 +38,11 @@
 
 
 
-	<form action="test/test4" method="post">
+	<form action="user" method="get">
 		<table>
+			<tr>
+				<input type="text" value="u_admin" name="id"></input>
+			</tr>
 			<tr>
 				<input type="text" value="david" name="username"></input>
 			</tr>
