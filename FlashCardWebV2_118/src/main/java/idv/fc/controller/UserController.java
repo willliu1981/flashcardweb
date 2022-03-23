@@ -124,7 +124,7 @@ public class UserController extends BaseController {
 	public String login(UserFaker userFaker, HttpSession session,
 			RedirectAttributes rdAttr) {
 
-		if (userFaker.queryByUsernameAndPassword()) {
+		if (userFaker.queryByUsernameAndPasswordIsPresentThenSetUser()) {
 			User sessUser = (User) session.getAttribute("userSession");
 			if (sessUser == null
 					|| !sessUser.getId().equals(userFaker.getUser().getId())) {

@@ -50,7 +50,9 @@ public class TestController {
 	public String test4(UserFaker user, HttpSession session,
 			RedirectAttributes rdAttr) {
 
-		Debug.test(this, "before", user);
+		Debug.test(this, "before", user.getUser());
+
+		user.intercept();
 
 		Debug.test(this, "after", user.getUser());
 
