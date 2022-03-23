@@ -142,6 +142,8 @@ public class JWTUtils {
 			System.out.println("解析失敗:");
 			exception.printStackTrace();
 		}
+		
+	
 
 	}
 }
