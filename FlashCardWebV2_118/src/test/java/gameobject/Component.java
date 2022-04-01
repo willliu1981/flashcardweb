@@ -20,10 +20,22 @@ public class Component {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
 
+	public String getParentLayer() {
+		return parentLayer;
+	}
 
+	public void setParentLayer(String parentLayer) {
+		this.parentLayer = parentLayer;
+	}
+
+	public Integer getLayer() {
+		return layer;
+	}
+
+	public void setLayer(Integer layer) {
+		this.layer = layer;
+	}
 
 	public Component getParentComponent() {
 		return parentComponent;
@@ -53,8 +65,17 @@ public class Component {
 		return components;
 	}
 
-	public void addComponent(Component components) {
-		this.components.add(components);
+	public void addComponent(Component component) {
+		this.components.add(component);
+		component.setParentComponent(this);
+	}
+
+	@Override
+	public String toString() {
+		return "Component [name=" + name + ", relevantPosition=" + relevantPosition
+				+ ", absolutePosition=" + absolutePosition + ", parentComponent="
+				+ parentComponent + ", components'size=" + components.size()
+				+ ", layer=" + parentLayer + ":" + layer + "]";
 	}
 
 }
