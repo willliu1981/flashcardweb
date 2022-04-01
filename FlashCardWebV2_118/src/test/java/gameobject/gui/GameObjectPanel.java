@@ -5,8 +5,8 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-import gameobject.Component;
-import gameobject.Scene;
+import gameobject.component.Component;
+import gameobject.component.Scene;
 import gameobject.tool.Graphs;
 
 public class GameObjectPanel extends JPanel {
@@ -20,7 +20,7 @@ public class GameObjectPanel extends JPanel {
 
 	@Override
 	public void paint(Graphics g) {
-
+		super.paint(g);
 		List<Component> gameObjects = Scene.getGameObjects();
 		gameObjects.forEach(go -> {
 			Graphs.paint(g, go);

@@ -1,4 +1,4 @@
-package gameobject;
+package gameobject.component;
 
 import java.awt.Point;
 
@@ -22,21 +22,23 @@ public class GameObjectDemo {
 		spine.addComponent(head);
 
 		Scene sc = new Scene();
-		sc.addComponent(spine);
+		sc.addSceneComponent(spine);
 
 		Debug.test("before...");
 		Debug.test("head", head);
 		Debug.test("spine", spine);
 
-		sc.locating();
+		Scene.locating();
 
 		Debug.test("after...");
 		Debug.test("head", head);
 		Debug.test("spine", spine);
 
 		GameObjectFrame frame = new GameObjectFrame();
-		frame.setScene(sc);
+		GameObjectFrame.setScene(sc);
 		frame.setVisible(true);
+
+		Scene.run(frame.getGameObjectPanel());
 
 	}
 

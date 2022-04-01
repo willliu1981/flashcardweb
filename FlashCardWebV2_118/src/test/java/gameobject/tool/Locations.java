@@ -3,7 +3,7 @@ package gameobject.tool;
 import java.awt.Point;
 import java.util.List;
 
-import gameobject.Component;
+import gameobject.component.Component;
 
 public class Locations {
 
