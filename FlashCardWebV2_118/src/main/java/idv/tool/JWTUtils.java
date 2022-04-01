@@ -2,6 +2,7 @@ package idv.tool;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.Objects;
 import java.util.UUID;
 
 import io.jsonwebtoken.Claims;
@@ -143,7 +144,7 @@ public class JWTUtils {
 			exception.printStackTrace();
 		}
 		
-	
+
 
 	}
 }

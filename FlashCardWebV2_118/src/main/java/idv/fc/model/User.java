@@ -4,9 +4,6 @@ import java.sql.Date;
 
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
-import idv.fc.enums.Authority;
-import idv.fc.proxy.annotation.Authorized;
-
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 public class User {
 	private String id;// {pk,not null,unique}

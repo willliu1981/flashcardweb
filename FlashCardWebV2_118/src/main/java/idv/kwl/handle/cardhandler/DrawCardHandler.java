@@ -9,6 +9,7 @@ import idv.fc.model.Card;
 import idv.kwl.handle.cardhandler.drawcardcase.DrawRule;
 import idv.tool.spring.SpringUtil;
 
+
 public class DrawCardHandler implements HandleableCase<Card> {
 	private HandleableCase<Card> cardCase;
 	private List<Card> reviews = new ArrayList<>();
