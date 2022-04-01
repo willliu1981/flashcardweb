@@ -2,6 +2,7 @@ package gameobject;
 
 import java.awt.Point;
 
+import gameobject.gui.GameObjectFrame;
 import idv.tool.Debug;
 
 public class GameObjectDemo {
@@ -32,6 +33,10 @@ public class GameObjectDemo {
 		Debug.test("after...");
 		Debug.test("head", head);
 		Debug.test("spine", spine);
+
+		GameObjectFrame frame = new GameObjectFrame();
+		frame.setScene(sc);
+		frame.setVisible(true);
 
 	}
 

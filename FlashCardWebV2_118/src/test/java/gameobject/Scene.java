@@ -14,6 +14,8 @@ public class Scene {
 	}
 
 	private List<Component> components = new ArrayList<>();
+	private static List<Component> gameObjects = new ArrayList<>();
+	
 
 	public List<Component> getComponents() {
 		return components;
@@ -26,6 +28,7 @@ public class Scene {
 	public void addComponent(Component component) {
 		this.components.add(component);
 		component.setParentComponent(parent);
+		addGameObject(component);
 	}
 
 	public void locating() {
@@ -34,5 +37,15 @@ public class Scene {
 		});
 
 	}
+	
+	public static void addGameObject(Component component) {
+		gameObjects.add(component);
+	}
+
+	public static List<Component> getGameObjects() {
+		return gameObjects;
+	}
+	
+	
 
 }
