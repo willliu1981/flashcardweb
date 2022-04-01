@@ -72,7 +72,7 @@
 		scope="prototype">
 		<property name="name" value="head" />
 		<property name="layer" value="23" />
-		<property name="position" value="0,-100" />
+		<property name="position" value="0,-75" />
 	</bean>
 
 	<bean id="rhand1" class="gameobject.component.impl.Body"
@@ -153,7 +153,7 @@
 		scope="prototype">
 		<property name="name" value="rhand1" />
 		<property name="layer" value="23" />
-		<property name="position" value="10,50" />
+		<property name="position" value="10,75" />
 		<property name="addComponent">
 			<list>
 				<ref bean="rfoot3" />
@@ -165,7 +165,7 @@
 		scope="prototype">
 		<property name="name" value="rhand1" />
 		<property name="layer" value="23" />
-		<property name="position" value="0,50" />
+		<property name="position" value="0,75" />
 	</bean>
 
 	<bean id="lfoot1" class="gameobject.component.impl.Body"
@@ -184,7 +184,7 @@
 		scope="prototype">
 		<property name="name" value="rhand1" />
 		<property name="layer" value="23" />
-		<property name="position" value="-10,50" />
+		<property name="position" value="-10,75" />
 		<property name="addComponent">
 			<list>
 				<ref bean="lfoot3" />
@@ -196,7 +196,7 @@
 		scope="prototype">
 		<property name="name" value="rhand1" />
 		<property name="layer" value="23" />
-		<property name="position" value="0,50" />
+		<property name="position" value="0,75" />
 	</bean>
 
 
