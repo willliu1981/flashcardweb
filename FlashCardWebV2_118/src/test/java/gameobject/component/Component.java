@@ -79,8 +79,10 @@ public class Component {
 		Scene.addGameObject(component);
 	}
 
-	public void setAddComponent(Component component) {
-		this.addComponent(component);
+	public void setAddComponent(List<Component> components) {
+		components.forEach(comp -> {
+			addComponent(comp);
+		});
 	}
 
 	@Override

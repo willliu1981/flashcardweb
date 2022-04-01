@@ -14,17 +14,189 @@
         https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 
-	<bean id="spine" class="gameobject.component.impl.Spine">
-		<property name="name" value="spine" />
-		<property name="layer" value="21" />
+	<bean id="person1" class="gameobject.component.impl.Person"
+		scope="prototype">
+		<property name="name" value="David" />
+		<property name="layer" value="2" />
 		<property name="position" value="100,300" />
-		<property name="addComponent" ref="head" />
+		<property name="addComponent">
+			<list>
+				<ref bean="spine" />
+			</list>
+		</property>
 	</bean>
 
-	<bean id="head" class="gameobject.component.impl.Head">
-		<property name="name" value="head" />
+
+	<bean id="spine" class="gameobject.component.impl.Body"
+		scope="prototype">
+		<property name="name" value="spine" />
+		<property name="layer" value="21" />
+		<property name="position" value="0,0" />
+		<property name="addComponent">
+			<list>
+				<ref bean="body" />
+				<ref bean="rfoot1" />
+				<ref bean="lfoot1" />
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="body" class="gameobject.component.impl.Body"
+		scope="prototype">
+		<property name="name" value="body" />
 		<property name="layer" value="22" />
-		<property name="position" value="0,-200" />
+		<property name="position" value="0,-50" />
+		<property name="addComponent">
+			<list>
+				<ref bean="body2" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="body2" class="gameobject.component.impl.Body"
+		scope="prototype">
+		<property name="name" value="body2" />
+		<property name="layer" value="22" />
+		<property name="position" value="0,-50" />
+		<property name="addComponent">
+			<list>
+				<ref bean="head" />
+				<ref bean="rhand1" />
+				<ref bean="lhand1" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="head" class="gameobject.component.impl.Body"
+		scope="prototype">
+		<property name="name" value="head" />
+		<property name="layer" value="23" />
+		<property name="position" value="0,-100" />
+	</bean>
+
+	<bean id="rhand1" class="gameobject.component.impl.Body"
+		scope="prototype">
+		<property name="name" value="rhand1" />
+		<property name="layer" value="23" />
+		<property name="position" value="50,0" />
+		<property name="addComponent">
+			<list>
+				<ref bean="rhand2" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="rhand2" class="gameobject.component.impl.Body"
+		scope="prototype">
+		<property name="name" value="rhand1" />
+		<property name="layer" value="23" />
+		<property name="position" value="25,50" />
+		<property name="addComponent">
+			<list>
+				<ref bean="rhand3" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="rhand3" class="gameobject.component.impl.Body"
+		scope="prototype">
+		<property name="name" value="rhand1" />
+		<property name="layer" value="23" />
+		<property name="position" value="0,50" />
+	</bean>
+
+	<bean id="lhand1" class="gameobject.component.impl.Body"
+		scope="prototype">
+		<property name="name" value="rhand1" />
+		<property name="layer" value="23" />
+		<property name="position" value="-50,0" />
+		<property name="addComponent">
+			<list>
+				<ref bean="lhand2" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="lhand2" class="gameobject.component.impl.Body"
+		scope="prototype">
+		<property name="name" value="rhand1" />
+		<property name="layer" value="23" />
+		<property name="position" value="-25,50" />
+		<property name="addComponent">
+			<list>
+				<ref bean="lhand3" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="lhand3" class="gameobject.component.impl.Body"
+		scope="prototype">
+		<property name="name" value="rhand1" />
+		<property name="layer" value="23" />
+		<property name="position" value="0,50" />
+	</bean>
+
+	<bean id="rfoot1" class="gameobject.component.impl.Body"
+		scope="prototype">
+		<property name="name" value="rhand1" />
+		<property name="layer" value="23" />
+		<property name="position" value="25,50" />
+		<property name="addComponent">
+			<list>
+				<ref bean="rfoot2" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="rfoot2" class="gameobject.component.impl.Body"
+		scope="prototype">
+		<property name="name" value="rhand1" />
+		<property name="layer" value="23" />
+		<property name="position" value="10,50" />
+		<property name="addComponent">
+			<list>
+				<ref bean="rfoot3" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="rfoot3" class="gameobject.component.impl.Body"
+		scope="prototype">
+		<property name="name" value="rhand1" />
+		<property name="layer" value="23" />
+		<property name="position" value="0,50" />
+	</bean>
+
+	<bean id="lfoot1" class="gameobject.component.impl.Body"
+		scope="prototype">
+		<property name="name" value="rhand1" />
+		<property name="layer" value="23" />
+		<property name="position" value="-25,50" />
+		<property name="addComponent">
+			<list>
+				<ref bean="lfoot2" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="lfoot2" class="gameobject.component.impl.Body"
+		scope="prototype">
+		<property name="name" value="rhand1" />
+		<property name="layer" value="23" />
+		<property name="position" value="-10,50" />
+		<property name="addComponent">
+			<list>
+				<ref bean="lfoot3" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="lfoot3" class="gameobject.component.impl.Body"
+		scope="prototype">
+		<property name="name" value="rhand1" />
+		<property name="layer" value="23" />
+		<property name="position" value="0,50" />
 	</bean>
 
 

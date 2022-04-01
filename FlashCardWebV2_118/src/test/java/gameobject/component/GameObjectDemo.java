@@ -1,6 +1,7 @@
 package gameobject.component;
 
-import gameobject.component.impl.Spine;
+import gameobject.component.impl.Body;
+import gameobject.component.impl.Person;
 import gameobject.gui.GameObjectFrame;
 import idv.tool.spring.MySpringUtil;
 
@@ -18,7 +19,7 @@ public class GameObjectDemo {
 
 		sc.addSceneComponent(MySpringUtil
 				.setApplicationContext("classpath:gameobject/config/game-config.xml")
-				.getBean("spine", Spine.class));
+				.getBean("person1", Person.class));
 
 		Scene.run(frame.getGameObjectPanel());
 

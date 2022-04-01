@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.List;
 
 import gameobject.component.Component;
+import idv.tool.Debug;
 
 public class Locations {
 
@@ -14,11 +15,14 @@ public class Locations {
 		absP.x = parentP.x + relP.x;
 		absP.y = parentP.y + relP.y;
 		comp.setAbsolutePosition(absP);
-
 		List<Component> subComps = comp.getComponents();
-		subComps.forEach(c -> {
-			Locations.locating(c);
-		});
+		if (subComps != null) {
+			subComps.forEach(c -> {
+				Locations.locating(c);
+			});
+
+		}
+
 	}
 
 }
