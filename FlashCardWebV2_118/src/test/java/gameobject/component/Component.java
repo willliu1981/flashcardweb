@@ -53,6 +53,14 @@ public class Component {
 		this.relevantPosition = relevantPosition;
 	}
 
+	public void setPosition(String position) {
+		String[] posArray = position.split(",");
+		Point p = new Point();
+		p.x = Integer.valueOf(posArray[0]);
+		p.y = Integer.valueOf(posArray[1]);
+		this.relevantPosition = p;
+	}
+
 	public Point getAbsolutePosition() {
 		return absolutePosition;
 	}
@@ -69,6 +77,10 @@ public class Component {
 		this.components.add(component);
 		component.setParentComponent(this);
 		Scene.addGameObject(component);
+	}
+
+	public void setAddComponent(Component component) {
+		this.addComponent(component);
 	}
 
 	@Override

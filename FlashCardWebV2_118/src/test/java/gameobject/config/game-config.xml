@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+
+	<bean id="spine" class="gameobject.component.impl.Spine">
+		<property name="name" value="spine" />
+		<property name="layer" value="21" />
+		<property name="position" value="100,300" />
+		<property name="addComponent" ref="head" />
+	</bean>
+
+	<bean id="head" class="gameobject.component.impl.Head">
+		<property name="name" value="head" />
+		<property name="layer" value="22" />
+		<property name="position" value="0,-200" />
+	</bean>
+
+
+</beans>

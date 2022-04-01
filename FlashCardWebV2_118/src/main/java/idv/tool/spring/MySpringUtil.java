@@ -2,27 +2,27 @@ package idv.tool.spring;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
-import idv.tool.Debug;
-
 @Component
-public class SpringUtil implements ApplicationContextAware {
+public class MySpringUtil {
 
-	private static ApplicationContext applicationContext ;
+	private static ApplicationContext applicationContext;
 
-	@Override
-	public void setApplicationContext(ApplicationContext applicationContext)
+	public static MySpringUtil setApplicationContext(String applicationContext)
 			throws BeansException {
-		if (SpringUtil.applicationContext == null) {
-			SpringUtil.applicationContext = applicationContext;
-		}
+		if (MySpringUtil.applicationContext == null) {
+			MySpringUtil.applicationContext = new ClassPathXmlApplicationContext(
+					applicationContext);
 
+		}
+		return new MySpringUtil();
 	}
 
 	public static ApplicationContext getApplicationContext() {
-		return SpringUtil.applicationContext;
+
+		return MySpringUtil.applicationContext;
 	}
 
 	public static Object getBean(String name) {
