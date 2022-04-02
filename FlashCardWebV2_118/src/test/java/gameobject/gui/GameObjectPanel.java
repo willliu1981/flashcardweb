@@ -22,9 +22,12 @@ public class GameObjectPanel extends JPanel {
 	public void paint(Graphics g) {
 		super.paint(g);
 		List<Component> gameObjects = Scene.getGameObjects();
-		gameObjects.forEach(go -> {
-			Graphs.paint(g, go);
-		});
+		if (!gameObjects.isEmpty()) {
+			gameObjects.forEach(go -> {
+				Graphs.paint(g, go);
+			});
+
+		}
 
 	}
 

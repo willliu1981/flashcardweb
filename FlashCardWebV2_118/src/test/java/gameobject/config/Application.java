@@ -11,5 +11,7 @@ public class Application {
 				.setApplicationContext("classpath:gameobject/config/game-config.xml")
 				.getBean("person1", Person.class);
 	}
+	
+	
 
 }

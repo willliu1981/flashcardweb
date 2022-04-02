@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Component {
-	private GameObject owner;
+	private String owner;
 	private String name;
 	private Point relevantPosition;
 	private Point absolutePosition;
@@ -24,11 +24,12 @@ public class Component {
 	
 	
 
-	public GameObject getOwner() {
+
+	public String getOwner() {
 		return owner;
 	}
 
-	public void setOwner(GameObject owner) {
+	public void setOwner(String owner) {
 		this.owner = owner;
 	}
 

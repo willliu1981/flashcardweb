@@ -4,6 +4,7 @@ import gameobject.component.impl.Person;
 import gameobject.config.Application;
 import gameobject.gui.GameObjectFrame;
 import gameobject.gui.PersonCreatorFrame;
+import idv.tool.Debug;
 import idv.tool.spring.MySpringUtil;
 
 public class GameObjectDemo {
@@ -19,13 +20,12 @@ public class GameObjectDemo {
 		//*/
 		GameObject person = Application.getPerson();
 		sc.addSceneComponent(person);
-		
-		PersonCreatorFrame pcf=new PersonCreatorFrame();
-		pcf.setTarget(person);
-		pcf.setVisible(true);
-		
+		sc.locating();
 
-		//Scene.run(frame.getGameObjectPanel());
+		PersonCreatorFrame pcf = new PersonCreatorFrame(person);
+		pcf.setVisible(true);
+
+		// Scene.run(frame.getGameObjectPanel());
 	}
 
 }

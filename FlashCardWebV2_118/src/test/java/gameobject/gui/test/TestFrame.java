@@ -43,6 +43,8 @@ public class TestFrame extends JFrame {
 		JList<Book> list = new JList<>();
 		DefaultListModel<Book> model =new DefaultListModel<>();
 		
+		
+		
 		Book b1=new Book("Java",1200);
 		Book b2=new Book("C#",1100);
 		
