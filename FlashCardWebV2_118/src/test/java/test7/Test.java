@@ -4,12 +4,14 @@ public class Test {
 
 	public static void main(String[] args) {
 
-		Car car = new Car();
+		//*
+		System.out.println("line1...");
+		//*/
 
-		CarI carProxy = (CarI) new ProxyUtil(car).getProxy();
-
-		carProxy.setName("X1");
-
+		/*
+		System.out.println("line2...");
+		//*/
+		
 	}
 
 }

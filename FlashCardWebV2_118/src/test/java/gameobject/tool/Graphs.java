@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 
 import gameobject.component.Component;
+import idv.tool.Debug;
 
 public class Graphs {
 
@@ -12,5 +13,13 @@ public class Graphs {
 		Point p = comp.getAbsolutePosition();
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.drawOval(p.x, p.y, 50, 50);
+	}
+
+	public static void paintForCreatePerson(Graphics g, Component comp) {
+		Point p = comp.getAbsolutePosition();
+		Debug.test("graphs",p);
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.drawOval(p.x, p.y, 50, 50);
+		
 	}
 }

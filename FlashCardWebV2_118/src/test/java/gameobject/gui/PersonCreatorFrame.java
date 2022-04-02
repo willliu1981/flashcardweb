@@ -31,24 +31,6 @@ public class PersonCreatorFrame extends JFrame {
 	}
 
 	/**
-	 * Launch the application.
-	 */
-	/*
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PersonCreatorFrame frame = new PersonCreatorFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	//*/
-
-	/**
 	 * Create the frame.
 	 */
 	public void init() {
@@ -59,7 +41,7 @@ public class PersonCreatorFrame extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 
-		GameObjectPanel gameObjectPanel = new GameObjectPanel();
+		GameObjectPanel gameObjectPanel = new CreatePersonGameObjectPanel();
 		contentPane.add(gameObjectPanel, BorderLayout.CENTER);
 
 		JPanel panel_east_bar = new JPanel();
@@ -68,7 +50,7 @@ public class PersonCreatorFrame extends JFrame {
 
 		//*
 		final DefaultListModel<Component> model = new DefaultListModel<>();
-		List<Component> components = GameObjectScanner.findComponent(target);
+		List<Component> components = GameObjectScanner.findComponents(target);
 		components.forEach(comp -> {
 			model.addElement(comp);
 		});
@@ -77,23 +59,6 @@ public class PersonCreatorFrame extends JFrame {
 		list.setFont(new Font("新細明體", Font.PLAIN, 28));
 		list.setModel(model);
 		list.setCellRenderer(new MyRender());
-		//*/
-
-		/*
-		final DefaultListModel<Book> testModel = new DefaultListModel<>();
-		Book b1 = new Book("Java", 1200);
-		Book b2 = new Book("C#", 1100);
-		Book b3 = new Book("PHP", 1050);
-		testModel.addElement(b1);
-		testModel.addElement(b2);
-		testModel.addElement(b3);
-		
-		JList<Book> list = new JList<>();
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		list.setFont(new Font("新細明體", Font.PLAIN, 28));
-		list.setModel(testModel);
-		list.setCellRenderer(new MyRender2());
-		//*/
 		//*/
 
 		JScrollPane scrollPane = new JScrollPane();
