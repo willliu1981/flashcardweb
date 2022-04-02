@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Component {
+	private GameObject owner;
 	private String name;
 	private Point relevantPosition;
 	private Point absolutePosition;
@@ -19,6 +20,16 @@ public class Component {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	
+
+	public GameObject getOwner() {
+		return owner;
+	}
+
+	public void setOwner(GameObject owner) {
+		this.owner = owner;
 	}
 
 	public String getParentLayer() {

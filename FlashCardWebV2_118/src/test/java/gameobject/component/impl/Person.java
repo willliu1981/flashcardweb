@@ -4,6 +4,7 @@ import gameobject.component.GameObject;
 
 public class Person extends GameObject {
 	
-	
-
+	private Person() {
+		this.setOwner(this);
+	}
 }
