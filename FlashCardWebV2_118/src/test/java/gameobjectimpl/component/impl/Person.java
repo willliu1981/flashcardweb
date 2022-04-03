@@ -1,17 +1,17 @@
 package gameobjectimpl.component.impl;
 
-import gameobjectimpl.Animator;
+import gameobjectimpl.animator.Animator;
 import gameobjectimpl.component.GameObject;
 
 public class Person extends GameObject {
-	private Animator Animator;
+	private Animator animator;
 
 	public Animator getAnimator() {
-		return Animator;
+		return animator;
 	}
 
 	public void setAnimator(Animator animator) {
-		Animator = animator;
+		animator = animator;
 	}
 
 }

@@ -5,16 +5,20 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
-@Component
 public class MySpringUtil {
 
 	private static ApplicationContext applicationContext;
 
 	public static MySpringUtil setApplicationContext(String applicationContext)
 			throws BeansException {
+		return setApplicationContext(new String[] { applicationContext });
+	}
+
+	public static MySpringUtil setApplicationContext(String[] applicationContexts)
+			throws BeansException {
 		if (MySpringUtil.applicationContext == null) {
 			MySpringUtil.applicationContext = new ClassPathXmlApplicationContext(
-					applicationContext);
+					applicationContexts);
 
 		}
 		return new MySpringUtil();

@@ -13,13 +13,16 @@
         http://www.springframework.org/schema/mvc
         https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
+	<context:property-placeholder
+		location="gameobjectimpl/config/component.properties" />
 
-	<bean id="person1" class="gameobject.component.impl.Person"
+	<bean id="person1" class="gameobjectimpl.component.impl.Person"
 		scope="prototype">
 		<property name="name" value="David" />
 		<property name="layer" value="2" />
 		<property name="position" value="100,300" />
 		<property name="owner" value="person1" />
+		<property name="animator" ref="person1Animator" />
 		<property name="addComponent">
 			<list>
 				<ref bean="spine" />
@@ -28,9 +31,9 @@
 	</bean>
 
 
-	<bean id="spine" class="gameobject.component.impl.Body"
+	<bean id="spine" class="gameobjectimpl.component.impl.Body"
 		scope="prototype">
-		<property name="name" value="spine" />
+		<property name="name" value="${component.spine}" />
 		<property name="layer" value="21" />
 		<property name="position" value="0,0" />
 		<property name="owner" value="person1" />
@@ -44,9 +47,9 @@
 	</bean>
 
 
-	<bean id="body" class="gameobject.component.impl.Body"
+	<bean id="body" class="gameobjectimpl.component.impl.Body"
 		scope="prototype">
-		<property name="name" value="body" />
+		<property name="name" value="${component.body}" />
 		<property name="layer" value="22" />
 		<property name="position" value="0,-50" />
 		<property name="owner" value="person1" />
@@ -57,9 +60,9 @@
 		</property>
 	</bean>
 
-	<bean id="body2" class="gameobject.component.impl.Body"
+	<bean id="body2" class="gameobjectimpl.component.impl.Body"
 		scope="prototype">
-		<property name="name" value="body2" />
+		<property name="name" value="${component.body2}" />
 		<property name="layer" value="22" />
 		<property name="position" value="0,-50" />
 		<property name="owner" value="person1" />
@@ -72,17 +75,17 @@
 		</property>
 	</bean>
 
-	<bean id="head" class="gameobject.component.impl.Body"
+	<bean id="head" class="gameobjectimpl.component.impl.Body"
 		scope="prototype">
-		<property name="name" value="head" />
+		<property name="name" value="${component.head}" />
 		<property name="layer" value="23" />
 		<property name="position" value="0,-75" />
 		<property name="owner" value="person1" />
 	</bean>
 
-	<bean id="rhand1" class="gameobject.component.impl.Body"
+	<bean id="rhand1" class="gameobjectimpl.component.impl.Body"
 		scope="prototype">
-		<property name="name" value="rhand1" />
+		<property name="name" value="${component.rhand1}" />
 		<property name="layer" value="23" />
 		<property name="position" value="50,0" />
 		<property name="owner" value="person1" />
@@ -93,9 +96,9 @@
 		</property>
 	</bean>
 
-	<bean id="rhand2" class="gameobject.component.impl.Body"
+	<bean id="rhand2" class="gameobjectimpl.component.impl.Body"
 		scope="prototype">
-		<property name="name" value="rhand2" />
+		<property name="name" value="${component.rhand2}" />
 		<property name="layer" value="23" />
 		<property name="position" value="25,50" />
 		<property name="owner" value="person1" />
@@ -106,17 +109,17 @@
 		</property>
 	</bean>
 
-	<bean id="rhand3" class="gameobject.component.impl.Body"
+	<bean id="rhand3" class="gameobjectimpl.component.impl.Body"
 		scope="prototype">
-		<property name="name" value="rhand3" />
+		<property name="name" value="${component.rhand3}" />
 		<property name="layer" value="23" />
 		<property name="position" value="0,50" />
 		<property name="owner" value="person1" />
 	</bean>
 
-	<bean id="lhand1" class="gameobject.component.impl.Body"
+	<bean id="lhand1" class="gameobjectimpl.component.impl.Body"
 		scope="prototype">
-		<property name="name" value="lhand1" />
+		<property name="name" value="${component.lhand1}" />
 		<property name="layer" value="23" />
 		<property name="position" value="-50,0" />
 		<property name="owner" value="person1" />
@@ -127,9 +130,9 @@
 		</property>
 	</bean>
 
-	<bean id="lhand2" class="gameobject.component.impl.Body"
+	<bean id="lhand2" class="gameobjectimpl.component.impl.Body"
 		scope="prototype">
-		<property name="name" value="lhand2" />
+		<property name="name" value="${component.lhand2}" />
 		<property name="layer" value="23" />
 		<property name="position" value="-25,50" />
 		<property name="owner" value="person1" />
@@ -140,17 +143,17 @@
 		</property>
 	</bean>
 
-	<bean id="lhand3" class="gameobject.component.impl.Body"
+	<bean id="lhand3" class="gameobjectimpl.component.impl.Body"
 		scope="prototype">
-		<property name="name" value="lhand3" />
+		<property name="name" value="${component.lhand3}" />
 		<property name="layer" value="23" />
 		<property name="position" value="0,50" />
 		<property name="owner" value="person1" />
 	</bean>
 
-	<bean id="rfoot1" class="gameobject.component.impl.Body"
+	<bean id="rfoot1" class="gameobjectimpl.component.impl.Body"
 		scope="prototype">
-		<property name="name" value="rfoot1" />
+		<property name="name" value="${component.rfoot1}" />
 		<property name="layer" value="23" />
 		<property name="position" value="25,50" />
 		<property name="owner" value="person1" />
@@ -161,9 +164,9 @@
 		</property>
 	</bean>
 
-	<bean id="rfoot2" class="gameobject.component.impl.Body"
+	<bean id="rfoot2" class="gameobjectimpl.component.impl.Body"
 		scope="prototype">
-		<property name="name" value="rfoot2" />
+		<property name="name" value="${component.rfoot2}" />
 		<property name="layer" value="23" />
 		<property name="position" value="10,75" />
 		<property name="owner" value="person1" />
@@ -174,17 +177,17 @@
 		</property>
 	</bean>
 
-	<bean id="rfoot3" class="gameobject.component.impl.Body"
+	<bean id="rfoot3" class="gameobjectimpl.component.impl.Body"
 		scope="prototype">
-		<property name="name" value="rfoot3" />
+		<property name="name" value="${component.rfoot3}" />
 		<property name="layer" value="23" />
 		<property name="position" value="0,75" />
 		<property name="owner" value="person1" />
 	</bean>
 
-	<bean id="lfoot1" class="gameobject.component.impl.Body"
+	<bean id="lfoot1" class="gameobjectimpl.component.impl.Body"
 		scope="prototype">
-		<property name="name" value="lfoot1" />
+		<property name="name" value="${component.lfoot1}" />
 		<property name="layer" value="23" />
 		<property name="position" value="-25,50" />
 		<property name="owner" value="person1" />
@@ -195,9 +198,9 @@
 		</property>
 	</bean>
 
-	<bean id="lfoot2" class="gameobject.component.impl.Body"
+	<bean id="lfoot2" class="gameobjectimpl.component.impl.Body"
 		scope="prototype">
-		<property name="name" value="lfoot2" />
+		<property name="name" value="${component.lfoot2}" />
 		<property name="layer" value="23" />
 		<property name="position" value="-10,75" />
 		<property name="owner" value="person1" />
@@ -208,9 +211,9 @@
 		</property>
 	</bean>
 
-	<bean id="lfoot3" class="gameobject.component.impl.Body"
+	<bean id="lfoot3" class="gameobjectimpl.component.impl.Body"
 		scope="prototype">
-		<property name="name" value="lfoot3" />
+		<property name="name" value="${component.lfoot3}" />
 		<property name="layer" value="23" />
 		<property name="position" value="0,75" />
 		<property name="owner" value="person1" />

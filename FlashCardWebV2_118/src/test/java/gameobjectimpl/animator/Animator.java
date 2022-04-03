@@ -1,4 +1,4 @@
-package gameobjectimpl;
+package gameobjectimpl.animator;
 
 import java.awt.Point;
 import java.util.ArrayList;
@@ -13,6 +13,10 @@ public class Animator {
 
 	public void setKeyFrames(List<KeyFrame> keyFrames) {
 		this.keyFrames = keyFrames;
+	}
+
+	public void addKeyFrame(KeyFrame keyFrame) {
+		this.keyFrames.add(keyFrame);
 	}
 
 	public static class KeyFrame {

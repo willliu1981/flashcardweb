@@ -3,8 +3,8 @@ package gameobjectimpl.component;
 import java.awt.Point;
 import java.util.List;
 
-import gameobjectimpl.Animator;
 import gameobjectimpl.adapter.AdapterI;
+import gameobjectimpl.animator.Animator;
 
 public class ComponentAdapter extends Component implements AdapterI<Component> {
 
