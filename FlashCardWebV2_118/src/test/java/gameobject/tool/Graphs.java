@@ -17,7 +17,6 @@ public class Graphs {
 
 	public static void paintForCreatePerson(Graphics g, Component comp) {
 		Point p = comp.getAbsolutePosition();
-		Debug.test("graphs",p);
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.drawOval(p.x, p.y, 50, 50);
 		

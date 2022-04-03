@@ -13,7 +13,7 @@ public class MyHandler extends InterceptHandler {
 
 	@Override
 	protected boolean preHandle(ParamWrap paramWrap) {
-		Debug.test("xxx");
+		
 		return true;
 	}
 

@@ -26,15 +26,8 @@ public class CreatePersonGameObjectPanel extends GameObjectPanel {
 		List<Component> gameObjects = Scene.getGameObjects();
 		if (!gameObjects.isEmpty()) {
 			gameObjects.forEach(go -> {
-				ProxyFactory<Component> factory = new ProxyFactory<>();
-				try {
-					Component proxy = factory.setTarget(go).setShuttle(new Shuttle())
-							.addInterceptHandler(new MyHandler()).getProxyInstance();
-					Graphs.paintForCreatePerson(g, proxy);
+				Graphs.paintForCreatePerson(g, go);
 
-				} catch (FindErrorException e) {
-					e.printStackTrace();
-				}
 			});
 
 		}
