@@ -6,12 +6,12 @@ import idv.tool.spring.MySpringUtil;
 
 public class Application {
 
-	public static GameObject getPerson() {
+	public static<T> T getBean(String name,Class<T> clazz) {
 		String[] paths = { "classpath:gameobjectimpl/config/person1-component-mapping.xml",
 				"gameobjectimpl/config/animator.xml" };
 
-		return MySpringUtil.setApplicationContext(paths).getBean("person1",
-				Person.class);
+		return MySpringUtil.setApplicationContext(paths).getBean(name,
+				clazz);
 	}
 
 }

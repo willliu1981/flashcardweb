@@ -40,6 +40,7 @@ public class Scene {
 			GameControler.move();
 			locating();
 			comp.repaint();
+		
 		}
 
 	}

@@ -11,7 +11,13 @@ public class Person extends GameObject {
 	}
 
 	public void setAnimator(Animator animator) {
-		animator = animator;
+		this.animator = animator;
+	}
+
+	@Override
+	public String toString() {
+		return "Person [animator=" + animator + ", toString()=" + super.toString()
+				+ "]";
 	}
 
 }

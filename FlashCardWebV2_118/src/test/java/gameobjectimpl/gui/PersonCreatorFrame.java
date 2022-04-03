@@ -32,13 +32,13 @@ import java.awt.Color;
 
 public class PersonCreatorFrame extends JFrame {
 	private GameObject target;
-	private List<ComponentAdapter> components;
+	private List<ComponentAdapter> adapters;
 
 	private JPanel contentPane;
 
 	public PersonCreatorFrame(GameObject target) {
 		this.setTarget(target);
-		this.components = AdapterListConverter.convert(
+		this.adapters = AdapterListConverter.convert(
 				GameObjectScanner.findComponents(target), ComponentAdapter.class);
 
 		this.init();
@@ -56,7 +56,9 @@ public class PersonCreatorFrame extends JFrame {
 		setContentPane(contentPane);
 
 		CreatePersonGameObjectPanel panelinfo_pserson = new CreatePersonGameObjectPanel();
-		panelinfo_pserson.setComponents(components);
+		panelinfo_pserson.setComponents(adapters);
+		panelinfo_pserson.setPerson(target);
+		panelinfo_pserson.setFrameIndex(0);
 		contentPane.add(panelinfo_pserson, BorderLayout.CENTER);
 
 		JPanel panel_east_bar = new JPanel();
@@ -66,7 +68,7 @@ public class PersonCreatorFrame extends JFrame {
 		//*
 		final DefaultListModel<ComponentAdapter> model = new DefaultListModel<>();
 
-		components.forEach(comp -> {
+		adapters.forEach(comp -> {
 			model.addElement(comp);
 		});
 
@@ -85,7 +87,7 @@ public class PersonCreatorFrame extends JFrame {
 				ComponentAdapter selectedValue = (ComponentAdapter) source
 						.getSelectedValue();
 
-				Components.clearSelected(components);
+				Components.clearSelected(adapters);
 				selectedValue.setSelected();
 				repaint();
 			}

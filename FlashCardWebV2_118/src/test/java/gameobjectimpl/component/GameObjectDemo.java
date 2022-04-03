@@ -20,9 +20,11 @@ public class GameObjectDemo {
 		GameObjectFrame.setScene(sc);
 		frame.setVisible(true);
 		//*/
-		GameObject person = Application.getPerson();
+
+		Person person = Application.getBean("david", Person.class);
 		sc.addSceneComponent(person);
 		sc.locating();
+		person.setAnimator(Animators.load("David"));
 
 		PersonCreatorFrame pcf = new PersonCreatorFrame(person);
 		pcf.setVisible(true);

@@ -9,7 +9,8 @@ import gameobjectimpl.tool.Graphs;
 
 public class CreatePersonGameObjectPanel extends GameObjectPanel {
 
-	private List<ComponentAdapter> components;
+	private List<ComponentAdapter> adapters;
+	private Integer frameIndex=0;
 	private GameObject person;
 
 	/**
@@ -22,22 +23,35 @@ public class CreatePersonGameObjectPanel extends GameObjectPanel {
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
-		if (!components.isEmpty()) {
-			components.forEach(go -> {
-				Graphs.paintForCreatePerson(g, go);
-
-			});
+		if (!adapters.isEmpty()) {
+			Graphs.paintForCreatePerson(g, adapters, person,frameIndex);
 
 		}
 
 	}
 
+	public GameObject getPerson() {
+		return person;
+	}
+
+	public void setPerson(GameObject person) {
+		this.person = person;
+	}
+
 	public List<ComponentAdapter> getGameObjectComponents() {
-		return components;
+		return adapters;
 	}
 
 	public void setComponents(List<ComponentAdapter> components) {
-		this.components = components;
+		this.adapters = components;
+	}
+
+	public Integer getFrameIndex() {
+		return frameIndex;
+	}
+
+	public void setFrameIndex(Integer frameIndex) {
+		this.frameIndex = frameIndex;
 	}
 
 }

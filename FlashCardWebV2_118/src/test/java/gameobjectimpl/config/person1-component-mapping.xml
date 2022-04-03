@@ -16,12 +16,18 @@
 	<context:property-placeholder
 		location="gameobjectimpl/config/component.properties" />
 
-	<bean id="person1" class="gameobjectimpl.component.impl.Person"
+	<bean id="owner-david" class="java.lang.String">
+		<constructor-arg>
+			<value>David</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="david" class="gameobjectimpl.component.impl.Person"
 		scope="prototype">
-		<property name="name" value="David" />
+		<property name="name" ref="owner-david" />
 		<property name="layer" value="2" />
 		<property name="position" value="100,300" />
-		<property name="owner" value="person1" />
+		<property name="owner" ref="owner-david" />
 		<property name="animator" ref="person1Animator" />
 		<property name="addComponent">
 			<list>
@@ -36,7 +42,7 @@
 		<property name="name" value="${component.spine}" />
 		<property name="layer" value="21" />
 		<property name="position" value="0,0" />
-		<property name="owner" value="person1" />
+		<property name="owner" ref="owner-david" />
 		<property name="addComponent">
 			<list>
 				<ref bean="body" />
@@ -52,7 +58,7 @@
 		<property name="name" value="${component.body}" />
 		<property name="layer" value="22" />
 		<property name="position" value="0,-50" />
-		<property name="owner" value="person1" />
+		<property name="owner" ref="owner-david" />
 		<property name="addComponent">
 			<list>
 				<ref bean="body2" />
@@ -65,7 +71,7 @@
 		<property name="name" value="${component.body2}" />
 		<property name="layer" value="22" />
 		<property name="position" value="0,-50" />
-		<property name="owner" value="person1" />
+		<property name="owner" ref="owner-david" />
 		<property name="addComponent">
 			<list>
 				<ref bean="head" />
@@ -80,7 +86,7 @@
 		<property name="name" value="${component.head}" />
 		<property name="layer" value="23" />
 		<property name="position" value="0,-75" />
-		<property name="owner" value="person1" />
+		<property name="owner" ref="owner-david" />
 	</bean>
 
 	<bean id="rhand1" class="gameobjectimpl.component.impl.Body"
@@ -88,7 +94,7 @@
 		<property name="name" value="${component.rhand1}" />
 		<property name="layer" value="23" />
 		<property name="position" value="50,0" />
-		<property name="owner" value="person1" />
+		<property name="owner" ref="owner-david" />
 		<property name="addComponent">
 			<list>
 				<ref bean="rhand2" />
@@ -101,7 +107,7 @@
 		<property name="name" value="${component.rhand2}" />
 		<property name="layer" value="23" />
 		<property name="position" value="25,50" />
-		<property name="owner" value="person1" />
+		<property name="owner" ref="owner-david" />
 		<property name="addComponent">
 			<list>
 				<ref bean="rhand3" />
@@ -114,7 +120,7 @@
 		<property name="name" value="${component.rhand3}" />
 		<property name="layer" value="23" />
 		<property name="position" value="0,50" />
-		<property name="owner" value="person1" />
+		<property name="owner" ref="owner-david" />
 	</bean>
 
 	<bean id="lhand1" class="gameobjectimpl.component.impl.Body"
@@ -122,7 +128,7 @@
 		<property name="name" value="${component.lhand1}" />
 		<property name="layer" value="23" />
 		<property name="position" value="-50,0" />
-		<property name="owner" value="person1" />
+		<property name="owner" ref="owner-david" />
 		<property name="addComponent">
 			<list>
 				<ref bean="lhand2" />
@@ -135,7 +141,7 @@
 		<property name="name" value="${component.lhand2}" />
 		<property name="layer" value="23" />
 		<property name="position" value="-25,50" />
-		<property name="owner" value="person1" />
+		<property name="owner" ref="owner-david" />
 		<property name="addComponent">
 			<list>
 				<ref bean="lhand3" />
@@ -148,7 +154,7 @@
 		<property name="name" value="${component.lhand3}" />
 		<property name="layer" value="23" />
 		<property name="position" value="0,50" />
-		<property name="owner" value="person1" />
+		<property name="owner" ref="owner-david" />
 	</bean>
 
 	<bean id="rfoot1" class="gameobjectimpl.component.impl.Body"
@@ -156,7 +162,7 @@
 		<property name="name" value="${component.rfoot1}" />
 		<property name="layer" value="23" />
 		<property name="position" value="25,50" />
-		<property name="owner" value="person1" />
+		<property name="owner" ref="owner-david" />
 		<property name="addComponent">
 			<list>
 				<ref bean="rfoot2" />
@@ -169,7 +175,7 @@
 		<property name="name" value="${component.rfoot2}" />
 		<property name="layer" value="23" />
 		<property name="position" value="10,75" />
-		<property name="owner" value="person1" />
+		<property name="owner" ref="owner-david" />
 		<property name="addComponent">
 			<list>
 				<ref bean="rfoot3" />
@@ -182,7 +188,7 @@
 		<property name="name" value="${component.rfoot3}" />
 		<property name="layer" value="23" />
 		<property name="position" value="0,75" />
-		<property name="owner" value="person1" />
+		<property name="owner" ref="owner-david" />
 	</bean>
 
 	<bean id="lfoot1" class="gameobjectimpl.component.impl.Body"
@@ -190,7 +196,7 @@
 		<property name="name" value="${component.lfoot1}" />
 		<property name="layer" value="23" />
 		<property name="position" value="-25,50" />
-		<property name="owner" value="person1" />
+		<property name="owner" ref="owner-david" />
 		<property name="addComponent">
 			<list>
 				<ref bean="lfoot2" />
@@ -203,7 +209,7 @@
 		<property name="name" value="${component.lfoot2}" />
 		<property name="layer" value="23" />
 		<property name="position" value="-10,75" />
-		<property name="owner" value="person1" />
+		<property name="owner" ref="owner-david" />
 		<property name="addComponent">
 			<list>
 				<ref bean="lfoot3" />
@@ -216,7 +222,7 @@
 		<property name="name" value="${component.lfoot3}" />
 		<property name="layer" value="23" />
 		<property name="position" value="0,75" />
-		<property name="owner" value="person1" />
+		<property name="owner" ref="owner-david" />
 	</bean>
 
 
