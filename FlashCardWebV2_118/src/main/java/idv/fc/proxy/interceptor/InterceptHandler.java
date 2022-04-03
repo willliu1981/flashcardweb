@@ -17,15 +17,33 @@ public abstract class InterceptHandler {
 	protected String name = "base";
 	private MethodFilter methodFilter = new MethodFilter();
 
+	public enum FilterParamter {
+		ANY
+	}
+
 	public static class MethodFilter {
 		private List<String> methodNames = new ArrayList<>();
+		private boolean isFilterParamterAny = false;
 
 		public MethodFilter filter(String filed) {
+			if (isFilterParamterAny) {
+				return this;
+			}
 			methodNames.add(filed);
 			return this;
 		}
 
+		public MethodFilter filter(FilterParamter filed) {
+			if (filed.equals(FilterParamter.ANY)) {
+				isFilterParamterAny = true;
+			}
+			return this;
+		}
+
 		protected boolean isContain(String name) {
+			if (isFilterParamterAny) {
+				return true;
+			}
 			if (methodNames.contains(name)) {
 				return true;
 			}
