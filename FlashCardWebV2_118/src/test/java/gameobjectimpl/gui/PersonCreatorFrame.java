@@ -2,6 +2,10 @@ package gameobjectimpl.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.BoxLayout;
@@ -13,17 +17,18 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
-import gameobjectimpl.component.Component;
 import gameobjectimpl.component.ComponentAdapter;
 import gameobjectimpl.component.GameObject;
-import gameobjectimpl.gui.test.Book;
+import gameobjectimpl.component.Scene;
+import gameobjectimpl.component.impl.Person;
 import gameobjectimpl.tool.AdapterListConverter;
+import gameobjectimpl.tool.Animators;
 import gameobjectimpl.tool.Components;
 import gameobjectimpl.tool.GameObjectScanner;
-import idv.tool.Debug;
-import javax.swing.ListSelectionModel;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import javax.swing.JLabel;
+import java.awt.Dimension;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
 
 public class PersonCreatorFrame extends JFrame {
 	private GameObject target;
@@ -50,9 +55,9 @@ public class PersonCreatorFrame extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 
-		CreatePersonGameObjectPanel gameObjectPanel = new CreatePersonGameObjectPanel();
-		gameObjectPanel.setComponents(components);
-		contentPane.add(gameObjectPanel, BorderLayout.CENTER);
+		CreatePersonGameObjectPanel panelinfo_pserson = new CreatePersonGameObjectPanel();
+		panelinfo_pserson.setComponents(components);
+		contentPane.add(panelinfo_pserson, BorderLayout.CENTER);
 
 		JPanel panel_east_bar = new JPanel();
 		contentPane.add(panel_east_bar, BorderLayout.EAST);
@@ -97,6 +102,40 @@ public class PersonCreatorFrame extends JFrame {
 		JButton btnNewButton = new JButton("set");
 		btnNewButton.setFont(new Font("新細明體", Font.PLAIN, 28));
 		panel_east_bar.add(btnNewButton);
+
+		JPanel panel_north_bar = new JPanel();
+		contentPane.add(panel_north_bar, BorderLayout.NORTH);
+
+		JButton btnNewButton_1 = new JButton("Output");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Person person = (Person) Scene.findSceneComponent("David");
+
+				Animators.write(person.getAnimator(), "David");
+			}
+		});
+		btnNewButton_1.setFont(new Font("新細明體", Font.PLAIN, 28));
+		panel_north_bar.add(btnNewButton_1);
+		
+		JPanel panel_south_bar = new JPanel();
+		contentPane.add(panel_south_bar, BorderLayout.SOUTH);
+		
+		JButton btnNewButton_2 = new JButton("<");
+		btnNewButton_2.setFont(new Font("新細明體", Font.PLAIN, 28));
+		panel_south_bar.add(btnNewButton_2);
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new LineBorder(Color.LIGHT_GRAY));
+		panel.setPreferredSize(new Dimension(120, 40));
+		panel_south_bar.add(panel);
+		
+		JLabel lblNewLabel = new JLabel("0");
+		panel.add(lblNewLabel);
+		lblNewLabel.setFont(new Font("新細明體", Font.PLAIN, 28));
+		
+		JButton btnNewButton_2_1 = new JButton(">");
+		btnNewButton_2_1.setFont(new Font("新細明體", Font.PLAIN, 28));
+		panel_south_bar.add(btnNewButton_2_1);
 	}
 
 	public GameObject getTarget() {

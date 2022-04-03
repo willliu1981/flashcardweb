@@ -3,14 +3,14 @@ package gameobjectimpl.gui;
 import java.awt.Graphics;
 import java.util.List;
 
-import gameobjectimpl.component.Component;
 import gameobjectimpl.component.ComponentAdapter;
-import gameobjectimpl.component.Scene;
+import gameobjectimpl.component.GameObject;
 import gameobjectimpl.tool.Graphs;
 
 public class CreatePersonGameObjectPanel extends GameObjectPanel {
 
 	private List<ComponentAdapter> components;
+	private GameObject person;
 
 	/**
 	 * Create the panel.

@@ -3,6 +3,7 @@ package gameobjectimpl.component;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -13,6 +14,19 @@ import gameobjectimpl.tool.Locations;
 import idv.tool.Debug;
 
 public class Scene {
+
+	private static GameTask task;
+
+	private static Timer timer = new Timer();
+
+	private static GameObject parent;
+	{
+		parent = new GameObject();
+		parent.setAbsolutePosition(new Point(0, 0));
+	}
+
+	private static List<Component> sceneComponents = new ArrayList<>();
+	private static List<Component> gameObjects = new ArrayList<>();
 
 	private static class GameTask extends TimerTask {
 		private JComponent comp;
@@ -30,35 +44,28 @@ public class Scene {
 
 	}
 
-	private static GameTask task;
-
-	private static Timer timer = new Timer();
-
-	private static GameObject parent;
-	{
-		parent = new GameObject();
-		parent.setAbsolutePosition(new Point(0, 0));
+	public static List<Component> getSceneComponents() {
+		return sceneComponents;
 	}
 
-	private static List<Component> sceneComponent = new ArrayList<>();
-	private static List<Component> gameObjects = new ArrayList<>();
-
-	public static List<Component> getSceneComponent() {
-		return sceneComponent;
+	public static Component findSceneComponent(String name) {
+		Optional<Component> findFirst = sceneComponents.stream()
+				.filter(comp -> comp.getName().equals(name)).findFirst();
+		return findFirst.get();
 	}
 
-	public void setSceneComponent(List<Component> components) {
-		Scene.sceneComponent = components;
+	public void setSceneComponents(List<Component> components) {
+		Scene.sceneComponents = components;
 	}
 
 	public void addSceneComponent(Component component) {
-		Scene.sceneComponent.add(component);
+		Scene.sceneComponents.add(component);
 		component.setParentComponent(parent);
 		addGameObject(component);
 	}
 
 	public static void locating() {
-		sceneComponent.forEach(comp -> {
+		sceneComponents.forEach(comp -> {
 			Locations.locating(comp);
 		});
 
