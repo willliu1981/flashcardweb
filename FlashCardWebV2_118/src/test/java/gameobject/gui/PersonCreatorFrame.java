@@ -14,8 +14,10 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import gameobject.component.Component;
+import gameobject.component.ComponentAdapter;
 import gameobject.component.GameObject;
 import gameobject.gui.test.Book;
+import gameobject.tool.AdapterListConverter;
 import gameobject.tool.GameObjectScanner;
 import idv.tool.Debug;
 import javax.swing.ListSelectionModel;
@@ -50,7 +52,8 @@ public class PersonCreatorFrame extends JFrame {
 
 		//*
 		final DefaultListModel<Component> model = new DefaultListModel<>();
-		List<Component> components = GameObjectScanner.findComponents(target);
+		List<ComponentAdapter> components = AdapterListConverter.convert(
+				GameObjectScanner.findComponents(target), ComponentAdapter.class);
 		components.forEach(comp -> {
 			model.addElement(comp);
 		});
