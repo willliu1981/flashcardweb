@@ -18,17 +18,24 @@ import gameobject.component.ComponentAdapter;
 import gameobject.component.GameObject;
 import gameobject.gui.test.Book;
 import gameobject.tool.AdapterListConverter;
+import gameobject.tool.Components;
 import gameobject.tool.GameObjectScanner;
 import idv.tool.Debug;
 import javax.swing.ListSelectionModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PersonCreatorFrame extends JFrame {
 	private GameObject target;
+	private List<ComponentAdapter> components;
 
 	private JPanel contentPane;
 
 	public PersonCreatorFrame(GameObject target) {
 		this.setTarget(target);
+		this.components = AdapterListConverter.convert(
+				GameObjectScanner.findComponents(target), ComponentAdapter.class);
+
 		this.init();
 	}
 
@@ -43,7 +50,8 @@ public class PersonCreatorFrame extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 
-		GameObjectPanel gameObjectPanel = new CreatePersonGameObjectPanel();
+		CreatePersonGameObjectPanel gameObjectPanel = new CreatePersonGameObjectPanel();
+		gameObjectPanel.setComponents(components);
 		contentPane.add(gameObjectPanel, BorderLayout.CENTER);
 
 		JPanel panel_east_bar = new JPanel();
@@ -51,14 +59,27 @@ public class PersonCreatorFrame extends JFrame {
 		panel_east_bar.setLayout(new BoxLayout(panel_east_bar, BoxLayout.Y_AXIS));
 
 		//*
-		final DefaultListModel<Component> model = new DefaultListModel<>();
-		List<ComponentAdapter> components = AdapterListConverter.convert(
-				GameObjectScanner.findComponents(target), ComponentAdapter.class);
+		final DefaultListModel<ComponentAdapter> model = new DefaultListModel<>();
+
 		components.forEach(comp -> {
 			model.addElement(comp);
 		});
 
-		JList<Component> list = new JList<>();
+		JList<ComponentAdapter> list = new JList<>();
+		list.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				@SuppressWarnings("unchecked")
+				JList<ComponentAdapter> source = (JList<ComponentAdapter>) e
+						.getSource();
+				ComponentAdapter selectedValue = (ComponentAdapter) source
+						.getSelectedValue();
+
+				Components.clearSelected(components);				
+				selectedValue.setSelected();
+				repaint();
+			}
+		});
 		list.setFont(new Font("新細明體", Font.PLAIN, 28));
 		list.setModel(model);
 		list.setCellRenderer(new MyRender());

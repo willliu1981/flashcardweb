@@ -14,6 +14,10 @@ public class ComponentAdapter extends Component implements AdapterI<Component> {
 	public void setSelected() {
 		this.selected = true;
 	}
+	
+	public void setSelected(boolean res) {
+		this.selected = res;
+	}
 
 	public boolean isSelected() {
 		return selected;

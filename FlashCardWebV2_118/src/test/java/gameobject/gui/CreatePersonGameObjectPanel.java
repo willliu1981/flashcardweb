@@ -4,14 +4,13 @@ import java.awt.Graphics;
 import java.util.List;
 
 import gameobject.component.Component;
+import gameobject.component.ComponentAdapter;
 import gameobject.component.Scene;
-import gameobject.interceptor.handler.MyHandler;
 import gameobject.tool.Graphs;
-import idv.fc.exception.FindErrorException;
-import idv.fc.proxy.ProxyFactory;
-import idv.fc.proxy.interceptor.Shuttle;
 
 public class CreatePersonGameObjectPanel extends GameObjectPanel {
+
+	private List<ComponentAdapter> components;
 
 	/**
 	 * Create the panel.
@@ -23,15 +22,22 @@ public class CreatePersonGameObjectPanel extends GameObjectPanel {
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
-		List<Component> gameObjects = Scene.getGameObjects();
-		if (!gameObjects.isEmpty()) {
-			gameObjects.forEach(go -> {
+		if (!components.isEmpty()) {
+			components.forEach(go -> {
 				Graphs.paintForCreatePerson(g, go);
 
 			});
 
 		}
 
+	}
+
+	public List<ComponentAdapter> getGameObjectComponents() {
+		return components;
+	}
+
+	public void setComponents(List<ComponentAdapter> components) {
+		this.components = components;
 	}
 
 }
