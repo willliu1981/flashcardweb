@@ -89,16 +89,12 @@ public class PersonCreatorFrame extends JFrame {
 				key.setPosition(relativeP);
 				anm.addKeyFrame(key);
 
-				Debug.test(this, key.getKeyName());
-
 				new Scene().locating();
 				repaint();
 
 			}
 		});
 		pane_person_info.setComponents(adapters);
-		pane_person_info.setPerson(target);
-		pane_person_info.setFrameIndex(0);
 		contentPane.add(pane_person_info, BorderLayout.CENTER);
 
 		JPanel panel_east_bar = new JPanel();
@@ -159,40 +155,46 @@ public class PersonCreatorFrame extends JFrame {
 		JPanel panel_scroll_bar = new JPanel();
 		panel_south_bar.add(panel_scroll_bar);
 
-		JButton btnNewButton_2_2 = new JButton("<");
-		btnNewButton_2_2.addActionListener(new ActionListener() {
+		JButton btn_previous = new JButton("<");
+		btn_previous.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int index = -1;
 				if ((index = Integer.valueOf(lbl_keyIndex.getText().trim())) == 0) {
 					return;
 				}
-				lbl_keyIndex.setText("" + --index);
+				index--;
+				lbl_keyIndex.setText("" + index);
+
+				refreshPosture();
 			}
 		});
-		btnNewButton_2_2.setFont(new Font("新細明體", Font.PLAIN, 28));
-		panel_scroll_bar.add(btnNewButton_2_2);
+		btn_previous.setFont(new Font("新細明體", Font.PLAIN, 28));
+		panel_scroll_bar.add(btn_previous);
 
-		JPanel panel_2 = new JPanel();
-		panel_2.setPreferredSize(new Dimension(80, 40));
-		panel_2.setBorder(new LineBorder(Color.LIGHT_GRAY));
-		panel_scroll_bar.add(panel_2);
+		JPanel panel_keyIndex = new JPanel();
+		panel_keyIndex.setPreferredSize(new Dimension(80, 40));
+		panel_keyIndex.setBorder(new LineBorder(Color.LIGHT_GRAY));
+		panel_scroll_bar.add(panel_keyIndex);
 
 		lbl_keyIndex = new JLabel("0");
 		lbl_keyIndex.setFont(new Font("新細明體", Font.PLAIN, 28));
-		panel_2.add(lbl_keyIndex);
+		panel_keyIndex.add(lbl_keyIndex);
 
-		JButton btnNewButton_2 = new JButton(">");
-		btnNewButton_2.addActionListener(new ActionListener() {
+		JButton btn_next = new JButton(">");
+		btn_next.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int index = Integer.valueOf(lbl_keyIndex.getText().trim());
 				if (index >= Integer.valueOf(text_maxNumberOfKey.getText().trim())) {
 					return;
 				}
-				lbl_keyIndex.setText("" + ++index);
+				index++;
+				lbl_keyIndex.setText("" + index);
+
+				refreshPosture();
 			}
 		});
-		btnNewButton_2.setFont(new Font("新細明體", Font.PLAIN, 28));
-		panel_scroll_bar.add(btnNewButton_2);
+		btn_next.setFont(new Font("新細明體", Font.PLAIN, 28));
+		panel_scroll_bar.add(btn_next);
 
 		JPanel panel_output = new JPanel();
 		panel_south_bar.add(panel_output, BorderLayout.EAST);
@@ -212,9 +214,9 @@ public class PersonCreatorFrame extends JFrame {
 		JPanel panel_maxKey = new JPanel();
 		panel_south_bar.add(panel_maxKey, BorderLayout.WEST);
 
-		JLabel lblNewLabel = new JLabel("max number of key");
-		lblNewLabel.setFont(new Font("新細明體", Font.PLAIN, 28));
-		panel_maxKey.add(lblNewLabel);
+		JLabel lbl_maxNumber = new JLabel("max number of key");
+		lbl_maxNumber.setFont(new Font("新細明體", Font.PLAIN, 28));
+		panel_maxKey.add(lbl_maxNumber);
 
 		text_maxNumberOfKey = new JTextField();
 		text_maxNumberOfKey.setHorizontalAlignment(SwingConstants.CENTER);
@@ -223,6 +225,20 @@ public class PersonCreatorFrame extends JFrame {
 		text_maxNumberOfKey.setFont(new Font("新細明體", Font.PLAIN, 28));
 		panel_maxKey.add(text_maxNumberOfKey);
 		text_maxNumberOfKey.setColumns(3);
+	}
+
+	protected int getKeyIndexFromLabel() {
+		return Integer.valueOf(lbl_keyIndex.getText().trim());
+	}
+
+	protected int getMaxNumberOfKeyFromText() {
+		return Integer.valueOf(text_maxNumberOfKey.getText().trim());
+	}
+
+	protected void refreshPosture() {
+		Animators.setPosture((HasAnimation) target, this.getKeyIndexFromLabel());
+		Scene.locating();
+		repaint();
 	}
 
 	public GameObject getTarget() {
