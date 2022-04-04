@@ -36,19 +36,42 @@ public class Graphs {
 
 	}
 
+	/**
+	 * 
+	 * @param g
+	 * @param adapters 具有 動畫創建的功能屬性
+	 * @param target
+	 * @param frameIndex
+	 */
 	public static void paintForCreatePerson(Graphics g, List<ComponentAdapter> adapters,
 			GameObject target, Integer frameIndex) {
+
+		adapters.stream().forEach(adpt -> {
+			if (adpt.isPaintable()) {
+				Graphics2D g2d = (Graphics2D) g;
+				if (adpt.isSelected()) {
+					g.setColor(Color.red);
+				} else {
+					g.setColor(Color.blue);
+				}
+				g2d.setStroke(new BasicStroke(3));
+				g2d.fillRoundRect(adpt.getAbsolutePosition().x,
+						adpt.getAbsolutePosition().y, 50, 50, 50, 50);
+			}
+		});
+
+		/*
 		Person person = (Person) target;
 		Animator animator = person.getAnimator();
-
+		
 		animator.getKeyFrames().stream().filter(k -> k.getKeyIndex().equals(frameIndex))
 				.forEach(key -> {
 					Point position = key.getPosition();
-
+		
 					ComponentAdapter adapter = adapters.stream()
 							.filter(adpt -> adpt.getName().equals(key.getKeyName()))
 							.findFirst().get();
-
+		
 					Graphics2D g2d = (Graphics2D) g;
 					if (adapter.isSelected()) {
 						g.setColor(Color.red);
@@ -59,8 +82,8 @@ public class Graphs {
 					g2d.fillRoundRect(key.getPosition().x, key.getPosition().y, 50, 50,
 							50, 50);
 				});
-
+		
 		//Point p = comp.getAbsolutePosition();
-
+		//*/
 	}
 }

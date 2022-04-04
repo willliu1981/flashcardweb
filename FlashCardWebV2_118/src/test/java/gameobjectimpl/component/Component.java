@@ -13,6 +13,15 @@ public class Component {
 	private List<Component> components = new ArrayList<>();
 	private String parentLayer;
 	private Integer layer;
+	private boolean paintable = true;
+
+	public boolean isPaintable() {
+		return paintable;
+	}
+
+	public void setPaintable(boolean paintable) {
+		this.paintable = paintable;
+	}
 
 	public String getName() {
 		return name;
@@ -21,9 +30,6 @@ public class Component {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
-
 
 	public String getOwner() {
 		return owner;

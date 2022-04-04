@@ -12,7 +12,17 @@ public class ComponentAdapter extends Component implements AdapterI<Component> {
 
 
 	private boolean selected = false;
+	private boolean paintable = true;
 
+
+
+	public boolean isPaintable() {
+		return comp.isPaintable();
+	}
+
+	public void setPaintable(boolean paintable) {
+		comp.setPaintable(paintable);
+	}
 
 	public void setSelected() {
 		this.selected = true;

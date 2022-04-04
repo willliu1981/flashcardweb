@@ -6,7 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
@@ -68,6 +70,10 @@ public class PersonCreatorFrame extends JFrame {
 		//*
 		final DefaultListModel<ComponentAdapter> model = new DefaultListModel<>();
 
+		adapters = adapters.stream()
+				.sorted(Comparator.comparing(ComponentAdapter::getLayer))
+				.collect(Collectors.toList());
+
 		adapters.forEach(comp -> {
 			model.addElement(comp);
 		});
@@ -102,6 +108,10 @@ public class PersonCreatorFrame extends JFrame {
 		panel_east_bar.add(scrollPane);
 
 		JButton btnNewButton = new JButton("set");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton.setFont(new Font("新細明體", Font.PLAIN, 28));
 		panel_east_bar.add(btnNewButton);
 
@@ -118,23 +128,23 @@ public class PersonCreatorFrame extends JFrame {
 		});
 		btnNewButton_1.setFont(new Font("新細明體", Font.PLAIN, 28));
 		panel_north_bar.add(btnNewButton_1);
-		
+
 		JPanel panel_south_bar = new JPanel();
 		contentPane.add(panel_south_bar, BorderLayout.SOUTH);
-		
+
 		JButton btnNewButton_2 = new JButton("<");
 		btnNewButton_2.setFont(new Font("新細明體", Font.PLAIN, 28));
 		panel_south_bar.add(btnNewButton_2);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(Color.LIGHT_GRAY));
 		panel.setPreferredSize(new Dimension(120, 40));
 		panel_south_bar.add(panel);
-		
+
 		JLabel lblNewLabel = new JLabel("0");
 		panel.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("新細明體", Font.PLAIN, 28));
-		
+
 		JButton btnNewButton_2_1 = new JButton(">");
 		btnNewButton_2_1.setFont(new Font("新細明體", Font.PLAIN, 28));
 		panel_south_bar.add(btnNewButton_2_1);
