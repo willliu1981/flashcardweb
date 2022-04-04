@@ -6,6 +6,8 @@ import java.util.Map;
 
 public class Debug {
 	private static String PREFIXSEPARATOR = " : ";
+	public static final String BEFORE = "before";
+	public static final String AFTER = "after";
 
 	private static class NoParam {
 

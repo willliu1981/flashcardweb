@@ -9,6 +9,15 @@ import idv.tool.Debug;
 
 public class Animator {
 	private List<KeyFrame> keyFrames = new ArrayList<>();
+	private Integer maxNumberOfKey;
+
+	public Integer getMaxNumberOfKey() {
+		return maxNumberOfKey;
+	}
+
+	public void setMaxNumberOfKey(Integer maxKeys) {
+		this.maxNumberOfKey = maxKeys;
+	}
 
 	public List<KeyFrame> getKeyFrames() {
 		return keyFrames;

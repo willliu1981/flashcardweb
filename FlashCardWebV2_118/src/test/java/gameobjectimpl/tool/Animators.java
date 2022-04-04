@@ -58,7 +58,6 @@ public class Animators {
 			prop.load(new FileInputStream(FILE));
 			Gson gson = new Gson();
 			String jsonString = gson.toJson(animator);
-			Debug.test("jsonString", jsonString);
 
 			prop.setProperty(PREFIX + name, jsonString);
 			prop.store(new FileOutputStream(FILE), "animator");
@@ -76,6 +75,7 @@ public class Animators {
 				.findComponents((GameObject) Scene.findSceneComponent(name));
 		Animator anm = new Animator();
 
+		anm.setMaxNumberOfKey(0);
 		findComponents.stream().forEach(comp -> {
 			KeyFrame key = new KeyFrame();
 			key.setKeyName(comp.getName());
