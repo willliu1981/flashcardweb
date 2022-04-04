@@ -10,7 +10,7 @@ import idv.tool.Debug;
 
 public class GameObjectScanner {
 	public static List<Component> findComponents(GameObject target) {
-		List<Component> list = Scene.getGameObjects().stream()
+		List<Component> list = Scene.getActivedGameObjects().stream()
 				.filter(comp ->{
 					boolean res=comp.getOwner().equals(target.getOwner());
 					

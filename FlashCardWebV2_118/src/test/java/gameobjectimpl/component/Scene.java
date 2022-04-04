@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.stream.Collectors;
 
 import javax.swing.JComponent;
 
@@ -26,7 +27,7 @@ public class Scene {
 	}
 
 	private static List<Component> sceneComponents = new ArrayList<>();
-	private static List<Component> gameObjects = new ArrayList<>();
+	private static List<Component> activedGameObjects = new ArrayList<>();
 
 	private static class GameTask extends TimerTask {
 		private JComponent comp;
@@ -54,6 +55,12 @@ public class Scene {
 				.filter(comp -> comp.getName().equals(name)).findFirst();
 		return findFirst.get();
 	}
+	
+	public static List<Component> findActivedGameObjectByOwner(String name) {
+		Component findSceneComponent = findSceneComponent(name);
+		List<Component> collect = activedGameObjects.stream().filter(go->go.getOwner().equals(name)).collect(Collectors.toList());
+		return collect;
+	}
 
 	public void setSceneComponents(List<Component> components) {
 		Scene.sceneComponents = components;
@@ -73,11 +80,11 @@ public class Scene {
 	}
 
 	public static void addGameObject(Component component) {
-		gameObjects.add(component);
+		activedGameObjects.add(component);
 	}
 
-	public static List<Component> getGameObjects() {
-		return gameObjects;
+	public static List<Component> getActivedGameObjects() {
+		return activedGameObjects;
 	}
 
 	public static void run(JComponent comp) {

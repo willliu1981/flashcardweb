@@ -3,6 +3,9 @@ package gameobjectimpl.animator;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import idv.tool.Debug;
 
 public class Animator {
 	private List<KeyFrame> keyFrames = new ArrayList<>();
@@ -16,6 +19,13 @@ public class Animator {
 	}
 
 	public void addKeyFrame(KeyFrame keyFrame) {
+		Optional<KeyFrame> findAny = keyFrames.stream()
+				.filter(key -> key.getKeyName().equals(keyFrame.getKeyName()))
+				.findAny();
+		if (findAny.isPresent()) {
+			keyFrames.remove(findAny.get());
+		}
+
 		this.keyFrames.add(keyFrame);
 	}
 

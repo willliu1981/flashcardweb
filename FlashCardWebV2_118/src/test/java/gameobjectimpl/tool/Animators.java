@@ -1,23 +1,21 @@
 package gameobjectimpl.tool;
 
-import java.awt.Point;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
-import com.google.common.io.Files;
 import com.google.gson.Gson;
 
 import gameobjectimpl.animator.Animator;
 import gameobjectimpl.animator.Animator.KeyFrame;
 import gameobjectimpl.component.Component;
 import gameobjectimpl.component.GameObject;
+import gameobjectimpl.component.HasAnimation;
 import gameobjectimpl.component.Scene;
 import idv.tool.Debug;
 
@@ -54,9 +52,13 @@ public class Animators {
 		Properties prop = new Properties();
 		try {
 
+			//KeyFrame findKey = Animators.findKey(animator, "rhand3");
+			//Debug.test("Animators", findKey.getPosition());
+
 			prop.load(new FileInputStream(FILE));
 			Gson gson = new Gson();
 			String jsonString = gson.toJson(animator);
+			Debug.test("jsonString", jsonString);
 
 			prop.setProperty(PREFIX + name, jsonString);
 			prop.store(new FileOutputStream(FILE), "animator");
@@ -86,64 +88,38 @@ public class Animators {
 		return anm;
 	}
 
-	@Test
-	public void test1() {
-		String fileString = "c:/test/animator.properties";
-		File file = new File(fileString);
-
-		Properties prop = new Properties();
-		try {
-			prop.load(new FileInputStream(file));
-			Animator anm = new Animator();
-			KeyFrame key = new KeyFrame();
-			key.setKeyIndex(1);
-			key.setKeyName("spine");
-			key.setPosition(new Point(20, 20));
-			anm.addKeyFrame(key);
-
-			KeyFrame key2 = new KeyFrame();
-			key2.setKeyIndex(1);
-			key2.setKeyName("head");
-			key2.setPosition(new Point(30, 30));
-
-			anm.addKeyFrame(key2);
-			Gson gson = new Gson();
-			String jsonString = gson.toJson(anm);
-
-			prop.clear();
-			prop.setProperty("person1", jsonString);
-			prop.list(System.out);
-
-			prop.store(new FileOutputStream(file.toString()), "person1");
-
-			//Debug.test(prop.getProperty("animator.spine"));
-		} catch (IOException e) {
-			e.printStackTrace();
+	public static KeyFrame findKey(Animator anm, String keyName) {
+		Optional<KeyFrame> findAny = anm.getKeyFrames().stream()
+				.filter(key -> key.getKeyName().equals(keyName)).findAny();
+		if (findAny.isPresent()) {
+			return findAny.get();
 		}
+
+		return null;
+	}
+
+	public static void setPosture(HasAnimation target, Integer keyIndex) {
+		List<KeyFrame> findKeys = findKeys(target.getAnimator(), keyIndex);
+
+		GameObject go = (GameObject) target;
+		List<Component> findActivedGameObjectByOwner = Scene
+				.findActivedGameObjectByOwner(go.getOwner());
+		findKeys.stream().forEach(key -> {
+			Optional<Component> findFirst = findActivedGameObjectByOwner.stream()
+					.filter(g -> g.getName().equals(key.getKeyName())).findFirst();
+			if (findFirst.isPresent()) {
+				Component component = findFirst.get();
+				component.setRelevantPosition(key.getPosition());
+			}
+		});
 
 	}
 
-	@Test
-	public void test2() {
-		String fileString = "c:/test/person1-animator.properties";
-		File file = new File(fileString);
+	public static List<KeyFrame> findKeys(Animator anm, Integer keyIndex) {
 
-		Properties prop = new Properties();
-		try {
-			prop.load(new FileInputStream(file));
-
-			Gson gson = new Gson();
-
-			String jsonString = prop.getProperty("person1");
-
-			Animator anm = gson.fromJson(jsonString, Animator.class);
-
-			anm.getKeyFrames().forEach(x -> System.out.println(x.getKeyName()));
-			//Debug.test(anm);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+		return anm.getKeyFrames().stream()
+				.filter(key -> key.getKeyIndex().equals(keyIndex))
+				.collect(Collectors.toList());
 	}
 
 }

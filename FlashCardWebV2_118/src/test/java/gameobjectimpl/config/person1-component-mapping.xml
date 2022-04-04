@@ -22,7 +22,7 @@
 		</constructor-arg>
 	</bean>
 
-	<bean id="david" class="gameobjectimpl.component.impl.Person"
+	<bean id="David" class="gameobjectimpl.component.impl.Person"
 		scope="prototype">
 		<property name="name" ref="owner-david" />
 		<property name="layer" value="0" />
