@@ -33,11 +33,14 @@ import gameobjectimpl.component.GameObject;
 import gameobjectimpl.component.HasAnimation;
 import gameobjectimpl.component.Scene;
 import gameobjectimpl.component.impl.Person;
+import gameobjectimpl.config.Application;
 import gameobjectimpl.tool.AdapterListConverter;
 import gameobjectimpl.tool.Animators;
 import gameobjectimpl.tool.Components;
 import gameobjectimpl.tool.GameObjectScanner;
 import idv.tool.Debug;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
 
 public class PersonCreatorFrame extends JFrame {
 	private static String TESTANIMATORNAME = "walk";
@@ -149,6 +152,41 @@ public class PersonCreatorFrame extends JFrame {
 		JPanel panel_north_bar = new JPanel();
 		contentPane.add(panel_north_bar, BorderLayout.NORTH);
 
+		JButton btn_output = new JButton("Output");
+		panel_north_bar.add(btn_output);
+		btn_output.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Person person = (Person) Scene.findSceneComponent("David");
+				person.getAnimator(TESTANIMATORNAME).setMaxNumberOfKey(
+						Integer.valueOf(text_maxNumberOfKey.getText().trim()));
+				Animators.write(person.getAnimator(TESTANIMATORNAME), "David");
+			}
+		});
+		btn_output.setFont(new Font("新細明體", Font.PLAIN, 28));
+
+		JButton btn_reset = new JButton("Reset");
+		btn_reset.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Animators.reset();
+
+				Scene sc = new Scene();
+				Person person = Application.getBean("David", Person.class);
+				sc.addSceneComponent(person);
+				person.addAnimator("walk", Animators.load("David"));
+				Animators.setPosture(person, 0);
+				sc.locating();
+
+				PersonCreatorFrame pcf = new PersonCreatorFrame(person);
+				pcf.setVisible(true);
+			
+				dispose();
+
+			}
+		});
+		btn_reset.setForeground(Color.RED);
+		btn_reset.setFont(new Font("新細明體", Font.BOLD, 28));
+		panel_north_bar.add(btn_reset);
+
 		JPanel panel_south_bar = new JPanel();
 		contentPane.add(panel_south_bar, BorderLayout.SOUTH);
 		panel_south_bar.setLayout(new BorderLayout(0, 0));
@@ -200,17 +238,14 @@ public class PersonCreatorFrame extends JFrame {
 		JPanel panel_output = new JPanel();
 		panel_south_bar.add(panel_output, BorderLayout.EAST);
 
-		JButton btn_output = new JButton("Output");
-		panel_output.add(btn_output);
-		btn_output.addActionListener(new ActionListener() {
+		JButton btn_test = new JButton("Test");
+		btn_test.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Person person = (Person) Scene.findSceneComponent("David");
-				person.getAnimator(TESTANIMATORNAME).setMaxNumberOfKey(
-						Integer.valueOf(text_maxNumberOfKey.getText().trim()));
-				Animators.write(person.getAnimator(TESTANIMATORNAME), "David");
+
 			}
 		});
-		btn_output.setFont(new Font("新細明體", Font.PLAIN, 28));
+		btn_test.setFont(new Font("新細明體", Font.PLAIN, 28));
+		panel_output.add(btn_test);
 
 		JPanel panel_maxKey = new JPanel();
 		panel_south_bar.add(panel_maxKey, BorderLayout.WEST);

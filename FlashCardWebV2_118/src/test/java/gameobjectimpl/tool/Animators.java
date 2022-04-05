@@ -21,7 +21,8 @@ import idv.tool.Debug;
 
 public class Animators {
 	private static String TESTANIMATORNAME = "walk";
-	private static final File FILE = new File("c:/test/gameobject/animator1.properties");
+	private static final File FILE = new File(
+			"c:/test/gameobject/animator1.properties");
 
 	private static final String TESTANIMATORSUFFIX = ".walk";
 
@@ -67,6 +68,12 @@ public class Animators {
 
 		}
 
+	}
+
+	public static void reset() {
+		if (FILE.exists()) {
+			FILE.delete();
+		}
 	}
 
 	private static Animator getDefaultAnimator(String name) {
