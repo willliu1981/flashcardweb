@@ -11,6 +11,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.stream.Collectors;
 
 import javax.swing.BoxLayout;
@@ -39,8 +41,6 @@ import gameobjectimpl.tool.Animators;
 import gameobjectimpl.tool.Components;
 import gameobjectimpl.tool.GameObjectScanner;
 import idv.tool.Debug;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
 
 public class PersonCreatorFrame extends JFrame {
 	private static String TESTANIMATORNAME = "walk";
@@ -178,7 +178,7 @@ public class PersonCreatorFrame extends JFrame {
 
 				PersonCreatorFrame pcf = new PersonCreatorFrame(person);
 				pcf.setVisible(true);
-			
+
 				dispose();
 
 			}
@@ -241,6 +241,28 @@ public class PersonCreatorFrame extends JFrame {
 		JButton btn_test = new JButton("Test");
 		btn_test.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
+				Timer tmr = new Timer();
+				TimerTask task = new TimerTask() {
+					int index;
+
+					@Override
+					public void run() {
+						Debug.test("timer");
+						Animators.setPosture((HasAnimation) target, index);
+						Scene.locating();
+						repaint();
+
+						index++;
+						if (index > target.getAnimator(TESTANIMATORNAME)
+								.getMaxNumberOfKey()) {
+							index = 0;
+						}
+					}
+
+				};
+
+				tmr.schedule(task, 500, 200);
 
 			}
 		});
