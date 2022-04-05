@@ -13,33 +13,6 @@ public class GameObjectFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel gameObjectPanel;
-	private static Scene scene;
-
-	/**
-	 * Launch the application.
-	 */
-	/*
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GameObjectFrame frame = new GameObjectFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	//*/
-
-	public static Scene getScene() {
-		return scene;
-	}
-
-	public static void setScene(Scene scene) {
-		GameObjectFrame.scene = scene;
-	}
 
 	/**
 	 * Create the frame.
@@ -59,7 +32,5 @@ public class GameObjectFrame extends JFrame {
 	public JPanel getGameObjectPanel() {
 		return gameObjectPanel;
 	}
-	
-	
 
 }

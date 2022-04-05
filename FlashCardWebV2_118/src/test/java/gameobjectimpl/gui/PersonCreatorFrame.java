@@ -99,7 +99,7 @@ public class PersonCreatorFrame extends JFrame {
 				key.setPosition(relativeP);
 				anm.addKeyFrame(key);
 
-				new Scene().locating();
+				Scene.locating();
 				repaint();
 			}
 		});
@@ -174,12 +174,11 @@ public class PersonCreatorFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Animators.reset();
 
-				Scene sc = new Scene();
 				Person person = Application.getBean("David", Person.class);
-				sc.addSceneComponent(person);
+				Scene.addSceneComponent(person);
 				person.addAnimator("walk", Animators.load("David"));
 				Animators.setPosture(person, 0);
-				sc.locating();
+				Scene.locating();
 
 				PersonCreatorFrame pcf = new PersonCreatorFrame(person);
 				pcf.setVisible(true);

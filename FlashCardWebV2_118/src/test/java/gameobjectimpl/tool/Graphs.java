@@ -15,25 +15,13 @@ import gameobjectimpl.component.impl.Person;
 import idv.tool.Debug;
 
 public class Graphs {
+	private static final Integer DEFAULTWIDTH = 50;
+	private static final Integer DEFAULTHEIGHT = 50;
 
 	public static void paint(Graphics g, Component comp) {
-		Point p = comp.getAbsolutePosition();
 		Graphics2D g2d = (Graphics2D) g;
-		g2d.drawOval(p.x, p.y, 50, 50);
-	}
-
-	public static void paintForCreatePerson(Graphics g, ComponentAdapter comp) {
-
-		Point p = comp.getAbsolutePosition();
-		Graphics2D g2d = (Graphics2D) g;
-		if (comp.isSelected()) {
-			g.setColor(Color.red);
-		} else {
-			g.setColor(Color.blue);
-		}
-		g2d.setStroke(new BasicStroke(3));
-		g2d.fillRoundRect(p.x, p.y, 50, 50, 50, 50);
-
+		g2d.fillRoundRect(comp.getAbsolutePosition().x, comp.getAbsolutePosition().y,
+				DEFAULTWIDTH, DEFAULTHEIGHT, DEFAULTWIDTH, DEFAULTHEIGHT);
 	}
 
 	/**
@@ -56,7 +44,8 @@ public class Graphs {
 				}
 				g2d.setStroke(new BasicStroke(3));
 				g2d.drawRoundRect(adpt.getAbsolutePosition().x,
-						adpt.getAbsolutePosition().y, 50, 50, 50, 50);
+						adpt.getAbsolutePosition().y, DEFAULTWIDTH, DEFAULTHEIGHT,
+						DEFAULTWIDTH, DEFAULTHEIGHT);
 			}
 		});
 

@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import gameobjectimpl.component.Component;
 import gameobjectimpl.component.Scene;
 import gameobjectimpl.tool.Graphs;
+import idv.tool.Debug;
+
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 
@@ -24,13 +26,10 @@ public class GameObjectPanel extends JPanel {
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
-		List<Component> gameObjects = Scene.getActivedGameObjects();
-		if (!gameObjects.isEmpty()) {
-			gameObjects.forEach(go -> {
-				Graphs.paint(g, go);
-			});
-
-		}
+		
+		Scene.refreshPosture();
+		Scene.locating();
+		Scene.paintActivedGameObjects(g);
 
 	}
 

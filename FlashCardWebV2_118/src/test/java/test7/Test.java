@@ -1,9 +1,12 @@
 package test7;
 
+import idv.tool.Debug;
+
 public class Test {
 	
 	static class Book{
 		private String name;
+		Integer a;
 	}
 	
 	static class EBook extends Book{
@@ -19,6 +22,8 @@ public class Test {
 		/*
 		System.out.println("line2...");
 		//*/
+		
+		Debug.test(new Book().a);
 		
 	}
 

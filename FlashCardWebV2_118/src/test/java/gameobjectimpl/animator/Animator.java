@@ -3,13 +3,34 @@ package gameobjectimpl.animator;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import idv.tool.Debug;
+import gameobjectimpl.component.GameObject;
 
 public class Animator {
 	private List<KeyFrame> keyFrames = new ArrayList<>();
 	private Integer maxNumberOfKey;
+	private Integer currentKeyIndex = 0;
+	private GameObject owner;
+
+	public GameObject getOwner() {
+		return owner;
+	}
+
+	public void setOwner(GameObject owner) {
+		this.owner = owner;
+	}
+
+	public Integer getCurrentKeyIndex() {
+		return currentKeyIndex;
+	}
+
+	public void setCurrentKeyIndex(Integer currentKeyIndex) {
+		if (currentKeyIndex > this.maxNumberOfKey) {
+			this.currentKeyIndex = 0;
+		} else {
+			this.currentKeyIndex = currentKeyIndex;
+		}
+	}
 
 	public Integer getMaxNumberOfKey() {
 		return maxNumberOfKey;

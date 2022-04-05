@@ -1,5 +1,6 @@
 package gameobjectimpl.component;
 
+import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +11,11 @@ import java.util.stream.Collectors;
 
 import javax.swing.JComponent;
 
+import gameobjectimpl.animator.Animator;
 import gameobjectimpl.control.GameControler;
+import gameobjectimpl.tool.Animators;
+import gameobjectimpl.tool.Graphs;
 import gameobjectimpl.tool.Locations;
-import idv.tool.Debug;
 
 public class Scene {
 
@@ -21,13 +24,18 @@ public class Scene {
 	private static Timer timer = new Timer();
 
 	private static GameObject parent;
-	{
+	static {
 		parent = new GameObject();
+		parent.setName("scene");
 		parent.setAbsolutePosition(new Point(0, 0));
 	}
 
 	private static List<Component> sceneComponents = new ArrayList<>();
 	private static List<Component> activedGameObjects = new ArrayList<>();
+
+	private Scene() {
+
+	}
 
 	private static class GameTask extends TimerTask {
 		private JComponent comp;
@@ -39,9 +47,9 @@ public class Scene {
 		@Override
 		public void run() {
 			GameControler.move();
-			locating();
+			//locating();
 			comp.repaint();
-		
+
 		}
 
 	}
@@ -55,21 +63,23 @@ public class Scene {
 				.filter(comp -> comp.getName().equals(name)).findFirst();
 		return findFirst.get();
 	}
-	
+
 	public static List<Component> findActivedGameObjectByOwner(String name) {
 		Component findSceneComponent = findSceneComponent(name);
-		List<Component> collect = activedGameObjects.stream().filter(go->go.getOwner().equals(name)).collect(Collectors.toList());
+		List<Component> collect = activedGameObjects.stream()
+				.filter(go -> go.getOwner().equals(name)).collect(Collectors.toList());
 		return collect;
 	}
 
-	public void setSceneComponents(List<Component> components) {
+	public static void setSceneComponents(List<Component> components) {
 		Scene.sceneComponents = components;
 	}
 
-	public void addSceneComponent(Component component) {
+	public static void addSceneComponent(Component component) {
 		Scene.sceneComponents.add(component);
 		component.setParentComponent(parent);
 		addGameObject(component);
+
 	}
 
 	public static void locating() {
@@ -89,7 +99,36 @@ public class Scene {
 
 	public static void run(JComponent comp) {
 		task = new GameTask(comp);
-		timer.schedule(task, 1000, 500);
+		timer.schedule(task, 1000, 100);
+	}
+
+	public static List<Animator> getActivedAnimators() {
+		List<Animator> anms = Scene.getSceneComponents().stream()
+				.filter(cmpt -> cmpt instanceof HasAnimation)
+				.map(cmpnt -> ((HasAnimation) cmpnt).getAnimators())
+				.flatMap(List::stream).collect(Collectors.toList());
+
+		return anms;
+	}
+
+	public static void refreshPosture() {
+		List<Animator> activedAnimators = getActivedAnimators();
+
+		activedAnimators.forEach(anm -> {
+			int currIndex = anm.getCurrentKeyIndex();
+			Animators.setPosture((HasAnimation) anm.getOwner(), currIndex);
+			anm.setCurrentKeyIndex(currIndex + 1);
+		});
+	}
+
+	public static void paintActivedGameObjects(Graphics g) {
+		List<Component> gameObjects = Scene.getActivedGameObjects();
+		if (!gameObjects.isEmpty()) {
+			gameObjects.forEach(go -> {
+				Graphs.paint(g, go);
+			});
+
+		}
 	}
 
 }
