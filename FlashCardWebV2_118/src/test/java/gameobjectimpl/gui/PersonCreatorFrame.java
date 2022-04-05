@@ -44,6 +44,8 @@ import idv.tool.Debug;
 
 public class PersonCreatorFrame extends JFrame {
 	private static String TESTANIMATORNAME = "walk";
+	private Timer tmr;
+	private boolean tmrIsRunning = false;
 	private GameObject target;
 	private List<ComponentAdapter> adapters;
 
@@ -78,6 +80,10 @@ public class PersonCreatorFrame extends JFrame {
 		pane_person_info.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
+				if (list.getSelectedIndex() == -1) {
+					return;
+				}
+
 				ComponentAdapter adpt = list.getSelectedValue();
 				Point adptP = e.getPoint();
 				Point parentP = adpt.getParentComponent().getAbsolutePosition();
@@ -95,7 +101,6 @@ public class PersonCreatorFrame extends JFrame {
 
 				new Scene().locating();
 				repaint();
-
 			}
 		});
 		pane_person_info.setComponents(adapters);
@@ -243,14 +248,19 @@ public class PersonCreatorFrame extends JFrame {
 		JButton btn_test = new JButton("Test");
 		btn_test.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (tmrIsRunning == true) {
+					tmr.cancel();
+					tmrIsRunning = false;
+					return;
+				}
 
-				Timer tmr = new Timer();
+				tmr = new Timer();
+
 				TimerTask task = new TimerTask() {
 					int index;
 
 					@Override
 					public void run() {
-						Debug.test("timer");
 						Animators.setPosture((HasAnimation) target, index);
 						Scene.locating();
 						repaint();
@@ -265,7 +275,7 @@ public class PersonCreatorFrame extends JFrame {
 				};
 
 				tmr.schedule(task, 500, 200);
-
+				tmrIsRunning = true;
 			}
 		});
 		btn_test.setFont(new Font("新細明體", Font.PLAIN, 28));
