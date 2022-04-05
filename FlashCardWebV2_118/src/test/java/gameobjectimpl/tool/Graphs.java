@@ -55,7 +55,7 @@ public class Graphs {
 					g.setColor(Color.blue);
 				}
 				g2d.setStroke(new BasicStroke(3));
-				g2d.fillRoundRect(adpt.getAbsolutePosition().x,
+				g2d.drawRoundRect(adpt.getAbsolutePosition().x,
 						adpt.getAbsolutePosition().y, 50, 50, 50, 50);
 			}
 		});

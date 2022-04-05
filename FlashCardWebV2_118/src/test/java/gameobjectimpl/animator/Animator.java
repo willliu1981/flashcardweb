@@ -32,9 +32,7 @@ public class Animator {
 		boolean contains = keyFrames.contains(keyFrame);
 
 		if (contains) {
-			keyFrames.remove(keyFrames.stream()
-					.filter(key -> key.getKeyName().equals(keyFrame.getKeyName()))
-					.findAny().get());
+			keyFrames.remove(keyFrame);
 		}
 
 		this.keyFrames.add(keyFrame);

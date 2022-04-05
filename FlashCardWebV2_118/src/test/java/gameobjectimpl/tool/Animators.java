@@ -22,7 +22,7 @@ import idv.tool.Debug;
 public class Animators {
 	private static String TESTANIMATORNAME = "walk";
 	private static final File FILE = new File(
-			"c:/test/gameobject/animator1.properties");
+			"c:/test/gameobject/animator.properties");
 
 	private static final String TESTANIMATORSUFFIX = ".walk";
 
