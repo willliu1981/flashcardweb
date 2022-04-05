@@ -40,6 +40,7 @@ import gameobjectimpl.tool.GameObjectScanner;
 import idv.tool.Debug;
 
 public class PersonCreatorFrame extends JFrame {
+	private static String TESTANIMATORNAME = "walk";
 	private GameObject target;
 	private List<ComponentAdapter> adapters;
 
@@ -81,7 +82,7 @@ public class PersonCreatorFrame extends JFrame {
 				relativeP.setLocation(adptP.x - parentP.x, adptP.y - parentP.y);
 				adpt.setRelevantPosition(relativeP);
 
-				Animator anm = ((Person) target).getAnimator();
+				Animator anm = ((Person) target).getAnimator(TESTANIMATORNAME);
 
 				KeyFrame key = new KeyFrame();
 				key.setKeyName(adpt.getName());
@@ -204,9 +205,9 @@ public class PersonCreatorFrame extends JFrame {
 		btn_output.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Person person = (Person) Scene.findSceneComponent("David");
-				person.getAnimator().setMaxNumberOfKey(
+				person.getAnimator(TESTANIMATORNAME).setMaxNumberOfKey(
 						Integer.valueOf(text_maxNumberOfKey.getText().trim()));
-				Animators.write(person.getAnimator(), "David");
+				Animators.write(person.getAnimator(TESTANIMATORNAME), "David");
 			}
 		});
 		btn_output.setFont(new Font("新細明體", Font.PLAIN, 28));
@@ -220,8 +221,8 @@ public class PersonCreatorFrame extends JFrame {
 
 		text_maxNumberOfKey = new JTextField();
 		text_maxNumberOfKey.setHorizontalAlignment(SwingConstants.CENTER);
-		text_maxNumberOfKey.setText(
-				"" + ((HasAnimation) target).getAnimator().getMaxNumberOfKey());
+		text_maxNumberOfKey.setText("" + ((HasAnimation) target)
+				.getAnimator(TESTANIMATORNAME).getMaxNumberOfKey());
 		text_maxNumberOfKey.setFont(new Font("新細明體", Font.PLAIN, 28));
 		panel_maxKey.add(text_maxNumberOfKey);
 		text_maxNumberOfKey.setColumns(3);

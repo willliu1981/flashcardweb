@@ -23,7 +23,7 @@ public class GameObjectDemo {
 
 		Person person = Application.getBean("David", Person.class);
 		sc.addSceneComponent(person);
-		person.setAnimator(Animators.load("David"));
+		person.addAnimator("walk", Animators.load("David"));
 		Animators.setPosture(person, 0);
 		sc.locating();
 

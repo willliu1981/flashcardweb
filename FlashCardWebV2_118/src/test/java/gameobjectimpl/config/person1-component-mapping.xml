@@ -29,7 +29,15 @@
 		<property name="paintable" value="false" />
 		<property name="position" value="100,300" />
 		<property name="owner" ref="owner-david" />
-		<property name="animator" ref="person1Animator" />
+		<!-- 
+		<property name="addAnimators">
+			<map>
+				<entry key="">
+					<ref bean="" />
+				</entry>
+			</map>
+		</property>
+		 -->
 		<property name="addComponent">
 			<list>
 				<ref bean="spine" />

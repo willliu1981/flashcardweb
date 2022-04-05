@@ -20,10 +20,10 @@ import gameobjectimpl.component.Scene;
 import idv.tool.Debug;
 
 public class Animators {
-	private static final File FILE = new File(
-			"c:/test/gameobject/person1-animator.properties");
+	private static String TESTANIMATORNAME = "walk";
+	private static final File FILE = new File("c:/test/gameobject/animator1.properties");
 
-	private static final String PREFIX = "animator.";
+	private static final String TESTANIMATORSUFFIX = ".walk";
 
 	public static Animator load(String name) {
 		Properties prop = new Properties();
@@ -37,7 +37,7 @@ public class Animators {
 			}
 			prop.load(new FileInputStream(FILE));
 			Gson gson = new Gson();
-			String jsonString = prop.getProperty(PREFIX + name);
+			String jsonString = prop.getProperty(name + TESTANIMATORSUFFIX);
 
 			return gson.fromJson(jsonString, Animator.class);
 
@@ -59,7 +59,7 @@ public class Animators {
 			Gson gson = new Gson();
 			String jsonString = gson.toJson(animator);
 
-			prop.setProperty(PREFIX + name, jsonString);
+			prop.setProperty(name + TESTANIMATORSUFFIX, jsonString);
 			prop.store(new FileOutputStream(FILE), "animator");
 
 		} catch (IOException e) {
@@ -99,7 +99,8 @@ public class Animators {
 	}
 
 	public static void setPosture(HasAnimation target, Integer keyIndex) {
-		List<KeyFrame> findKeys = findKeys(target.getAnimator(), keyIndex);
+		List<KeyFrame> findKeys = findKeys(target.getAnimator(TESTANIMATORNAME),
+				keyIndex);
 
 		GameObject go = (GameObject) target;
 		List<Component> findActivedGameObjectByOwner = Scene
