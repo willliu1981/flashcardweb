@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import javax.swing.JComponent;
 
 import gameobjectimpl.animator.Animator;
-import gameobjectimpl.control.GameControler;
+import gameobjectimpl.control.TestGameControler;
 import gameobjectimpl.tool.Animators;
 import gameobjectimpl.tool.Graphs;
 import gameobjectimpl.tool.Locations;
@@ -46,7 +46,7 @@ public class Scene {
 
 		@Override
 		public void run() {
-			GameControler.move();
+			TestGameControler.move();
 			//locating();
 			comp.repaint();
 
@@ -99,7 +99,7 @@ public class Scene {
 
 	public static void run(JComponent comp) {
 		task = new GameTask(comp);
-		timer.schedule(task, 1000, 100);
+		timer.schedule(task, 1000, 50);
 	}
 
 	public static List<Animator> getActivedAnimators() {
