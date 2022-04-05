@@ -198,10 +198,11 @@ public class PersonCreatorFrame extends JFrame {
 		btn_previous.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int index = -1;
-				if ((index = Integer.valueOf(lbl_keyIndex.getText().trim())) == 0) {
-					return;
+				if ((index = Integer.valueOf(lbl_keyIndex.getText().trim())) <= 0) {
+					index = target.getAnimator(TESTANIMATORNAME).getMaxNumberOfKey();
+				} else {
+					index--;
 				}
-				index--;
 				lbl_keyIndex.setText("" + index);
 
 				refreshPosture();
@@ -224,9 +225,10 @@ public class PersonCreatorFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int index = Integer.valueOf(lbl_keyIndex.getText().trim());
 				if (index >= Integer.valueOf(text_maxNumberOfKey.getText().trim())) {
-					return;
+					index = 0;
+				} else {
+					index++;
 				}
-				index++;
 				lbl_keyIndex.setText("" + index);
 
 				refreshPosture();
