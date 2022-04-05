@@ -23,21 +23,13 @@
 	</bean>
 
 	<bean id="David" class="gameobjectimpl.component.impl.Person"
-		scope="prototype">
+		scope="prototype" init-method="initAnimators">
 		<property name="name" ref="owner-david" />
 		<property name="layer" value="0" />
 		<property name="paintable" value="false" />
 		<property name="position" value="100,300" />
 		<property name="owner" ref="owner-david" />
-		<!-- 
-		<property name="addAnimators">
-			<map>
-				<entry key="">
-					<ref bean="" />
-				</entry>
-			</map>
-		</property>
-		 -->
+		<property name="animatorBuilder" ref="person1AnimatorBuilder" />
 		<property name="addComponent">
 			<list>
 				<ref bean="spine" />

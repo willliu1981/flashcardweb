@@ -17,7 +17,7 @@ public class TestRunApp {
 
 		Person person = Application.getBean("David", Person.class);
 		Scene.addSceneComponent(person);
-		person.addAnimator("walk", Animators.load("David"));
+		//person.addAnimator("walk", Animators.load("David"));
 		Animators.setPosture(person, 0);
 		Scene.locating();
 

@@ -7,10 +7,19 @@ import java.util.List;
 import gameobjectimpl.component.GameObject;
 
 public class Animator {
+	private String name;//自定的 animator 的 name
 	private List<KeyFrame> keyFrames = new ArrayList<>();
 	private Integer maxNumberOfKey;
 	private Integer currentKeyIndex = 0;
 	private GameObject owner;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public GameObject getOwner() {
 		return owner;

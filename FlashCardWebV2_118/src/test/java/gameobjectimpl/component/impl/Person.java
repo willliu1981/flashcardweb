@@ -1,14 +1,20 @@
 package gameobjectimpl.component.impl;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import gameobjectimpl.animator.Animator;
+import gameobjectimpl.animator.AnimatorBuilder;
 import gameobjectimpl.component.GameObject;
 import gameobjectimpl.component.HasAnimation;
+import gameobjectimpl.component.IsAnimatorGameObjectBean;
 
-public class Person extends GameObject implements HasAnimation {
+public class Person extends GameObject
+		implements HasAnimation, IsAnimatorGameObjectBean {
+	protected AnimatorBuilder animatorBuilder;
+
+	@Override
+	public void setAnimatorBuilder(AnimatorBuilder animatorBuilder) {
+		this.animatorBuilder = animatorBuilder;
+	}
 
 	@Override
 	public String toString() {
@@ -16,16 +22,8 @@ public class Person extends GameObject implements HasAnimation {
 				+ "]";
 	}
 
-	public void setAddAnimators(Map<String, Animator> animatorMap) {
-		this.animators = animatorMap;
-	}
-
 	@Override
 	public void initAnimators() {
-		this.animators = new HashMap<>();
-
+		this.animators = animatorBuilder.getAnimators();
 	}
-
-
-
 }
