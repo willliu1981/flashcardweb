@@ -8,8 +8,7 @@ public class Application {
 
 	public static <T> T getBean(String name, Class<T> clazz) {
 		String[] paths = {
-				"classpath:gameobjectimpl/config/person1-component-mapping.xml",
-				"classpath:gameobjectimpl/config/animator.xml" };
+				"classpath:gameobjectimpl/config/person1-component-mapping.xml" };
 
 		return MySpringUtil.setApplicationContext(paths).getBean(name, clazz);
 	}

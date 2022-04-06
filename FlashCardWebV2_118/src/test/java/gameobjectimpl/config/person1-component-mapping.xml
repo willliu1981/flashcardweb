@@ -13,15 +13,19 @@
         http://www.springframework.org/schema/mvc
         https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-		
+
 	<context:property-placeholder
-		location="gameobjectimpl/config/component.properties,
-		file:c:/test/gameobject/animators.properties" />
+		location="gameobjectimpl/config/component.properties" />
 
 	<bean id="owner-david" class="java.lang.String">
 		<constructor-arg>
 			<value>person1</value>
 		</constructor-arg>
+	</bean>
+
+	<bean id="animatorResolver"
+		class="gameobjectimpl.animator.AnimatorResolver">
+		<property name="config" value="gameobjectimpl/config/animator.xml" />
 	</bean>
 
 
@@ -49,6 +53,7 @@
 		<property name="position" value="100,300" />
 		<property name="owner" ref="owner-david" />
 		<property name="animatorBuilder" ref="person1AnimatorBuilder" />
+		<property name="animatorResolver" ref="animatorResolver" />
 		<property name="addComponent">
 			<list>
 				<ref bean="spine" />
