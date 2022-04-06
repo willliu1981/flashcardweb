@@ -11,7 +11,6 @@ public class Animator {
 	private List<KeyFrame> keyFrames = new ArrayList<>();
 	private Integer maxNumberOfKey;
 	private Integer currentKeyIndex = 0;
-	private GameObject owner;
 
 	public String getName() {
 		return name;
@@ -19,14 +18,6 @@ public class Animator {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public GameObject getOwner() {
-		return owner;
-	}
-
-	public void setOwner(GameObject owner) {
-		this.owner = owner;
 	}
 
 	public Integer getCurrentKeyIndex() {

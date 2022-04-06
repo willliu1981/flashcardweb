@@ -1,5 +1,8 @@
 package gameobjectimpl.component.impl;
 
+import java.util.List;
+
+import gameobjectimpl.animator.Animator;
 import gameobjectimpl.animator.AnimatorBuilder;
 import gameobjectimpl.animator.AnimatorResolver;
 import gameobjectimpl.component.GameObject;
@@ -10,8 +13,8 @@ import idv.tool.Debug;
 
 public class Person extends GameObject
 		implements HasAnimation, IsAnimatorGameObjectBean {
-	protected AnimatorBuilder animatorBuilder;
-	protected String animatorBuilderBean;
+
+	protected String animatorBuilder;
 	protected AnimatorResolver animatorResolver;
 
 	public Person() {
@@ -19,35 +22,30 @@ public class Person extends GameObject
 	}
 
 	@Override
-	public void setAnimatorBuilder(AnimatorBuilder animatorBuilder) {
-		this.animatorBuilder = animatorBuilder;
-	}
-
-	@Override
 	public String toString() {
-		return "Person [animator=" + this.getAnimators() + ", toString()="
-				+ super.toString() + "]";
+		return "Person [animatorBuilder=" + animatorBuilder + ", animatorResolver="
+				+ animatorResolver + ", toString()=" + super.toString() + "]";
 	}
 
 	@Override
 	public void initAnimators() {
 		try {
-			//this.setAnimators(animatorBuilder.getAnimators());
-
-			this.setAnimators(this.animatorResolver.getAnimators(animatorBuilderBean));
+			this.setAnimators(this.animatorResolver.getAnimators(animatorBuilder));
+			//			Debug.test(this, "builder", animatorBuilder);
+			//			Debug.test(this, "resolver", animatorResolver);
 		} catch (NullPointerException e) {
 			System.out.println(e.getMessage());
 		}
 	}
 
 	@Override
-	public void setAnimatorResolver(AnimatorResolver animatorResolver) {
-		this.animatorResolver = animatorResolver;
-
+	public void setAnimatorBuilder(String animatorBuilder) {
+		this.animatorBuilder = animatorBuilder;
 	}
 
 	@Override
-	public void setAnimatorBuilder(String builderBean) {
-		this.animatorBuilderBean = builderBean;
+	public void setAnimatorResolver(AnimatorResolver animatorResolver) {
+		this.animatorResolver = animatorResolver;
 	}
+
 }

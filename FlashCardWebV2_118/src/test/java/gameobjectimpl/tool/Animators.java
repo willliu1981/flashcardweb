@@ -20,7 +20,7 @@ import gameobjectimpl.component.Scene;
 import idv.tool.Debug;
 
 public class Animators {
-	private static String TESTANIMATORNAME = "person1.walk-right";
+	private static String TESTANIMATORNAME = "walk-right";
 	private static final File FILE = new File(
 			"c:/test/gameobject/animators.properties");
 

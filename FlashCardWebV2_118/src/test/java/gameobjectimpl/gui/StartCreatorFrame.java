@@ -57,28 +57,19 @@ public class StartCreatorFrame extends JFrame {
 				Person person = null;
 
 				if (fileIsExist) {
-					Debug.test(this,"is exist");
+					Debug.test(this, "is exist");
 					person = Application.getBean("person1", Person.class);
 				} else {
-					Debug.test(this,"not exist");
 					Animators.createEmptyFile();
 					person = Application.getBean("defaultPerson1", Person.class);
-					//AnimatorBuilder builder = Application.getBean(
-					//	"defaultPerson1AnimatorBuilder", AnimatorBuilder.class);
-					//*
-					AnimatorBuilder builder = MySpringUtil.setApplicationContext(
-							"classpath:gameobjectimpl/demo/data/defaultdata/default-animator.xml")
-							.getBean("defaultPerson1AnimatorBuilder",
-									AnimatorBuilder.class);
-					//*/
-					Debug.test(builder);
-					//person.setAnimatorBuilder(builder);
 				}
 				Debug.test(person);
-				//Scene.addSceneComponent(person);
+				
+				
+				Scene.addSceneComponent(person);
 
-				//PersonCreatorFrame pcf = new PersonCreatorFrame(person);
-				//pcf.setVisible(true);
+				PersonCreatorFrame pcf = new PersonCreatorFrame(person);
+				pcf.setVisible(true);
 			}
 		});
 		btnNewButton.setFont(new Font("新細明體", Font.PLAIN, 28));

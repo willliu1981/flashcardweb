@@ -13,31 +13,16 @@
         http://www.springframework.org/schema/mvc
         https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
+
 	<context:property-placeholder
 		location="gameobjectimpl/demo/data/defaultdata/animators.properties" />
 
 
-
-	<bean id="defaultPerson1AnimatorBuilder"
-		class="gameobjectimpl.animator.AnimatorBuilder">
-		<property name="resolver" ref="defaultAnimatorResolver" />
-		<property name="names">
-			<list>
-				<value>person1.walk-right</value>
-				<value>person1.walk-left</value>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="defaultAnimatorResolver"
-		class="gameobjectimpl.animator.AnimatorResolver"
-		init-method="initAnimators">
-		<property name="addAnimator">
+	<bean id="default" class="gameobjectimpl.animator.AnimatorBuilder">
+		<property name="animatorJsons">
 			<map>
-				<entry key="person1.walk-right"
-					value="${animator.person1.walk_right}" />
-				<entry key="person1.walk_left"
-					value="${animator.person1.walk_left}" />
+				<entry key="walk-right" value="${animator.person1.walk_right}" />
+				<entry key="walk_left" value="${animator.person1.walk_left}" />
 			</map>
 		</property>
 	</bean>

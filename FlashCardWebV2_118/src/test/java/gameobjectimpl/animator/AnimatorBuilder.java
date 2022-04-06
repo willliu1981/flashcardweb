@@ -6,30 +6,18 @@ import java.util.Map;
 import idv.tool.Debug;
 
 public class AnimatorBuilder {
-	private AnimatorResolver resolver;
-	private List<String> names;//用於取得resolver 中 map 的 vaule 的 key 
-	
 
+	private Map<String, String> animatorJsons;
 
-	public List<String> getNames() {
-		return names;
+	public AnimatorBuilder() {
 	}
 
-	public void setAddNames(List<String> names) {
-		this.names = names;
+	public Map<String, String> getAnimatorJsons() {
+		return animatorJsons;
 	}
 
-	public void setResolver(AnimatorResolver resolver) {
-		this.resolver = resolver;
+	public void setAnimatorJsons(Map<String, String> animatorJsons) {
+		this.animatorJsons = animatorJsons;
 	}
 
-	public Map<String, Animator> getAnimators() {
-		return resolver.getAnimators(names);
-	}
-
-	public void setNames(List<String> names) {
-		this.names = names;
-	}
-	
-	
 }

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 
 public class MySpringUtil {
 
+	private String[] applicationContexts;
+
 	private static ApplicationContext applicationContext;
 
 	public static MySpringUtil setApplicationContext(String applicationContext)
@@ -16,32 +18,35 @@ public class MySpringUtil {
 
 	public static MySpringUtil setApplicationContext(String[] applicationContexts)
 			throws BeansException {
-		if (MySpringUtil.applicationContext == null) {
-			MySpringUtil.applicationContext = new ClassPathXmlApplicationContext(
-					applicationContexts);
+		//		if (MySpringUtil.applicationContext == null) {
+		//			MySpringUtil.applicationContext = new ClassPathXmlApplicationContext(
+		//					applicationContexts);
+		//
+		//		}
 
-		}
-		return new MySpringUtil();
+		MySpringUtil mySpringUtil = new MySpringUtil();
+		mySpringUtil.applicationContexts = applicationContexts;
+		return mySpringUtil;
 	}
 
-	public static ApplicationContext getApplicationContext() {
+	public ApplicationContext getApplicationContext() {
 
-		return MySpringUtil.applicationContext;
+		return new ClassPathXmlApplicationContext(applicationContexts);
 	}
 
-	public static Object getBean(String name) {
+	public Object getBean(String name) {
 		return getApplicationContext().getBean(name);
 	}
 
-	public static <T> T getBean(String name, Class<T> clazz) {
+	public <T> T getBean(String name, Class<T> clazz) {
 		return getApplicationContext().getBean(name, clazz);
 	}
 
-	public static <T> T getBean(Class<T> clazz) {
+	public <T> T getBean(Class<T> clazz) {
 		return getApplicationContext().getBean(clazz);
 	}
 
-	public static <T> T getBean(Class<T> clazz, Object... args) {
+	public <T> T getBean(Class<T> clazz, Object... args) {
 		return getApplicationContext().getBean(clazz, args);
 	}
 }

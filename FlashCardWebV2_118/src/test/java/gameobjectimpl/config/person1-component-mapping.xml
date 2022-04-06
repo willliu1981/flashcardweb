@@ -25,18 +25,28 @@
 
 	<bean id="animatorResolver"
 		class="gameobjectimpl.animator.AnimatorResolver">
-		<property name="config" value="gameobjectimpl/config/animator.xml" />
+		<property name="config"
+			value="classpath:gameobjectimpl/config/animator.xml" />
+	</bean>
+
+	<bean id="defaultAnimatorResolver"
+		class="gameobjectimpl.animator.AnimatorResolver">
+		<property name="config"
+			value="classpath:gameobjectimpl/demo/data/defaultdata/default-animator.xml" />
 	</bean>
 
 
-
 	<bean id="defaultPerson1"
-		class="gameobjectimpl.component.impl.Person" scope="prototype">
+		class="gameobjectimpl.component.impl.Person" scope="prototype"
+		init-method="initAnimators">
 		<property name="name" ref="owner-david" />
 		<property name="layer" value="0" />
 		<property name="paintable" value="false" />
 		<property name="position" value="100,300" />
 		<property name="owner" ref="owner-david" />
+		<property name="animatorResolver"
+			ref="defaultAnimatorResolver" />
+		<property name="animatorBuilder" value="default" />
 		<property name="addComponent">
 			<list>
 				<ref bean="spine" />
@@ -52,8 +62,9 @@
 		<property name="paintable" value="false" />
 		<property name="position" value="100,300" />
 		<property name="owner" ref="owner-david" />
-		<property name="animatorBuilder" ref="person1AnimatorBuilder" />
 		<property name="animatorResolver" ref="animatorResolver" />
+		<property name="animatorBuilder"
+			value="person1AnimatorBuilder" />
 		<property name="addComponent">
 			<list>
 				<ref bean="spine" />

@@ -43,7 +43,7 @@ import gameobjectimpl.tool.GameObjectScanner;
 import idv.tool.Debug;
 
 public class PersonCreatorFrame extends JFrame {
-	private static String TESTANIMATORNAME = "walk";
+	private static String TESTANIMATORNAME = "walk-right";
 	private Timer tmr;
 	private boolean tmrIsRunning = false;
 	private GameObject target;

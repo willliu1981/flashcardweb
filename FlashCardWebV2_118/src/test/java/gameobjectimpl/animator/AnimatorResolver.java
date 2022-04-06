@@ -12,10 +12,6 @@ import idv.tool.spring.MySpringUtil;
 public class AnimatorResolver {
 	private String config;
 
-	//private Map<String, Animator> animators;
-
-	//private Map<String, String> animatorByJsonStrings;
-
 	public String getConfig() {
 		return config;
 	}
@@ -25,52 +21,27 @@ public class AnimatorResolver {
 	}
 
 	public Map<String, Animator> getAnimators(String builderBeanName) {
+		if (builderBeanName == null || builderBeanName.equals("")) {
+			return null;
+		}
+
 		AnimatorBuilder builder = MySpringUtil.setApplicationContext(this.config)
 				.getBean(builderBeanName, AnimatorBuilder.class);
+		Map<String, String> animatorJsons = builder.getAnimatorJsons();
 
-		return null;
-	}
-
-	/*
-	public Map<String, Animator> getAnimators(List<String> keys) {
-		this.initAnimators();
-	
-		Map<String, Animator> anms = new HashMap<>();
-		animators.forEach((k, v) -> {
-			if (keys.contains(k)) {
-				anms.put("person1.walk-right", v);
-			}
+		Map<String, Animator> animators = new HashMap<>();
+		animatorJsons.forEach((k, v) -> {
+			Animator anm = parse(v);
+			animators.put(k, anm);
 		});
-		return anms;
-	}
-	
-	
-	public void setAnimators(Map<String, Animator> animators) {
-		this.animators = animators;
-	}
-	
-	public void setAddAnimator(Map<String, String> animatorByJsonStrings) {
-		this.animatorByJsonStrings = animatorByJsonStrings;
-	}
-	//*/
 
-	/*
+		return animators;
+	}
+
 	private Animator parse(String jsonString) {
 		Gson gson = new Gson();
 		return gson.fromJson(jsonString, Animator.class);
-	
-	}
-	//*/
 
-	/*
-	public void initAnimators() {
-		if (this.animators == null) {
-			this.animators = new HashMap<>();
-			animatorByJsonStrings.forEach((k, v) -> {
-				Animator anm = parse(v);
-				animators.put(k, anm);
-			});
-		}
 	}
-	//*/
+
 }

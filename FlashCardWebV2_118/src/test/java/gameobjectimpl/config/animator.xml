@@ -17,28 +17,15 @@
 		location="file:c:/test/gameobject/animators.properties" />
 
 	<bean id="person1AnimatorBuilder"
-		class="gameobjectimpl.animator.AnimatorBuilder" lazy-init="true">
-		<property name="resolver" ref="animatorResolver" />
-		<property name="names">
-			<list>
-				<value>person1.walk-right</value>
-				<value>person1.walk-left</value>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="animatorResolver"
-		class="gameobjectimpl.animator.AnimatorResolver"
-		init-method="initAnimators" lazy-init="true">
-		<property name="addAnimator">
+		class="gameobjectimpl.animator.AnimatorBuilder">
+		<property name="animatorJsons">
 			<map>
-				<entry key="person1.walk-right"
-					value="${animator.person1.walk_right}" />
-				<entry key="person1.walk_left"
-					value="${animator.person1.walk_left}" />
+				<entry key="walk-right" value="${animator.person1.walk_right}" />
+				<entry key="walk_left" value="${animator.person1.walk_left}" />
 			</map>
 		</property>
 	</bean>
+
 
 
 

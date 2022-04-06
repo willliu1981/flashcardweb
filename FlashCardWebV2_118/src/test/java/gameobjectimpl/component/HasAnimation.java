@@ -1,17 +1,18 @@
 package gameobjectimpl.component;
 
 import java.util.List;
+import java.util.Map;
 
 import gameobjectimpl.animator.Animator;
-import gameobjectimpl.animator.AnimatorBuilder;
+import gameobjectimpl.animator.AnimatorControl;
 
 public interface HasAnimation {
 
-	public void addAnimator(String name, Animator animator);
-
 	public Animator getAnimator(String name);
 
-	public List<Animator> getAnimators();
+	public List<Animator> getToListAnimators();
+
+	public Map<String, Animator> getAnimators();
 
 	public void initAnimators();
 

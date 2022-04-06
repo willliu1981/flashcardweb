@@ -3,6 +3,7 @@ package gameobjectimpl.component;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.Timer;
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
 import javax.swing.JComponent;
 
 import gameobjectimpl.animator.Animator;
+import gameobjectimpl.animator.AnimatorControl;
 import gameobjectimpl.control.TestGameControler;
 import gameobjectimpl.tool.Animators;
 import gameobjectimpl.tool.Graphs;
@@ -102,23 +104,36 @@ public class Scene {
 		timer.schedule(task, 1000, 100);
 	}
 
-	public static List<Animator> getActivedAnimators() {
-		List<Animator> anms = Scene.getSceneComponents().stream()
-				.filter(cmpt -> cmpt instanceof HasAnimation)
-				.map(cmpnt -> ((HasAnimation) cmpnt).getAnimators())
-				.flatMap(List::stream).collect(Collectors.toList());
+	//	public static List<Animator> getActivedAnimators() {
+	//		List<Animator> anms = Scene.getSceneComponents().stream()
+	//				.filter(cmpt -> cmpt instanceof HasAnimation)
+	//				.map(cmpnt -> ((HasAnimation) cmpnt).getToListAnimators())
+	//				.flatMap(List::stream).collect(Collectors.toList());
+	//
+	//		return anms;
+	//	}
 
-		return anms;
+	public static List<AnimatorControl> getActivedAnimatorControls() {
+		List<AnimatorControl> collect = Scene.getSceneComponents().stream()
+				.filter(cmpt -> cmpt instanceof HasAnimation)
+				.map(cmpnt -> ((GameObject) cmpnt).getAnimatorControl())
+				.collect(Collectors.toList());
+
+		return collect;
 	}
 
 	public static void refreshPosture() {
-		List<Animator> activedAnimators = getActivedAnimators();
-
-		activedAnimators.forEach(anm -> {
-			int currIndex = anm.getCurrentKeyIndex();
-			Animators.setPosture((HasAnimation) anm.getOwner(), currIndex);
-			anm.setCurrentKeyIndex(currIndex + 1);
+		List<AnimatorControl> controls = getActivedAnimatorControls();
+		controls.stream().forEach(cr -> {
+			GameObject owner = cr.getOwner();
+			Collection<Animator> animators = cr.getAnimators().values();
+			animators.forEach(anm -> {
+				int currIndex = anm.getCurrentKeyIndex();
+				Animators.setPosture((HasAnimation) owner, currIndex);
+				anm.setCurrentKeyIndex(currIndex + 1);
+			});
 		});
+
 	}
 
 	public static void paintActivedGameObjects(Graphics g) {
