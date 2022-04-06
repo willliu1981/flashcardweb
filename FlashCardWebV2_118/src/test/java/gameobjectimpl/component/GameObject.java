@@ -9,13 +9,16 @@ import gameobjectimpl.animator.Animator;
 import gameobjectimpl.animator.AnimatorBuilder;
 
 public class GameObject extends Component {
-	protected Map<String, Animator> animators;
+	private Map<String, Animator> animators;
 
 	public GameObject() {
 
 	}
 
 	public void addAnimator(String name, Animator animator) {
+		if (this.animators == null) {
+			this.animators = new HashMap<>();
+		}
 		this.animators.put(name, animator);
 		animator.setOwner(this);
 	}
@@ -26,5 +29,12 @@ public class GameObject extends Component {
 
 	public List<Animator> getAnimators() {
 		return this.animators.values().stream().collect(Collectors.toList());
+	}
+
+	public final void setAnimators(Map<String, Animator> animators) {
+		animators.forEach((k, v) -> {
+			addAnimator(k, v);
+		});
+
 	}
 }

@@ -78,7 +78,7 @@ public class Scene {
 	public static void addSceneComponent(Component component) {
 		Scene.sceneComponents.add(component);
 		component.setParentComponent(parent);
-		addGameObject(component);
+		addActivedGameObject(component);
 
 	}
 
@@ -89,7 +89,7 @@ public class Scene {
 
 	}
 
-	public static void addGameObject(Component component) {
+	public static void addActivedGameObject(Component component) {
 		activedGameObjects.add(component);
 	}
 

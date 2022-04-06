@@ -13,26 +13,55 @@
         http://www.springframework.org/schema/mvc
         https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-
 	<context:property-placeholder
-		location="file:c:/test/gameobject/animator.properties" />
+		location="gameobjectimpl/config/component.properties" />
 
-	<bean id="car" class="test7.Car" init-method="init">
-		<constructor-arg>
-			<value>xxx1</value>
-		</constructor-arg>
-		<property name="name" value="${animator.person1.walk_right}"></property>
-		<property name="addComponents">
+
+<!-- 
+	<bean id="person1AnimatorBuilder"
+		class="gameobjectimpl.animator.AnimatorBuilder">
+		<property name="resolver" ref="animatorResolver" />
+		<property name="names">
+			<list>
+				<value>person1.walk-right</value>
+				<value>person1.walk-left</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="animatorResolver"
+		class="gameobjectimpl.animator.AnimatorResolver"
+		init-method="initAnimators">
+		<property name="addAnimator">
 			<map>
-			<!--  	-->
+			
 				<entry key="person1.walk-right"
 					value="${animator.person1.walk_right}" />
 				<entry key="person1.walk-left"
 					value="${animator.person1.walk_left}" />
+				
+			</map>
+		</property>
+	</bean>
+ -->
+<!-- -->
+	<bean id="car2" class="test7.Car" init-method="init">
+		<constructor-arg>
+			<value>xxx1</value>
+		</constructor-arg>
+		<property name="name" value="ccc"></property>
+		<property name="addComponents">
+			<map>
+
+				<entry key="person1.walk-right" value="aaa" />
+				<entry key="person1.walk-left" value="bbb" />
 
 			</map>
 		</property>
 	</bean>
+
+
+
 
 
 </beans>

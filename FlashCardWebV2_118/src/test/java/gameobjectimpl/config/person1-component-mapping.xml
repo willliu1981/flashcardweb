@@ -14,7 +14,7 @@
         https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 	<context:property-placeholder
-		location="gameobjectimpl/config/component.properties" />
+		location="gameobjectimpl/config/component.properties,file:c:/test/gameobject/animator.properties" />
 
 	<bean id="owner-david" class="java.lang.String">
 		<constructor-arg>

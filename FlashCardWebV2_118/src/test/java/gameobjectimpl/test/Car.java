@@ -1,10 +1,10 @@
-package test7;
+package gameobjectimpl.test;
 
 import java.util.Map;
 
 import idv.tool.Debug;
 
-public class Car implements CarI {
+public class Car {
 	private Map<String,String> components;
 
 	private String name;

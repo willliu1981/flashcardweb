@@ -6,10 +6,15 @@ import gameobjectimpl.animator.AnimatorBuilder;
 import gameobjectimpl.component.GameObject;
 import gameobjectimpl.component.HasAnimation;
 import gameobjectimpl.component.IsAnimatorGameObjectBean;
+import idv.tool.Debug;
 
 public class Person extends GameObject
 		implements HasAnimation, IsAnimatorGameObjectBean {
 	protected AnimatorBuilder animatorBuilder;
+
+	public Person() {
+
+	}
 
 	@Override
 	public void setAnimatorBuilder(AnimatorBuilder animatorBuilder) {
@@ -18,12 +23,12 @@ public class Person extends GameObject
 
 	@Override
 	public String toString() {
-		return "Person [animator=" + animators + ", toString()=" + super.toString()
-				+ "]";
+		return "Person [animator=" + this.getAnimators() + ", toString()="
+				+ super.toString() + "]";
 	}
 
 	@Override
 	public void initAnimators() {
-		this.animators = animatorBuilder.getAnimators();
+		this.setAnimators(animatorBuilder.getAnimators());
 	}
 }

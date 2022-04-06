@@ -6,6 +6,8 @@ import java.util.Map;
 
 import com.google.gson.Gson;
 
+import idv.tool.Debug;
+
 public class AnimatorResolver {
 	private Map<String, Animator> animators;
 
@@ -17,10 +19,9 @@ public class AnimatorResolver {
 		Map<String, Animator> anms = new HashMap<>();
 		animators.forEach((k, v) -> {
 			if (keys.contains(k)) {
-				anms.put(v.getName(), v);
+				anms.put("person1.walk-right", v);
 			}
 		});
-
 		return anms;
 	}
 
@@ -40,6 +41,7 @@ public class AnimatorResolver {
 
 	public void initAnimators() {
 		if (this.animators == null) {
+			this.animators=new HashMap<>();
 			animatorByJsonStrings.forEach((k, v) -> {
 				Animator anm = parse(v);
 				animators.put(k, anm);

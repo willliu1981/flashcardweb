@@ -94,7 +94,7 @@ public class Component {
 	public void addComponent(Component component) {
 		this.components.add(component);
 		component.setParentComponent(this);
-		Scene.addGameObject(component);
+		Scene.addActivedGameObject(component);
 	}
 
 	public void setAddComponent(List<Component> components) {
