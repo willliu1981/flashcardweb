@@ -16,13 +16,13 @@ public class CreatePersonApp {
 
 	public static void main(String[] args) throws InterruptedException {
 
-		Person person = Application.getBean("David", Person.class);
-		Scene.addSceneComponent(person);
-		person.addAnimator("walk", Animators.load("David"));
-		Animators.setPosture(person, 0);
-		Scene.locating();
+		//Person person = Application.getBean("David", Person.class);
+		//Scene.addSceneComponent(person);
+		//person.addAnimator("walk", Animators.load("David"));
+		//Animators.setPosture(person, 0);
+		//Scene.locating();
 
-		PersonCreatorFrame pcf = new PersonCreatorFrame(person);
+		PersonCreatorFrame pcf = new PersonCreatorFrame(null);
 		pcf.setVisible(true);
 
 		/*

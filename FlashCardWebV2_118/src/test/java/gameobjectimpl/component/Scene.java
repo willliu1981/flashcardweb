@@ -99,7 +99,7 @@ public class Scene {
 
 	public static void run(JComponent comp) {
 		task = new GameTask(comp);
-		timer.schedule(task, 1000, 50);
+		timer.schedule(task, 1000, 100);
 	}
 
 	public static List<Animator> getActivedAnimators() {

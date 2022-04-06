@@ -14,31 +14,12 @@
         https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 
-	<bean id="person1AnimatorBuilder"
-		class="gameobjectimpl.animator.AnimatorBuilder" lazy-init="true">
-		<property name="resolver" ref="animatorResolver" />
-		<property name="names">
-			<list>
-				<value>person1.walk-right</value>
-				<value>person1.walk-left</value>
-			</list>
-		</property>
+
+
+	<bean id="book" class="test7.Book" lazy-init="true" >
+		<property name="name" value="${aaa.bbb}"></property>
+
 	</bean>
-
-	<bean id="animatorResolver"
-		class="gameobjectimpl.animator.AnimatorResolver"
-		init-method="initAnimators" lazy-init="true">
-		<property name="addAnimator">
-			<map>
-				<entry key="person1.walk-right"
-					value="${animator.person1.walk_right}" />
-				<entry key="person1.walk_left"
-					value="${animator.person1.walk_left}" />
-			</map>
-		</property>
-	</bean>
-
-
 
 
 </beans>

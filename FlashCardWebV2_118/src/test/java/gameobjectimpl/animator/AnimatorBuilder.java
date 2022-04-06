@@ -8,6 +8,8 @@ import idv.tool.Debug;
 public class AnimatorBuilder {
 	private AnimatorResolver resolver;
 	private List<String> names;//用於取得resolver 中 map 的 vaule 的 key 
+	
+
 
 	public List<String> getNames() {
 		return names;

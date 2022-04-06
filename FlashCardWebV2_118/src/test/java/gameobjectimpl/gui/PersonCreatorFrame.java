@@ -174,9 +174,10 @@ public class PersonCreatorFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Animators.reset();
 
-				Person person = Application.getBean("David", Person.class);
+				Person person = Application.getBean("defaultPerson1", Person.class);
 				Scene.addSceneComponent(person);
-				person.addAnimator("walk", Animators.load("David"));
+
+
 				Animators.setPosture(person, 0);
 				Scene.locating();
 

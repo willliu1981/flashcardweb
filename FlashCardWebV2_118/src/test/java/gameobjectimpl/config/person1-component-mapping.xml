@@ -13,16 +13,35 @@
         http://www.springframework.org/schema/mvc
         https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
+		
 	<context:property-placeholder
-		location="gameobjectimpl/config/component.properties,file:c:/test/gameobject/animator.properties" />
+		location="gameobjectimpl/config/component.properties,
+		file:c:/test/gameobject/animators.properties" />
 
 	<bean id="owner-david" class="java.lang.String">
 		<constructor-arg>
-			<value>David</value>
+			<value>person1</value>
 		</constructor-arg>
 	</bean>
 
-	<bean id="David" class="gameobjectimpl.component.impl.Person"
+
+
+	<bean id="defaultPerson1"
+		class="gameobjectimpl.component.impl.Person" scope="prototype">
+		<property name="name" ref="owner-david" />
+		<property name="layer" value="0" />
+		<property name="paintable" value="false" />
+		<property name="position" value="100,300" />
+		<property name="owner" ref="owner-david" />
+		<property name="addComponent">
+			<list>
+				<ref bean="spine" />
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="person1" class="gameobjectimpl.component.impl.Person"
 		scope="prototype" init-method="initAnimators">
 		<property name="name" ref="owner-david" />
 		<property name="layer" value="0" />

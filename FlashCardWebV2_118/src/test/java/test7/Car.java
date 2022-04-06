@@ -10,17 +10,17 @@ public class Car implements CarI {
 	private String name;
 
 	public Car() {
-		
+		Debug.test("ccccccc");
 	}
 
 	public Car(String name) {
 		this.name = name;
-		Debug.test(this, "constructor");
+		//Debug.test(this, "constructor");
 	}
 
 	public void setName(String name) {
 		this.name = name;
-		Debug.test(this, "setName");
+		//Debug.test(this, "setName");
 	}
 
 	public String getName() {
@@ -28,7 +28,7 @@ public class Car implements CarI {
 	}
 
 	public void init() {
-		Debug.test(this, "init");
+		//Debug.test(this, "init");
 	}
 
 	public Map<String, String> getComponents() {

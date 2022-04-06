@@ -1,11 +1,10 @@
 package gameobjectimpl.component.impl;
 
-import java.util.HashMap;
-
 import gameobjectimpl.animator.AnimatorBuilder;
 import gameobjectimpl.component.GameObject;
 import gameobjectimpl.component.HasAnimation;
 import gameobjectimpl.component.IsAnimatorGameObjectBean;
+import idv.fc.exception.FindErrorException;
 import idv.tool.Debug;
 
 public class Person extends GameObject
@@ -29,6 +28,10 @@ public class Person extends GameObject
 
 	@Override
 	public void initAnimators() {
-		this.setAnimators(animatorBuilder.getAnimators());
+		try {
+			this.setAnimators(animatorBuilder.getAnimators());
+		} catch (NullPointerException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

@@ -21,21 +21,35 @@ import idv.tool.Debug;
 
 public class Animators {
 	private static String TESTANIMATORNAME = "person1.walk-right";
-	private static final File FILE = new File("c:/test/gameobject/animator.properties");
+	private static final File FILE = new File(
+			"c:/test/gameobject/animators.properties");
 
 	private static final String TESTANIMATORSUFFIX = ".walk";
+
+	public static boolean fileIsExist() {
+		return FILE.exists();
+	}
+
+	public static void createEmptyFile() {
+		try {
+			FILE.getParentFile().mkdirs();
+			FILE.createNewFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public static Animator load(String name) {
 		Properties prop = new Properties();
 		try {
 			if (!FILE.exists()) {
-				FILE.getParentFile().mkdirs();
-				FILE.createNewFile();
-				Animator animator = getDefaultAnimator(name);
-				write(animator, name);
-				return animator;
+				prop.load(new FileInputStream(FILE));
+			} else {
+				prop.load(new FileInputStream(
+						"gameobjectimpl.demo.data.defaultdata.animators.properties"));
 			}
-			prop.load(new FileInputStream(FILE));
+
 			Gson gson = new Gson();
 			String jsonString = prop.getProperty(name + TESTANIMATORSUFFIX);
 
@@ -50,10 +64,12 @@ public class Animators {
 
 	public static void write(Animator animator, String name) {
 		Properties prop = new Properties();
-		try {
 
-			//KeyFrame findKey = Animators.findKey(animator, "rhand3");
-			//Debug.test("Animators", findKey.getPosition());
+		try {
+			if (!FILE.exists()) {
+				FILE.getParentFile().mkdirs();
+				FILE.createNewFile();
+			}
 
 			prop.load(new FileInputStream(FILE));
 			Gson gson = new Gson();

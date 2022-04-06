@@ -26,7 +26,7 @@ public class TestRunApp {
 		GameObjectFrame frame = new GameObjectFrame();
 		frame.setVisible(true);
 
-		Person person = Application.getBean("David", Person.class);
+		Person person = Application.getBean("person1", Person.class);
 		Scene.addSceneComponent(person);
 		//Animators.setPosture(person, 0);
 		//Scene.locating();

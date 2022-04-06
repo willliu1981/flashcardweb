@@ -13,10 +13,16 @@
         http://www.springframework.org/schema/mvc
         https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-
+<!--  -->
 	<context:property-placeholder
-		location="file:c:/test/gameobject/animator.properties" />
+		location="file:c:/test/gameobject/animators.properties" />
 
+
+	<bean id="car" class="test7.Car" init-method="init">
+		<property name="name" value="cccc"></property>
+	</bean>
+
+<!--  
 	<bean id="car" class="test7.Car" init-method="init">
 		<constructor-arg>
 			<value>xxx1</value>
@@ -24,15 +30,15 @@
 		<property name="name" value="${animator.person1.walk_right}"></property>
 		<property name="addComponents">
 			<map>
-			<!--  	-->
-				<entry key="person1.walk-right"
-					value="${animator.person1.walk_right}" />
-				<entry key="person1.walk-left"
-					value="${animator.person1.walk_left}" />
 
-			</map>
-		</property>
-	</bean>
+	<entry key="person1.walk-right"
+		value="${animator.person1.walk_right}" />
+	<entry key="person1.walk-left"
+		value="${animator.person1.walk_left}" />
 
+</map>
+</property>
+</bean>
+	-->
 
 </beans>
