@@ -43,7 +43,7 @@ import gameobjectimpl.tool.GameObjectScanner;
 import idv.tool.Debug;
 
 public class PersonCreatorFrame extends JFrame {
-	private static String TESTANIMATORNAME = "walk-right";
+	private static String TESTANIMATORNAME = "walk_right";
 	private Timer tmr;
 	private boolean tmrIsRunning = false;
 	private GameObject target;
@@ -74,9 +74,6 @@ public class PersonCreatorFrame extends JFrame {
 		setContentPane(contentPane);
 
 		CreatePersonGameObjectPanel pane_person_info = new CreatePersonGameObjectPanel();
-		/*
-		 * #mouse pressed
-		 */
 		pane_person_info.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -126,7 +123,6 @@ public class PersonCreatorFrame extends JFrame {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				@SuppressWarnings("unchecked")
 				JList<ComponentAdapter> source = (JList<ComponentAdapter>) e
 						.getSource();
 				ComponentAdapter selectedValue = (ComponentAdapter) source
@@ -161,10 +157,11 @@ public class PersonCreatorFrame extends JFrame {
 		panel_north_bar.add(btn_output);
 		btn_output.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Person person = (Person) Scene.findSceneComponent("David");
+				Person person = (Person) Scene.findSceneComponent("person1");
 				person.getAnimator(TESTANIMATORNAME).setMaxNumberOfKey(
 						Integer.valueOf(text_maxNumberOfKey.getText().trim()));
-				Animators.write(person.getAnimator(TESTANIMATORNAME), "David");
+				Animators.write(person.getAnimator(TESTANIMATORNAME),
+						person.getOwner());
 			}
 		});
 		btn_output.setFont(new Font("新細明體", Font.PLAIN, 28));
@@ -176,7 +173,6 @@ public class PersonCreatorFrame extends JFrame {
 
 				Person person = Application.getBean("defaultPerson1", Person.class);
 				Scene.addSceneComponent(person);
-
 
 				Animators.setPosture(person, 0);
 				Scene.locating();

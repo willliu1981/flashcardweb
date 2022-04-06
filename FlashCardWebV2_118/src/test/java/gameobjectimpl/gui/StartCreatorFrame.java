@@ -63,7 +63,7 @@ public class StartCreatorFrame extends JFrame {
 					Animators.createEmptyFile();
 					person = Application.getBean("defaultPerson1", Person.class);
 				}
-				Debug.test(person);
+				Debug.test(this,person);
 				
 				
 				Scene.addSceneComponent(person);

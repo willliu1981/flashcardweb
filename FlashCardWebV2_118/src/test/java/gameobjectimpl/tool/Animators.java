@@ -20,10 +20,11 @@ import gameobjectimpl.component.Scene;
 import idv.tool.Debug;
 
 public class Animators {
-	private static String TESTANIMATORNAME = "walk-right";
+	private static String TESTANIMATORNAME = "walk_right";
 	private static final File FILE = new File(
 			"c:/test/gameobject/animators.properties");
 
+	private static final String PROP_KEY_RPREFIX = "animator";
 	private static final String TESTANIMATORSUFFIX = ".walk";
 
 	public static boolean fileIsExist() {
@@ -40,6 +41,7 @@ public class Animators {
 		}
 	}
 
+	/*
 	public static Animator load(String name) {
 		Properties prop = new Properties();
 		try {
@@ -49,20 +51,21 @@ public class Animators {
 				prop.load(new FileInputStream(
 						"gameobjectimpl.demo.data.defaultdata.animators.properties"));
 			}
-
+	
 			Gson gson = new Gson();
 			String jsonString = prop.getProperty(name + TESTANIMATORSUFFIX);
-
+	
 			return gson.fromJson(jsonString, Animator.class);
-
+	
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
 		}
-
+	
 	}
+	//*/
 
-	public static void write(Animator animator, String name) {
+	public static void write(Animator animator, String ownerName) {
 		Properties prop = new Properties();
 
 		try {
@@ -75,7 +78,11 @@ public class Animators {
 			Gson gson = new Gson();
 			String jsonString = gson.toJson(animator);
 
-			prop.setProperty(name + TESTANIMATORSUFFIX, jsonString);
+			Debug.test("Anms", ownerName, jsonString);
+
+			String propKey = String.format("%s.%s.%s", PROP_KEY_RPREFIX,
+					ownerName.trim(), animator.getName().trim());
+			prop.setProperty(propKey, jsonString);
 			prop.store(new FileOutputStream(FILE), "animator");
 
 		} catch (IOException e) {
@@ -124,6 +131,7 @@ public class Animators {
 		List<KeyFrame> findKeys = findKeys(target.getAnimator(TESTANIMATORNAME),
 				keyIndex);
 
+		Debug.test("Anms idx", keyIndex);
 		GameObject go = (GameObject) target;
 		List<Component> findActivedGameObjectByOwner = Scene
 				.findActivedGameObjectByOwner(go.getOwner());

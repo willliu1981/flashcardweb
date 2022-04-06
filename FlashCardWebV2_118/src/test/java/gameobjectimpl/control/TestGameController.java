@@ -7,7 +7,7 @@ import gameobjectimpl.component.Component;
 import gameobjectimpl.component.Scene;
 import idv.tool.Debug;
 
-public class TestGameControler implements GameControllerI {
+public class TestGameController implements GameControllerI {
 	private static int dir = -1;
 
 	public static void move() {

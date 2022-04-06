@@ -27,7 +27,7 @@ public class GameObjectPanel extends JPanel {
 	public void paint(Graphics g) {
 		super.paint(g);
 		
-		Scene.refreshPosture();
+
 		Scene.locating();
 		Scene.paintActivedGameObjects(g);
 

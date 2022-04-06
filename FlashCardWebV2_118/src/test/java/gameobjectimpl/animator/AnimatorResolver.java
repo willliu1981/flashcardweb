@@ -32,6 +32,7 @@ public class AnimatorResolver {
 		Map<String, Animator> animators = new HashMap<>();
 		animatorJsons.forEach((k, v) -> {
 			Animator anm = parse(v);
+			anm.setName(k);
 			animators.put(k, anm);
 		});
 

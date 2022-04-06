@@ -14,10 +14,11 @@ import javax.swing.JComponent;
 
 import gameobjectimpl.animator.Animator;
 import gameobjectimpl.animator.AnimatorControl;
-import gameobjectimpl.control.TestGameControler;
+import gameobjectimpl.control.TestGameController;
 import gameobjectimpl.tool.Animators;
 import gameobjectimpl.tool.Graphs;
 import gameobjectimpl.tool.Locations;
+import idv.tool.Debug;
 
 public class Scene {
 
@@ -48,8 +49,9 @@ public class Scene {
 
 		@Override
 		public void run() {
-			TestGameControler.move();
+			TestGameController.move();
 			//locating();
+			Scene.refreshPosture();
 			comp.repaint();
 
 		}
@@ -71,10 +73,6 @@ public class Scene {
 		List<Component> collect = activedGameObjects.stream()
 				.filter(go -> go.getOwner().equals(name)).collect(Collectors.toList());
 		return collect;
-	}
-
-	public static void setSceneComponents(List<Component> components) {
-		Scene.sceneComponents = components;
 	}
 
 	public static void addSceneComponent(Component component) {
@@ -130,7 +128,7 @@ public class Scene {
 			animators.forEach(anm -> {
 				int currIndex = anm.getCurrentKeyIndex();
 				Animators.setPosture((HasAnimation) owner, currIndex);
-				anm.setCurrentKeyIndex(currIndex + 1);
+				anm.setCurrentKeyIndex(currIndex);
 			});
 		});
 
