@@ -41,29 +41,9 @@ public class Animators {
 		}
 	}
 
-	/*
-	public static Animator load(String name) {
-		Properties prop = new Properties();
-		try {
-			if (!FILE.exists()) {
-				prop.load(new FileInputStream(FILE));
-			} else {
-				prop.load(new FileInputStream(
-						"gameobjectimpl.demo.data.defaultdata.animators.properties"));
-			}
-	
-			Gson gson = new Gson();
-			String jsonString = prop.getProperty(name + TESTANIMATORSUFFIX);
-	
-			return gson.fromJson(jsonString, Animator.class);
-	
-		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
-		}
-	
+	public static List<String> getAnimatorNames(HasAnimation target) {
+		return target.getAnimators().keySet().stream().collect(Collectors.toList());
 	}
-	//*/
 
 	public static void write(Animator animator, String ownerName) {
 		Properties prop = new Properties();

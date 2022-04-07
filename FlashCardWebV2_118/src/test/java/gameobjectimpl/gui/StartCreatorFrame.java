@@ -19,6 +19,9 @@ import gameobjectimpl.tool.Animators;
 import idv.tool.Debug;
 import idv.tool.spring.MySpringUtil;
 
+/*
+ * notice: 運行此程式,預設會在 c:/test/gameobject/animators.properties 創建properties檔案
+ */
 public class StartCreatorFrame extends JFrame {
 	private static String TESTANIMATORNAME = "walk_right";
 	private JPanel contentPane;

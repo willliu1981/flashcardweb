@@ -21,6 +21,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -40,9 +43,6 @@ import gameobjectimpl.tool.AdapterListConverter;
 import gameobjectimpl.tool.Animators;
 import gameobjectimpl.tool.Components;
 import gameobjectimpl.tool.GameObjectScanner;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 
 public class PersonCreatorFrame extends JFrame {
 	private static String TESTANIMATORNAME = "walk_right";
@@ -55,6 +55,7 @@ public class PersonCreatorFrame extends JFrame {
 	private JList<ComponentAdapter> list;
 	private JLabel lbl_keyIndex;
 	private JTextField text_maxNumberOfKey;
+	private JLabel lbl_animatorName;
 
 	public PersonCreatorFrame(GameObject target) {
 		this.setTarget(target);
@@ -154,21 +155,45 @@ public class PersonCreatorFrame extends JFrame {
 
 		JPanel panel_north_bar = new JPanel();
 		contentPane.add(panel_north_bar, BorderLayout.NORTH);
-		
+
 		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBorder(new LineBorder(Color.ORANGE));
 		panel_north_bar.add(menuBar);
-		
+
 		JMenu mnNewMenu = new JMenu("animator");
 		mnNewMenu.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 18));
 		menuBar.add(mnNewMenu);
-		
-		JMenuItem mntmNewMenuItem = new JMenuItem("New menu item");
-		mntmNewMenuItem.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 18));
-		mnNewMenu.add(mntmNewMenuItem);
-		
+		{
+			List<String> animatorNames = Animators
+					.getAnimatorNames((HasAnimation) target);
+
+			animatorNames.forEach(n -> {
+				JMenuItem mntmNewMenuItem = new JMenuItem(n);
+				mntmNewMenuItem
+						.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 18));
+				mnNewMenu.add(mntmNewMenuItem);
+				mntmNewMenuItem.setName(n);
+				mntmNewMenuItem.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						JMenuItem item = (JMenuItem) e.getSource();
+						lbl_animatorName.setText(item.getName());
+					}
+
+				});
+			});
+		}
+
 		JPanel panel = new JPanel();
-		panel.setPreferredSize(new Dimension(60, 10));
 		panel_north_bar.add(panel);
+
+		lbl_animatorName = new JLabel("      ");
+		lbl_animatorName.setFont(new Font("新細明體", Font.PLAIN, 28));
+		panel.add(lbl_animatorName);
+		
+		JLabel lbl_animatorName_gap1 = new JLabel("      ");
+		lbl_animatorName_gap1.setFont(new Font("新細明體", Font.PLAIN, 28));
+		panel.add(lbl_animatorName_gap1);
 
 		JButton btn_output = new JButton("Output");
 		panel_north_bar.add(btn_output);
