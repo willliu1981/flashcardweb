@@ -20,7 +20,6 @@ import gameobjectimpl.component.Scene;
 import idv.tool.Debug;
 
 public class Animators {
-	private static String TESTANIMATORNAME = "walk_right";
 	private static final File FILE = new File(
 			"c:/test/gameobject/animators.properties");
 
@@ -111,8 +110,9 @@ public class Animators {
 		return null;
 	}
 
-	public static void setPosture(HasAnimation target, Integer keyIndex) {
-		List<KeyFrame> findKeys = findKeys(target.getAnimator(TESTANIMATORNAME),
+	public static void setPosture(HasAnimation target, String animatorName,
+			Integer keyIndex) {
+		List<KeyFrame> findKeys = findKeys(target.getAnimator(animatorName),
 				keyIndex);
 
 		GameObject go = (GameObject) target;

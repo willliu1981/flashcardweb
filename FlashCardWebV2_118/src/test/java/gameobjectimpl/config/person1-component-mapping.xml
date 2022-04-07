@@ -24,13 +24,13 @@
 	</bean>
 
 	<bean id="animatorResolver"
-		class="gameobjectimpl.animator.AnimatorResolver">
+		class="gameobjectimpl.animator.AnimatorResolver" scope="prototype">
 		<property name="config"
 			value="classpath:gameobjectimpl/config/animator.xml" />
 	</bean>
 
 	<bean id="defaultAnimatorResolver"
-		class="gameobjectimpl.animator.AnimatorResolver">
+		class="gameobjectimpl.animator.AnimatorResolver" scope="prototype">
 		<property name="config"
 			value="classpath:gameobjectimpl/demo/data/defaultdata/default-animator.xml" />
 	</bean>

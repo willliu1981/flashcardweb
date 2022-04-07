@@ -1,0 +1,7 @@
+.	本程式會在 c:test\gameobject 下創建 properties 檔案
+.	檔案出錯時,刪除  c:test\gameobject\ 下的檔案
+
+
+
+問題:
+.	PersonCreatorFrame : index 往後走時,出現key不存在造成節點錯位的問題

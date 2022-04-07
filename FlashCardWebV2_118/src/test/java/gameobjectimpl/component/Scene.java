@@ -18,7 +18,6 @@ import gameobjectimpl.control.TestGameController;
 import gameobjectimpl.tool.Animators;
 import gameobjectimpl.tool.Graphs;
 import gameobjectimpl.tool.Locations;
-import idv.tool.Debug;
 
 public class Scene {
 
@@ -51,7 +50,7 @@ public class Scene {
 		public void run() {
 			TestGameController.move();
 			//locating();
-			Scene.refreshPosture();
+			//Scene.refreshPosture();
 			comp.repaint();
 
 		}
@@ -123,14 +122,15 @@ public class Scene {
 		return collect;
 	}
 
-	public static void refreshPosture() {
+	public static void refreshPosture(String currentAnimatorName) {
 		List<AnimatorControl> controls = getActivedAnimatorControls();
 		controls.stream().forEach(cr -> {
 			GameObject owner = cr.getOwner();
 			Collection<Animator> animators = cr.getAnimators().values();
 			animators.forEach(anm -> {
 				int currIndex = anm.getCurrentKeyIndex();
-				Animators.setPosture((HasAnimation) owner, currIndex);
+				Animators.setPosture((HasAnimation) owner, currentAnimatorName,
+						currIndex);
 				anm.setCurrentKeyIndex(currIndex + 1);
 			});
 		});

@@ -38,12 +38,10 @@ import gameobjectimpl.component.GameObject;
 import gameobjectimpl.component.HasAnimation;
 import gameobjectimpl.component.Scene;
 import gameobjectimpl.component.impl.Person;
-import gameobjectimpl.config.Application;
 import gameobjectimpl.tool.AdapterListConverter;
 import gameobjectimpl.tool.Animators;
 import gameobjectimpl.tool.Components;
 import gameobjectimpl.tool.GameObjectScanner;
-import idv.tool.Debug;
 
 public class PersonCreatorFrame extends JFrame {
 	private static String TESTANIMATORNAME = "walk_right";
@@ -207,10 +205,12 @@ public class PersonCreatorFrame extends JFrame {
 		panel_north_bar.add(btn_output);
 		btn_output.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Person person = (Person) Scene.findSceneComponent("person1");
-				person.getAnimator(currentAnimatorName).setMaxNumberOfKey(
-						Integer.valueOf(text_maxNumberOfKey.getText().trim()));
-				Animators.writeAll(person, currentAnimatorName);
+				if (currentAnimatorIsExist) {
+					Person person = (Person) Scene.findSceneComponent("person1");
+					person.getAnimator(currentAnimatorName).setMaxNumberOfKey(
+							Integer.valueOf(text_maxNumberOfKey.getText().trim()));
+					Animators.writeAll(person, person.getOwner());
+				}
 			}
 		});
 		btn_output.setFont(new Font("新細明體", Font.PLAIN, 28));
@@ -313,7 +313,7 @@ public class PersonCreatorFrame extends JFrame {
 
 						@Override
 						public void run() {
-							Animators.setPosture((HasAnimation) target, index);
+							Animators.setPosture((HasAnimation) target,currentAnimatorName, index);
 							Scene.locating();
 							repaint();
 
@@ -369,7 +369,7 @@ public class PersonCreatorFrame extends JFrame {
 	}
 
 	protected void refreshPosture() {
-		Animators.setPosture((HasAnimation) target, this.getKeyIndexFromLabel());
+		Animators.setPosture((HasAnimation) target,currentAnimatorName, this.getKeyIndexFromLabel());
 		Scene.locating();
 		repaint();
 	}
