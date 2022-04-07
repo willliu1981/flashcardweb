@@ -45,6 +45,12 @@ public class Animators {
 		return target.getAnimators().keySet().stream().collect(Collectors.toList());
 	}
 
+	public static void writeAll(HasAnimation target, String ownerName) {
+		target.getAnimators().values().stream().forEach(anm -> {
+			write(anm, ownerName);
+		});
+	}
+
 	public static void write(Animator animator, String ownerName) {
 		Properties prop = new Properties();
 
@@ -57,8 +63,6 @@ public class Animators {
 			prop.load(new FileInputStream(FILE));
 			Gson gson = new Gson();
 			String jsonString = gson.toJson(animator);
-
-			Debug.test("Anms", ownerName, jsonString);
 
 			String propKey = String.format("%s.%s.%s", PROP_KEY_RPREFIX,
 					ownerName.trim(), animator.getName().trim());

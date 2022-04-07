@@ -23,6 +23,7 @@ import idv.tool.spring.MySpringUtil;
  * notice: 運行此程式,預設會在 c:/test/gameobject/animators.properties 創建properties檔案
  */
 public class StartCreatorFrame extends JFrame {
+	private StartCreatorFrame thisFrame = this;
 	private static String TESTANIMATORNAME = "walk_right";
 	private JPanel contentPane;
 
@@ -64,14 +65,15 @@ public class StartCreatorFrame extends JFrame {
 				} else {
 					Animators.createEmptyFile();
 					person = Application.getBean("defaultPerson1", Person.class);
-					Animators.write(person.getAnimator(TESTANIMATORNAME),
-							person.getOwner());
+					Animators.writeAll(person, person.getOwner());
 				}
 
 				Scene.addSceneComponent(person);
 
 				PersonCreatorFrame pcf = new PersonCreatorFrame(person);
 				pcf.setVisible(true);
+
+				thisFrame.setVisible(false);
 			}
 		});
 		btnNewButton.setFont(new Font("新細明體", Font.PLAIN, 28));

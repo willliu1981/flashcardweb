@@ -43,6 +43,7 @@ import gameobjectimpl.tool.AdapterListConverter;
 import gameobjectimpl.tool.Animators;
 import gameobjectimpl.tool.Components;
 import gameobjectimpl.tool.GameObjectScanner;
+import idv.tool.Debug;
 
 public class PersonCreatorFrame extends JFrame {
 	private static String TESTANIMATORNAME = "walk_right";
@@ -56,6 +57,8 @@ public class PersonCreatorFrame extends JFrame {
 	private JLabel lbl_keyIndex;
 	private JTextField text_maxNumberOfKey;
 	private JLabel lbl_animatorName;
+	private String currentAnimatorName;
+	private boolean currentAnimatorIsExist = false;
 
 	public PersonCreatorFrame(GameObject target) {
 		this.setTarget(target);
@@ -80,27 +83,30 @@ public class PersonCreatorFrame extends JFrame {
 		pane_person_info.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (list.getSelectedIndex() == -1) {
-					return;
+				if (currentAnimatorIsExist) {
+					if (list.getSelectedIndex() == -1) {
+						return;
+					}
+
+					ComponentAdapter adpt = list.getSelectedValue();
+					Point adptP = e.getPoint();
+					Point parentP = adpt.getParentComponent().getAbsolutePosition();
+					Point relativeP = new Point();
+					relativeP.setLocation(adptP.x - parentP.x, adptP.y - parentP.y);
+					adpt.setRelevantPosition(relativeP);
+
+					Animator anm = ((Person) target).getAnimator(currentAnimatorName);
+
+					KeyFrame key = new KeyFrame();
+					key.setKeyName(adpt.getName());
+					key.setKeyIndex(Integer.valueOf(lbl_keyIndex.getText()));
+					key.setPosition(relativeP);
+					anm.addKeyFrame(key);
+
+					Scene.locating();
+					repaint();
 				}
 
-				ComponentAdapter adpt = list.getSelectedValue();
-				Point adptP = e.getPoint();
-				Point parentP = adpt.getParentComponent().getAbsolutePosition();
-				Point relativeP = new Point();
-				relativeP.setLocation(adptP.x - parentP.x, adptP.y - parentP.y);
-				adpt.setRelevantPosition(relativeP);
-
-				Animator anm = ((Person) target).getAnimator(TESTANIMATORNAME);
-
-				KeyFrame key = new KeyFrame();
-				key.setKeyName(adpt.getName());
-				key.setKeyIndex(Integer.valueOf(lbl_keyIndex.getText()));
-				key.setPosition(relativeP);
-				anm.addKeyFrame(key);
-
-				Scene.locating();
-				repaint();
 			}
 		});
 		pane_person_info.setComponents(adapters);
@@ -123,17 +129,18 @@ public class PersonCreatorFrame extends JFrame {
 
 		list = new JList<>();
 		list.addMouseListener(new MouseAdapter() {
-
 			@Override
 			public void mousePressed(MouseEvent e) {
-				JList<ComponentAdapter> source = (JList<ComponentAdapter>) e
-						.getSource();
-				ComponentAdapter selectedValue = (ComponentAdapter) source
-						.getSelectedValue();
+				if (currentAnimatorIsExist) {
+					JList<ComponentAdapter> source = (JList<ComponentAdapter>) e
+							.getSource();
+					ComponentAdapter selectedValue = (ComponentAdapter) source
+							.getSelectedValue();
 
-				Components.clearSelected(adapters);
-				selectedValue.setSelected();
-				repaint();
+					Components.clearSelected(adapters);
+					selectedValue.setSelected();
+					repaint();
+				}
 			}
 		});
 		list.setFont(new Font("新細明體", Font.PLAIN, 28));
@@ -177,7 +184,8 @@ public class PersonCreatorFrame extends JFrame {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						JMenuItem item = (JMenuItem) e.getSource();
-						lbl_animatorName.setText(item.getName());
+
+						loadAnimatorAndInit(item);
 					}
 
 				});
@@ -190,7 +198,7 @@ public class PersonCreatorFrame extends JFrame {
 		lbl_animatorName = new JLabel("      ");
 		lbl_animatorName.setFont(new Font("新細明體", Font.PLAIN, 28));
 		panel.add(lbl_animatorName);
-		
+
 		JLabel lbl_animatorName_gap1 = new JLabel("      ");
 		lbl_animatorName_gap1.setFont(new Font("新細明體", Font.PLAIN, 28));
 		panel.add(lbl_animatorName_gap1);
@@ -200,10 +208,9 @@ public class PersonCreatorFrame extends JFrame {
 		btn_output.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Person person = (Person) Scene.findSceneComponent("person1");
-				person.getAnimator(TESTANIMATORNAME).setMaxNumberOfKey(
+				person.getAnimator(currentAnimatorName).setMaxNumberOfKey(
 						Integer.valueOf(text_maxNumberOfKey.getText().trim()));
-				Animators.write(person.getAnimator(TESTANIMATORNAME),
-						person.getOwner());
+				Animators.writeAll(person, currentAnimatorName);
 			}
 		});
 		btn_output.setFont(new Font("新細明體", Font.PLAIN, 28));
@@ -211,18 +218,18 @@ public class PersonCreatorFrame extends JFrame {
 		JButton btn_reset = new JButton("Reset");
 		btn_reset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Animators.reset();
-
-				Person person = Application.getBean("defaultPerson1", Person.class);
-				Scene.addSceneComponent(person);
-
-				Animators.setPosture(person, 0);
-				Scene.locating();
-
-				PersonCreatorFrame pcf = new PersonCreatorFrame(person);
-				pcf.setVisible(true);
-
-				dispose();
+				/*	Animators.reset();
+				
+					Person person = Application.getBean("defaultPerson1", Person.class);
+					Scene.addSceneComponent(person);
+				
+					Animators.setPosture(person, 0);
+					Scene.locating();
+				
+					PersonCreatorFrame pcf = new PersonCreatorFrame(person);
+					pcf.setVisible(true);
+				
+					dispose();*/
 
 			}
 		});
@@ -240,15 +247,18 @@ public class PersonCreatorFrame extends JFrame {
 		JButton btn_previous = new JButton("<");
 		btn_previous.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int index = -1;
-				if ((index = Integer.valueOf(lbl_keyIndex.getText().trim())) <= 0) {
-					index = target.getAnimator(TESTANIMATORNAME).getMaxNumberOfKey();
-				} else {
-					index--;
-				}
-				lbl_keyIndex.setText("" + index);
+				if (currentAnimatorIsExist) {
+					int index = -1;
+					if ((index = Integer.valueOf(lbl_keyIndex.getText().trim())) <= 0) {
+						index = target.getAnimator(currentAnimatorName)
+								.getMaxNumberOfKey();
+					} else {
+						index--;
+					}
+					lbl_keyIndex.setText("" + index);
 
-				refreshPosture();
+					refreshPosture();
+				}
 			}
 		});
 		btn_previous.setFont(new Font("新細明體", Font.PLAIN, 28));
@@ -266,15 +276,18 @@ public class PersonCreatorFrame extends JFrame {
 		JButton btn_next = new JButton(">");
 		btn_next.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int index = Integer.valueOf(lbl_keyIndex.getText().trim());
-				if (index >= Integer.valueOf(text_maxNumberOfKey.getText().trim())) {
-					index = 0;
-				} else {
-					index++;
-				}
-				lbl_keyIndex.setText("" + index);
+				if (currentAnimatorIsExist) {
+					int index = Integer.valueOf(lbl_keyIndex.getText().trim());
+					if (index >= Integer
+							.valueOf(text_maxNumberOfKey.getText().trim())) {
+						index = 0;
+					} else {
+						index++;
+					}
+					lbl_keyIndex.setText("" + index);
 
-				refreshPosture();
+					refreshPosture();
+				}
 			}
 		});
 		btn_next.setFont(new Font("新細明體", Font.PLAIN, 28));
@@ -286,34 +299,35 @@ public class PersonCreatorFrame extends JFrame {
 		JButton btn_test = new JButton("Test");
 		btn_test.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (tmrIsRunning == true) {
-					tmr.cancel();
-					tmrIsRunning = false;
-					return;
-				}
-
-				tmr = new Timer();
-
-				TimerTask task = new TimerTask() {
-					int index;
-
-					@Override
-					public void run() {
-						Animators.setPosture((HasAnimation) target, index);
-						Scene.locating();
-						repaint();
-
-						index++;
-						if (index > target.getAnimator(TESTANIMATORNAME)
-								.getMaxNumberOfKey()) {
-							index = 0;
-						}
+				if (currentAnimatorIsExist) {
+					if (tmrIsRunning == true) {
+						tmr.cancel();
+						tmrIsRunning = false;
+						return;
 					}
 
-				};
+					tmr = new Timer();
 
-				tmr.schedule(task, 500, 200);
-				tmrIsRunning = true;
+					TimerTask task = new TimerTask() {
+						int index;
+
+						@Override
+						public void run() {
+							Animators.setPosture((HasAnimation) target, index);
+							Scene.locating();
+							repaint();
+
+							index++;
+							if (index > target.getAnimator(currentAnimatorName)
+									.getMaxNumberOfKey()) {
+								index = 0;
+							}
+						}
+					};
+
+					tmr.schedule(task, 500, 200);
+					tmrIsRunning = true;
+				}
 			}
 		});
 		btn_test.setFont(new Font("新細明體", Font.PLAIN, 28));
@@ -328,11 +342,22 @@ public class PersonCreatorFrame extends JFrame {
 
 		text_maxNumberOfKey = new JTextField();
 		text_maxNumberOfKey.setHorizontalAlignment(SwingConstants.CENTER);
-		text_maxNumberOfKey.setText("" + ((HasAnimation) target)
-				.getAnimator(TESTANIMATORNAME).getMaxNumberOfKey());
+		text_maxNumberOfKey.setText("" + 0);
 		text_maxNumberOfKey.setFont(new Font("新細明體", Font.PLAIN, 28));
 		panel_maxKey.add(text_maxNumberOfKey);
 		text_maxNumberOfKey.setColumns(3);
+	}
+
+	protected void loadAnimatorAndInit(JMenuItem item) {
+		String name = item.getName();
+		lbl_animatorName.setText(name);
+		currentAnimatorName = name;
+		this.text_maxNumberOfKey.setText("" + ((HasAnimation) target)
+				.getAnimator(currentAnimatorName).getMaxNumberOfKey());
+		this.lbl_keyIndex.setText("" + 0);
+		currentAnimatorIsExist = true;
+
+		this.refreshPosture();
 	}
 
 	protected int getKeyIndexFromLabel() {
