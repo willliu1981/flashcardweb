@@ -35,8 +35,9 @@ public class Graphs {
 			List<ComponentAdapter> adapters) {
 		g.setColor(Color.cyan);
 		g.drawLine(0, 300, 1000, 300);
-		g.drawLine(300, 0, 300, 1000);
+		g.drawLine(0, 500, 1000, 500);
 
+		g.drawLine(300, 0, 300, 1000);
 
 		adapters.stream().forEach(adpt -> {
 			if (adpt.isPaintable()) {
@@ -47,9 +48,9 @@ public class Graphs {
 					g.setColor(Color.blue);
 				}
 				g2d.setStroke(new BasicStroke(3));
-				g2d.drawRoundRect(adpt.getAbsolutePosition().x,
-						adpt.getAbsolutePosition().y, DEFAULTWIDTH, DEFAULTHEIGHT,
-						DEFAULTWIDTH, DEFAULTHEIGHT);
+				g2d.drawRoundRect(adpt.getAbsolutePosition().x - DEFAULTWIDTH / 2,
+						adpt.getAbsolutePosition().y - DEFAULTHEIGHT / 2, DEFAULTWIDTH,
+						DEFAULTHEIGHT, DEFAULTWIDTH, DEFAULTHEIGHT);
 			}
 		});
 
