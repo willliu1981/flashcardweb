@@ -131,7 +131,6 @@ public class Animators {
 		List<KeyFrame> findKeys = findKeys(target.getAnimator(TESTANIMATORNAME),
 				keyIndex);
 
-		Debug.test("Anms idx", keyIndex);
 		GameObject go = (GameObject) target;
 		List<Component> findActivedGameObjectByOwner = Scene
 				.findActivedGameObjectByOwner(go.getOwner());

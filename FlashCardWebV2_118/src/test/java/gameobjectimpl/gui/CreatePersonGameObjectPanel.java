@@ -11,17 +11,11 @@ public class CreatePersonGameObjectPanel extends GameObjectPanel {
 
 	private List<ComponentAdapter> adapters;
 
-	/**
-	 * Create the panel.
-	 */
-	public CreatePersonGameObjectPanel() {
-
-	}
-
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
-		if (!adapters.isEmpty()) {
+
+		if (adapters != null && !adapters.isEmpty()) {
 			Graphs.paintForCreatePerson(g, adapters);
 
 		}

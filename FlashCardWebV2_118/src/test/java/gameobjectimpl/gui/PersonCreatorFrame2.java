@@ -40,11 +40,9 @@ import gameobjectimpl.tool.AdapterListConverter;
 import gameobjectimpl.tool.Animators;
 import gameobjectimpl.tool.Components;
 import gameobjectimpl.tool.GameObjectScanner;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
+import idv.tool.Debug;
 
-public class PersonCreatorFrame extends JFrame {
+public class PersonCreatorFrame2 extends JFrame {
 	private static String TESTANIMATORNAME = "walk_right";
 	private Timer tmr;
 	private boolean tmrIsRunning = false;
@@ -56,7 +54,7 @@ public class PersonCreatorFrame extends JFrame {
 	private JLabel lbl_keyIndex;
 	private JTextField text_maxNumberOfKey;
 
-	public PersonCreatorFrame(GameObject target) {
+	public PersonCreatorFrame2(GameObject target) {
 		this.setTarget(target);
 		this.adapters = AdapterListConverter.convert(
 				GameObjectScanner.findComponents(target), ComponentAdapter.class);
@@ -154,21 +152,6 @@ public class PersonCreatorFrame extends JFrame {
 
 		JPanel panel_north_bar = new JPanel();
 		contentPane.add(panel_north_bar, BorderLayout.NORTH);
-		
-		JMenuBar menuBar = new JMenuBar();
-		panel_north_bar.add(menuBar);
-		
-		JMenu mnNewMenu = new JMenu("animator");
-		mnNewMenu.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 18));
-		menuBar.add(mnNewMenu);
-		
-		JMenuItem mntmNewMenuItem = new JMenuItem("New menu item");
-		mntmNewMenuItem.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 18));
-		mnNewMenu.add(mntmNewMenuItem);
-		
-		JPanel panel = new JPanel();
-		panel.setPreferredSize(new Dimension(60, 10));
-		panel_north_bar.add(panel);
 
 		JButton btn_output = new JButton("Output");
 		panel_north_bar.add(btn_output);
@@ -194,7 +177,7 @@ public class PersonCreatorFrame extends JFrame {
 				Animators.setPosture(person, 0);
 				Scene.locating();
 
-				PersonCreatorFrame pcf = new PersonCreatorFrame(person);
+				PersonCreatorFrame2 pcf = new PersonCreatorFrame2(person);
 				pcf.setVisible(true);
 
 				dispose();

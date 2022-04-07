@@ -20,7 +20,7 @@ import idv.tool.Debug;
 import idv.tool.spring.MySpringUtil;
 
 public class StartCreatorFrame extends JFrame {
-
+	private static String TESTANIMATORNAME = "walk_right";
 	private JPanel contentPane;
 
 	/**
@@ -57,15 +57,14 @@ public class StartCreatorFrame extends JFrame {
 				Person person = null;
 
 				if (fileIsExist) {
-					Debug.test(this, "is exist");
 					person = Application.getBean("person1", Person.class);
 				} else {
 					Animators.createEmptyFile();
 					person = Application.getBean("defaultPerson1", Person.class);
+					Animators.write(person.getAnimator(TESTANIMATORNAME),
+							person.getOwner());
 				}
-				Debug.test(this,person);
-				
-				
+
 				Scene.addSceneComponent(person);
 
 				PersonCreatorFrame pcf = new PersonCreatorFrame(person);

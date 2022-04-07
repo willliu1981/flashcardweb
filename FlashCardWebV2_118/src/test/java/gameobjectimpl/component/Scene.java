@@ -83,9 +83,12 @@ public class Scene {
 	}
 
 	public static void locating() {
-		sceneComponents.forEach(comp -> {
-			Locations.locating(comp);
-		});
+		if (sceneComponents != null) {
+			sceneComponents.forEach(comp -> {
+				Locations.locating(comp);
+			});
+
+		}
 
 	}
 
@@ -128,7 +131,7 @@ public class Scene {
 			animators.forEach(anm -> {
 				int currIndex = anm.getCurrentKeyIndex();
 				Animators.setPosture((HasAnimation) owner, currIndex);
-				anm.setCurrentKeyIndex(currIndex);
+				anm.setCurrentKeyIndex(currIndex + 1);
 			});
 		});
 
