@@ -33,6 +33,10 @@ public class Graphs {
 	 */
 	public static void paintForCreatePerson(Graphics g,
 			List<ComponentAdapter> adapters) {
+		g.setColor(Color.cyan);
+		g.drawLine(0, 300, 1000, 300);
+		g.drawLine(300, 0, 300, 1000);
+
 
 		adapters.stream().forEach(adpt -> {
 			if (adpt.isPaintable()) {

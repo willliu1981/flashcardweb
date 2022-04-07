@@ -193,7 +193,7 @@ public class PersonCreatorFrame extends JFrame {
 		JPanel panel = new JPanel();
 		panel_north_bar.add(panel);
 
-		lbl_animatorName = new JLabel("      ");
+		lbl_animatorName = new JLabel("尚未選取");
 		lbl_animatorName.setFont(new Font("新細明體", Font.PLAIN, 28));
 		panel.add(lbl_animatorName);
 
@@ -370,7 +370,6 @@ public class PersonCreatorFrame extends JFrame {
 
 	protected void refreshPosture() {
 		Animators.setPosture((HasAnimation) target,currentAnimatorName, this.getKeyIndexFromLabel());
-		Scene.locating();
 		repaint();
 	}
 
