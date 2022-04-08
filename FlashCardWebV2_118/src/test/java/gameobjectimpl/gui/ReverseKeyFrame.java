@@ -1,6 +1,7 @@
 package gameobjectimpl.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.HeadlessException;
@@ -24,10 +25,12 @@ import com.google.gson.Gson;
 
 import gameobjectimpl.animator.Animator;
 import gameobjectimpl.tool.Animators;
+import gameobjectimpl.tool.Frames;
 import idv.tool.Debug;
 import java.awt.GridLayout;
 
 public class ReverseKeyFrame extends JFrame {
+	private ParentContainer parentContainer;
 	private List<Animator> reverses;
 	private List<Animator> targets;
 
@@ -36,9 +39,9 @@ public class ReverseKeyFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ReverseKeyFrame(List<Animator> anms) throws HeadlessException {
+	public ReverseKeyFrame( ParentContainer parentContainer,List<Animator> anms) throws HeadlessException {
 		super();
-
+		this.parentContainer=parentContainer;
 		this.reverses = anms;
 		this.targets = anms;
 
@@ -48,7 +51,7 @@ public class ReverseKeyFrame extends JFrame {
 	public void init() {
 		setTitle("reverse keys");
 		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
-		setBounds(100, 100, 709, 456);
+		Frames.setBoundsCenterToParentContainer(this.parentContainer, this, 500, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));

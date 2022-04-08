@@ -48,4 +48,6 @@ public class Person extends GameObject
 		this.animatorResolver = animatorResolver;
 	}
 
+
+
 }

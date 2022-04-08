@@ -24,6 +24,10 @@ public class AnimatorControl {
 	public void setAnimators(Map<String, Animator> animators) {
 		this.animators = animators;
 	}
+	
+	public void addAnimator(String name, Animator anm) {
+		this.animators.put(name, anm);
+	}
 
 	public Animator getAnimator(String name) {
 		return this.animators.get(name);

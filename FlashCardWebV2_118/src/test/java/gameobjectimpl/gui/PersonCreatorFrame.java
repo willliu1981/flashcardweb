@@ -2,6 +2,7 @@ package gameobjectimpl.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
@@ -9,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Timer;
@@ -44,9 +44,11 @@ import gameobjectimpl.component.impl.Person;
 import gameobjectimpl.tool.AdapterLists;
 import gameobjectimpl.tool.Animators;
 import gameobjectimpl.tool.Components;
+import gameobjectimpl.tool.Frames;
 import gameobjectimpl.tool.GameObjectScanner;
 
-public class PersonCreatorFrame extends JFrame {
+public class PersonCreatorFrame extends JFrame implements ParentContainer {
+	private ParentContainer parentContainer;
 	private static String TESTANIMATORNAME = "walk_right";
 	private Timer tmr;
 	private boolean tmrIsRunning = false;
@@ -62,8 +64,10 @@ public class PersonCreatorFrame extends JFrame {
 	private boolean currentAnimatorIsExist = false;
 	private CreatePersonGameObjectPanel pane_person_info;
 	private JCheckBox chkBox_previous;
+	protected Container thisFrame = this;
 
-	public PersonCreatorFrame(GameObject target) {
+	public PersonCreatorFrame(ParentContainer parentContainer, GameObject target) {
+		this.parentContainer = parentContainer;
 		this.setTarget(target);
 		this.adapters = AdapterLists.convertToAdapter(
 				GameObjectScanner.findComponents(target), ComponentAdapter.class);
@@ -76,7 +80,7 @@ public class PersonCreatorFrame extends JFrame {
 	 */
 	public void init() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 840, 789);
+		Frames.setBoundsCenterToParentContainer(this.parentContainer, this, 1000, 1000);
 
 		JMenuBar menuBar_top = new JMenuBar();
 		setJMenuBar(menuBar_top);
@@ -85,18 +89,30 @@ public class PersonCreatorFrame extends JFrame {
 		mnNewMenu_edit.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 28));
 		menuBar_top.add(mnNewMenu_edit);
 
-		JMenuItem mntmNewMenuItem_reverseKey = new JMenuItem("Reverse Key");
-		mntmNewMenuItem_reverseKey.addMouseListener(new MouseAdapter() {
+		JMenuItem mntm_reverseKey = new JMenuItem("Reverse Key");
+		mntm_reverseKey.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				ReverseKeyFrame reverse = new ReverseKeyFrame(
-						target.getAnimatorsToList());
+						(ParentContainer) thisFrame, target.getAnimatorsToList());
 				reverse.setVisible(true);
 			}
 		});
-		mntmNewMenuItem_reverseKey
-				.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 28));
-		mnNewMenu_edit.add(mntmNewMenuItem_reverseKey);
+
+		JMenuItem mntm_addAnimator = new JMenuItem("Add Animator");
+		mntm_addAnimator.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				AddAnimatorFrame addFrame = new AddAnimatorFrame(
+						(ParentContainer) thisFrame);
+				addFrame.setParentAnimator((HasAnimation) target);
+				addFrame.setVisible(true);
+			}
+		});
+		mntm_addAnimator.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 28));
+		mnNewMenu_edit.add(mntm_addAnimator);
+		mntm_reverseKey.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 28));
+		mnNewMenu_edit.add(mntm_reverseKey);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -244,7 +260,7 @@ public class PersonCreatorFrame extends JFrame {
 		panel_north_bar.add(btn_output);
 		btn_output.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Animators.writeAll((HasAnimation) target, target.getOwner());
+				save();
 
 			}
 		});
@@ -394,6 +410,11 @@ public class PersonCreatorFrame extends JFrame {
 
 	}
 
+	protected void save() {
+		Animators.writeAll((HasAnimation) target, target.getOwner());
+
+	}
+
 	protected void loadAnimatorAndInit(JMenuItem item) {
 		String name = item.getName();
 		lbl_animatorName.setText(name);
@@ -434,6 +455,19 @@ public class PersonCreatorFrame extends JFrame {
 
 	private void setTarget(GameObject target) {
 		this.target = target;
+	}
+
+	public void restart() {
+
+		save();
+		PersonCreatorFrame pcf = new PersonCreatorFrame((ParentContainer) thisFrame,
+				target);
+		pcf.setVisible(true);
+
+		thisFrame.setVisible(false);
+
+		dispose();
+
 	}
 
 }

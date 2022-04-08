@@ -14,6 +14,8 @@ public interface HasAnimation {
 
 	public Map<String, Animator> getAnimators();
 
+	public void addAnimator(String name, Animator anm);
+
 	public void initAnimators();
 
 }

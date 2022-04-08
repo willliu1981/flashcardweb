@@ -22,8 +22,8 @@ public class CreatePersonApp {
 		//Animators.setPosture(person, 0);
 		//Scene.locating();
 
-		PersonCreatorFrame pcf = new PersonCreatorFrame(null);
-		pcf.setVisible(true);
+		//PersonCreatorFrame pcf = new PersonCreatorFrame(null);
+		//pcf.setVisible(true);
 
 		/*
 		List<Animator> activedAnimators = Scene.getActivedAnimators();

@@ -22,7 +22,7 @@ import idv.tool.spring.MySpringUtil;
 /*
  * notice: 運行此程式,預設會在 c:/test/gameobject/animators.properties 創建properties檔案
  */
-public class StartCreatorFrame extends JFrame {
+public class StartCreatorFrame extends JFrame implements ParentContainer {
 	private StartCreatorFrame thisFrame = this;
 	private static String TESTANIMATORNAME = "walk_right";
 	private JPanel contentPane;
@@ -53,6 +53,7 @@ public class StartCreatorFrame extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		this.setLocationRelativeTo(null);
 
 		JButton btnNewButton = new JButton("Create Pserson");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -69,7 +70,8 @@ public class StartCreatorFrame extends JFrame {
 
 				Scene.addSceneComponent(person);
 
-				PersonCreatorFrame pcf = new PersonCreatorFrame(person);
+				PersonCreatorFrame pcf = new PersonCreatorFrame(
+						(ParentContainer) thisFrame, person);
 				pcf.setVisible(true);
 
 				thisFrame.setVisible(false);
@@ -77,6 +79,12 @@ public class StartCreatorFrame extends JFrame {
 		});
 		btnNewButton.setFont(new Font("新細明體", Font.PLAIN, 28));
 		contentPane.add(btnNewButton, BorderLayout.CENTER);
+	}
+
+	@Override
+	public void restart() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -41,6 +41,11 @@ public class GameObject extends Component {
 		return values.stream().collect(Collectors.toList());
 	}
 
+	public void addAnimator(String name, Animator anm) {
+		this.animatorControl.addAnimator(name, anm);
+
+	}
+
 	public Map<String, Animator> getAnimators() {
 
 		return this.getAnimatorControl().getAnimators();
