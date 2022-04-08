@@ -39,7 +39,7 @@ public class Graphs {
 
 	public static void paintForCreatePersonPrevious(Graphics g,
 			List<ComponentAdapter> adapters) {
-		paintForCreatePersonPrevious(g, adapters, Color.magenta, Color.orange);
+		paintForCreatePersonPrevious(g, adapters, Color.green, Color.orange);
 	}
 
 	private static void paintForCreatePersonPrevious(Graphics g,
@@ -52,7 +52,7 @@ public class Graphs {
 				} else {
 					g.setColor(background);
 				}
-				g2d.setStroke(new BasicStroke(3));
+				g2d.setStroke(new BasicStroke(2));
 				g2d.drawRoundRect(
 						adpt.getPreviosAbsolutePosition().x - DEFAULTWIDTH / 2,
 						adpt.getPreviosAbsolutePosition().y - DEFAULTHEIGHT / 2,
@@ -64,6 +64,8 @@ public class Graphs {
 
 	private static void paintForCreatePerson(Graphics g,
 			List<ComponentAdapter> adapters, Color background, Color active) {
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.setStroke(new BasicStroke(1));
 		g.setColor(Color.LIGHT_GRAY);
 		g.drawLine(0, 300, 1000, 300);
 		g.drawLine(0, 500, 1000, 500);
@@ -72,7 +74,7 @@ public class Graphs {
 
 		adapters.stream().forEach(adpt -> {
 			if (adpt.isPaintable()) {
-				Graphics2D g2d = (Graphics2D) g;
+
 				if (adpt.isSelected()) {
 					g.setColor(active);
 				} else {

@@ -42,6 +42,7 @@ import gameobjectimpl.tool.AdapterLists;
 import gameobjectimpl.tool.Animators;
 import gameobjectimpl.tool.Components;
 import gameobjectimpl.tool.GameObjectScanner;
+import javax.swing.JCheckBox;
 
 public class PersonCreatorFrame extends JFrame {
 	private static String TESTANIMATORNAME = "walk_right";
@@ -58,6 +59,7 @@ public class PersonCreatorFrame extends JFrame {
 	private String currentAnimatorName;
 	private boolean currentAnimatorIsExist = false;
 	private CreatePersonGameObjectPanel pane_person_info;
+	private JCheckBox chkBox_previous;
 
 	public PersonCreatorFrame(GameObject target) {
 		this.setTarget(target);
@@ -161,14 +163,22 @@ public class PersonCreatorFrame extends JFrame {
 
 		JPanel panel_north_bar = new JPanel();
 		contentPane.add(panel_north_bar, BorderLayout.NORTH);
+		panel_north_bar.setLayout(new BoxLayout(panel_north_bar, BoxLayout.X_AXIS));
+
+		JPanel panel_animator = new JPanel();
+		panel_north_bar.add(panel_animator);
+
+		JPanel panel_1 = new JPanel();
+		panel_animator.add(panel_1);
 
 		JMenuBar menuBar = new JMenuBar();
+		panel_1.add(menuBar);
 		menuBar.setBorder(new LineBorder(Color.ORANGE));
-		panel_north_bar.add(menuBar);
 
 		JMenu mnNewMenu = new JMenu("animator");
 		mnNewMenu.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 18));
 		menuBar.add(mnNewMenu);
+
 		{
 			List<String> animatorNames = Animators
 					.getAnimatorNames((HasAnimation) target);
@@ -177,7 +187,6 @@ public class PersonCreatorFrame extends JFrame {
 				JMenuItem mntmNewMenuItem = new JMenuItem(n);
 				mntmNewMenuItem
 						.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 18));
-				mnNewMenu.add(mntmNewMenuItem);
 				mntmNewMenuItem.setName(n);
 				mntmNewMenuItem.addActionListener(new ActionListener() {
 					@Override
@@ -188,19 +197,26 @@ public class PersonCreatorFrame extends JFrame {
 					}
 
 				});
+				mnNewMenu.add(mntmNewMenuItem);
 			});
 		}
 
 		JPanel panel = new JPanel();
-		panel_north_bar.add(panel);
+		panel_animator.add(panel);
 
 		lbl_animatorName = new JLabel("尚未選取");
 		lbl_animatorName.setFont(new Font("新細明體", Font.PLAIN, 28));
 		panel.add(lbl_animatorName);
 
-		JLabel lbl_animatorName_gap1 = new JLabel("      ");
-		lbl_animatorName_gap1.setFont(new Font("新細明體", Font.PLAIN, 28));
-		panel.add(lbl_animatorName_gap1);
+		JPanel panel_showPrevious = new JPanel();
+		panel_north_bar.add(panel_showPrevious);
+
+		chkBox_previous = new JCheckBox("previous");
+		chkBox_previous.setFont(new Font("新細明體", Font.PLAIN, 28));
+		panel_showPrevious.add(chkBox_previous);
+
+		JPanel panel_gap1 = new JPanel();
+		panel_north_bar.add(panel_gap1);
 
 		JButton btn_output = new JButton("Output");
 		panel_north_bar.add(btn_output);
@@ -303,11 +319,9 @@ public class PersonCreatorFrame extends JFrame {
 		btn_test.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (currentAnimatorIsExist) {
-					pane_person_info.setCreateMode(false);
 					if (tmrIsRunning == true) {
 						tmr.cancel();
 						tmrIsRunning = false;
-						pane_person_info.setCreateMode(true);
 						return;
 					}
 
@@ -365,7 +379,7 @@ public class PersonCreatorFrame extends JFrame {
 		currentAnimatorIsExist = true;
 
 		this.refreshPosture();
-		pane_person_info.setCreateMode(true);
+
 	}
 
 	protected int getKeyIndexFromLabel() {
@@ -377,7 +391,10 @@ public class PersonCreatorFrame extends JFrame {
 	}
 
 	protected void refreshPosture() {
-		AdapterLists.setComponentPreviosAbsolutePosition(adapters);
+		if (chkBox_previous.isSelected()) {
+			pane_person_info.setShowPrevious(true);
+			AdapterLists.setComponentPreviosAbsolutePosition(adapters);
+		}
 
 		Animators.setPosture((HasAnimation) target, currentAnimatorName,
 				this.getKeyIndexFromLabel());
