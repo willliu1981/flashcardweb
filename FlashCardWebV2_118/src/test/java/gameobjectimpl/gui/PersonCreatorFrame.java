@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -27,6 +28,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -42,11 +44,6 @@ import gameobjectimpl.tool.AdapterLists;
 import gameobjectimpl.tool.Animators;
 import gameobjectimpl.tool.Components;
 import gameobjectimpl.tool.GameObjectScanner;
-import idv.tool.Debug;
-
-import javax.swing.JCheckBox;
-import java.awt.Rectangle;
-import java.awt.Insets;
 
 public class PersonCreatorFrame extends JFrame {
 	private static String TESTANIMATORNAME = "walk_right";
@@ -92,7 +89,7 @@ public class PersonCreatorFrame extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 
-				Debug.test(this, "xxxx");
+				//ReverseKeyFrame reverse = new ReverseKeyFrame();
 			}
 		});
 		mntmNewMenuItem_reverseKey
@@ -142,16 +139,17 @@ public class PersonCreatorFrame extends JFrame {
 
 		//*
 		final DefaultListModel<ComponentAdapter> model = new DefaultListModel<>();
+		{
+			adapters = adapters.stream()
+					.sorted(Comparator.comparing(ComponentAdapter::getLayer))
+					.collect(Collectors.toList());
 
-		adapters = adapters.stream()
-				.sorted(Comparator.comparing(ComponentAdapter::getLayer))
-				.collect(Collectors.toList());
-
-		adapters.forEach(comp -> {
-			model.addElement(comp);
-		});
-
+			adapters.forEach(comp -> {
+				model.addElement(comp);
+			});
+		}
 		list = new JList<>();
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
