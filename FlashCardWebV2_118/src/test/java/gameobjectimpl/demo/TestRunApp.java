@@ -1,13 +1,10 @@
 package gameobjectimpl.demo;
 
-import gameobjectimpl.animator.AnimatorResolver;
 import gameobjectimpl.component.Scene;
 import gameobjectimpl.component.impl.Person;
 import gameobjectimpl.config.Application;
-import gameobjectimpl.gui.GameObjectFrame;
-import gameobjectimpl.tool.Animators;
-import idv.tool.Debug;
-import idv.tool.spring.MySpringUtil;
+import gameobjectimpl.control.TestGameController;
+import gameobjectimpl.gui.RunGameObjectFrame;
 
 public class TestRunApp {
 
@@ -21,16 +18,16 @@ public class TestRunApp {
 				.getBean("animatorResolver", AnimatorResolver.class);
 		Debug.test(bean);
 		//*/
-		
+
 		//*
-		GameObjectFrame frame = new GameObjectFrame();
+		RunGameObjectFrame frame = new RunGameObjectFrame();
 		frame.setVisible(true);
 
 		Person person = Application.getBean("person1", Person.class);
 		Scene.addSceneComponent(person);
 		//Animators.setPosture(person, 0);
 		//Scene.locating();
-
+		Scene.addGameControllerI(new TestGameController());
 		Scene.run(frame.getGameObjectPanel());
 
 		//*/

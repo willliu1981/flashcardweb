@@ -14,13 +14,13 @@ import javax.swing.JComponent;
 
 import gameobjectimpl.animator.Animator;
 import gameobjectimpl.animator.AnimatorControl;
-import gameobjectimpl.control.TestGameController;
+import gameobjectimpl.control.GameControllerI;
 import gameobjectimpl.tool.Animators;
 import gameobjectimpl.tool.Graphs;
 import gameobjectimpl.tool.Locations;
 
 public class Scene {
-
+	private static List<GameControllerI> testGameControllers = new ArrayList<>();
 	private static GameTask task;
 
 	private static Timer timer = new Timer();
@@ -39,8 +39,13 @@ public class Scene {
 
 	}
 
+	public static void addGameControllerI(GameControllerI gameControllerI) {
+		testGameControllers.add(gameControllerI);
+	}
+
 	private static class GameTask extends TimerTask {
 		private JComponent comp;
+		private boolean isStarted = false;
 
 		private GameTask(JComponent comp) {
 			this.comp = comp;
@@ -48,9 +53,13 @@ public class Scene {
 
 		@Override
 		public void run() {
-			TestGameController.move();
-			//locating();
-			//Scene.refreshPosture();
+			if (!isStarted) {
+				testGameControllers.forEach(GameControllerI::start);
+				isStarted = true;
+			}
+
+			testGameControllers.forEach(GameControllerI::update);
+
 			comp.repaint();
 
 		}
@@ -103,15 +112,6 @@ public class Scene {
 		task = new GameTask(comp);
 		timer.schedule(task, 1000, 100);
 	}
-
-	//	public static List<Animator> getActivedAnimators() {
-	//		List<Animator> anms = Scene.getSceneComponents().stream()
-	//				.filter(cmpt -> cmpt instanceof HasAnimation)
-	//				.map(cmpnt -> ((HasAnimation) cmpnt).getToListAnimators())
-	//				.flatMap(List::stream).collect(Collectors.toList());
-	//
-	//		return anms;
-	//	}
 
 	public static List<AnimatorControl> getActivedAnimatorControls() {
 		List<AnimatorControl> collect = Scene.getSceneComponents().stream()

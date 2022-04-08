@@ -10,30 +10,40 @@ import idv.tool.Debug;
 public class TestGameController implements GameControllerI {
 	private static int dir = -1;
 
-	public static void move() {
-		List<Component> gameObjects = Scene.getSceneComponents();
-		gameObjects.forEach(go -> {
-			Point p = go.getRelevantPosition();
-
-			switch (dir) {
-			case 1:
-				p.x = p.x + 25;
-				break;
-			case -1:
-				p.x = p.x - 25;
-				break;
-			default:
-				break;
-			}
-
-			if (p.x > 800) {
-				dir = -1;
-			} else if (p.x < 50) {
-				dir = 1;
-			}
-			go.setRelevantPosition(p);
-		});
-
+	@Override
+	public void start() {
+		Debug.test("start...");
 	}
+
+	@Override
+	public void update() {
+		Debug.test("update...");
+	}
+
+//	public static void move() {
+//		List<Component> gameObjects = Scene.getSceneComponents();
+//		gameObjects.forEach(go -> {
+//			Point p = go.getRelevantPosition();
+//
+//			switch (dir) {
+//			case 1:
+//				p.x = p.x + 25;
+//				break;
+//			case -1:
+//				p.x = p.x - 25;
+//				break;
+//			default:
+//				break;
+//			}
+//
+//			if (p.x > 800) {
+//				dir = -1;
+//			} else if (p.x < 50) {
+//				dir = 1;
+//			}
+//			go.setRelevantPosition(p);
+//		});
+//
+//	}
 
 }

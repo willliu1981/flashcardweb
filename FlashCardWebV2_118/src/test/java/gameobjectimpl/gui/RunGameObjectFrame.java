@@ -9,7 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 import gameobjectimpl.component.Scene;
 
-public class GameObjectFrame extends JFrame {
+public class RunGameObjectFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel gameObjectPanel;
@@ -17,7 +17,7 @@ public class GameObjectFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GameObjectFrame() {
+	public RunGameObjectFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 700);
 		contentPane = new JPanel();
