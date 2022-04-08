@@ -31,9 +31,40 @@ public class Graphs {
 	 * @param target
 	 * @param frameIndex
 	 */
+
 	public static void paintForCreatePerson(Graphics g,
 			List<ComponentAdapter> adapters) {
-		g.setColor(Color.cyan);
+		paintForCreatePerson(g, adapters, Color.blue, Color.red);
+	}
+
+	public static void paintForCreatePersonPrevious(Graphics g,
+			List<ComponentAdapter> adapters) {
+		paintForCreatePersonPrevious(g, adapters, Color.magenta, Color.orange);
+	}
+
+	private static void paintForCreatePersonPrevious(Graphics g,
+			List<ComponentAdapter> adapters, Color background, Color active) {
+		adapters.stream().forEach(adpt -> {
+			if (adpt.isPaintable()) {
+				Graphics2D g2d = (Graphics2D) g;
+				g.setColor(active);
+				if (adpt.isSelected()) {
+				} else {
+					g.setColor(background);
+				}
+				g2d.setStroke(new BasicStroke(3));
+				g2d.drawRoundRect(
+						adpt.getPreviosAbsolutePosition().x - DEFAULTWIDTH / 2,
+						adpt.getPreviosAbsolutePosition().y - DEFAULTHEIGHT / 2,
+						DEFAULTWIDTH, DEFAULTHEIGHT, DEFAULTWIDTH, DEFAULTHEIGHT);
+			}
+		});
+
+	}
+
+	private static void paintForCreatePerson(Graphics g,
+			List<ComponentAdapter> adapters, Color background, Color active) {
+		g.setColor(Color.LIGHT_GRAY);
 		g.drawLine(0, 300, 1000, 300);
 		g.drawLine(0, 500, 1000, 500);
 
@@ -43,9 +74,9 @@ public class Graphs {
 			if (adpt.isPaintable()) {
 				Graphics2D g2d = (Graphics2D) g;
 				if (adpt.isSelected()) {
-					g.setColor(Color.red);
+					g.setColor(active);
 				} else {
-					g.setColor(Color.blue);
+					g.setColor(background);
 				}
 				g2d.setStroke(new BasicStroke(3));
 				g2d.drawRoundRect(adpt.getAbsolutePosition().x - DEFAULTWIDTH / 2,
@@ -53,6 +84,5 @@ public class Graphs {
 						DEFAULTHEIGHT, DEFAULTWIDTH, DEFAULTHEIGHT);
 			}
 		});
-
 	}
 }

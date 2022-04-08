@@ -14,10 +14,19 @@ import gameobjectimpl.tool.Graphs;
 public class CreatePersonGameObjectPanel extends JPanel {
 
 	private List<ComponentAdapter> adapters;
-	
+	private boolean createMode = false;
+
 	public CreatePersonGameObjectPanel() {
 		setBorder(new LineBorder(Color.CYAN));
 
+	}
+
+	public boolean isCreateMode() {
+		return createMode;
+	}
+
+	public void setCreateMode(boolean createMode) {
+		this.createMode = createMode;
 	}
 
 	@Override
@@ -26,6 +35,9 @@ public class CreatePersonGameObjectPanel extends JPanel {
 
 		if (adapters != null && !adapters.isEmpty()) {
 			Scene.locating();
+			if (isCreateMode()) {
+				Graphs.paintForCreatePersonPrevious(g, adapters);
+			}
 			Graphs.paintForCreatePerson(g, adapters);
 
 		}

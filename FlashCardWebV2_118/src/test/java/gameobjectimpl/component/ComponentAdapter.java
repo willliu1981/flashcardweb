@@ -4,17 +4,25 @@ import java.awt.Point;
 import java.util.List;
 
 import gameobjectimpl.adapter.AdapterI;
+import gameobjectimpl.adapter.ComponentAdapterI;
 import gameobjectimpl.animator.Animator;
 
-public class ComponentAdapter extends Component implements AdapterI<Component> {
+public class ComponentAdapter extends Component implements ComponentAdapterI {
 
 	private Component comp;
 
-
 	private boolean selected = false;
-	private boolean paintable = true;
+	private Point previosAbsolutePosition;
 
+	@Override
+	public Point getPreviosAbsolutePosition() {
+		return previosAbsolutePosition;
+	}
 
+	@Override
+	public void setPreviosAbsolutePosition(Point previosAbsolutePosition) {
+		this.previosAbsolutePosition = previosAbsolutePosition;
+	}
 
 	public boolean isPaintable() {
 		return comp.isPaintable();

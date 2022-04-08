@@ -6,7 +6,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import gameobjectimpl.adapter.AdapterI;
-import gameobjectimpl.tool.AdapterListConverter;
+import gameobjectimpl.tool.AdapterLists;
 import idv.tool.Debug;
 
 public class MyTest2 {
@@ -90,7 +90,7 @@ public class MyTest2 {
 		bs.add(b2);
 		bs.add(b3);
 
-		List<BookAdapter> adpts = AdapterListConverter.convert(bs, BookAdapter.class);
+		List<BookAdapter> adpts = AdapterLists.convertToAdapter(bs, BookAdapter.class);
 		adpts.forEach(e -> Debug.test(e));
 
 	}

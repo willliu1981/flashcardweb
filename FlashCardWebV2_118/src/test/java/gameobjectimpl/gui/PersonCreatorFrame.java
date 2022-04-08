@@ -38,7 +38,7 @@ import gameobjectimpl.component.GameObject;
 import gameobjectimpl.component.HasAnimation;
 import gameobjectimpl.component.Scene;
 import gameobjectimpl.component.impl.Person;
-import gameobjectimpl.tool.AdapterListConverter;
+import gameobjectimpl.tool.AdapterLists;
 import gameobjectimpl.tool.Animators;
 import gameobjectimpl.tool.Components;
 import gameobjectimpl.tool.GameObjectScanner;
@@ -57,10 +57,11 @@ public class PersonCreatorFrame extends JFrame {
 	private JLabel lbl_animatorName;
 	private String currentAnimatorName;
 	private boolean currentAnimatorIsExist = false;
+	private CreatePersonGameObjectPanel pane_person_info;
 
 	public PersonCreatorFrame(GameObject target) {
 		this.setTarget(target);
-		this.adapters = AdapterListConverter.convert(
+		this.adapters = AdapterLists.convertToAdapter(
 				GameObjectScanner.findComponents(target), ComponentAdapter.class);
 
 		this.init();
@@ -77,7 +78,7 @@ public class PersonCreatorFrame extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 
-		CreatePersonGameObjectPanel pane_person_info = new CreatePersonGameObjectPanel();
+		pane_person_info = new CreatePersonGameObjectPanel();
 		pane_person_info.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -286,6 +287,8 @@ public class PersonCreatorFrame extends JFrame {
 					}
 					lbl_keyIndex.setText("" + index);
 
+					//					pane_person_info.setPaintPrevious(true);
+					//					pane_person_info.setPaintPrevious(rootPaneCheckingEnabled);
 					refreshPosture();
 				}
 			}
@@ -300,9 +303,11 @@ public class PersonCreatorFrame extends JFrame {
 		btn_test.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (currentAnimatorIsExist) {
+					pane_person_info.setCreateMode(false);
 					if (tmrIsRunning == true) {
 						tmr.cancel();
 						tmrIsRunning = false;
+						pane_person_info.setCreateMode(true);
 						return;
 					}
 
@@ -313,7 +318,8 @@ public class PersonCreatorFrame extends JFrame {
 
 						@Override
 						public void run() {
-							Animators.setPosture((HasAnimation) target,currentAnimatorName, index);
+							Animators.setPosture((HasAnimation) target,
+									currentAnimatorName, index);
 							Scene.locating();
 							repaint();
 
@@ -346,6 +352,7 @@ public class PersonCreatorFrame extends JFrame {
 		text_maxNumberOfKey.setFont(new Font("新細明體", Font.PLAIN, 28));
 		panel_maxKey.add(text_maxNumberOfKey);
 		text_maxNumberOfKey.setColumns(3);
+
 	}
 
 	protected void loadAnimatorAndInit(JMenuItem item) {
@@ -358,6 +365,7 @@ public class PersonCreatorFrame extends JFrame {
 		currentAnimatorIsExist = true;
 
 		this.refreshPosture();
+		pane_person_info.setCreateMode(true);
 	}
 
 	protected int getKeyIndexFromLabel() {
@@ -369,7 +377,10 @@ public class PersonCreatorFrame extends JFrame {
 	}
 
 	protected void refreshPosture() {
-		Animators.setPosture((HasAnimation) target,currentAnimatorName, this.getKeyIndexFromLabel());
+		AdapterLists.setComponentPreviosAbsolutePosition(adapters);
+
+		Animators.setPosture((HasAnimation) target, currentAnimatorName,
+				this.getKeyIndexFromLabel());
 		repaint();
 	}
 

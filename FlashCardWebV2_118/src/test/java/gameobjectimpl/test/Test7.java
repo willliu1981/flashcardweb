@@ -5,7 +5,9 @@ import idv.tool.spring.MySpringUtil;
 
 
 public class Test7 {
+	
 
+	
 	public static void main(String[] args) {
 		String[] paths = {
 				"classpath:gameobjectimpl/config/person1-component-mapping.xml",
