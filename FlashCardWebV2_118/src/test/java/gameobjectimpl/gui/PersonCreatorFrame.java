@@ -244,12 +244,8 @@ public class PersonCreatorFrame extends JFrame {
 		panel_north_bar.add(btn_output);
 		btn_output.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (currentAnimatorIsExist) {
-					Person person = (Person) Scene.findSceneComponent("person1");
-					person.getAnimator(currentAnimatorName).setMaxNumberOfKey(
-							Integer.valueOf(text_maxNumberOfKey.getText().trim()));
-					Animators.writeAll(person, person.getOwner());
-				}
+				Animators.writeAll((HasAnimation) target, target.getOwner());
+
 			}
 		});
 		btn_output.setFont(new Font("新細明體", Font.PLAIN, 28));
@@ -383,6 +379,13 @@ public class PersonCreatorFrame extends JFrame {
 		panel_maxKey.add(lbl_maxNumber);
 
 		text_maxNumberOfKey = new JTextField();
+		text_maxNumberOfKey.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				target.getAnimator(currentAnimatorName).setMaxNumberOfKey(
+						Integer.valueOf(text_maxNumberOfKey.getText().trim()));
+			}
+		});
 		text_maxNumberOfKey.setHorizontalAlignment(SwingConstants.CENTER);
 		text_maxNumberOfKey.setText("" + 0);
 		text_maxNumberOfKey.setFont(new Font("新細明體", Font.PLAIN, 28));

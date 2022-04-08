@@ -13,6 +13,10 @@ public class Debug {
 
 	}
 
+	public static void test() {
+		System.out.println();
+	}
+	
 	public static void test(Object msg) {
 		test(null, new NoParam(), msg, false);
 	}

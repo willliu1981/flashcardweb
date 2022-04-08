@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.HeadlessException;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.BoxLayout;
@@ -18,7 +20,12 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import com.google.gson.Gson;
+
 import gameobjectimpl.animator.Animator;
+import gameobjectimpl.tool.Animators;
+import idv.tool.Debug;
+import java.awt.GridLayout;
 
 public class ReverseKeyFrame extends JFrame {
 	private List<Animator> reverses;
@@ -62,7 +69,7 @@ public class ReverseKeyFrame extends JFrame {
 		{
 			this.reverses.forEach(anm -> model_reverse.addElement(anm));
 		}
-		JList list_reverse = new JList();
+		JList<Animator> list_reverse = new JList<>();
 		list_reverse.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane_reverse.setViewportView(list_reverse);
 		list_reverse.setModel(model_reverse);
@@ -94,7 +101,7 @@ public class ReverseKeyFrame extends JFrame {
 			this.targets.forEach(anm -> model_target.addElement(anm));
 		}
 
-		JList list_target = new JList();
+		JList<Animator> list_target = new JList<>();
 		list_target.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane_target.setViewportView(list_target);
 		list_target.setModel(model_target);
@@ -104,8 +111,37 @@ public class ReverseKeyFrame extends JFrame {
 		contentPane.add(panel_confirm, BorderLayout.SOUTH);
 
 		JButton btn_reverse = new JButton("Reverse");
+		btn_reverse.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+
+				if (list_reverse.getSelectedValue().getName()
+						.equals(list_target.getSelectedValue().getName())) {
+					return;
+				}
+
+				Gson g = new Gson();
+				String json1 = g.toJson(list_reverse.getSelectedValue());
+
+				Animators.reverseKeys(list_reverse.getSelectedValue(),
+						list_target.getSelectedValue());
+
+				String json2 = g.toJson(list_reverse.getSelectedValue());
+			}
+		});
+		panel_confirm.setLayout(new GridLayout(0, 3, 0, 0));
+		
+		JLabel lblNewLabel = new JLabel("reverse anm.");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("新細明體", Font.PLAIN, 28));
+		panel_confirm.add(lblNewLabel);
 		btn_reverse.setFont(new Font("新細明體", Font.PLAIN, 28));
 		panel_confirm.add(btn_reverse);
+		
+		JLabel lblTargetAnm = new JLabel("target anm.");
+		lblTargetAnm.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTargetAnm.setFont(new Font("新細明體", Font.PLAIN, 28));
+		panel_confirm.add(lblTargetAnm);
 	}
 
 }

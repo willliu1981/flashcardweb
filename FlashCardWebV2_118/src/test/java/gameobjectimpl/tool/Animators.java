@@ -19,6 +19,7 @@ import gameobjectimpl.component.Component;
 import gameobjectimpl.component.GameObject;
 import gameobjectimpl.component.HasAnimation;
 import gameobjectimpl.component.Scene;
+import idv.tool.Debug;
 
 public class Animators {
 	private static final File FILE = new File(
@@ -26,6 +27,7 @@ public class Animators {
 
 	private static final String PROP_KEY_RPREFIX = "animator";
 	private static final String SPINE = "spine";
+	private static final String ROOT = "person1";
 
 	public static boolean fileIsExist() {
 		return FILE.exists();
@@ -46,6 +48,7 @@ public class Animators {
 	}
 
 	public static void writeAll(HasAnimation target, String ownerName) {
+		//fixNamesInAnimator(target);//檔案損毀時的解決方案
 		target.getAnimators().values().stream().forEach(anm -> {
 			write(anm, ownerName);
 		});
@@ -139,8 +142,16 @@ public class Animators {
 
 	public static KeyFrame findKeysByEqualWithKey(Animator anm, KeyFrame key) {
 
-		return anm.getKeyFrames().stream().filter(k -> k.equals(key)).findFirst()
-				.orElseGet(null);
+		Optional<KeyFrame> findKey = anm.getKeyFrames().stream().filter(k -> {
+
+			return k.equals(key);
+		}).findFirst();
+
+		if (findKey.isPresent()) {
+			return findKey.get();
+		}
+
+		return null;
 	}
 
 	public static void reverseKeys(Animator reverse, Animator target) {
@@ -148,20 +159,49 @@ public class Animators {
 		spine.setKeyName(SPINE);
 		spine.setKeyIndex(0);
 		KeyFrame findSpine = findKeysByEqualWithKey(target, spine);
+		if (findSpine != null) {
+			reverse.setMaxNumberOfKey(target.getMaxNumberOfKey());
+			reverse.setName(reverse.getName());
+			reverse.setCurrentKeyIndex(0);
 
-		reverse.setKeyFrames(new ArrayList<>());
-		target.getKeyFrames().forEach(key -> {
-			KeyFrame newKey = new KeyFrame();
-			Point targetPos = key.getPosition();
-			Point spinePos = findSpine.getPosition();
-			Point newPos = new Point();
-			int relX = targetPos.x - spinePos.x;
+			reverse.setKeyFrames(new ArrayList<>());
+			target.getKeyFrames().forEach(key -> {
+				KeyFrame newKey = new KeyFrame();
+				newKey.setKeyName(key.getKeyName());
+				newKey.setKeyIndex(key.getKeyIndex());
 
-			newPos.x = spinePos.x - relX;
-			newPos.y = targetPos.y;
+				Point targetPos = key.getPosition();
+				Point spinePos = findSpine.getPosition();
+				Point newPos = new Point();
+				int relX = targetPos.x - spinePos.x;
 
-			newKey.setPosition(newPos);
-			reverse.addKeyFrame(key);
+				newPos.x = spinePos.x - relX;
+				newPos.y = targetPos.y;
+
+				if (key.getKeyName().endsWith(ROOT)) {
+					newKey.setPosition(key.getPosition());
+				} else {
+					newKey.setPosition(newPos);
+				}
+				reverse.addKeyFrame(newKey);
+
+			});
+		}
+
+	}
+
+	public static void fixNamesInAnimator(HasAnimation target) {
+
+		target.getAnimators().values().forEach(anm -> {
+
+			String name = anm.getName().replaceAll("\"", "");
+			anm.setName(name);
+
+			anm.getKeyFrames().forEach(key -> {
+				String keyName = key.getKeyName().replaceAll("\"", "");
+				key.setKeyName(keyName);
+			});
+
 		});
 
 	}
