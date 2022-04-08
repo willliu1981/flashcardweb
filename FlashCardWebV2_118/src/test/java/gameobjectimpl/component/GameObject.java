@@ -1,6 +1,7 @@
 package gameobjectimpl.component;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -32,6 +33,12 @@ public class GameObject extends Component {
 	public final void setAnimators(Map<String, Animator> animators) {
 		this.getAnimatorControl().setAnimators(animators);
 
+	}
+
+	public List<Animator> getAnimatorsToList() {
+		Collection<Animator> values = getAnimators().values();
+
+		return values.stream().collect(Collectors.toList());
 	}
 
 	public Map<String, Animator> getAnimators() {

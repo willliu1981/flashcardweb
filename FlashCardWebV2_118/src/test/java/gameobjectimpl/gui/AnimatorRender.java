@@ -13,16 +13,17 @@ import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
 import javax.swing.ListSelectionModel;
 
+import gameobjectimpl.animator.Animator;
 import gameobjectimpl.component.Component;
 import idv.tool.Debug;
 
-public class MyRender extends JPanel implements ListCellRenderer<Component> {
+public class AnimatorRender extends JPanel implements ListCellRenderer<Animator> {
 	protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 	private JLabel lbIcon = new JLabel();
 	private JLabel lbName = new JLabel();
 	private JLabel lbComponentCount = new JLabel();
 
-	public MyRender() {
+	public AnimatorRender() {
 		setLayout(new BorderLayout(5, 5));
 
 		JPanel panelText = new JPanel(new GridLayout(1, 0));
@@ -36,12 +37,12 @@ public class MyRender extends JPanel implements ListCellRenderer<Component> {
 
 	@Override
 	public java.awt.Component getListCellRendererComponent(
-			JList<? extends Component> list, Component value, int index,
+			JList<? extends Animator> list, Animator value, int index,
 			boolean isSelected, boolean cellHasFocus) {
 
 		this.lbName.setText(value.getName());
 		this.lbComponentCount
-				.setText(String.format(" (%d)", value.getComponents().size()));
+				.setText(String.format(" (%d)", value.getKeyFrames().size()));
 
 		lbName.setOpaque(true);
 		lbComponentCount.setOpaque(true);
@@ -58,6 +59,7 @@ public class MyRender extends JPanel implements ListCellRenderer<Component> {
 			lbIcon.setBackground(list.getBackground());
 			setBackground(list.getBackground());
 		}
+
 		return this;
 	}
 

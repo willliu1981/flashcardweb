@@ -40,7 +40,7 @@ public class ReverseKeyFrame extends JFrame {
 
 	public void init() {
 		setTitle("reverse keys");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setBounds(100, 100, 709, 456);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -66,6 +66,7 @@ public class ReverseKeyFrame extends JFrame {
 		list_reverse.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane_reverse.setViewportView(list_reverse);
 		list_reverse.setModel(model_reverse);
+		list_reverse.setCellRenderer(new AnimatorRender());
 
 		JPanel panel_sign = new JPanel();
 		panel_sign.setPreferredSize(new Dimension(100, 10));
@@ -97,6 +98,7 @@ public class ReverseKeyFrame extends JFrame {
 		list_target.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane_target.setViewportView(list_target);
 		list_target.setModel(model_target);
+		list_target.setCellRenderer(new AnimatorRender());
 
 		JPanel panel_confirm = new JPanel();
 		contentPane.add(panel_confirm, BorderLayout.SOUTH);

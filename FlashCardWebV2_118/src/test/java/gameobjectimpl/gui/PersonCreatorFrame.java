@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Timer;
@@ -88,8 +89,9 @@ public class PersonCreatorFrame extends JFrame {
 		mntmNewMenuItem_reverseKey.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-
-				//ReverseKeyFrame reverse = new ReverseKeyFrame();
+				ReverseKeyFrame reverse = new ReverseKeyFrame(
+						target.getAnimatorsToList());
+				reverse.setVisible(true);
 			}
 		});
 		mntmNewMenuItem_reverseKey
@@ -167,7 +169,7 @@ public class PersonCreatorFrame extends JFrame {
 		});
 		list.setFont(new Font("新細明體", Font.PLAIN, 28));
 		list.setModel(model);
-		list.setCellRenderer(new MyRender());
+		list.setCellRenderer(new ComponentRender());
 		//*/
 
 		JScrollPane scrollPane = new JScrollPane();
