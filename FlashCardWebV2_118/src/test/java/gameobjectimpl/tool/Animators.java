@@ -1,9 +1,11 @@
 package gameobjectimpl.tool;
 
+import java.awt.Point;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
@@ -17,14 +19,13 @@ import gameobjectimpl.component.Component;
 import gameobjectimpl.component.GameObject;
 import gameobjectimpl.component.HasAnimation;
 import gameobjectimpl.component.Scene;
-import idv.tool.Debug;
 
 public class Animators {
 	private static final File FILE = new File(
 			"c:/test/gameobject/animators.properties");
 
 	private static final String PROP_KEY_RPREFIX = "animator";
-	private static final String TESTANIMATORSUFFIX = ".walk";
+	private static final String SPINE = "spine";
 
 	public static boolean fileIsExist() {
 		return FILE.exists();
@@ -112,7 +113,7 @@ public class Animators {
 
 	public static void setPosture(HasAnimation target, String animatorName,
 			Integer keyIndex) {
-		List<KeyFrame> findKeys = findKeys(target.getAnimator(animatorName),
+		List<KeyFrame> findKeys = findKeysByIndex(target.getAnimator(animatorName),
 				keyIndex);
 
 		GameObject go = (GameObject) target;
@@ -129,11 +130,40 @@ public class Animators {
 
 	}
 
-	public static List<KeyFrame> findKeys(Animator anm, Integer keyIndex) {
+	public static List<KeyFrame> findKeysByIndex(Animator anm, Integer keyIndex) {
 
 		return anm.getKeyFrames().stream()
 				.filter(key -> key.getKeyIndex().equals(keyIndex))
 				.collect(Collectors.toList());
+	}
+
+	public static KeyFrame findKeysByEqualWithKey(Animator anm, KeyFrame key) {
+
+		return anm.getKeyFrames().stream().filter(k -> k.equals(key)).findFirst()
+				.orElseGet(null);
+	}
+
+	public static void reverseKeys(Animator reverse, Animator target) {
+		KeyFrame spine = new KeyFrame();
+		spine.setKeyName(SPINE);
+		spine.setKeyIndex(0);
+		KeyFrame findSpine = findKeysByEqualWithKey(target, spine);
+
+		reverse.setKeyFrames(new ArrayList<>());
+		target.getKeyFrames().forEach(key -> {
+			KeyFrame newKey = new KeyFrame();
+			Point targetPos = key.getPosition();
+			Point spinePos = findSpine.getPosition();
+			Point newPos = new Point();
+			int relX = targetPos.x - spinePos.x;
+
+			newPos.x = spinePos.x - relX;
+			newPos.y = targetPos.y;
+
+			newKey.setPosition(newPos);
+			reverse.addKeyFrame(key);
+		});
+
 	}
 
 }

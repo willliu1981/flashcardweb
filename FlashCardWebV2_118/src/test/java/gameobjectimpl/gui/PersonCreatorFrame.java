@@ -42,7 +42,11 @@ import gameobjectimpl.tool.AdapterLists;
 import gameobjectimpl.tool.Animators;
 import gameobjectimpl.tool.Components;
 import gameobjectimpl.tool.GameObjectScanner;
+import idv.tool.Debug;
+
 import javax.swing.JCheckBox;
+import java.awt.Rectangle;
+import java.awt.Insets;
 
 public class PersonCreatorFrame extends JFrame {
 	private static String TESTANIMATORNAME = "walk_right";
@@ -75,6 +79,25 @@ public class PersonCreatorFrame extends JFrame {
 	public void init() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 840, 789);
+
+		JMenuBar menuBar_top = new JMenuBar();
+		setJMenuBar(menuBar_top);
+
+		JMenu mnNewMenu_edit = new JMenu("Edit");
+		mnNewMenu_edit.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 28));
+		menuBar_top.add(mnNewMenu_edit);
+
+		JMenuItem mntmNewMenuItem_reverseKey = new JMenuItem("Reverse Key");
+		mntmNewMenuItem_reverseKey.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+
+				Debug.test(this, "xxxx");
+			}
+		});
+		mntmNewMenuItem_reverseKey
+				.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 28));
+		mnNewMenu_edit.add(mntmNewMenuItem_reverseKey);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -168,27 +191,26 @@ public class PersonCreatorFrame extends JFrame {
 		JPanel panel_animator = new JPanel();
 		panel_north_bar.add(panel_animator);
 
-		JPanel panel_1 = new JPanel();
-		panel_animator.add(panel_1);
+		JPanel panel_animator_inner = new JPanel();
+		panel_animator.add(panel_animator_inner);
 
-		JMenuBar menuBar = new JMenuBar();
-		panel_1.add(menuBar);
-		menuBar.setBorder(new LineBorder(Color.ORANGE));
+		JMenuBar menuBar_animator = new JMenuBar();
+		panel_animator_inner.add(menuBar_animator);
+		menuBar_animator.setBorder(new LineBorder(Color.ORANGE));
 
-		JMenu mnNewMenu = new JMenu("animator");
-		mnNewMenu.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 18));
-		menuBar.add(mnNewMenu);
+		JMenu mnNewMenu_animator = new JMenu("animator");
+		mnNewMenu_animator.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 18));
+		menuBar_animator.add(mnNewMenu_animator);
 
 		{
 			List<String> animatorNames = Animators
 					.getAnimatorNames((HasAnimation) target);
 
 			animatorNames.forEach(n -> {
-				JMenuItem mntmNewMenuItem = new JMenuItem(n);
-				mntmNewMenuItem
-						.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 18));
-				mntmNewMenuItem.setName(n);
-				mntmNewMenuItem.addActionListener(new ActionListener() {
+				JMenuItem newItem = new JMenuItem(n);
+				newItem.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 18));
+				newItem.setName(n);
+				newItem.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						JMenuItem item = (JMenuItem) e.getSource();
@@ -197,16 +219,16 @@ public class PersonCreatorFrame extends JFrame {
 					}
 
 				});
-				mnNewMenu.add(mntmNewMenuItem);
+				mnNewMenu_animator.add(newItem);
 			});
 		}
 
-		JPanel panel = new JPanel();
-		panel_animator.add(panel);
+		JPanel panel_animatorName = new JPanel();
+		panel_animator.add(panel_animatorName);
 
 		lbl_animatorName = new JLabel("尚未選取");
 		lbl_animatorName.setFont(new Font("新細明體", Font.PLAIN, 28));
-		panel.add(lbl_animatorName);
+		panel_animatorName.add(lbl_animatorName);
 
 		JPanel panel_showPrevious = new JPanel();
 		panel_north_bar.add(panel_showPrevious);
@@ -394,6 +416,8 @@ public class PersonCreatorFrame extends JFrame {
 		if (chkBox_previous.isSelected()) {
 			pane_person_info.setShowPrevious(true);
 			AdapterLists.setComponentPreviosAbsolutePosition(adapters);
+		} else {
+			pane_person_info.setShowPrevious(false);
 		}
 
 		Animators.setPosture((HasAnimation) target, currentAnimatorName,

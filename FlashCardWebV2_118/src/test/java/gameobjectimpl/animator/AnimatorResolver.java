@@ -24,7 +24,6 @@ public class AnimatorResolver {
 		if (builderBeanName == null || builderBeanName.equals("")) {
 			return null;
 		}
-		Debug.test(this, this.config);
 
 		AnimatorBuilder builder = MySpringUtil.setApplicationContext(this.config)
 				.getBean(builderBeanName, AnimatorBuilder.class);

@@ -59,7 +59,6 @@ public class StartCreatorFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				boolean fileIsExist = Animators.fileIsExist();
 				Person person = null;
-				Debug.test(this, fileIsExist);
 				if (fileIsExist) {
 					person = Application.getBean("person1", Person.class);
 				} else {
