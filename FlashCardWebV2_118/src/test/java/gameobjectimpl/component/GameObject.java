@@ -51,7 +51,7 @@ public class GameObject extends Component {
 		return this.getAnimatorControl().getAnimators();
 	}
 
-	public List<Animator> getToListAnimators() {
+	public List<Animator> getAnimatorList() {
 		return this.getAnimatorControl().getAnimators().values().stream()
 				.collect(Collectors.toList());
 	}

@@ -60,6 +60,8 @@ public class Scene {
 
 			testGameControllers.forEach(GameControllerI::update);
 
+			Scene.refreshPosture();
+
 			comp.repaint();
 
 		}
@@ -122,26 +124,21 @@ public class Scene {
 		return collect;
 	}
 
-	public static void refreshPosture(String currentAnimatorName) {
+	/*
+	 * 刷新所有作用中的動畫節點
+	 */
+	public static void refreshPosture() {
 		List<AnimatorControl> controls = getActivedAnimatorControls();
 		controls.stream().forEach(cr -> {
-			GameObject owner = cr.getOwner();
-			Collection<Animator> animators = cr.getAnimators().values();
-			animators.forEach(anm -> {
-				int currIndex = anm.getCurrentKeyIndex();
-				Animators.setPosture((HasAnimation) owner, currentAnimatorName,
-						currIndex);
-				anm.setCurrentKeyIndex(currIndex + 1);
-			});
+			Animators.animatorTick(cr);
 		});
-
 	}
 
 	public static void paintActivedGameObjects(Graphics g) {
 		List<Component> gameObjects = Scene.getActivedGameObjects();
 		if (!gameObjects.isEmpty()) {
 			gameObjects.forEach(go -> {
-				Graphs.paint(g, go);
+				Graphs.paintForActivedGameObjects(g, go);
 			});
 
 		}

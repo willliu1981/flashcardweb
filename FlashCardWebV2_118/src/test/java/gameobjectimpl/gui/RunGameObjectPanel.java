@@ -13,12 +13,12 @@ import idv.tool.Debug;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 
-public class GameObjectPanel extends JPanel {
+public class RunGameObjectPanel extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public GameObjectPanel() {
+	public RunGameObjectPanel() {
 		setBorder(new LineBorder(Color.CYAN));
 
 	}

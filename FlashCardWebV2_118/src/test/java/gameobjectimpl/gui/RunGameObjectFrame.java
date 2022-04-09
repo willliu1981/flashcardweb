@@ -25,7 +25,7 @@ public class RunGameObjectFrame extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 
-		gameObjectPanel = new GameObjectPanel();
+		gameObjectPanel = new RunGameObjectPanel();
 		contentPane.add(gameObjectPanel, BorderLayout.CENTER);
 	}
 

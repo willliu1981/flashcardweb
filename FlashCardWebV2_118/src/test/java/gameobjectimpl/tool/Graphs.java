@@ -18,7 +18,7 @@ public class Graphs {
 	private static final Integer DEFAULTWIDTH = 50;
 	private static final Integer DEFAULTHEIGHT = 50;
 
-	public static void paint(Graphics g, Component comp) {
+	public static void paintForActivedGameObjects(Graphics g, Component comp) {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.fillRoundRect(comp.getAbsolutePosition().x, comp.getAbsolutePosition().y,
 				DEFAULTWIDTH, DEFAULTHEIGHT, DEFAULTWIDTH, DEFAULTHEIGHT);

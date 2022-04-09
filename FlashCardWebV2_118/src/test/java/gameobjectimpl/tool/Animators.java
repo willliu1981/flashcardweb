@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 
 import gameobjectimpl.animator.Animator;
 import gameobjectimpl.animator.Animator.KeyFrame;
+import gameobjectimpl.animator.AnimatorControl;
 import gameobjectimpl.component.Component;
 import gameobjectimpl.component.GameObject;
 import gameobjectimpl.component.HasAnimation;
@@ -114,14 +115,12 @@ public class Animators {
 		return null;
 	}
 
-	public static void setPosture(HasAnimation target, String animatorName,
-			Integer keyIndex) {
-		List<KeyFrame> findKeys = findKeysByIndex(target.getAnimator(animatorName),
-				keyIndex);
+	public static void setPosture(String owner, Animator animator, Integer keyIndex) {
 
-		GameObject go = (GameObject) target;
+		List<KeyFrame> findKeys = findKeysByIndex(animator, keyIndex);
+
 		List<Component> findActivedGameObjectByOwner = Scene
-				.findActivedGameObjectByOwner(go.getOwner());
+				.findActivedGameObjectByOwner(owner);
 		findKeys.stream().forEach(key -> {
 			Optional<Component> findFirst = findActivedGameObjectByOwner.stream()
 					.filter(g -> g.getName().equals(key.getKeyName())).findFirst();
@@ -130,6 +129,12 @@ public class Animators {
 				component.setRelevantPosition(key.getPosition());
 			}
 		});
+	}
+
+	public static void setPosture(HasAnimation target, String animatorName,
+			Integer keyIndex) {
+		setPosture(((GameObject) target).getOwner(), target.getAnimator(animatorName),
+				keyIndex);
 
 	}
 
@@ -203,6 +208,22 @@ public class Animators {
 			});
 
 		});
+
+	}
+
+	public static void animatorTick(AnimatorControl control) {
+
+		Animator activeAnimator = control.getCurrentAnimator();
+		int maxKey = activeAnimator.getMaxNumberOfKey();
+		Integer currentKeyIndex = control.getCurrentKeyIndex(activeAnimator.getName());
+		Animators.setPosture(control.getOwner().getOwner(), activeAnimator,
+				currentKeyIndex);
+
+		currentKeyIndex++;
+		if (currentKeyIndex > maxKey) {
+			currentKeyIndex = 0;
+		}
+		control.setCurrentKeyIndex(activeAnimator.getName(), currentKeyIndex);
 
 	}
 

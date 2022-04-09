@@ -10,7 +10,7 @@ public interface HasAnimation {
 
 	public Animator getAnimator(String name);
 
-	public List<Animator> getToListAnimators();
+	public List<Animator> getAnimatorList();
 
 	public Map<String, Animator> getAnimators();
 
@@ -18,4 +18,6 @@ public interface HasAnimation {
 
 	public void initAnimators();
 
+	public AnimatorControl getAnimatorControl() ;
+	
 }

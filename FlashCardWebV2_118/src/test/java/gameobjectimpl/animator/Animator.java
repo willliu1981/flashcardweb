@@ -10,7 +10,7 @@ public class Animator {
 	private String name;//自定的 animator 的 name
 	private List<KeyFrame> keyFrames = new ArrayList<>();
 	private Integer maxNumberOfKey=0;
-	private Integer currentKeyIndex = 0;
+	private Integer currentKeyIndex = 0;// 棄用,待處理
 
 	public String getName() {
 		return name;
