@@ -32,7 +32,7 @@ public class Scene {
 	private static List<Component> sceneComponents = new ArrayList<>();
 	private static List<Component> activedGameObjects = new ArrayList<>();
 
-	public Scene() {
+	private Scene() {
 
 	}
 
@@ -64,10 +64,6 @@ public class Scene {
 
 		}
 
-	}
-
-	public List<Component> testGetSceneComponents() {
-		return Scene.getSceneComponents();
 	}
 
 	public static List<Component> getSceneComponents() {

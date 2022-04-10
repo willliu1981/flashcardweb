@@ -4,17 +4,17 @@ import java.util.Map;
 
 import idv.tool.Debug;
 
-public class Car {
+public class Car2 {
 	private static String logo;
 	private Map<String, String> components;
 
 	private String name;
 
-	public Car() {
+	private Car2() {
 
 	}
 
-	public Car(String name) {
+	public Car2(String name) {
 		this.name = name;
 		Debug.test(this, "constructor");
 	}
