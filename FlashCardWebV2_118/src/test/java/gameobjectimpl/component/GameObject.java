@@ -10,11 +10,30 @@ import gameobjectimpl.animator.Animator;
 import gameobjectimpl.animator.AnimatorControl;
 
 public class GameObject extends Component {
-	//private Map<String, Animator> animators;
+	//private List<FunctionComponent> functionComponents = new ArrayList<>();
 
 	private AnimatorControl animatorControl;
+	private List<Script> scripts;
 
 	public GameObject() {
+
+	}
+
+	/*public void addFunctionComponent(FunctionComponent functionComponent) {
+		this.functionComponents.add(functionComponent);
+		Scene.addFunctionComponent((GameControllerI) functionComponent);
+	}
+	
+	public List<FunctionComponent> getFunctionComponents() {
+		return functionComponents;
+	}*/
+
+	public void addScript(Script script) {
+		if (scripts == null) {
+			scripts = new ArrayList<>();
+		}
+		scripts.add(script);
+		script.setOwner(this);
 
 	}
 

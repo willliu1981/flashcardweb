@@ -15,10 +15,17 @@ public class TestRunApp {
 		Person person = Application.getBean("person1", Person.class);
 		Scene.addSceneComponent(person);
 
-		//game contorller config
+		//person.addFunctionComponent(new TestGameController());
+		person.addScript(new TestGameController() );
+
+		/**
+		 * game config
+		 * animator 於 bean config xml 
+		 */
 		{
 			TestGameController gc = new TestGameController();
-			Scene.addGameControllerI(gc);
+			person.getAnimatorControl().setCurrentAnimatorId("idle");
+			
 			gc.setPerson(person);
 
 		}

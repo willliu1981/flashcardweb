@@ -3,7 +3,6 @@ package gameobjectimpl.component;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.Timer;
@@ -12,15 +11,13 @@ import java.util.stream.Collectors;
 
 import javax.swing.JComponent;
 
-import gameobjectimpl.animator.Animator;
 import gameobjectimpl.animator.AnimatorControl;
-import gameobjectimpl.control.GameControllerI;
 import gameobjectimpl.tool.Animators;
 import gameobjectimpl.tool.Graphs;
 import gameobjectimpl.tool.Locations;
+import idv.tool.Debug;
 
 public class Scene {
-	private static List<GameControllerI> testGameControllers = new ArrayList<>();
 	private static GameTask task;
 
 	private static Timer timer = new Timer();
@@ -35,12 +32,8 @@ public class Scene {
 	private static List<Component> sceneComponents = new ArrayList<>();
 	private static List<Component> activedGameObjects = new ArrayList<>();
 
-	private Scene() {
+	public Scene() {
 
-	}
-
-	public static void addGameControllerI(GameControllerI gameControllerI) {
-		testGameControllers.add(gameControllerI);
 	}
 
 	private static class GameTask extends TimerTask {
@@ -54,11 +47,16 @@ public class Scene {
 		@Override
 		public void run() {
 			if (!isStarted) {
-				testGameControllers.forEach(GameControllerI::start);
+				//functionComponents.forEach(GameControllerI::start);
+
+				List<Component> sceneComps = getSceneComponents();
+				sceneComps.stream().filter(c -> c.getClass().equals(Script.class))
+						.map(c2 -> (Script) c2).forEach(c3 -> Debug.test(c3));
+
 				isStarted = true;
 			}
 
-			testGameControllers.forEach(GameControllerI::update);
+			//functionComponents.forEach(GameControllerI::update);
 
 			Scene.refreshPosture();
 
@@ -66,6 +64,10 @@ public class Scene {
 
 		}
 
+	}
+
+	public List<Component> testGetSceneComponents() {
+		return Scene.getSceneComponents();
 	}
 
 	public static List<Component> getSceneComponents() {
@@ -112,7 +114,7 @@ public class Scene {
 
 	public static void run(JComponent comp) {
 		task = new GameTask(comp);
-		timer.schedule(task, 1000, 100);
+		timer.schedule(task, 200, 100);
 	}
 
 	public static List<AnimatorControl> getActivedAnimatorControls() {

@@ -4,11 +4,12 @@ import java.awt.Point;
 import java.util.List;
 
 import gameobjectimpl.component.Component;
+import gameobjectimpl.component.GameObject;
 import gameobjectimpl.component.Scene;
 import gameobjectimpl.component.impl.Person;
 import idv.tool.Debug;
 
-public class TestGameController implements GameControllerI {
+public class TestGameController extends GameController  {
 	private static int dir = -1;
 
 	private Person person;
@@ -30,6 +31,18 @@ public class TestGameController implements GameControllerI {
 
 	public void setPerson(Person person) {
 		this.person = person;
+	}
+
+	@Override
+	public void setOwner(GameObject owner) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public GameObject getOwner() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	//	public static void move() {

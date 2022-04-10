@@ -8,11 +8,12 @@ import gameobjectimpl.animator.AnimatorResolver;
 import gameobjectimpl.component.GameObject;
 import gameobjectimpl.component.HasAnimation;
 import gameobjectimpl.component.IsAnimatorGameObjectBean;
+import gameobjectimpl.component.Script;
 import idv.fc.exception.FindErrorException;
 import idv.tool.Debug;
 
 public class Person extends GameObject
-		implements HasAnimation, IsAnimatorGameObjectBean {
+		implements HasAnimation, IsAnimatorGameObjectBean ,HasScript {
 
 	protected String animatorBuilder;
 	protected AnimatorResolver animatorResolver;
@@ -31,8 +32,8 @@ public class Person extends GameObject
 	public void initAnimators() {
 		try {
 			this.setAnimators(this.animatorResolver.getAnimators(animatorBuilder));
-			//			Debug.test(this, "builder", animatorBuilder);
-			//			Debug.test(this, "resolver", animatorResolver);
+
+
 		} catch (NullPointerException e) {
 			System.out.println(e.getMessage());
 		}
@@ -47,6 +48,8 @@ public class Person extends GameObject
 	public void setAnimatorResolver(AnimatorResolver animatorResolver) {
 		this.animatorResolver = animatorResolver;
 	}
+
+
 
 
 

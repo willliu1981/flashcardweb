@@ -4,6 +4,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import idv.fc.exception.FindErrorException;
+import idv.fc.proxy.ProxyFactory;
+import idv.fc.proxy.interceptor.InterceptHandler;
+import idv.fc.proxy.interceptor.InterceptHandler.MethodFilter;
+import idv.fc.proxy.interceptor.InterceptHandlerWrap.ParamWrap;
+
 public class Debug {
 	private static String PREFIXSEPARATOR = " : ";
 	public static final String BEFORE = "before";
@@ -16,13 +22,13 @@ public class Debug {
 	public static void test() {
 		System.out.println();
 	}
-	
+
 	public static void test(Object msg) {
 		test(null, new NoParam(), msg, false);
 	}
 
-	public static void test(Object prefix, Object msg) {
-		test(null, prefix, msg, false);
+	public static void test(Object objForClassInfo, Object msg) {
+		test(objForClassInfo, new NoParam(), msg, false);
 	}
 
 	public static void test(String prefixString, Object prefixObj, Object msg) {
@@ -35,7 +41,10 @@ public class Debug {
 
 	public static void test(Object objForClassInfo, Object prefix, Object msg,
 			boolean any) {
-		String head = objForClassInfo == null ? "" : objForClassInfo.toString() + " : ";
+		String head = objForClassInfo == null ? ""
+				: objForClassInfo.toString() + "::"
+						+ Thread.currentThread().getStackTrace()[1].getMethodName()
+						+ " : ";
 
 		String prefixString = "";
 		if (prefix == null) {

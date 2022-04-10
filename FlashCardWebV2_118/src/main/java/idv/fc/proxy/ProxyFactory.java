@@ -45,7 +45,7 @@ public class ProxyFactory<T> {
 			return interceptor;
 		}
 
-		public ProxyBuilder<E> setInterceptor(BaseInterceptor interceptor) {
+		private ProxyBuilder<E> setInterceptor(BaseInterceptor interceptor) {
 			this.interceptor = interceptor;
 			return this;
 		}

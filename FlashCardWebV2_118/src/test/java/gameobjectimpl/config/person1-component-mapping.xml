@@ -53,6 +53,10 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="" class="">
+	<property name=""></property>
+	</bean>
 
 
 	<bean id="person1" class="gameobjectimpl.component.impl.Person"

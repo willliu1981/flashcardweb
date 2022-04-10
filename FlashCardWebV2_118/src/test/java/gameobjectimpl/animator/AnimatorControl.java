@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import gameobjectimpl.component.GameObject;
 
-public class AnimatorControl {
+public class AnimatorControl   {
 	private GameObject owner;
 	private String currentAnimator;
 

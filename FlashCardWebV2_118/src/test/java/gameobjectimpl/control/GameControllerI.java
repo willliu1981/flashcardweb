@@ -1,6 +1,8 @@
 package gameobjectimpl.control;
 
-public interface GameControllerI {
+import gameobjectimpl.component.Script;
+
+public interface GameControllerI  extends Script {
 	public void start();
 
 	public void update();

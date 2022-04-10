@@ -22,6 +22,7 @@ public abstract class InterceptHandler {
 	}
 
 	public static class MethodFilter {
+		public static final FilterParamter ANY = FilterParamter.ANY;
 		private List<String> methodNames = new ArrayList<>();
 		private boolean isFilterParamterAny = false;
 
