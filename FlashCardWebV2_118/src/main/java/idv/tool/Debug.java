@@ -41,10 +41,7 @@ public class Debug {
 
 	public static void test(Object objForClassInfo, Object prefix, Object msg,
 			boolean any) {
-		String head = objForClassInfo == null ? ""
-				: objForClassInfo.toString() + "::"
-						+ Thread.currentThread().getStackTrace()[1].getMethodName()
-						+ " : ";
+		String head = objForClassInfo == null ? "" : objForClassInfo.toString() + " : ";
 
 		String prefixString = "";
 		if (prefix == null) {
@@ -64,16 +61,16 @@ public class Debug {
 
 		if (msg instanceof Map) {
 			Map<?, ?> map = (Map<?, ?>) msg;
-			System.out.println(head + "foreach...");
+			System.out.println(head + "foreach<Map>...");
 			map.forEach((k, v) -> System.out.printf("  key= %s , value= %s\n", k, v));
 
 		} else if (msg instanceof List) {
 			List<?> list = (List<?>) msg;
-			System.out.println(head + "foreach...");
+			System.out.println(head + "foreach(List)...");
 			list.forEach((x) -> System.out.printf("  %s\n", x));
 
 		} else if (msg.getClass().isArray()) {
-			System.out.println(head + "foreach...");
+			System.out.println(head + "foreach(Array)...");
 			Object[] os = (Object[]) msg;
 			Arrays.asList(os).forEach((x) -> System.out.printf("  %s\n", x));
 
