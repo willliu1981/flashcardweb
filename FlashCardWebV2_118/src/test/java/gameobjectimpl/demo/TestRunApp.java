@@ -16,7 +16,7 @@ public class TestRunApp {
 		Scene.addSceneComponent(person);
 
 		//person.addFunctionComponent(new TestGameController());
-		person.addScript(new TestGameController() );
+		person.addScript(new TestGameController());
 
 		/**
 		 * game config
@@ -25,8 +25,6 @@ public class TestRunApp {
 		{
 			TestGameController gc = new TestGameController();
 			person.getAnimatorControl().setCurrentAnimatorId("idle");
-			
-			gc.setPerson(person);
 
 		}
 

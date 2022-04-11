@@ -8,12 +8,16 @@ import java.util.stream.Collectors;
 
 import gameobjectimpl.animator.Animator;
 import gameobjectimpl.animator.AnimatorControl;
+import gameobjectimpl.component.impl.HasScript;
+import gameobjectimpl.control.ScriptI;
+import idv.tool.Debug;
 
 public class GameObject extends Component {
 	//private List<FunctionComponent> functionComponents = new ArrayList<>();
 
+	
 	private AnimatorControl animatorControl;
-	private List<Script> scripts;
+	private List<ScriptI> scripts;
 
 	public GameObject() {
 
@@ -28,13 +32,18 @@ public class GameObject extends Component {
 		return functionComponents;
 	}*/
 
-	public void addScript(Script script) {
+	public void addScript(ScriptI script) {
 		if (scripts == null) {
 			scripts = new ArrayList<>();
 		}
 		scripts.add(script);
 		script.setOwner(this);
 
+	}
+
+	public List<ScriptI> getScripts() {
+
+		return this.scripts;
 	}
 
 	public AnimatorControl getAnimatorControl() {

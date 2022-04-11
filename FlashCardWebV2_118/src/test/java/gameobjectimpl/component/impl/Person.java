@@ -8,7 +8,7 @@ import gameobjectimpl.animator.AnimatorResolver;
 import gameobjectimpl.component.GameObject;
 import gameobjectimpl.component.HasAnimation;
 import gameobjectimpl.component.IsAnimatorGameObjectBean;
-import gameobjectimpl.component.Script;
+import gameobjectimpl.control.ScriptI;
 import idv.fc.exception.FindErrorException;
 import idv.tool.Debug;
 

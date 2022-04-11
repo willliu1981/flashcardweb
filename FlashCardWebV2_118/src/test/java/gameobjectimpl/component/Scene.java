@@ -19,7 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import gameobjectimpl.animator.AnimatorControl;
 import gameobjectimpl.component.impl.HasScript;
 import gameobjectimpl.component.impl.Person;
-import gameobjectimpl.test.Test10;
+import gameobjectimpl.test.Test10ForMock;
 import gameobjectimpl.tool.Animators;
 import gameobjectimpl.tool.Graphs;
 import gameobjectimpl.tool.Locations;
@@ -46,7 +46,6 @@ public class Scene {
 
 	private static class GameTask extends TimerTask {
 		private JComponent comp;
-		private boolean isStarted = false;
 
 		private GameTask(JComponent comp) {
 			this.comp = comp;
@@ -54,13 +53,10 @@ public class Scene {
 
 		@Override
 		public void run() {
-			if (!isStarted) {
-				//functionComponents.forEach(GameControllerI::start);
-
-				List<HasScript> sceneComps = getSceneComponentsWithScript();
-
-				isStarted = true;
-			}
+			List<HasScript> sceneComps = getSceneComponentsWithScript();
+			sceneComps.forEach(hses -> {
+				hses.getScripts().forEach(hs -> hs.execute());
+			});
 
 			//functionComponents.forEach(GameControllerI::update);
 
@@ -76,23 +72,20 @@ public class Scene {
 		return sceneComponents;
 	}
 
-	public static String testMsg(String a) {
-		return "msg=" + a;
-	}
-
 	public static List<HasScript> getSceneComponentsWithScript() {
-		//*
+		/*
 		try (MockedStatic<?> utilities = Mockito.mockStatic(Scene.class)) {
-			utilities.when(Scene::getSceneComponents).thenReturn(Test10.lists);
-			
+			utilities.when(Scene::getSceneComponents).thenReturn(Test10ForMock.lists);
+			//*/
+
 			List<Component> sceneComps = getSceneComponents();
 			List<HasScript> newComps = sceneComps.stream()
 					.filter(c -> c instanceof HasScript).map(c2 -> (HasScript) c2)
 					.collect(Collectors.toList());
-			
+
 			return newComps;
 
-		} //*/
+		//}
 	}
 
 	public static Component findSceneComponent(String name) {

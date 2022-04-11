@@ -21,7 +21,7 @@ import gameobjectimpl.component.impl.Person;
 import idv.tool.Debug;
 
 @ExtendWith(MockitoExtension.class)
-public class Test10 {
+public class Test10ForMock {
 	@Mock
 	static Car car1;
 
@@ -53,9 +53,9 @@ public class Test10 {
 		//*
 		try (MockedStatic<?> utilities = Mockito.mockStatic(Class.class)) {
 			utilities.when(null).thenReturn(null);
-			
+			//*/
 
-		} //*/
+		}
 	}
 
 	@Disabled
@@ -144,7 +144,6 @@ public class Test10 {
 		List<HasScript> sceneComponentsWithScript;
 		sceneComponentsWithScript = Scene.getSceneComponentsWithScript();
 		sceneComponentsWithScript.forEach(x -> Debug.test(this, x));
-		
 
 	}
 

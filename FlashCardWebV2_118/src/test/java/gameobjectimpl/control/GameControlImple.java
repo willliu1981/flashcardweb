@@ -2,9 +2,10 @@ package gameobjectimpl.control;
 
 import gameobjectimpl.component.GameObject;
 
-public abstract class GameController implements GameControllerI {
+public abstract class GameControlImple implements GameControlI {
 
 	private GameObject owner;
+	private boolean isStarted = false;
 
 	@Override
 	public void setOwner(GameObject owner) {
@@ -21,7 +22,14 @@ public abstract class GameController implements GameControllerI {
 	public String toString() {
 		return "GameController [owner=" + owner + "]";
 	}
-	
-	
+
+	@Override
+	public boolean isStarted() {
+		if (!this.isStarted) {
+			this.isStarted = true;
+			return false;
+		}
+		return true;
+	}
 
 }

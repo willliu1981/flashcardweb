@@ -1,7 +1,10 @@
 package gameobjectimpl.component.impl;
 
-import gameobjectimpl.component.Script;
+import java.util.List;
+
+import gameobjectimpl.control.ScriptI;
 
 public interface HasScript {
-	void addScript(Script script);
+	void addScript(ScriptI script);
+	List<ScriptI> getScripts();
 }

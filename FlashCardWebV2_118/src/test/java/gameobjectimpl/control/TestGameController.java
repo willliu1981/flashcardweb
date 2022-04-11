@@ -9,40 +9,18 @@ import gameobjectimpl.component.Scene;
 import gameobjectimpl.component.impl.Person;
 import idv.tool.Debug;
 
-public class TestGameController extends GameController  {
+public class TestGameController extends GameControlImple {
 	private static int dir = -1;
-
-	private Person person;
 
 	@Override
 	public void start() {
 		Debug.test("start...");
-		person.getAnimatorControl().setCurrentAnimatorId("idle");
+		this.getOwner().getAnimatorControl().setCurrentAnimatorId("idle");
 	}
 
 	@Override
 	public void update() {
-		//Debug.test("update...");
-	}
-
-	public Person getPerson() {
-		return person;
-	}
-
-	public void setPerson(Person person) {
-		this.person = person;
-	}
-
-	@Override
-	public void setOwner(GameObject owner) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public GameObject getOwner() {
-		// TODO Auto-generated method stub
-		return null;
+		Debug.test("update...");
 	}
 
 	//	public static void move() {
