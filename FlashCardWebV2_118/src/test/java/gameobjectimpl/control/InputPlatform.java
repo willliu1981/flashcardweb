@@ -48,21 +48,20 @@ public class InputPlatform extends GameController {
 
 	@Override
 	public void update() {
-		
+		//Debug.test("ip");
 		switch (animatorControl.getCurrentAnimatorId()) {
 
 		case "idle":
 
 			break;
 		case "walk-right":
-			this.target.setX(this.target.getX() + 15);
+			this.target.setX(this.target.getX() + 10);
 			break;
 		case "walk-left":
-			this.target.setX(this.target.getX() - 15);
+			this.target.setX(this.target.getX() - 10);
 			break;
 
 		default:
-			
 
 			break;
 		}

@@ -26,9 +26,7 @@ public class RunGameObjectPanel extends JPanel {
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
-		
 
-		Scene.locating();
 		Scene.paintActivedGameObjects(g);
 
 	}

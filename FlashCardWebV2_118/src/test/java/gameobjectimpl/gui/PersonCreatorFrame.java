@@ -142,7 +142,7 @@ public class PersonCreatorFrame extends JFrame implements ParentContainer {
 					key.setPosition(relativeP);
 					anm.addKeyFrame(key);
 
-					Scene.locating();
+					Scene.locateSceneComponent();
 					repaint();
 				}
 
@@ -368,7 +368,7 @@ public class PersonCreatorFrame extends JFrame implements ParentContainer {
 						public void run() {
 							Animators.setPosture((HasAnimation) target,
 									currentAnimatorName, index);
-							Scene.locating();
+							Scene.locateSceneComponent();
 							repaint();
 
 							index++;

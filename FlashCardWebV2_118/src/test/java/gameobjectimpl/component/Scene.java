@@ -59,7 +59,7 @@ public class Scene {
 			});
 
 			//functionComponents.forEach(GameControllerI::update);
-
+			Scene.locateSceneComponent();
 			Scene.refreshPosture();
 
 			comp.repaint();
@@ -109,10 +109,10 @@ public class Scene {
 
 	}
 
-	public static void locating() {
+	public static void locateSceneComponent() {
 		if (sceneComponents != null) {
 			sceneComponents.forEach(comp -> {
-				Locations.locating(comp);
+				Locations.locate(comp);
 			});
 
 		}
@@ -133,11 +133,10 @@ public class Scene {
 	}
 
 	public static List<AnimatorControl> getActivedAnimatorControls() {
-		List<AnimatorControl> collect = Scene.getSceneComponents().stream()
+		List<AnimatorControl> collect = Scene.getActivedGameObjects().stream()
 				.filter(cmpt -> cmpt instanceof HasAnimation)
 				.map(cmpnt -> ((GameObject) cmpnt).getAnimatorControl())
 				.collect(Collectors.toList());
-
 		return collect;
 	}
 

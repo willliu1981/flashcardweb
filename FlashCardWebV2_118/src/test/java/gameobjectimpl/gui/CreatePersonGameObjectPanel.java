@@ -34,7 +34,7 @@ public class CreatePersonGameObjectPanel extends JPanel {
 		super.paint(g);
 
 		if (adapters != null && !adapters.isEmpty()) {
-			Scene.locating();
+			Scene.locateSceneComponent();
 			if (isShowPrevious()) {
 				Graphs.paintForCreatePersonPrevious(g, adapters);
 			}
