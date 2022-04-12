@@ -60,9 +60,9 @@ public class Scene {
 
 			//functionComponents.forEach(GameControllerI::update);
 
-			//Scene.refreshPosture();
+			Scene.refreshPosture();
 
-			//comp.repaint();
+			comp.repaint();
 
 		}
 

@@ -1,5 +1,6 @@
 package gameobjectimpl.component;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -8,14 +9,11 @@ import java.util.stream.Collectors;
 
 import gameobjectimpl.animator.Animator;
 import gameobjectimpl.animator.AnimatorControl;
-import gameobjectimpl.component.impl.HasScript;
 import gameobjectimpl.control.ScriptI;
-import idv.tool.Debug;
 
 public class GameObject extends Component {
 	//private List<FunctionComponent> functionComponents = new ArrayList<>();
 
-	
 	private AnimatorControl animatorControl;
 	private List<ScriptI> scripts;
 
@@ -39,6 +37,22 @@ public class GameObject extends Component {
 		scripts.add(script);
 		script.setOwner(this);
 
+	}
+
+	public int getX() {
+		return this.getRelevantPosition().x;
+	}
+
+	public int getY() {
+		return this.getRelevantPosition().y;
+	}
+
+	public void setX(int x) {
+		this.setRelevantPosition(new Point(x, this.getY()));
+	}
+
+	public void setY(int y) {
+		this.setRelevantPosition(new Point(this.getX(), y));
 	}
 
 	public List<ScriptI> getScripts() {

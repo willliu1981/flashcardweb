@@ -2,7 +2,7 @@ package gameobjectimpl.control;
 
 import gameobjectimpl.component.GameObject;
 
-public abstract class GameControlImple implements GameControlI {
+public abstract class GameController implements GameControlI {
 
 	private GameObject owner;
 	private boolean isStarted = false;

@@ -1,8 +1,11 @@
 package gameobjectimpl.demo;
 
+import java.awt.Point;
+
 import gameobjectimpl.component.Scene;
 import gameobjectimpl.component.impl.Person;
 import gameobjectimpl.config.Application;
+import gameobjectimpl.control.InputPlatform;
 import gameobjectimpl.control.TestGameController;
 import gameobjectimpl.gui.RunGameObjectFrame;
 
@@ -17,6 +20,7 @@ public class TestRunApp {
 
 		//person.addFunctionComponent(new TestGameController());
 		person.addScript(new TestGameController());
+		person.addScript(new InputPlatform(new Point(1900, 1000)));
 
 		/**
 		 * game config
@@ -24,7 +28,6 @@ public class TestRunApp {
 		 */
 		{
 			TestGameController gc = new TestGameController();
-			person.getAnimatorControl().setCurrentAnimatorId("idle");
 
 		}
 

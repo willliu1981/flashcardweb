@@ -123,7 +123,13 @@ public class Animators {
 				.findActivedGameObjectByOwner(owner);
 		findKeys.stream().forEach(key -> {
 			Optional<Component> findFirst = findActivedGameObjectByOwner.stream()
-					.filter(g -> g.getName().equals(key.getKeyName())).findFirst();
+					.filter(g -> {
+						if (g.getName().equals("person1")) {
+							Debug.test("anms", g.getAbsolutePosition());
+							return false;
+						}
+						return g.getName().equals(key.getKeyName());
+					}).findFirst();
 			if (findFirst.isPresent()) {
 				Component component = findFirst.get();
 				component.setRelevantPosition(key.getPosition());

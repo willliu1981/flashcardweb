@@ -20,8 +20,8 @@
 		class="gameobjectimpl.animator.AnimatorBuilder">
 		<property name="animatorJsons">
 			<map>
-				<entry key="walk_right" value="${animator.person1.walk_right}" />
-				<entry key="walk_left" value="${animator.person1.walk_left}" />
+				<entry key="walk-right" value="${animator.person1.walk_right}" />
+				<entry key="walk-left" value="${animator.person1.walk_left}" />
 				<entry key="idle" value="${animator.person1.idle}" />
 
 			</map>

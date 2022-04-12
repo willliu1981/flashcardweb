@@ -9,18 +9,21 @@ import gameobjectimpl.component.Scene;
 import gameobjectimpl.component.impl.Person;
 import idv.tool.Debug;
 
-public class TestGameController extends GameControlImple {
+public class TestGameController extends GameController {
 	private static int dir = -1;
 
 	@Override
 	public void start() {
 		Debug.test("start...");
-		this.getOwner().getAnimatorControl().setCurrentAnimatorId("idle");
+		this.getOwner().getAnimatorControl().setCurrentAnimatorId("walk-right");
 	}
 
 	@Override
 	public void update() {
-		Debug.test("update...");
+		//Debug.test("TGC",this.getOwner().getX());
+		
+		
+		
 	}
 
 	//	public static void move() {
