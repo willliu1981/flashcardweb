@@ -2,7 +2,7 @@ package gameobjectimpl.control;
 
 import gameobjectimpl.component.GameObject;
 
-public abstract class GameController implements GameControlI {
+public abstract class GameControllerAdapter implements GameControlI {
 
 	private GameObject owner;
 	private boolean isStarted = false;
@@ -20,7 +20,7 @@ public abstract class GameController implements GameControlI {
 
 	@Override
 	public String toString() {
-		return "GameController [owner=" + owner + "]";
+		return "GameController [owner=" + owner.getName() + "]";
 	}
 
 	@Override
@@ -30,6 +30,11 @@ public abstract class GameController implements GameControlI {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public void init() {
+
 	}
 
 }

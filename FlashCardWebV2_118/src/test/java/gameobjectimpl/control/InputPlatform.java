@@ -1,73 +1,26 @@
 package gameobjectimpl.control;
 
 import java.awt.Point;
-import java.util.Date;
 
-import gameobjectimpl.animator.AnimatorControl;
 import gameobjectimpl.component.GameObject;
-import gameobjectimpl.component.impl.Person;
-import idv.tool.Debug;
 
-public class InputPlatform extends GameController {
-	Point screenSize;
+public abstract class InputPlatform extends GameControllerAdapter {
+
 	GameObject target;
-	AnimatorControl animatorControl;
 	int dir = 0;
-	long beginTime;
-
-	public InputPlatform(Point screenSize) {
-		this.screenSize = screenSize;
-	}
-
-	static enum AniType {
-		IDLE("idle"), WALK_RIGHT("walk-right"), WALK_LEFT("walk-left");
-
-		String value;
-
-		AniType(String name) {
-			value = name;
-		}
-
-		public String getValue() {
-			return this.value;
-		}
-	}
-
-	public void setAnimatorControl(AnimatorControl animatorControl) {
-		this.animatorControl = animatorControl;
-	}
 
 	public void setTarget(GameObject person) {
 		this.target = person;
 	}
 
-	@Override
-	public void start() {
-		this.beginTime = new Date().getTime();
-	}
-
-	@Override
-	public void update() {
-		//Debug.test("ip");
-		switch (animatorControl.getCurrentAnimatorId()) {
-
-		case "idle":
-
-			break;
-		case "walk-right":
-			this.target.setX(this.target.getX() + 10);
-			break;
-		case "walk-left":
-			this.target.setX(this.target.getX() - 10);
-			break;
-
-		default:
-
-			break;
+	public void setDirection(int dir) {
+		if (dir > 0) {
+			this.dir = 1;
+		} else if (dir < 0) {
+			this.dir = -1;
+		} else {
+			this.dir = 0;
 		}
-
-		//	Debug.test("ip",this.target.getX());
-
 	}
 
 }

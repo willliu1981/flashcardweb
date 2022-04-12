@@ -8,6 +8,8 @@ import gameobjectimpl.component.Scene;
 import gameobjectimpl.component.impl.Person;
 import gameobjectimpl.config.Application;
 import gameobjectimpl.control.InputPlatform;
+import gameobjectimpl.control.InputPlatformImpl;
+import gameobjectimpl.control.ScriptFactory;
 import gameobjectimpl.control.TestGameController;
 import gameobjectimpl.gui.RunGameObjectFrame;
 
@@ -24,11 +26,16 @@ public class TestRunApp {
 
 		Scene.addSceneComponent(david);
 
-		InputPlatform inputPlatform = new InputPlatform(new Point(1900, 1000));
-		inputPlatform.setTarget(david);
-		inputPlatform.setAnimatorControl(person.getAnimatorControl());
+		InputPlatformImpl inputPlatform = ScriptFactory.getInputPlatform(david,
+				InputPlatformImpl.class);
 
-		person.addScript(new TestGameController());
+		TestGameController testGameController = new TestGameController();
+
+		testGameController.setInputPlatform(inputPlatform);
+		testGameController.setTarget(david);
+		testGameController.setScreenSize(Application.getScreenSize());
+
+		person.addScript(testGameController);
 		person.addScript(inputPlatform);
 
 		/**

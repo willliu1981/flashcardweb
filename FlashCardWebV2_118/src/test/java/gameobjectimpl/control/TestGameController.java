@@ -1,29 +1,74 @@
 package gameobjectimpl.control;
 
 import java.awt.Point;
-import java.util.List;
 
-import gameobjectimpl.component.Component;
+import gameobjectimpl.animator.AnimatorControl;
 import gameobjectimpl.component.GameObject;
-import gameobjectimpl.component.Scene;
-import gameobjectimpl.component.impl.Person;
+import gameobjectimpl.component.HasAnimation;
 import idv.tool.Debug;
 
-public class TestGameController extends GameController {
+public class TestGameController extends GameControllerAdapter {
+	Point screenSize;
+	static Point targetSize = new Point(600, 900);
+	InputPlatformImpl inputPlatform;
+	GameObject target;
+	HasAnimation targetWithAnimatorControl;
+	AnimatorControl animatorControl;
 	private static int dir = -1;
 
 	@Override
 	public void start() {
 		Debug.test("start...");
-		this.getOwner().getAnimatorControl().setCurrentAnimatorId("walk-right");
+		animatorControl = this.getOwner().getAnimatorControl();
+		animatorControl.setCurrentAnimatorId("walk-right");
+		inputPlatform.setDirection(1);
 	}
 
 	@Override
 	public void update() {
-		//Debug.test("TGC",this.getOwner().getX());
-		
-		
-		
+
+		//*
+		switch (animatorControl.getCurrentAnimatorId()) {
+
+		case "idle":
+
+			break;
+		case "walk-right":
+			if (this.target.getX() > this.screenSize.x - targetSize.x) {
+				animatorControl.setCurrentAnimatorId("walk-left");
+				inputPlatform.setDirection(-1);
+			}
+			break;
+		case "walk-left":
+
+			if (this.target.getX() < 10) {
+				animatorControl.setCurrentAnimatorId("walk-right");
+				inputPlatform.setDirection(1);
+			}
+			break;
+
+		default:
+
+			break;
+		}
+		//*/
+
+	}
+
+	public void setInputPlatform(InputPlatformImpl inputPlatform) {
+		this.inputPlatform = inputPlatform;
+	}
+
+	public void setTarget(GameObject target) {
+		this.target = target;
+	}
+
+	public void setTargetWithAnimatorControl(HasAnimation targetWithAnimatorControl) {
+		this.targetWithAnimatorControl = targetWithAnimatorControl;
+	}
+
+	public void setScreenSize(Point screenSize) {
+		this.screenSize = screenSize;
 	}
 
 	//	public static void move() {
