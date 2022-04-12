@@ -53,7 +53,7 @@ public class Scene {
 
 		@Override
 		public void run() {
-			List<HasScript> sceneComps = getSceneComponentsWithScript();
+			List<HasScript> sceneComps = getGameObjectsWithScript();
 			sceneComps.forEach(hses -> {
 				hses.getScripts().forEach(hs -> hs.execute());
 			});
@@ -72,18 +72,19 @@ public class Scene {
 		return sceneComponents;
 	}
 
-	public static List<HasScript> getSceneComponentsWithScript() {
+	public static List<HasScript> getGameObjectsWithScript() {
 		/*
 		try (MockedStatic<?> utilities = Mockito.mockStatic(Scene.class)) {
 			utilities.when(Scene::getSceneComponents).thenReturn(Test10ForMock.lists);
 			//*/
 
-			List<Component> sceneComps = getSceneComponents();
-			List<HasScript> newComps = sceneComps.stream()
-					.filter(c -> c instanceof HasScript).map(c2 -> (HasScript) c2)
-					.collect(Collectors.toList());
+		List<Component> sceneComps = getActivedGameObjects();
 
-			return newComps;
+		List<HasScript> newComps = sceneComps.stream()
+				.filter(c -> c instanceof HasScript).map(c2 -> (HasScript) c2)
+				.collect(Collectors.toList());
+
+		return newComps;
 
 		//}
 	}

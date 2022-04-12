@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import gameobjectimpl.component.GameObject;
 
-public class AnimatorControl   {
+public class AnimatorControl {
 	private GameObject owner;
 	private String currentAnimator;
 
@@ -16,13 +16,13 @@ public class AnimatorControl   {
 	public Integer getCurrentKeyIndex(String anmName) {
 		return this.currentKeyIndexes.get(anmName);
 	}
-	
-	public void setCurrentKeyIndex(String anmName,Integer index) {
+
+	public void setCurrentKeyIndex(String anmName, Integer index) {
 		this.currentKeyIndexes.put(anmName, index);
 	}
 
 	public Animator getCurrentAnimator() {
-		Optional<Animator> findFirst = this.animators.values().stream()
+		Optional<Animator> findFirst = getAnimators().values().stream()
 				.filter(anm -> anm.getName().equals(currentAnimator)).findFirst();
 		if (findFirst.isPresent()) {
 			return findFirst.get();
@@ -49,6 +49,9 @@ public class AnimatorControl   {
 	}
 
 	public Map<String, Animator> getAnimators() {
+		if (this.animators == null) {
+			this.animators = new HashMap<>();
+		}
 		return animators;
 	}
 
@@ -57,11 +60,12 @@ public class AnimatorControl   {
 	}
 
 	public void addAnimator(String name, Animator anm) {
-		this.animators.put(name, anm);
+		getAnimators().put(name, anm);
 	}
 
 	public Animator getAnimator(String name) {
-		return this.animators.get(name);
+
+		return getAnimators().get(name);
 	}
 
 	@Override

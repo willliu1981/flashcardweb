@@ -102,7 +102,7 @@ public class Test10ForMock {
 		}
 
 		Debug.test("final");
-		sceneComponentsWithScript = Scene.getSceneComponentsWithScript();
+		sceneComponentsWithScript = Scene.getGameObjectsWithScript();
 		Debug.test("size", sceneComponentsWithScript.size());
 		sceneComponentsWithScript.forEach(x -> Debug.test(this, x));
 	}
@@ -132,7 +132,7 @@ public class Test10ForMock {
 
 			Debug.test("final");
 
-			sceneComponentsWithScript = Scene.getSceneComponentsWithScript();
+			sceneComponentsWithScript = Scene.getGameObjectsWithScript();
 			Debug.test("size", sceneComponentsWithScript.size());
 			sceneComponentsWithScript.forEach(x -> Debug.test(this, x));
 		}
@@ -142,7 +142,7 @@ public class Test10ForMock {
 	public void test4() {
 		Debug.test("test4");
 		List<HasScript> sceneComponentsWithScript;
-		sceneComponentsWithScript = Scene.getSceneComponentsWithScript();
+		sceneComponentsWithScript = Scene.getGameObjectsWithScript();
 		sceneComponentsWithScript.forEach(x -> Debug.test(this, x));
 
 	}

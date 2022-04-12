@@ -31,10 +31,7 @@ public class GameObject extends Component {
 	}*/
 
 	public void addScript(ScriptI script) {
-		if (scripts == null) {
-			scripts = new ArrayList<>();
-		}
-		scripts.add(script);
+		getScripts().add(script);
 		script.setOwner(this);
 
 	}
@@ -56,6 +53,9 @@ public class GameObject extends Component {
 	}
 
 	public List<ScriptI> getScripts() {
+		if (scripts == null) {
+			scripts = new ArrayList<>();
+		}
 
 		return this.scripts;
 	}

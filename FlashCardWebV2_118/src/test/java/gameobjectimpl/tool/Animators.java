@@ -124,10 +124,10 @@ public class Animators {
 		findKeys.stream().forEach(key -> {
 			Optional<Component> findFirst = findActivedGameObjectByOwner.stream()
 					.filter(g -> {
-						if (g.getName().equals("person1")) {
-							Debug.test("anms", g.getAbsolutePosition());
-							return false;
-						}
+						//						if (g.getName().equals("person1")) {
+						//							Debug.test("anms", g.getAbsolutePosition());
+						//							return false;
+						//						}
 						return g.getName().equals(key.getKeyName());
 					}).findFirst();
 			if (findFirst.isPresent()) {
@@ -217,6 +217,9 @@ public class Animators {
 
 	}
 
+	/*
+	 * 進行下一楨
+	 */
 	public static void animatorTick(AnimatorControl control) {
 
 		Animator activeAnimator = control.getCurrentAnimator();

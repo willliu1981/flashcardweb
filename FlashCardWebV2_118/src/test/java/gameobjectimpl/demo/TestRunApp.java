@@ -2,6 +2,7 @@ package gameobjectimpl.demo;
 
 import java.awt.Point;
 
+import gameobjectimpl.component.GameObject;
 import gameobjectimpl.component.Scene;
 import gameobjectimpl.component.impl.Person;
 import gameobjectimpl.config.Application;
@@ -16,11 +17,20 @@ public class TestRunApp {
 		frame.setVisible(true);
 
 		Person person = Application.getBean("person1", Person.class);
-		Scene.addSceneComponent(person);
+		GameObject david = new GameObject();
+		david.addComponent(person);
+		david.setRelevantPosition(new Point(300, 200));
+		//david.setOwner("David");
 
-		//person.addFunctionComponent(new TestGameController());
+		//Scene.addSceneComponent(person);
+		Scene.addSceneComponent(david);
+
+		InputPlatform inputPlatform = new InputPlatform(new Point(1900, 1000));
+		inputPlatform.setTarget(david
+		inputPlatform.setAnimatorControl(person.getAnimatorControl());
+
 		person.addScript(new TestGameController());
-		person.addScript(new InputPlatform(new Point(1900, 1000)));
+		person.addScript(inputPlatform);
 
 		/**
 		 * game config

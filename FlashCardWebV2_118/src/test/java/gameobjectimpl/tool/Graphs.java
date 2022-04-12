@@ -20,6 +20,7 @@ public class Graphs {
 
 	public static void paintForActivedGameObjects(Graphics g, Component comp) {
 		Graphics2D g2d = (Graphics2D) g;
+		
 		g2d.fillRoundRect(comp.getAbsolutePosition().x, comp.getAbsolutePosition().y,
 				DEFAULTWIDTH, DEFAULTHEIGHT, DEFAULTWIDTH, DEFAULTHEIGHT);
 	}
