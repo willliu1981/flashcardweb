@@ -6,7 +6,7 @@ import idv.tool.Debug;
 
 public class InputPlatformImpl extends InputPlatform {
 	static Point targetSize = new Point(300, 900);
-	int distance = 18;
+	int distance = 20;
 
 	@Override
 	public void init() {

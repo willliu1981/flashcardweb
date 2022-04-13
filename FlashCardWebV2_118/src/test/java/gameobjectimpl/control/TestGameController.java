@@ -1,6 +1,7 @@
 package gameobjectimpl.control;
 
 import java.awt.Point;
+import java.util.Date;
 
 import gameobjectimpl.animator.AnimatorControl;
 import gameobjectimpl.component.GameObject;
@@ -14,36 +15,123 @@ public class TestGameController extends GameControllerAdapter {
 	GameObject target;
 	HasAnimation targetWithAnimatorControl;
 	AnimatorControl animatorControl;
-	private static int dir = -1;
+
+	int currentActionPeriod;
+	long primeTime;
+	Action currentAction;
+	boolean isActive;//action 是否已啟動
+
+	enum Action {
+		WALK_RIGHT, WALK_LEFT, IDLE, NOTHING
+	}
+
+	static class Rater {
+		int rate;
+
+		void reset() {
+
+		}
+
+		void start() {
+			rate = (int) (100 * Math.random());
+		}
+
+		int getRate() {
+			return this.rate;
+		}
+	}
+
+	static class RaterFactory {
+		static Rater getRater() {
+			Rater rater = new Rater();
+			rater.start();
+			return rater;
+		}
+
+		static boolean isRate(Rater rater, int expectedRate) {
+			return rater.getRate() < expectedRate;
+		}
+	}
 
 	@Override
 	public void start() {
 		Debug.test("start...");
 		animatorControl = this.getOwner().getAnimatorControl();
 		animatorControl.setCurrentAnimatorId("walk-right");
+		this.currentAction = Action.WALK_RIGHT;
 		inputPlatform.setDirection(1);
+		this.primeTime = new Date().getTime();
 	}
 
 	@Override
 	public void update() {
 
+		/*
+		 *  時間到,重設狀態
+		 */
+
 		//*
-		switch (animatorControl.getCurrentAnimatorId()) {
+		switch (this.currentAction) {
 
-		case "idle":
+		case IDLE:
 
-			break;
-		case "walk-right":
-			if (this.target.getX() > this.screenSize.x - targetSize.x) {
-				animatorControl.setCurrentAnimatorId("walk-left");
-				inputPlatform.setDirection(-1);
+			if (this.currentActionPeriod + this.primeTime < new Date().getTime()) {
+				this.currentActionPeriod = (int) (500 + 2000 * Math.random());
+				Rater rater = RaterFactory.getRater();
+
+				if (RaterFactory.isRate(rater, 10)) {
+					this.currentAction = Action.IDLE;
+					Debug.test("reset", "idle");
+				} else if (RaterFactory.isRate(rater, 55)) {
+					this.currentAction = Action.WALK_RIGHT;
+					Debug.test("reset", "right");
+				} else if (RaterFactory.isRate(rater, 100)) {
+					this.currentAction = Action.WALK_LEFT;
+					Debug.test("reset", "left");
+				}
+
+				this.primeTime = new Date().getTime();
+				this.isActive = false;
+
+			}
+
+			if (!this.isActive) {
+				animatorControl.setCurrentAnimatorId("idle");
+				inputPlatform.setDirection(0);
+				this.isActive = true;
 			}
 			break;
-		case "walk-left":
+		case WALK_RIGHT:
 
-			if (this.target.getX() < 10) {
+			if (this.target.getX() > this.screenSize.x - targetSize.x - 100) {
+				setActionForIdleDueToOutOfBounds();
+
+			}
+
+			if (this.currentActionPeriod + this.primeTime < new Date().getTime()) {
+				setActionDueToFinshFromWalkRightOrWalkLeft();
+			}
+
+			if (!this.isActive) {
 				animatorControl.setCurrentAnimatorId("walk-right");
 				inputPlatform.setDirection(1);
+				this.isActive = true;
+			}
+
+			break;
+		case WALK_LEFT:
+			if (this.target.getX() < 100) {
+				setActionForIdleDueToOutOfBounds();
+			}
+
+			if (this.currentActionPeriod + this.primeTime < new Date().getTime()) {
+				setActionDueToFinshFromWalkRightOrWalkLeft();
+			}
+
+			if (!this.isActive) {
+				animatorControl.setCurrentAnimatorId("walk-left");
+				inputPlatform.setDirection(-1);
+				this.isActive = true;
 			}
 			break;
 
@@ -53,6 +141,34 @@ public class TestGameController extends GameControllerAdapter {
 		}
 		//*/
 
+	}
+
+	/*
+	 * 超出邊界
+	 */
+	public void setActionForIdleDueToOutOfBounds() {
+		this.currentAction = Action.IDLE;
+		this.primeTime = new Date().getTime();
+		this.currentActionPeriod = (int) (Math.random() * 800 + 200);
+		this.isActive = false;
+	}
+
+	public void setActionDueToFinshFromWalkRightOrWalkLeft() {
+		Rater rater = RaterFactory.getRater();
+		if (RaterFactory.isRate(rater, 80)) {
+			this.currentAction = Action.IDLE;
+			Debug.test("from finsh(Right/Left)", "idle");
+		} else if (RaterFactory.isRate(rater, 90)) {
+			this.currentAction = Action.WALK_RIGHT;
+			Debug.test("from finsh(Right/Left)", "right");
+		} else if (RaterFactory.isRate(rater, 100)) {
+			this.currentAction = Action.WALK_LEFT;
+			Debug.test("from finsh(Right/Left)", "left");
+		}
+
+		this.primeTime = new Date().getTime();
+		this.currentActionPeriod = (int) (Math.random() * 500 + 2000);
+		this.isActive = false;
 	}
 
 	public void setInputPlatform(InputPlatformImpl inputPlatform) {
@@ -70,31 +186,5 @@ public class TestGameController extends GameControllerAdapter {
 	public void setScreenSize(Point screenSize) {
 		this.screenSize = screenSize;
 	}
-
-	//	public static void move() {
-	//		List<Component> gameObjects = Scene.getSceneComponents();
-	//		gameObjects.forEach(go -> {
-	//			Point p = go.getRelevantPosition();
-	//
-	//			switch (dir) {
-	//			case 1:
-	//				p.x = p.x + 25;
-	//				break;
-	//			case -1:
-	//				p.x = p.x - 25;
-	//				break;
-	//			default:
-	//				break;
-	//			}
-	//
-	//			if (p.x > 800) {
-	//				dir = -1;
-	//			} else if (p.x < 50) {
-	//				dir = 1;
-	//			}
-	//			go.setRelevantPosition(p);
-	//		});
-	//
-	//	}
 
 }
