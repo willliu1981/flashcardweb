@@ -20,7 +20,6 @@ import gameobjectimpl.component.Component;
 import gameobjectimpl.component.GameObject;
 import gameobjectimpl.component.HasAnimation;
 import gameobjectimpl.component.Scene;
-import idv.tool.Debug;
 
 public class Animators {
 	private static final File FILE = new File(
@@ -137,6 +136,28 @@ public class Animators {
 		});
 	}
 
+	public static void setPosture(Component target, Animator animator,
+			Integer keyIndex) {
+
+		List<KeyFrame> findKeys = findKeysByIndex(animator, keyIndex);
+
+		List<Component> findActivedGameObjectByOwner = Scene
+				.findActivedGameObjectByParnet(target);
+		findKeys.stream().forEach(key -> {
+			Optional<Component> findFirst = findActivedGameObjectByOwner.stream()
+					.filter(g -> {
+						if (g.getName() == null) {
+							return false;
+						}
+						return g.getName().equals(key.getKeyName());
+					}).findFirst();
+			if (findFirst.isPresent()) {
+				Component component = findFirst.get();
+				component.setRelevantPosition(key.getPosition());
+			}
+		});
+	}
+
 	public static void setPosture(HasAnimation target, String animatorName,
 			Integer keyIndex) {
 		setPosture(((GameObject) target).getOwner(), target.getAnimator(animatorName),
@@ -225,7 +246,9 @@ public class Animators {
 		Animator activeAnimator = control.getCurrentAnimator();
 		int maxKey = activeAnimator.getMaxNumberOfKey();
 		Integer currentKeyIndex = control.getCurrentKeyIndex(activeAnimator.getName());
-		Animators.setPosture(control.getOwner().getOwner(), activeAnimator,
+		//		Animators.setPosture(control.getOwner().getOwner(), activeAnimator,
+		//				currentKeyIndex);
+		Animators.setPosture(control.getOwner().getParentComponent(), activeAnimator,
 				currentKeyIndex);
 
 		currentKeyIndex++;

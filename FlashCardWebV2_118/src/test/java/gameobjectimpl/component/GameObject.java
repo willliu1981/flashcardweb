@@ -16,6 +16,8 @@ public class GameObject extends Component {
 
 	private AnimatorControl animatorControl;
 	private List<ScriptI> scripts;
+	private String GameObjectName;
+	
 
 	public GameObject() {
 
@@ -34,6 +36,16 @@ public class GameObject extends Component {
 		getScripts().add(script);
 		script.setOwner(this);
 
+	}
+	
+	
+
+	public String getGameObjectName() {
+		return GameObjectName;
+	}
+
+	public void setGameObjectName(String gameObjectName) {
+		GameObjectName = gameObjectName;
 	}
 
 	public int getX() {

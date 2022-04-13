@@ -19,36 +19,34 @@ public class TestRunApp {
 		RunGameObjectFrame frame = new RunGameObjectFrame();
 		frame.setVisible(true);
 
+		createPerson("David");
+		createPerson("Helen");
+		createPerson("Peter");
+
+		Scene.run(frame.getGameObjectPanel());
+
+	}
+
+	public static void createPerson(String name) {
+
 		Person person = Application.getBean("person1", Person.class);
-		GameObject david = GameObjectFactory.createGameObject("David");
-		david.addComponent(person);
-		david.setRelevantPosition(new Point(0, 100));
+		GameObject PersonGO = GameObjectFactory.createGameObject(name);
+		PersonGO.addComponent(person);
+		PersonGO.setRelevantPosition(new Point(0, 100));
 
-		Scene.addSceneComponent(david);
+		Scene.addSceneComponent(PersonGO);
 
-		InputPlatformImpl inputPlatform = ScriptFactory.getInputPlatform(david,
+		InputPlatformImpl inputPlatform = ScriptFactory.getInputPlatform(PersonGO,
 				InputPlatformImpl.class);
 
 		TestGameController testGameController = new TestGameController();
 
 		testGameController.setInputPlatform(inputPlatform);
-		testGameController.setTarget(david);
+		testGameController.setTarget(PersonGO);
 		testGameController.setScreenSize(Application.getScreenSize());
 
 		person.addScript(testGameController);
 		person.addScript(inputPlatform);
-
-		/**
-		 * game config
-		 * animator 於 bean config xml 
-		 */
-		{
-			TestGameController gc = new TestGameController();
-
-		}
-
-		Scene.run(frame.getGameObjectPanel());
-
 	}
 
 }

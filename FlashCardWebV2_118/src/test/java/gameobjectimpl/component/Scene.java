@@ -95,8 +95,20 @@ public class Scene {
 		return findFirst.get();
 	}
 
+	public static List<Component> findActivedGameObjectByParnet(Component parent) {
+		List<Component> parentComps = new ArrayList<>();
+		parentComps.add(parent);
+		if (parent.getComponents() != null && !parent.getComponents().isEmpty()) {
+			parent.getComponents().forEach(c -> {
+				List<Component> comps = findActivedGameObjectByParnet(c);
+				parentComps.addAll(comps);
+			});
+		}
+
+		return parentComps;
+	}
+
 	public static List<Component> findActivedGameObjectByOwner(String name) {
-		//Component findSceneComponent = findSceneComponent(name);
 		List<Component> collect = activedGameObjects.stream()
 				.filter(go -> go.getOwner().equals(name)).collect(Collectors.toList());
 		return collect;

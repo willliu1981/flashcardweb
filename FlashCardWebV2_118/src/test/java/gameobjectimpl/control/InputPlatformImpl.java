@@ -20,8 +20,6 @@ public class InputPlatformImpl extends InputPlatform {
 
 	@Override
 	public void update() {
-
-		//Debug.test("ip", dir);
 		this.target.setX(this.target.getX() + dir * distance);
 
 	}
