@@ -1,4 +1,4 @@
-package idv.fc.model;
+package idv.fc.pojo;
 
 import java.sql.Date;
 

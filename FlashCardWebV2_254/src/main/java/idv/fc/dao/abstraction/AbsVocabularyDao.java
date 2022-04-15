@@ -3,7 +3,7 @@ package idv.fc.dao.abstraction;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import idv.fc.model.Vocabulary;
+import idv.fc.pojo.Vocabulary;
 
 public abstract class AbsVocabularyDao extends OldBaseDao
 		implements Dao<Vocabulary>, ProcessData<Vocabulary> {

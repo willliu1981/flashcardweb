@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import idv.fc.dao.abstraction.AbsCardDao;
-import idv.fc.model.Card;
+import idv.fc.pojo.Card;
 
 public class CardDao extends AbsCardDao {
 

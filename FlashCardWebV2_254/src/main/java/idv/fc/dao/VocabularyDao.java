@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import idv.fc.dao.abstraction.AbsVocabularyDao;
-import idv.fc.model.Vocabulary;
+import idv.fc.pojo.Vocabulary;
 
 public class VocabularyDao extends AbsVocabularyDao {
 

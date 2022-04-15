@@ -3,7 +3,7 @@ package idv.fc.dao.abstraction;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import idv.fc.model.Card;
+import idv.fc.pojo.Card;
 
 public abstract class AbsCardDao extends OldBaseDao
 		implements Dao<Card>, ProcessData<Card> {

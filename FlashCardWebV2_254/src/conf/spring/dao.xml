@@ -19,7 +19,7 @@
 	<context:property-placeholder
 		location="classpath:property/jdbc.properties" />
 
-
+<!-- 
 	<bean id="DataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName">
@@ -36,7 +36,7 @@
 		</property>
 
 	</bean>
-
+ -->
 
 
 
