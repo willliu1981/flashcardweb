@@ -9,8 +9,6 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import idv.tool.Debug;
-
 public abstract class BaseDao<T> implements Dao<T> {
 	private DataSource dataSource;
 

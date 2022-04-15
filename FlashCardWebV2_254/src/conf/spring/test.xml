@@ -21,9 +21,6 @@
 	<context:component-scan base-package="idv.test"></context:component-scan>
 
 
-	<bean id="Car" class="idv.test.Car"
-		scope="prototype">
-	</bean>
 
 
 </beans>

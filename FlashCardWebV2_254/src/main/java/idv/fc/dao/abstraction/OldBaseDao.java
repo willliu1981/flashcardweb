@@ -8,9 +8,6 @@ import java.sql.Statement;
 
 import javax.sql.DataSource;
 
-import idv.fc.model.Vocabulary;
-import idv.tool.spring.SpringUtil;
-
 public abstract class OldBaseDao{
 	private DataSource dataSource;
 	private String tableName;

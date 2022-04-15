@@ -31,11 +31,13 @@
 		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
 		<property name="converters">
 			<list>
-				<bean class="idv.tool.TimestampConverter" />
+				<bean class="tool.TimestampConverter" />
 			</list>
 		</property>
 	</bean>
 
+
+<!-- 
 	<bean
 		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="exceptionMappings">
@@ -44,7 +46,7 @@
 			</props>
 		</property>
 	</bean>
-
+ -->
 
 
 
