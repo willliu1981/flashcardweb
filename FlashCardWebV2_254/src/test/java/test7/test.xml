@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+<!--  -->
+	<context:property-placeholder
+		location="file:c:/test/gameobject/animators.properties" />
+
+
+	<bean id="car" class="test7.Car" init-method="init">
+		<property name="name" value="cccc"></property>
+	</bean>
+
+<!--  
+	<bean id="car" class="test7.Car" init-method="init">
+		<constructor-arg>
+			<value>xxx1</value>
+		</constructor-arg>
+		<property name="name" value="${animator.person1.walk_right}"></property>
+		<property name="addComponents">
+			<map>
+
+	<entry key="person1.walk-right"
+		value="${animator.person1.walk_right}" />
+	<entry key="person1.walk-left"
+		value="${animator.person1.walk_left}" />
+
+</map>
+</property>
+</bean>
+	-->
+
+</beans>
