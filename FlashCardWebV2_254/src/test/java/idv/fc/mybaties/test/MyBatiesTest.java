@@ -10,15 +10,18 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.apache.log4j.Logger;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import idv.fc.mybatis.mapper.VocabularyMapper;
 import idv.fc.pojo.Vocabulary;
 import tool.Debug;
+import tool.MapperMap;
 
 public class MyBatiesTest {
-	//private final static Logger logger = Logger.getLogger(MyBatiesTest.class);
+	private final static Logger logger = LoggerFactory
+			.getLogger(MyBatiesTest.class);
 	static SqlSessionFactory sf;
 
 	static {
@@ -96,11 +99,8 @@ public class MyBatiesTest {
 		SqlSession session = sf.openSession();
 		VocabularyMapper mapper = session.getMapper(VocabularyMapper.class);
 
-		Map<String, String> map = new HashMap<>();
-		map.put("id", "v_yellow");
-		map.put("v", "yellow");
-
-		Vocabulary checkLogin = mapper.checkLoginByMap(map);
+		Vocabulary checkLogin = mapper.checkLoginByMap(
+				MapperMap.put("id", "v_yellow").put("v", "yellow"));
 
 		Debug.test(this, checkLogin);
 	}
@@ -124,6 +124,18 @@ public class MyBatiesTest {
 		Map<String, String> maps = mapper.queryAlltoMap();
 
 		Debug.test(this, maps);
+	}
+
+	@Test
+	public void testQueryByLike() {
+		SqlSession session = sf.openSession();
+		VocabularyMapper mapper = session.getMapper(VocabularyMapper.class);
+		// %' or translation like 'y
+		Map<String, String> maps = mapper
+				.queryByLike("%' or translation like 'y");
+		logger.info("maps={}", maps);
+		logger.info("size={}", maps.size());
+
 	}
 
 }

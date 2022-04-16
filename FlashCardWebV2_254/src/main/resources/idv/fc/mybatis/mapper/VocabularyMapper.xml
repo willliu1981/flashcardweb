@@ -37,6 +37,20 @@
 		select * from vocabulary
 	</select>
 
+<!--  -->
+	<select id="queryByLike" resultType="map">
+		select * from vocabulary where vocabulary like
+		"%"#{vocabulary}"%"
+	</select>
+	
+
+<!-- 
+	<select id="queryByLike" resultType="map">
+		select * from vocabulary where vocabulary like
+		<bind name="vocabulary" value="'%'+vocabulary+'%'" />
+		#{vocabulary}
+	</select>
+ -->
 
 
 

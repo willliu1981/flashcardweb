@@ -20,14 +20,15 @@ public interface VocabularyMapper {
 
 	Vocabulary checkLogin(String id, String vocabulry);
 
-	Vocabulary checkLoginByMap(Map<String, String> map);
+	Vocabulary checkLoginByMap(Map<String, Object> map);
 
 	Map<String, String> queryByIDtoMap(@Param("id") String id);
 
 	//List<Map<String, String>> queryAlltoMap();
 	@MapKey("id")
 	Map<String, String> queryAlltoMap();
-	
 
+	@MapKey("id")
+	Map<String, String> queryByLike(String vocabulary);
 
 }
