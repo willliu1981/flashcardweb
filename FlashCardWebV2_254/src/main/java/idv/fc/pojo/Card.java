@@ -124,7 +124,7 @@ public class Card {
 	public int hashCode() {
 		int prime = 31;
 		int res = 7;
-		res = res * prime + this.id;
+		res = res * prime + (this.id == null ? 0 : this.id);
 		return res;
 	}
 
@@ -144,6 +144,15 @@ public class Card {
 		Card other = (Card) obj;
 		return other.getId().equals(this.getId());
 
+	}
+
+	@Override
+	public String toString() {
+		return "Card [id=" + id + ", name=" + name + ", vid=" + vid + ", uid="
+				+ uid + ", create_date=" + create_date + ", last_time="
+				+ last_time + ", usage_count=" + usage_count + ", exam_count="
+				+ exam_count + ", pass_count=" + pass_count + ", tag=" + tag
+				+ ", step=" + step + ", step_time=" + step_time + "]";
 	}
 
 }

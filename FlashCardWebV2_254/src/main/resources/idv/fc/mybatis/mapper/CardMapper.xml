@@ -2,9 +2,12 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="">
+<mapper namespace="idv.fc.mybatis.mapper.CardMapper">
 
-
+	<insert id="insertCard" useGeneratedKeys="true" keyProperty="tag">
+		insert into card (id,name,uid,create_date) values
+		(null,#{name},#{uid},now())
+	</insert>
 
 
 </mapper>

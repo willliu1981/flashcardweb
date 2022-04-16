@@ -2,7 +2,6 @@ package idv.fc.mybaties.test;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +13,9 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import idv.fc.mybatis.mapper.CardMapper;
 import idv.fc.mybatis.mapper.VocabularyMapper;
+import idv.fc.pojo.Card;
 import idv.fc.pojo.Vocabulary;
 import tool.Debug;
 import tool.MapperMap;
@@ -44,10 +45,14 @@ public class MyBatiesTest {
 		SqlSession session = sf.openSession(true);
 		VocabularyMapper mapper = session.getMapper(VocabularyMapper.class);
 
-		int res = mapper.insertVocabulary();
+		Vocabulary vocabulary = new Vocabulary();
+		vocabulary.setId("v_blue3");
+		vocabulary.setVocabulary("blue3");
+		vocabulary.setTranslation("blue3 xxx");
 
-		//session.commit();
-		Debug.test(this, res);
+		int res = mapper.insertVocabulary(vocabulary);
+
+		logger.info("vocabulary={}", vocabulary);
 	}
 
 	@Test
@@ -135,6 +140,19 @@ public class MyBatiesTest {
 				.queryByLike("%' or translation like 'y");
 		logger.info("maps={}", maps);
 		logger.info("size={}", maps.size());
+
+	}
+
+	@Test
+	public void testInsertCard() {
+		SqlSession session = sf.openSession(true);
+		CardMapper mapper = session.getMapper(CardMapper.class);
+		Card card = new Card();
+		card.setName("xxx2");
+		card.setUid("u_admin");
+
+		int res = mapper.insertCard(card);
+		logger.info("card={}", card);
 
 	}
 

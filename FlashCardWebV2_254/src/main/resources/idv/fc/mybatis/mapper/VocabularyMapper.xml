@@ -3,10 +3,12 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="idv.fc.mybatis.mapper.VocabularyMapper">
-	<insert id="insertVocabulary">
-		insert into vocabulary (id,vocabulary,translation,create_date) values
-		("v_yellow6","yellow6","黃色6",now())
+	<insert id="insertVocabulary" useGeneratedKeys="true" keyProperty="tag">
+		insert into vocabulary
+		(id,vocabulary,translation,create_date) values
+		(#{id},#{vocabulary},#{translation},now())
 	</insert>
+
 	<update id="updateVocabulary">
 		update vocabulary set translation ="xxx" where id='v_yellow2'
 	</update>

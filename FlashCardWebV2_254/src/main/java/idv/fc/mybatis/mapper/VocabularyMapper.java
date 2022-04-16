@@ -12,7 +12,7 @@ public interface VocabularyMapper {
 
 	Vocabulary queryByID(String id);
 
-	int insertVocabulary();
+	int insertVocabulary(Vocabulary vocabulary);
 
 	List<Vocabulary> getAllVocabulary();
 
