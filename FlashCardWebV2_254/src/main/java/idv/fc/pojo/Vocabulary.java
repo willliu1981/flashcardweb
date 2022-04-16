@@ -49,4 +49,10 @@ public class Vocabulary {
 		this.create_date = create_date;
 	}
 
+	@Override
+	public String toString() {
+		return "Vocabulary [id=" + id + ", vocabulary=" + vocabulary + ", translation="
+				+ translation + ", create_date=" + create_date + ", tag=" + tag + "]";
+	}
+
 }
