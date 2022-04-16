@@ -10,6 +10,7 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.apache.log4j.Logger;
 import org.junit.jupiter.api.Test;
 
 import idv.fc.mybatis.mapper.VocabularyMapper;
@@ -17,6 +18,7 @@ import idv.fc.pojo.Vocabulary;
 import tool.Debug;
 
 public class MyBatiesTest {
+	//private final static Logger logger = Logger.getLogger(MyBatiesTest.class);
 	static SqlSessionFactory sf;
 
 	static {
@@ -102,4 +104,26 @@ public class MyBatiesTest {
 
 		Debug.test(this, checkLogin);
 	}
+
+	@Test
+	public void testQueryByIDToMap() {
+		SqlSession session = sf.openSession();
+		VocabularyMapper mapper = session.getMapper(VocabularyMapper.class);
+
+		Map<String, String> map = mapper.queryByIDtoMap("v_yellow");
+
+		Debug.test(this, map);
+	}
+
+	@Test
+	public void testQueryAllToMap() {
+		SqlSession session = sf.openSession();
+		VocabularyMapper mapper = session.getMapper(VocabularyMapper.class);
+
+		//List<Map<String, String>> maps = mapper.queryAlltoMap();
+		Map<String, String> maps = mapper.queryAlltoMap();
+
+		Debug.test(this, maps);
+	}
+
 }

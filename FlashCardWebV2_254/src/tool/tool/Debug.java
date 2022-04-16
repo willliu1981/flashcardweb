@@ -1,6 +1,5 @@
 package tool;
 
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +35,8 @@ public class Debug {
 
 	public static void test(Object objForClassInfo, Object prefix, Object msg,
 			boolean any) {
-		String head = objForClassInfo == null ? "" : objForClassInfo.toString() + " : ";
+		String head = objForClassInfo == null ? ""
+				: objForClassInfo.toString() + " : ";
 
 		String prefixString = "";
 		if (prefix == null) {
@@ -57,7 +57,8 @@ public class Debug {
 		if (msg instanceof Map) {
 			Map<?, ?> map = (Map<?, ?>) msg;
 			System.out.println(head + "foreach<Map>...");
-			map.forEach((k, v) -> System.out.printf("  key= %s , value= %s\n", k, v));
+			//map.forEach((k, v) -> System.out.printf("  key= %s , value= %s\n", k, v));
+			System.out.println(map);
 
 		} else if (msg instanceof List) {
 			List<?> list = (List<?>) msg;

@@ -10,6 +10,7 @@
 	<update id="updateVocabulary">
 		update vocabulary set translation ="xxx" where id='v_yellow2'
 	</update>
+
 	<select id="queryByID" resultType="idv.fc.pojo.Vocabulary">
 		select * from vocabulary where id=#{id}
 	</select>
@@ -19,10 +20,24 @@
 	<select id="getAllVocabulary" resultType="Vocabulary">
 		select * from vocabulary
 	</select>
+
 	<select id="checkLogin" resultType="Vocabulary">
 		select * from vocabulary where id=#{arg0} and vocabulary=#{arg1}
 	</select>
+
 	<select id="checkLoginByMap" resultType="Vocabulary">
 		select * from vocabulary where id=#{id} and vocabulary=#{v}
 	</select>
+
+	<select id="queryByIDtoMap" resultType="map">
+		select * from vocabulary where id=#{id}
+	</select>
+
+	<select id="queryAlltoMap" resultType="map">
+		select * from vocabulary
+	</select>
+
+
+
+
 </mapper>
