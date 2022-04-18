@@ -1,6 +1,7 @@
 package idv.fc.pojo;
 
 import java.sql.Date;
+import java.util.List;
 
 public class Vocabulary {
 	private String id;// {pk,not null,unique}
@@ -8,6 +9,16 @@ public class Vocabulary {
 	private String translation;// not null
 	private Date createDate;// not null
 	private String tag;
+
+	private List<Card> cards;
+
+	public List<Card> getCards() {
+		return cards;
+	}
+
+	public void setCards(List<Card> cards) {
+		this.cards = cards;
+	}
 
 	public String getTag() {
 		return tag;
@@ -51,8 +62,9 @@ public class Vocabulary {
 
 	@Override
 	public String toString() {
-		return "Vocabulary [id=" + id + ", vocabulary=" + vocabulary + ", translation="
-				+ translation + ", create_date=" + createDate + ", tag=" + tag + "]";
+		return "Vocabulary [id=" + id + ", vocabulary=" + vocabulary
+				+ ", translation=" + translation + ", createDate=" + createDate
+				+ ", tag=" + tag + ", cards=" + cards + "]";
 	}
 
 }

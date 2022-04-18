@@ -72,7 +72,7 @@ public class MyBatiesTestForVocabulary {
 		SqlSession session = sf.openSession(true);
 		VocabularyMapper mapper = session.getMapper(VocabularyMapper.class);
 
-		Vocabulary queryByID = mapper.queryByID("v_yellow");
+		Vocabulary queryByID = mapper.queryByID("v_at");
 
 		Debug.test(this, queryByID);
 	}

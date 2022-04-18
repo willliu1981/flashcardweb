@@ -45,9 +45,10 @@ public class MyBatiesTestForCard {
 		SqlSession session = sf.openSession(true);
 		CardMapper mapper = session.getMapper(CardMapper.class);
 
-		Card queryByID = mapper.queryById(20);
+		Card queryByID = mapper.queryByIdByStep(20);
 
 		Debug.test(this, queryByID);
+
 	}
 
 }

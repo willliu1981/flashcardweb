@@ -30,5 +30,7 @@ public interface VocabularyMapper {
 
 	@MapKey("id")
 	Map<String, String> queryByLike(String vocabulary);
+	
+	Vocabulary queryByIDTwo(String id);
 
 }
