@@ -5,29 +5,51 @@
 <mapper namespace="idv.fc.mybatis.mapper.CardMapper">
 
 	<insert id="insertCard" useGeneratedKeys="true" keyProperty="tag">
-		insert into card (id,name,uid,create_date) values
+		insert into
+		card (id,name,uid,create_date) values
 		(null,#{name},#{uid},now())
 	</insert>
 
 	<resultMap type="Card" id="cardResultMap">
 		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="vid" column="vid" />
+		<result property="uid" column="uid" />
+		<result property="tag" column="tag" />
+		<result property="step" column="step" />
 		<result property="createDate" column="create_date" />
 		<result property="lastTime" column="last_time" />
 		<result property="usageCount" column="usage_count" />
 		<result property="examCount" column="exam_count" />
 		<result property="passCount" column="pass_count" />
 		<result property="stepTime" column="step_time" />
-		<result property="vocabulary.id" column="id" />
+		<!-- <result property="vocabulary.id" column="id" />
 		<result property="vocabulary.vocabulary" column="vocabulary" />
 		<result property="vocabulary.translation" column="translation" />
 		<result property="vocabulary.createDate" column="create_date" />
-		<result property="vocabulary.tag" column="tag" />
+		<result property="vocabulary.tag" column="tag" /> -->
+
+		<association property="vocabulary" javaType="Vocabulary">
+			<result property="id" column="vid" />
+			<result property="vocabulary" column="vocabulary" />
+			<result property="translation" column="translation" />
+			<result property="createDate" column="vcreate_date" />
+			<result property="tag" column="vtag" />
+		</association>
 
 	</resultMap>
 
+	<sql id="cardQueryById_Column_List">
+		c.id, c.name, c.vid, c.uid, c.tag, c.step, c.create_date,
+		c.last_time, c.usage_count, c.exam_count, c.pass_count, c.step_time,
+		v.vocabulary, v.translation, v.id vid, v.create_date vcreate_date, v.tag vtag
+	</sql>
+
 	<select id="queryById" resultMap="cardResultMap">
-		select * from card left join vocabulary on card.vid=vocabulary.id where
-		card.id=#{id}
+		select
+		<include refid="cardQueryById_Column_List" />
+		from card c left join vocabulary v on c.vid=v.id where
+		c.id=#{id}
 
 	</select>
 
