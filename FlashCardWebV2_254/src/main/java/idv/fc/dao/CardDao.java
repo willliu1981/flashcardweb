@@ -23,7 +23,7 @@ public class CardDao extends AbsCardDao {
 			st.setString(1, t.getName().trim());
 			st.setString(2, t.getVid().trim());
 			st.setString(3, t.getUid().trim());
-			st.setDate(4, t.getCreate_date());
+			st.setDate(4, t.getCreateDate());
 
 			st.execute();
 
@@ -44,13 +44,13 @@ public class CardDao extends AbsCardDao {
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1, t.getName().trim());
 			st.setString(2, t.getVid());
-			st.setTimestamp(3, t.getLast_time());
-			st.setInt(4, t.getUsage_count());
+			st.setTimestamp(3, t.getLastTime());
+			st.setInt(4, t.getUsageCount());
 			st.setString(5, t.getTag());
-			st.setInt(6, t.getExam_count());
-			st.setInt(7, t.getPass_count());
+			st.setInt(6, t.getExamCount());
+			st.setInt(7, t.getPassCount());
 			st.setInt(8, t.getStep());
-			st.setTimestamp(9, t.getStep_time());
+			st.setTimestamp(9, t.getStepTime());
 			st.setString(10, t.getUid());
 			st.setInt(11, Integer.parseInt(id.toString()));
 

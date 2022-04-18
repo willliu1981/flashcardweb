@@ -13,7 +13,15 @@
 		update vocabulary set translation ="xxx" where id='v_yellow2'
 	</update>
 
-	<select id="queryByID" resultType="idv.fc.pojo.Vocabulary">
+	<resultMap type="Vocabulary" id="vocabularyResultMap">
+		<!-- --> <id property="id" column="id" />
+		<!-- <result property="vocabulary" column="vocabulary" /> -->
+		<!--  <result property="translation" column="translation" />-->
+		<result property="createDate" column="create_date" />
+		<!--  <result property="tag" column="tag" />-->
+	</resultMap>
+
+	<select id="queryByID" resultMap="vocabularyResultMap">
 		select * from vocabulary where id=#{id}
 	</select>
 

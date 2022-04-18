@@ -6,6 +6,10 @@
 <configuration>
 	<properties resource="property/jdbc.properties" />
 
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="false" />
+	</settings>
+
 	<typeAliases>
 		<!-- <typeAlias type="idv.fc.pojo.Vocabulary" alias="Vocabulary" /> -->
 		<package name="idv.fc.pojo" />

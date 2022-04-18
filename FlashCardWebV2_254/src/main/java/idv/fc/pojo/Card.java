@@ -8,14 +8,15 @@ public class Card {
 	private String name;// {not null}
 	private String vid;// voicabulary id
 	private String uid;// {not null}, user id
-	private Date create_date;// {not null}
-	private Timestamp last_time;// 上次使用時間
-	private Integer usage_count;// 使用次數
-	private Integer exam_count;// 測驗次數(亦增加 使用次數)
-	private Integer pass_count;// 通過測驗 次數
+	private Date createDate;// {not null}
+	private Timestamp lastTime;// 上次使用時間
+	private Integer usageCount;// 使用次數
+	private Integer examCount;// 測驗次數(亦增加 使用次數)
+	private Integer passCount;// 通過測驗 次數
 	private String tag;
 	private Integer step;// 階段
-	private Timestamp step_time;// 當前階段的時間
+	private Timestamp stepTime;// 當前階段的時間
+	private Vocabulary vocabulary;
 
 	public String getUid() {
 		return uid;
@@ -23,6 +24,14 @@ public class Card {
 
 	public void setUid(String uid) {
 		this.uid = uid;
+	}
+
+	public Vocabulary getVocabulary() {
+		return vocabulary;
+	}
+
+	public void setVocabulary(Vocabulary vocabulary) {
+		this.vocabulary = vocabulary;
 	}
 
 	public Integer getStep() {
@@ -33,12 +42,12 @@ public class Card {
 		this.step = step;
 	}
 
-	public Timestamp getStep_time() {
-		return step_time;
+	public Timestamp getStepTime() {
+		return stepTime;
 	}
 
-	public void setStep_time(Timestamp step_time) {
-		this.step_time = step_time;
+	public void setStepTime(Timestamp step_time) {
+		this.stepTime = step_time;
 	}
 
 	public String getTag() {
@@ -49,24 +58,24 @@ public class Card {
 		this.tag = tag;
 	}
 
-	public Integer getExam_count() {
-		return exam_count;
+	public Integer getExamCount() {
+		return examCount;
 	}
 
-	public void setExam_count(Integer exam_count) {
-		this.exam_count = exam_count;
+	public void setExamCount(Integer exam_count) {
+		this.examCount = exam_count;
 	}
 
-	public Integer getPass_count() {
-		return pass_count;
+	public Integer getPassCount() {
+		return passCount;
 	}
 
-	public void setPass_count(Integer pass_count) {
-		this.pass_count = pass_count;
+	public void setPassCount(Integer pass_count) {
+		this.passCount = pass_count;
 	}
 
 	public void addPass_count() {
-		this.setPass_count(this.getPass_count() + 1);
+		this.setPassCount(this.getPassCount() + 1);
 	}
 
 	public Integer getId() {
@@ -78,23 +87,23 @@ public class Card {
 	}
 
 	public void addUsageCount() {
-		this.setUsage_count(this.getUsage_count() + 1);
+		this.setUsageCount(this.getUsageCount() + 1);
 	}
 
-	public Integer getUsage_count() {
-		return usage_count;
+	public Integer getUsageCount() {
+		return usageCount;
 	}
 
-	public void setUsage_count(Integer usageCount) {
-		this.usage_count = usageCount;
+	public void setUsageCount(Integer usageCount) {
+		this.usageCount = usageCount;
 	}
 
-	public Timestamp getLast_time() {
-		return last_time;
+	public Timestamp getLastTime() {
+		return lastTime;
 	}
 
-	public void setLast_time(Timestamp useTime) {
-		this.last_time = useTime;
+	public void setLastTime(Timestamp useTime) {
+		this.lastTime = useTime;
 	}
 
 	public String getName() {
@@ -113,12 +122,12 @@ public class Card {
 		this.vid = vid;
 	}
 
-	public Date getCreate_date() {
-		return create_date;
+	public Date getCreateDate() {
+		return createDate;
 	}
 
-	public void setCreate_date(Date create_date) {
-		this.create_date = create_date;
+	public void setCreateDate(Date create_date) {
+		this.createDate = create_date;
 	}
 
 	public int hashCode() {
@@ -149,10 +158,11 @@ public class Card {
 	@Override
 	public String toString() {
 		return "Card [id=" + id + ", name=" + name + ", vid=" + vid + ", uid="
-				+ uid + ", create_date=" + create_date + ", last_time="
-				+ last_time + ", usage_count=" + usage_count + ", exam_count="
-				+ exam_count + ", pass_count=" + pass_count + ", tag=" + tag
-				+ ", step=" + step + ", step_time=" + step_time + "]";
+				+ uid + ", create_date=" + createDate + ", last_time="
+				+ lastTime + ", usage_count=" + usageCount + ", exam_count="
+				+ examCount + ", pass_count=" + passCount + ", tag=" + tag
+				+ ", step=" + step + ", step_time=" + stepTime + ", vocabulary="
+				+ vocabulary + "]";
 	}
 
 }

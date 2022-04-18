@@ -23,7 +23,7 @@ public class VocabularyDao extends AbsVocabularyDao {
 			st.setString(1, t.getId().trim());
 			st.setString(2, t.getVocabulary().trim());
 			st.setString(3, t.getTranslation());
-			st.setDate(4, t.getCreate_date());
+			st.setDate(4, t.getCreateDate());
 
 			st.execute();
 

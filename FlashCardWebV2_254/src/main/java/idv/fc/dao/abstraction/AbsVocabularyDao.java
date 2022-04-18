@@ -21,7 +21,7 @@ public abstract class AbsVocabularyDao extends OldBaseDao
 		model.setId(rs.getString("id"));
 		model.setVocabulary(rs.getString("vocabulary"));
 		model.setTranslation(rs.getString("translation"));
-		model.setCreate_date(rs.getDate("create_date"));
+		model.setCreateDate(rs.getDate("create_date"));
 		model.setTag(rs.getString("tag"));
 
 		return model;

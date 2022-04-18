@@ -20,14 +20,14 @@ public abstract class AbsCardDao extends OldBaseDao
 		model.setId(rs.getInt("id"));
 		model.setName(rs.getString("name"));
 		model.setVid(rs.getString("vid"));
-		model.setCreate_date(rs.getDate("create_date"));
-		model.setLast_time(rs.getTimestamp("create_date"));
-		model.setUsage_count(rs.getInt("usage_count"));
+		model.setCreateDate(rs.getDate("create_date"));
+		model.setLastTime(rs.getTimestamp("create_date"));
+		model.setUsageCount(rs.getInt("usage_count"));
 		model.setTag(rs.getString("tag"));
-		model.setExam_count(rs.getInt("exam_count"));
-		model.setPass_count(rs.getInt("pass_count"));
+		model.setExamCount(rs.getInt("exam_count"));
+		model.setPassCount(rs.getInt("pass_count"));
 		model.setStep(rs.getInt("step"));
-		model.setStep_time(rs.getTimestamp("step_time"));
+		model.setStepTime(rs.getTimestamp("step_time"));
 		model.setUid(rs.getString("uid"));
 
 		return model;

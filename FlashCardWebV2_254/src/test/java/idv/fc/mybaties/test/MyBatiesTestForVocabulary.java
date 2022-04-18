@@ -20,9 +20,9 @@ import idv.fc.pojo.Vocabulary;
 import tool.Debug;
 import tool.MapperMap;
 
-public class MyBatiesTest {
+public class MyBatiesTestForVocabulary {
 	private final static Logger logger = LoggerFactory
-			.getLogger(MyBatiesTest.class);
+			.getLogger(MyBatiesTestForVocabulary.class);
 	static SqlSessionFactory sf;
 
 	static {

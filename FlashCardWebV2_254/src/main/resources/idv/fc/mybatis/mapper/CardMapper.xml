@@ -9,5 +9,27 @@
 		(null,#{name},#{uid},now())
 	</insert>
 
+	<resultMap type="Card" id="cardResultMap">
+		<id property="id" column="id" />
+		<result property="createDate" column="create_date" />
+		<result property="lastTime" column="last_time" />
+		<result property="usageCount" column="usage_count" />
+		<result property="examCount" column="exam_count" />
+		<result property="passCount" column="pass_count" />
+		<result property="stepTime" column="step_time" />
+		<result property="vocabulary.id" column="id" />
+		<result property="vocabulary.vocabulary" column="vocabulary" />
+		<result property="vocabulary.translation" column="translation" />
+		<result property="vocabulary.createDate" column="create_date" />
+		<result property="vocabulary.tag" column="tag" />
+
+	</resultMap>
+
+	<select id="queryById" resultMap="cardResultMap">
+		select * from card left join vocabulary on card.vid=vocabulary.id where
+		card.id=#{id}
+
+	</select>
+
 
 </mapper>

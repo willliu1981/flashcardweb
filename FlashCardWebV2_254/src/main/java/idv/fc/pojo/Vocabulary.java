@@ -6,7 +6,7 @@ public class Vocabulary {
 	private String id;// {pk,not null,unique}
 	private String vocabulary;// not null, unique
 	private String translation;// not null
-	private Date create_date;// not null
+	private Date createDate;// not null
 	private String tag;
 
 	public String getTag() {
@@ -41,18 +41,18 @@ public class Vocabulary {
 		this.translation = translation;
 	}
 
-	public Date getCreate_date() {
-		return create_date;
+	public Date getCreateDate() {
+		return createDate;
 	}
 
-	public void setCreate_date(Date create_date) {
-		this.create_date = create_date;
+	public void setCreateDate(Date create_date) {
+		this.createDate = create_date;
 	}
 
 	@Override
 	public String toString() {
 		return "Vocabulary [id=" + id + ", vocabulary=" + vocabulary + ", translation="
-				+ translation + ", create_date=" + create_date + ", tag=" + tag + "]";
+				+ translation + ", create_date=" + createDate + ", tag=" + tag + "]";
 	}
 
 }
