@@ -39,7 +39,7 @@
  -->
 
 
-
+	<bean id="vocabulary" class="idv.fc.pojo.Vocabulary"></bean>
 
 
 

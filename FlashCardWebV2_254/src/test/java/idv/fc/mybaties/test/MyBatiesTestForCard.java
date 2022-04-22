@@ -49,6 +49,8 @@ public class MyBatiesTestForCard {
 
 		Debug.test(this, queryByID);
 
+
+
 	}
 
 }

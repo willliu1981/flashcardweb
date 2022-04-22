@@ -18,9 +18,21 @@
         http://www.springframework.org/schema/util/spring-util-4.0.xsd">
 
 
-	<context:component-scan base-package="idv.test"></context:component-scan>
+	<context:component-scan base-package="idv.test,spring"></context:component-scan>
 
+	<bean id="xmlUrlFactory" class="spring.XmlUrlFactory">
+		<property name="xmlUrls">
+			<map>
+				<entry key="test">
+					<list>
+						<value>classpath:spring/test.xml</value>
+					</list>
+				</entry>
+			</map>
+		</property>
 
+	</bean>
 
+	<bean id="car1" class="idv.test.Car"></bean>
 
 </beans>
