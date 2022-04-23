@@ -26,6 +26,7 @@
 				<entry key="test">
 					<list>
 						<value>classpath:spring/test.xml</value>
+						<value>classpath:spring/dao.xml</value>
 					</list>
 				</entry>
 			</map>
@@ -33,6 +34,8 @@
 
 	</bean>
 
-	<bean id="car1" class="idv.test.Car"></bean>
+	<!-- <bean class="test.AfterHandler"></bean> -->
+
+
 
 </beans>

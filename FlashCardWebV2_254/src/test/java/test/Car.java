@@ -1,4 +1,4 @@
-package idv.test;
+package test;
 
 public class Car {
 	private String name;
@@ -25,7 +25,7 @@ public class Car {
 		return "Car [name=" + name + ", price=" + price + "]";
 	}
 
-	private Car() {
+	public Car() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

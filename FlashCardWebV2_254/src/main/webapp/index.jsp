@@ -10,8 +10,14 @@
 
 	<h1>Welcome to FlashCard</h1>
 	<h2>
-		<a href="test/test1?">test</a>
+		<a href="word/word">test</a>
 	</h2>
+
+	<h2>
+		<a href="word/wordManager?">card manager</a>
+	</h2>
+
+
 
 
 </body>
