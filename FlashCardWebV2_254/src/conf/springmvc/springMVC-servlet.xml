@@ -18,7 +18,7 @@
 	<mvc:default-servlet-handler />
 	<mvc:annotation-driven conversion-service="converterUtil" />
 
-	<context:component-scan base-package="idv.fc"/>
+	<context:component-scan base-package="idv.fc" />
 
 	<context:property-placeholder
 		location="classpath:property/jdbc.properties" />
@@ -38,42 +38,11 @@
 		</property>
 	</bean>
 
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close">
-		<property name="driverClassName" value="${jdbc.driverClassName}" />
-		<property name="url" value="${jdbc.url}" />
-		<property name="username" value="${jdbc.username}" />
-		<property name="password" value="${jdbc.password}" />  
-    <!-- 初始化連線大小 -->
-		<property name="initialSize" value="${jdbc.initialSize}"></property>  
-    <!-- 連線池最大數量 -->
-		<property name="maxActive" value="${jdbc.maxActive}"></property>  
-    <!-- 連線池最大空閒 -->
-		<property name="maxIdle" value="${jdbc.maxIdle}"></property>  
-    <!-- 連線池最小空閒 -->
-		<property name="minIdle" value="${jdbc.minIdle}"></property>  
-    <!-- 獲取連線最大等待時間 -->
-		<property name="maxWait" value="${jdbc.maxWait}"></property>
-	</bean>
 
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />  
-    <!-- 自動掃描mapping.xml檔案 -->
-		<property name="mapperLocations"
-			value="classpath:idv/fc/mybatis/mapper/VocabularyMapper.xml"></property>
-	</bean>
 
-<!-- DAO介面所在包名，Spring會自動查詢其下的類 -->
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="idv.fc.mybatis.mapper" />
-		<!-- <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property> -->
-	</bean>  
 
-<!-- (事務管理)transaction manager, use JtaTransactionManager for global tx -->
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
+
+
 
 
 

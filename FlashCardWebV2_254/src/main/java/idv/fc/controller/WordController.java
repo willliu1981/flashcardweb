@@ -20,15 +20,7 @@ public class WordController {
 
 	@RequestMapping(value = "vocabulary")
 	public String toWord(HashMap<String, List<Vocabulary>> map) {
-		List<Vocabulary> vocabularys = new ArrayList<>();
-		Vocabulary vocabulary = new Vocabulary();
-		vocabulary.setVocabulary("x1");
-		vocabulary.setTranslation("X1");
-		vocabularys.add(vocabulary);
-		vocabulary = new Vocabulary();
-		vocabulary.setVocabulary("x2");
-		vocabulary.setTranslation("X2");
-		vocabularys.add(vocabulary);
+	SpringUtil .
 		map.put("vocabularys", vocabularys);
 
 		return "wordManager/vocabularyManagedPage";

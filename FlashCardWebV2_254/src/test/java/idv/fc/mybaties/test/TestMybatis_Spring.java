@@ -31,7 +31,7 @@ public class TestMybatis_Spring {
 	@BeforeEach
 	public void before() {
 		ac = new ClassPathXmlApplicationContext(
-				"classpath:springmvc/springMVC-servlet.xml");
+				"classpath:springmvc/spring-mybatis.xml");
 		vocabularyService = (IVocabularyService) ac
 				.getBean("vocabularyService");
 	}
