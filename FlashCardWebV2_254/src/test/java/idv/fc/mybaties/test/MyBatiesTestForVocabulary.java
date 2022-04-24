@@ -13,8 +13,8 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import idv.fc.dao.VocabularyDao;
 import idv.fc.mybatis.mapper.CardMapper;
-import idv.fc.mybatis.mapper.VocabularyMapper;
 import idv.fc.mybatis.mapper.VocabularyMapperOld;
 import idv.fc.pojo.Card;
 import idv.fc.pojo.Vocabulary;
@@ -170,7 +170,7 @@ public class MyBatiesTestForVocabulary {
 	@Test
 	public void testGetAllVocabulary() {
 		SqlSession session = sf.openSession(true);
-		VocabularyMapper mapper = session.getMapper(VocabularyMapper.class);
+		VocabularyDao mapper = session.getMapper(VocabularyDao.class);
 		List<Vocabulary> queryAll = mapper.queryAll();
 		logger.info("vocs={}", queryAll);
 
@@ -178,8 +178,8 @@ public class MyBatiesTestForVocabulary {
 
 	@Test
 	public void testMapperUtil() {
-		VocabularyMapper mapper = MapperUtil
-				.setMapperType(VocabularyMapper.class).setAutoCommit()
+		VocabularyDao mapper = MapperUtil
+				.setMapperType(VocabularyDao.class).setAutoCommit()
 				.getMapper();
 
 		logger.info("vocs={}", mapper.queryAll());

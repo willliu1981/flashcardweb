@@ -13,7 +13,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.alibaba.fastjson.JSON;
 
-import idv.fc.mybatis.mapper.VocabularyMapper;
+import idv.fc.dao.VocabularyDao;
 import idv.fc.pojo.Vocabulary;
 import idv.fc.service.IVocabularyService;
 import tool.MapperUtil;
@@ -47,8 +47,8 @@ public class TestMybatis_Spring {
 
 	@Test
 	public void test2() {
-		VocabularyMapper mapper = MapperUtil
-				.setMapperType(VocabularyMapper.class).setAutoCommit()
+		VocabularyDao mapper = MapperUtil
+				.setMapperType(VocabularyDao.class).setAutoCommit()
 				.getMapper();
 		logger.info(JSON.toJSONString(mapper.queryAll()));
 	}

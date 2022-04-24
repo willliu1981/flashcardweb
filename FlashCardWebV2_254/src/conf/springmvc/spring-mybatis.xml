@@ -12,8 +12,9 @@
         http://www.springframework.org/schema/mvc
         https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-<!--  --> 
-	<context:component-scan base-package="idv.fc.mybatis,idv.fc.service" />
+<!--  -->
+	<context:component-scan
+		base-package="idv.fc.mybatis,idv.fc.service" />
        
         
 <!-- 引入配置檔案 -->
@@ -51,12 +52,15 @@
     <!-- 自動掃描mapping.xml檔案 -->
 		<property name="mapperLocations"
 			value="classpath:idv/fc/mybatis/mapper/VocabularyMapper.xml"></property>
+		<!--  -->
+		<property name="configLocation"
+			value="classpath:idv/fc/mybatis/mybatis-config.xml" />
 	</bean>
 	
 
 <!-- DAO介面所在包名，Spring會自動查詢其下的類 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="idv.fc.mybatis.mapper" />
+		<property name="basePackage" value="idv.fc.dao" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
 	</bean>  
 
