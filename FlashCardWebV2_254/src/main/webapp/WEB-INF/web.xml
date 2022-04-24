@@ -69,6 +69,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			classpath:spring/dao.xml,
+			classpath:springmvc/spring-mybatis.xml,
 			classpath:spring/test.xml
 		</param-value>
 	</context-param>
