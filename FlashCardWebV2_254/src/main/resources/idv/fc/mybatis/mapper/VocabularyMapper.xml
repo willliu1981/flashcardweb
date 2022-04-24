@@ -5,96 +5,12 @@
 <mapper namespace="idv.fc.mybatis.mapper.VocabularyMapper">
 
 
-	<select id="queryAll" resultType="Vocabulary">
+	<select id="queryAll" resultType="idv.fc.pojo.Vocabulary">
 		select * from vocabulary
 	</select>
 
 
-	<insert id="insertVocabulary" useGeneratedKeys="true" keyProperty="tag">
-		insert into
-		vocabulary
-		(id,vocabulary,translation,create_date) values
-		(#{id},#{vocabulary},#{translation},now())
-	</insert>
-
-	<update id="updateVocabulary">
-		update vocabulary set translation ="xxx" where id='v_yellow2'
-	</update>
-
-	<resultMap type="Vocabulary" id="vocabularyResultMap">
-		<!-- -->
-		<id property="id" column="id" />
-		<!-- <result property="vocabulary" column="vocabulary" /> -->
-		<!--  <result property="translation" column="translation" />-->
-		<result property="createDate" column="create_date" />
-		<!--  <result property="tag" column="tag" />-->
-
-		<collection property="cards" ofType="Card">
-			<id property="id" column="c_id" />
-			<result property="name" column="name" />
-		</collection>
-	</resultMap>
-
-	<select id="queryByID" resultMap="vocabularyResultMap">
-		select v.id,v.create_date,c.id c_id
-		,c.name
-		from
-		vocabulary v left join
-		card c on v.id=c.vid where v.id=#{id}
-	</select>
-
-
-	<!-- -->
-	<select id="getAllVocabulary" resultType="Vocabulary">
-		select * from vocabulary
-	</select>
-
-	<select id="checkLogin" resultType="Vocabulary">
-		select * from vocabulary where
-		id=#{arg0} and
-		vocabulary=#{arg1}
-	</select>
-
-	<select id="checkLoginByMap" resultType="Vocabulary">
-		select * from vocabulary where
-		id=#{id} and
-		vocabulary=#{v}
-	</select>
-
-	<select id="queryByIDtoMap" resultType="map">
-		select * from vocabulary where
-		id=#{id}
-	</select>
-
-	<select id="queryAlltoMap" resultType="map">
-		select * from vocabulary
-	</select>
-
-<!--  -->
-	<select id="queryByLike" resultType="map">
-		select * from vocabulary where
-		vocabulary like
-		"%"#{vocabulary}"%"
-	</select>
 	
-
-<!-- 
-	<select id="queryByLike" resultType="map">
-		select * from vocabulary where vocabulary like
-		<bind name="vocabulary" value="'%'+vocabulary+'%'" />
-		#{vocabulary}
-	</select>
- -->
-
-	<resultMap type="Vocabulary" id="queryByIdByStepTwo">
-		<!-- -->
-		<id property="id" column="id" />
-
-	</resultMap>
-
-	<select id="queryByIDTwo" resultMap="queryByIdByStepTwo">
-		select * from vocabulary where id=#{id}
-	</select>
 
 
 </mapper>

@@ -1,16 +1,14 @@
 package idv.fc.mybatis.mapper;
 
 import java.util.List;
-import java.util.Map;
 
-import org.apache.ibatis.annotations.MapKey;
-import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import idv.fc.pojo.Vocabulary;
 
+@Repository
 public interface VocabularyMapper {
 
 	List<Vocabulary> queryAll();
-
 
 }

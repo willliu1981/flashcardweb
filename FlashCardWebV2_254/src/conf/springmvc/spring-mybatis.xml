@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
+<?xml version="1.0" encoding="UTF-8" ?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="
         http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd
@@ -14,29 +12,20 @@
         http://www.springframework.org/schema/mvc
         https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-
-	<mvc:default-servlet-handler />
-	<mvc:annotation-driven conversion-service="converterUtil" />
-
-	<context:component-scan base-package="idv.fc"/>
-
+<!--  
+	<context:component-scan base-package="idv.fc.mybatis,idv.fc.service" />
+      -->  
+        
+<!-- 引入配置檔案 -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:property/jdbc.properties" />
+	</bean>
+	
+<!--  
 	<context:property-placeholder
 		location="classpath:property/jdbc.properties" />
-
-	<bean id="viewResolver"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/view/"></property>
-		<property name="suffix" value=".jsp"></property>
-	</bean>
-
-	<bean id="converterUtil"
-		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
-		<property name="converters">
-			<list>
-				<bean class="tool.TimestampConverter" />
-			</list>
-		</property>
-	</bean>
+-->
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
@@ -54,19 +43,20 @@
 		<property name="minIdle" value="${jdbc.minIdle}"></property>  
     <!-- 獲取連線最大等待時間 -->
 		<property name="maxWait" value="${jdbc.maxWait}"></property>
-	</bean>
+	</bean>  
 
+<!-- spring和MyBatis完美整合，不需要mybatis的配置對映檔案 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />  
     <!-- 自動掃描mapping.xml檔案 -->
-		<property name="mapperLocations"
-			value="classpath:idv/fc/mybatis/mapper/VocabularyMapper.xml"></property>
+		<property name="mapperLocations" value="classpath:idv/fc/mybatis/mapper/*.xml"></property>
 	</bean>
+	
 
 <!-- DAO介面所在包名，Spring會自動查詢其下的類 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="idv.fc.mybatis.mapper" />
-		<!-- <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property> -->
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
 	</bean>  
 
 <!-- (事務管理)transaction manager, use JtaTransactionManager for global tx -->
@@ -76,21 +66,5 @@
 	</bean>
 
 
-
-<!-- 
-	<bean
-		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-		<property name="exceptionMappings">
-			<props>
-				<prop key="idv.fc.exception.FindErrorException">redirect:/error</prop>
-			</props>
-		</property>
-	</bean>
- -->
-
-
-
-
-
-
 </beans>
+

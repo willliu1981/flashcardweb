@@ -38,6 +38,7 @@
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter
 		</filter-class>
+		<async-supported>true</async-supported>
 		<init-param>
 			<param-name>encoding</param-name>
 			<param-value>utf-8</param-value>
@@ -78,6 +79,9 @@
 		</listener-class>
 	</listener>
 
-
+<!-- 防止Spring記憶體溢位監聽器 -->  
+<!-- <listener>  
+    <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>  
+</listener>  -->
 
 </web-app>
