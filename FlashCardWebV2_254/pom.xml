@@ -34,16 +34,12 @@
 			<version>1.2</version>
 		</dependency>
 		 
-		 
-
 <!-- https://mvnrepository.com/artifact/taglibs/standard -->
 		<dependency>
 			<groupId>taglibs</groupId>
 			<artifactId>standard</artifactId>
 			<version>1.1.2</version>
 		</dependency>
-
-
 
 	<!-- https://mvnrepository.com/artifact/org.webjars/jquery -->
 		<dependency>
@@ -57,7 +53,6 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.10.0.pr3</version>
 		</dependency>
-
 
 		<!-- https://mvnrepository.com/artifact/junit/junit 
 		<dependency>
@@ -81,8 +76,6 @@
 			<version>5.7.2</version>
 			<scope>test</scope>
 		</dependency>
-		
-		
 		
 <!-- https://mvnrepository.com/artifact/org.mockito/mockito-inline -->
 		<dependency>

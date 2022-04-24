@@ -15,10 +15,12 @@ import org.slf4j.LoggerFactory;
 
 import idv.fc.mybatis.mapper.CardMapper;
 import idv.fc.mybatis.mapper.VocabularyMapper;
+import idv.fc.mybatis.mapper.VocabularyMapperOld;
 import idv.fc.pojo.Card;
 import idv.fc.pojo.Vocabulary;
 import tool.Debug;
 import tool.MapperMap;
+import tool.MapperUtil;
 
 public class MyBatiesTestForVocabulary {
 	private final static Logger logger = LoggerFactory
@@ -43,7 +45,8 @@ public class MyBatiesTestForVocabulary {
 	public void testInsert() throws IOException {
 
 		SqlSession session = sf.openSession(true);
-		VocabularyMapper mapper = session.getMapper(VocabularyMapper.class);
+		VocabularyMapperOld mapper = session
+				.getMapper(VocabularyMapperOld.class);
 
 		Vocabulary vocabulary = new Vocabulary();
 		vocabulary.setId("v_blue3");
@@ -59,7 +62,8 @@ public class MyBatiesTestForVocabulary {
 	public void testUpdate() throws IOException {
 
 		SqlSession session = sf.openSession(true);
-		VocabularyMapper mapper = session.getMapper(VocabularyMapper.class);
+		VocabularyMapperOld mapper = session
+				.getMapper(VocabularyMapperOld.class);
 
 		int res = mapper.updateVocabulary();
 
@@ -70,7 +74,8 @@ public class MyBatiesTestForVocabulary {
 	public void testQueryByID() throws IOException {
 
 		SqlSession session = sf.openSession(true);
-		VocabularyMapper mapper = session.getMapper(VocabularyMapper.class);
+		VocabularyMapperOld mapper = session
+				.getMapper(VocabularyMapperOld.class);
 
 		Vocabulary queryByID = mapper.queryByID("v_at");
 
@@ -82,7 +87,8 @@ public class MyBatiesTestForVocabulary {
 	@Test
 	public void testQueryAll() throws IOException {
 		SqlSession session = sf.openSession();
-		VocabularyMapper mapper = session.getMapper(VocabularyMapper.class);
+		VocabularyMapperOld mapper = session
+				.getMapper(VocabularyMapperOld.class);
 
 		List<Vocabulary> allVocabulary = mapper.getAllVocabulary();
 
@@ -92,7 +98,8 @@ public class MyBatiesTestForVocabulary {
 	@Test
 	public void testCheck() {
 		SqlSession session = sf.openSession();
-		VocabularyMapper mapper = session.getMapper(VocabularyMapper.class);
+		VocabularyMapperOld mapper = session
+				.getMapper(VocabularyMapperOld.class);
 
 		Vocabulary checkLogin = mapper.checkLogin("v_yellow", "yellow");
 
@@ -102,7 +109,8 @@ public class MyBatiesTestForVocabulary {
 	@Test
 	public void testCheckByMap() {
 		SqlSession session = sf.openSession();
-		VocabularyMapper mapper = session.getMapper(VocabularyMapper.class);
+		VocabularyMapperOld mapper = session
+				.getMapper(VocabularyMapperOld.class);
 
 		Vocabulary checkLogin = mapper.checkLoginByMap(
 				MapperMap.put("id", "v_yellow").put("v", "yellow"));
@@ -113,7 +121,8 @@ public class MyBatiesTestForVocabulary {
 	@Test
 	public void testQueryByIDToMap() {
 		SqlSession session = sf.openSession();
-		VocabularyMapper mapper = session.getMapper(VocabularyMapper.class);
+		VocabularyMapperOld mapper = session
+				.getMapper(VocabularyMapperOld.class);
 
 		Map<String, String> map = mapper.queryByIDtoMap("v_yellow");
 
@@ -123,7 +132,8 @@ public class MyBatiesTestForVocabulary {
 	@Test
 	public void testQueryAllToMap() {
 		SqlSession session = sf.openSession();
-		VocabularyMapper mapper = session.getMapper(VocabularyMapper.class);
+		VocabularyMapperOld mapper = session
+				.getMapper(VocabularyMapperOld.class);
 
 		//List<Map<String, String>> maps = mapper.queryAlltoMap();
 		Map<String, String> maps = mapper.queryAlltoMap();
@@ -134,7 +144,8 @@ public class MyBatiesTestForVocabulary {
 	@Test
 	public void testQueryByLike() {
 		SqlSession session = sf.openSession();
-		VocabularyMapper mapper = session.getMapper(VocabularyMapper.class);
+		VocabularyMapperOld mapper = session
+				.getMapper(VocabularyMapperOld.class);
 		// %' or translation like 'y
 		Map<String, String> maps = mapper
 				.queryByLike("%' or translation like 'y");
@@ -153,6 +164,25 @@ public class MyBatiesTestForVocabulary {
 
 		int res = mapper.insertCard(card);
 		logger.info("card={}", card);
+
+	}
+
+	@Test
+	public void testGetAllVocabulary() {
+		SqlSession session = sf.openSession(true);
+		VocabularyMapper mapper = session.getMapper(VocabularyMapper.class);
+		List<Vocabulary> queryAll = mapper.queryAll();
+		logger.info("vocs={}", queryAll);
+
+	}
+
+	@Test
+	public void testMapperUtil() {
+		VocabularyMapper mapper = MapperUtil
+				.setMapperType(VocabularyMapper.class).setAutoCommit()
+				.getMapper();
+
+		logger.info("vocs={}", mapper.queryAll());
 
 	}
 

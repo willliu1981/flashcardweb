@@ -2,14 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="idv.fc.mybatis.mapper.VocabularyMapper">
-
-
-	<select id="queryAll" resultType="Vocabulary">
-		select * from vocabulary
-	</select>
-
-
+<mapper namespace="idv.fc.mybatis.mapper.VocabularyMapperOld">
 	<insert id="insertVocabulary" useGeneratedKeys="true" keyProperty="tag">
 		insert into
 		vocabulary

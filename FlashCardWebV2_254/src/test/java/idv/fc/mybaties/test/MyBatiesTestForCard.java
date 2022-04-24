@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import idv.fc.mybatis.mapper.CardMapper;
-import idv.fc.mybatis.mapper.VocabularyMapper;
+import idv.fc.mybatis.mapper.VocabularyMapperOld;
 import idv.fc.pojo.Card;
 import idv.fc.pojo.Vocabulary;
 import tool.Debug;
