@@ -19,7 +19,7 @@
 		</tr>
 		<tr>
 			<td
-				onclick="window.location.href='${pageContext.request.contextPath}/word/word';"><font
+				onclick="window.location.href='${pageContext.request.contextPath}/word/vocabulary';"><font
 				size="6" color="blue">Word</font>
 		</tr>
 		<tr>
