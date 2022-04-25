@@ -1,15 +1,12 @@
 package test1;
 
-import java.util.List;
-import java.util.Map;
+import java.util.Scanner;
 
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import idv.fc.pojo.Vocabulary;
-import spring.XmlUrlFactory;
 import test.Car;
 import test.ICar;
 import tool.Debug;
@@ -148,6 +145,12 @@ public class Test1 {
 		for (int i = 0; i < count; i++) {
 			System.out.println(animals[i][3]);
 		}
+
+	}
+
+	@Test
+	public void testA() {
+
 
 	}
 

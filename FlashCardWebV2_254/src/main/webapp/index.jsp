@@ -10,7 +10,7 @@
 
 	<h1>Welcome to FlashCard</h1>
 	<h2>
-		<a href="word/word">test</a>
+		<a href="test/test1">test</a>
 	</h2>
 
 	<h2>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 import idv.fc.pojo.Vocabulary;
 import idv.fc.service.IVocabularyService;
@@ -29,9 +30,11 @@ public class WordController {
 	public String toWord(HashMap<String, List<Vocabulary>> map) {
 		IVocabularyService service = SpringUtil.getBean("vocabularyService",
 				IVocabularyService.class);
-		PageHelper.startPage(1, 4);
-
-		map.put("vocabularys", service.getAllVocabulary());
+		PageHelper.startPage(2, 5);
+		List<Vocabulary> allVocabulary = service.getAllVocabulary();
+		map.put("vocabularys", allVocabulary);
+		PageInfo<Vocabulary> page = new PageInfo<>(allVocabulary, 5);
+		logger.info("page:" + page);
 
 		return "wordManager/vocabularyManagedPage";
 	}

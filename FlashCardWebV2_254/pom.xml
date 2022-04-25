@@ -53,6 +53,13 @@
 			<artifactId>jquery</artifactId>
 			<version>3.4.1</version>
 		</dependency>
+		
+		 <!-- https://mvnrepository.com/artifact/org.webjars/bootstrap -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>5.1.0</version>
+		</dependency>
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -265,6 +272,15 @@
 			<version>${spring.version}</version>
 		</dependency>
 		
+				<!-- https://mvnrepository.com/artifact/org.springframework/spring
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring</artifactId>
+			<version>${spring.version}</version>
+			<type>pom</type>
+		</dependency>
+ -->
+		
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -356,16 +372,12 @@
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
 			<version>1.9</version>
-		</dependency>  
-		
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring</artifactId>
-			<version>${spring.version}</version>
-			<type>pom</type>
 		</dependency>
- -->
+
+
+
+
+
 
 
 	</dependencies>

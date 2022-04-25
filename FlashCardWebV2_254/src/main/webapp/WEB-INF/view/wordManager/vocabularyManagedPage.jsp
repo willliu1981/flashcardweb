@@ -20,8 +20,6 @@
 		<c:forEach var="v" items="${vocabularys}">
 			<tr>
 				<td><c:out value="${v.vocabulary}"></c:out>
-			</tr>
-			<tr>
 				<td><c:out value="${v.translation}"></c:out>
 			</tr>
 		</c:forEach>
