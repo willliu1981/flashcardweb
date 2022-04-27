@@ -14,7 +14,7 @@
 	</h2>
 
 	<h2>
-		<a href="word/wordManager?">card manager</a>
+		<a href="flashcard/manager">Flashcard Manager</a>
 	</h2>
 
 

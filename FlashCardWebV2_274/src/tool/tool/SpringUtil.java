@@ -7,12 +7,12 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
-import idv.fc.controller.WordController;
+import idv.fc.controller.FlashcardController;
 
 @Component
 public class SpringUtil implements ApplicationContextAware {
 	private static Logger logger = LoggerFactory
-			.getLogger(WordController.class);
+			.getLogger(FlashcardController.class);
 	private static ApplicationContext applicationContext;
 
 	@Override
