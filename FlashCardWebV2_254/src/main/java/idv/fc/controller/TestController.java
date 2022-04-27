@@ -11,7 +11,7 @@ public class TestController {
 	public String query() {
 
 		System.out.println("test1");
-		return "test/testBootstrap";
+		return "test/bootstrap/testBootstrap2";
 	}
 
 }
