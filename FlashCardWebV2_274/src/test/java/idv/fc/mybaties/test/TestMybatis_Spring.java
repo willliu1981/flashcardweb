@@ -14,6 +14,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.alibaba.fastjson.JSON;
 
 import idv.fc.dao.FlashcardDao;
+import idv.fc.model.Flashcard;
 import idv.fc.pojo.Vocabulary;
 import idv.fc.service.IFlashcardService;
 import tool.MapperUtil;
@@ -39,7 +40,7 @@ public class TestMybatis_Spring {
 	@Test
 	public void test1() {
 		logger.info("service=" + vocabularyService);
-		List<Vocabulary> allVocabulary = vocabularyService.getAll();
+		List<Flashcard> allVocabulary = vocabularyService.getAll();
 		// System.out.println(user.getUserName());  
 		// logger.info("值："+user.getUserName());  
 		logger.info(JSON.toJSONString(allVocabulary));
@@ -56,7 +57,7 @@ public class TestMybatis_Spring {
 	@Test
 	public void run1() {
 		//调用方法
-		List<Vocabulary> findAllVoc = vocabularyService.getAll();
+		List<Flashcard> findAllVoc = vocabularyService.getAll();
 		logger.info("find:" + findAllVoc);
 	}
 }

@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import idv.fc.dao.FlashcardDao;
+import idv.fc.model.Flashcard;
 import idv.fc.mybatis.mapper.CardMapper;
 import idv.fc.mybatis.mapper.VocabularyMapperOld;
 import idv.fc.pojo.Card;
@@ -171,21 +172,18 @@ public class MyBatiesTestForVocabulary {
 	public void testGetAllVocabulary() {
 		SqlSession session = sf.openSession(true);
 		FlashcardDao mapper = session.getMapper(FlashcardDao.class);
-		List<Vocabulary> queryAll = mapper.queryAll();
+		List<Flashcard> queryAll = mapper.queryAll();
 		logger.info("vocs={}", queryAll);
 
 	}
 
-	@Test
+	@Test	
 	public void testMapperUtil() {
-		FlashcardDao mapper = MapperUtil
-				.setMapperType(FlashcardDao.class).setAutoCommit()
-				.getMapper();
+		FlashcardDao mapper = MapperUtil.setMapperType(FlashcardDao.class)
+				.setAutoCommit().getMapper();
 
 		logger.info("vocs={}", mapper.queryAll());
 
 	}
-
-
 
 }

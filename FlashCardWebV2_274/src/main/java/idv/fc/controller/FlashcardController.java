@@ -7,18 +7,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import idv.fc.model.Flashcard;
-import idv.fc.pojo.Vocabulary;
 import idv.fc.service.IFlashcardService;
 import tool.SpringUtil;
 
 @Controller
 @RequestMapping(value = "flashcard")
 public class FlashcardController {
+	private static final Integer MAX_PAGE_NUMBER = 10;
+	private static final Integer MAX_NAV_PAGE_NUMBER = 5;
+
 	private static Logger logger = LoggerFactory
 			.getLogger(FlashcardController.class);
 
@@ -28,15 +31,25 @@ public class FlashcardController {
 	}
 
 	@RequestMapping(value = "flashcardDetail")
-	public String toFlashcardDetail(HashMap<String, List<Flashcard>> map) {
+	public String toFlashcardDetail(HashMap<String, Object> map,
+			@RequestParam(value = "pageNumber", required = false) String pageNumber) {
 		//*
 		IFlashcardService service = SpringUtil.getBean("flashcardService",
 				IFlashcardService.class);
-		PageHelper.startPage(1, 5);
+		int intPageNumber = 1;
+		if (pageNumber != null && !pageNumber.equals("")) {
+			intPageNumber = Integer.valueOf(pageNumber);
+		}
+
+		PageHelper.startPage(intPageNumber, MAX_PAGE_NUMBER);
 		List<Flashcard> all = service.getAll();
 		map.put("flashcards", all);
-		PageInfo<Flashcard> page = new PageInfo<>(all, 5);
-		logger.info("page:" + map.size());
+		PageInfo<Flashcard> pageInfo = new PageInfo<>(all, MAX_NAV_PAGE_NUMBER);
+		pageInfo.getPageNum();
+
+		map.put("pageInfo", pageInfo);
+		logger.info("pageInfo:" + pageInfo);
+
 		//*/
 		return "flashcard/flashcardDetailManagedPage";
 	}
