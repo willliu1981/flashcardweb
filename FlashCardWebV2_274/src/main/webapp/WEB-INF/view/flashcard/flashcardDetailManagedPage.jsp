@@ -84,22 +84,27 @@
             </c:forEach>
         </ul>
     </div>
-    s ${pageInfo.navigateFirstPage}
-    <br>e ${pageInfo.navigateLastPage}
+
+
+
+
+    test = ${pageInfo.isHasPreviousPage()}
+
 
     <div class="container">
         <ul class="pager ">
             <li>
                 <ul class="pagination">
                     <li></li>
-                    <li class="disabled"><a href="#">&laquo;</a></li>
-                    <li><a href="#">Previous</a></li>
+                    <li><a href="#">&laquo;</a></li>
+                    <li <c:if test="${!pageInfo.isHasPreviousPage()}">class="disabled"</c:if>><a href="#">Previous</a></li>
                     <c:forEach var="i" begin="${pageInfo.navigateFirstPage}" end="${pageInfo.navigateLastPage}">
-                        <li><a href="#">
+                        <li <c:if test="${pageInfo.pageNum==i}">class="active"</c:if>><a
+                                href="${pageContext.request.contextPath}/flashcard/flashcardDetail/<c:out value="${i}" />">
                                 <c:out value="${i}" />
                             </a></li>
                     </c:forEach>
-                    <li><a href="#">Next</a></li>
+                    <li <c:if test="${!pageInfo.isHasNextPage()}">class="disabled"</c:if>><a href="#">Next</a></li>
                     <li><a href="#">&raquo;</a></li>
                     <li></li>
                 </ul>
@@ -107,8 +112,35 @@
         </ul>
     </div>
 
+    <ul class="pagination">
+        <li><a href="#">&laquo;</a></li>
+        <li class="disabled"><a href="#">Previous</a></li>
+        <li><a href="#">Next</a></li>
+        <li><a href="#">Next</a></li>
+        <li><a href="#">&raquo;</a></li>
+    </ul>
 
-
-
+    <!-- 模態框 -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">FlashCard</h4>
+                </div>
+                <div class="modal-body">
+                    <p>編輯中&hellip;</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
 </body>
 </html>

@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -17,6 +18,7 @@ import com.github.pagehelper.PageInfo;
 
 import idv.fc.model.Flashcard;
 import idv.fc.service.IFlashcardService;
+import tool.Debug;
 import tool.SpringUtil;
 
 @Controller
@@ -33,13 +35,12 @@ public class FlashcardController {
 		return "flashcard/managedPage";
 	}
 
-	@RequestMapping(value = "flashcardDetail")
-	public String toFlashcardDetail(HashMap<String, Object> map,
-			@RequestParam(value = "pageNumber", required = false) String pageNumber) {
-
+	@RequestMapping(value = "flashcardDetail/{pageNumber}")
+	public String toFlashcardDetailWithPathVariable(HashMap<String, Object> map,
+			@PathVariable(value = "pageNumber") String pageNumber) {
 		IFlashcardService service = SpringUtil.getBean("flashcardService",
 				IFlashcardService.class);
-		int intPageNumber = 1;
+		int intPageNumber = 1;//default pageNumber
 		if (pageNumber != null && !pageNumber.equals("")) {
 			intPageNumber = Integer.valueOf(pageNumber);
 		}
@@ -52,19 +53,26 @@ public class FlashcardController {
 		map.put("pageInfo", pageInfo);
 
 		//*
-		pageInfo.getStartRow();
+		pageInfo.getPageNum();
 		pageInfo.getNavigateFirstPage();
 		pageInfo.getNavigateLastPage();
+		pageInfo.isHasPreviousPage();
+		pageInfo.isHasNextPage();
 
-		int length = pageInfo.getNavigatepageNums().length;
-		logger.info("startPage:" + startPage);
-		logger.info("pageInfo:" + pageInfo);
-		Arrays.stream(pageInfo.getNavigatepageNums()).boxed()
-				.collect(Collectors.toList())
+		int[] nums = pageInfo.getNavigatepageNums();
+		logger.info("nums(Logger):" + nums);
+		Arrays.stream(nums).boxed().collect(Collectors.toList())
 				.forEach(x -> logger.info("x=" + x));
+
+		Debug.test("nums(Debug)", nums);
 		//*/
 
 		return "flashcard/flashcardDetailManagedPage";
+	}
+
+	@RequestMapping(value = "flashcardDetail")
+	public String toFlashcardDetail(HashMap<String, Object> map) {
+		return toFlashcardDetailWithPathVariable(map, null);
 	}
 
 	@RequestMapping(value = "handledCardDetail")

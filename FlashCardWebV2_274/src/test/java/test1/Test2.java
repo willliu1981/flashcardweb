@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import tool.Debug;
+
 public class Test2 {
 	Logger logger = LoggerFactory.getLogger(Test2.class);
 
@@ -88,6 +90,14 @@ public class Test2 {
 		} catch (ClassCastException e) {
 			System.out.println("xxx" + a);
 		}
+
+	}
+
+	@Test
+	public void testx2() {
+		Boolean[] os = { true,false,true };
+
+		Debug.test("os", os);
 
 	}
 
