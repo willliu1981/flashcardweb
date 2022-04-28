@@ -26,10 +26,12 @@ public class Debug {
 	}
 
 	public static void test(String prefixString, Object prefixObj, Object msg) {
-		test(null, String.format("%s(%s)", prefixString, prefixObj), msg, false);
+		test(null, String.format("%s(%s)", prefixString, prefixObj), msg,
+				false);
 	}
 
-	public static void test(Object objForClassInfo, Object prefixObj, Object msg) {
+	public static void test(Object objForClassInfo, Object prefixObj,
+			Object msg) {
 		test(objForClassInfo, prefixObj, msg, false);
 	}
 
@@ -67,8 +69,14 @@ public class Debug {
 
 		} else if (msg.getClass().isArray()) {
 			System.out.println(head + "foreach(Array)...");
-			Object[] os = (Object[]) msg;
-			Arrays.asList(os).forEach((x) -> System.out.printf("  %s\n", x));
+
+			try {
+				Object[] os = (Object[]) msg;
+				Arrays.asList(os)
+						.forEach((x) -> System.out.printf("  %s\n", x));
+			} catch (ClassCastException e) {
+				System.out.println("can't cast(Debug):" + msg);
+			}
 
 		} else if (msg instanceof String) {
 			System.out.println(head + msg);

@@ -78,8 +78,16 @@ public class Test2 {
 
 	@Test
 	public void testCallPather() {
-		String s = "At their housewarming, Jenny's family congratulates them on their new house for the newborn baby";
-		logger.info("size=" + s.length());
+
+		int[] a = { 1, 2, 3 };
+		Object o = a;
+		try {
+			Object[] cast = (Object[]) o;
+			System.out.println(cast);
+
+		} catch (ClassCastException e) {
+			System.out.println("xxx" + a);
+		}
 
 	}
 
