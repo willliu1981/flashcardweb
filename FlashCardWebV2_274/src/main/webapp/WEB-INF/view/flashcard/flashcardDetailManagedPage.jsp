@@ -89,7 +89,7 @@
 
 
 
-    test = ${pageInfo.isHasPreviousPage()}
+    test = ${pageInfo.size}
 
 
     <div class="container">
@@ -97,8 +97,14 @@
             <li>
                 <ul class="pagination">
                     <li></li>
-                    <li><a href="#">&laquo;</a></li>
-                    <li <c:if test="${!pageInfo.isHasPreviousPage()}">class="disabled"</c:if>><a href="#">Previous</a></li>
+                    <!-- 首頁 -->
+                    <li <c:if test="${pageInfo.pageNum==1}">class="disabled"</c:if>><a
+                            href="${pageContext.request.contextPath}/flashcard/flashcardDetail/1">&laquo;</a></li>
+
+                    <!-- 上一頁 -->
+                    <li <c:if test="${!pageInfo.isHasPreviousPage()}">class="disabled"</c:if>><a
+                            href="${pageContext.request.contextPath}/flashcard/flashcardDetail/<c:out value="${pageInfo.pageNum-1}" />">Previous</a></li>
+                    <!-- 中間頁數 -->
                     <c:forEach var="i" begin="${pageInfo.navigateFirstPage}" end="${pageInfo.navigateLastPage}">
                         <li <c:if test="${pageInfo.pageNum==i}">class="active"</c:if>><a
                                 <c:if test="${pageInfo.pageNum==i}">class="hrefDisabled"</c:if>
@@ -106,8 +112,14 @@
                                 <c:out value="${i}" />
                             </a></li>
                     </c:forEach>
-                    <li <c:if test="${!pageInfo.isHasNextPage()}">class="disabled"</c:if>><a href="#">Next</a></li>
-                    <li><a href="#">&raquo;</a></li>
+
+                    <!-- 下一頁 -->
+                    <li <c:if test="${!pageInfo.isHasNextPage()}">class="disabled"</c:if>><a
+                            href="${pageContext.request.contextPath}/flashcard/flashcardDetail/<c:out value="${pageInfo.pageNum+1}" />">Next</a></li>
+
+                    <!-- 最末頁 -->
+                    <li <c:if test="${pageInfo.isIsLastPage()}">class="disabled"</c:if>><a
+                            href="${pageContext.request.contextPath}/flashcard/flashcardDetail/<c:out value="${pageInfo.pages}" />">&raquo;</a></li>
                     <li></li>
                 </ul>
             </li>

@@ -53,18 +53,18 @@ public class FlashcardController {
 		map.put("pageInfo", pageInfo);
 
 		//*
-		pageInfo.getPageNum();
+		pageInfo.getPages();
 		pageInfo.getNavigateFirstPage();
 		pageInfo.getNavigateLastPage();
 		pageInfo.isHasPreviousPage();
-		pageInfo.isHasNextPage();
+		pageInfo.isIsLastPage();
 
 		int[] nums = pageInfo.getNavigatepageNums();
 		logger.info("nums(Logger):" + nums);
 		Arrays.stream(nums).boxed().collect(Collectors.toList())
 				.forEach(x -> logger.info("x=" + x));
 
-		Debug.test("nums(Debug)", nums);
+		Debug.test("nums(Debug)", pageInfo);
 		//*/
 
 		return "flashcard/flashcardDetailManagedPage";
