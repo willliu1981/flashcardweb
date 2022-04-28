@@ -27,13 +27,13 @@
 }
 </style>
 
+
 </head>
 <body>
 
     <!-- 導航欄 -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#bs-example-navbar-collapse-1">
@@ -42,13 +42,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">FlashCard</a>
+                <a class="navbar-brand disabled" href="${pageContext.request.contextPath}/index.jsp">FlashCard</a>
             </div>
-
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <!-- <li class="active"><a href="#">xxx<span class="sr-only">(current)</span> </a></li> -->
-                    <li><a href="flashcard/manager">字卡管理</a></li>
+                    <!-- class="disabled" -->
+                    <li><a href="${pageContext.request.contextPath}/flashcard/manager">字卡管理</a></li>
                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                         aria-expanded="false"><span class="caret"></span> </a>
                         <ul class="dropdown-menu" role="menu">
@@ -61,8 +60,14 @@
                 </ul>
             </div>
         </div>
+        <script type="text/javascript">
+				  $(function() {
+					$('a.disabled').on("click", function(e) {
+					  e.preventDefault();
+					});
+				  });
+				</script>
     </nav>
-
 
     <!-- 輪播 -->
     <div id="carousel-example-generic" class="carousel slide my-carousel" data-ride="carousel" data-interval="3000"

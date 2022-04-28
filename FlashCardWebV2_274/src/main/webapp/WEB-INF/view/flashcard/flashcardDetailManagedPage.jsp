@@ -14,6 +14,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/webjars/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+    <!-- 導航欄 -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -24,18 +25,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">FlashCard</a>
+                <a class="navbar-brand" href="${pageContext.request.contextPath}/index.jsp">FlashCard</a>
             </div>
-
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <!-- <li class="active"><a href="#">xxx<span class="sr-only">(current)</span> </a></li> -->
-                    <li><a href="flashcard/manager">字卡管理</a></li>
+                    <li><a  href="${pageContext.request.contextPath}/flashcard/manager">字卡管理</a></li>
                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                         aria-expanded="false"><span class="caret"></span> </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="flashcard/flashcardDetail">Flashcard</a></li>
-                            <li><a href="flashcard/handledCardDetail">FlashcardHolder</a></li>
+                            <li><a class="disabled" href="${pageContext.request.contextPath}/flashcard/flashcardDetail">Flashcard</a></li>
+                            <li><a href="${pageContext.request.contextPath}/flashcard/handledCardDetail">FlashcardHolder</a></li>
                         </ul></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -43,6 +42,13 @@
                 </ul>
             </div>
         </div>
+        <script type="text/javascript">
+				  $(function() {
+					$('a.disabled').on("click", function(e) {
+					  e.preventDefault();
+					});
+				  });
+				</script>
     </nav>
 
 
@@ -63,7 +69,7 @@
 
     <table class="evenTable">
         <tr>
-            <td><font size="6" color="blue">Card Manager</font>
+            <td><font size="6" color="blue">Flashcard Manager</font>
         </tr>
         <c:forEach var="v" items="${vocabularys}">
             <tr>

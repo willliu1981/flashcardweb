@@ -7,8 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
 <title>FLASH CARD</title>
 <link rel="styleSheet" type="text/css" href="${pageContext.request.contextPath}/css/EvenTable.css">
-<%-- <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/webjars/bootstrap/5.1.0/css/bootstrap.min.css"> --%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/webjars/bootstrap/3.4.1/css/bootstrap-theme.min.css">
 
@@ -29,11 +27,9 @@
                 </button>
                 <a class="navbar-brand" href="${pageContext.request.contextPath}/index.jsp">FlashCard</a>
             </div>
-
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <!-- <li class="active"><a href="#">xxx<span class="sr-only">(current)</span> </a></li> -->
-                    <li><a   href="#">字卡管理</a></li>
+                    <li><a class="disabled" href="${pageContext.request.contextPath}/flashcard/manager">字卡管理</a></li>
                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                         aria-expanded="false"><span class="caret"></span> </a>
                         <ul class="dropdown-menu" role="menu">
@@ -46,6 +42,13 @@
                 </ul>
             </div>
         </div>
+        <script type="text/javascript">
+				  $(function() {
+					$('a.disabled').on("click", function(e) {
+					  e.preventDefault();
+					});
+				  });
+				</script>
     </nav>
 
 
