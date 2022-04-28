@@ -85,7 +85,23 @@
         </ul>
     </div>
 
-    <div class="container" style="background-color: orange;">
+
+    <div class="container">
+        <ul class="pager">
+            <li class="disabled"><a href="#">&laquo;</a></li>
+            <li><a href="#">Previous</a></li>
+            <li class="active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">Next</a></li>
+            <li><a href="#">&raquo;</a></li>
+        </ul>
+    </div>
+
+
+    <div class="container">
         <ul class="pagination">
             <li class="disabled"><a href="#">&laquo;</a></li>
             <li class="active"><a href="#">1</a></li>
@@ -96,20 +112,6 @@
             <li><a href="#">&raquo;</a></li>
         </ul>
     </div>
-
-    <table class="evenTable">
-        <tr>
-            <td><font size="6" color="blue">Flashcard Manager</font>
-        </tr>
-        <c:forEach var="v" items="${vocabularys}">
-            <tr>
-                <td><c:out value="${v.vocabulary}"></c:out>
-                <td><c:out value="${v.translation}"></c:out>
-            </tr>
-        </c:forEach>
-
-
-    </table>
 
 
 </body>
