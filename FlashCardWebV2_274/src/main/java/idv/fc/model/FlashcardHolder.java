@@ -2,7 +2,7 @@ package idv.fc.model;
 
 import java.sql.Timestamp;
 
-public class HandledCard {
+public class FlashcardHolder {
 	private Integer id; //ai
 	private String name;
 	private String fcId;//fk: flashcard id
@@ -10,11 +10,11 @@ public class HandledCard {
 	private Integer numberOfQuizTimes;
 	private Integer passTheQuizTimes;
 
-	private HandledCard() {
+	private FlashcardHolder() {
 		super();
 	}
 
-	private HandledCard(Integer id, String name, String fcId) {
+	private FlashcardHolder(Integer id, String name, String fcId) {
 		super();
 		this.id = id;
 		this.name = name;

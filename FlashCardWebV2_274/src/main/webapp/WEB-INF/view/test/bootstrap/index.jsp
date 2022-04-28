@@ -30,41 +30,50 @@
 </head>
 <body>
 
-    <!-- 導航欄 -->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+    <div class="container-fluid">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
 
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">FlashCard</a>
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">FlashCard</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <!--   <li class="active"><a href="#"><span class="sr-only">(current)</span>
+                        </a></li> -->
+                        <li><a href="#">Flashcard manager</a></li>
+                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                            role="button" aria-expanded="false"><span class="caret"></span>
+                        </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Flashcard</a></li>
+                                <li><a href="#">HandledCard</a></li>
+                                <!-- <li class="divider"></li>
+                                <li><a href="#">Separated link</a></li> -->
+                            </ul></li>
+                    </ul>
+                    <form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Link</a></li>
+                    </ul>
+                </div>
             </div>
+        </nav>
+    </div>
 
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <!-- <li class="active"><a href="#">xxx<span class="sr-only">(current)</span> </a></li> -->
-                    <li><a href="flashcard/manager">字卡管理</a></li>
-                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                        aria-expanded="false"><span class="caret"></span> </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="${pageContext.request.contextPath}/flashcard/flashcardDetail">Flashcard</a></li>
-                            <li><a href="${pageContext.request.contextPath}/flashcard/handledCardDetail">FlashcardHolder</a></li>
-                        </ul></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#" data-target="#myModal" data-toggle="modal">關於</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-
-    <!-- 輪播 -->
     <div id="carousel-example-generic" class="carousel slide my-carousel" data-ride="carousel" data-interval="3000"
         data-pause="null" data-wrap="true">
         <!-- Indicators -->
@@ -101,35 +110,19 @@
     </div>
 
 
-    <div class="container" id="x1">
-        <h1>Welcome to FlashCard</h1>
-    </div>
+
+
+    <h1>Welcome to FlashCard</h1>
+    <h2>
+        <a href="test/test1">test</a>
+    </h2>
+
+    <h2>
+        <a href="flashcard/manager">Flashcard Manager</a>
+    </h2>
 
 
 
-    <div class="container">&copy; FlashCard</div>
 
-    <!-- 模態框 -->
-    <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title">FlashCard</h4>
-                </div>
-                <div class="modal-body">
-                    <p>編輯中&hellip;</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal -->
 </body>
 </html>
