@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import idv.fc.pojo.Vocabulary;
+import idv.fc.model.Flashcard;
 
 @Repository
-public interface VocabularyDao {
+public interface FlashcardDao {
 
-	List<Vocabulary> queryAll();
+	List<Flashcard> queryAll();
 
 }

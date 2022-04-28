@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+import idv.fc.model.Flashcard;
 import idv.fc.pojo.Vocabulary;
-import idv.fc.service.IVocabularyService;
+import idv.fc.service.IFlashcardService;
 import tool.SpringUtil;
 
 @Controller
@@ -27,15 +28,16 @@ public class FlashcardController {
 	}
 
 	@RequestMapping(value = "flashcardDetail")
-	public String toFlashcardDetail(HashMap<String, List<Vocabulary>> map) {
-		/*		IVocabularyService service = SpringUtil.getBean("vocabularyService",
-						IVocabularyService.class);
-				PageHelper.startPage(2, 5);
-				List<Vocabulary> allVocabulary = service.getAllVocabulary();
-				map.put("vocabularys", allVocabulary);
-				PageInfo<Vocabulary> page = new PageInfo<>(allVocabulary, 5);
-				logger.info("page:" + page);
-		 */
+	public String toFlashcardDetail(HashMap<String, List<Flashcard>> map) {
+		//*
+		IFlashcardService service = SpringUtil.getBean("flashcardService",
+				IFlashcardService.class);
+		PageHelper.startPage(1, 5);
+		List<Flashcard> all = service.getAll();
+		map.put("flashcards", all);
+		PageInfo<Flashcard> page = new PageInfo<>(all, 5);
+		logger.info("page:" + map.size());
+		//*/
 		return "flashcard/flashcardDetailManagedPage";
 	}
 

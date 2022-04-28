@@ -34,7 +34,7 @@
                         aria-expanded="false"><span class="caret"></span> </a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="${pageContext.request.contextPath}/flashcard/flashcardDetail">Flashcard</a></li>
-                            <li><a class="disabled"
+                            <li class="active"><a class="hrefDisabled"
                                 href="${pageContext.request.contextPath}/flashcard/handledCardDetail">FlashcardHolder</a></li>
                         </ul></li>
                 </ul>
@@ -45,14 +45,19 @@
         </div>
         <script type="text/javascript">
 				  $(function() {
-					$('a.disabled').on("click", function(e) {
+					$('a.hrefDisabled').on("click", function(e) {
 					  e.preventDefault();
 					});
 				  });
 				</script>
     </nav>
 
+    <!-- 巨屏 -->
+    <div class="jumbotron">
+        <h1>FlashCard</h1>
+        <p>FlashcardHolder 編輯</p>
 
+    </div>
 
 
 

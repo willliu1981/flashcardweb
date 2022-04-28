@@ -26,10 +26,11 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="${pageContext.request.contextPath}/index.jsp">FlashCard</a>
+
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a class="disabled" href="${pageContext.request.contextPath}/flashcard/manager">字卡管理</a></li>
+                    <li class="active"><a class="hrefDisabled" href="${pageContext.request.contextPath}/flashcard/manager">字卡管理</a></li>
                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                         aria-expanded="false"><span class="caret"></span> </a>
                         <ul class="dropdown-menu" role="menu">
@@ -44,7 +45,7 @@
         </div>
         <script type="text/javascript">
 				  $(function() {
-					$('a.disabled').on("click", function(e) {
+					$('a.hrefDisabled').on("click", function(e) {
 					  e.preventDefault();
 					});
 				  });

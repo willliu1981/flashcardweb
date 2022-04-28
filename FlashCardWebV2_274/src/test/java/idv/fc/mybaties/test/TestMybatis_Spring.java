@@ -13,9 +13,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.alibaba.fastjson.JSON;
 
-import idv.fc.dao.VocabularyDao;
+import idv.fc.dao.FlashcardDao;
 import idv.fc.pojo.Vocabulary;
-import idv.fc.service.IVocabularyService;
+import idv.fc.service.IFlashcardService;
 import tool.MapperUtil;
 
 //@ContextConfiguration(locations = { "classpath:springmvc/spring-mybatis.xml" })
@@ -24,7 +24,7 @@ public class TestMybatis_Spring {
 			.getLogger(TestMybatis_Spring.class);
 
 	@Resource
-	private IVocabularyService vocabularyService = null;
+	private IFlashcardService vocabularyService = null;
 
 	private ApplicationContext ac = null;
 
@@ -32,14 +32,14 @@ public class TestMybatis_Spring {
 	public void before() {
 		ac = new ClassPathXmlApplicationContext(
 				"classpath:springmvc/spring-mybatis.xml");
-		vocabularyService = (IVocabularyService) ac
+		vocabularyService = (IFlashcardService) ac
 				.getBean("vocabularyService");
 	}
 
 	@Test
 	public void test1() {
 		logger.info("service=" + vocabularyService);
-		List<Vocabulary> allVocabulary = vocabularyService.getAllVocabulary();
+		List<Vocabulary> allVocabulary = vocabularyService.getAll();
 		// System.out.println(user.getUserName());  
 		// logger.info("值："+user.getUserName());  
 		logger.info(JSON.toJSONString(allVocabulary));
@@ -47,8 +47,8 @@ public class TestMybatis_Spring {
 
 	@Test
 	public void test2() {
-		VocabularyDao mapper = MapperUtil
-				.setMapperType(VocabularyDao.class).setAutoCommit()
+		FlashcardDao mapper = MapperUtil
+				.setMapperType(FlashcardDao.class).setAutoCommit()
 				.getMapper();
 		logger.info(JSON.toJSONString(mapper.queryAll()));
 	}
@@ -56,7 +56,7 @@ public class TestMybatis_Spring {
 	@Test
 	public void run1() {
 		//调用方法
-		List<Vocabulary> findAllVoc = vocabularyService.getAllVocabulary();
+		List<Vocabulary> findAllVoc = vocabularyService.getAll();
 		logger.info("find:" + findAllVoc);
 	}
 }

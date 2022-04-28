@@ -15,7 +15,7 @@
 
 	<typeAliases>
 		<!-- <typeAlias type="idv.fc.pojo.Vocabulary" alias="Vocabulary" /> -->
-		<package name="idv.fc.pojo" />
+		<package name="idv.fc.model" />
 	</typeAliases>
 
 	<plugins>

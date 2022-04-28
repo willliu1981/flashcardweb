@@ -50,8 +50,7 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />  
     <!-- 自動掃描mapping.xml檔案 -->
-		<property name="mapperLocations"
-			value="classpath:idv/fc/mybatis/mapper/VocabularyMapper.xml"></property>
+		<property name="mapperLocations" value="classpath:idv/fc/mybatis/mapper/*.xml"></property>
 		<!--  -->
 		<property name="configLocation"
 			value="classpath:idv/fc/mybatis/mybatis-config.xml" />

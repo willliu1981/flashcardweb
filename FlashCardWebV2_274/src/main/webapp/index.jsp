@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/webjars/bootstrap/3.4.1/css/bootstrap-theme.min.css">
 
 <style type="text/css">
-#carousel-example-generic .carousel-inner>.item>.img {
+#carousel-example-generic .carousel-inner>.item>img {
 	display: block;
 	width: 100%;
 	height: 750px;
@@ -42,7 +42,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand disabled" href="${pageContext.request.contextPath}/index.jsp">FlashCard</a>
+                <a class="navbar-brand hrefDisabled" href="${pageContext.request.contextPath}/index.jsp">FlashCard</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
@@ -62,7 +62,7 @@
         </div>
         <script type="text/javascript">
 				  $(function() {
-					$('a.disabled').on("click", function(e) {
+					$('a.hrefDisabled').on("click", function(e) {
 					  e.preventDefault();
 					});
 				  });
@@ -107,12 +107,14 @@
 
 
     <div class="container" id="x1">
-        <h1>Welcome to FlashCard</h1>
+        <h1>歡迎使用 FlashCard</h1>
     </div>
 
 
 
-    <div class="container">&copy; FlashCard</div>
+    <div class="container">
+        <h4>Copyright &copy; 2021-2022 FlashCard. All rights reserved.</h4>
+    </div>
 
     <!-- 模態框 -->
     <div class="modal fade" tabindex="-1" role="dialog" id="myModal">

@@ -2,10 +2,10 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="idv.fc.dao.VocabularyDao">
+<mapper namespace="idv.fc.dao.FlashcardDao">
 
-	<select id="queryAll" resultType="Vocabulary">
-		select * from vocabulary
+	<select id="queryAll" resultType="Flashcard">
+		select * from flashcard
 	</select>
 
 
