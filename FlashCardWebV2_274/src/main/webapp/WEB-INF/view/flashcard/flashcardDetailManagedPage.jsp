@@ -18,7 +18,14 @@
 }
 </style>
 
-
+<!-- 使用 a href 失效 -->
+<script type="text/javascript">
+  $(function() {
+	$('a.hrefDisabled').on("click", function(e) {
+	  e.preventDefault();
+	});
+  });
+</script>
 </head>
 <body>
     <!-- 導航欄 -->
@@ -52,13 +59,7 @@
                 </ul>
             </div>
         </div>
-        <script type="text/javascript">
-				  $(function() {
-					$('a.hrefDisabled').on("click", function(e) {
-					  e.preventDefault();
-					});
-				  });
-				</script>
+
     </nav>
 
     <!-- 巨屏 -->
@@ -100,6 +101,7 @@
                     <li <c:if test="${!pageInfo.isHasPreviousPage()}">class="disabled"</c:if>><a href="#">Previous</a></li>
                     <c:forEach var="i" begin="${pageInfo.navigateFirstPage}" end="${pageInfo.navigateLastPage}">
                         <li <c:if test="${pageInfo.pageNum==i}">class="active"</c:if>><a
+                                <c:if test="${pageInfo.pageNum==i}">class="hrefDisabled"</c:if>
                                 href="${pageContext.request.contextPath}/flashcard/flashcardDetail/<c:out value="${i}" />">
                                 <c:out value="${i}" />
                             </a></li>
