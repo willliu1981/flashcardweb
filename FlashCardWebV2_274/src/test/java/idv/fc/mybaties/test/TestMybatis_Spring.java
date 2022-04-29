@@ -25,7 +25,7 @@ public class TestMybatis_Spring {
 			.getLogger(TestMybatis_Spring.class);
 
 	@Resource
-	private IFlashcardService vocabularyService = null;
+	private IFlashcardService flashcardService = null;
 
 	private ApplicationContext ac = null;
 
@@ -33,17 +33,17 @@ public class TestMybatis_Spring {
 	public void before() {
 		ac = new ClassPathXmlApplicationContext(
 				"classpath:springmvc/spring-mybatis.xml");
-		vocabularyService = (IFlashcardService) ac
-				.getBean("vocabularyService");
+		flashcardService = (IFlashcardService) ac
+				.getBean("flashcardService");
 	}
 
 	@Test
 	public void test1() {
-		logger.info("service=" + vocabularyService);
-		List<Flashcard> allVocabulary = vocabularyService.getAll();
+		logger.info("service=" + flashcardService);
+		List<Flashcard> allVocabulary = flashcardService.getAll();
 		// System.out.println(user.getUserName());  
 		// logger.info("值："+user.getUserName());  
-		logger.info(JSON.toJSONString(allVocabulary));
+		logger.info("xxx:"+JSON.toJSONString(allVocabulary));
 	}
 
 	@Test
@@ -57,7 +57,7 @@ public class TestMybatis_Spring {
 	@Test
 	public void run1() {
 		//调用方法
-		List<Flashcard> findAllVoc = vocabularyService.getAll();
+		List<Flashcard> findAllVoc = flashcardService.getAll();
 		logger.info("find:" + findAllVoc);
 	}
 }
