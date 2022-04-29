@@ -95,7 +95,7 @@ public class Test2 {
 
 	@Test
 	public void testx2() {
-		Boolean[] os = { true,false,true };
+		Boolean[] os = { true, false, true };
 
 		Debug.test("os", os);
 
