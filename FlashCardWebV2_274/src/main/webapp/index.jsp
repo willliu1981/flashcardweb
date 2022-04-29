@@ -49,7 +49,9 @@
                     <!-- class="disabled" -->
                     <li><a href="${pageContext.request.contextPath}/flashcard/manager">字卡管理</a></li>
                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                        aria-expanded="false"><span class="caret"></span> </a>
+                            aria-expanded="false">
+                            <span class="caret"></span>
+                        </a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="${pageContext.request.contextPath}/flashcard/flashcardDetail">Flashcard</a></li>
                             <li><a href="${pageContext.request.contextPath}/flashcard/handledCardDetail">FlashcardHolder</a></li>
@@ -57,6 +59,7 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#" data-target="#myModal" data-toggle="modal">關於</a></li>
+                    <li><a href="${pageContext.request.contextPath}/flashcard/test">test</a></li>
                 </ul>
             </div>
         </div>
@@ -98,10 +101,13 @@
         </div>
 
         <!-- Controls -->
-        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev"> <span
-                class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span class="sr-only">Previous</span>
-        </a> <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next"> <span
-                class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> <span class="sr-only">Next</span>
+        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
         </a>
     </div>
 

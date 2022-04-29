@@ -20,7 +20,6 @@ public class Flashcard {
 		this.id = id;
 		this.term = term;
 		this.definition = definition;
-
 	}
 
 	public String getId() {

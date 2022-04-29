@@ -49,8 +49,9 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li class="active"><a class="hrefDisabled"
-                                    href="${pageContext.request.contextPath}/flashcard/flashcardDetail">Flashcard</a></li>
+                            <li class="active"><
+                                href="${pageContext.request.contextPath}/flashcard/flashcardDetail">Flashcard</a>
+                            </li>
                             <li><a href="${pageContext.request.contextPath}/flashcard/handledCardDetail">FlashcardHolder</a></li>
                         </ul></li>
                 </ul>
@@ -68,60 +69,74 @@
         <p>Flashcard 編輯</p>
     </div>
 
-    <!-- list -->
-    <div class="container">
-        <ul class="list-group myBadgeCursor">
-            <li class="list-group-item"><span class="badge"
-                    onclick="location.href='${pageContext.request.contextPath}/flashcard'">ADD</span>
-                <h3>Flashcard</h3></li>
-            <c:forEach var="fc" items="${flashcards}">
-                <li class="list-group-item"><a href="#" class="list-group-item">
-                        <span class="badge" onclick="location.href='${pageContext.request.contextPath}/index.jsp'">EDIT</span>
-                        <h4 class="list-group-item-heading">
-                            <c:out value="${fc.term}"></c:out>
-                        </h4>
-                        <p class="list-group-item-text">
-                            <c:out value="${fc.definition}"></c:out>
-                        </p>
-                    </a></li>
-            </c:forEach>
-        </ul>
-    </div>
-
-    <!-- 分頁 -->
-    <div class="container">
-        <ul class="pager ">
-            <li>
-                <ul class="pagination">
-                    <li></li>
-                    <!-- 首頁 -->
-                    <li <c:if test="${pageInfo.pageNum==1}">class="disabled"</c:if>><a
-                            href="${pageContext.request.contextPath}/flashcard/flashcardDetail/1">&laquo;</a></li>
-
-                    <!-- 上一頁 -->
-                    <li <c:if test="${!pageInfo.isHasPreviousPage()}">class="disabled"</c:if>><a
-                            href="${pageContext.request.contextPath}/flashcard/flashcardDetail/<c:out value="${pageInfo.pageNum-1}" />">Previous</a></li>
-                    <!-- 中間頁數 -->
-                    <c:forEach var="i" begin="${pageInfo.navigateFirstPage}" end="${pageInfo.navigateLastPage}">
-                        <li <c:if test="${pageInfo.pageNum==i}">class="active"</c:if>><a
-                                <c:if test="${pageInfo.pageNum==i}">class="hrefDisabled"</c:if>
-                                href="${pageContext.request.contextPath}/flashcard/flashcardDetail/<c:out value="${i}" />">
-                                <c:out value="${i}" />
-                            </a></li>
-                    </c:forEach>
-
-                    <!-- 下一頁 -->
-                    <li <c:if test="${!pageInfo.isHasNextPage()}">class="disabled"</c:if>><a
-                            href="${pageContext.request.contextPath}/flashcard/flashcardDetail/<c:out value="${pageInfo.pageNum+1}" />">Next</a></li>
-
-                    <!-- 最末頁 -->
-                    <li <c:if test="${pageInfo.isIsLastPage()}">class="disabled"</c:if>><a
-                            href="${pageContext.request.contextPath}/flashcard/flashcardDetail/<c:out value="${pageInfo.pages}" />">&raquo;</a></li>
-                    <li></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
+    <form class="form-horizontal">
+        <fieldset>
+            <legend>Legend</legend>
+            <div class="form-group">
+                <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="inputEmail" placeholder="Email">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+                <div class="col-lg-10">
+                    <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                    <div class="checkbox">
+                        <label> <input type="checkbox"> Checkbox
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="textArea" class="col-lg-2 control-label">Textarea</label>
+                <div class="col-lg-10">
+                    <textarea class="form-control" rows="3" id="textArea"></textarea>
+                    <span class="help-block">A longer block of help text that breaks onto a new line and may
+                        extend beyond one line.</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Radios</label>
+                <div class="col-lg-10">
+                    <div class="radio">
+                        <label> <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1"
+                                checked=""> Option one is this
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label> <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                            Option two can be something else
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="select" class="col-lg-2 control-label">Selects</label>
+                <div class="col-lg-10">
+                    <select class="form-control" id="select">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select> <br> <select multiple="" class="form-control">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button type="reset" class="btn btn-default">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
 
     <!-- 模態框 -->
     <div class="modal fade" tabindex="-1" role="dialog" id="myModal">

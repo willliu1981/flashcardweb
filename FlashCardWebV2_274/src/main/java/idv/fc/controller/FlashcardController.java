@@ -27,7 +27,7 @@ public class FlashcardController {
 	private static final Integer MAX_PAGE_NUMBER = 5;
 	private static final Integer MAX_NAV_PAGE_NUMBER = 5;
 
-	private static Logger logger = LoggerFactory
+	protected static Logger logger = LoggerFactory
 			.getLogger(FlashcardController.class);
 
 	@RequestMapping(value = "manager")
@@ -45,27 +45,11 @@ public class FlashcardController {
 			intPageNumber = Integer.valueOf(pageNumber);
 		}
 
-		Page<Object> startPage = PageHelper.startPage(intPageNumber,
-				MAX_PAGE_NUMBER);
+		PageHelper.startPage(intPageNumber, MAX_PAGE_NUMBER);
 		List<Flashcard> all = service.getAll();
 		map.put("flashcards", all);
 		PageInfo<Flashcard> pageInfo = new PageInfo<>(all, MAX_NAV_PAGE_NUMBER);
 		map.put("pageInfo", pageInfo);
-
-		//*
-		pageInfo.getPages();
-		pageInfo.getNavigateFirstPage();
-		pageInfo.getNavigateLastPage();
-		pageInfo.isHasPreviousPage();
-		pageInfo.isIsLastPage();
-
-		int[] nums = pageInfo.getNavigatepageNums();
-		logger.info("nums(Logger):" + nums);
-		Arrays.stream(nums).boxed().collect(Collectors.toList())
-				.forEach(x -> logger.info("x=" + x));
-
-		Debug.test("nums(Debug)", pageInfo);
-		//*/
 
 		return "flashcard/flashcardDetailManagedPage";
 	}
