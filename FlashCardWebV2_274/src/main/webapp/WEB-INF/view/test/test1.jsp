@@ -6,7 +6,7 @@
 </head>
 <body>
     <jsp:include page="/WEB-INF/view/public/header.jsp" flush="true">
-        <jsp:param name="active" value="manage-flashcard" />
+        <jsp:param name="active" value="home" />
     </jsp:include>
 
 
