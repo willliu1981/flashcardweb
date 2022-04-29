@@ -59,7 +59,7 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#" data-target="#myModal" data-toggle="modal">關於</a></li>
-                    <li><a href="${pageContext.request.contextPath}/flashcard/test">test</a></li>
+                    <li><a href="${pageContext.request.contextPath}/test/test1">test</a></li>
                 </ul>
             </div>
         </div>

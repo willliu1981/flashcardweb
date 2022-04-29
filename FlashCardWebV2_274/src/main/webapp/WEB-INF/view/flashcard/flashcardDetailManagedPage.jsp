@@ -64,8 +64,10 @@
 
     <!-- 巨屏 -->
     <div class="jumbotron">
-        <h1>FlashCard</h1>
-        <p>Flashcard 編輯</p>
+      <div class="container">
+            <h1>FlashCard</h1>
+            <p>Flashcard 編輯</p>
+        </div>
     </div>
 
     <!-- list -->

@@ -30,9 +30,12 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a class="hrefDisabled" href="${pageContext.request.contextPath}/flashcard/manager">字卡管理</a></li>
+                    <li class="active"><a class="hrefDisabled"
+                            href="${pageContext.request.contextPath}/flashcard/manager">字卡管理</a></li>
                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                        aria-expanded="false"><span class="caret"></span> </a>
+                            aria-expanded="false">
+                            <span class="caret"></span>
+                        </a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="${pageContext.request.contextPath}/flashcard/flashcardDetail">Flashcard</a></li>
                             <li><a href="${pageContext.request.contextPath}/flashcard/handledCardDetail">FlashcardHolder</a></li>
@@ -55,22 +58,22 @@
 
     <!-- 巨屏 -->
     <div class="jumbotron">
-        <h1>FlashCard</h1>
-        <p>編輯中</p>
-
+        <div class="container">
+            <h1>FlashCard</h1>
+            <p>Flashcard 管理</p>
+        </div>
     </div>
 
     <!-- 清單 -->
-    <div class="list-group">
-        <a href="javascript:;" class="list-group-item disabled">字卡編輯</a> <a
-            href="${pageContext.request.contextPath}/flashcard/flashcardDetail" class="list-group-item">FlashCard</a> <a
-            href="${pageContext.request.contextPath}/flashcard/handledCardDetail" class="list-group-item">FlashcardHolder</a>
+    <div class="container">
+        <div class="list-group">
+            <a href="javascript:;" class="list-group-item disabled">字卡編輯</a>
+            <a href="${pageContext.request.contextPath}/flashcard/flashcardDetail" class="list-group-item">FlashCard</a>
+            <a href="${pageContext.request.contextPath}/flashcard/handledCardDetail" class="list-group-item">FlashcardHolder</a>
+        </div>
     </div>
 
-
-
-
-<!-- 模態框 -->
+    <!-- 模態框 -->
     <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
