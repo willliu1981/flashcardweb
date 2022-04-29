@@ -28,7 +28,6 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <!-- <li class="active"><a class="hrefDisabled" -->
                             <li <c:if test="${param.active eq 'manage-flashcard'}">class="active"</c:if>><a
                                     <c:if test="${param.active eq 'manage-flashcard'}">class="hrefDisabled"</c:if>
                                     href="${pageContext.request.contextPath}/flashcard/flashcardDetail">Flashcard</a></li>
@@ -43,12 +42,6 @@
                 </ul>
             </div>
         </div>
-
     </nav>
-    <div>xx</div>
-    <div>xx</div>
-    <div>xx</div>
-    <br />
-    xxx=${param.active eq 'homePage'}
 </body>
 </html>
