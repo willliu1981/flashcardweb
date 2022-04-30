@@ -13,12 +13,14 @@ import tool.spring.SpringUtil;
 @Controller
 @RequestMapping(value = "flashcard")
 public class FlashcardCRUDController {
+	protected String FLASHCARDS = "flashcards";
+
 	@Autowired
 	IFlashcardService flashcardService;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String toAdd() {
-		return "flashcard/addFlashcardPage";
+		return FLASHCARDS + "/addFlashcardPage";
 	}
 
 	/*
@@ -29,12 +31,12 @@ public class FlashcardCRUDController {
 		String term = flashcard.getTerm();
 		IDGenerator IDGenerator = SpringUtil.getBean("IDGenerator",
 				IDGenerator.class);
-		String id = IDGenerator.generate(term,Flashcard.class);
+		String id = IDGenerator.generate(term, Flashcard.class);
 
 		flashcard.setId(id);
 		flashcardService.addNew(flashcard);
 
-		return "redirect:flashcard/flashcardDetail";
+		return "redirect:" + FLASHCARDS + "/fcManager";
 	}
 
 }

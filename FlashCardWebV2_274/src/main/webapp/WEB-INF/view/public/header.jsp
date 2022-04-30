@@ -4,6 +4,11 @@
 <html>
 
 <body>
+    <c:set var="home" value="index.jsp" />
+    <c:set var="flashcardsManager" value="flashcards/fcsManager" />
+    <c:set var="flashcardManager" value="flashcards/fcManager" />
+    <c:set var="flahscardHolderManager" value="flashcards/fhManager" />
+
     <!-- 導航欄 -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
@@ -16,13 +21,13 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand ${param.active eq 'home'?'hrefDisabled':''}"
-                    href="${pageContext.request.contextPath}/index.jsp">FlashCard</a>
+                    href="${pageContext.request.contextPath}/<c:out value="${home}"></c:out>">FlashCard</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li <c:if test="${param.active eq 'manage'}">class="active"</c:if>><a
                             <c:if test="${param.active eq 'manage'}">class="hrefDisabled"</c:if>
-                            href="${pageContext.request.contextPath}/flashcard/manager">字卡管理</a></li>
+                            href="${pageContext.request.contextPath}/<c:out value="${flashcardsManager}"></c:out>">字卡管理</a></li>
                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                             aria-expanded="false">
                             <span class="caret"></span>
@@ -30,11 +35,11 @@
                         <ul class="dropdown-menu" role="menu">
                             <li <c:if test="${param.active eq 'manage-flashcard'}">class="active"</c:if>><a
                                     <c:if test="${param.active eq 'manage-flashcard'}">class="hrefDisabled"</c:if>
-                                    href="${pageContext.request.contextPath}/flashcard/flashcardDetail">Flashcard</a></li>
+                                    href="${pageContext.request.contextPath}/<c:out value="${flashcardManager}"></c:out>">Flashcard</a></li>
 
                             <li <c:if test="${param.active eq 'manage-flashcardHolder'}">class="active"</c:if>><a
                                     <c:if test="${param.active eq 'manage-flashcardHolder'}">class="hrefDisabled"</c:if>
-                                    href="${pageContext.request.contextPath}/flashcard/handledCardDetail">FlashcardHolder</a></li>
+                                    href="${pageContext.request.contextPath}/<c:out value="${flahscardHolderManager}"></c:out>">FlashcardHolder</a></li>
                         </ul></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

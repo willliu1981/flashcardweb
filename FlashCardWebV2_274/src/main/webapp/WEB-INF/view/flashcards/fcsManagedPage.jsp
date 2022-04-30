@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <jsp:include page="/WEB-INF/view/public/bootstrapCommon.jsp" />
 </head>
 <body>
+    <c:set var="flashcardManager" value="flashcards/fcManager" />
+    <c:set var="flahscardHolderManager" value="flashcards/fhManager" />
+
     <!-- header include nav -->
     <jsp:include page="/WEB-INF/view/public/header.jsp" flush="true">
         <jsp:param name="active" value="manage" />
@@ -22,8 +26,10 @@
     <div class="container">
         <div class="list-group">
             <a href="javascript:;" class="list-group-item disabled">字卡編輯</a>
-            <a href="${pageContext.request.contextPath}/flashcard/flashcardDetail" class="list-group-item">FlashCard</a>
-            <a href="${pageContext.request.contextPath}/flashcard/handledCardDetail" class="list-group-item">FlashcardHolder</a>
+            <a href="${pageContext.request.contextPath}/<c:out value="${flashcardManager}"></c:out>"
+                class="list-group-item">FlashCard</a>
+            <a href="${pageContext.request.contextPath}/<c:out value="${flahscardHolderManager}"></c:out>"
+                class="list-group-item">FlashcardHolder</a>
         </div>
     </div>
 
