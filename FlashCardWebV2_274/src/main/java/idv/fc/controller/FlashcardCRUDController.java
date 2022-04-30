@@ -11,14 +11,14 @@ import tool.idgenerator.IDGenerator;
 import tool.spring.SpringUtil;
 
 @Controller
-@RequestMapping(value = "flashcard")
 public class FlashcardCRUDController {
-	protected String FLASHCARDS = "flashcards";
+	protected String WEB_FLASHCARDS = "flashcards";//web base page
+	protected String FLASHCARDS = "flashcards";//jsp base page
 
 	@Autowired
 	IFlashcardService flashcardService;
 
-	@RequestMapping(value = "", method = RequestMethod.GET)
+	@RequestMapping(value = "flashcard", method = RequestMethod.GET)
 	public String toAdd() {
 		return FLASHCARDS + "/addFlashcardPage";
 	}
@@ -26,7 +26,7 @@ public class FlashcardCRUDController {
 	/*
 	 * process begin
 	 */
-	@RequestMapping(value = "", method = RequestMethod.POST)
+	@RequestMapping(value = "flashcard", method = RequestMethod.POST)
 	public String add(Flashcard flashcard) {
 		String term = flashcard.getTerm();
 		IDGenerator IDGenerator = SpringUtil.getBean("IDGenerator",
@@ -36,7 +36,7 @@ public class FlashcardCRUDController {
 		flashcard.setId(id);
 		flashcardService.addNew(flashcard);
 
-		return "redirect:" + FLASHCARDS + "/fcManager";
+		return "redirect:" + WEB_FLASHCARDS + "/fcManager";
 	}
 
 }

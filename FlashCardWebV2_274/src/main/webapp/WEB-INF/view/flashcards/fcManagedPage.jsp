@@ -6,6 +6,9 @@
 <jsp:include page="/WEB-INF/view/public/bootstrapCommon.jsp" />
 </head>
 <body>
+    <c:set var="addFlashcard" value="flashcard" />
+    <c:set var="flashcardManager" value="flashcards/fcManager" />
+
     <!-- header include nav -->
     <jsp:include page="/WEB-INF/view/public/header.jsp" flush="true">
         <jsp:param name="active" value="manage-flashcard" />
@@ -23,11 +26,11 @@
     <div class="container">
         <ul class="list-group myBadgeCursor">
             <li class="list-group-item"><span class="badge"
-                    onclick="location.href='${pageContext.request.contextPath}/flashcard'">ADD</span>
+                    onclick="location.href='${pageContext.request.contextPath}/<c:out value="${addFlashcard}"></c:out>'">ADD</span>
                 <h3>Flashcard</h3></li>
             <c:forEach var="fc" items="${flashcards}">
                 <li class="list-group-item"><a href="#" class="list-group-item">
-                        <span class="badge" onclick="location.href='${pageContext.request.contextPath}/index.jsp'">EDIT</span>
+                        <span class="badge" onclick="location.href='${pageContext.request.contextPath}/xxx.jsp'">EDIT</span>
                         <h4 class="list-group-item-heading">
                             <c:out value="${fc.term}"></c:out>
                         </h4>
@@ -47,27 +50,31 @@
                     <li></li>
                     <!-- 首頁 -->
                     <li <c:if test="${pageInfo.pageNum==1}">class="disabled"</c:if>><a
-                            href="${pageContext.request.contextPath}/flashcard/flashcardDetail/1">&laquo;</a></li>
+                            <c:if test="${pageInfo.pageNum==1}">class="hrefDisabled"</c:if>
+                            href="${pageContext.request.contextPath}/<c:out value="${flashcardManager}"></c:out>/1">&laquo;</a></li>
 
                     <!-- 上一頁 -->
                     <li <c:if test="${!pageInfo.isHasPreviousPage()}">class="disabled"</c:if>><a
-                            href="${pageContext.request.contextPath}/flashcard/flashcardDetail/<c:out value="${pageInfo.pageNum-1}" />">Previous</a></li>
+                            <c:if test="${!pageInfo.isHasPreviousPage()}">class="hrefDisabled"</c:if>
+                            href="${pageContext.request.contextPath}/<c:out value="${flashcardManager}"></c:out>/<c:out value="${pageInfo.pageNum-1}" />">Previous</a></li>
                     <!-- 中間頁數 -->
                     <c:forEach var="i" begin="${pageInfo.navigateFirstPage}" end="${pageInfo.navigateLastPage}">
                         <li <c:if test="${pageInfo.pageNum==i}">class="active"</c:if>><a
                                 <c:if test="${pageInfo.pageNum==i}">class="hrefDisabled"</c:if>
-                                href="${pageContext.request.contextPath}/flashcard/flashcardDetail/<c:out value="${i}" />">
+                                href="${pageContext.request.contextPath}/<c:out value="${flashcardManager}"></c:out>/<c:out value="${i}" />">
                                 <c:out value="${i}" />
                             </a></li>
                     </c:forEach>
 
                     <!-- 下一頁 -->
                     <li <c:if test="${!pageInfo.isHasNextPage()}">class="disabled"</c:if>><a
-                            href="${pageContext.request.contextPath}/flashcard/flashcardDetail/<c:out value="${pageInfo.pageNum+1}" />">Next</a></li>
+                            <c:if test="${!pageInfo.isHasNextPage()}">class="hrefDisabled"</c:if>
+                            href="${pageContext.request.contextPath}/<c:out value="${flashcardManager}"></c:out>/<c:out value="${pageInfo.pageNum+1}" />">Next</a></li>
 
                     <!-- 最末頁 -->
                     <li <c:if test="${pageInfo.isIsLastPage()}">class="disabled"</c:if>><a
-                            href="${pageContext.request.contextPath}/flashcard/flashcardDetail/<c:out value="${pageInfo.pages}" />">&raquo;</a></li>
+                            <c:if test="${pageInfo.isIsLastPage()}">class="hrefDisabled"</c:if>
+                            href="${pageContext.request.contextPath}/<c:out value="${flashcardManager}"></c:out>/<c:out value="${pageInfo.pages}" />">&raquo;</a></li>
                     <li></li>
                 </ul>
             </li>

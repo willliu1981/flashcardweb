@@ -22,7 +22,8 @@ import tool.spring.SpringUtil;
 public class FlashcardController {
 	private static final Integer MAX_PAGE_NUMBER = 5;
 	private static final Integer MAX_NAV_PAGE_NUMBER = 5;
-	protected String FLASHCARDS = "flashcards";//base path
+	protected String WEB_FLASHCARDS = "flashcards";//web base page
+	protected String FLASHCARDS = "flashcards";//jsp base path
 
 	protected static Logger logger = LoggerFactory
 			.getLogger(FlashcardController.class);
