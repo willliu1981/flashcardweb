@@ -10,5 +10,7 @@ import idv.fc.model.Flashcard;
 public interface FlashcardDao {
 
 	List<Flashcard> queryAll();
+	
+	public void create(Flashcard flashcard);
 
 }

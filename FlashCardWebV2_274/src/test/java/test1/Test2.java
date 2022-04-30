@@ -1,12 +1,18 @@
 package test1;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import idv.fc.model.Flashcard;
 import tool.Debug;
+import tool.spring.MySpringUtil;
 
 public class Test2 {
 	Logger logger = LoggerFactory.getLogger(Test2.class);
@@ -95,9 +101,70 @@ public class Test2 {
 
 	@Test
 	public void testx2() {
-		Boolean[] os = { true, false, true };
+		String qq = "1882345";
+		//String regex = "[1-9]\\d{4,14}";//這是正規表示式的規則 
+		String regex = "[1-9]{3,14}";//這是正規表示式的規則 
+		Boolean flag = qq.matches(regex);
+		System.out.println("xxxxxxxxx");
+		if (flag) {
+			System.out.println(qq + "...is ok");
+		} else {
+			System.out.println(qq + "...is not ok");
+		}
 
-		Debug.test("os", os);
+	}
+
+	@Test
+	public void testx3() {
+		/*int[] is = { 1, 2, 3 };
+		Object o = is;
+		
+		Object[] os = (Object[]) o;
+		System.out.println(os);*/
+
+		Object[] os = { 1, 2, 3 };
+		Object o = os;
+		int[] is = (int[]) o;
+
+		System.out.println(is);
+	}
+
+	@Test
+	public void testx4() {
+		String st1 = "apple is a fruit";
+		String id1 = "fc_" + st1 + "_" + UUID.randomUUID();
+		String st2 = "apple is a fruit";
+		String id2 = "fc_" + st2 + "_" + UUID.randomUUID();
+
+		List<String> ids = new ArrayList<>();
+		ids.add(id1);
+		ids.add(id2);
+
+		String[] split = id1.split(" ", 2);
+
+		Debug.test(split.length, split);
+
+		int a = 0;
+
+		logger.info("name=" + Test2.class.getSimpleName());
+
+	}
+
+	@Test
+	public void testSwitch() {
+
+		String type = " ";
+
+		logger.info("type= " + type.isEmpty());
+
+	}
+
+	@Test
+	public void testIDGen() {
+		MySpringUtil.loadXml("test2");
+		//Flashcard bean = MySpringUtil.getBean("Flashcard", Flashcard.class);
+
+		//logger.info("bean=" + bean);
 
 	}
 

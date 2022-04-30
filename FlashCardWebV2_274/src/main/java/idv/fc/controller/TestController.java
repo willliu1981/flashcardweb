@@ -8,10 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class TestController {
 
 	@RequestMapping(value = "test1")
-	public String query() {
+	public String test1() {
 
-		System.out.println("test1");
 		return "test/test1";
+	}
+	@RequestMapping(value = "test2")
+	public String test2() {
+		
+		return "test/test2";
 	}
 
 }

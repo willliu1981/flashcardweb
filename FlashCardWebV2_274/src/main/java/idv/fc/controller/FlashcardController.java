@@ -19,7 +19,7 @@ import com.github.pagehelper.PageInfo;
 import idv.fc.model.Flashcard;
 import idv.fc.service.IFlashcardService;
 import tool.Debug;
-import tool.SpringUtil;
+import tool.spring.SpringUtil;
 
 @Controller
 @RequestMapping(value = "flashcard")
@@ -38,7 +38,7 @@ public class FlashcardController {
 	@RequestMapping(value = "flashcardDetail/{pageNumber}")
 	public String toFlashcardDetailWithPathVariable(HashMap<String, Object> map,
 			@PathVariable(value = "pageNumber") String pageNumber) {
-		IFlashcardService service = SpringUtil.getBean("flashcardService",
+		IFlashcardService flashcardService = SpringUtil.getBean("flashcardService",
 				IFlashcardService.class);
 		int intPageNumber = 1;//default pageNumber
 		if (pageNumber != null && !pageNumber.equals("")) {
@@ -46,7 +46,7 @@ public class FlashcardController {
 		}
 
 		PageHelper.startPage(intPageNumber, MAX_PAGE_NUMBER);
-		List<Flashcard> all = service.getAll();
+		List<Flashcard> all = flashcardService.getAll();
 		map.put("flashcards", all);
 		PageInfo<Flashcard> pageInfo = new PageInfo<>(all, MAX_NAV_PAGE_NUMBER);
 		map.put("pageInfo", pageInfo);

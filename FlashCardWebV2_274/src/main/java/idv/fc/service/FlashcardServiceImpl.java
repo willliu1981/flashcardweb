@@ -20,4 +20,9 @@ public class FlashcardServiceImpl implements IFlashcardService {
 		return flashcardDao.queryAll();
 	}
 
+	@Override
+	public void addNew(Flashcard flashcard) {
+		flashcardDao.create(flashcard);
+	}
+
 }

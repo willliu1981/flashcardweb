@@ -16,17 +16,30 @@
         https://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/util
         http://www.springframework.org/schema/util/spring-util-4.0.xsd">
-
+        
+	<!-- 用於測試, 由 MySpringUtil加載 -->
 
 	<context:component-scan base-package="idv.test,spring"></context:component-scan>
 
+	<!-- 使用 MySpringUtil (loadXml)會加載 -->
 	<bean id="xmlUrlFactory" class="spring.XmlUrlFactory">
+		<property name="defaultXmlUrlSet">
+			<props>
+				<prop key="default">test</prop>
+			</props>
+		</property>
 		<property name="xmlUrls">
 			<map>
 				<entry key="test">
 					<list>
 						<value>classpath:spring/test.xml</value>
 						<value>classpath:spring/dao.xml</value>
+						<value>classpath:spring/tool.xml</value>
+					</list>
+				</entry>
+				<entry key="test2">
+					<list>
+						<value>classpath:spring/test.xml</value>
 					</list>
 				</entry>
 			</map>
@@ -34,8 +47,9 @@
 
 	</bean>
 
-	<!-- <bean class="test.AfterHandler"></bean> -->
+	<bean id="fc" class="idv.fc.model.Flashcard">
 
+	</bean>
 
 
 </beans>

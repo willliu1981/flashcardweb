@@ -4,6 +4,7 @@
 
 .	jsp import jsp 問題
 
+.	MySpringUtil 結構混亂
 
 
 .	jquery,引用 <script type="text/javascript" src="<%=request.getContextPath()%>/webjars/jquery/3.4.1/jquery.min.js"></script>

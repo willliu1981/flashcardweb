@@ -20,19 +20,19 @@
     </div>
 
     <div class="container">
-        <form class="form-horizontal">
+        <form class="form-horizontal" method="post" action="${pageContext.request.contextPath}/flashcard">
             <fieldset>
                 <legend>新增 Flashcard</legend>
                 <div class="form-group">
                     <label for="inputEmail" class="col-lg-2 control-label">Term</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" id="inputEmail" placeholder="Ex: apple">
+                        <input type="text" class="form-control" name="term" placeholder="Ex: apple">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputPassword" class="col-lg-2 control-label">Definition</label>
                     <div class="col-lg-10">
-                        <input type="password" class="form-control" id="inputPassword" placeholder="Ex: 蘋果">
+                        <input type="text" class="form-control" name="definition" placeholder="Ex: 蘋果">
                     </div>
                 </div>
                 <div class="form-group">

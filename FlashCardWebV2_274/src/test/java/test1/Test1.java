@@ -1,16 +1,13 @@
 package test1;
 
-import java.util.Scanner;
-
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import idv.fc.pojo.Vocabulary;
 import test.Car;
 import test.ICar;
 import tool.Debug;
-import tool.MySpringUtil;
+import tool.spring.MySpringUtil;
 
 public class Test1 {
 	private final static Logger logger = LoggerFactory.getLogger(Test1.class);
@@ -20,13 +17,7 @@ public class Test1 {
 		logger.info("main");
 	}
 
-	@Test
-	public void test1() {
-		MySpringUtil.loadXml("test");
-		Vocabulary bean = MySpringUtil.getBean("vocabulary", Vocabulary.class);
 
-		Debug.test("voc", bean);
-	}
 
 	@Test
 	public void test2() {

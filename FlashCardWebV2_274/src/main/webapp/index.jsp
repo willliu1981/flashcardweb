@@ -66,7 +66,9 @@
         <h1>歡迎使用 FlashCard</h1>
     </div>
 
-
+    <div class="container">
+        <a href="${pageContext.request.contextPath}/test/test2">test</a>
+    </div>
 
     <div class="container">
         <h4>Copyright &copy; 2021-2022 FlashCard. All rights reserved.</h4>

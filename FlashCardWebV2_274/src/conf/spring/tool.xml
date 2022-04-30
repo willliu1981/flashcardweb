@@ -14,8 +14,16 @@
         https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 
-	<context:component-scan base-package="idv.fc"></context:component-scan>
+	<context:component-scan base-package="tool"></context:component-scan>
 
+	<bean id="IDGenerator" class="tool.idgenerator.IDGeneratorFactory">
+		<property name="idMappings">
+			<map>
+				<entry key-ref="idv.fc.model.Flashcard" value="fc" />
+				<entry key-ref="idv.fc.model.FlashcardHolder" value="fh" />
+			</map>
+		</property>
+	</bean>
 
 
 

@@ -8,7 +8,9 @@
 		select * from flashcard
 	</select>
 
-
+	<insert id="create" parameterType="Flashcard">
+		insert into flashcard values();
+	</insert>
 
 
 
