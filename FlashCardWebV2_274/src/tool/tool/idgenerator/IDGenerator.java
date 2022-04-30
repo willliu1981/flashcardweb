@@ -23,7 +23,7 @@ public class IDGenerator {
 		this.defaultSeparator = defaultSeparator;
 	}
 
-	public String generate(String id, Class<?> modelType) {
+	public String generate(String oriId, Class<?> modelType) {
 		String idPrefix = null;
 		if (modelType == null) {
 			idPrefix = defaultIdPrefix;
@@ -33,14 +33,16 @@ public class IDGenerator {
 				idPrefix = value;
 			}
 		}
+		
+		
 
-		return idPrefix + defaultSeparator + id + defaultSeparator
+		return idPrefix + defaultSeparator + oriId + defaultSeparator
 				+ UUID.randomUUID();
 	}
 
-	public String generate(String id) {
+	public String generate(String oriId) {
 
-		return generate(id, null);
+		return generate(oriId, null);
 	}
 
 }

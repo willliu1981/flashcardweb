@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import idv.fc.model.Flashcard;
 import idv.fc.service.IFlashcardService;
+import tool.idgenerator.IDGenerator;
+import tool.spring.SpringUtil;
 
 @Controller
 @RequestMapping(value = "flashcard")
@@ -24,13 +26,15 @@ public class FlashcardCRUDController {
 	 */
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String add(Flashcard flashcard) {
-		String term=flashcard.getTerm();
-		//term.
-		
-		//flashcard.setId(null);
-		//flashcardService.addNew(flashcard);
+		String term = flashcard.getTerm();
+		IDGenerator IDGenerator = SpringUtil.getBean("IDGenerator",
+				IDGenerator.class);
+		String id = IDGenerator.generate(term,Flashcard.class);
 
-		return "../flashcardDetail";
+		flashcard.setId(id);
+		flashcardService.addNew(flashcard);
+
+		return "redirect:flashcard/flashcardDetail";
 	}
 
 }

@@ -9,7 +9,7 @@
 	</select>
 
 	<insert id="create" parameterType="Flashcard">
-		insert into flashcard values();
+		insert into flashcard (id,term,definition)values(#{id},#{term},#{definition});
 	</insert>
 
 

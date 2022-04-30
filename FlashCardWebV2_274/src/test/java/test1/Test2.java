@@ -8,6 +8,9 @@ import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.AlternativeJdkIdGenerator;
+import org.springframework.util.JdkIdGenerator;
+import org.springframework.util.SimpleIdGenerator;
 
 import idv.fc.model.Flashcard;
 import tool.Debug;
@@ -166,8 +169,50 @@ public class Test2 {
 				IDGenerator.class);
 
 		String generate = bean.generate("abc def", Flashcard.class);
+		String generate2 = bean.generate("abc def", Flashcard.class);
 
 		logger.info("bean=" + generate);
+		logger.info("bean=" + generate2);
+
+	}
+
+	@Test
+	public void testIDGen2() {
+		SimpleIdGenerator g1 = new SimpleIdGenerator();
+		logger.info("SimpleIdGenerator g1=" + g1.generateId().randomUUID());
+
+		JdkIdGenerator g2 = new JdkIdGenerator();
+		logger.info("JdkIdGenerator g2=" + g2.generateId().randomUUID());
+
+		AlternativeJdkIdGenerator g3 = new AlternativeJdkIdGenerator();
+		logger.info("AlternativeJdkIdGenerator g3=" + g3.generateId().randomUUID());
+
+		logger.info("xxx");
+
+		SimpleIdGenerator g12 = new SimpleIdGenerator();
+		logger.info("SimpleIdGenerator g12=" + g12.generateId().randomUUID());
+
+		JdkIdGenerator g22 = new JdkIdGenerator();
+		logger.info("JdkIdGenerator g22=" + g22.generateId().randomUUID());
+
+		AlternativeJdkIdGenerator g32 = new AlternativeJdkIdGenerator();
+		logger.info("AlternativeJdkIdGenerator g32=" + g32.generateId().randomUUID());
+
+		
+	}
+	
+	@Test
+	public void testx5() {
+		String st1 = "apple is a fruit";
+		String id1 = "fc_" + st1 + "_" + UUID.randomUUID();
+
+
+		
+		String replaceAll = id1.replaceAll("[fc_]", "");
+
+		logger.info("id1=" +id1);
+		logger.info("replaceAll=" +replaceAll);
+
 
 	}
 
