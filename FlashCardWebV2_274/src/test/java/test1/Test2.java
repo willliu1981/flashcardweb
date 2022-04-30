@@ -8,10 +8,10 @@ import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import idv.fc.model.Flashcard;
 import tool.Debug;
+import tool.idgenerator.IDGenerator;
 import tool.spring.MySpringUtil;
 
 public class Test2 {
@@ -162,9 +162,12 @@ public class Test2 {
 	@Test
 	public void testIDGen() {
 		MySpringUtil.loadXml("test2");
-		//Flashcard bean = MySpringUtil.getBean("Flashcard", Flashcard.class);
+		IDGenerator bean = MySpringUtil.getBean("IDGenerator",
+				IDGenerator.class);
 
-		//logger.info("bean=" + bean);
+		String generate = bean.generate("abc def", Flashcard.class);
+
+		logger.info("bean=" + generate);
 
 	}
 

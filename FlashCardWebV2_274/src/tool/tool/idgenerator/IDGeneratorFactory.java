@@ -6,7 +6,7 @@ import org.springframework.beans.factory.FactoryBean;
 
 public class IDGeneratorFactory implements FactoryBean<IDGenerator> {
 
-	private Map<Class, String> idMappings;
+	private Map<String, String> idMappings;
 	private String defaultIdPrefix= "ID";
 	private String defaultSeparator = "_";
 
@@ -24,7 +24,7 @@ public class IDGeneratorFactory implements FactoryBean<IDGenerator> {
 		return IDGenerator.class;
 	}
 
-	public void setIdMappings(Map<Class, String> idMappings) {
+	public void setIdMappings(Map<String, String> idMappings) {
 		this.idMappings = idMappings;
 	}
 

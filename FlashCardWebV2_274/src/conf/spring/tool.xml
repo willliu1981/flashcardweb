@@ -19,8 +19,8 @@
 	<bean id="IDGenerator" class="tool.idgenerator.IDGeneratorFactory">
 		<property name="idMappings">
 			<map>
-				<entry key-ref="idv.fc.model.Flashcard" value="fc" />
-				<entry key-ref="idv.fc.model.FlashcardHolder" value="fh" />
+				<entry key="idv.fc.model.Flashcard" value="fc" />
+				<entry key="idv.fc.model.FlashcardHolder" value="fh" />
 			</map>
 		</property>
 	</bean>
