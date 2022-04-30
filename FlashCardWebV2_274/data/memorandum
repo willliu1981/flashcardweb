@@ -1,20 +1,15 @@
+.	java web ssm.mm 人智圖
+
 .	sql 驗證 default
 .	try catch 位置
-.	jdbc pool
-
-.	jsp import jsp 問題
 
 .	MySpringUtil 結構混亂
+
+
 
 
 .	jquery,引用 <script type="text/javascript" src="<%=request.getContextPath()%>/webjars/jquery/3.4.1/jquery.min.js"></script>
 
 
-
-
-.	header.jsp active param:
-		home
-		mamager
-		mamager-flashcard
-		mamager-flashcardHolder
-		flashcard-add
+.	header.jsp active param: (參照 header.jsp : path mapping)
+			

@@ -6,32 +6,45 @@
 <jsp:include page="/WEB-INF/view/public/bootstrapCommon.jsp" />
 </head>
 <body>
-    <c:set var="flashcardManager" value="flashcards/fcManager" />
-    <c:set var="flahscardHolderManager" value="flashcards/fhManager" />
-
     <!-- header include nav -->
     <jsp:include page="/WEB-INF/view/public/header.jsp" flush="true">
-        <jsp:param name="active" value="flashcardsManager" />
+        <jsp:param name="active" value="flashcard-add" />
     </jsp:include>
 
     <!-- 巨屏 -->
     <div class="jumbotron">
         <div class="container">
             <h1>FlashCard</h1>
-            <p>Flashcard 管理</p>
+            <p>Flashcard 編輯</p>
         </div>
     </div>
 
-    <!-- 清單 -->
     <div class="container">
-        <div class="list-group">
-            <a href="javascript:;" class="list-group-item disabled">字卡編輯</a>
-            <a href="${pageContext.request.contextPath}/<c:out value="${flashcardManager}"></c:out>"
-                class="list-group-item">FlashCard</a>
-            <a href="${pageContext.request.contextPath}/<c:out value="${flahscardHolderManager}"></c:out>"
-                class="list-group-item">FlashcardHolder</a>
-        </div>
+        <form class="form-horizontal" method="post" action="${pageContext.request.contextPath}/flashcard">
+            <fieldset>
+                <legend>新增 Flashcard</legend>
+                <div class="form-group">
+                    <label for="inputEmail" class="col-lg-2 control-label">Term</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" name="term" placeholder="Ex: apple">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword" class="col-lg-2 control-label">Definition</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" name="definition" placeholder="Ex: 蘋果">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button type="reset" class="btn btn-default">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
     </div>
+
 
     <!-- 模態框 -->
     <div class="modal fade" tabindex="-1" role="dialog" id="myModal">

@@ -1,7 +1,10 @@
 package idv.fc.controller;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -14,13 +17,22 @@ import tool.spring.SpringUtil;
 public class FlashcardCRUDController {
 	protected String WEB_FLASHCARDS = "flashcards";//web base page
 	protected String FLASHCARDS = "flashcards";//jsp base page
+	protected String FLASHCARD = "flashcard";//jsp second-level page
 
 	@Autowired
 	IFlashcardService flashcardService;
 
 	@RequestMapping(value = "flashcard", method = RequestMethod.GET)
 	public String toAdd() {
-		return FLASHCARDS + "/addFlashcardPage";
+		return FLASHCARDS + "/" + FLASHCARD + "/addFlashcardPage";
+	}
+
+	@RequestMapping(value = "flashcard/{id}", method = RequestMethod.GET)
+	public String toEdit(HashMap<String, Object> map,
+			@PathVariable("id") String id) {
+		
+		map.put("flashcard", id);
+		return FLASHCARDS + "/" + FLASHCARD + "/editFlashcardPage";
 	}
 
 	/*

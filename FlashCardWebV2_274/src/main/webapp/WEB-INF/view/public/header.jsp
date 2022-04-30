@@ -4,6 +4,7 @@
 <html>
 
 <body>
+    <!-- path mapping  (亦用於 include page 的 active)-->
     <c:set var="home" value="index.jsp" />
     <c:set var="flashcardsManager" value="flashcards/fcsManager" />
     <c:set var="flashcardManager" value="flashcards/fcManager" />
@@ -25,20 +26,20 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li <c:if test="${param.active eq 'manage'}">class="active"</c:if>><a
-                            <c:if test="${param.active eq 'manage'}">class="hrefDisabled"</c:if>
+                    <li <c:if test="${param.active eq 'flashcardsManager'}">class="active"</c:if>><a
+                            <c:if test="${param.active eq 'flashcardsManager'}">class="hrefDisabled"</c:if>
                             href="${pageContext.request.contextPath}/<c:out value="${flashcardsManager}"></c:out>">字卡管理</a></li>
                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                             aria-expanded="false">
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li <c:if test="${param.active eq 'manage-flashcard'}">class="active"</c:if>><a
-                                    <c:if test="${param.active eq 'manage-flashcard'}">class="hrefDisabled"</c:if>
+                            <li <c:if test="${param.active eq 'flashcardManager'}">class="active"</c:if>><a
+                                    <c:if test="${param.active eq 'flashcardManager'}">class="hrefDisabled"</c:if>
                                     href="${pageContext.request.contextPath}/<c:out value="${flashcardManager}"></c:out>">Flashcard</a></li>
 
-                            <li <c:if test="${param.active eq 'manage-flashcardHolder'}">class="active"</c:if>><a
-                                    <c:if test="${param.active eq 'manage-flashcardHolder'}">class="hrefDisabled"</c:if>
+                            <li <c:if test="${param.active eq 'flahscardHolderManager'}">class="active"</c:if>><a
+                                    <c:if test="${param.active eq 'flahscardHolderManager'}">class="hrefDisabled"</c:if>
                                     href="${pageContext.request.contextPath}/<c:out value="${flahscardHolderManager}"></c:out>">FlashcardHolder</a></li>
                         </ul></li>
                 </ul>

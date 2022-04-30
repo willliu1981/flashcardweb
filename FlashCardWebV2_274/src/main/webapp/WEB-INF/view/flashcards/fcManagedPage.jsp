@@ -11,7 +11,7 @@
 
     <!-- header include nav -->
     <jsp:include page="/WEB-INF/view/public/header.jsp" flush="true">
-        <jsp:param name="active" value="manage-flashcard" />
+        <jsp:param name="active" value="flashcardManager" />
     </jsp:include>
 
     <!-- 巨屏 -->

@@ -8,7 +8,7 @@
 <body>
     <!-- header include nav -->
     <jsp:include page="/WEB-INF/view/public/header.jsp" flush="true">
-        <jsp:param name="active" value="manage-flashcardHolder" />
+        <jsp:param name="active" value="flahscardHolderManager" />
     </jsp:include>
 
     <!-- 巨屏 -->
