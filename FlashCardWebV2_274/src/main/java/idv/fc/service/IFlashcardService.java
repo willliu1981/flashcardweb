@@ -13,4 +13,6 @@ public interface IFlashcardService {
 	public void addNew(Flashcard flashcard);
 
 	public void edit(Flashcard flashcard);
+
+	public void remove(String id);
 }

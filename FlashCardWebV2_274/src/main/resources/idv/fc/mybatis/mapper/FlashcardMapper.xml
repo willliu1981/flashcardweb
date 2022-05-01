@@ -22,6 +22,8 @@
 		term=#{term},definition=#{definition} where id = #{id};
 	</update>
 
-
+	<delete id="delete">
+		delete from flashcard where id = #{id};
+	</delete>
 
 </mapper>

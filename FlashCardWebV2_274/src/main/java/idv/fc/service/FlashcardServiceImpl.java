@@ -35,4 +35,9 @@ public class FlashcardServiceImpl implements IFlashcardService {
 		flashcardDao.update(flashcard);
 	}
 
+	@Override
+	public void remove(String id) {
+		flashcardDao.delete(id);
+	}
+
 }

@@ -13,14 +13,22 @@
 </style>
 
 <script type="text/javascript">
-  $("#listDeleteModal").model("hide");
-
-  function modelValues(id,term,definition) {
-	alert("xxx");
+  //$("#listDeleteModal").model("hide");
+  function modelValues(id, term, definition) {
 	$("#model_id").val(id);
 	$("#model_term").val(term);
 	$("#model_definition").val(definition);
+	$("#model_formID").attr("action", function(i, orig) {
+	  return orig + id;
+	});
   }
+
+  $(document).ready(function() {
+
+	/* $("#model_delete").click(function() {
+	  location.href="${pageContext.request.contextPath}/fhashcard"
+	}); */
+  });
 </script>
 
 </head>
@@ -50,7 +58,7 @@
             <c:forEach var="fc" items="${flashcards}">
                 <li class="list-group-item"><a href="#" class="list-group-item">
                         <span class="badge" style="background: red;" data-target="#listDeleteModal" data-toggle="modal"
-                            onclick="modelValues(${fc.id},${fc.term},${fc.definition})">
+                            onclick='modelValues("${fc.id}","${fc.term}","${fc.definition}")'>
                             <font size="4">DELETE</font>
                         </span>
                         <span class="badge badgeSpan"
@@ -118,17 +126,21 @@
                     <h4 class="modal-title">FlashCard</h4>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" id="model_id" name="model_id" value="" />
+
                     <input type="text" id="model_term" name="model_term" value="" />
                     <br />
                     <input type="text" id="model_definition" name="model_definition" value="" />
-                    <p>編輯中&hellip;</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">
-                        <font color="black"> Close</font>
-                    </button>
-                    <button type="button" class="btn btn-primary" style="background: red;">Delete Data</button>
+                    <form id="model_formID" action="${pageContext.request.contextPath}/flashcard/" method="post">
+                        <input type="hidden" id="model_id" name="model_id" value="" />
+                        <input type="hidden" name="_method" value="delete" />
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            <font color="black"> Close</font>
+                        </button>
+                        <button id="model_delete" type="submit" class="btn btn-primary" style="background: red;">Delete
+                            Data</button>
+                    </form>
                 </div>
             </div>
             <!-- /.modal-content -->

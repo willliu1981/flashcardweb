@@ -10,11 +10,13 @@ import idv.fc.model.Flashcard;
 public interface FlashcardDao {
 
 	List<Flashcard> selectAll();
-	
+
 	Flashcard selectById(String id);
-	
+
 	public void create(Flashcard flashcard);
-	
+
 	public void update(Flashcard flashcard);
+
+	public void delete(String id);
 
 }
