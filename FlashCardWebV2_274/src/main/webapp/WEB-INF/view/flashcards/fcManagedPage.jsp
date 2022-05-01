@@ -16,6 +16,7 @@
   $("#listDeleteModal").model("hide");
 
   function modelValues(id,term,definition) {
+	alert("xxx");
 	$("#model_id").val(id);
 	$("#model_term").val(term);
 	$("#model_definition").val(definition);

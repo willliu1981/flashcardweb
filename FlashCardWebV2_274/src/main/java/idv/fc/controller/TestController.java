@@ -27,11 +27,11 @@ public class TestController {
 		
 		FlashcardServiceImpl service = SpringUtil.getBean("flashcardService", FlashcardServiceImpl.class);
 		
-		List<Flashcard> all = service.getAll();
-		Debug.test(this,all);
-		//map.put("fcs", all);
+		Flashcard find = service.getById("33");
+
 		
-		request.getServletContext().setAttribute("fcs", all);
+		
+		request.getServletContext().setAttribute("fc", find);
 		
 		return "test/test3";
 	}
