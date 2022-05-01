@@ -1,7 +1,17 @@
 package idv.fc.controller;
 
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import idv.fc.model.Flashcard;
+import idv.fc.service.FlashcardServiceImpl;
+import tool.Debug;
+import tool.spring.SpringUtil;
 
 @Controller
 @RequestMapping(value = "test")
@@ -13,9 +23,17 @@ public class TestController {
 		return "test/test1";
 	}
 	@RequestMapping(value = "test2")
-	public String test2() {
+	public String test2(Map<String,Object> map,HttpServletRequest request) {
 		
-		return "test/test2";
+		FlashcardServiceImpl service = SpringUtil.getBean("flashcardService", FlashcardServiceImpl.class);
+		
+		List<Flashcard> all = service.getAll();
+		Debug.test(this,all);
+		//map.put("fcs", all);
+		
+		request.getServletContext().setAttribute("fcs", all);
+		
+		return "test/test3";
 	}
 
 }

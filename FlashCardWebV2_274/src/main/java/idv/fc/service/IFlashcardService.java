@@ -9,4 +9,6 @@ public interface IFlashcardService {
 	public List<Flashcard> getAll();
 
 	public void addNew(Flashcard flashcard);
+
+	Flashcard getById(String id);
 }

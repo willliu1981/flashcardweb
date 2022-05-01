@@ -4,12 +4,17 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="idv.fc.dao.FlashcardDao">
 
-	<select id="queryAll" resultType="Flashcard">
+	<select id="selectAll" resultType="Flashcard">
 		select * from flashcard
 	</select>
 
+	<select id="selectById" resultType="Flashcard">
+		select * from flashcard where id = #{id}
+	</select>
+
 	<insert id="create" parameterType="Flashcard">
-		insert into flashcard (id,term,definition)values(#{id},#{term},#{definition});
+		insert into flashcard
+		(id,term,definition)values(#{id},#{term},#{definition});
 	</insert>
 
 

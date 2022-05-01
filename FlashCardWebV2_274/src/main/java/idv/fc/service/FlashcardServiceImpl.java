@@ -17,7 +17,12 @@ public class FlashcardServiceImpl implements IFlashcardService {
 
 	@Override
 	public List<Flashcard> getAll() {
-		return flashcardDao.queryAll();
+		return flashcardDao.selectAll();
+	}
+
+	@Override
+	public Flashcard getById(String id) {
+		return flashcardDao.selectById(id);
 	}
 
 	@Override

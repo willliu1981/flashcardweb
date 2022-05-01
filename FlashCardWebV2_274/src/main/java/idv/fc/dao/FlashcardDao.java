@@ -9,7 +9,9 @@ import idv.fc.model.Flashcard;
 @Repository
 public interface FlashcardDao {
 
-	List<Flashcard> queryAll();
+	List<Flashcard> selectAll();
+	
+	Flashcard selectById(String id);
 	
 	public void create(Flashcard flashcard);
 

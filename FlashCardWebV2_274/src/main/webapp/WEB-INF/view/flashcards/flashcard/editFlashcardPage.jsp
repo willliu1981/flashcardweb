@@ -11,28 +11,29 @@
         <jsp:param name="active" value="flashcard-add" />
     </jsp:include>
 
-    <!-- 巨屏 -->
-    <div class="jumbotron">
-        <div class="container">
-            <h1>FlashCard</h1>
-            <p>Flashcard 編輯</p>
-        </div>
-    </div>
+    <!-- 引入巨屏 -->
+    <jsp:include page="/WEB-INF/view/public/jumbotron.jsp">
+        <jsp:param name="title" value="編輯 Flashcard" />
+    </jsp:include>
 
     <div class="container">
         <form class="form-horizontal" method="post" action="${pageContext.request.contextPath}/flashcard">
+            <input type="hidden" name="id" value="${flashcard.id}" />
+            <input type="hidden" name="_method" value="put" />
             <fieldset>
-                <legend>新增 Flashcard</legend>
+                <legend>編輯 Flashcard</legend>
                 <div class="form-group">
                     <label for="inputEmail" class="col-lg-2 control-label">Term</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" name="term" placeholder="Ex: apple">
+                        <input type="text" class="form-control" name="term" placeholder="Ex: apple"
+                            value="${flashcard.term}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputPassword" class="col-lg-2 control-label">Definition</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" name="definition" placeholder="Ex: 蘋果">
+                        <input type="text" class="form-control" name="definition" placeholder="Ex: 蘋果"
+                            value="${flashcard.definition}">
                     </div>
                 </div>
                 <div class="form-group">
@@ -45,28 +46,5 @@
         </form>
     </div>
 
-
-    <!-- 模態框 -->
-    <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title">FlashCard</h4>
-                </div>
-                <div class="modal-body">
-                    <p>編輯中&hellip;</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal -->
 </body>
 </html>

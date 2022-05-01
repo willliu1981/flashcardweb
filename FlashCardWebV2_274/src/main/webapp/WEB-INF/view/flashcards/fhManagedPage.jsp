@@ -11,12 +11,10 @@
         <jsp:param name="active" value="flahscardHolderManager" />
     </jsp:include>
 
-    <!-- 巨屏 -->
-    <div class="jumbotron">
-        <h1>FlashCard</h1>
-        <p>FlashcardHolder 編輯</p>
-
-    </div>
+     <!-- 引入巨屏 -->
+    <jsp:include page="/WEB-INF/view/public/jumbotron.jsp">
+        <jsp:param name="title" value="管理 FlashcardHolder" />
+    </jsp:include>
 
 
 

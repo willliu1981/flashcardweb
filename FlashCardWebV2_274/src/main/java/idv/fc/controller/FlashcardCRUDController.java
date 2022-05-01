@@ -2,6 +2,8 @@ package idv.fc.controller;
 
 import java.util.HashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +21,9 @@ public class FlashcardCRUDController {
 	protected String FLASHCARDS = "flashcards";//jsp base page
 	protected String FLASHCARD = "flashcard";//jsp second-level page
 
+	protected static Logger logger = LoggerFactory
+			.getLogger(FlashcardController.class);
+
 	@Autowired
 	IFlashcardService flashcardService;
 
@@ -30,8 +35,9 @@ public class FlashcardCRUDController {
 	@RequestMapping(value = "flashcard/{id}", method = RequestMethod.GET)
 	public String toEdit(HashMap<String, Object> map,
 			@PathVariable("id") String id) {
-		
-		map.put("flashcard", id);
+		Flashcard find = flashcardService.getById(id);
+
+		map.put("flashcard", find);
 		return FLASHCARDS + "/" + FLASHCARD + "/editFlashcardPage";
 	}
 
@@ -47,6 +53,14 @@ public class FlashcardCRUDController {
 
 		flashcard.setId(id);
 		flashcardService.addNew(flashcard);
+
+		return "redirect:" + WEB_FLASHCARDS + "/fcManager";
+	}
+
+	@RequestMapping(value = "flashcard", method = RequestMethod.PUT)
+	public String edit(Flashcard flashcard) {
+
+		logger.info("edit ...............");
 
 		return "redirect:" + WEB_FLASHCARDS + "/fcManager";
 	}
