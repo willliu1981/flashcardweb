@@ -16,13 +16,10 @@ import tool.idgenerator.IDGenerator;
 import tool.spring.SpringUtil;
 
 @Controller
-public class FlashcardCRUDController {
+public class FlashcardCRUDController extends BaseController {
 	protected String WEB_FLASHCARDS = "flashcards";//web base page
 	protected String FLASHCARDS = "flashcards";//jsp base page
 	protected String FLASHCARD = "flashcard";//jsp second-level page
-
-	protected static Logger logger = LoggerFactory
-			.getLogger(FlashcardController.class);
 
 	@Autowired
 	IFlashcardService flashcardService;
@@ -64,6 +61,7 @@ public class FlashcardCRUDController {
 	@RequestMapping(value = "flashcard", method = RequestMethod.PUT)
 	public String edit(Flashcard flashcard) {
 		flashcardService.edit(flashcard);
+
 		return "redirect:" + WEB_FLASHCARDS + "/fcManager";
 	}
 

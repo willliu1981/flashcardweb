@@ -19,14 +19,11 @@ import tool.spring.SpringUtil;
 
 @Controller
 @RequestMapping(value = "flashcards")
-public class FlashcardController {
+public class FlashcardController extends BaseController {
 	private static final Integer MAX_PAGE_NUMBER = 5;
 	private static final Integer MAX_NAV_PAGE_NUMBER = 5;
 	protected String WEB_FLASHCARDS = "flashcards";//web base page
 	protected String FLASHCARDS = "flashcards";//jsp base path
-
-	protected static Logger logger = LoggerFactory
-			.getLogger(FlashcardController.class);
 
 	@Autowired
 	IFlashcardService flashcardService;

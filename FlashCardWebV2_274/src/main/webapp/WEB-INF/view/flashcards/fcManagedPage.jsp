@@ -4,6 +4,24 @@
 <html>
 <head>
 <jsp:include page="/WEB-INF/view/public/bootstrapCommon.jsp" />
+<style type="text/css">
+.badgeSpan { /* 用於 list badge (delete)*/
+	text-align: center;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+</style>
+
+<script type="text/javascript">
+  $("#listDeleteModal").model("hide");
+
+  function modelValues(id,term,definition) {
+	$("#model_id").val(id);
+	$("#model_term").val(term);
+	$("#model_definition").val(definition);
+  }
+</script>
+
 </head>
 <body>
     <c:set var="pathFlashcard" value="flashcard" />
@@ -30,7 +48,11 @@
                 <h3>Flashcard</h3></li>
             <c:forEach var="fc" items="${flashcards}">
                 <li class="list-group-item"><a href="#" class="list-group-item">
-                        <span class="badge"
+                        <span class="badge" style="background: red;" data-target="#listDeleteModal" data-toggle="modal"
+                            onclick="modelValues(${fc.id},${fc.term},${fc.definition})">
+                            <font size="4">DELETE</font>
+                        </span>
+                        <span class="badge badgeSpan"
                             onclick="location.href='${pageContext.request.contextPath}/<c:out value="${pathFlashcard}"></c:out>/${fc.id}'">
                             <font size="4">EDIT</font>
                         </span>
@@ -84,6 +106,35 @@
         </ul>
     </div>
 
+    <!-- 模態框 用於 list delete-->
+    <div class="modal fade" tabindex="-1" role="dialog" id="listDeleteModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">FlashCard</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="model_id" name="model_id" value="" />
+                    <input type="text" id="model_term" name="model_term" value="" />
+                    <br />
+                    <input type="text" id="model_definition" name="model_definition" value="" />
+                    <p>編輯中&hellip;</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <font color="black"> Close</font>
+                    </button>
+                    <button type="button" class="btn btn-primary" style="background: red;">Delete Data</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
 
 </body>
 </html>

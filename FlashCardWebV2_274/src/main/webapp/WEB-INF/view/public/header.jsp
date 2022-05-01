@@ -64,7 +64,9 @@
                     <p>編輯中&hellip;</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <font color="black"> Close</font>
+                    </button>
                 </div>
             </div>
             <!-- /.modal-content -->
