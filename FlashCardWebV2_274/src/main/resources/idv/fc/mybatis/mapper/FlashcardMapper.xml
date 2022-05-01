@@ -17,6 +17,11 @@
 		(id,term,definition)values(#{id},#{term},#{definition});
 	</insert>
 
+	<update id="update" parameterType="Flashcard">
+		update flashcard set
+		term=#{term},definition=#{definition} where id = #{id};
+	</update>
+
 
 
 </mapper>

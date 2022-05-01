@@ -30,4 +30,9 @@ public class FlashcardServiceImpl implements IFlashcardService {
 		flashcardDao.create(flashcard);
 	}
 
+	@Override
+	public void edit(Flashcard flashcard) {
+		flashcardDao.update(flashcard);
+	}
+
 }

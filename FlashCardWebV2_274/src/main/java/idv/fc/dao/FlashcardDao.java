@@ -14,5 +14,7 @@ public interface FlashcardDao {
 	Flashcard selectById(String id);
 	
 	public void create(Flashcard flashcard);
+	
+	public void update(Flashcard flashcard);
 
 }

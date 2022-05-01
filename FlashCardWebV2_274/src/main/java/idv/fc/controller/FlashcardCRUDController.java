@@ -46,10 +46,14 @@ public class FlashcardCRUDController {
 	 */
 	@RequestMapping(value = "flashcard", method = RequestMethod.POST)
 	public String add(Flashcard flashcard) {
-		String term = flashcard.getTerm();
-		IDGenerator IDGenerator = SpringUtil.getBean("IDGenerator",
-				IDGenerator.class);
-		String id = IDGenerator.generate(term, Flashcard.class);
+		String id;
+		// 創建ID 
+		{
+			String term = flashcard.getTerm();
+			IDGenerator IDGenerator = SpringUtil.getBean("IDGenerator",
+					IDGenerator.class);
+			id = IDGenerator.generate(term, Flashcard.class);
+		}
 
 		flashcard.setId(id);
 		flashcardService.addNew(flashcard);
@@ -59,9 +63,7 @@ public class FlashcardCRUDController {
 
 	@RequestMapping(value = "flashcard", method = RequestMethod.PUT)
 	public String edit(Flashcard flashcard) {
-
-		logger.info("edit ...............");
-
+		flashcardService.edit(flashcard);
 		return "redirect:" + WEB_FLASHCARDS + "/fcManager";
 	}
 
