@@ -90,4 +90,16 @@ public class Inventory {
 		return Inventory.products[getIndexWithProductID(productID)];
 	}
 
+	//回朔庫存
+	public static void rollback(Order order) {
+		ProductItem[] productItems = order.getProductItems();
+		for (int i = 0; i < order.getItemCount(); i++) {
+			ProductItem productItem = productItems[i];
+			Inventory.productQuantity[getIndexWithProductID(
+					productItem.getProduct().getId())] += productItem
+							.getQuantity();
+		}
+
+	}
+
 }

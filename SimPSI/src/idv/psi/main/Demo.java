@@ -82,9 +82,22 @@ public class Demo {
 				System.out.println("目前訂單明細:");
 				System.out.println(order.getOrderDisplay());
 				System.out.println();
-				System.out.println("追加項目 按1 , 結帳按9");
+				System.out.println("追加項目 按1 , 結帳按9 , 棄單按7");
 				System.out.print("> ");
 				input = sc.nextInt();
+
+				//棄單
+			} else if (input == 7) {
+				Inventory.rollback(order);
+				System.out.println("已放棄訂單");
+				System.out.println();
+				System.out.println("新增訂單:按 1  (按-1 離開, 按8 查看庫存)");
+				System.out.print("> ");
+				input = sc.nextInt();
+				if (input == 1) {
+					System.out.println("已創建新單");
+					System.out.println();
+				}
 
 				//查看庫存
 			} else if (input == 8) {
@@ -105,8 +118,11 @@ public class Demo {
 					System.out.println("已創建新單");
 				}
 
+				//exit 
 			} else if (input == -1) {
 				break;
+
+				//指令瞎按
 			} else {
 				System.out.print("> ");
 				input = sc.nextInt();
