@@ -15,20 +15,12 @@
 <script type="text/javascript">
   //$("#listDeleteModal").model("hide");
   function modelValues(id, term, definition) {
-	$("#model_id").val(id);
-	$("#model_term").val(term);
-	$("#model_definition").val(definition);
-	$("#model_formID").attr("action", function(i, orig) {
+	$("#modal_fcTerm").val(term);
+	$("#modal_fcDefinition").val(definition);
+	$("#modal_form").attr("action", function(i, orig) {
 	  return orig + id;
 	});
   }
-
-  $(document).ready(function() {
-
-	/* $("#model_delete").click(function() {
-	  location.href="${pageContext.request.contextPath}/fhashcard"
-	}); */
-  });
 </script>
 
 </head>
@@ -127,13 +119,12 @@
                 </div>
                 <div class="modal-body">
 
-                    <input type="text" id="model_term" name="model_term" value="" />
+                    <input type="text" id="modal_fcTerm" name="modal_fcTerm" value="" />
                     <br />
-                    <input type="text" id="model_definition" name="model_definition" value="" />
+                    <input type="text" id="modal_fcDefinition" name="modal_fcDefinition" value="" />
                 </div>
                 <div class="modal-footer">
-                    <form id="model_formID" action="${pageContext.request.contextPath}/flashcard/" method="post">
-                        <input type="hidden" id="model_id" name="model_id" value="" />
+                    <form id="modal_form" action="${pageContext.request.contextPath}/flashcard/" method="post">
                         <input type="hidden" name="_method" value="delete" />
                         <button type="button" class="btn btn-default" data-dismiss="modal">
                             <font color="black"> Close</font>

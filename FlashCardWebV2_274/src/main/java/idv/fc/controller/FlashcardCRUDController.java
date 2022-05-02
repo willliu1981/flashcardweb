@@ -56,21 +56,21 @@ public class FlashcardCRUDController extends BaseController {
 		flashcard.setId(id);
 		flashcardService.addNew(flashcard);
 
-		return "redirect:" + WEB_FLASHCARDS + "/fcManager";
+		return "redirect:/" + WEB_FLASHCARDS + "/fcManager";
 	}
 
 	@RequestMapping(value = "flashcard", method = RequestMethod.PUT)
 	public String edit(Flashcard flashcard) {
 		flashcardService.edit(flashcard);
 
-		return "redirect:" + WEB_FLASHCARDS + "/fcManager";
+		return "redirect:/" + WEB_FLASHCARDS + "/fcManager";
 	}
 
 	@RequestMapping(value = "flashcard/{id}", method = RequestMethod.DELETE)
 	public String remove(@PathVariable("id") String id) {
 		flashcardService.remove(id);
 
-		return "redirect:" + WEB_FLASHCARDS + "/fcManager";
+		return "redirect:/" + WEB_FLASHCARDS + "/fcManager";
 	}
 
 	/*
