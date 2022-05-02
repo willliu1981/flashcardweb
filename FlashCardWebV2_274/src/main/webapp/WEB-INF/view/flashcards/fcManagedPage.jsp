@@ -15,8 +15,8 @@
 <script type="text/javascript">
   //$("#listDeleteModal").model("hide");
   function modelValues(id, term, definition) {
-	$("#modal_fcTerm").val(term);
-	$("#modal_fcDefinition").val(definition);
+	$("#modal_fcTerm").text(term);
+	$("#modal_fcDefinition").text(definition);
 	$("#modal_form").attr("action", function(i, orig) {
 	  return orig + id;
 	});
@@ -118,10 +118,9 @@
                     <h4 class="modal-title">FlashCard</h4>
                 </div>
                 <div class="modal-body">
-
-                    <input type="text" id="modal_fcTerm" name="modal_fcTerm" value="" />
+                    <label id="modal_fcTerm" style="font-size: 20px;">term</label>
                     <br />
-                    <input type="text" id="modal_fcDefinition" name="modal_fcDefinition" value="" />
+                    <label id="modal_fcDefinition" style="font-size: 20px;">definition</label>
                 </div>
                 <div class="modal-footer">
                     <form id="modal_form" action="${pageContext.request.contextPath}/flashcard/" method="post">

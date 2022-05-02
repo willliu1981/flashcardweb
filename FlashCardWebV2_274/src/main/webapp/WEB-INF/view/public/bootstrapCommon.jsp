@@ -13,6 +13,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/webjars/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/webjars/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <style type="text/css">
+/* 用於list-group 下,改變游標圖示  */
 .myBadgeCursor>li>.badge {
 	cursor: pointer;
 }

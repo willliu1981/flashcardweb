@@ -22,14 +22,15 @@
     <!-- 清單 -->
     <div class="container">
         <div class="list-group">
-            <a href="javascript:;" class="list-group-item disabled">字卡編輯</a>
-            <a href="${pageContext.request.contextPath}/<c:out value="${flashcardManager}"></c:out>"
-                class="list-group-item">FlashCard</a>
-            <a href="${pageContext.request.contextPath}/<c:out value="${flahscardHolderManager}"></c:out>"
-                class="list-group-item">FlashcardHolder</a>
+            <!-- <a href="javascript:;" class="list-group-item disabled "> 字卡編輯 </a> -->
+            <li class="list-group-item"><a
+                    href="${pageContext.request.contextPath}/<c:out value="${flashcardManager}"></c:out>" class=" h4">FlashCard</a></li>
+            <li class="list-group-item"><a
+                    href="${pageContext.request.contextPath}/<c:out value="${flahscardHolderManager}"></c:out>"
+                    class="h4">FlashcardHolder</a></li>
         </div>
     </div>
 
-   
+
 </body>
 </html>

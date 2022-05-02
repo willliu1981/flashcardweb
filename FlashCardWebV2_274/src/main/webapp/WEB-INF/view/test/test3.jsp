@@ -45,7 +45,7 @@ div.panel {
 		width : '+=300px'
 
 	  });
-	});  
+	});
 
 	$(".flipup").click(function() {
 	  $(".panel").animate({
