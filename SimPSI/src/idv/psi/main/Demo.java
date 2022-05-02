@@ -3,8 +3,8 @@ package idv.psi.main;
 import java.util.Scanner;
 
 import idv.psi.model.Inventory;
+import idv.psi.model.Order;
 import idv.psi.model.Product;
-import idv.psi.service.Client;
 
 public class Demo {
 
@@ -12,33 +12,107 @@ public class Demo {
 		Scanner sc = new Scanner(System.in);
 
 		//init start
-		Inventory.initialize(10);
-
-		Product p1 = new Product("沙朗牛排", "嚴選最頂級澳洲和牛", 400);
-		Product p2 = new Product("松阪豬", "整頭豬最珍貴的地方", 320);
-		Product p3 = new Product("脆皮雞排", "外皮煎的香酥脆口，肉汁鮮美不乾硬", 260);
-		Inventory.setProduct(0, p1);
-		Inventory.setProduct(1, p2);
-		Inventory.setProduct(2, p3);
+		int maxProductCategory = 10;//
+		Inventory.initialize(maxProductCategory);
+		//product id = Inventory 的 products index+1 , 因此需要大於0, 小於或等於 maxProductCategory
+		Product p1 = new Product(1, "沙朗牛排", "嚴選最頂級澳洲和牛", 400);
+		Product p2 = new Product(2, "松阪豬", "整頭豬最珍貴的地方", 320);
+		Product p3 = new Product(3, "脆皮雞排", "外皮煎的香酥脆口，肉汁鮮美不乾硬", 260);
+		Inventory.setProduct(p1, 50);
+		Inventory.setProduct(p2, 30);
+		Inventory.setProduct(p3, 100);
 
 		//init end
 
-		System.out.println(Inventory.display());
+		System.out.println(Inventory.getDisplayForTitle());
 
-		Client clt = new Client();
+		System.out.println("新增訂單:按 1  (按-1 離開, 按8 查看庫存)");
+		System.out.print("> ");
+		int input = sc.nextInt();
+		if (input == 1) {
+			System.out.println("已創建新單");
+			System.out.println();
+		}
 
-		clt.addOrder(null);
+		Order order = new Order();
+		while (true) {
 
-		System.out.println("新增訂單:按1");
+			//新增項目
+			if (input == 1) {
+				System.out.println("選擇產品:1~" + Inventory.getItemCount());
+				System.out.print("> ");
+				int index = sc.nextInt();//sc.nextInt() 具有暫停效果, 以下如是
+				if (!Inventory.isExistCategory(index)) {
+					System.out.println("沒有這項產品!");
+					System.out.println();
+					input = 2;
+					continue;
+				}
+				System.out.println(
+						"已選擇 " + Inventory.getProduct(index).getName());
+				System.out.println();
+				System.out.println(
+						"選擇數量:(" + Inventory.getProductQuantity(index) + ")");
+				System.out.print("> ");
+				int count = sc.nextInt();
+				if (count <= 0) {
+					System.out.println("已取消項目");
+					System.out.println();
+					input = 2;//如同直接到 詢問"是否結帳"
+					continue;
+				}
 
-		/*while (true) {
-		
-			if (sc.nextInt() == 1) {
-				System.out.println("選擇產品:1~10");
-		
+				//創建新單
+				Product p = Inventory.getProduct(index);
+				boolean result = order.addProductItem(p, count);
+				if (!result) {
+					System.out.println("庫存數量不足!");
+					input = 2;//如同直接到 詢問"是否結帳"
+					continue;
+				}
+
+				System.out.println("已新增項目> " + order.getCurrentItemDisplay());
+				System.out.println();
+				System.out.println("新增項目:按 1 , 按2 前往下一步,完成訂單");
+				System.out.print("> ");
+				input = sc.nextInt();
+
+				//是否結帳
+			} else if (input == 2) {
+				System.out.println("目前訂單明細:");
+				System.out.println(order.getOrderDisplay());
+				System.out.println();
+				System.out.println("追加項目 按1 , 結帳按9");
+				System.out.print("> ");
+				input = sc.nextInt();
+
+				//查看庫存
+			} else if (input == 8) {
+				System.out.println(Inventory.getDisplay());
+				System.out.println("繼續> ");
+				input = sc.nextInt();
+
+				//結帳
+			} else if (input == 9) {
+				System.out.println("訂單明細:");
+				System.out.println(order.getOrderDisplay());
+				System.out.println();
+				System.out.println("新單按1 , 查看庫存按8 , 離開程式按-1");
+				System.out.print("> ");
+				order = new Order();
+				input = sc.nextInt();
+				if (input == 1) {
+					System.out.println("已創建新單");
+				}
+
+			} else if (input == -1) {
+				break;
+			} else {
+				System.out.print("> ");
+				input = sc.nextInt();
 			}
-		
-		}*/
+
+		}
 
 	}
 
