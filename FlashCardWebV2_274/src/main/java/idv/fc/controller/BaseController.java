@@ -5,5 +5,5 @@ import org.slf4j.LoggerFactory;
 
 public abstract class BaseController {
 	protected static Logger logger = LoggerFactory
-			.getLogger(FlashcardController.class);
+			.getLogger(FlashcardsController.class);
 }

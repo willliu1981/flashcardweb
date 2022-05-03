@@ -21,14 +21,14 @@
 
     <!-- 清單 -->
     <div class="container">
-        <div class="list-group">
+        <ul class="list-group">
             <!-- <a href="javascript:;" class="list-group-item disabled "> 字卡編輯 </a> -->
-            <li class="list-group-item"><a
+            <li class="list-group-item"><a class="list-group-item"
                     href="${pageContext.request.contextPath}/<c:out value="${flashcardManager}"></c:out>" class=" h4">FlashCard</a></li>
-            <li class="list-group-item"><a
+            <li class="list-group-item"><a class="list-group-item"
                     href="${pageContext.request.contextPath}/<c:out value="${flahscardHolderManager}"></c:out>"
                     class="h4">FlashcardHolder</a></li>
-        </div>
+        </ul>
     </div>
 
 

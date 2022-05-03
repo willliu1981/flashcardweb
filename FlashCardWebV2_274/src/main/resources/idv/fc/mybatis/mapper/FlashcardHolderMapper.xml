@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="idv.fc.dao.FlashcardHolderDao">
+
+	<select id="selectAll" resultType="FlashcardHolder">
+		select * from flashcardHolder
+	</select>
+
+	<select id="selectById" resultType="FlashcardHolder">
+		select * from flashcardHolder where id = #{id}
+	</select>
+
+	<insert id="create" parameterType="FlashcardHolder">
+		insert into flashcardHolder
+		(name,fc_id)values(#{name},#{fcId});
+	</insert>
+
+	<update id="update" parameterType="FlashcardHolder">
+		update flashcardHolder set
+		name=#{name},fc_id=#{fcId} where id = #{id};
+	</update>
+
+	<delete id="delete">
+		delete from flashcardHolder where id = #{id};
+	</delete>
+
+</mapper>

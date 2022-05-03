@@ -25,8 +25,10 @@
 
 </head>
 <body>
+    <!-- 清單前往 web 的 path -->
     <c:set var="pathFlashcard" value="flashcard" />
-    <!-- web base path -->
+
+    <!-- 分頁前往 web 的 base path -->
     <c:set var="flashcardManager" value="flashcards/fcManager" />
 
     <!-- include header nav -->
@@ -126,7 +128,7 @@
                     <form id="modal_form" action="${pageContext.request.contextPath}/flashcard/" method="post">
                         <input type="hidden" name="_method" value="delete" />
                         <button type="button" class="btn btn-default" data-dismiss="modal">
-                            <font color="black"> Close</font>
+                            <font color="black">Close</font>
                         </button>
                         <button id="model_delete" type="submit" class="btn btn-primary" style="background: red;">Delete
                             Data</button>
