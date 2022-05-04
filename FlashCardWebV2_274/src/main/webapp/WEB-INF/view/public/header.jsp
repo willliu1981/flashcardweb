@@ -9,6 +9,7 @@
     <c:set var="flashcardsManager" value="flashcards/fcsManager" />
     <c:set var="flashcardManager" value="flashcards/fcManager" />
     <c:set var="flahscardHolderManager" value="flashcards/fhManager" />
+    <c:set var="holderDataManager" value="flashcards/hdManager" />
 
     <!-- 導航欄 -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -41,6 +42,10 @@
                             <li <c:if test="${param.active eq 'flahscardHolderManager'}">class="active"</c:if>><a
                                     <c:if test="${param.active eq 'flahscardHolderManager'}">class="hrefDisabled"</c:if>
                                     href="${pageContext.request.contextPath}/<c:out value="${flahscardHolderManager}"></c:out>">FlashcardHolder</a></li>
+
+                            <li <c:if test="${param.active eq 'holderDataManager'}">class="active"</c:if>><a
+                                    <c:if test="${param.active eq 'holderDataManager'}">class="hrefDisabled"</c:if>
+                                    href="${pageContext.request.contextPath}/<c:out value="${holderDataManager}"></c:out>">HolderData</a></li>
                         </ul></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

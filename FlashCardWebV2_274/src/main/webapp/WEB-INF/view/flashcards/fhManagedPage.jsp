@@ -58,11 +58,11 @@
                             onclick="location.href='${pageContext.request.contextPath}/<c:out value="${pathFlashcardHolder}"></c:out>/${fh.id}'">
                             <font size="4">EDIT</font>
                         </span>
-                        <h4 style="font-size: 36px;" class="list-group-item-heading">
+                        <h4 class="h4" class="list-group-item-heading">
                             <c:out value="${fh.name}"></c:out>
                         </h4>
-                        <p style="font-size: 22px;" class="list-group-item-text">
-                            <c:out value="${fh.fcId}"></c:out>
+                        <p class="h4" class="list-group-item-text">
+                            <c:out value="(id: ${fh.id}) ${fh.fcId}"></c:out>
                         </p>
                     </a></li>
             </c:forEach>
@@ -116,7 +116,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title">FlashCardHolder</h4>
+                    <h4 class="modal-title">FlashcardHolder</h4>
                 </div>
                 <div class="modal-body">
                     <label id="modal_fhName" style="font-size: 20px;">name</label>

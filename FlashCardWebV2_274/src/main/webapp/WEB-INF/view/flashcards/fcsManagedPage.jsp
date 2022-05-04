@@ -6,8 +6,7 @@
 <jsp:include page="/WEB-INF/view/public/bootstrapCommon.jsp" />
 </head>
 <body>
-    <c:set var="flashcardManager" value="flashcards/fcManager" />
-    <c:set var="flahscardHolderManager" value="flashcards/fhManager" />
+    <c:set var="pathFlashcards" value="flashcards" />
 
     <!-- include header nav -->
     <jsp:include page="/WEB-INF/view/public/header.jsp" flush="true">
@@ -16,7 +15,7 @@
 
     <!-- 引入巨屏 -->
     <jsp:include page="/WEB-INF/view/public/jumbotron.jsp">
-        <jsp:param name="title" value="管理 Flashcard & FlashcardHolder" />
+        <jsp:param name="title" value="管理 Flashcard 、 FlashcardHolder 、 HolderData" />
     </jsp:include>
 
     <!-- 清單 -->
@@ -24,10 +23,17 @@
         <ul class="list-group">
             <!-- <a href="javascript:;" class="list-group-item disabled "> 字卡編輯 </a> -->
             <li class="list-group-item"><a class="list-group-item"
-                    href="${pageContext.request.contextPath}/<c:out value="${flashcardManager}"></c:out>" class=" h4">FlashCard</a></li>
+                    href="${pageContext.request.contextPath}/<c:out value="${pathFlashcards}/fcManager"></c:out>">
+                    <p class="list-group-item-heading h4">FlashCard</p>
+                </a></li>
             <li class="list-group-item"><a class="list-group-item"
-                    href="${pageContext.request.contextPath}/<c:out value="${flahscardHolderManager}"></c:out>"
-                    class="h4">FlashcardHolder</a></li>
+                    href="${pageContext.request.contextPath}/<c:out value="${pathFlashcards}/fhManager"></c:out>">
+                    <p class="list-group-item-heading h4">FlashcardHolder</p>
+                </a></li>
+            <li class="list-group-item"><a class="list-group-item"
+                    href="${pageContext.request.contextPath}/<c:out value="${pathFlashcards}/hdManager"></c:out>">
+                    <p class="list-group-item-heading h4">HolderData</p>
+                </a></li>
         </ul>
     </div>
 

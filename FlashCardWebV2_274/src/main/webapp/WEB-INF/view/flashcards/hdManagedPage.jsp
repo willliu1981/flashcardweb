@@ -14,9 +14,8 @@
 
 <script type="text/javascript">
   //$("#listDeleteModal").model("hide");
-  function modelValues(id, term, definition) {
-	$("#modal_fcTerm").text(term);
-	$("#modal_fcDefinition").text(definition);
+  function modelValues(id, fhId) {
+	$("#modal_hdFcId").text(fhId);
 	$("#modal_form").attr("action", function(i, orig) {
 	  return orig + id;
 	});
@@ -25,45 +24,45 @@
 
 </head>
 <body>
-    <!-- 清單前往 web 的 path -->
-    <c:set var="pathFlashcard" value="flashcard" />
+    <!-- 清單前往 web 的 path (crud)-->
+    <c:set var="pathForList" value="holderData" />
 
     <!-- 分頁前往 web 的 base path -->
-    <c:set var="flashcardManager" value="flashcards/fcManager" />
+    <c:set var="flashcardHolderManager" value="flashcards/hdManager" />
 
     <!-- include header nav -->
     <jsp:include page="/WEB-INF/view/public/header.jsp" flush="true">
-        <jsp:param name="active" value="flashcardManager" />
+        <jsp:param name="active" value="holderDataManager" />
     </jsp:include>
 
     <!-- 引入巨屏 -->
     <jsp:include page="/WEB-INF/view/public/jumbotron.jsp">
-        <jsp:param name="title" value="管理 Flashcard" />
+        <jsp:param name="title" value="管理 HolderData" />
     </jsp:include>
 
     <!-- list -->
     <div class="container">
         <ul class="list-group myBadgeCursor">
             <li class="list-group-item"><span class="badge"
-                    onclick="location.href='${pageContext.request.contextPath}/<c:out value="${pathFlashcard}"></c:out>'">
+                    onclick="location.href='${pageContext.request.contextPath}/<c:out value="${pathForList}"></c:out>'">
                     <font size="5">ADD</font>
                 </span>
-                <h3>Flashcard</h3></li>
-            <c:forEach var="fc" items="${flashcards}">
+                <h3>HolderData</h3></li>
+            <c:forEach var="data" items="${datas}">
                 <li class="list-group-item"><a href="#" class="list-group-item">
                         <span class="badge" style="background: red;" data-target="#listDeleteModal" data-toggle="modal"
-                            onclick='modelValues("${fc.id}","${fc.term}","${fc.definition}")'>
+                            onclick='modelValues("${data.id}","${data.fhId}")'>
                             <font size="4">DELETE</font>
                         </span>
                         <span class="badge badgeSpan"
-                            onclick="location.href='${pageContext.request.contextPath}/<c:out value="${pathFlashcard}"></c:out>/${fc.id}'">
+                            onclick="location.href='${pageContext.request.contextPath}/<c:out value="${pathForList}"></c:out>/${data.id}'">
                             <font size="4">EDIT</font>
                         </span>
                         <h4 class="h4" class="list-group-item-heading">
-                            <c:out value="${fc.term}"></c:out>
+                            <c:out value="id: ${data.id}"></c:out>
                         </h4>
                         <p class="h4" class="list-group-item-text">
-                            <c:out value="(id: ${fc.id}) ${fc.definition}"></c:out>
+                            <c:out value="fhId: ${data.fhId}"></c:out>
                         </p>
                     </a></li>
             </c:forEach>
@@ -79,17 +78,17 @@
                     <!-- 首頁 -->
                     <li <c:if test="${pageInfo.pageNum==1}">class="disabled"</c:if>><a
                             <c:if test="${pageInfo.pageNum==1}">class="hrefDisabled"</c:if>
-                            href="${pageContext.request.contextPath}/<c:out value="${flashcardManager}"></c:out>/1">&laquo;</a></li>
+                            href="${pageContext.request.contextPath}/<c:out value="${pathForPager}"></c:out>/1">&laquo;</a></li>
 
                     <!-- 上一頁 -->
                     <li <c:if test="${!pageInfo.isHasPreviousPage()}">class="disabled"</c:if>><a
                             <c:if test="${!pageInfo.isHasPreviousPage()}">class="hrefDisabled"</c:if>
-                            href="${pageContext.request.contextPath}/<c:out value="${flashcardManager}"></c:out>/<c:out value="${pageInfo.pageNum-1}" />">Previous</a></li>
+                            href="${pageContext.request.contextPath}/<c:out value="${pathForPager}"></c:out>/<c:out value="${pageInfo.pageNum-1}" />">Previous</a></li>
                     <!-- 中間頁數 -->
                     <c:forEach var="i" begin="${pageInfo.navigateFirstPage}" end="${pageInfo.navigateLastPage}">
                         <li <c:if test="${pageInfo.pageNum==i}">class="active"</c:if>><a
                                 <c:if test="${pageInfo.pageNum==i}">class="hrefDisabled"</c:if>
-                                href="${pageContext.request.contextPath}/<c:out value="${flashcardManager}"></c:out>/<c:out value="${i}" />">
+                                href="${pageContext.request.contextPath}/<c:out value="${pathForPager}"></c:out>/<c:out value="${i}" />">
                                 <c:out value="${i}" />
                             </a></li>
                     </c:forEach>
@@ -97,12 +96,12 @@
                     <!-- 下一頁 -->
                     <li <c:if test="${!pageInfo.isHasNextPage()}">class="disabled"</c:if>><a
                             <c:if test="${!pageInfo.isHasNextPage()}">class="hrefDisabled"</c:if>
-                            href="${pageContext.request.contextPath}/<c:out value="${flashcardManager}"></c:out>/<c:out value="${pageInfo.pageNum+1}" />">Next</a></li>
+                            href="${pageContext.request.contextPath}/<c:out value="${pathForPager}"></c:out>/<c:out value="${pageInfo.pageNum+1}" />">Next</a></li>
 
                     <!-- 最末頁 -->
                     <li <c:if test="${pageInfo.isIsLastPage()}">class="disabled"</c:if>><a
                             <c:if test="${pageInfo.isIsLastPage()}">class="hrefDisabled"</c:if>
-                            href="${pageContext.request.contextPath}/<c:out value="${flashcardManager}"></c:out>/<c:out value="${pageInfo.pages}" />">&raquo;</a></li>
+                            href="${pageContext.request.contextPath}/<c:out value="${pathForPager}"></c:out>/<c:out value="${pageInfo.pages}" />">&raquo;</a></li>
                     <li></li>
                 </ul>
             </li>
@@ -117,15 +116,13 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title">Flashcard</h4>
+                    <h4 class="modal-title">HolderData</h4>
                 </div>
                 <div class="modal-body">
-                    <label id="modal_fcTerm" style="font-size: 20px;">term</label>
-                    <br />
-                    <label id="modal_fcDefinition" style="font-size: 20px;">definition</label>
+                    <label id="modal_hdFcId" style="font-size: 20px;">name</label>
                 </div>
                 <div class="modal-footer">
-                    <form id="modal_form" action="${pageContext.request.contextPath}/flashcard/" method="post">
+                    <form id="modal_form" action="${pageContext.request.contextPath}/flashcardHolder/" method="post">
                         <input type="hidden" name="_method" value="delete" />
                         <button type="button" class="btn btn-default" data-dismiss="modal">
                             <font color="black">Close</font>

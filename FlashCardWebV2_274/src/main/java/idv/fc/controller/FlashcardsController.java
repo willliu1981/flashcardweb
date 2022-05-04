@@ -13,8 +13,10 @@ import com.github.pagehelper.PageInfo;
 
 import idv.fc.model.Flashcard;
 import idv.fc.model.FlashcardHolder;
+import idv.fc.model.HolderData;
 import idv.fc.service.abstraction.IFlashcardHolderService;
 import idv.fc.service.abstraction.IFlashcardService;
+import idv.fc.service.abstraction.IHolderDataService;
 
 @Controller
 @RequestMapping(value = "flashcards")
@@ -30,6 +32,9 @@ public class FlashcardsController extends BaseController {
 	@Autowired
 	IFlashcardHolderService flashcardHolderService;
 
+	@Autowired
+	IHolderDataService holderDataService;
+
 	/*
 	 * 管理 Flashcard & FlashcardHolder
 	 */
@@ -40,8 +45,7 @@ public class FlashcardsController extends BaseController {
 
 	// manage flashcard begin
 	@RequestMapping(value = "fcManager")
-	public String toFlashcardManagerForDefaultPageNumber(
-			HashMap<String, Object> map) {
+	public String toFlashcardManager(HashMap<String, Object> map) {
 		return toFlashcardManagerWithPageNumber(map, null);
 	}
 
@@ -65,8 +69,7 @@ public class FlashcardsController extends BaseController {
 
 	//manage flashcardHolder begin
 	@RequestMapping(value = "fhManager")
-	public String toFlashcardHolderManagerForDefaultPageNumber(
-			HashMap<String, Object> map) {
+	public String toFlashcardHolderManager(HashMap<String, Object> map) {
 		return toFlashcardHolderManagerWithPageNumber(map, null);
 	}
 
@@ -89,4 +92,29 @@ public class FlashcardsController extends BaseController {
 		return FLASHCARDS + "/fhManagedPage";
 	}
 	//manage flashcardHolder end
+
+	//manage holderData begin
+	@RequestMapping(value = "hdManager")
+	public String toHolderDataManager(HashMap<String, Object> map) {
+		return toHolderDataManagerWithPageNumber(map, null);
+	}
+
+	@RequestMapping(value = "hdManager/{pageNumber}")
+	public String toHolderDataManagerWithPageNumber(HashMap<String, Object> map,
+			@PathVariable(value = "pageNumber") String pageNumber) {
+		int intPageNumber = 1;//default pageNumber
+		if (pageNumber != null && !pageNumber.equals("")) {
+			intPageNumber = Integer.valueOf(pageNumber);
+		}
+
+		PageHelper.startPage(intPageNumber, MAX_PAGE_NUMBER);
+		List<HolderData> all = holderDataService.getAll();
+		map.put("datas", all);
+		PageInfo<HolderData> pageInfo = new PageInfo<>(all,
+				MAX_NAV_PAGE_NUMBER);
+		map.put("pageInfo", pageInfo);
+
+		return FLASHCARDS + "/hdManagedPage";
+	}
+	//manage holderData end
 }
