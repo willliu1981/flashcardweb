@@ -29,7 +29,7 @@
     <c:set var="pathFlashcard" value="flashcard" />
 
     <!-- 分頁前往 web 的 base path -->
-    <c:set var="pathForPager" value="flashcards/fcManager" />
+    <c:set var="pathForPager" value="flashcards/fcManager" scope="request"/>
 
     <!-- include header nav -->
     <jsp:include page="/WEB-INF/view/public/header.jsp" flush="true">
@@ -71,9 +71,7 @@
     </div>
 
     <!-- 引入分頁  -->
-    <jsp:include page="/WEB-INF/view/public/pager.jsp">
-        <jsp:param name="webPath" value="flashcards/fcManager" />
-    </jsp:include>
+    <jsp:include page="/WEB-INF/view/public/pager.jsp"></jsp:include>
 
     <!-- 模態框 用於 list delete-->
     <div class="modal fade" tabindex="-1" role="dialog" id="listDeleteModal">

@@ -70,9 +70,8 @@
     </div>
 
     <!-- 引入分頁  -->
-    <jsp:include page="/WEB-INF/view/public/pager.jsp">
-        <jsp:param name="webPath" value="flashcards/fhManager" />
-    </jsp:include>
+    <jsp:include page="/WEB-INF/view/public/pager.jsp"/>
+
 
     <!-- 模態框 用於 list delete-->
     <div class="modal fade" tabindex="-1" role="dialog" id="listDeleteModal">
