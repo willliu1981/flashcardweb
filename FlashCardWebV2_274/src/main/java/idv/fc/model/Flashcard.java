@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class Flashcard {
 
-	private String id;
+	private Integer id;
 	private String term;
 	private String definition;
 	private Timestamp createDate;
@@ -15,18 +15,18 @@ public class Flashcard {
 		super();
 	}
 
-	private Flashcard(String id, String term, String definition) {
+	private Flashcard(Integer id, String term, String definition) {
 		super();
 		this.id = id;
 		this.term = term;
 		this.definition = definition;
 	}
 
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

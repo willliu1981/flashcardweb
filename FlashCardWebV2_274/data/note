@@ -7,10 +7,12 @@
 
 .	abstract dao 
 
+.	transaction , ai , list search , create fc with fh or create fh with fc 
 
 
 .	jquery,引用 <script type="text/javascript" src="<%=request.getContextPath()%>/webjars/jquery/3.4.1/jquery.min.js"></script>
 
+.	測試 mysql table 名稱有底線的情況
 
 .	header.jsp active param: (參照 header.jsp : path mapping)
 			

@@ -44,16 +44,16 @@ public class FlashcardCRUDController extends BaseController {
 	 */
 	@RequestMapping(value = "flashcard", method = RequestMethod.POST)
 	public String add(Flashcard flashcard) {
-		String id;
-		// 創建ID 
-		{
-			String term = flashcard.getTerm();
-			IDGenerator IDGenerator = SpringUtil.getBean("IDGenerator",
-					IDGenerator.class);
-			id = IDGenerator.generate(term, Flashcard.class);
-		}
-
+		/*		String id;
+				// 創建ID 
+				{
+					String term = flashcard.getTerm();
+					IDGenerator IDGenerator = SpringUtil.getBean("IDGenerator",
+							IDGenerator.class);
+					id = IDGenerator.generate(term, Flashcard.class);
+		
 		flashcard.setId(id);
+				}*/
 		flashcardService.addNew(flashcard);
 
 		return "redirect:/" + WEB_FLASHCARDS + "/fcManager";

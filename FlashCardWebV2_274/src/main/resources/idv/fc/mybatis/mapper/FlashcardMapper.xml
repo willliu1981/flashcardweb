@@ -14,7 +14,7 @@
 
 	<insert id="create" parameterType="Flashcard">
 		insert into flashcard
-		(id,term,definition)values(#{id},#{term},#{definition});
+		(term,definition)values(#{term},#{definition});
 	</insert>
 
 	<update id="update" parameterType="Flashcard">
