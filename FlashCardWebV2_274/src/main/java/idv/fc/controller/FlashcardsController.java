@@ -13,8 +13,8 @@ import com.github.pagehelper.PageInfo;
 
 import idv.fc.model.Flashcard;
 import idv.fc.model.FlashcardHolder;
-import idv.fc.service.IFlashcardHolderService;
-import idv.fc.service.IFlashcardService;
+import idv.fc.service.abstraction.IFlashcardHolderService;
+import idv.fc.service.abstraction.IFlashcardService;
 
 @Controller
 @RequestMapping(value = "flashcards")

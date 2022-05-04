@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import idv.fc.model.Flashcard;
-import idv.fc.service.FlashcardServiceImpl;
+import idv.fc.service.impl.FlashcardServiceImpl;
 import tool.Debug;
 import tool.spring.SpringUtil;
 

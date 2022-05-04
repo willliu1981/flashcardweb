@@ -13,7 +13,7 @@ import com.google.gson.Gson;
 
 import idv.fc.model.Flashcard;
 import idv.fc.model.FlashcardHolder;
-import idv.fc.service.IFlashcardHolderService;
+import idv.fc.service.abstraction.IFlashcardHolderService;
 import tool.idgenerator.IDGenerator;
 import tool.spring.SpringUtil;
 

@@ -1,6 +1,5 @@
 package idv.fc.dao.abstraction;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -11,11 +10,15 @@ public interface Dao<T> {
 
 	void update(T model, Object id) throws SQLException;
 
-	void delete(Object id);
+	void update(T model) throws SQLException;
+
+	void delete(Object id) throws SQLException;
 
 	T queryById(Object id) throws FindErrorException;
 
-	List<T> queryAll();
+	T selectById(Object id) throws SQLException;
+
+	List<T> selectAll();
 
 	public int executeSQL(String sql, Object... params) throws SQLException;
 

@@ -15,4 +15,6 @@
 .	測試 mysql table 名稱有底線的情況
 
 .	header.jsp active param: (參照 header.jsp : path mapping)
+
+.	dao id 雖然為 String , 但依然能向sql 的 int id 進行存取 (mybatis)
 			

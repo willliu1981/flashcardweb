@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 
 import idv.fc.model.Flashcard;
-import idv.fc.service.IFlashcardService;
-import tool.idgenerator.IDGenerator;
-import tool.spring.SpringUtil;
+import idv.fc.service.abstraction.IFlashcardService;
 
 @Controller
 public class FlashcardCRUDController extends BaseController {

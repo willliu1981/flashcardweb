@@ -1,12 +1,13 @@
-package idv.fc.service;
+package idv.fc.service.impl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import idv.fc.dao.FlashcardHolderDao;
+import idv.fc.dao.impl.FlashcardHolderDao;
 import idv.fc.model.FlashcardHolder;
+import idv.fc.service.abstraction.IFlashcardHolderService;
 
 @Service("flashcardHolderService")
 public class FlashcardHolderServiceImpl implements IFlashcardHolderService {

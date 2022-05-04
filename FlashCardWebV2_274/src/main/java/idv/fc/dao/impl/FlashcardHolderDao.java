@@ -1,4 +1,4 @@
-package idv.fc.dao;
+package idv.fc.dao.impl;
 
 import java.util.List;
 

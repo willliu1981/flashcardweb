@@ -59,7 +59,7 @@
 
 <!-- DAO介面所在包名，Spring會自動查詢其下的類 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="idv.fc.dao" />
+		<property name="basePackage" value="idv.fc.dao.impl" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
 	</bean>  
 

@@ -1,12 +1,14 @@
-package idv.fc.service;
+package idv.fc.service.impl;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import idv.fc.dao.FlashcardDao;
+import idv.fc.dao.impl.FlashcardDao;
 import idv.fc.model.Flashcard;
+import idv.fc.service.abstraction.IFlashcardService;
 
 @Service("flashcardService")
 public class FlashcardServiceImpl implements IFlashcardService {
@@ -22,22 +24,39 @@ public class FlashcardServiceImpl implements IFlashcardService {
 
 	@Override
 	public Flashcard getById(String id) {
-		return flashcardDao.selectById(id);
+		try {
+			return flashcardDao.selectById(id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@Override
 	public void addNew(Flashcard flashcard) {
-		flashcardDao.create(flashcard);
+		try {
+			flashcardDao.create(flashcard);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void edit(Flashcard flashcard) {
-		flashcardDao.update(flashcard);
+		try {
+			flashcardDao.update(flashcard);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void remove(String id) {
-		flashcardDao.delete(id);
+		try {
+			flashcardDao.delete(id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
