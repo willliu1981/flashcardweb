@@ -1,22 +1,11 @@
 package idv.fc.dao.impl;
 
-import java.util.List;
-
 import org.springframework.stereotype.Repository;
 
+import idv.fc.dao.abstraction.Dao;
 import idv.fc.model.FlashcardHolder;
 
 @Repository
-public interface FlashcardHolderDao {
-
-	List<FlashcardHolder> selectAll();
-
-	FlashcardHolder selectById(String id);
-
-	public void create(FlashcardHolder flashcard);
-
-	public void update(FlashcardHolder flashcard);
-
-	public void delete(String id);
+public interface FlashcardHolderDao extends Dao<FlashcardHolder> {
 
 }

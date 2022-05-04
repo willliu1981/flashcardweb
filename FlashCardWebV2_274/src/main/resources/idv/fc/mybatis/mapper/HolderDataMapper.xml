@@ -4,26 +4,26 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="idv.fc.dao.impl.HolderDataDao">
 
-	<select id="selectAll" resultType="Flashcard">
-		select * from flashcard
+	<select id="selectAll" resultType="HolderData">
+		select * from HolderData
 	</select>
 
-	<select id="selectById" resultType="Flashcard">
-		select * from flashcard where id = #{id}
+	<select id="selectById" resultType="HolderData">
+		select * from HolderData where id = #{id}
 	</select>
 
-	<insert id="create" parameterType="Flashcard">
-		insert into flashcard
-		(term,definition)values(#{term},#{definition});
+	<insert id="create" parameterType="HolderData">
+		insert into HolderData
+		(fh_id,)values(#{fhId});
 	</insert>
 
-	<update id="update" parameterType="Flashcard">
-		update flashcard set
-		term=#{term},definition=#{definition} where id = #{id};
+	<update id="update" parameterType="HolderData">
+		update HolderData set
+		fh_id=#{fhId}where id = #{id};
 	</update>
 
 	<delete id="delete">
-		delete from flashcard where id = #{id};
+		delete from HolderData where id = #{id};
 	</delete>
 
 </mapper>

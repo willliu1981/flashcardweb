@@ -1,5 +1,6 @@
 package idv.fc.service.impl;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,22 +24,39 @@ public class FlashcardHolderServiceImpl implements IFlashcardHolderService {
 
 	@Override
 	public FlashcardHolder getById(String id) {
-		return flashcardHolderDao.selectById(id);
+		try {
+			return flashcardHolderDao.selectById(id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@Override
 	public void addNew(FlashcardHolder flashcard) {
-		flashcardHolderDao.create(flashcard);
+		try {
+			flashcardHolderDao.create(flashcard);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void edit(FlashcardHolder flashcard) {
-		flashcardHolderDao.update(flashcard);
+		try {
+			flashcardHolderDao.update(flashcard);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void remove(String id) {
-		flashcardHolderDao.delete(id);
+		try {
+			flashcardHolderDao.delete(id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

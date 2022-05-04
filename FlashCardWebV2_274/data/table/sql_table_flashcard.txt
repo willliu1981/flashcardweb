@@ -1,9 +1,9 @@
 CREATE TABLE `flashcard` (
-  `id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `term` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `definition` varchar(600) COLLATE utf8_unicode_ci NOT NULL,
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `number_of_quiz_times` int(11) DEFAULT '0',
   `pass_the_quiz_times` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci

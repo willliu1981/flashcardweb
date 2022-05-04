@@ -14,7 +14,6 @@ import idv.fc.service.abstraction.IFlashcardService;
 public class FlashcardServiceImpl implements IFlashcardService {
 
 	@Autowired
-	//@Resource
 	private FlashcardDao flashcardDao;
 
 	@Override

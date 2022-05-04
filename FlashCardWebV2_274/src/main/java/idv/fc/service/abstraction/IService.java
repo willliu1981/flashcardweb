@@ -1,6 +1,5 @@
 package idv.fc.service.abstraction;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public interface IService<T> {
