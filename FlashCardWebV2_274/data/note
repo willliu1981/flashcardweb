@@ -19,7 +19,14 @@
 備忘:
 .	jquery,引用 <script type="text/javascript" src="<%=request.getContextPath()%>/webjars/jquery/3.4.1/jquery.min.js"></script>
 
-
+.	custom tag , schema 
+		<taglib xmlns="https://java.sun.com/xml/ns/j2ee"
+			xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+			xsi:schemaLocation="https://java.sun.com/xml/ns/j2ee https://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+			version="2.0">
+			
+		</taglib>
+		或見 https://www.journaldev.com/2099/jsp-custom-tags-example-tutorial
 
 
 參照:

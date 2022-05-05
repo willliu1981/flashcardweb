@@ -81,6 +81,14 @@
 		</listener-class>
 	</listener>
 
+<!----> 	
+<jsp-config>
+		<taglib>
+			<taglib-uri>https://fc.idv/jsp/tlds/mytags</taglib-uri>
+			<taglib-location>/WEB-INF/lib/taglib/test/calcTag.tld</taglib-location>
+		</taglib>
+	</jsp-config> 
+ 
 <!-- 防止Spring記憶體溢位監聽器 -->  
 <!-- <listener>  
     <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>  

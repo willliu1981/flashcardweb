@@ -33,7 +33,7 @@ public class TestController {
 		
 		request.getServletContext().setAttribute("fc", find);
 		
-		return "test/test5";
+		return "test/test6";
 	}
 
 }

@@ -113,7 +113,6 @@ public class FlashcardsController extends BaseController {
 		PageInfo<HolderData> pageInfo = new PageInfo<>(all,
 				MAX_NAV_PAGE_NUMBER);
 		map.put("pageInfo", pageInfo);
-
 		return FLASHCARDS + "/hdManagedPage";
 	}
 	//manage holderData end

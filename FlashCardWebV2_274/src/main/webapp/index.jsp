@@ -61,11 +61,6 @@
         </a>
     </div>
 
-<%--     <!-- 引入巨屏 -->
-    <jsp:include page="/WEB-INF/view/public/jumbotron.jsp">
-        <jsp:param name="title" value="" />
-    </jsp:include> --%>
-
 
     <div class="container" id="x1">
         <h1>歡迎使用 FlashCard</h1>

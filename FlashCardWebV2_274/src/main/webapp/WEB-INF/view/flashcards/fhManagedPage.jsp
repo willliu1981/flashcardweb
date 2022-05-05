@@ -28,7 +28,7 @@
     <c:set var="pathFlashcardHolder" value="flashcardHolder" />
 
     <!-- 分頁前往 web 的 base path -->
-    <c:set var="pathForPager" value="flashcards/fhManager" />
+    <c:set var="pathForPager" value="flashcards/fhManager" scope="request"/>
 
     <!-- include header nav -->
     <jsp:include page="/WEB-INF/view/public/header.jsp" flush="true">
