@@ -2,6 +2,8 @@ package test1;
 
 import org.junit.jupiter.api.Test;
 
+import tool.Debug;
+
 public class Test3 {
 
 	static boolean a;
@@ -88,11 +90,8 @@ public class Test3 {
 	@Test
 	public void testx2() {
 
-		Book b = null;
-		EBook b2 = null;
-		Car c = null;
+		Debug.test(Math.pow(3, 2));
 
-		System.out.println("" + (b == b2));
 	}
 
 }

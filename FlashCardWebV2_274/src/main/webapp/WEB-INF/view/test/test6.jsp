@@ -15,7 +15,10 @@
 <body>
 
     <div>
-        <tx:Calc num1="2" num2="3"/>
+        <tx:Calc num1="2" num2="3" />
+    </div>
+    <div>
+        <tx:CalcArea operation="squ" num1="2" num2="4"/>
     </div>
 
 

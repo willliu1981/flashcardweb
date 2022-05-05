@@ -26,5 +26,31 @@
 			<name>num3</name>
 			<required>false</required>
 		</attribute>
+		<attribute>
+			<name>operation</name>
+			<required>false</required>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>CalcArea</name>
+		<tag-class>taglib.test.CalcAreaTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>num1</name>
+			<required>true</required>
+		</attribute>
+		<attribute>
+			<name>num2</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<name>num3</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<name>operation</name>
+			<required>true</required>
+		</attribute>
 	</tag>
 </taglib>

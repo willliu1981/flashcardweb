@@ -6,7 +6,7 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-public class CalcTag extends SimpleTagSupport {
+public class CalcAreaTag extends SimpleTagSupport {
 
 	private Integer num1;
 	private Integer num2;
@@ -32,21 +32,31 @@ public class CalcTag extends SimpleTagSupport {
 	@Override
 	public void doTag() throws JspException, IOException {
 		JspWriter out = this.getJspContext().getOut();
-		switch (this.operation) {
-		case "add":
-		default:
-			out.println("Clac Tag, answer= " + (num1 + num2));
-			break;
-		case "sub":
-			out.println("Clac Tag, answer= " + (num1 - num2));
-			break;
-		case "mult":
-			out.println("Clac Tag, answer= " + num1 * num2);
-			break;
-		case "div":
-			out.println("Clac Tag, answer= " + num1 * 0.1 / num2);
-			break;
+		if (num2 == null) {
+			num2 = 1;
+		}
 
+		if (num3 == null) {
+			num3 = 1;
+		}
+
+		switch (this.operation) {
+		case "rect":
+			out.println("ClacArea Tag, answer= " + (num1 * num2));
+			break;
+		case "tri":
+			out.println("ClacArea Tag, answer= " + (num1 * num2) / 2.0);
+			break;
+		case "cir":
+			out.println("ClacArea Tag, answer= "
+					+ (Math.pow(num1, 2) * Math.PI * 2.0));
+			break;
+		case "squ":
+			out.println("ClacArea Tag, answer= " + (Math.pow(num1, 2)));
+			break;
+		default:
+			out.println("Clac Tag, answer= " + num1);
+			break;
 		}
 	}
 
