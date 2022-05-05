@@ -81,13 +81,18 @@
 		</listener-class>
 	</listener>
 
-<!----> 	
-<jsp-config>
+<!---->
+	<jsp-config>
 		<taglib>
-			<taglib-uri>https://fc.idv/jsp/tlds/mytags</taglib-uri>
+			<taglib-uri>https://fc.idv/jsp/tlds/myTestTags</taglib-uri>
 			<taglib-location>/WEB-INF/lib/taglib/test/calcTag.tld</taglib-location>
 		</taglib>
-	</jsp-config> 
+		<taglib>
+			<taglib-uri>https://fc.idv/jsp/tlds/myFCTags</taglib-uri>
+			<taglib-location>/WEB-INF/lib/taglib/listgroup/listGroupTag.tld</taglib-location>
+		</taglib>
+	</jsp-config>
+
  
 <!-- 防止Spring記憶體溢位監聽器 -->  
 <!-- <listener>  

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="https://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://java.sun.com/xml/ns/j2ee https://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+
+
+	<tlib-version>2.1</tlib-version>
+	<!-- <jsp-version>1.2</jsp-version> -->
+	<!-- <uri>/WEB-INF/lib/taglib/test/calcTag.tld</uri> -->
+	<short-name>Calc TLD</short-name>
+	<tag>
+		<name>Test</name>
+		<tag-class>idv.fc.taglib.listgroup.ListGroupTag</tag-class>
+		<body-content>empty</body-content>
+	<!-- 	<attribute>
+			<name>type</name>
+			<type>idv.fc.taglib.listgroup.ModelType</type>
+			<required>true</required>
+		</attribute> -->
+		<attribute>
+			<name>model</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>idv.fc.taglib.listgroup.ModelType</type>
+			<required>true</required>
+		</attribute>
+	</tag>
+</taglib>

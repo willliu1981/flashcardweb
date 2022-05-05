@@ -28,6 +28,8 @@
 		</taglib>
 		或見 https://www.journaldev.com/2099/jsp-custom-tags-example-tutorial
 
+.	custom tag , tld <rtexprvalue> , 為true 才能使用 EL
+
 
 參照:
 .	header.jsp active param: (參照 header.jsp : path mapping)

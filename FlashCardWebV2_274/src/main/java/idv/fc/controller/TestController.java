@@ -27,7 +27,7 @@ public class TestController {
 		
 		FlashcardServiceImpl service = SpringUtil.getBean("flashcardService", FlashcardServiceImpl.class);
 		
-		Flashcard find = service.getById("33");
+		Flashcard find = service.getById("7");
 
 		
 		
