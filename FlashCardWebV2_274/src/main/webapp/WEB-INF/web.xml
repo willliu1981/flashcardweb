@@ -84,10 +84,6 @@
 <!---->
 	<jsp-config>
 		<taglib>
-			<taglib-uri>https://fc.idv/jsp/tlds/myTestTags</taglib-uri>
-			<taglib-location>/WEB-INF/lib/taglib/test/calcTag.tld</taglib-location>
-		</taglib>
-		<taglib>
 			<taglib-uri>https://fc.idv/jsp/tlds/myFCTags</taglib-uri>
 			<taglib-location>/WEB-INF/lib/taglib/listgroup/listGroupTag.tld</taglib-location>
 		</taglib>

@@ -22,17 +22,17 @@ public class TestController {
 
 		return "test/test1";
 	}
+
 	@RequestMapping(value = "test2")
-	public String test2(Map<String,Object> map,HttpServletRequest request) {
-		
-		FlashcardServiceImpl service = SpringUtil.getBean("flashcardService", FlashcardServiceImpl.class);
-		
+	public String test2(Map<String, Object> map, HttpServletRequest request) {
+
+		FlashcardServiceImpl service = SpringUtil.getBean("flashcardService",
+				FlashcardServiceImpl.class);
+
 		Flashcard find = service.getById("7");
 
-		
-		
 		request.getServletContext().setAttribute("fc", find);
-		
+
 		return "test/test6";
 	}
 
