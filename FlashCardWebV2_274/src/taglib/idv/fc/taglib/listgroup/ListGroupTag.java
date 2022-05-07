@@ -8,7 +8,7 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import idv.fc.model.Flashcard;
-import idv.fc.taglib.listgroup.listmodel.renderer.ListGroupRenderer;
+import idv.fc.taglib.component.listgroup.renderer.ListGroupRenderer;
 
 public class ListGroupTag extends SimpleTagSupport {
 

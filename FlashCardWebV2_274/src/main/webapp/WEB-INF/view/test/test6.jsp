@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<jsp:include page="/WEB-INF/view/public/bootstrapCommon.jsp" />
 
 <style type="text/css">
 </style>
@@ -17,6 +17,10 @@
 
     <div>
         <fc:Test model="${fc}">tag fc </fc:Test>
+    </div>
+
+    <div>
+        <jsp:include page="/WEB-INF/view/public/list2.jsp"></jsp:include>
     </div>
 
 </body>

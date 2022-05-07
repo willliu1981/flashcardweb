@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import idv.fc.model.Flashcard;
 import idv.fc.service.impl.FlashcardServiceImpl;
-import tool.Debug;
+import idv.fc.taglib.component.listgroup.ListGroup;
+import idv.fc.taglib.component.listgroup.listmodel.DefaultListGroupModel;
+import idv.fc.taglib.component.listgroup.renderer.ListGroupRenderer;
+import idv.fc.taglib.component.listgroup.renderer.impl.FlashcardListGroupRenderer;
 import tool.spring.SpringUtil;
 
 @Controller
@@ -29,9 +32,16 @@ public class TestController {
 		FlashcardServiceImpl service = SpringUtil.getBean("flashcardService",
 				FlashcardServiceImpl.class);
 
-		Flashcard find = service.getById("7");
+		List<Flashcard> finds = service.getAll();
 
-		request.getServletContext().setAttribute("fc", find);
+		DefaultListGroupModel<Flashcard> model = new DefaultListGroupModel<>();
+		finds.stream().forEach(item -> model.addItem(item));
+		ListGroup<Flashcard> listGroup = new ListGroup<>();
+		FlashcardListGroupRenderer renderer = new FlashcardListGroupRenderer();
+		listGroup.setRenderer(renderer);
+
+		request.getServletContext().setAttribute("datas", finds);
+		request.getServletContext().setAttribute("lg", listGroup);
 
 		return "test/test6";
 	}

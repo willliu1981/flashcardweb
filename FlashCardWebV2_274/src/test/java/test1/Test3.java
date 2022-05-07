@@ -1,5 +1,9 @@
 package test1;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 
 import tool.Debug;
@@ -91,6 +95,19 @@ public class Test3 {
 	public void testx2() {
 
 		Debug.test(Math.pow(3, 2));
+
+	}
+
+	@Test
+	public void testx3() {
+
+		List<String> strs = new ArrayList<>();
+		strs.add("x");
+		strs.add("y");
+		strs.add("z");
+
+		String reduce = strs.stream().reduce((x1, x2) -> x1 + "," + x2).get();
+		Debug.test(reduce);
 
 	}
 
