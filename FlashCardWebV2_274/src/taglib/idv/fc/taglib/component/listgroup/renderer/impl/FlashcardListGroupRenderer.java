@@ -33,11 +33,21 @@ public class FlashcardListGroupRenderer
 	public String getRenderedResult(Flashcard model,
 			HttpServletRequest request) {
 		//delete badge begin
+		StringBuilder deleteScriptSB = new StringBuilder();
+		deleteScriptSB.append("modelValues").append("('");//script begin
+		deleteScriptSB.append(model.getId()).append("','")
+				.append(model.getTerm()).append("','")
+				.append(model.getDefinition());//script parameter
+		deleteScriptSB.append("')");//script end
+
 		Badge deleteBadge = new Badge();
 		deleteBadge.addStyleSheet(badgeSpanSheet);
 		deleteBadge.addStyleSheet("background:red");
 		deleteBadge.addStyleSheet("font-size:18px");
+		deleteBadge.addAttribute("data-target", "#listDeleteModal")
+				.addAttribute("data-toggle", "modal");
 		deleteBadge.setText("DELETE");
+		deleteBadge.onClick(deleteScriptSB.toString());
 		//delete badge end
 
 		//edit badge begin

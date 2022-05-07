@@ -2,6 +2,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+<head>
+<script type="text/javascript" src="${pageContext.request.contextPath}/webjars/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+  //$("#listDeleteModal").model("hide");
+  function modelValues(id, term, definition) {
+	$("#modal_fcTerm").text(term);
+	$("#modal_fcDefinition").text(definition);
+	$("#modal_form").attr("action", function(i, orig) {
+	  return orig + id;
+	});
+  }
+</script>
+</head>
 
 <body>
     <!-- list -->
@@ -14,12 +27,12 @@
                 <h3>HolderData</h3></li>
             <c:forEach var="i" begin="0" end="${ datas.size()-1 }">
                 <li class="list-group-item"><a href="#" class="list-group-item">
-                        <%--                  <span class="badge" style="background: red;" data-target="#listDeleteModal" data-toggle="modal"
-                            onclick='modelValues("${data.term}","${data.definition}")'>
+                        <%--         <span class="badge" style="background: red;" data-target="#listDeleteModal" data-toggle="modal"
+                            onclick='modelValues("${fc.id}","${fc.term}","${fc.definition}")'>
                             <font size="4">DELETE</font>
                         </span>
                         <span class="badge badgeSpan"
-                            onclick="location.href='${pageContext.request.contextPath}/<c:out value="${pathForList}"></c:out>/${data.id}'">
+                            onclick="location.href='${pageContext.request.contextPath}/<c:out value="${pathFlashcard}"></c:out>/${fc.id}'">
                             <font size="4">EDIT</font>
                         </span> --%>
 

@@ -13,20 +13,13 @@
 </style>
 
 <script type="text/javascript">
-  //$("#listDeleteModal").model("hide");
-  function modelValues(id, term, definition) {
-	$("#modal_fcTerm").text(term);
-	$("#modal_fcDefinition").text(definition);
-	$("#modal_form").attr("action", function(i, orig) {
-	  return orig + id;
-	});
-  }
+  
 </script>
 
 </head>
 <body>
     <!-- 清單 前往 web 的 path -->
-    <c:set var="pathForList" value="flashcard" scope="request"/>
+    <c:set var="pathForList" value="flashcard" scope="request" />
 
     <!-- 分頁 前往 web 的 base path -->
     <c:set var="pathForPager" value="flashcards/fcManager" scope="request" />

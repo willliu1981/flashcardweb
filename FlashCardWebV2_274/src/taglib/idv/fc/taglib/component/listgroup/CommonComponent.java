@@ -1,7 +1,9 @@
 package idv.fc.taglib.component.listgroup;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import idv.fc.taglib.component.TaglibComponent;
 
@@ -11,6 +13,7 @@ public class CommonComponent implements TaglibComponent {
 	private String htmlTag = "span";
 	private List<String> htmlClasses = new ArrayList<>();
 	private List<String> styleSheets = new ArrayList<>();
+	private Map<String, String> attributes = new HashMap<>();
 
 	public CommonComponent() {
 	}
@@ -70,6 +73,17 @@ public class CommonComponent implements TaglibComponent {
 	@Override
 	public String getOnClickScript() {
 		return this.script;
+	}
+
+	@Override
+	public TaglibComponent addAttribute(String name, String value) {
+		this.attributes.put(name, value);
+		return this;
+	}
+
+	@Override
+	public Map<String, String> getAttributes() {
+		return this.attributes;
 	}
 
 }
