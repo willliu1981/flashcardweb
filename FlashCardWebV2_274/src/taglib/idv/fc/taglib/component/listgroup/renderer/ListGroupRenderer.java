@@ -1,11 +1,13 @@
 package idv.fc.taglib.component.listgroup.renderer;
 
-public interface ListGroupRenderer<T> {
-	static String SKIP="rtn_skip";
+import javax.servlet.http.HttpServletRequest;
 
-	String getRenderedBefore(T model);
+public interface ListGroupRenderer<T> {
+	static String SKIP = "rtn_skip";
 
 	String getRenderedResult(T model);
 
 	String getRenderedAfter(T model);
+
+	String getRenderedBefore(HttpServletRequest request);
 }

@@ -6,8 +6,8 @@ import java.util.List;
 import idv.fc.taglib.component.TaglibComponent;
 
 public class CommonComponent implements TaglibComponent {
-
-	private String text;
+	private String script;//onclick script
+	private String text;// 文本框
 	private String htmlTag = "span";
 	private List<String> htmlClasses = new ArrayList<>();
 	private List<String> styleSheets = new ArrayList<>();
@@ -60,6 +60,16 @@ public class CommonComponent implements TaglibComponent {
 	@Override
 	public List<String> getStyleSheets() {
 		return this.styleSheets;
+	}
+
+	@Override
+	public void onClick(String script) {
+		this.script = script;
+	}
+
+	@Override
+	public String getOnClickScript() {
+		return this.script;
 	}
 
 }

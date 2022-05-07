@@ -36,7 +36,7 @@ public class TestController {
 
 		DefaultListGroupModel<Flashcard> model = new DefaultListGroupModel<>();
 		finds.stream().forEach(item -> model.addItem(item));
-		ListGroup<Flashcard> listGroup = new ListGroup<>();
+		ListGroup<Flashcard> listGroup = new ListGroup<>(request);
 		listGroup.setModel(model);
 
 		FlashcardListGroupRenderer renderer = new FlashcardListGroupRenderer();

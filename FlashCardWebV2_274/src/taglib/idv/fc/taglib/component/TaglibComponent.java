@@ -15,6 +15,10 @@ public interface TaglibComponent {
 
 	String getHtmlTag();
 
+	void onClick(String script);
+
+	String getOnClickScript();
+
 	TaglibComponent addHtmlClass(String htmlClass);
 
 	TaglibComponent addStyleSheet(String sheet);
@@ -32,10 +36,14 @@ public interface TaglibComponent {
 		String styleSheets = this.getStyleSheets().stream()
 				.collect(Collectors.joining(";", "style=\"", "\""));
 
+		String onClickScript = "onclick=\"" + getOnClickScript() + "\"";
+
 		sb.append("<").append(this.getHtmlTag());//prifix begin
 		sb.append(htmlClasses);// class
 		sb.append(styleSheets);// css
+		sb.append(onClickScript);//onclick
 		sb.append(">");//prifix end
+
 		sb.append(this.getText());//data
 		sb.append("</").append(this.getHtmlTag()).append("/>");//suffix
 
