@@ -10,7 +10,7 @@ import idv.fc.taglib.component.listgroup.renderer.ListGroupRenderer;
 
 public class FlashcardListGroupRenderer
 		implements ListGroupRenderer<Flashcard> {
-	private final String pathForAdd = "flashcard";
+	private final String pathForCRUD = "flashcard";
 	private final String badgeSpanSheet = "text-align: center; padding-left: 20px;"
 			+ " padding-right: 20px;";
 
@@ -18,7 +18,7 @@ public class FlashcardListGroupRenderer
 	public String getRenderedBefore(HttpServletRequest request) {
 		StringBuilder scriptSB = new StringBuilder();
 		scriptSB.append("location.href='").append(request.getContextPath())
-				.append("/").append(pathForAdd).append("'");
+				.append("/").append(pathForCRUD).append("'");
 
 		Badge badge = new Badge();
 		badge.addStyleSheet(badgeSpanSheet);
@@ -30,19 +30,30 @@ public class FlashcardListGroupRenderer
 	}
 
 	@Override
-	public String getRenderedResult(Flashcard model) {
-
+	public String getRenderedResult(Flashcard model,
+			HttpServletRequest request) {
+		//delete badge begin
 		Badge deleteBadge = new Badge();
 		deleteBadge.addStyleSheet(badgeSpanSheet);
 		deleteBadge.addStyleSheet("background:red");
 		deleteBadge.addStyleSheet("font-size:18px");
 		deleteBadge.setText("DELETE");
+		//delete badge end
+
+		//edit badge begin
+		StringBuilder editScriptSB = new StringBuilder();
+		editScriptSB.append("location.href=").append("'");//href begin
+		editScriptSB.append(request.getContextPath()).append("/");//context path
+		editScriptSB.append(pathForCRUD).append("/").append(model.getId());//rest path
+		editScriptSB.append("'");//herf end
 
 		Badge editBadge = new Badge();
 		editBadge.addStyleSheet(badgeSpanSheet);
 		//editBadge.addStyleSheet("background:blue");//註解以使用預設藍色
 		editBadge.addStyleSheet("font-size:17px");
 		editBadge.setText("EDIT");
+		editBadge.onClick(editScriptSB.toString());
+		//edit badge end
 
 		ListGroupItemHeading heading = new ListGroupItemHeading();
 		heading.addHtmlClass("h3");

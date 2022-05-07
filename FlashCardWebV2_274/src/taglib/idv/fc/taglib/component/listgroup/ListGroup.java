@@ -39,7 +39,8 @@ public class ListGroup<T> {
 	}
 
 	public String getDataResult(int index) {
-		return this.renderer.getRenderedResult(this.model.getItem(index));
+		return this.renderer.getRenderedResult(this.model.getItem(index),
+				request);
 	}
 
 	public String getTitleResult() {
