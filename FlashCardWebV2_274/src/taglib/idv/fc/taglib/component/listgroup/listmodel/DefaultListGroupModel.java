@@ -12,6 +12,14 @@ public class DefaultListGroupModel<T> implements ListGroupModel<T> {
 	public void addItem(T model) {
 		this.items.add(model);
 	}
+
+
+	@Override
+	public T getItem(int index) {
+		return this.items.get(index);
+	}
+	
+	
 	
 	
 

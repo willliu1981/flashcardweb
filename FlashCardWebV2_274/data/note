@@ -7,6 +7,7 @@
 
 問題:
 .	MySpringUtil 結構混亂
+.	有時啟動會出現 load IDGeneratorFactory 的問題, clean 或等待一些時間, 原因未知 
 
 
 待測:
@@ -40,6 +41,8 @@
 
 特別加註:
 .	dao id 雖然為 String , 但依然能向sql 的 int id 進行存取 (mybatis)
+
+
 
 
 

@@ -27,4 +27,10 @@ public class ListGroup<T> {
 		this.renderer = renderer;
 	}
 
+	public String getResult(int index) {
+		return this.renderer.getRenderedResult(this.model.getItem(index));
+	}
+	
+	
+
 }

@@ -4,7 +4,19 @@
 <html>
 
 <body>
-    <!-- list -->
+
+    <div class="container">
+        <span> list2 </span>
+        <c:forEach var="i" begin="0" end="${ datas.size()-1 }">
+            <span ><font color="red"> ${lg.getResult(i) }</font></span>
+
+        </c:forEach>
+
+
+    </div>
+
+
+    <!-- list 
     <div class="container">
         <ul class="list-group myBadgeCursor">
             <li class="list-group-item"><span class="badge"
@@ -17,7 +29,7 @@
 
 
 
-                      <%--   <span class="badge" style="background: red;" data-target="#listDeleteModal" data-toggle="modal"
+                        <span class="badge" style="background: red;" data-target="#listDeleteModal" data-toggle="modal"
                             onclick='modelValues("${data.term}","${data.definition}")'>
                             <font size="4">DELETE</font>
                         </span>
@@ -30,10 +42,10 @@
                         </h4>
                         <p class="list-group-item-text h4">
                             <c:out value="fhId: ${data.definition}"></c:out>
-                        </p> --%>
+                        </p> 
                     </a></li>
             </c:forEach>
         </ul>
-    </div>
+    </div>-->
 </body>
 </html>

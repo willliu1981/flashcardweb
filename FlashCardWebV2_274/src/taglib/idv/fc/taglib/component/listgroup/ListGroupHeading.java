@@ -10,10 +10,10 @@ public class ListGroupHeading implements TaglibComponent {
 
 	private String text;
 	private String htmlTag;
-	private List<String> htmlClass = new ArrayList<>();
+	private List<String> htmlClasses = new ArrayList<>();
 
 	public ListGroupHeading() {
-		this.htmlClass.add("list-group-item-heading");
+		this.htmlClasses.add("list-group-item-heading");
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class ListGroupHeading implements TaglibComponent {
 
 	@Override
 	public ListGroupHeading addHtmlClass(String htmlClass) {
-		this.htmlClass.add(htmlClass);
+		this.htmlClasses.add(htmlClass);
 
 		return this;
 	}
@@ -45,7 +45,7 @@ public class ListGroupHeading implements TaglibComponent {
 
 	@Override
 	public List<String> getHtmlClasses() {
-		return this.getHtmlClasses();
+		return this.htmlClasses;
 	}
 
 }
