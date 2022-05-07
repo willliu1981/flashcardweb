@@ -18,6 +18,9 @@
 
 </head>
 <body>
+    <!-- title -->
+    <c:set var="title" value="Flashcard" scope="request" />
+
     <!-- 清單 前往 web 的 path -->
     <c:set var="pathForList" value="flashcard" scope="request" />
 
@@ -31,7 +34,7 @@
 
     <!-- 引入巨屏 -->
     <jsp:include page="/WEB-INF/view/public/jumbotron.jsp">
-        <jsp:param name="title" value="管理 Flashcard" />
+        <jsp:param name="title" value="管理 ${title}" />
     </jsp:include>
 
     <!-- 引入 list -->

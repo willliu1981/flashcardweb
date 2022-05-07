@@ -20,7 +20,7 @@
     </div>
 
     <div>
-        <jsp:include page="/WEB-INF/view/public/list2.jsp"></jsp:include>
+       <%--  <jsp:include page="/WEB-INF/view/public/list2.jsp"></jsp:include> --%>
     </div>
 
 </body>

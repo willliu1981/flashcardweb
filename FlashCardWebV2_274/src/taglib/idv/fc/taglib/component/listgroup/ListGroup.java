@@ -15,6 +15,10 @@ public class ListGroup<T> {
 
 	}
 
+	public int getItemSize() {
+		return this.model.getItemSize();
+	}
+
 	public String getHeading() {
 
 		return null;

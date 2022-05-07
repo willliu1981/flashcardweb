@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script type="text/javascript" src="${pageContext.request.contextPath}/webjars/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
   //$("#listDeleteModal").model("hide");
   function modelValues(id, term, definition) {
@@ -20,12 +19,10 @@
     <!-- list -->
     <div class="container">
         <ul class="list-group myBadgeCursor">
-            <li class="list-group-item"><span class="badge"
-                    onclick="location.href='${pageContext.request.contextPath}/<c:out value="${pathForList}"></c:out>'">
-                    <font size="5">ADD</font>
-                </span>
-                <h3>HolderData</h3></li>
-            <c:forEach var="i" begin="0" end="${ datas.size()-1 }">
+            <li class="list-group-item">${listGroup.titleResult}
+                <h3>${title}</h3>
+            </li>
+            <c:forEach var="i" begin="0" end="${listGroup.itemSize-1}">
                 <li class="list-group-item"><a href="#" class="list-group-item"> ${listGroup.getDataResult(i) }
                     </a></li>
             </c:forEach>
@@ -40,7 +37,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title">Flashcard</h4>
+                    <h4 class="modal-title">${title}</h4>
                 </div>
                 <div class="modal-body">
                     <label id="modal_fcTerm" style="font-size: 20px;">term</label>

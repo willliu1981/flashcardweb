@@ -49,7 +49,6 @@ public class TestController {
 				request);
 		listGroup.setRenderer(renderer);
 
-		request.getServletContext().setAttribute("datas", finds);
 		request.getServletContext().setAttribute("listGroup", listGroup);
 
 		return "test/fcManagedTestPage";

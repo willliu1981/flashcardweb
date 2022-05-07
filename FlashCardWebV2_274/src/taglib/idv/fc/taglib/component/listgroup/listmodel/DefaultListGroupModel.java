@@ -18,6 +18,12 @@ public class DefaultListGroupModel<T> implements ListGroupModel<T> {
 	public T getItem(int index) {
 		return this.items.get(index);
 	}
+
+
+	@Override
+	public int getItemSize() {
+		return this.items.size();
+	}
 	
 	
 	
