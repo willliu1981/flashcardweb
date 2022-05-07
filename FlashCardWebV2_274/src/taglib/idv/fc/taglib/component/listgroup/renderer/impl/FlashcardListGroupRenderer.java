@@ -13,9 +13,14 @@ public class FlashcardListGroupRenderer
 	private final String pathForCRUD = "flashcard";
 	private final String badgeSpanSheet = "text-align: center; padding-left: 20px;"
 			+ " padding-right: 20px;";
+	private HttpServletRequest request;
+
+	public FlashcardListGroupRenderer(HttpServletRequest request) {
+		this.request = request;
+	}
 
 	@Override
-	public String getRenderedBefore(HttpServletRequest request) {
+	public String getRenderedBefore() {
 		StringBuilder scriptSB = new StringBuilder();
 		scriptSB.append("location.href='").append(request.getContextPath())
 				.append("/").append(pathForCRUD).append("'");
@@ -30,8 +35,7 @@ public class FlashcardListGroupRenderer
 	}
 
 	@Override
-	public String getRenderedResult(Flashcard model,
-			HttpServletRequest request) {
+	public String getRenderedResult(Flashcard model) {
 		//delete badge begin
 		StringBuilder deleteScriptSB = new StringBuilder();
 		deleteScriptSB.append("modelValues").append("('");//script begin

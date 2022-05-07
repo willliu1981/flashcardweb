@@ -26,18 +26,7 @@
                 </span>
                 <h3>HolderData</h3></li>
             <c:forEach var="i" begin="0" end="${ datas.size()-1 }">
-                <li class="list-group-item"><a href="#" class="list-group-item">
-                        <%--         <span class="badge" style="background: red;" data-target="#listDeleteModal" data-toggle="modal"
-                            onclick='modelValues("${fc.id}","${fc.term}","${fc.definition}")'>
-                            <font size="4">DELETE</font>
-                        </span>
-                        <span class="badge badgeSpan"
-                            onclick="location.href='${pageContext.request.contextPath}/<c:out value="${pathFlashcard}"></c:out>/${fc.id}'">
-                            <font size="4">EDIT</font>
-                        </span> --%>
-
-                        ${lg.getDataResult(i) }
-
+                <li class="list-group-item"><a href="#" class="list-group-item"> ${listGroup.getDataResult(i) }
                     </a></li>
             </c:forEach>
         </ul>

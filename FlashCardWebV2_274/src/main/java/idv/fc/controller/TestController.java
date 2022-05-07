@@ -42,14 +42,15 @@ public class TestController {
 
 		DefaultListGroupModel<Flashcard> model = new DefaultListGroupModel<>();
 		finds.stream().forEach(item -> model.addItem(item));
-		ListGroup<Flashcard> listGroup = new ListGroup<>(request);
+		ListGroup<Flashcard> listGroup = new ListGroup<>();
 		listGroup.setModel(model);
 
-		FlashcardListGroupRenderer renderer = new FlashcardListGroupRenderer();
+		FlashcardListGroupRenderer renderer = new FlashcardListGroupRenderer(
+				request);
 		listGroup.setRenderer(renderer);
 
 		request.getServletContext().setAttribute("datas", finds);
-		request.getServletContext().setAttribute("lg", listGroup);
+		request.getServletContext().setAttribute("listGroup", listGroup);
 
 		return "test/fcManagedTestPage";
 
