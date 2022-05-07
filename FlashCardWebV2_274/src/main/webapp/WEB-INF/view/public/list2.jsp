@@ -5,7 +5,7 @@
 
 <body>
 
-    <div class="container">
+    <%--     <div class="container">
         <span> list2 </span>
         <c:forEach var="i" begin="0" end="${ datas.size()-1 }">
             <span ><font color="red"> ${lg.getResult(i) }</font></span>
@@ -13,10 +13,10 @@
         </c:forEach>
 
 
-    </div>
+    </div> --%>
 
 
-    <!-- list 
+    <!-- list -->
     <div class="container">
         <ul class="list-group myBadgeCursor">
             <li class="list-group-item"><span class="badge"
@@ -24,11 +24,8 @@
                     <font size="5">ADD</font>
                 </span>
                 <h3>HolderData</h3></li>
-            <c:forEach var="data" items="${datas}">
+            <c:forEach var="i" begin="0" end="${ datas.size()-1 }">
                 <li class="list-group-item"><a href="#" class="list-group-item">
-
-
-
                         <span class="badge" style="background: red;" data-target="#listDeleteModal" data-toggle="modal"
                             onclick='modelValues("${data.term}","${data.definition}")'>
                             <font size="4">DELETE</font>
@@ -37,15 +34,12 @@
                             onclick="location.href='${pageContext.request.contextPath}/<c:out value="${pathForList}"></c:out>/${data.id}'">
                             <font size="4">EDIT</font>
                         </span>
-                        <h4 class="list-group-item-heading h4">
-                            <c:out value="id: ${data.term}"></c:out>
-                        </h4>
-                        <p class="list-group-item-text h4">
-                            <c:out value="fhId: ${data.definition}"></c:out>
-                        </p> 
+
+                        ${lg.getResult(i) }
+
                     </a></li>
             </c:forEach>
         </ul>
-    </div>-->
+    </div>
 </body>
 </html>
