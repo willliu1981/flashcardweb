@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
 import idv.fc.model.Flashcard;
 import idv.fc.service.impl.FlashcardServiceImpl;
 import idv.fc.taglib.component.listgroup.ListGroup;
@@ -32,7 +35,10 @@ public class TestController {
 		FlashcardServiceImpl service = SpringUtil.getBean("flashcardService",
 				FlashcardServiceImpl.class);
 
+		PageHelper.startPage(1, 5);
 		List<Flashcard> finds = service.getAll();
+		PageInfo<Flashcard> pageInfo = new PageInfo<>(finds, 5);
+		map.put("pageInfo", pageInfo);
 
 		DefaultListGroupModel<Flashcard> model = new DefaultListGroupModel<>();
 		finds.stream().forEach(item -> model.addItem(item));
@@ -45,7 +51,8 @@ public class TestController {
 		request.getServletContext().setAttribute("datas", finds);
 		request.getServletContext().setAttribute("lg", listGroup);
 
-		return "test/test6";
+		return "test/fcManagedTestPage";
+
 	}
 
 }
