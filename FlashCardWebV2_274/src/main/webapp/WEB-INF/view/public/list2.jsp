@@ -26,14 +26,14 @@
                 <h3>HolderData</h3></li>
             <c:forEach var="i" begin="0" end="${ datas.size()-1 }">
                 <li class="list-group-item"><a href="#" class="list-group-item">
-                        <span class="badge" style="background: red;" data-target="#listDeleteModal" data-toggle="modal"
+       <%--                  <span class="badge" style="background: red;" data-target="#listDeleteModal" data-toggle="modal"
                             onclick='modelValues("${data.term}","${data.definition}")'>
                             <font size="4">DELETE</font>
                         </span>
                         <span class="badge badgeSpan"
                             onclick="location.href='${pageContext.request.contextPath}/<c:out value="${pathForList}"></c:out>/${data.id}'">
                             <font size="4">EDIT</font>
-                        </span>
+                        </span> --%>
 
                         ${lg.getResult(i) }
 

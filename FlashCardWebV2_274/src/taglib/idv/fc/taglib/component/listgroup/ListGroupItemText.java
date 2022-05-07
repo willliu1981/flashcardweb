@@ -1,12 +1,12 @@
 package idv.fc.taglib.component.listgroup;
 
-public class ListGroupItemText extends ListGroupItem {
+public class ListGroupItemText extends CommonComponent {
 
 	public ListGroupItemText() {
-		this.htmlClasses.add("list-group-item-text");
+		this.addHtmlClass("list-group-item-text");
 	}
 
 	public ListGroupItemText(String overridePrimeClass) {
-		this.htmlClasses.add(overridePrimeClass);
+		this.addHtmlClass(overridePrimeClass);
 	}
 }

@@ -5,17 +5,17 @@ import java.util.List;
 
 import idv.fc.taglib.component.TaglibComponent;
 
-public class ListGroupItem implements TaglibComponent {
+public class CommonComponent implements TaglibComponent {
 
-	protected String text;
-	protected String htmlTag = "span";
-	protected List<String> htmlClasses = new ArrayList<>();
-	protected List<String> styleSheets = new ArrayList<>();
+	private String text;
+	private String htmlTag = "span";
+	private List<String> htmlClasses = new ArrayList<>();
+	private List<String> styleSheets = new ArrayList<>();
 
-	public ListGroupItem() {
+	public CommonComponent() {
 	}
 
-	public ListGroupItem(String primeClass) {
+	public CommonComponent(String primeClass) {
 		this.htmlClasses.add(primeClass);
 	}
 
@@ -30,7 +30,7 @@ public class ListGroupItem implements TaglibComponent {
 	}
 
 	@Override
-	public ListGroupItem addHtmlClass(String htmlClass) {
+	public CommonComponent addHtmlClass(String htmlClass) {
 		this.htmlClasses.add(htmlClass);
 
 		return this;

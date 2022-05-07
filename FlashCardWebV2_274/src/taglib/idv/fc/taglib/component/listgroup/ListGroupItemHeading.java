@@ -1,13 +1,13 @@
 package idv.fc.taglib.component.listgroup;
 
-public class ListGroupItemHeading extends ListGroupItem {
+public class ListGroupItemHeading extends CommonComponent {
 
 	public ListGroupItemHeading() {
-		this.htmlClasses.add("list-group-item-heading");
+		this.addHtmlClass("list-group-item-heading");
 	}
 
 	public ListGroupItemHeading(String overridePrimeClass) {
-		this.htmlClasses.add(overridePrimeClass);
+		this.addHtmlClass(overridePrimeClass);
 	}
 
 }
