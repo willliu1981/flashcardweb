@@ -1,6 +1,6 @@
 package idv.fc.taglib.component.listgroup;
 
-public class ListGroupItemHeading extends CommonComponent {
+public class ListGroupItemHeading extends CommonComponentItem {
 
 	public ListGroupItemHeading() {
 		this.addHtmlClass("list-group-item-heading");

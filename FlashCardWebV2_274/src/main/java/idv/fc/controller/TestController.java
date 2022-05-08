@@ -13,9 +13,9 @@ import com.github.pagehelper.PageInfo;
 
 import idv.fc.model.Flashcard;
 import idv.fc.service.impl.FlashcardServiceImpl;
+import idv.fc.taglib.component.common.TaglibRenderer;
 import idv.fc.taglib.component.listgroup.ListGroup;
 import idv.fc.taglib.component.listgroup.listmodel.DefaultListGroupModel;
-import idv.fc.taglib.component.listgroup.renderer.ListGroupRenderer;
 import idv.fc.taglib.component.listgroup.renderer.impl.FlashcardListGroupRenderer;
 import tool.spring.SpringUtil;
 

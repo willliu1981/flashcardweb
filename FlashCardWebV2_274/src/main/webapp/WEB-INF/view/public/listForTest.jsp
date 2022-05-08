@@ -5,9 +5,22 @@
 <head>
 <script type="text/javascript">
   //$("#listDeleteModal").model("hide");
-  function modelValues(id, term, definition) {
-	$("#modal_fcTerm").text(term);
-	$("#modal_fcDefinition").text(definition);
+  function modelValues(id) {
+	modelValues(id, "");
+  }
+
+  function modelValues(id, var1) {
+	modelValues(id, var1, "");
+  }
+
+  function modelValues(id, var1, var2) {
+	modelValues(id, var1, var2, "");
+  }
+
+  function modelValues(id, var1, var2, var3) {
+	$("#modal_var1").text(var1);
+	$("#modal_var2").text(var2);
+	$("#modal_var3").text(var3);
 	$("#modal_form").attr("action", function(i, orig) {
 	  return orig + id;
 	});
@@ -19,11 +32,11 @@
     <!-- list -->
     <div class="container">
         <ul class="list-group myBadgeCursor">
-            <li class="list-group-item">${listGroup.titleResult}
+            <li class="list-group-item">${listGroup.getTitleResult()}
                 <h3>${title}</h3>
             </li>
             <c:forEach var="i" begin="0" end="${listGroup.itemSize-1}">
-                <li class="list-group-item"><a href="#" class="list-group-item"> ${listGroup.getDataResult(i) }
+                <li class="list-group-item"><a href="#" class="list-group-item"> ${listGroup.getBodyResult(i) }
                     </a></li>
             </c:forEach>
         </ul>
@@ -40,9 +53,11 @@
                     <h4 class="modal-title">${title}</h4>
                 </div>
                 <div class="modal-body">
-                    <label id="modal_fcTerm" style="font-size: 20px;">term</label>
+                    <label id="modal_var1" style="font-size: 20px;">term</label>
                     <br />
-                    <label id="modal_fcDefinition" style="font-size: 20px;">definition</label>
+                    <label id="modal_var2" style="font-size: 20px;">definition</label>
+                    <br />
+                    <label id="modal_var3" style="font-size: 20px;">var3</label>
                 </div>
                 <div class="modal-footer">
                     <form id="modal_form" action="${pageContext.request.contextPath}/flashcard/" method="post">

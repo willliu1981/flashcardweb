@@ -1,11 +1,13 @@
-package idv.fc.taglib.component;
+package idv.fc.taglib.component.common;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-public interface TaglibComponent {
+/*
+ * 由 ListGroupItem、Badge 等實作
+ */
+public interface TaglibComponentItem {
 
 	void setText(String text);
 
@@ -19,11 +21,11 @@ public interface TaglibComponent {
 
 	String getOnClickScript();
 
-	TaglibComponent addHtmlClass(String htmlClass);
+	TaglibComponentItem addHtmlClass(String htmlClass);
 
-	TaglibComponent addStyleSheet(String sheet);
+	TaglibComponentItem addStyleSheet(String sheet);
 
-	TaglibComponent addAttribute(String name, String value);
+	TaglibComponentItem addAttribute(String name, String value);
 
 	List<String> getHtmlClasses();
 

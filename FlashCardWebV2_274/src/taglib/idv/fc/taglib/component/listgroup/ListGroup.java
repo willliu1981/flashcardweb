@@ -1,15 +1,13 @@
 package idv.fc.taglib.component.listgroup;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
+import idv.fc.taglib.component.common.TaglibComponent;
+import idv.fc.taglib.component.common.TaglibRenderer;
 import idv.fc.taglib.component.listgroup.listmodel.ListGroupModel;
-import idv.fc.taglib.component.listgroup.renderer.ListGroupRenderer;
+import idv.fc.taglib.component.listgroup.renderer.ListGroupRenderere;
 
-public class ListGroup<T> {
+public class ListGroup<T> implements TaglibComponent<T> {
 	private ListGroupModel<T> model;
-	private ListGroupRenderer<T> renderer;
+	private TaglibRenderer<T> renderer;
 
 	public ListGroup() {
 
@@ -19,30 +17,29 @@ public class ListGroup<T> {
 		return this.model.getItemSize();
 	}
 
-	public String getHeading() {
-
-		return null;
-	}
-
-	public List<String> getTexts() {
-
-		return null;
-	}
-
 	public void setModel(ListGroupModel<T> model) {
 		this.model = model;
 	}
 
-	public void setRenderer(ListGroupRenderer<T> renderer) {
+	@Override
+	public void setRenderer(TaglibRenderer<T> renderer) {
 		this.renderer = renderer;
 	}
 
-	public String getDataResult(int index) {
-		return this.renderer.getRenderedResult(this.model.getItem(index));
+	@Override
+	public String getBodyResult(int index) {
+		return ((ListGroupRenderere<T>) this.renderer)
+				.getRenderedBody(this.model.getItem(index));
 	}
 
+	@Override
 	public String getTitleResult() {
-		return this.renderer.getRenderedBefore();
+		return this.renderer.getRenderedTitle();
+	}
+
+	@Override
+	public String getFooterResult() {
+		return this.renderer.getRenderedFooter();
 	}
 
 }

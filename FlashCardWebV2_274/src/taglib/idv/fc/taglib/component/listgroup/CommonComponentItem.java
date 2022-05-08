@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import idv.fc.taglib.component.TaglibComponent;
+import idv.fc.taglib.component.common.TaglibComponentItem;
 
-public class CommonComponent implements TaglibComponent {
+public class CommonComponentItem implements TaglibComponentItem {
 	private String script;//onclick script
 	private String text;// 文本框
 	private String htmlTag = "span";
@@ -15,10 +15,10 @@ public class CommonComponent implements TaglibComponent {
 	private List<String> styleSheets = new ArrayList<>();
 	private Map<String, String> attributes = new HashMap<>();
 
-	public CommonComponent() {
+	public CommonComponentItem() {
 	}
 
-	public CommonComponent(String primeClass) {
+	public CommonComponentItem(String primeClass) {
 		this.htmlClasses.add(primeClass);
 	}
 
@@ -33,7 +33,7 @@ public class CommonComponent implements TaglibComponent {
 	}
 
 	@Override
-	public CommonComponent addHtmlClass(String htmlClass) {
+	public CommonComponentItem addHtmlClass(String htmlClass) {
 		this.htmlClasses.add(htmlClass);
 
 		return this;
@@ -55,7 +55,7 @@ public class CommonComponent implements TaglibComponent {
 	}
 
 	@Override
-	public TaglibComponent addStyleSheet(String sheet) {
+	public TaglibComponentItem addStyleSheet(String sheet) {
 		this.styleSheets.add(sheet);
 		return this;
 	}
@@ -76,7 +76,7 @@ public class CommonComponent implements TaglibComponent {
 	}
 
 	@Override
-	public TaglibComponent addAttribute(String name, String value) {
+	public TaglibComponentItem addAttribute(String name, String value) {
 		this.attributes.put(name, value);
 		return this;
 	}

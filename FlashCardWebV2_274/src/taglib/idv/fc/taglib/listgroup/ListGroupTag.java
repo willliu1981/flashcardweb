@@ -8,19 +8,19 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import idv.fc.model.Flashcard;
-import idv.fc.taglib.component.listgroup.renderer.ListGroupRenderer;
+import idv.fc.taglib.component.common.TaglibRenderer;
 
 public class ListGroupTag extends SimpleTagSupport {
 
 	private Flashcard model;
-	private ListGroupRenderer listRenderer;
+	private TaglibRenderer listRenderer;
 	StringWriter sw = new StringWriter();
 
 	public void setModel(Flashcard model) {
 		this.model = model;
 	}
 
-	public void setListRenderer(ListGroupRenderer listRenderer) {
+	public void setListRenderer(TaglibRenderer listRenderer) {
 		this.listRenderer = listRenderer;
 	}
 

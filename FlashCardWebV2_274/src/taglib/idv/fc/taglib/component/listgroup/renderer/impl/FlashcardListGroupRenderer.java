@@ -3,13 +3,13 @@ package idv.fc.taglib.component.listgroup.renderer.impl;
 import javax.servlet.http.HttpServletRequest;
 
 import idv.fc.model.Flashcard;
-import idv.fc.taglib.component.Badge;
+import idv.fc.taglib.component.common.Badge;
+import idv.fc.taglib.component.common.TaglibRenderer;
 import idv.fc.taglib.component.listgroup.ListGroupItemHeading;
 import idv.fc.taglib.component.listgroup.ListGroupItemText;
-import idv.fc.taglib.component.listgroup.renderer.ListGroupRenderer;
+import idv.fc.taglib.component.listgroup.renderer.ListGroupRenderere;
 
-public class FlashcardListGroupRenderer
-		implements ListGroupRenderer<Flashcard> {
+public class FlashcardListGroupRenderer extends ListGroupRenderere<Flashcard> {
 	private final String pathForCRUD = "flashcard";
 	private final String badgeSpanSheet = "text-align: center; padding-left: 20px;"
 			+ " padding-right: 20px;";
@@ -20,7 +20,7 @@ public class FlashcardListGroupRenderer
 	}
 
 	@Override
-	public String getRenderedBefore() {
+	public String getRenderedTitle() {
 		StringBuilder scriptSB = new StringBuilder();
 		scriptSB.append("location.href='").append(request.getContextPath())
 				.append("/").append(pathForCRUD).append("'");
@@ -35,13 +35,13 @@ public class FlashcardListGroupRenderer
 	}
 
 	@Override
-	public String getRenderedResult(Flashcard model) {
+	public String getRenderedBody(Flashcard model) {
 		//delete badge begin
 		StringBuilder deleteScriptSB = new StringBuilder();
 		deleteScriptSB.append("modelValues").append("('");//script begin
-		deleteScriptSB.append(model.getId()).append("','")
-				.append(model.getTerm()).append("','")
-				.append(model.getDefinition());//script parameter
+		deleteScriptSB.append(model.getId()).append("','");//script parameter
+		deleteScriptSB.append(model.getTerm()).append("','");
+		deleteScriptSB.append(model.getDefinition()).append("','");
 		deleteScriptSB.append("')");//script end
 
 		Badge deleteBadge = new Badge();
@@ -87,8 +87,8 @@ public class FlashcardListGroupRenderer
 	}
 
 	@Override
-	public String getRenderedAfter(Flashcard model) {
-		return SKIP;
+	public String getRenderedFooter() {
+		return EMPTY;
 	}
 
 }
