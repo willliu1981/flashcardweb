@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import tool.taglib.Taglibs;
+
 /*
  * 由 ListGroupItem、Badge 等實作
  */
@@ -36,22 +38,12 @@ public interface TaglibComponentItem {
 	default public String getHtmlCode() {
 		StringBuilder sb = new StringBuilder();
 
-		String htmlClasses = getHtmlClasses().stream()
-				.collect(Collectors.joining(" ", " class=\"", "\""));
-
-		String styleSheets = this.getStyleSheets().stream()
-				.collect(Collectors.joining(";", "style=\"", "\""));
-
-		String attributes = this.getAttributes().entrySet().stream()
-				.map(es -> es.getKey() + "=\"" + es.getValue() + "\"")
-				.collect(Collectors.joining(" "));
-
 		String onClickScript = "onclick=\"" + getOnClickScript() + "\"";
 
 		sb.append("<").append(this.getHtmlTag());//prifix begin
-		sb.append(htmlClasses);// class
-		sb.append(styleSheets);// css
-		sb.append(attributes);//attribute
+		sb.append(Taglibs.getHtmlClasses(getHtmlClasses()));// class
+		sb.append(Taglibs.getStyleSheets(getStyleSheets()));// css
+		sb.append(Taglibs.getAttributes(getAttributes()));//attribute
 		sb.append(onClickScript);//onclick
 		sb.append(">");//prifix end
 

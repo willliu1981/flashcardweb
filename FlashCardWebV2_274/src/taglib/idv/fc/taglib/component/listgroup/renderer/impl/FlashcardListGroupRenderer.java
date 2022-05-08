@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import idv.fc.model.Flashcard;
 import idv.fc.taglib.component.common.Badge;
-import idv.fc.taglib.component.common.TaglibRenderer;
+import idv.fc.taglib.component.common.Script;
 import idv.fc.taglib.component.listgroup.ListGroupItemHeading;
 import idv.fc.taglib.component.listgroup.ListGroupItemText;
 import idv.fc.taglib.component.listgroup.renderer.ListGroupRenderere;
@@ -77,6 +77,9 @@ public class FlashcardListGroupRenderer extends ListGroupRenderere<Flashcard> {
 		//text.addHtmlClass("h4");//改變font size , 但也改變了顏色
 		text.addStyleSheet("font-size:22px");
 		text.setText(model.getDefinition());
+
+		Script script = new Script();
+		
 
 		//組合
 		StringBuilder sb = new StringBuilder();
