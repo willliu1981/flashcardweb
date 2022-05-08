@@ -8,6 +8,7 @@ import idv.fc.taglib.component.common.Script;
 import idv.fc.taglib.component.listgroup.ListGroupItemHeading;
 import idv.fc.taglib.component.listgroup.ListGroupItemText;
 import idv.fc.taglib.component.listgroup.renderer.ListGroupRenderere;
+import tool.taglib.Scripts;
 
 public class FlashcardListGroupRenderer extends ListGroupRenderere<Flashcard> {
 	private final String pathForCRUD = "flashcard";
@@ -44,6 +45,10 @@ public class FlashcardListGroupRenderer extends ListGroupRenderere<Flashcard> {
 		deleteScriptSB.append(model.getDefinition()).append("','");
 		deleteScriptSB.append("')");//script end
 
+		Scripts.getScript("modelValues", "",
+				new String[] { model.getId().toString(), model.getTerm(),
+						model.getDefinition() });
+
 		Badge deleteBadge = new Badge();
 		deleteBadge.addStyleSheet(badgeSpanSheet);
 		deleteBadge.addStyleSheet("background:red");
@@ -79,7 +84,6 @@ public class FlashcardListGroupRenderer extends ListGroupRenderere<Flashcard> {
 		text.setText(model.getDefinition());
 
 		Script script = new Script();
-		
 
 		//組合
 		StringBuilder sb = new StringBuilder();
