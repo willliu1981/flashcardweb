@@ -3,6 +3,8 @@ package tool.taglib;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.servlet.http.HttpServletRequest;
+
 public class Scripts {
 
 	public static String getScript(String name, String... params) {
@@ -12,6 +14,18 @@ public class Scripts {
 		StringBuilder sb = Taglibs.getStringBuilder();
 		sb.append(name).append("(").append(strParams).append(")");
 
+		return sb.toString();
+	}
+
+	public static String getScriptWithHref(HttpServletRequest request,
+			String... pathVariables) {
+		String pv = Stream.of(pathVariables).collect(Collectors.joining("/"));
+
+		StringBuilder sb = Taglibs.getStringBuilder();
+		sb.append("location.href='").append(request.getContextPath())
+				.append("/");
+		sb.append(pv);
+		sb.append("'");
 		return sb.toString();
 	}
 

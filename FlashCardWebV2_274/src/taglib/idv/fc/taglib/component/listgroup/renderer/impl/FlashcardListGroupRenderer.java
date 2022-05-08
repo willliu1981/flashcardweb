@@ -38,13 +38,6 @@ public class FlashcardListGroupRenderer extends ListGroupRenderere<Flashcard> {
 	@Override
 	public String getRenderedBody(Flashcard model) {
 		//delete badge begin
-		StringBuilder deleteScriptSB = new StringBuilder();
-		deleteScriptSB.append("modelValues").append("('");//script begin
-		deleteScriptSB.append(model.getId()).append("','");//script parameter
-		deleteScriptSB.append(model.getTerm()).append("','");
-		deleteScriptSB.append(model.getDefinition()).append("','");
-		deleteScriptSB.append("')");//script end
-
 		Badge deleteBadge = new Badge();
 		deleteBadge.addStyleSheet(badgeSpanSheet);
 		deleteBadge.addStyleSheet("background:red");
@@ -53,23 +46,18 @@ public class FlashcardListGroupRenderer extends ListGroupRenderere<Flashcard> {
 				.addAttribute("data-toggle", "modal");
 		deleteBadge.setText("DELETE");
 		deleteBadge.onClick(
-				Scripts.getScript("modelValues",  model.getId().toString(),
+				Scripts.getScript("modelValues", model.getId().toString(),
 						model.getTerm(), model.getDefinition()));
 		//delete badge end
 
 		//edit badge begin
-		StringBuilder editScriptSB = new StringBuilder();
-		editScriptSB.append("location.href=").append("'");//href begin
-		editScriptSB.append(request.getContextPath()).append("/");//context path
-		editScriptSB.append(pathForCRUD).append("/").append(model.getId());//rest path
-		editScriptSB.append("'");//herf end
-
 		Badge editBadge = new Badge();
 		editBadge.addStyleSheet(badgeSpanSheet);
 		//editBadge.addStyleSheet("background:blue");//註解以使用預設藍色
 		editBadge.addStyleSheet("font-size:17px");
 		editBadge.setText("EDIT");
-		editBadge.onClick(editScriptSB.toString());
+		editBadge.onClick(Scripts.getScriptWithHref(request, pathForCRUD,
+				model.getId().toString()));
 		//edit badge end
 
 		ListGroupItemHeading heading = new ListGroupItemHeading();
