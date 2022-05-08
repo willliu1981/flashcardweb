@@ -48,7 +48,7 @@ public interface TaglibComponentItem {
 		sb.append(">");//prifix end
 
 		sb.append(this.getText());//data
-		sb.append("</").append(this.getHtmlTag()).append("/>");//suffix
+		sb.append("</").append(this.getHtmlTag()).append(">");//suffix
 
 		return sb.toString();
 	}

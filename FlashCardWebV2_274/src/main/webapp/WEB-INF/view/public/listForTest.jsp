@@ -4,26 +4,12 @@
 <html>
 <head>
 <script type="text/javascript">
-  //$("#listDeleteModal").model("hide");
-  function modelValues(id) {
-	modelValues(id, "");
-  }
+  function modelValues(id,... datas) {
+	var items=$(".modal-body").children(".modal-body-item");
 
-  function modelValues(id, var1) {
-	modelValues(id, var1, "");
-  }
-
-  function modelValues(id, var1, var2) {
-	modelValues(id, var1, var2, "");
-  }
-
-  function modelValues(id, var1, var2, var3) {
-	$("#modal_var1").text(var1);
-	$("#modal_var2").text(var2);
-	$("#modal_var3").text(var3);
-	$("#modal_form").attr("action", function(i, orig) {
-	  return orig + id;
-	});
+	for(var i=0; i<datas.length;i++){
+	  items[i].innerHTML=datas[i];
+	}
   }
 </script>
 </head>
@@ -53,11 +39,11 @@
                     <h4 class="modal-title">${title}</h4>
                 </div>
                 <div class="modal-body">
-                    <label id="modal_var1" style="font-size: 20px;">term</label>
+                    <label class="modal-body-item" style="font-size: 20px;"></label>
                     <br />
-                    <label id="modal_var2" style="font-size: 20px;">definition</label>
+                    <label class="modal-body-item" style="font-size: 20px;"></label>
                     <br />
-                    <label id="modal_var3" style="font-size: 20px;">var3</label>
+                    <label class="modal-body-item" style="font-size: 20px;"></label>
                 </div>
                 <div class="modal-footer">
                     <form id="modal_form" action="${pageContext.request.contextPath}/flashcard/" method="post">

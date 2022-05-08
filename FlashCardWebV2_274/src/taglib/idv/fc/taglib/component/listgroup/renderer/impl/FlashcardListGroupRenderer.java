@@ -45,10 +45,6 @@ public class FlashcardListGroupRenderer extends ListGroupRenderere<Flashcard> {
 		deleteScriptSB.append(model.getDefinition()).append("','");
 		deleteScriptSB.append("')");//script end
 
-		Scripts.getScript("modelValues", "",
-				new String[] { model.getId().toString(), model.getTerm(),
-						model.getDefinition() });
-
 		Badge deleteBadge = new Badge();
 		deleteBadge.addStyleSheet(badgeSpanSheet);
 		deleteBadge.addStyleSheet("background:red");
@@ -56,7 +52,9 @@ public class FlashcardListGroupRenderer extends ListGroupRenderere<Flashcard> {
 		deleteBadge.addAttribute("data-target", "#listDeleteModal")
 				.addAttribute("data-toggle", "modal");
 		deleteBadge.setText("DELETE");
-		deleteBadge.onClick(deleteScriptSB.toString());
+		deleteBadge.onClick(
+				Scripts.getScript("modelValues",  model.getId().toString(),
+						model.getTerm(), model.getDefinition()));
 		//delete badge end
 
 		//edit badge begin
