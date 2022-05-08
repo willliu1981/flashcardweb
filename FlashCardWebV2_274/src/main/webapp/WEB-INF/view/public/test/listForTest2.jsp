@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="ls" uri="https://fc.idv/jsp/tlds/listTags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,9 +22,16 @@
             <li class="list-group-item">${fcFacade.listTitle}
                 <h3>${title}</h3>
             </li>
-            <c:forEach var="i" begin="0" end="4">
+
+            <ls:eachItem listFacade="${fcFacade }" var="item">
+                <li class="list-group-item"><a href="#" class="list-group-item">
+                        <ls:item>${item }</ls:item>
+                    </a></li>
+            </ls:eachItem>
+
+            <%--   <c:forEach var="i" begin="0" end="4">
                 <li class="list-group-item"><a href="#" class="list-group-item"> ${fcFacade.listItem } </a></li>
-            </c:forEach>
+            </c:forEach> --%>
         </ul>
     </div>
 

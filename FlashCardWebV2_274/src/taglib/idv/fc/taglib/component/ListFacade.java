@@ -3,12 +3,12 @@ package idv.fc.taglib.component;
 import idv.fc.taglib.component.listgroup.ListGroup;
 import idv.fc.taglib.component.modal.Modal;
 
-public class Facade<T> {
+public class ListFacade<T> {
 	public static String EMPTY = "";
 	private ListGroup<T> listGroup;
 	private Modal<T> modal;
 
-	public Facade(ListGroup<T> listGroup, Modal<T> modal) {
+	public ListFacade(ListGroup<T> listGroup, Modal<T> modal) {
 		super();
 		this.listGroup = listGroup;
 		this.modal = modal;
@@ -23,7 +23,11 @@ public class Facade<T> {
 			return this.listGroup.getNextBodyResult();
 		}
 
-		return Facade.EMPTY;
+		return ListFacade.EMPTY;
+	}
+
+	public boolean hasNextListItem() {
+		return this.listGroup.hasNext();
 	}
 
 	public String getModalBody() {

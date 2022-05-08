@@ -33,6 +33,9 @@ public class ListGroup<T> implements TaglibComponent<T> {
 	}
 
 	public String getNextBodyResult() {
+		if (!this.hasNext()) {
+			this.pointer = 0;
+		}
 		String bodyResultWithIndex = this.getBodyResultWithIndex(pointer);
 		this.pointer++;
 		return bodyResultWithIndex;
