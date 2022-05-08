@@ -1,16 +1,14 @@
-package idv.fc.taglib.component.listgroup;
+package idv.fc.taglib.component.common;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import idv.fc.taglib.component.common.TaglibComponentItem;
-
 public class CommonComponentItem implements TaglibComponentItem {
 	private String script;//onclick script
 	private String text;// 文本框
-	private String htmlTag = "span";
+	private String htmlTag ;
 	private List<String> htmlClasses = new ArrayList<>();
 	private List<String> styleSheets = new ArrayList<>();
 	private Map<String, String> attributes = new HashMap<>();

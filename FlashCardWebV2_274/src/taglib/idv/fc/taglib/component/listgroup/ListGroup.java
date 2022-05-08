@@ -42,4 +42,9 @@ public class ListGroup<T> implements TaglibComponent<T> {
 		return this.renderer.getRenderedFooter();
 	}
 
+	@Override
+	public String getBodyResult() {
+		return ((ListGroupRenderere<T>) this.renderer).getRenderedBody();
+	}
+
 }

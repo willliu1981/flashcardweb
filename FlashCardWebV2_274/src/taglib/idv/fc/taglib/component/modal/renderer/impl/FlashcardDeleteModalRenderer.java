@@ -1,9 +1,20 @@
 package idv.fc.taglib.component.modal.renderer.impl;
 
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import javax.servlet.http.HttpServletRequest;
+
 import idv.fc.model.Flashcard;
+import idv.fc.taglib.component.common.ModalBodyItemLabel;
 import idv.fc.taglib.component.modal.renderer.ModalRenderer;
 
 public class FlashcardDeleteModalRenderer extends ModalRenderer<Flashcard> {
+	private HttpServletRequest request;
+
+	public FlashcardDeleteModalRenderer(HttpServletRequest request) {
+		this.request = request;
+	}
 
 	@Override
 	public String getRenderedTitle() {
@@ -12,7 +23,11 @@ public class FlashcardDeleteModalRenderer extends ModalRenderer<Flashcard> {
 
 	@Override
 	public String getRenderedBody() {
-		return EMPTY;
+		ModalBodyItemLabel label1 = new ModalBodyItemLabel();
+		ModalBodyItemLabel label2 = new ModalBodyItemLabel();
+
+		return Stream.of(label1.getHtmlCode(), label2.getHtmlCode())
+				.map(x -> "<p>" + x + "</p>").collect(Collectors.joining());
 	}
 
 	@Override

@@ -9,7 +9,7 @@ public class Modal<T> implements TaglibComponent<T> {
 
 	@Override
 	public String getBodyResult(int index) {
-		return null;
+		return renderer.getRenderedBody();
 	}
 
 	@Override
@@ -25,6 +25,11 @@ public class Modal<T> implements TaglibComponent<T> {
 	@Override
 	public void setRenderer(TaglibRenderer<T> renderer) {
 		this.renderer = renderer;
+	}
+
+	@Override
+	public String getBodyResult() {
+		return renderer.getRenderedBody();
 	}
 
 }

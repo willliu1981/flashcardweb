@@ -1,5 +1,8 @@
 package idv.fc.taglib.component.listgroup.renderer.impl;
 
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import javax.servlet.http.HttpServletRequest;
 
 import idv.fc.model.Flashcard;
@@ -69,14 +72,10 @@ public class FlashcardListGroupRenderer extends ListGroupRenderere<Flashcard> {
 		text.addStyleSheet("font-size:22px");
 		text.setText(model.getDefinition());
 
-		Script script = new Script();
-
-		//組合
-		StringBuilder sb = new StringBuilder();
-		sb.append(deleteBadge.getHtmlCode()).append(editBadge.getHtmlCode());//badge
-		sb.append(heading.getHtmlCode()).append(" ").append(text.getHtmlCode());//heading & text
-
-		return sb.toString();
+		return Stream
+				.of(deleteBadge.getHtmlCode(), editBadge.getHtmlCode(),
+						heading.getHtmlCode(), text.getHtmlCode())
+				.collect(Collectors.joining());
 	}
 
 	@Override

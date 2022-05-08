@@ -1,11 +1,10 @@
 package idv.fc.taglib.component.common;
 
-import idv.fc.taglib.component.listgroup.CommonComponentItem;
-
 public class Badge extends CommonComponentItem {
 
 	public Badge() {
 		this.addHtmlClass("badge");
+		this.setHtmlTag("span");
 	}
 
 	public Badge(String overridePrimeClass) {

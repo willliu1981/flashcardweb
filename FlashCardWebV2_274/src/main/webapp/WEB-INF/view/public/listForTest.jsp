@@ -5,7 +5,7 @@
 <head>
 <script type="text/javascript">
   function modelValues(id,... datas) {
-	var items=$(".modal-body").children(".modal-body-item");
+	var items=$(".modal-body p").children(".modal-body-item");
 
 	for(var i=0; i<datas.length;i++){
 	  items[i].innerHTML=datas[i];
@@ -39,11 +39,9 @@
                     <h4 class="modal-title">${title}</h4>
                 </div>
                 <div class="modal-body">
-                    <label class="modal-body-item" style="font-size: 20px;"></label>
-                    <br />
-                    <label class="modal-body-item" style="font-size: 20px;"></label>
-                    <br />
-                    <label class="modal-body-item" style="font-size: 20px;"></label>
+                   ${modal.getBodyResult()}
+
+
                 </div>
                 <div class="modal-footer">
                     <form id="modal_form" action="${pageContext.request.contextPath}/flashcard/" method="post">
