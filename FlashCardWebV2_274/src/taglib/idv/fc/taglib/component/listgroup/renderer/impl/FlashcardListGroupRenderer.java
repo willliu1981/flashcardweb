@@ -39,7 +39,7 @@ public class FlashcardListGroupRenderer extends ListGroupRenderere<Flashcard> {
 	}
 
 	@Override
-	public String getRenderedBody(Flashcard model) {
+	public String getRenderedEachBody(Flashcard model) {
 		//delete badge begin
 		Badge deleteBadge = new Badge();
 		deleteBadge.addStyleSheet(badgeSpanSheet);

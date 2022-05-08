@@ -8,11 +8,6 @@ public class Modal<T> implements TaglibComponent<T> {
 	private TaglibRenderer<T> renderer;
 
 	@Override
-	public String getBodyResult(int index) {
-		return renderer.getRenderedBody();
-	}
-
-	@Override
 	public String getTitleResult() {
 		return renderer.getRenderedTitle();
 	}

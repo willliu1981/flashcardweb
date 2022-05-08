@@ -22,8 +22,8 @@
                 <h3>${title}</h3>
             </li>
             <c:forEach var="i" begin="0" end="${listGroup.itemSize-1}">
-                <li class="list-group-item"><a href="#" class="list-group-item"> ${listGroup.getBodyResult(i) }
-                    </a></li>
+                <li class="list-group-item"><a href="#" class="list-group-item">
+                        ${listGroup.getEachBodyResult(i) } </a></li>
             </c:forEach>
         </ul>
     </div>
@@ -38,11 +38,7 @@
                     </button>
                     <h4 class="modal-title">${title}</h4>
                 </div>
-                <div class="modal-body">
-                   ${modal.getBodyResult()}
-
-
-                </div>
+                <div class="modal-body">${modal.getBodyResult()}</div>
                 <div class="modal-footer">
                     <form id="modal_form" action="${pageContext.request.contextPath}/flashcard/" method="post">
                         <input type="hidden" name="_method" value="delete" />

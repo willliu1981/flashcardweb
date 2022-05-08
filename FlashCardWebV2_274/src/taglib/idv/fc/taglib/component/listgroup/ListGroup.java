@@ -8,6 +8,7 @@ import idv.fc.taglib.component.listgroup.renderer.ListGroupRenderere;
 public class ListGroup<T> implements TaglibComponent<T> {
 	private ListGroupModel<T> model;
 	private TaglibRenderer<T> renderer;
+	private int pointer = 0;
 
 	public ListGroup() {
 
@@ -26,10 +27,19 @@ public class ListGroup<T> implements TaglibComponent<T> {
 		this.renderer = renderer;
 	}
 
-	@Override
-	public String getBodyResult(int index) {
+	protected String getBodyResultWithIndex(int index) {
 		return ((ListGroupRenderere<T>) this.renderer)
-				.getRenderedBody(this.model.getItem(index));
+				.getRenderedEachBody(this.model.getItem(index));
+	}
+
+	public String getNextBodyResult() {
+		String bodyResultWithIndex = this.getBodyResultWithIndex(pointer);
+		this.pointer++;
+		return bodyResultWithIndex;
+	}
+
+	public boolean hasNext() {
+		return this.pointer < this.model.getItemSize();
 	}
 
 	@Override

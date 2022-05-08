@@ -13,6 +13,7 @@ import com.github.pagehelper.PageInfo;
 
 import idv.fc.model.Flashcard;
 import idv.fc.service.impl.FlashcardServiceImpl;
+import idv.fc.taglib.component.Facade;
 import idv.fc.taglib.component.listgroup.ListGroup;
 import idv.fc.taglib.component.listgroup.listmodel.DefaultListGroupModel;
 import idv.fc.taglib.component.listgroup.renderer.impl.FlashcardListGroupRenderer;
@@ -51,7 +52,7 @@ public class TestController extends BaseController {
 		listGroup.setModel(model);
 		listGroup.setRenderer(fclgRenderer);
 
-		request.getServletContext().setAttribute("listGroup", listGroup);
+		//request.getServletContext().setAttribute("listGroup", listGroup);
 		//ListGroup end
 
 		//Modal begin
@@ -60,8 +61,11 @@ public class TestController extends BaseController {
 				request);
 		modal.setRenderer(fcdmRenderer);
 
-		request.getServletContext().setAttribute("modal", modal);
+		//request.getServletContext().setAttribute("modal", modal);
 		//Modal end
+
+		Facade<Flashcard> fcFacade = new Facade<>(listGroup, modal);
+		request.getServletContext().setAttribute("fcFacade", fcFacade);
 
 		return "test/fcManagedTestPage";
 
