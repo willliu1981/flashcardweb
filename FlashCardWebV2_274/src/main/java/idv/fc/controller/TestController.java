@@ -13,7 +13,8 @@ import com.github.pagehelper.PageInfo;
 
 import idv.fc.model.Flashcard;
 import idv.fc.service.impl.FlashcardServiceImpl;
-import idv.fc.taglib.component.ListFacade;
+import idv.fc.taglib.component.FlashcardListFacade;
+import idv.fc.taglib.component.ListFacadeFactory;
 import idv.fc.taglib.component.listgroup.ListGroup;
 import idv.fc.taglib.component.listgroup.listmodel.DefaultListGroupModel;
 import idv.fc.taglib.component.listgroup.renderer.impl.FlashcardListGroupRenderer;
@@ -38,34 +39,14 @@ public class TestController extends BaseController {
 				FlashcardServiceImpl.class);
 
 		PageHelper.startPage(1, 5);
-		List<Flashcard> finds = service.getAll();
-		PageInfo<Flashcard> pageInfo = new PageInfo<>(finds, 5);
+		List<Flashcard> datas = service.getAll();
+		PageInfo<Flashcard> pageInfo = new PageInfo<>(datas, 5);
 		map.put("pageInfo", pageInfo);
 
-		//ListGroup begin
-		ListGroup<Flashcard> listGroup = new ListGroup<>();
-		DefaultListGroupModel<Flashcard> model = new DefaultListGroupModel<>();
-		finds.stream().forEach(item -> model.addItem(item));
-		FlashcardListGroupRenderer fclgRenderer = new FlashcardListGroupRenderer(
-				request);
+		FlashcardListFacade facade = ListFacadeFactory.getListFacade(request,
+				datas, FlashcardListFacade.class);
 
-		listGroup.setModel(model);
-		listGroup.setRenderer(fclgRenderer);
-
-		//request.getServletContext().setAttribute("listGroup", listGroup);
-		//ListGroup end
-
-		//Modal begin
-		Modal<Flashcard> modal = new Modal<>();
-		FlashcardDeleteModalRenderer fcdmRenderer = new FlashcardDeleteModalRenderer(
-				request);
-		modal.setRenderer(fcdmRenderer);
-
-		//request.getServletContext().setAttribute("modal", modal);
-		//Modal end
-
-		ListFacade<Flashcard> fcFacade = new ListFacade<>(listGroup, modal);
-		request.getServletContext().setAttribute("fcFacade", fcFacade);
+		request.getServletContext().setAttribute("fcFacade", facade);
 
 		return "test/fcManagedTestPage";
 

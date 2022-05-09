@@ -24,7 +24,10 @@ public class FlashcardDeleteModalRenderer extends ModalRenderer<Flashcard> {
 	@Override
 	public String getRenderedBody() {
 		ModalBodyItemLabel label1 = new ModalBodyItemLabel();
+		label1.addStyleSheet("font-size:24px;");
+		
 		ModalBodyItemLabel label2 = new ModalBodyItemLabel();
+		label2.addStyleSheet("font-size:20px;");
 
 		return Stream.of(label1.getHtmlCode(), label2.getHtmlCode())
 				.map(x -> "<p>" + x + "</p>").collect(Collectors.joining());

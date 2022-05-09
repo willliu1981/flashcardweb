@@ -63,18 +63,22 @@ public class FlashcardListGroupRenderer extends ListGroupRenderere<Flashcard> {
 				model.getId().toString()));
 		//edit badge end
 
+		//heading
 		ListGroupItemHeading heading = new ListGroupItemHeading();
 		heading.addHtmlClass("h3");
 		heading.setText(model.getTerm());
 
+		//text
 		ListGroupItemText text = new ListGroupItemText();
-		//text.addHtmlClass("h4");//改變font size , 但也改變了顏色
 		text.addStyleSheet("font-size:22px");
 		text.setText(model.getDefinition());
 
+		//gap
+		String gap = "<span style='width:10px; display: inline-block;'></span>";
+
 		return Stream
 				.of(deleteBadge.getHtmlCode(), editBadge.getHtmlCode(),
-						heading.getHtmlCode(), text.getHtmlCode())
+						heading.getHtmlCode(), gap, text.getHtmlCode())
 				.collect(Collectors.joining());
 	}
 

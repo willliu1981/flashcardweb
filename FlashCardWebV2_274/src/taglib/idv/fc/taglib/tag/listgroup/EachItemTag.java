@@ -1,23 +1,21 @@
 package idv.fc.taglib.tag.listgroup;
 
 import java.io.IOException;
-import java.io.StringWriter;
 
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-import idv.fc.model.Flashcard;
 import idv.fc.taglib.component.ListFacade;
-import idv.fc.taglib.component.common.TaglibRenderer;
+import tool.Debug;
 
-public class EachItemTag<T> extends SimpleTagSupport {
+public class EachItemTag extends SimpleTagSupport {
 
-	private ListFacade<T> facade;
+	private ListFacade facade;
 	private String var = "item";
 
-	public void setListFacade(ListFacade<T> facade) {
+	public void setListFacade(ListFacade facade) {
 		this.facade = facade;
+		Debug.test(this, facade);
 	}
 
 	public void setVar(String var) {
@@ -26,8 +24,6 @@ public class EachItemTag<T> extends SimpleTagSupport {
 
 	@Override
 	public void doTag() throws JspException, IOException {
-
-		final JspWriter out = this.getJspContext().getOut();
 
 		while (this.facade.hasNextListItem()) {
 			String listItem = facade.getListItem();

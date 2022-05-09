@@ -8,7 +8,7 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import idv.fc.model.Flashcard;
-import idv.fc.taglib.component.ListFacade;
+import idv.fc.taglib.component.FlashcardListFacade;
 import idv.fc.taglib.component.common.TaglibRenderer;
 
 public class ItemTag extends SimpleTagSupport {

@@ -6,11 +6,17 @@
 <head>
 <script type="text/javascript">
   function modelValues(id,... datas) {
-	var items=$(".modal-body p").children(".modal-body-item");
+	var items=$(".modal-body").find(".modal-body-item");
 
+	/* show datas */
 	for(var i=0; i<datas.length;i++){
 	  items[i].innerHTML=datas[i];
 	}
+	
+	/* delete */
+	$("#modal_form").attr("action", function(i, orig) {
+	  return orig + id;
+	});
   }
 </script>
 </head>
@@ -19,19 +25,13 @@
     <!-- list -->
     <div class="container">
         <ul class="list-group myBadgeCursor">
-            <li class="list-group-item">${fcFacade.listTitle}
+            <li class="list-group-item">${facade.listTitle}
                 <h3>${title}</h3>
             </li>
 
-            <ls:eachItem listFacade="${fcFacade }" var="item">
-                <li class="list-group-item"><a href="#" class="list-group-item">
-                        <ls:item>${item }</ls:item>
-                    </a></li>
+            <ls:eachItem listFacade="${facade}" var="item">
+                <li class="list-group-item"><a href="#" class="list-group-item">${item}</a></li>
             </ls:eachItem>
-
-            <%--   <c:forEach var="i" begin="0" end="4">
-                <li class="list-group-item"><a href="#" class="list-group-item"> ${fcFacade.listItem } </a></li>
-            </c:forEach> --%>
         </ul>
     </div>
 
@@ -45,9 +45,9 @@
                     </button>
                     <h4 class="modal-title">${title}</h4>
                 </div>
-                <div class="modal-body">${fcFacade.modalBody}</div>
+                <div class="modal-body">${facade.modalBody}</div>
                 <div class="modal-footer">
-                    <form id="modal_form" action="${pageContext.request.contextPath}/flashcard/" method="post">
+                    <form id="modal_form" action="${pageContext.request.contextPath}/${pathForList}/" method="post">
                         <input type="hidden" name="_method" value="delete" />
                         <button type="button" class="btn btn-default" data-dismiss="modal">
                             <font color="black">Close</font>

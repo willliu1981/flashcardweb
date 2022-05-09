@@ -21,10 +21,10 @@
     <!-- title -->
     <c:set var="title" value="Flashcard" scope="request" />
 
-    <!-- 清單 前往 web 的 path -->
+    <!-- 清單 前往 web 的 base path -->
     <c:set var="pathForList" value="flashcard" scope="request" />
 
-    <!-- 分頁 前往 web 的 base path -->
+    <!-- 分頁 前往 web 的 base base path -->
     <c:set var="pathForPager" value="flashcards/fcManager" scope="request" />
 
     <!-- include header nav -->
