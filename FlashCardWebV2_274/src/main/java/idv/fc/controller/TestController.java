@@ -44,8 +44,8 @@ public class TestController extends BaseController {
 		PageInfo<Flashcard> pageInfo = new PageInfo<>(datas, 5);
 		map.put("pageInfo", pageInfo);
 
-		FlashcardListFacade facade = ListFacadeFactory.getListFacade(request,
-				datas, FlashcardListFacade.class);
+		FlashcardListFacade facade = ListFacadeFactory.getListFacade(datas,
+				FlashcardListFacade.class);
 
 		request.getServletContext().setAttribute("facade", facade);
 

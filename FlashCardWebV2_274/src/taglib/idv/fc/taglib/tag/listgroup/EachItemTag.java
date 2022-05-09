@@ -15,7 +15,6 @@ public class EachItemTag extends SimpleTagSupport {
 
 	public void setListFacade(ListFacade facade) {
 		this.facade = facade;
-		Debug.test(this, facade);
 	}
 
 	public void setVar(String var) {

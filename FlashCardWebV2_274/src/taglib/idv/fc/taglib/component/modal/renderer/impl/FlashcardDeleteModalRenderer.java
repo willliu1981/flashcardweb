@@ -10,10 +10,10 @@ import idv.fc.taglib.component.common.ModalBodyItemLabel;
 import idv.fc.taglib.component.modal.renderer.ModalRenderer;
 
 public class FlashcardDeleteModalRenderer extends ModalRenderer<Flashcard> {
-	private HttpServletRequest request;
+	private String contextPath;
 
-	public FlashcardDeleteModalRenderer(HttpServletRequest request) {
-		this.request = request;
+	public FlashcardDeleteModalRenderer(String contextPath) {
+		this.contextPath = contextPath;
 	}
 
 	@Override

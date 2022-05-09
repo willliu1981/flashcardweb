@@ -18,12 +18,13 @@ public class FlashcardListFacade extends ListFacade {
 	public static String EMPTY = "";
 	private ListGroup<Flashcard> listGroup;
 	private Modal<Flashcard> modal;
+	private String contextPath;
 
 	public FlashcardListFacade() {
 
 	}
 
-	public FlashcardListFacade(HttpServletRequest request,
+	public FlashcardListFacade(
 			List<Flashcard> datas) {
 		listGroup = new ListGroup<>();
 		DefaultListGroupModel<Flashcard> model = new DefaultListGroupModel<>();
@@ -31,13 +32,18 @@ public class FlashcardListFacade extends ListFacade {
 		listGroup.setModel(model);
 
 		FlashcardListGroupRenderer fclgRenderer = new FlashcardListGroupRenderer(
-				request);
+				contextPath);
 		listGroup.setRenderer(fclgRenderer);
 
 		modal = new Modal<>();
 		FlashcardDeleteModalRenderer fcdmRenderer = new FlashcardDeleteModalRenderer(
-				request);
+				contextPath);
 		modal.setRenderer(fcdmRenderer);
+	}
+
+	@Override
+	public void setContextPath(String contextPath) {
+		this.contextPath = contextPath;
 	}
 
 	@Override

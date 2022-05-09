@@ -25,9 +25,7 @@
     <!-- list -->
     <div class="container">
         <ul class="list-group myBadgeCursor">
-            <li class="list-group-item">${facade.listTitle}
-                <h3>${title}</h3>
-            </li>
+            <li class="list-group-item"><ls:listTitle listFacade="${facade}"></ls:listTitle></li>
 
             <ls:eachItem listFacade="${facade}" var="item">
                 <li class="list-group-item"><a href="#" class="list-group-item">${item}</a></li>

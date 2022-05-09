@@ -17,12 +17,12 @@ public class Scripts {
 		return sb.toString();
 	}
 
-	public static String getScriptWithHref(HttpServletRequest request,
+	public static String getScriptWithHref(String contextPath,
 			String... pathVariables) {
 		String pv = Stream.of(pathVariables).collect(Collectors.joining("/"));
 
 		StringBuilder sb = Taglibs.getStringBuilder();
-		sb.append("location.href='").append(request.getContextPath())
+		sb.append("location.href='").append(contextPath)
 				.append("/");
 		sb.append(pv);
 		sb.append("'");

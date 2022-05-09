@@ -8,14 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 
 public class ListFacadeFactory {
 
-	public static <T extends ListFacade, E> T getListFacade(
-			HttpServletRequest request, List<E> datas,
+	public static <T extends ListFacade, E> T getListFacade(List<E> datas,
 			Class<T> listFacadeType) {
 		T newInstance = null;
 		try {
-			Constructor<T> constructor = listFacadeType.getDeclaredConstructor(
-					HttpServletRequest.class, List.class);
-			newInstance = constructor.newInstance(request, datas);
+			Constructor<T> constructor = listFacadeType
+					.getDeclaredConstructor(List.class);
+			newInstance = constructor.newInstance(datas);
 
 		} catch (NoSuchMethodException | SecurityException
 				| InstantiationException | IllegalAccessException

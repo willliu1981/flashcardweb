@@ -18,12 +18,6 @@
 
 </head>
 <body>
-    <!-- 清單前往 web 的 path -->
-    <c:set var="pathForList" value="flashcard" scope="request" />
-
-    <!-- 分頁前往 web 的 base path -->
-    <c:set var="pathForPager" value="flashcards/fcManager" scope="request" />
-
     <!-- include header nav -->
     <jsp:include page="/WEB-INF/view/public/header.jsp" flush="true">
         <jsp:param name="active" value="flashcardManager" />

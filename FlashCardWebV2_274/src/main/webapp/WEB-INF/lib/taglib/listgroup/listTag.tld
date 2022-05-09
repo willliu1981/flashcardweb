@@ -24,11 +24,23 @@
 			<required>true</required>
 		</attribute>
 	</tag>
-	
+
 	<tag>
 		<name>item</name>
 		<tag-class>idv.fc.taglib.tag.listgroup.ItemTag</tag-class>
 		<body-content>scriptless</body-content>
+	</tag>
+
+	<tag>
+		<name>listTitle</name>
+		<tag-class>idv.fc.taglib.tag.listgroup.titleTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>listFacade</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>idv.fc.taglib.component.ListFacade</type>
+			<required>true</required>
+		</attribute>
 	</tag>
 
 </taglib>

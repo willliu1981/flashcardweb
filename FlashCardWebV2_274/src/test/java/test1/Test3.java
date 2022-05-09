@@ -111,4 +111,39 @@ public class Test3 {
 
 	}
 
+	static class Person {
+		Info info;
+		String infoData;
+
+		Person() {
+			info = new Info(infoData);
+		}
+
+		public void setInfoData(String infoData) {
+			this.infoData = infoData;
+		}
+
+		@Override
+		public String toString() {
+			return "Person [info=" + info + ", infoData=" + infoData + "]";
+		}
+
+	}
+
+	static class Info {
+		String data;
+
+		Info(String data) {
+			this.data = data;
+		}
+	}
+
+	@Test
+	public void testx4() {
+		Person p = new Person();
+		p.setInfoData("xxx");
+
+		Debug.test(this, p);
+	}
+
 }

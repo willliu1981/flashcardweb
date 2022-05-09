@@ -31,6 +31,10 @@
 
 .	custom tag , tld <rtexprvalue> , 為true 才能使用 EL
 
+.	custom tag  , 取得 ContextPat
+		ServletContext servletContext = ((PageContext) getJspContext()).getServletContext();
+		String appContext = servletContext.getContextPath();
+
 
 參照:
 .	header.jsp active param: (參照 header.jsp : path mapping)
