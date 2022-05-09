@@ -1,4 +1,4 @@
-package test3;
+package testConstructor;
 
 public class Product {
 

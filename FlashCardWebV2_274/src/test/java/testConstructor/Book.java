@@ -1,13 +1,15 @@
-package test3;
+package testConstructor;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 public class Book<T> extends Product {
-	private String name;
+	private Name name;
 	private int price;
 	List<T> datas;
 
-	public Book(String name, int price, List<T> datas) {
+	public Book(Name name, int price, List<T> datas,HttpServletRequest request) {
 		this.name = name;
 		this.price = price;
 		this.datas = datas;
