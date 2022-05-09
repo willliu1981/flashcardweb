@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CommonComponentItem implements TaglibComponentItem {
+public abstract class CommonComponentItem implements TaglibComponentItem {
 	private String script;//onclick script
 	private String text;// 文本框
-	private String htmlTag ;
+	private String htmlTag;
 	private List<String> htmlClasses = new ArrayList<>();
 	private List<String> styleSheets = new ArrayList<>();
 	private Map<String, String> attributes = new HashMap<>();
@@ -21,7 +21,7 @@ public class CommonComponentItem implements TaglibComponentItem {
 	}
 
 	@Override
-	public void setText(String text) {
+	public void setBody(String text) {
 		this.text = text;
 	}
 
@@ -38,7 +38,7 @@ public class CommonComponentItem implements TaglibComponentItem {
 	}
 
 	@Override
-	public String getText() {
+	public String getBody() {
 		return this.text;
 	}
 

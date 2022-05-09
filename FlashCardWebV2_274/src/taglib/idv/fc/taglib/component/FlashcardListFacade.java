@@ -16,34 +16,34 @@ import tool.Debug;
 
 public class FlashcardListFacade extends ListFacade {
 	public static String EMPTY = "";
+	private static String title = "Flashcard";
 	private ListGroup<Flashcard> listGroup;
 	private Modal<Flashcard> modal;
-	private String contextPath;
+	private ContentPath contextPath = new ContentPath();
 
 	public FlashcardListFacade() {
 
 	}
 
-	public FlashcardListFacade(
-			List<Flashcard> datas) {
+	public FlashcardListFacade(List<Flashcard> datas) {
 		listGroup = new ListGroup<>();
 		DefaultListGroupModel<Flashcard> model = new DefaultListGroupModel<>();
 		datas.stream().forEach(item -> model.addItem(item));
 		listGroup.setModel(model);
 
 		FlashcardListGroupRenderer fclgRenderer = new FlashcardListGroupRenderer(
-				contextPath);
+				contextPath, title);
 		listGroup.setRenderer(fclgRenderer);
 
 		modal = new Modal<>();
 		FlashcardDeleteModalRenderer fcdmRenderer = new FlashcardDeleteModalRenderer(
-				contextPath);
+				contextPath, title);
 		modal.setRenderer(fcdmRenderer);
 	}
 
 	@Override
 	public void setContextPath(String contextPath) {
-		this.contextPath = contextPath;
+		this.contextPath.setPath(contextPath);
 	}
 
 	@Override
@@ -66,6 +66,12 @@ public class FlashcardListFacade extends ListFacade {
 	}
 
 	@Override
+	public String getModalTitle() {
+		return this.modal.getTitleResult();
+	}
+
+	@Override
+
 	public String getModalBody() {
 		return this.modal.getBodyResult();
 	}

@@ -11,9 +11,9 @@ import tool.taglib.TaglibComponentItems;
  */
 public interface TaglibComponentItem {
 
-	void setText(String text);
+	void setBody(String text);
 
-	String getText();
+	String getBody();
 
 	void setHtmlTag(String htmlTag);
 
@@ -47,7 +47,7 @@ public interface TaglibComponentItem {
 		sb.append(onClickScript);//onclick
 		sb.append(">");//prifix end
 
-		sb.append(this.getText());//data
+		sb.append(this.getBody());//data
 		sb.append("</").append(this.getHtmlTag()).append(">");//suffix
 
 		return sb.toString();

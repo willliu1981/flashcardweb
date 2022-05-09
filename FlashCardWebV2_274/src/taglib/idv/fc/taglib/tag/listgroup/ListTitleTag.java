@@ -5,20 +5,19 @@ import java.io.IOException;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.tagext.JspFragment;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import idv.fc.taglib.component.ListFacade;
 import tool.Debug;
 
-public class titleTag extends SimpleTagSupport {
+public class ListTitleTag extends SimpleTagSupport {
 	private ListFacade facade;
 
 	public void setListFacade(ListFacade facade) {
 		this.facade = facade;
-		this.facade.setContextPath(((PageContext) getJspContext())
-				.getServletContext().getContextPath());
-
+		String contextPath = ((PageContext) getJspContext()).getServletContext()
+				.getContextPath();
+		this.facade.setContextPath(contextPath);
 	}
 
 	@Override

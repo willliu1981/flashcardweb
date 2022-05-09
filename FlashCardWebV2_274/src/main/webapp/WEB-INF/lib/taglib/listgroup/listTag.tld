@@ -33,7 +33,18 @@
 
 	<tag>
 		<name>listTitle</name>
-		<tag-class>idv.fc.taglib.tag.listgroup.titleTag</tag-class>
+		<tag-class>idv.fc.taglib.tag.listgroup.ListTitleTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>listFacade</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>idv.fc.taglib.component.ListFacade</type>
+			<required>true</required>
+		</attribute>
+	</tag>
+	<tag>
+		<name>modalTitle</name>
+		<tag-class>idv.fc.taglib.tag.listgroup.ModalTitleTag</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
 			<name>listFacade</name>

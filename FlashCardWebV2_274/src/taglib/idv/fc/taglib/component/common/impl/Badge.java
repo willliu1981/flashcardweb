@@ -1,4 +1,6 @@
-package idv.fc.taglib.component.common;
+package idv.fc.taglib.component.common.impl;
+
+import idv.fc.taglib.component.common.CommonComponentItem;
 
 public class Badge extends CommonComponentItem {
 

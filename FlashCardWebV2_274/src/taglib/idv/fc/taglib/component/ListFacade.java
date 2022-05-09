@@ -2,24 +2,16 @@ package idv.fc.taglib.component;
 
 public abstract class ListFacade {
 
-	public boolean hasNextListItem() {
-		return false;
-	}
+	public abstract boolean hasNextListItem();
 
-	public String getListItem() {
-		return null;
-	}
+	public abstract String getListItem();
 
-	public String getModalBody() {
-		return null;
-	}
+	public abstract String getModalBody();
 
-	public String getListTitle() {
-		return null;
-	}
+	public abstract String getListTitle();
 
-	public void setContextPath(String contextPath) {
+	public abstract String getModalTitle();
 
-	}
+	public abstract void setContextPath(String contextPath);
 
 }

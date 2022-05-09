@@ -3,30 +3,35 @@ package idv.fc.taglib.component.modal.renderer.impl;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import javax.servlet.http.HttpServletRequest;
-
 import idv.fc.model.Flashcard;
-import idv.fc.taglib.component.common.ModalBodyItemLabel;
+import idv.fc.taglib.component.ContentPath;
+import idv.fc.taglib.component.common.impl.ModalBodyItem;
+import idv.fc.taglib.component.modal.ModalTitle;
 import idv.fc.taglib.component.modal.renderer.ModalRenderer;
 
 public class FlashcardDeleteModalRenderer extends ModalRenderer<Flashcard> {
-	private String contextPath;
+	private ContentPath contextPath;
+	private String title;
 
-	public FlashcardDeleteModalRenderer(String contextPath) {
+	public FlashcardDeleteModalRenderer(ContentPath contextPath, String title) {
 		this.contextPath = contextPath;
+		this.title = title;
 	}
 
 	@Override
 	public String getRenderedTitle() {
-		return EMPTY;
+		ModalTitle title = new ModalTitle();
+		title.setBody(this.title);
+
+		return title.getHtmlCode();
 	}
 
 	@Override
 	public String getRenderedBody() {
-		ModalBodyItemLabel label1 = new ModalBodyItemLabel();
+		ModalBodyItem label1 = new ModalBodyItem();
 		label1.addStyleSheet("font-size:24px;");
-		
-		ModalBodyItemLabel label2 = new ModalBodyItemLabel();
+
+		ModalBodyItem label2 = new ModalBodyItem();
 		label2.addStyleSheet("font-size:20px;");
 
 		return Stream.of(label1.getHtmlCode(), label2.getHtmlCode())
