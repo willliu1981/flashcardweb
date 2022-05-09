@@ -15,23 +15,6 @@ import tool.Debug;
 
 public class Test1 {
 
-	public static class Car {
-		private String name;
-
-		public Car(String name) {
-			this.name = name;
-		}
-
-		public void testM(String name, String body, String... params) {
-			Debug.test(name, body, params);
-		}
-
-		@Override
-		public String toString() {
-			return "Car [name=" + name + "]";
-		}
-	}
-
 	@Test
 	public void test1() {
 
@@ -52,15 +35,15 @@ public class Test1 {
 		Name name = new BookName();
 		name.setBookName("b1");
 
-		Book<Car> create = create(Book.class, datas, name);
+		Book create = create(Book.class, datas);
 		Debug.test(create);
 	}
 
-	public static <T extends Product, E> T create(Class<T> type, List<E> datas,
-			Name name) {
+	public static <T extends Product, E> T create(Class<T> type,
+			List<E> datas) {
 		T newInstance = null;
 		try {
-			Constructor<T> constructor = type.getConstructor(Name.class,
+			Constructor<T> constructor = type.getDeclaredConstructor(Name.class,
 					int.class, List.class, HttpServletRequest.class);
 			newInstance = constructor.newInstance(null, 123, datas, null);
 			Debug.test(newInstance);

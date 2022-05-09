@@ -4,12 +4,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class Book<T> extends Product {
+public class Book extends Product {
 	private Name name;
 	private int price;
-	List<T> datas;
+	List<Car> datas;
 
-	public Book(Name name, int price, List<T> datas,HttpServletRequest request) {
+	public Book(Name name, int price, List<Car> datas,HttpServletRequest request) {
 		this.name = name;
 		this.price = price;
 		this.datas = datas;

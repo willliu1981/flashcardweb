@@ -20,6 +20,7 @@ import idv.fc.taglib.component.listgroup.listmodel.DefaultListGroupModel;
 import idv.fc.taglib.component.listgroup.renderer.impl.FlashcardListGroupRenderer;
 import idv.fc.taglib.component.modal.Modal;
 import idv.fc.taglib.component.modal.renderer.impl.FlashcardDeleteModalRenderer;
+import tool.Debug;
 import tool.spring.SpringUtil;
 
 @Controller
@@ -46,7 +47,7 @@ public class TestController extends BaseController {
 		FlashcardListFacade facade = ListFacadeFactory.getListFacade(request,
 				datas, FlashcardListFacade.class);
 
-		request.getServletContext().setAttribute("fcFacade", facade);
+		request.getServletContext().setAttribute("facade", facade);
 
 		return "test/fcManagedTestPage";
 

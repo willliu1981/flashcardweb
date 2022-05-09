@@ -1,5 +1,5 @@
 package testConstructor;
 
-public class Product {
+public abstract class Product {
 
 }

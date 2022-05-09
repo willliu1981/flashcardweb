@@ -12,14 +12,20 @@ import idv.fc.taglib.component.listgroup.renderer.ListGroupRenderere;
 import idv.fc.taglib.component.listgroup.renderer.impl.FlashcardListGroupRenderer;
 import idv.fc.taglib.component.modal.Modal;
 import idv.fc.taglib.component.modal.renderer.impl.FlashcardDeleteModalRenderer;
+import tool.Debug;
 
 public class FlashcardListFacade extends ListFacade {
 	public static String EMPTY = "";
 	private ListGroup<Flashcard> listGroup;
 	private Modal<Flashcard> modal;
 
+	public FlashcardListFacade() {
+
+	}
+
 	public FlashcardListFacade(HttpServletRequest request,
 			List<Flashcard> datas) {
+		listGroup = new ListGroup<>();
 		DefaultListGroupModel<Flashcard> model = new DefaultListGroupModel<>();
 		datas.stream().forEach(item -> model.addItem(item));
 		listGroup.setModel(model);
@@ -28,6 +34,7 @@ public class FlashcardListFacade extends ListFacade {
 				request);
 		listGroup.setRenderer(fclgRenderer);
 
+		modal = new Modal<>();
 		FlashcardDeleteModalRenderer fcdmRenderer = new FlashcardDeleteModalRenderer(
 				request);
 		modal.setRenderer(fcdmRenderer);

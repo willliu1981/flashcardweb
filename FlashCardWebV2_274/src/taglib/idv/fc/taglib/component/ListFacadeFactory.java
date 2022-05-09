@@ -6,8 +6,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import tool.Debug;
-
 public class ListFacadeFactory {
 
 	public static <T extends ListFacade, E> T getListFacade(
@@ -15,10 +13,10 @@ public class ListFacadeFactory {
 			Class<T> listFacadeType) {
 		T newInstance = null;
 		try {
-			Debug.test("lff", request);
 			Constructor<T> constructor = listFacadeType.getDeclaredConstructor(
 					HttpServletRequest.class, List.class);
 			newInstance = constructor.newInstance(request, datas);
+
 		} catch (NoSuchMethodException | SecurityException
 				| InstantiationException | IllegalAccessException
 				| IllegalArgumentException | InvocationTargetException e) {
