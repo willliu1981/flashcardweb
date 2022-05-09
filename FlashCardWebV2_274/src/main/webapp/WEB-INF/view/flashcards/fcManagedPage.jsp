@@ -13,23 +13,16 @@
 </style>
 
 <script type="text/javascript">
-  //$("#listDeleteModal").model("hide");
-  function modelValues(id, term, definition) {
-	$("#modal_fcTerm").text(term);
-	$("#modal_fcDefinition").text(definition);
-	$("#modal_form").attr("action", function(i, orig) {
-	  return orig + id;
-	});
-  }
+  
 </script>
 
 </head>
 <body>
     <!-- 清單前往 web 的 path -->
-    <c:set var="pathFlashcard" value="flashcard" />
+    <c:set var="pathForList" value="flashcard" scope="request" />
 
     <!-- 分頁前往 web 的 base path -->
-    <c:set var="pathForPager" value="flashcards/fcManager" scope="request"/>
+    <c:set var="pathForPager" value="flashcards/fcManager" scope="request" />
 
     <!-- include header nav -->
     <jsp:include page="/WEB-INF/view/public/header.jsp" flush="true">
@@ -42,68 +35,10 @@
     </jsp:include>
 
     <!-- list -->
-    <div class="container">
-        <ul class="list-group myBadgeCursor">
-            <li class="list-group-item"><span class="badge"
-                    onclick="location.href='${pageContext.request.contextPath}/<c:out value="${pathFlashcard}"></c:out>'">
-                    <font size="5">ADD</font>
-                </span>
-                <h3>Flashcard</h3></li>
-            <c:forEach var="fc" items="${flashcards}">
-                <li class="list-group-item"><a href="#" class="list-group-item">
-                        <span class="badge" style="background: red;" data-target="#listDeleteModal" data-toggle="modal"
-                            onclick='modelValues("${fc.id}","${fc.term}","${fc.definition}")'>
-                            <font size="4">DELETE</font>
-                        </span>
-                        <span class="badge badgeSpan"
-                            onclick="location.href='${pageContext.request.contextPath}/<c:out value="${pathFlashcard}"></c:out>/${fc.id}'">
-                            <font size="4">EDIT</font>
-                        </span>
-                        <h4 class="h4" class="list-group-item-heading">
-                            <c:out value="${fc.term}"></c:out>
-                        </h4>
-                        <p class="h4" class="list-group-item-text">
-                            <c:out value="(id: ${fc.id}) ${fc.definition}"></c:out>
-                        </p>
-                    </a></li>
-            </c:forEach>
-        </ul>
-    </div>
+    <jsp:include page="/WEB-INF/view/public/list.jsp"></jsp:include>
 
     <!-- 引入分頁  -->
     <jsp:include page="/WEB-INF/view/public/pager.jsp"></jsp:include>
-
-    <!-- 模態框 用於 list delete-->
-    <div class="modal fade" tabindex="-1" role="dialog" id="listDeleteModal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title">Flashcard</h4>
-                </div>
-                <div class="modal-body">
-                    <label id="modal_fcTerm" style="font-size: 20px;">term</label>
-                    <br />
-                    <label id="modal_fcDefinition" style="font-size: 20px;">definition</label>
-                </div>
-                <div class="modal-footer">
-                    <form id="modal_form" action="${pageContext.request.contextPath}/flashcard/" method="post">
-                        <input type="hidden" name="_method" value="delete" />
-                        <button type="button" class="btn btn-default" data-dismiss="modal">
-                            <font color="black">Close</font>
-                        </button>
-                        <button id="model_delete" type="submit" class="btn btn-primary" style="background: red;">Delete
-                            Data</button>
-                    </form>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal -->
 
 </body>
 </html>

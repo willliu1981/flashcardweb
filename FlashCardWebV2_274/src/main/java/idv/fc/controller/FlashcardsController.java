@@ -3,6 +3,8 @@ package idv.fc.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +19,8 @@ import idv.fc.model.HolderData;
 import idv.fc.service.abstraction.IFlashcardHolderService;
 import idv.fc.service.abstraction.IFlashcardService;
 import idv.fc.service.abstraction.IHolderDataService;
+import idv.fc.taglib.component.FlashcardListFacade;
+import idv.fc.taglib.component.ListFacadeFactory;
 
 @Controller
 @RequestMapping(value = "flashcards")
@@ -45,13 +49,15 @@ public class FlashcardsController extends BaseController {
 
 	// manage flashcard begin
 	@RequestMapping(value = "fcManager")
-	public String toFlashcardManager(HashMap<String, Object> map) {
-		return toFlashcardManagerWithPageNumber(map, null);
+	public String toFlashcardManager(HashMap<String, Object> map,
+			HttpServletRequest request) {
+		return toFlashcardManagerWithPageNumber(map, null, request);
 	}
 
 	@RequestMapping(value = "fcManager/{pageNumber}")
 	public String toFlashcardManagerWithPageNumber(HashMap<String, Object> map,
-			@PathVariable(value = "pageNumber") String pageNumber) {
+			@PathVariable(value = "pageNumber") String pageNumber,
+			HttpServletRequest request) {
 		int intPageNumber = 1;//default pageNumber
 		if (pageNumber != null && !pageNumber.equals("")) {
 			intPageNumber = Integer.valueOf(pageNumber);
@@ -59,9 +65,12 @@ public class FlashcardsController extends BaseController {
 
 		PageHelper.startPage(intPageNumber, MAX_PAGE_NUMBER);
 		List<Flashcard> all = flashcardService.getAll();
-		map.put("flashcards", all);
 		PageInfo<Flashcard> pageInfo = new PageInfo<>(all, MAX_NAV_PAGE_NUMBER);
 		map.put("pageInfo", pageInfo);
+
+		FlashcardListFacade listFacade = ListFacadeFactory
+				.getListFacade(request, all, FlashcardListFacade.class);
+		map.put("facade", listFacade);
 
 		return FLASHCARDS + "/fcManagedPage";
 	}
