@@ -12,22 +12,14 @@ import idv.fc.taglib.component.ListFacade;
 import idv.fc.taglib.component.common.Renderable;
 import tool.Debug;
 
-public class ModalFooterTag extends SimpleTagSupport implements Renderable {
-	private ListFacade facade;
-
-	public void setListFacade(ListFacade facade) {
-		this.facade = facade;
-		this.facade.setContextPath(((PageContext) getJspContext())
-				.getServletContext().getContextPath());
-
-	}
+public class ModalFooterTag extends ListTag implements Renderable {
 
 	@Override
 	public void doTag() throws JspException, IOException {
 		JspWriter out = this.getJspContext().getOut();
 		StringWriter sw = new StringWriter();
 
-		String modalBody = this.facade.getModalFooter();
+		String modalBody = this.getFacade().getModalFooter();
 
 		this.getJspBody().invoke(sw);
 		StringBuffer buffer = sw.getBuffer();

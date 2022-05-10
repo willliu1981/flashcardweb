@@ -50,7 +50,7 @@
 			<name>listFacade</name>
 			<rtexprvalue>true</rtexprvalue>
 			<type>idv.fc.taglib.component.ListFacade</type>
-			<required>true</required>
+			<required>false</required>
 		</attribute>
 		<attribute>
 			<name>var</name>
@@ -74,7 +74,7 @@
 			<name>listFacade</name>
 			<rtexprvalue>true</rtexprvalue>
 			<type>idv.fc.taglib.component.ListFacade</type>
-			<required>true</required>
+			<required>false</required>
 		</attribute>
 	</tag>
 
@@ -86,7 +86,7 @@
 			<name>listFacade</name>
 			<rtexprvalue>true</rtexprvalue>
 			<type>idv.fc.taglib.component.ListFacade</type>
-			<required>true</required>
+			<required>false</required>
 		</attribute>
 	</tag>
 
@@ -98,7 +98,7 @@
 			<name>listFacade</name>
 			<rtexprvalue>true</rtexprvalue>
 			<type>idv.fc.taglib.component.ListFacade</type>
-			<required>true</required>
+			<required>false</required>
 		</attribute>
 	</tag>
 

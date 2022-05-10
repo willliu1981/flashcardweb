@@ -10,20 +10,12 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 import idv.fc.taglib.component.ListFacade;
 import tool.Debug;
 
-public class ListHeaderTag extends SimpleTagSupport {
-	private ListFacade facade;
-
-	public void setListFacade(ListFacade facade) {
-		this.facade = facade;
-		String contextPath = ((PageContext) getJspContext()).getServletContext()
-				.getContextPath();
-		this.facade.setContextPath(contextPath);
-	}
+public class ListHeaderTag extends ListTag {
 
 	@Override
 	public void doTag() throws JspException, IOException {
 		JspWriter out = this.getJspContext().getOut();
-		out.print(this.facade.getListHeader());
+		out.print(this.getFacade().getListHeader());
 
 	}
 

@@ -22,14 +22,14 @@
 </head>
 
 <body>
-    <ls:setFacade facadeType="idv.fc.taglib.component.FlashcardListFacade" datas="datas"   />
+   
 
     <!-- list -->
     <div class="container">
         <ul class="list-group myBadgeCursor">
-            <li class="list-group-item"><ls:listHeader listFacade="${_facade}"></ls:listHeader></li>
+            <li class="list-group-item"><ls:listHeader></ls:listHeader></li>
 
-            <ls:eachItem listFacade="${_facade}" var="item">
+            <ls:eachItem var="item">
                 <li class="list-group-item"><a href="#" class="list-group-item">${item}</a></li>
             </ls:eachItem>
         </ul>
@@ -43,13 +43,13 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <ls:modalHeader listFacade="${facade}"></ls:modalHeader>
+                    <ls:modalHeader></ls:modalHeader>
                 </div>
                 <div class="modal-body">
-                    <ls:modalBody listFacade="${facade}"></ls:modalBody>
+                    <ls:modalBody></ls:modalBody>
                 </div>
                 <div class="modal-footer">
-                    <ls:modalFooter listFacade="${facade}">
+                    <ls:modalFooter>
                         <input type="hidden" name="_method" value="delete" />
                         <button type="button" class="btn btn-default" data-dismiss="modal">
                             <font color="black">Close</font>

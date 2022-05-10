@@ -8,14 +8,8 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 import idv.fc.taglib.component.ListFacade;
 import tool.Debug;
 
-public class EachItemTag extends SimpleTagSupport {
-
-	private ListFacade facade;
+public class EachItemTag extends ListTag {
 	private String var = "item";
-
-	public void setListFacade(ListFacade facade) {
-		this.facade = facade;
-	}
 
 	public void setVar(String var) {
 		this.var = var;
@@ -24,8 +18,8 @@ public class EachItemTag extends SimpleTagSupport {
 	@Override
 	public void doTag() throws JspException, IOException {
 
-		while (this.facade.hasNextListItem()) {
-			String listItem = facade.getListItem();
+		while (this.getFacade().hasNextListItem()) {
+			String listItem = getFacade().getListItem();
 			this.getJspContext().setAttribute(var, listItem);
 
 			try {

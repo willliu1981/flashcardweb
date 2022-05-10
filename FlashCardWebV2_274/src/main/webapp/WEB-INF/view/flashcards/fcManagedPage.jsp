@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="ls" uri="https://fc.idv/jsp/tlds/listTags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,14 +19,16 @@
 
 </head>
 <body>
+    <ls:setFacade facadeType="idv.fc.taglib.component.FlashcardListFacade" datas="datas" />
+
     <!-- include header nav -->
     <jsp:include page="/WEB-INF/view/public/header.jsp" flush="true">
-        <jsp:param name="active" value="${facade.active}" />
+        <jsp:param name="active" value="${_facade.active}" />
     </jsp:include>
 
     <!-- 引入巨屏 -->
     <jsp:include page="/WEB-INF/view/public/jumbotron.jsp">
-        <jsp:param name="title" value="${facade.jumbotronTitle}" />
+        <jsp:param name="title" value="${_facade.jumbotronTitle}" />
     </jsp:include>
 
     <!-- list -->

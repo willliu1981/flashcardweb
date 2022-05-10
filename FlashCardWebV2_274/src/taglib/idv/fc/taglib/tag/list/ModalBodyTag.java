@@ -9,20 +9,12 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import idv.fc.taglib.component.ListFacade;
 
-public class ModalBodyTag extends SimpleTagSupport {
-	private ListFacade facade;
-
-	public void setListFacade(ListFacade facade) {
-		this.facade = facade;
-		this.facade.setContextPath(((PageContext) getJspContext())
-				.getServletContext().getContextPath());
-
-	}
+public class ModalBodyTag extends ListTag {
 
 	@Override
 	public void doTag() throws JspException, IOException {
 		JspWriter out = this.getJspContext().getOut();
-		out.print(this.facade.getModalBody());
+		out.print(this.getFacade().getModalBody());
 
 	}
 

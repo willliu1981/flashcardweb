@@ -12,12 +12,13 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 import idv.fc.taglib.component.ListFacade;
 import idv.fc.taglib.component.ListFacadeFactory;
 import tool.Debug;
+import tool.taglib.Taglibs;
 
 public class FacadeTag<T extends ListFacade> extends SimpleTagSupport {
 
 	private String facadeType;
-	private String datas = "_datas";
-	private String var = "_facade";//default var
+	private String datas = Taglibs.FacadeTag_DATAS;//default datas var
+	private String var = Taglibs.FacadeTag_FACADE_VAR;//default facade var
 
 	public void setVar(String var) {
 		this.var = var;
@@ -33,21 +34,18 @@ public class FacadeTag<T extends ListFacade> extends SimpleTagSupport {
 
 	@Override
 	public void doTag() throws JspException, IOException {
-		Debug.test(this, "datas", datas);
 		Class<T> clazz;
 		try {
-			clazz = (Class<T>) Class.forName(this.facadeType);
-
 			HttpServletRequest request = (HttpServletRequest) ((PageContext) this
 					.getJspContext()).getRequest();
-
 			List attrDatas = (List) request.getAttribute(datas);
 
-			Debug.test(this, "list", attrDatas);
+			clazz = (Class<T>) Class.forName(this.facadeType);
 			ListFacade listFacade = ListFacadeFactory.getListFacade(attrDatas,
 					clazz);
+			listFacade.setContextPath(request.getContextPath());
 
-			this.getJspContext().setAttribute(var, listFacade);
+			request.setAttribute(var, listFacade);
 
 		} catch (ClassNotFoundException e1) {
 			e1.printStackTrace();
