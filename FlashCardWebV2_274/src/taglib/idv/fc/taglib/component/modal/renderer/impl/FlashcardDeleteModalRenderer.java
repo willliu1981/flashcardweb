@@ -4,16 +4,16 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import idv.fc.model.Flashcard;
-import idv.fc.taglib.component.ContentPath;
+import idv.fc.taglib.component.ContextPath;
 import idv.fc.taglib.component.common.impl.ModalBodyItem;
 import idv.fc.taglib.component.modal.ModalTitle;
 import idv.fc.taglib.component.modal.renderer.ModalRenderer;
 
 public class FlashcardDeleteModalRenderer extends ModalRenderer<Flashcard> {
-	private ContentPath contextPath;
+	private ContextPath contextPath;
 	private String title;
 
-	public FlashcardDeleteModalRenderer(ContentPath contextPath, String title) {
+	public FlashcardDeleteModalRenderer(ContextPath contextPath, String title) {
 		this.contextPath = contextPath;
 		this.title = title;
 	}

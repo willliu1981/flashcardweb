@@ -1,6 +1,6 @@
 package idv.fc.taglib.component;
 
-public class ContentPath {
+public class ContextPath {
 	private String path;
 
 	public String getPath() {

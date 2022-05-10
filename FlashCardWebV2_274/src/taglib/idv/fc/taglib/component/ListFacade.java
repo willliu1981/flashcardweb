@@ -14,4 +14,8 @@ public abstract class ListFacade {
 
 	public abstract void setContextPath(String contextPath);
 
+	public abstract String getJumbotronTitle();
+
+	public abstract String getActive();
+
 }

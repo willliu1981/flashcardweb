@@ -4,7 +4,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import idv.fc.model.Flashcard;
-import idv.fc.taglib.component.ContentPath;
+import idv.fc.taglib.component.ContextPath;
 import idv.fc.taglib.component.common.impl.Badge;
 import idv.fc.taglib.component.listgroup.ListGroupItemHeading;
 import idv.fc.taglib.component.listgroup.ListGroupItemText;
@@ -16,10 +16,10 @@ public class FlashcardListGroupRenderer extends ListGroupRenderere<Flashcard> {
 	private final String pathForCRUD = "flashcard";
 	private final String badgeSpanSheet = "text-align: center; padding-left: 20px;"
 			+ " padding-right: 20px;";
-	private ContentPath contextPath;
+	private ContextPath contextPath;
 	private String title;
 
-	public FlashcardListGroupRenderer(ContentPath contextPath, String title) {
+	public FlashcardListGroupRenderer(ContextPath contextPath, String title) {
 		this.contextPath = contextPath;
 		this.title = title;
 	}

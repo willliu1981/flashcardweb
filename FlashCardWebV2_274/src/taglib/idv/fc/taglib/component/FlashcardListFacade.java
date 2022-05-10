@@ -16,10 +16,12 @@ import tool.Debug;
 
 public class FlashcardListFacade extends ListFacade {
 	public static String EMPTY = "";
-	private static String title = "Flashcard";
-	private ListGroup<Flashcard> listGroup;
-	private Modal<Flashcard> modal;
-	private ContentPath contextPath = new ContentPath();
+	private static String title = "Flashcard";// 傳入 Renderer 的 Title
+	private static String jumbotronTitle = "管理 Flashcard";//managedPage 顯示 巨屏 Title
+	private static String active = "flashcardManager";//managedPage 導航欄 的 active
+	private ListGroup<Flashcard> listGroup;//tag 組件
+	private Modal<Flashcard> modal;//tag 組件
+	private ContextPath contextPath = new ContextPath();//可由 Tag 傳入 contextPath
 
 	public FlashcardListFacade() {
 
@@ -71,9 +73,18 @@ public class FlashcardListFacade extends ListFacade {
 	}
 
 	@Override
-
 	public String getModalBody() {
 		return this.modal.getBodyResult();
+	}
+
+	@Override
+	public String getJumbotronTitle() {
+		return jumbotronTitle;
+	}
+
+	@Override
+	public String getActive() {
+		return active;
 	}
 
 }

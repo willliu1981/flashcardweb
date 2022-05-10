@@ -20,12 +20,12 @@
 <body>
     <!-- include header nav -->
     <jsp:include page="/WEB-INF/view/public/header.jsp" flush="true">
-        <jsp:param name="active" value="flashcardManager" />
+        <jsp:param name="active" value="${facade.active}" />
     </jsp:include>
 
     <!-- 引入巨屏 -->
     <jsp:include page="/WEB-INF/view/public/jumbotron.jsp">
-        <jsp:param name="title" value="管理 Flashcard" />
+        <jsp:param name="title" value="${facade.jumbotronTitle}" />
     </jsp:include>
 
     <!-- list -->
