@@ -19,7 +19,7 @@
 
 </head>
 <body>
-    <ls:setFacade facadeType="idv.fc.taglib.component.FlashcardListFacade" datas="datas" var="facade" />
+    <ls:setFacade facadeType="idv.fc.taglib.component.facade.impl.FlashcardHolderListFacade" datas="datas" var="facade" />
 
     <!-- include header nav -->
     <jsp:include page="/WEB-INF/view/public/header.jsp" flush="true">

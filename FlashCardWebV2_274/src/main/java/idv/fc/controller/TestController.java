@@ -13,8 +13,8 @@ import com.github.pagehelper.PageInfo;
 
 import idv.fc.model.Flashcard;
 import idv.fc.service.impl.FlashcardServiceImpl;
-import idv.fc.taglib.component.FlashcardListFacade;
 import idv.fc.taglib.component.ListFacadeFactory;
+import idv.fc.taglib.component.facade.impl.FlashcardListFacade;
 import idv.fc.taglib.component.listgroup.ListGroup;
 import idv.fc.taglib.component.listgroup.listmodel.DefaultListGroupModel;
 import idv.fc.taglib.component.listgroup.renderer.impl.FlashcardListGroupRenderer;

@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import idv.fc.model.Flashcard;
 import idv.fc.model.FlashcardHolder;
 import idv.fc.service.abstraction.IFlashcardHolderService;
+import tool.Debug;
 import tool.idgenerator.IDGenerator;
 import tool.spring.SpringUtil;
 
@@ -56,7 +57,7 @@ public class FlashcardHolderCRUDController extends BaseController {
 
 	@RequestMapping(value = "flashcardHolder", method = RequestMethod.PUT)
 	public String edit(FlashcardHolder flashcardHolder) {
-		if (flashcardHolder.getFcId() != null
+		if (flashcardHolder.getFcId() == null
 				|| flashcardHolder.getId().equals("")) {
 			flashcardHolder.setFcId(null);
 		}

@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class FlashcardHolder {
 	private Integer id; //ai
 	private String name;
-	private String fcId;//fk: flashcard id
+	private Integer fcId;//fk: flashcard id
 	private Timestamp createDate;
 	private Integer numberOfQuizTimes;
 	private Integer passTheQuizTimes;
@@ -14,7 +14,7 @@ public class FlashcardHolder {
 		super();
 	}
 
-	private FlashcardHolder(Integer id, String name, String fcId) {
+	private FlashcardHolder(Integer id, String name, Integer fcId) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -37,11 +37,11 @@ public class FlashcardHolder {
 		this.name = name;
 	}
 
-	public String getFcId() {
+	public Integer getFcId() {
 		return fcId;
 	}
 
-	public void setFcId(String fcId) {
+	public void setFcId(Integer fcId) {
 		this.fcId = fcId;
 	}
 

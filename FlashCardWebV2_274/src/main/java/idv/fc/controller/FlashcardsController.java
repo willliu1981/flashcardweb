@@ -19,8 +19,8 @@ import idv.fc.model.HolderData;
 import idv.fc.service.abstraction.IFlashcardHolderService;
 import idv.fc.service.abstraction.IFlashcardService;
 import idv.fc.service.abstraction.IHolderDataService;
-import idv.fc.taglib.component.FlashcardListFacade;
 import idv.fc.taglib.component.ListFacadeFactory;
+import idv.fc.taglib.component.facade.impl.FlashcardListFacade;
 
 @Controller
 @RequestMapping(value = "flashcards")
@@ -66,18 +66,11 @@ public class FlashcardsController extends BaseController {
 		PageHelper.startPage(intPageNumber, MAX_PAGE_NUMBER);
 		List<Flashcard> all = flashcardService.getAll();
 		PageInfo<Flashcard> pageInfo = new PageInfo<>(all, MAX_NAV_PAGE_NUMBER);
+		
 		map.put("pageInfo", pageInfo);
-
-		/*FlashcardListFacade listFacade = ListFacadeFactory.getListFacade(all,
-				FlashcardListFacade.class);
-		map.put("facade", listFacade);*/
-
 		map.put("datas", all);
 
-		//map.put("pathForList", "flashcard");
-		//map.put("pathForPager", "flashcards/fcManager");
-
-		return FLASHCARDS + "/fcManagedPage";
+		return FLASHCARDS + "/modelManagedPage";
 	}
 	//manage flashcard end
 
@@ -101,9 +94,11 @@ public class FlashcardsController extends BaseController {
 		map.put("flashcardHolders", all);
 		PageInfo<FlashcardHolder> pageInfo = new PageInfo<>(all,
 				MAX_NAV_PAGE_NUMBER);
+		
 		map.put("pageInfo", pageInfo);
+		map.put("datas", all);
 
-		return FLASHCARDS + "/fhManagedPage";
+		return FLASHCARDS + "/modelManagedPage";
 	}
 	//manage flashcardHolder end
 

@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.junit.jupiter.api.Test;
 
-import idv.fc.taglib.component.FlashcardListFacade;
 import idv.fc.taglib.component.ListFacade;
+import idv.fc.taglib.component.facade.impl.FlashcardListFacade;
 import tool.Debug;
 
 public class Test1 {
