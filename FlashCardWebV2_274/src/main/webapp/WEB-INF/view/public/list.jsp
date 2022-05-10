@@ -22,12 +22,14 @@
 </head>
 
 <body>
+    <ls:setFacade facadeType="idv.fc.taglib.component.FlashcardListFacade" datas="datas"   />
+
     <!-- list -->
     <div class="container">
         <ul class="list-group myBadgeCursor">
-            <li class="list-group-item"><ls:listHeader listFacade="${facade}"></ls:listHeader></li>
+            <li class="list-group-item"><ls:listHeader listFacade="${_facade}"></ls:listHeader></li>
 
-            <ls:eachItem listFacade="${facade}" var="item">
+            <ls:eachItem listFacade="${_facade}" var="item">
                 <li class="list-group-item"><a href="#" class="list-group-item">${item}</a></li>
             </ls:eachItem>
         </ul>
@@ -57,10 +59,7 @@
                     </ls:modalFooter>
                 </div>
             </div>
-            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal -->
 </body>
 </html>

@@ -5,12 +5,46 @@
 	xsi:schemaLocation="https://java.sun.com/xml/ns/j2ee https://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
 	version="2.0">
 
-
 	<tlib-version>2.1</tlib-version>
 	<short-name>List TLD</short-name>
+	
+	<!-- 設定頁面的 facade 變數 -->
+	<tag>
+		<name>setFacade</name>
+		<tag-class>idv.fc.taglib.tag.list.FacadeTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>facadeType</name>
+			<type>java.lang.String</type>
+			<required>true</required>
+		</attribute>
+		<attribute>
+			<name>datas</name>
+			<type>java.lang.String</type>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<name>var</name>
+			<type>java.lang.String</type>
+			<required>false</required>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>listHeader</name>
+		<tag-class>idv.fc.taglib.tag.list.ListHeaderTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>listFacade</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>idv.fc.taglib.component.ListFacade</type>
+			<required>false</required>
+		</attribute>
+	</tag>
+
 	<tag>
 		<name>eachItem</name>
-		<tag-class>idv.fc.taglib.tag.listgroup.EachItemTag</tag-class>
+		<tag-class>idv.fc.taglib.tag.list.EachItemTag</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
 			<name>listFacade</name>
@@ -27,24 +61,14 @@
 
 	<tag>
 		<name>item</name>
-		<tag-class>idv.fc.taglib.tag.listgroup.ItemTag</tag-class>
+		<tag-class>idv.fc.taglib.tag.list.ItemTag</tag-class>
 		<body-content>scriptless</body-content>
 	</tag>
 
-	<tag>
-		<name>listHeader</name>
-		<tag-class>idv.fc.taglib.tag.listgroup.ListHeaderTag</tag-class>
-		<body-content>scriptless</body-content>
-		<attribute>
-			<name>listFacade</name>
-			<rtexprvalue>true</rtexprvalue>
-			<type>idv.fc.taglib.component.ListFacade</type>
-			<required>true</required>
-		</attribute>
-	</tag>
+
 	<tag>
 		<name>modalHeader</name>
-		<tag-class>idv.fc.taglib.tag.listgroup.ModalHeaderTag</tag-class>
+		<tag-class>idv.fc.taglib.tag.list.ModalHeaderTag</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
 			<name>listFacade</name>
@@ -53,10 +77,10 @@
 			<required>true</required>
 		</attribute>
 	</tag>
-	
+
 	<tag>
 		<name>modalBody</name>
-		<tag-class>idv.fc.taglib.tag.listgroup.ModalBodyTag</tag-class>
+		<tag-class>idv.fc.taglib.tag.list.ModalBodyTag</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
 			<name>listFacade</name>
@@ -65,10 +89,10 @@
 			<required>true</required>
 		</attribute>
 	</tag>
-	
+
 	<tag>
 		<name>modalFooter</name>
-		<tag-class>idv.fc.taglib.tag.listgroup.ModalFooterTag</tag-class>
+		<tag-class>idv.fc.taglib.tag.list.ModalFooterTag</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
 			<name>listFacade</name>

@@ -68,9 +68,11 @@ public class FlashcardsController extends BaseController {
 		PageInfo<Flashcard> pageInfo = new PageInfo<>(all, MAX_NAV_PAGE_NUMBER);
 		map.put("pageInfo", pageInfo);
 
-		FlashcardListFacade listFacade = ListFacadeFactory.getListFacade(all,
+		/*FlashcardListFacade listFacade = ListFacadeFactory.getListFacade(all,
 				FlashcardListFacade.class);
-		map.put("facade", listFacade);
+		map.put("facade", listFacade);*/
+
+		map.put("datas", all);
 
 		//map.put("pathForList", "flashcard");
 		//map.put("pathForPager", "flashcards/fcManager");
