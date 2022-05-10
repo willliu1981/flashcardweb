@@ -4,11 +4,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import idv.fc.model.Flashcard;
-import idv.fc.taglib.component.ContextPath;
 import idv.fc.taglib.component.ListFacade;
+import idv.fc.taglib.component.common.Renderable;
+import idv.fc.taglib.component.common.impl.Form;
 import idv.fc.taglib.component.common.impl.ModalBodyItem;
 import idv.fc.taglib.component.modal.ModalTitle;
 import idv.fc.taglib.component.modal.renderer.ModalRenderer;
+import tool.taglib.Taglibs;
 
 public class FlashcardDeleteModalRenderer extends ModalRenderer<Flashcard> {
 	private ListFacade facade;
@@ -44,8 +46,17 @@ public class FlashcardDeleteModalRenderer extends ModalRenderer<Flashcard> {
 
 	@Override
 	public String getRenderedFooter() {
+		StringBuilder sbAction = Taglibs.getStringBuilder()
+				.append(this.facade.getContextPath().getPath()).append("/")
+				.append(this.facade.getPathForCRUD()).append("/");
 
-		return EMPTY;
+		Form form = new Form();
+		form.setId("modal_form");
+		form.setAction(sbAction.toString());
+		form.setMethod("post");
+		form.setBody(Renderable.BODY);
+
+		return form.getHtmlCode();
 	}
 
 }

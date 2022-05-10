@@ -47,14 +47,14 @@
                     <ls:modalBody listFacade="${facade}"></ls:modalBody>
                 </div>
                 <div class="modal-footer">
-                    <form id="modal_form" action="${pageContext.request.contextPath}/${pathForList}/" method="post">
+                    <ls:modalFooter listFacade="${facade}">
                         <input type="hidden" name="_method" value="delete" />
                         <button type="button" class="btn btn-default" data-dismiss="modal">
                             <font color="black">Close</font>
                         </button>
                         <button id="model_delete" type="submit" class="btn btn-primary" style="background: red;">Delete
                             Data</button>
-                    </form>
+                    </ls:modalFooter>
                 </div>
             </div>
             <!-- /.modal-content -->

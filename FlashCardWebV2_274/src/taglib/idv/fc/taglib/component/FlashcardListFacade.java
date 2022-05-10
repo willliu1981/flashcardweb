@@ -104,4 +104,9 @@ public class FlashcardListFacade extends ListFacade {
 		return this.contextPath;
 	}
 
+	@Override
+	public String getModalFooter() {
+		return this.modal.getFooterResult();
+	}
+
 }
