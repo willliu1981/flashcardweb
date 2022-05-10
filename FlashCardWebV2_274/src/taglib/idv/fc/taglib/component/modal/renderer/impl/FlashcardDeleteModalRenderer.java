@@ -5,21 +5,25 @@ import java.util.stream.Stream;
 
 import idv.fc.model.Flashcard;
 import idv.fc.taglib.component.ContextPath;
+import idv.fc.taglib.component.ListFacade;
 import idv.fc.taglib.component.common.impl.ModalBodyItem;
 import idv.fc.taglib.component.modal.ModalTitle;
 import idv.fc.taglib.component.modal.renderer.ModalRenderer;
 
 public class FlashcardDeleteModalRenderer extends ModalRenderer<Flashcard> {
-	private ContextPath contextPath;
+	private ListFacade facade;
 	private String title;
 
-	public FlashcardDeleteModalRenderer(ContextPath contextPath, String title) {
-		this.contextPath = contextPath;
+	public FlashcardDeleteModalRenderer(ListFacade facade, String title) {
+		this.facade = facade;
 		this.title = title;
 	}
 
+	/*
+	 * only Title info
+	 */
 	@Override
-	public String getRenderedTitle() {
+	public String getRenderedHeader() {
 		ModalTitle title = new ModalTitle();
 		title.setBody(this.title);
 
@@ -40,6 +44,7 @@ public class FlashcardDeleteModalRenderer extends ModalRenderer<Flashcard> {
 
 	@Override
 	public String getRenderedFooter() {
+
 		return EMPTY;
 	}
 

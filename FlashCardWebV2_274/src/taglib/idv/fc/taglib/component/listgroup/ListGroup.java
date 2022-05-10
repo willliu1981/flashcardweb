@@ -46,8 +46,8 @@ public class ListGroup<T> implements TaglibComponent<T> {
 	}
 
 	@Override
-	public String getTitleResult() {
-		return this.renderer.getRenderedTitle();
+	public String getHeaderResult() {
+		return this.renderer.getRenderedHeader();
 	}
 
 	@Override

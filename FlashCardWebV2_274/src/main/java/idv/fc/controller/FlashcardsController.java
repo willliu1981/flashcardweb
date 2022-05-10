@@ -72,8 +72,8 @@ public class FlashcardsController extends BaseController {
 				FlashcardListFacade.class);
 		map.put("facade", listFacade);
 
-		map.put("pathForList", "flashcard");
-		map.put("pathForPager", "flashcards/fcManager");
+		//map.put("pathForList", "flashcard");
+		//map.put("pathForPager", "flashcards/fcManager");
 
 		return FLASHCARDS + "/fcManagedPage";
 	}

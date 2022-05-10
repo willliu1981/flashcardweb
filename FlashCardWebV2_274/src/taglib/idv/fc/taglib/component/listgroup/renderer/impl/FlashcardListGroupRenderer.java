@@ -5,6 +5,7 @@ import java.util.stream.Stream;
 
 import idv.fc.model.Flashcard;
 import idv.fc.taglib.component.ContextPath;
+import idv.fc.taglib.component.ListFacade;
 import idv.fc.taglib.component.common.impl.Badge;
 import idv.fc.taglib.component.listgroup.ListGroupItemHeading;
 import idv.fc.taglib.component.listgroup.ListGroupItemText;
@@ -13,22 +14,22 @@ import tool.taglib.Scripts;
 import tool.taglib.Taglibs;
 
 public class FlashcardListGroupRenderer extends ListGroupRenderere<Flashcard> {
-	private final String pathForCRUD = "flashcard";
+	private ListFacade facade;
 	private final String badgeSpanSheet = "text-align: center; padding-left: 20px;"
 			+ " padding-right: 20px;";
-	private ContextPath contextPath;
 	private String title;
 
-	public FlashcardListGroupRenderer(ContextPath contextPath, String title) {
-		this.contextPath = contextPath;
+	public FlashcardListGroupRenderer(ListFacade facade, String title) {
+		this.facade = facade;
 		this.title = title;
 	}
 
 	@Override
-	public String getRenderedTitle() {
+	public String getRenderedHeader() {
 		StringBuilder sbScript = new StringBuilder();
-		sbScript.append("location.href='").append(contextPath.getPath())
-				.append("/").append(pathForCRUD).append("'");
+		sbScript.append("location.href='")
+				.append(this.facade.getContextPath().getPath()).append("/")
+				.append(this.facade.getPathForCRUD()).append("'");
 
 		Badge badge = new Badge();
 		badge.addStyleSheet(badgeSpanSheet);
@@ -64,8 +65,9 @@ public class FlashcardListGroupRenderer extends ListGroupRenderere<Flashcard> {
 		//editBadge.addStyleSheet("background:blue");//註解以使用預設藍色
 		editBadge.addStyleSheet("font-size:17px");
 		editBadge.setBody("EDIT");
-		editBadge.onClick(Scripts.getScriptWithHref(contextPath.getPath(),
-				pathForCRUD, model.getId().toString()));
+		editBadge.onClick(Scripts.getScriptWithHref(
+				this.facade.getContextPath().getPath(),
+				this.facade.getPathForCRUD(), model.getId().toString()));
 		//edit badge end
 
 		//heading

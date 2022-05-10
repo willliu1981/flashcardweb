@@ -25,7 +25,7 @@
     <!-- list -->
     <div class="container">
         <ul class="list-group myBadgeCursor">
-            <li class="list-group-item"><ls:listTitle listFacade="${facade}"></ls:listTitle></li>
+            <li class="list-group-item"><ls:listHeader listFacade="${facade}"></ls:listHeader></li>
 
             <ls:eachItem listFacade="${facade}" var="item">
                 <li class="list-group-item"><a href="#" class="list-group-item">${item}</a></li>
@@ -41,9 +41,11 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <ls:modalTitle listFacade="${facade}"></ls:modalTitle>
+                    <ls:modalHeader listFacade="${facade}"></ls:modalHeader>
                 </div>
-                <div class="modal-body">${facade.modalBody}</div>
+                <div class="modal-body">
+                    <ls:modalBody listFacade="${facade}"></ls:modalBody>
+                </div>
                 <div class="modal-footer">
                     <form id="modal_form" action="${pageContext.request.contextPath}/${pathForList}/" method="post">
                         <input type="hidden" name="_method" value="delete" />

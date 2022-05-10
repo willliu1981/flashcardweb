@@ -8,22 +8,21 @@ import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import idv.fc.taglib.component.ListFacade;
-import tool.Debug;
 
-public class ListTitleTag extends SimpleTagSupport {
+public class ModalHeaderTag extends SimpleTagSupport {
 	private ListFacade facade;
 
 	public void setListFacade(ListFacade facade) {
 		this.facade = facade;
-		String contextPath = ((PageContext) getJspContext()).getServletContext()
-				.getContextPath();
-		this.facade.setContextPath(contextPath);
+		this.facade.setContextPath(((PageContext) getJspContext())
+				.getServletContext().getContextPath());
+
 	}
 
 	@Override
 	public void doTag() throws JspException, IOException {
 		JspWriter out = this.getJspContext().getOut();
-		out.print(this.facade.getListTitle());
+		out.print(this.facade.getModalHeader());
 
 	}
 

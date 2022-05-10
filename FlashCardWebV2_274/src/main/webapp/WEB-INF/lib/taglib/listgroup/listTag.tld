@@ -32,8 +32,8 @@
 	</tag>
 
 	<tag>
-		<name>listTitle</name>
-		<tag-class>idv.fc.taglib.tag.listgroup.ListTitleTag</tag-class>
+		<name>listHeader</name>
+		<tag-class>idv.fc.taglib.tag.listgroup.ListHeaderTag</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
 			<name>listFacade</name>
@@ -43,8 +43,20 @@
 		</attribute>
 	</tag>
 	<tag>
-		<name>modalTitle</name>
-		<tag-class>idv.fc.taglib.tag.listgroup.ModalTitleTag</tag-class>
+		<name>modalHeader</name>
+		<tag-class>idv.fc.taglib.tag.listgroup.ModalHeaderTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>listFacade</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>idv.fc.taglib.component.ListFacade</type>
+			<required>true</required>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<name>modalBody</name>
+		<tag-class>idv.fc.taglib.tag.listgroup.ModalBodyTag</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
 			<name>listFacade</name>

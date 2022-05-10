@@ -15,6 +15,8 @@ import idv.fc.taglib.component.modal.renderer.impl.FlashcardDeleteModalRenderer;
 import tool.Debug;
 
 public class FlashcardListFacade extends ListFacade {
+	private final String pathForCRUD = "flashcard";
+	private final String pathForPager = "flashcards/fcManager";
 	public static String EMPTY = "";
 	private static String title = "Flashcard";// 傳入 Renderer 的 Title
 	private static String jumbotronTitle = "管理 Flashcard";//managedPage 顯示 巨屏 Title
@@ -34,12 +36,12 @@ public class FlashcardListFacade extends ListFacade {
 		listGroup.setModel(model);
 
 		FlashcardListGroupRenderer fclgRenderer = new FlashcardListGroupRenderer(
-				contextPath, title);
+				this, title);
 		listGroup.setRenderer(fclgRenderer);
 
 		modal = new Modal<>();
 		FlashcardDeleteModalRenderer fcdmRenderer = new FlashcardDeleteModalRenderer(
-				contextPath, title);
+				this, title);
 		modal.setRenderer(fcdmRenderer);
 	}
 
@@ -49,8 +51,8 @@ public class FlashcardListFacade extends ListFacade {
 	}
 
 	@Override
-	public String getListTitle() {
-		return this.listGroup.getTitleResult();
+	public String getListHeader() {
+		return this.listGroup.getHeaderResult();
 	}
 
 	@Override
@@ -68,8 +70,8 @@ public class FlashcardListFacade extends ListFacade {
 	}
 
 	@Override
-	public String getModalTitle() {
-		return this.modal.getTitleResult();
+	public String getModalHeader() {
+		return this.modal.getHeaderResult();
 	}
 
 	@Override
@@ -85,6 +87,21 @@ public class FlashcardListFacade extends ListFacade {
 	@Override
 	public String getActive() {
 		return active;
+	}
+
+	@Override
+	public String getPathForCRUD() {
+		return pathForCRUD;
+	}
+
+	@Override
+	public String getPathForPager() {
+		return pathForPager;
+	}
+
+	@Override
+	public ContextPath getContextPath() {
+		return this.contextPath;
 	}
 
 }

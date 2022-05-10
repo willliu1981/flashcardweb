@@ -6,7 +6,7 @@ public interface TaglibComponent<T> {
 
 	String getBodyResult();
 
-	String getTitleResult();
+	String getHeaderResult();
 
 	String getFooterResult();
 
