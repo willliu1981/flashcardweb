@@ -5,7 +5,6 @@ import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import idv.fc.taglib.component.ListFacade;
-import tool.Debug;
 import tool.taglib.Taglibs;
 
 public class ListTag extends SimpleTagSupport {
@@ -22,8 +21,10 @@ public class ListTag extends SimpleTagSupport {
 		if (this.facade == null) {
 			HttpServletRequest request = (HttpServletRequest) ((PageContext) this
 					.getJspContext()).getRequest();
-			ListFacade facade = (ListFacade) request
-					.getAttribute(Taglibs.FacadeTag_FACADE_VAR);
+			String var = (String) request
+					.getAttribute(Taglibs.FacadeTag_FACADE_VAR_KEY);
+
+			ListFacade facade = (ListFacade) request.getAttribute(var);
 
 			return facade;
 		}

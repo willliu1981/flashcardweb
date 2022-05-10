@@ -4,7 +4,7 @@
 <html>
 
 <body>
-    <c:set var="pathForPager" value="${_facade.pathForPager}"></c:set>
+    <c:set var="pathForPager" value="${facade.pathForPager}"></c:set>
 
     <!-- 分頁 -->
     <div class="container">

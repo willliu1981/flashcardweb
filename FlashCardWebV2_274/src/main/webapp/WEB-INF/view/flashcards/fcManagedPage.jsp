@@ -19,16 +19,16 @@
 
 </head>
 <body>
-    <ls:setFacade facadeType="idv.fc.taglib.component.FlashcardListFacade" datas="datas" />
+    <ls:setFacade facadeType="idv.fc.taglib.component.FlashcardListFacade" datas="datas" var="facade" />
 
     <!-- include header nav -->
     <jsp:include page="/WEB-INF/view/public/header.jsp" flush="true">
-        <jsp:param name="active" value="${_facade.active}" />
+        <jsp:param name="active" value="${facade.active}" />
     </jsp:include>
 
     <!-- 引入巨屏 -->
     <jsp:include page="/WEB-INF/view/public/jumbotron.jsp">
-        <jsp:param name="title" value="${_facade.jumbotronTitle}" />
+        <jsp:param name="title" value="${facade.jumbotronTitle}" />
     </jsp:include>
 
     <!-- list -->

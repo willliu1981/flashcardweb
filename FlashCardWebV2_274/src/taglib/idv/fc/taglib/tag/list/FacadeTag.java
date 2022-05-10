@@ -45,6 +45,7 @@ public class FacadeTag<T extends ListFacade> extends SimpleTagSupport {
 					clazz);
 			listFacade.setContextPath(request.getContextPath());
 
+			request.setAttribute(Taglibs.FacadeTag_FACADE_VAR_KEY, var);
 			request.setAttribute(var, listFacade);
 
 		} catch (ClassNotFoundException e1) {
