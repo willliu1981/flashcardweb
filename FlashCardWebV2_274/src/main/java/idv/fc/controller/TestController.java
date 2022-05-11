@@ -14,7 +14,7 @@ import com.github.pagehelper.PageInfo;
 import idv.fc.model.Flashcard;
 import idv.fc.service.impl.FlashcardServiceImpl;
 import idv.fc.taglib.impl.list.FlashcardDeleteModalRenderer;
-import idv.fc.taglib.impl.list.FlashcardListFacade;
+import idv.fc.taglib.impl.list.FlashcardListFacadeOld;
 import idv.fc.taglib.impl.list.FlashcardListGroupRenderer;
 import idv.taglib.component.facade.FacadeFactory;
 import idv.taglib.component.listgroup.ListGroup;
@@ -44,8 +44,8 @@ public class TestController extends BaseController {
 		PageInfo<Flashcard> pageInfo = new PageInfo<>(datas, 5);
 		map.put("pageInfo", pageInfo);
 
-		FlashcardListFacade facade = FacadeFactory.getListFacade(datas,
-				FlashcardListFacade.class);
+		FlashcardListFacadeOld facade = FacadeFactory.getListFacade(datas,
+				FlashcardListFacadeOld.class);
 
 		request.getServletContext().setAttribute("facade", facade);
 

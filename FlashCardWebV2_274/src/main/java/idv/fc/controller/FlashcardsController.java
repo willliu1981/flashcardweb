@@ -19,7 +19,7 @@ import idv.fc.model.HolderData;
 import idv.fc.service.abstraction.IFlashcardHolderService;
 import idv.fc.service.abstraction.IFlashcardService;
 import idv.fc.service.abstraction.IHolderDataService;
-import idv.fc.taglib.impl.list.FlashcardListFacade;
+import idv.fc.taglib.impl.list.FlashcardListFacadeOld;
 import idv.taglib.component.facade.ListFacade;
 import idv.taglib.component.facade.FacadeFactory;
 

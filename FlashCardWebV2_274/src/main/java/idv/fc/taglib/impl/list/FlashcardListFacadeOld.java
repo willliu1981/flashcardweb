@@ -14,24 +14,35 @@ import idv.taglib.listgroup.listmodel.DefaultListGroupModel;
 import idv.taglib.listgroup.listmodel.ListGroupModel;
 import tool.Debug;
 
-public class CommonListFacade extends ListFacade {
-	public static final String EMPTY = "";
-	private String pathForCRUD;
-	private String pathForPager;
-	private String jumbotronTitle;//managedPage 顯示 巨屏 Title
-	private String active;//managedPage 導航欄 的 active
+public class FlashcardListFacadeOld extends ListFacade {
+	private final String pathForCRUD = "flashcard";
+	private final String pathForPager = "flashcards/fcManager";
+	public static String EMPTY = "";
+	private static String title = "Flashcard";// 傳入 Renderer 的 Title
+	private static String jumbotronTitle = "管理 Flashcard";//managedPage 顯示 巨屏 Title
+	private static String active = "flashcardManager";//managedPage 導航欄 的 active
 	private ListGroup<Flashcard> listGroup;//tag 組件
 	private Modal<Flashcard> modal;//tag 組件
 	private ContextPath contextPath = new ContextPath();//可由 Tag 傳入 contextPath
 
-	public CommonListFacade() {
+	public FlashcardListFacadeOld() {
 
 	}
 
-	public CommonListFacade(ListGroup<Flashcard> listGroup,
-			Modal<Flashcard> modal) {
-		this.listGroup = listGroup;
-		this.modal = modal;
+	public FlashcardListFacadeOld(List<Flashcard> datas) {
+		listGroup = new ListGroup<>();
+		DefaultListGroupModel<Flashcard> model = new DefaultListGroupModel<>();
+		datas.stream().forEach(item -> model.addItem(item));
+		listGroup.setModel(model);
+
+		FlashcardListGroupRenderer fclgRenderer = new FlashcardListGroupRenderer(
+				this, title);
+		listGroup.setRenderer(fclgRenderer);
+
+		modal = new Modal<>();
+		FlashcardDeleteModalRenderer fcdmRenderer = new FlashcardDeleteModalRenderer(
+				this, title);
+		modal.setRenderer(fcdmRenderer);
 	}
 
 	@Override
@@ -50,7 +61,7 @@ public class CommonListFacade extends ListFacade {
 			return this.listGroup.getNextBodyResult();
 		}
 
-		return CommonListFacade.EMPTY;
+		return FlashcardListFacadeOld.EMPTY;
 	}
 
 	@Override
@@ -76,14 +87,6 @@ public class CommonListFacade extends ListFacade {
 	@Override
 	public String getActive() {
 		return active;
-	}
-
-	public static void setJumbotronTitle(String jumbotronTitle) {
-		CommonListFacade.jumbotronTitle = jumbotronTitle;
-	}
-
-	public static void setActive(String active) {
-		CommonListFacade.active = active;
 	}
 
 	@Override

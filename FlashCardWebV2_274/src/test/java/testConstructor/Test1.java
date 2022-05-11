@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.junit.jupiter.api.Test;
 
-import idv.fc.taglib.impl.list.FlashcardListFacade;
+import idv.fc.taglib.impl.list.FlashcardListFacadeOld;
 import idv.taglib.component.facade.ListFacade;
 import tool.Debug;
 
@@ -67,7 +67,7 @@ public class Test1 {
 		datas.add(new Car("b1"));
 		datas.add(new Car("c1"));
 
-		FlashcardListFacade create = create2(FlashcardListFacade.class, datas);
+		FlashcardListFacadeOld create = create2(FlashcardListFacadeOld.class, datas);
 		Debug.test(create);
 	}
 
