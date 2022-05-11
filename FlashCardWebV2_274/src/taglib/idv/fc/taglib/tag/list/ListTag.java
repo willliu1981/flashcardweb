@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-import idv.taglib.component.ListFacade;
+import idv.taglib.component.facade.ListFacade;
 import tool.taglib.Taglibs;
 
 public class ListTag extends SimpleTagSupport {

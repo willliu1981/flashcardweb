@@ -9,8 +9,8 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-import idv.taglib.component.ListFacade;
-import idv.taglib.component.ListFacadeFactory;
+import idv.taglib.component.facade.ListFacade;
+import idv.taglib.component.facade.FacadeFactory;
 import tool.Debug;
 import tool.taglib.Taglibs;
 
@@ -38,7 +38,7 @@ public class FacadeTag<T extends ListFacade> extends SimpleTagSupport {
 				.getJspContext()).getRequest();
 		List<?> attrDatas = (List<?>) request.getAttribute(datas);
 
-		ListFacade listFacade = ListFacadeFactory.getListFacade(attrDatas,
+		ListFacade listFacade = FacadeFactory.getListFacade(attrDatas,
 				facadeType);
 		listFacade.setContextPath(request.getContextPath());
 

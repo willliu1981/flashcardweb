@@ -19,9 +19,9 @@ import idv.fc.model.HolderData;
 import idv.fc.service.abstraction.IFlashcardHolderService;
 import idv.fc.service.abstraction.IFlashcardService;
 import idv.fc.service.abstraction.IHolderDataService;
-import idv.fc.taglib.FlashcardListFacade;
-import idv.taglib.component.ListFacade;
-import idv.taglib.component.ListFacadeFactory;
+import idv.fc.taglib.impl.list.FlashcardListFacade;
+import idv.taglib.component.facade.ListFacade;
+import idv.taglib.component.facade.FacadeFactory;
 
 @Controller
 @RequestMapping(value = "flashcards")

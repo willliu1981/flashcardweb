@@ -1,4 +1,4 @@
-package idv.fc.taglib;
+package idv.fc.taglib.impl.list;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import idv.fc.model.Flashcard;
 import idv.taglib.component.ContextPath;
-import idv.taglib.component.ListFacade;
+import idv.taglib.component.facade.ListFacade;
 import idv.taglib.component.listgroup.ListGroup;
 import idv.taglib.component.listgroup.renderer.ListGroupRenderere;
 import idv.taglib.component.modal.Modal;

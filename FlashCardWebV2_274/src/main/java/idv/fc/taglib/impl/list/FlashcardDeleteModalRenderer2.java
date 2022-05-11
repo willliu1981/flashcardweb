@@ -1,22 +1,22 @@
-package idv.fc.taglib;
+package idv.fc.taglib.impl.list;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import idv.fc.model.FlashcardHolder;
-import idv.taglib.component.ListFacade;
+import idv.fc.model.Flashcard;
 import idv.taglib.component.common.Renderable;
 import idv.taglib.component.common.impl.Form;
 import idv.taglib.component.common.impl.ModalBodyItem;
+import idv.taglib.component.facade.ListFacade;
 import idv.taglib.component.modal.ModalTitle;
 import idv.taglib.component.modal.renderer.ModalRenderer;
 import tool.taglib.Taglibs;
 
-public class FlashcardHolderDeleteModalRenderer extends ModalRenderer<FlashcardHolder> {
+public class FlashcardDeleteModalRenderer2 extends ModalRenderer<Flashcard> {
 	private ListFacade facade;
 	private String title;
 
-	public FlashcardHolderDeleteModalRenderer(ListFacade facade, String title) {
+	public FlashcardDeleteModalRenderer2(ListFacade facade, String title) {
 		this.facade = facade;
 		this.title = title;
 	}

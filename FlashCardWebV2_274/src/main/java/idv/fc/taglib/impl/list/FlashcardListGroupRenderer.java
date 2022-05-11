@@ -1,12 +1,12 @@
-package idv.fc.taglib;
+package idv.fc.taglib.impl.list;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import idv.fc.model.Flashcard;
 import idv.taglib.component.ContextPath;
-import idv.taglib.component.ListFacade;
 import idv.taglib.component.common.impl.Badge;
+import idv.taglib.component.facade.ListFacade;
 import idv.taglib.component.listgroup.ListGroupItemHeading;
 import idv.taglib.component.listgroup.ListGroupItemText;
 import idv.taglib.component.listgroup.renderer.ListGroupRenderere;

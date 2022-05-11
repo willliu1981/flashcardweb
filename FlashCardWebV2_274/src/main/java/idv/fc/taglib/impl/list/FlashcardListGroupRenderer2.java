@@ -1,26 +1,25 @@
-package idv.fc.taglib;
+package idv.fc.taglib.impl.list;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import idv.fc.model.Flashcard;
-import idv.fc.model.FlashcardHolder;
-import idv.taglib.component.ListFacade;
+import idv.taglib.component.ContextPath;
 import idv.taglib.component.common.impl.Badge;
+import idv.taglib.component.facade.ListFacade;
 import idv.taglib.component.listgroup.ListGroupItemHeading;
 import idv.taglib.component.listgroup.ListGroupItemText;
 import idv.taglib.component.listgroup.renderer.ListGroupRenderere;
 import tool.taglib.Scripts;
 import tool.taglib.Taglibs;
 
-public class FlashcardHolderListGroupRenderer
-		extends ListGroupRenderere<FlashcardHolder> {
+public class FlashcardListGroupRenderer2 extends ListGroupRenderere<Flashcard> {
 	private ListFacade facade;
 	private final String badgeSpanSheet = "text-align: center; padding-left: 20px;"
 			+ " padding-right: 20px;";
 	private String title;
 
-	public FlashcardHolderListGroupRenderer(ListFacade facade, String title) {
+	public FlashcardListGroupRenderer2(ListFacade facade, String title) {
 		this.facade = facade;
 		this.title = title;
 	}
@@ -46,7 +45,7 @@ public class FlashcardHolderListGroupRenderer
 	}
 
 	@Override
-	public String getRenderedEachBody(FlashcardHolder model) {
+	public String getRenderedEachBody(Flashcard model) {
 		//delete badge begin
 		Badge deleteBadge = new Badge();
 		deleteBadge.addStyleSheet(badgeSpanSheet);
@@ -55,9 +54,9 @@ public class FlashcardHolderListGroupRenderer
 		deleteBadge.addAttribute("data-target", "#listDeleteModal")
 				.addAttribute("data-toggle", "modal");
 		deleteBadge.setBody("DELETE");
-		deleteBadge.onClick(Scripts.getScript("modelValues",
-				model.getId().toString(), model.getName(),
-				model.getFcId() == null ? "N/A" : model.getFcId().toString()));
+		deleteBadge.onClick(
+				Scripts.getScript("modelValues", model.getId().toString(),
+						model.getTerm(), model.getDefinition()));
 		//delete badge end
 
 		//edit badge begin
@@ -74,13 +73,12 @@ public class FlashcardHolderListGroupRenderer
 		//heading
 		ListGroupItemHeading heading = new ListGroupItemHeading();
 		heading.addHtmlClass("h3");
-		heading.setBody(model.getName());
+		heading.setBody(model.getTerm());
 
 		//text
 		ListGroupItemText text = new ListGroupItemText();
-		text.addStyleSheet("font-size:26px");
-		text.setBody("fc-id: " + (model.getFcId() == null ? "N/A"
-				: model.getFcId().toString()));
+		text.addStyleSheet("font-size:22px");
+		text.setBody(model.getDefinition());
 
 		//gap
 		String gap = "<span style='width:10px; display: inline-block;'></span>";
