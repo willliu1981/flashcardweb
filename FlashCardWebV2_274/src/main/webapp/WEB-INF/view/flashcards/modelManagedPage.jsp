@@ -18,7 +18,6 @@
 </script>
 
 </head>
-<!--idv.fc.taglib.component.facade.impl.FlashcardHolderListFacade  -->
 <body>
     <ls:setFacade facadeType="${type}" datas="datas" var="facade" />
 

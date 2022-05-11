@@ -8,8 +8,8 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-import idv.fc.taglib.component.ListFacade;
-import idv.fc.taglib.component.common.Renderable;
+import idv.taglib.component.ListFacade;
+import idv.taglib.component.common.Renderable;
 import tool.Debug;
 
 public class ModalFooterTag extends ListTag implements Renderable {

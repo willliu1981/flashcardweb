@@ -13,13 +13,13 @@ import com.github.pagehelper.PageInfo;
 
 import idv.fc.model.Flashcard;
 import idv.fc.service.impl.FlashcardServiceImpl;
-import idv.fc.taglib.component.ListFacadeFactory;
-import idv.fc.taglib.component.facade.impl.FlashcardListFacade;
-import idv.fc.taglib.component.listgroup.ListGroup;
-import idv.fc.taglib.component.listgroup.listmodel.DefaultListGroupModel;
-import idv.fc.taglib.component.listgroup.renderer.impl.FlashcardListGroupRenderer;
-import idv.fc.taglib.component.modal.Modal;
-import idv.fc.taglib.component.modal.renderer.impl.FlashcardDeleteModalRenderer;
+import idv.fc.taglib.FlashcardDeleteModalRenderer;
+import idv.fc.taglib.FlashcardListFacade;
+import idv.fc.taglib.FlashcardListGroupRenderer;
+import idv.taglib.component.ListFacadeFactory;
+import idv.taglib.component.listgroup.ListGroup;
+import idv.taglib.component.modal.Modal;
+import idv.taglib.listgroup.listmodel.DefaultListGroupModel;
 import tool.Debug;
 import tool.spring.SpringUtil;
 
