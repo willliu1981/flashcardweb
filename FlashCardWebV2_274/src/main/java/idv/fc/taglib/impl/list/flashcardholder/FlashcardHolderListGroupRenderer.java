@@ -1,10 +1,10 @@
-package idv.fc.taglib.impl.list;
+package idv.fc.taglib.impl.list.flashcardholder;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import idv.fc.model.Flashcard;
-import idv.taglib.component.ContextPath;
+import idv.fc.model.FlashcardHolder;
 import idv.taglib.component.common.impl.Badge;
 import idv.taglib.component.facade.ListFacade;
 import idv.taglib.component.listgroup.ListGroupItemHeading;
@@ -13,13 +13,14 @@ import idv.taglib.component.listgroup.renderer.ListGroupRenderere;
 import tool.taglib.Scripts;
 import tool.taglib.Taglibs;
 
-public class FlashcardListGroupRenderer extends ListGroupRenderere<Flashcard> {
+public class FlashcardHolderListGroupRenderer
+		extends ListGroupRenderere<FlashcardHolder> {
 	private ListFacade facade;
 	private final String badgeSpanSheet = "text-align: center; padding-left: 20px;"
 			+ " padding-right: 20px;";
 	private String title;
 
-	public FlashcardListGroupRenderer(ListFacade facade, String title) {
+	public FlashcardHolderListGroupRenderer(ListFacade facade, String title) {
 		this.facade = facade;
 		this.title = title;
 	}
@@ -45,7 +46,7 @@ public class FlashcardListGroupRenderer extends ListGroupRenderere<Flashcard> {
 	}
 
 	@Override
-	public String getRenderedEachBody(Flashcard model) {
+	public String getRenderedEachBody(FlashcardHolder model) {
 		//delete badge begin
 		Badge deleteBadge = new Badge();
 		deleteBadge.addStyleSheet(badgeSpanSheet);
@@ -54,9 +55,9 @@ public class FlashcardListGroupRenderer extends ListGroupRenderere<Flashcard> {
 		deleteBadge.addAttribute("data-target", "#listDeleteModal")
 				.addAttribute("data-toggle", "modal");
 		deleteBadge.setBody("DELETE");
-		deleteBadge.onClick(
-				Scripts.getScript("modelValues", model.getId().toString(),
-						model.getTerm(), model.getDefinition()));
+		deleteBadge.onClick(Scripts.getScript("modelValues",
+				model.getId().toString(), model.getName(),
+				model.getFcId() == null ? "N/A" : model.getFcId().toString()));
 		//delete badge end
 
 		//edit badge begin
@@ -73,19 +74,20 @@ public class FlashcardListGroupRenderer extends ListGroupRenderere<Flashcard> {
 		//heading
 		ListGroupItemHeading heading = new ListGroupItemHeading();
 		heading.addHtmlClass("h3");
-		heading.setBody(model.getTerm());
+		heading.setBody(model.getName());
 
 		//text
 		ListGroupItemText text = new ListGroupItemText();
-		text.addStyleSheet("font-size:22px");
-		text.setBody(model.getDefinition());
-
 		//gap
 		String gap = "<span style='width:10px; display: inline-block;'></span>";
+		text.addStyleSheet("font-size:26px");
+		text.setBody(gap + "(id:" + model.getId() + ")" + gap + "fc-id: "
+				+ (model.getFcId() == null ? "N/A"
+						: model.getFcId().toString()));
 
 		return Stream
 				.of(deleteBadge.getHtmlCode(), editBadge.getHtmlCode(),
-						heading.getHtmlCode(), gap, text.getHtmlCode())
+						heading.getHtmlCode(), text.getHtmlCode())
 				.collect(Collectors.joining());
 	}
 

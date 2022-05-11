@@ -1,9 +1,9 @@
-package idv.fc.taglib.impl.list;
+package idv.fc.taglib.impl.list.holderdata;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import idv.fc.model.Flashcard;
+import idv.fc.model.HolderData;
 import idv.taglib.component.common.Renderable;
 import idv.taglib.component.common.impl.Form;
 import idv.taglib.component.common.impl.ModalBodyItem;
@@ -12,11 +12,11 @@ import idv.taglib.component.modal.ModalTitle;
 import idv.taglib.component.modal.renderer.ModalRenderer;
 import tool.taglib.Taglibs;
 
-public class FlashcardDeleteModalRenderer2 extends ModalRenderer<Flashcard> {
+public class HolderDataDeleteModalRenderer extends ModalRenderer<HolderData> {
 	private ListFacade facade;
 	private String title;
 
-	public FlashcardDeleteModalRenderer2(ListFacade facade, String title) {
+	public HolderDataDeleteModalRenderer(ListFacade facade, String title) {
 		this.facade = facade;
 		this.title = title;
 	}

@@ -19,9 +19,7 @@ import idv.fc.model.HolderData;
 import idv.fc.service.abstraction.IFlashcardHolderService;
 import idv.fc.service.abstraction.IFlashcardService;
 import idv.fc.service.abstraction.IHolderDataService;
-import idv.fc.taglib.impl.list.FlashcardListFacadeOld;
 import idv.taglib.component.facade.ListFacade;
-import idv.taglib.component.facade.FacadeFactory;
 
 @Controller
 @RequestMapping(value = "flashcards")
@@ -121,11 +119,14 @@ public class FlashcardsController extends BaseController {
 
 		PageHelper.startPage(intPageNumber, MAX_PAGE_NUMBER);
 		List<HolderData> all = holderDataService.getAll();
-		map.put("datas", all);
 		PageInfo<HolderData> pageInfo = new PageInfo<>(all,
 				MAX_NAV_PAGE_NUMBER);
+
 		map.put("pageInfo", pageInfo);
-		return FLASHCARDS + "/hdManagedPage";
+		map.put("datas", all);
+		map.put("type", ListFacade.HOLDERDATA);
+
+		return FLASHCARDS + "/modelManagedPage";
 	}
 	//manage holderData end
 }

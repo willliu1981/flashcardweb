@@ -13,7 +13,7 @@
 
     <!-- 引入巨屏 -->
     <jsp:include page="/WEB-INF/view/public/jumbotron.jsp">
-        <jsp:param name="title" value="編輯 FlashcardHolder" />
+        <jsp:param name="title" value="編輯 Flashcard Holder" />
     </jsp:include>
 
     <div class="container">
@@ -21,7 +21,7 @@
             <input type="hidden" name="id" value="${flashcardHolder.id}" />
             <input type="hidden" name="_method" value="put" />
             <fieldset>
-                <legend>編輯 FlashcardHolder</legend>
+                <legend>編輯 Flashcard Holder</legend>
                 <div class="form-group">
                     <label for="inputEmail" class="col-lg-2 control-label">Name</label>
                     <div class="col-lg-10">
@@ -32,7 +32,7 @@
                 <div class="form-group">
                     <label for="inputPassword" class="col-lg-2 control-label">Link Flashcard ID</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" name="fcId" placeholder="Ex: xxx"
+                        <input type="text" class="form-control" name="fcId" placeholder="Ex: 123"
                             value="${flashcardHolder.fcId}">
                     </div>
                 </div>

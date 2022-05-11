@@ -14,12 +14,12 @@
 
 	<insert id="create" parameterType="HolderData">
 		insert into HolderData
-		(fh_id,)values(#{fhId});
+		(fh_id)values(#{fhId});
 	</insert>
 
 	<update id="update" parameterType="HolderData">
 		update HolderData set
-		fh_id=#{fhId}where id = #{id};
+		fh_id=#{fhId} where id = #{id};
 	</update>
 
 	<delete id="delete">

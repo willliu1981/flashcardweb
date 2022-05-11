@@ -1,4 +1,4 @@
-package idv.fc.taglib.impl.list;
+package idv.fc.taglib.impl.list.flashcard;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -13,13 +13,13 @@ import idv.taglib.component.listgroup.renderer.ListGroupRenderere;
 import tool.taglib.Scripts;
 import tool.taglib.Taglibs;
 
-public class FlashcardListGroupRenderer2 extends ListGroupRenderere<Flashcard> {
+public class FlashcardListGroupRenderer extends ListGroupRenderere<Flashcard> {
 	private ListFacade facade;
 	private final String badgeSpanSheet = "text-align: center; padding-left: 20px;"
 			+ " padding-right: 20px;";
 	private String title;
 
-	public FlashcardListGroupRenderer2(ListFacade facade, String title) {
+	public FlashcardListGroupRenderer(ListFacade facade, String title) {
 		this.facade = facade;
 		this.title = title;
 	}
@@ -77,15 +77,16 @@ public class FlashcardListGroupRenderer2 extends ListGroupRenderere<Flashcard> {
 
 		//text
 		ListGroupItemText text = new ListGroupItemText();
-		text.addStyleSheet("font-size:22px");
-		text.setBody(model.getDefinition());
-
 		//gap
 		String gap = "<span style='width:10px; display: inline-block;'></span>";
 
+		text.addStyleSheet("font-size:22px");
+		text.setBody(gap + "(id:" + model.getId() + ")" + gap
+				+ model.getDefinition());
+
 		return Stream
 				.of(deleteBadge.getHtmlCode(), editBadge.getHtmlCode(),
-						heading.getHtmlCode(), gap, text.getHtmlCode())
+						heading.getHtmlCode(), text.getHtmlCode())
 				.collect(Collectors.joining());
 	}
 

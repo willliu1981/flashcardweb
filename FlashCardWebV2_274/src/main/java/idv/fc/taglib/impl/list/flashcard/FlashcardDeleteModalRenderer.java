@@ -1,4 +1,4 @@
-package idv.fc.taglib.impl.list;
+package idv.fc.taglib.impl.list.flashcard;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;

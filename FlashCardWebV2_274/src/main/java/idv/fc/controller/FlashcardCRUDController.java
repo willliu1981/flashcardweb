@@ -71,19 +71,4 @@ public class FlashcardCRUDController extends BaseController {
 		return "redirect:/" + WEB_FLASHCARDS + "/fcManager";
 	}
 
-	/*
-	 * ajax
-	 * (目前由 test3.jsp 呼叫)
-	 */
-	@RequestMapping(value = "ajax/flashcard/{id}", method = RequestMethod.GET)
-	@ResponseBody
-	public String getForAjax(HashMap<String, Object> map,
-			@PathVariable("id") String id) {
-		Flashcard find = flashcardService.getById(id);
-
-		Gson g = new Gson();
-
-		return g.toJson(find);
-	}
-
 }

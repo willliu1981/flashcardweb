@@ -1,10 +1,11 @@
-package idv.fc.taglib.impl.list;
+package idv.fc.taglib.impl.list.flashcard;
 
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import idv.fc.model.Flashcard;
+import idv.fc.taglib.impl.list.ListFacadeAdapter;
 import idv.taglib.component.ContextPath;
 import idv.taglib.component.facade.ListFacade;
 import idv.taglib.component.listgroup.ListGroup;
@@ -28,17 +29,18 @@ public class FlashcardListFacade extends ListFacadeAdapter<Flashcard> {
 	@Override
 	protected void configureListGroupAndModal(ListGroup<Flashcard> listGroup,
 			Modal<Flashcard> modal) {
+		
 		DefaultListGroupModel<Flashcard> model = new DefaultListGroupModel<>();
 		this.getDatas().stream().forEach(item -> model.addItem(item));
 		listGroup.setModel(model);
 
-		FlashcardListGroupRenderer fclgRenderer = new FlashcardListGroupRenderer(
+		FlashcardListGroupRenderer lgRenderer = new FlashcardListGroupRenderer(
 				this, title);
-		listGroup.setRenderer(fclgRenderer);
+		listGroup.setRenderer(lgRenderer);
 
-		FlashcardDeleteModalRenderer fcdmRenderer = new FlashcardDeleteModalRenderer(
+		FlashcardDeleteModalRenderer dmRenderer = new FlashcardDeleteModalRenderer(
 				this, title);
-		modal.setRenderer(fcdmRenderer);
+		modal.setRenderer(dmRenderer);
 
 	}
 

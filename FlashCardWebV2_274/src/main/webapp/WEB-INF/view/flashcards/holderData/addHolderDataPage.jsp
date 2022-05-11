@@ -13,23 +13,17 @@
 
     <!-- 引入巨屏 -->
     <jsp:include page="/WEB-INF/view/public/jumbotron.jsp">
-        <jsp:param name="title" value="新增 Flashcard Holder" />
+        <jsp:param name="title" value="新增 Holder Data" />
     </jsp:include>
 
     <div class="container">
-        <form class="form-horizontal" method="post" action="${pageContext.request.contextPath}/flashcardHolder">
+        <form class="form-horizontal" method="post" action="${pageContext.request.contextPath}/holderData">
             <fieldset>
-                <legend>新增 FlashcardHolder</legend>
+                <legend>新增 Holder Data</legend>
                 <div class="form-group">
-                    <label class="col-lg-2 control-label">Name</label>
+                    <label class="col-lg-2 control-label">Link Flashcard Holder ID</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" name="name" placeholder="Ex: apple">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">Link Flashcard ID</label>
-                    <div class="col-lg-10">
-                        <input type="text" class="form-control" name="fcId" placeholder="Ex: 123">
+                        <input type="text" class="form-control" name="fhId" placeholder="Ex: 123">
                     </div>
                 </div>
                 <div class="form-group">

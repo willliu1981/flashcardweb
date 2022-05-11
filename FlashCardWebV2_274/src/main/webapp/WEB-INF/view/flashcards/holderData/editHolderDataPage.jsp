@@ -6,30 +6,27 @@
 <jsp:include page="/WEB-INF/view/public/bootstrapCommon.jsp" />
 </head>
 <body>
-    <!-- include header nav -->
+    <!-- header include nav -->
     <jsp:include page="/WEB-INF/view/public/header.jsp" flush="true">
         <jsp:param name="active" value="" />
     </jsp:include>
 
     <!-- 引入巨屏 -->
     <jsp:include page="/WEB-INF/view/public/jumbotron.jsp">
-        <jsp:param name="title" value="新增 Flashcard Holder" />
+        <jsp:param name="title" value="編輯 Holder Data" />
     </jsp:include>
 
     <div class="container">
-        <form class="form-horizontal" method="post" action="${pageContext.request.contextPath}/flashcardHolder">
+        <form class="form-horizontal" method="post" action="${pageContext.request.contextPath}/holderData">
+            <input type="hidden" name="id" value="${holderData.id}" />
+            <input type="hidden" name="_method" value="put" />
             <fieldset>
-                <legend>新增 FlashcardHolder</legend>
+                <legend>編輯 Holder Data</legend>
                 <div class="form-group">
-                    <label class="col-lg-2 control-label">Name</label>
+                    <label for="inputPassword" class="col-lg-2 control-label">Link Flashcard Holder ID</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" name="name" placeholder="Ex: apple">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">Link Flashcard ID</label>
-                    <div class="col-lg-10">
-                        <input type="text" class="form-control" name="fcId" placeholder="Ex: 123">
+                        <input type="text" class="form-control" name="fhId" placeholder="Ex: 123"
+                            value="${holderData.fhId}">
                     </div>
                 </div>
                 <div class="form-group">
@@ -41,7 +38,6 @@
             </fieldset>
         </form>
     </div>
-
 
 </body>
 </html>
