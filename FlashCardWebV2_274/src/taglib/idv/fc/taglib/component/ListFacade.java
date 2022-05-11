@@ -1,6 +1,11 @@
 package idv.fc.taglib.component;
 
+import idv.fc.taglib.component.facade.impl.FlashcardHolderListFacade;
+import idv.fc.taglib.component.facade.impl.FlashcardListFacade;
+
 public abstract class ListFacade {
+	public static final Class<FlashcardListFacade> FLASHCARD = FlashcardListFacade.class;
+	public static final Class<FlashcardHolderListFacade> FLASHCARDHOLDER = FlashcardHolderListFacade.class;
 
 	public abstract boolean hasNextListItem();
 

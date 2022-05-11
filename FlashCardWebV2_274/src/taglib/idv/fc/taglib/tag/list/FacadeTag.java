@@ -16,7 +16,7 @@ import tool.taglib.Taglibs;
 
 public class FacadeTag<T extends ListFacade> extends SimpleTagSupport {
 
-	private String facadeType;
+	private Class<ListFacade> facadeType;
 	private String datas = Taglibs.FacadeTag_DATAS;//default datas var
 	private String var = Taglibs.FacadeTag_FACADE_VAR;//default facade var
 
@@ -24,7 +24,7 @@ public class FacadeTag<T extends ListFacade> extends SimpleTagSupport {
 		this.var = var;
 	}
 
-	public void setFacadeType(String type) {
+	public void setFacadeType(Class<ListFacade> type) {
 		this.facadeType = type;
 	}
 
@@ -34,23 +34,16 @@ public class FacadeTag<T extends ListFacade> extends SimpleTagSupport {
 
 	@Override
 	public void doTag() throws JspException, IOException {
-		Class<T> clazz;
-		try {
-			HttpServletRequest request = (HttpServletRequest) ((PageContext) this
-					.getJspContext()).getRequest();
-			List attrDatas = (List) request.getAttribute(datas);
+		HttpServletRequest request = (HttpServletRequest) ((PageContext) this
+				.getJspContext()).getRequest();
+		List<?> attrDatas = (List<?>) request.getAttribute(datas);
 
-			clazz = (Class<T>) Class.forName(this.facadeType);
-			ListFacade listFacade = ListFacadeFactory.getListFacade(attrDatas,
-					clazz);
-			listFacade.setContextPath(request.getContextPath());
+		ListFacade listFacade = ListFacadeFactory.getListFacade(attrDatas,
+				facadeType);
+		listFacade.setContextPath(request.getContextPath());
 
-			request.setAttribute(Taglibs.FacadeTag_FACADE_VAR_KEY, var);
-			request.setAttribute(var, listFacade);
-
-		} catch (ClassNotFoundException e1) {
-			e1.printStackTrace();
-		}
+		request.setAttribute(Taglibs.FacadeTag_FACADE_VAR_KEY, var);
+		request.setAttribute(var, listFacade);
 
 	}
 

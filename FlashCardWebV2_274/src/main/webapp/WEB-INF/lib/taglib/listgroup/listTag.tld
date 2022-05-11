@@ -15,7 +15,8 @@
 		<body-content>empty</body-content>
 		<attribute>
 			<name>facadeType</name>
-			<type>java.lang.String</type>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Class</type>
 			<required>true</required>
 		</attribute>
 		<attribute>

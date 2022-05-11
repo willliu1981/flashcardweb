@@ -78,7 +78,7 @@ public class FlashcardHolderListGroupRenderer
 
 		//text
 		ListGroupItemText text = new ListGroupItemText();
-		text.addStyleSheet("font-size:22px");
+		text.addStyleSheet("font-size:26px");
 		text.setBody("fc-id: " + (model.getFcId() == null ? "N/A"
 				: model.getFcId().toString()));
 

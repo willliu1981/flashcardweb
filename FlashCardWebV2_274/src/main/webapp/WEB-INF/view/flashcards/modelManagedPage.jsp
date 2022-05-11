@@ -18,8 +18,9 @@
 </script>
 
 </head>
+<!--idv.fc.taglib.component.facade.impl.FlashcardHolderListFacade  -->
 <body>
-    <ls:setFacade facadeType="idv.fc.taglib.component.facade.impl.FlashcardHolderListFacade" datas="datas" var="facade" />
+    <ls:setFacade facadeType="${type}" datas="datas" var="facade" />
 
     <!-- include header nav -->
     <jsp:include page="/WEB-INF/view/public/header.jsp" flush="true">
@@ -36,6 +37,5 @@
 
     <!-- 引入分頁  -->
     <jsp:include page="/WEB-INF/view/public/pager.jsp"></jsp:include>
-
 </body>
 </html>
