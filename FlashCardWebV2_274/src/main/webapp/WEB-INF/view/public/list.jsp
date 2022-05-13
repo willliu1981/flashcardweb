@@ -54,8 +54,7 @@
                         <button type="button" class="btn btn-default" data-dismiss="modal">
                             <font color="black">{btnCloseName}</font>
                         </button>
-                        <button id="model_delete" type="submit" class="btn btn-primary" style="background: red;">Delete
-                            Data</button>
+                        <button id="model_delete" type="submit" class="btn btn-primary" style="background: red;">{btnDeleteName}</button>
                     </ls:modalFooter>
                 </div>
             </div>

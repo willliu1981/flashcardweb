@@ -20,13 +20,22 @@ public class ModalFooterTag extends ListTag {
 		String modalBody = this.getFacade().getModalFooter().getStrResult();
 		this.getJspBody().invoke(sw);
 		StringBuffer buffer = sw.getBuffer();
+		String jspBody = buffer.toString();
 
-		String replace = modalBody.replace(Handler.BODY, buffer.toString());
-		String close = this.getFacade().getModalFooter().getHandler()
-				.getAttribute("btnCloseName").toString();
-		replace = replace.replace("{btnCloseName}", close);
+		//將jspBody 取代 Handler.BODY 佔位符
+		buffer.setLength(0);
+		buffer.append(modalBody);
+		int indexOf = buffer.indexOf(Handler.BODY);
+		buffer.replace(indexOf, indexOf + Handler.BODY.length(), jspBody);
 
-		out.print(replace);
+		Handler handler = this.getFacade().getModalFooter().getHandler();
+
+		handler.getAttributes().forEach((k, v) -> {
+			int idx = buffer.indexOf(k);
+			buffer.replace(idx - 1, idx + k.length() + 1, v);
+		});
+
+		out.print(buffer.toString());
 
 	}
 }
