@@ -8,13 +8,12 @@ public class DefaultHandler implements Handler {
 
 	@Override
 	public void setAttribute(String name, String attr) {
-		this.attrs.put(name, attr);
-
+		this.attrs.put(name.trim(), attr);
 	}
 
 	@Override
 	public String getAttribute(String name) {
-		return attrs.get(name);
+		return attrs.get(name.trim());
 	}
 
 	@Override

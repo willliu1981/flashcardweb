@@ -56,8 +56,8 @@ public class FlashcardDeleteModalRenderer extends ModalRenderer<Flashcard> {
 		form.setAction(sbAction.toString());
 		form.setMethod("post");
 		form.setBody(Handler.BODY);
-		handler.setAttribute("btnCloseName ", "開閉");
-		handler.setAttribute("  btnDeleteName", "刪除");
+		handler.setAttribute("btnCloseName", "開閉");
+		handler.setAttribute("btnDeleteName", "刪除");
 
 		return form.getHtmlCode();
 	}

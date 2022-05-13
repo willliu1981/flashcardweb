@@ -4,13 +4,12 @@ import java.util.Map;
 
 public interface Handler {
 	public final static String EMPTY = "";
-	public final static String BODY = "${BODY}";
+	public final static String BODY = "${_BODY}";
 
 	void setAttribute(String name, String attr);
 
 	String getAttribute(String name);
 
 	Map<String, String> getAttributes();
-	
-	
+
 }

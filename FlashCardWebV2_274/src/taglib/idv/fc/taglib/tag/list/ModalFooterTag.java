@@ -11,6 +11,7 @@ import javax.servlet.jsp.JspWriter;
 import idv.debug.Debug;
 import idv.fc.taglib.impl.list.ListFacadeAdapter;
 import idv.taglib.control.Handler;
+import idv.taglib.control.Result;
 
 public class ModalFooterTag extends ListTag {
 
@@ -19,28 +20,16 @@ public class ModalFooterTag extends ListTag {
 		JspWriter out = this.getJspContext().getOut();
 		StringWriter sw = new StringWriter();
 
-		String modalBody = this.getFacade().getModalFooter().getStrResult();
 		this.getJspBody().invoke(sw);
 		StringBuffer buffer = sw.getBuffer();
-		String jspBody = buffer.toString();
 
-		//將jspBody 取代 Handler.BODY 佔位符
-		buffer.setLength(0);
-		buffer.append(modalBody);
-		int indexOf = buffer.indexOf(Handler.BODY);
-		buffer.replace(indexOf, indexOf + Handler.BODY.length(), jspBody);
+		ListTag.processJspBodyReplacement(buffer,
+				this.getFacade().getModalFooter());
 
-		Handler handler = this.getFacade().getModalFooter().getHandler();
-
-		handler.getAttributes().forEach((k, v) -> {
-			Pattern compile = Pattern.compile("\\{[ ]*" + k.trim() + "*[ ]*\\}");
-			Matcher matcher = compile.matcher(buffer.toString());
-			String replaceAll = matcher.replaceAll(v);
-			buffer.setLength(0);
-			buffer.append(replaceAll);
-		});
+		processRendererAttributeReplacement(buffer,
+				this.getFacade().getModalFooter().getHandler());
 
 		out.print(buffer.toString());
-
 	}
+
 }
