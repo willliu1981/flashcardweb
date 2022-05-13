@@ -5,11 +5,9 @@ import java.io.StringWriter;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
-import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.tagext.SimpleTagSupport;
 
+import idv.fc.taglib.impl.list.ListFacadeAdapter;
 import idv.taglib.component.itf.Renderable;
-import idv.taglib.factory.ListFacade;
 import tool.Debug;
 
 public class ModalFooterTag extends ListTag implements Renderable {
@@ -19,12 +17,17 @@ public class ModalFooterTag extends ListTag implements Renderable {
 		JspWriter out = this.getJspContext().getOut();
 		StringWriter sw = new StringWriter();
 
-		String modalBody = this.getFacade().getModalFooter();
+		ListFacadeAdapter facade = (ListFacadeAdapter) this.getFacade();
+
+		String modalBody = facade.getModalFooter2().getStrResult();
 
 		this.getJspBody().invoke(sw);
 		StringBuffer buffer = sw.getBuffer();
 
 		String replace = modalBody.replace(this.BODY, buffer.toString());
+		String close = facade.getModalFooter2().getHandler()
+				.getAttribute("btnCloseName").toString();
+		replace = replace.replace("&#35;{btnCloseName}", close);
 
 		out.print(replace);
 

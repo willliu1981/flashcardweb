@@ -5,6 +5,7 @@ import java.util.List;
 import idv.taglib.component.ContextPath;
 import idv.taglib.component.listgroup.ListGroup;
 import idv.taglib.component.modal.Modal;
+import idv.taglib.control.Result;
 import idv.taglib.factory.ListFacade;
 
 public abstract class ListFacadeAdapter<T> extends ListFacade {
@@ -86,6 +87,10 @@ public abstract class ListFacadeAdapter<T> extends ListFacade {
 	@Override
 	public String getModalFooter() {
 		return this.modal.getFooterResult();
+	}
+	
+	public Result getModalFooter2() {
+		return this.modal.getFooterResult2();
 	}
 
 }

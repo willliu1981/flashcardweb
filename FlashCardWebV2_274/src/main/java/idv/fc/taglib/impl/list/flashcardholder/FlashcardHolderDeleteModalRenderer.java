@@ -10,8 +10,8 @@ import idv.taglib.component.common.impl.ModalBodyItem;
 import idv.taglib.component.itf.Renderable;
 import idv.taglib.component.modal.ModalTitle;
 import idv.taglib.component.modal.renderer.ModalRenderer;
+import idv.taglib.control.Handler;
 import idv.taglib.factory.ListFacade;
-import idv.taglib.handle.Handler;
 import tool.taglib.Taglibs;
 
 public class FlashcardHolderDeleteModalRenderer
@@ -58,6 +58,7 @@ public class FlashcardHolderDeleteModalRenderer
 		form.setAction(sbAction.toString());
 		form.setMethod("post");
 		form.setBody(Renderable.BODY);
+		handler.setAttribute("btnCloseName", "開閉");
 
 		return form.getHtmlCode();
 	}

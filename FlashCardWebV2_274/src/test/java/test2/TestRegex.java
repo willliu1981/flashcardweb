@@ -47,6 +47,8 @@ public class TestRegex {
 		logger.info(stackTrace.getClassName() + "."
 				+ stackTrace.getMethodName() + "  尚未實作");*/
 
+		
+		
 	}
 
 	@Test

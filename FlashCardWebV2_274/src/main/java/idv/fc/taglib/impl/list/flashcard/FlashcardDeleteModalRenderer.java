@@ -3,12 +3,14 @@ package idv.fc.taglib.impl.list.flashcard;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import idv.excpetion.ExceptionFactory;
 import idv.fc.model.Flashcard;
 import idv.taglib.component.common.impl.Form;
 import idv.taglib.component.common.impl.ModalBodyItem;
 import idv.taglib.component.itf.Renderable;
 import idv.taglib.component.modal.ModalTitle;
 import idv.taglib.component.modal.renderer.ModalRenderer;
+import idv.taglib.control.Handler;
 import idv.taglib.factory.ListFacade;
 import tool.taglib.Taglibs;
 
@@ -45,7 +47,7 @@ public class FlashcardDeleteModalRenderer extends ModalRenderer<Flashcard> {
 	}
 
 	@Override
-	public String getRenderedFooter() {
+	public String getRenderedFooter(Handler handler) {
 		StringBuilder sbAction = Taglibs.getStringBuilder()
 				.append(this.facade.getContextPath().getPath()).append("/")
 				.append(this.facade.getPathForCRUD()).append("/");
@@ -55,8 +57,16 @@ public class FlashcardDeleteModalRenderer extends ModalRenderer<Flashcard> {
 		form.setAction(sbAction.toString());
 		form.setMethod("post");
 		form.setBody(Renderable.BODY);
+		handler.setAttribute("btnCloseName", "開閉");
 
 		return form.getHtmlCode();
+	}
+
+	@Override
+	public String getRenderedFooter() {
+		throw ExceptionFactory
+				.getDefaultUnsupportedOperationException(new Object() {
+				});
 	}
 
 }

@@ -1,9 +1,11 @@
 package idv.taglib.factory;
 
+import idv.excpetion.MyUnsupportedOperationException;
 import idv.fc.taglib.impl.list.flashcard.FlashcardListFacade;
 import idv.fc.taglib.impl.list.flashcardholder.FlashcardHolderListFacade;
 import idv.fc.taglib.impl.list.holderdata.HolderDataListFacade;
 import idv.taglib.component.ContextPath;
+import idv.taglib.control.Result;
 
 public abstract class ListFacade {
 	public static final Class<FlashcardListFacade> FLASHCARD = FlashcardListFacade.class;
@@ -21,6 +23,11 @@ public abstract class ListFacade {
 	public abstract String getModalBody();
 
 	public abstract String getModalFooter();
+
+	public  Result getModalFooter2() {
+		throw new MyUnsupportedOperationException(
+				new Object().getClass().getEnclosingMethod() + " 方法尚未實作");
+	}
 
 	public abstract void setContextPath(String contextPath);
 
