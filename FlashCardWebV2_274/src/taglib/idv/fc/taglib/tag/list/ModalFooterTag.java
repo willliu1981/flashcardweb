@@ -27,7 +27,7 @@ public class ModalFooterTag extends ListTag implements Renderable {
 		String replace = modalBody.replace(this.BODY, buffer.toString());
 		String close = facade.getModalFooter2().getHandler()
 				.getAttribute("btnCloseName").toString();
-		replace = replace.replace("&#35;{btnCloseName}", close);
+		replace = replace.replace("{btnCloseName}", close);
 
 		out.print(replace);
 

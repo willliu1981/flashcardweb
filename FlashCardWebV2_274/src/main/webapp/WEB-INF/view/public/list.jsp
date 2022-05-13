@@ -52,7 +52,7 @@
                     <ls:modalFooter>
                         <input type="hidden" name="_method" value="delete" />
                         <button type="button" class="btn btn-default" data-dismiss="modal">
-                            <font color="black">&#35;{btnCloseName}</font>
+                            <font color="black">{btnCloseName}</font>
                         </button>
                         <button id="model_delete" type="submit" class="btn btn-primary" style="background: red;">Delete
                             Data</button>
