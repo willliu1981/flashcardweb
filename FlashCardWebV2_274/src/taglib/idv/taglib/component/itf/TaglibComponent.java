@@ -1,6 +1,10 @@
 package idv.taglib.component.itf;
 
+import java.util.function.Function;
+
 import idv.excpetion.MyUnsupportedOperationException;
+import idv.taglib.control.DefaultHandler;
+import idv.taglib.control.Handler;
 import idv.taglib.control.Result;
 
 public interface TaglibComponent<T> {
@@ -11,11 +15,15 @@ public interface TaglibComponent<T> {
 
 	Result getFooterResult();
 
-	default Result getFooterResult2() {
-		throw new MyUnsupportedOperationException(
-				new Object().getClass().getEnclosingMethod() + " 方法尚未實作");
-	}
-
 	void setRenderer(TaglibRenderer<T> renderer);
+
+	default Result createResult(Function<Handler, String> rend) {
+		DefaultHandler defaultHandler = new DefaultHandler();
+		String apply = rend.apply(defaultHandler);
+		Result result = new Result();
+		result.setHandler(defaultHandler);
+		result.setResult(apply);
+		return result;
+	}
 
 }

@@ -14,20 +14,17 @@ public abstract class ListFacade {
 
 	public abstract boolean hasNextListItem();
 
-	public abstract String getListHeader();
+	public abstract Result getListHeader();
 
 	public abstract String getListItem();
 
-	public abstract String getModalHeader();
+	public abstract Result getModalHeader();
 
-	public abstract String getModalBody();
+	public abstract Result getModalBody();
 
-	public abstract String getModalFooter();
+	public abstract Result getModalFooter();
 
-	public  Result getModalFooter2() {
-		throw new MyUnsupportedOperationException(
-				new Object().getClass().getEnclosingMethod() + " 方法尚未實作");
-	}
+
 
 	public abstract void setContextPath(String contextPath);
 

@@ -9,22 +9,20 @@ import javax.servlet.jsp.JspWriter;
 import idv.fc.taglib.impl.list.ListFacadeAdapter;
 import idv.taglib.control.Handler;
 
-public class ModalFooterTag extends ListTag  {
+public class ModalFooterTag extends ListTag {
 
 	@Override
 	public void doTag() throws JspException, IOException {
 		JspWriter out = this.getJspContext().getOut();
 		StringWriter sw = new StringWriter();
 
-		ListFacadeAdapter<?> facade = (ListFacadeAdapter<?>) this.getFacade();
-
-		String modalBody = facade.getModalFooter2().getStrResult();
+		String modalBody = facade.getModalFooter().getStrResult();
 
 		this.getJspBody().invoke(sw);
 		StringBuffer buffer = sw.getBuffer();
 
 		String replace = modalBody.replace(Handler.BODY, buffer.toString());
-		String close = facade.getModalFooter2().getHandler()
+		String close = facade.getModalFooter().getHandler()
 				.getAttribute("btnCloseName").toString();
 		replace = replace.replace("{btnCloseName}", close);
 

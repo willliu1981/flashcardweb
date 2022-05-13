@@ -48,17 +48,32 @@ public class ListGroup<T> implements TaglibComponent<T> {
 
 	@Override
 	public Result getHeaderResult() {
-		return this.renderer.getRenderedHeader(null);
-	}
-
-	@Override
-	public Result getFooterResult() {
-		return this.renderer.getRenderedFooter(null);
+		return createResult(h -> renderer.getRenderedHeader(h));
 	}
 
 	@Override
 	public Result getBodyResult() {
-		return ((ListGroupRenderere<T>) this.renderer).getRenderedBody(null);
+		return createResult(h -> renderer.getRenderedBody(h));
 	}
+
+	@Override
+	public Result getFooterResult() {
+		return createResult(h -> renderer.getRenderedFooter(h));
+	}
+
+	/*	@Override
+		public Result getHeaderResult() {
+			return this.renderer.getRenderedHeader(null);
+		}
+	
+		@Override
+		public Result getFooterResult() {
+			return this.renderer.getRenderedFooter(null);
+		}
+	
+		@Override
+		public Result getBodyResult() {
+			return ((ListGroupRenderere<T>) this.renderer).getRenderedBody(null);
+		}*/
 
 }

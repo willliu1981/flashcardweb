@@ -51,7 +51,7 @@ public abstract class ListFacadeAdapter<T> extends ListFacade {
 	}
 
 	@Override
-	public String getListHeader() {
+	public Result getListHeader() {
 		return this.listGroup.getHeaderResult();
 	}
 
@@ -70,12 +70,12 @@ public abstract class ListFacadeAdapter<T> extends ListFacade {
 	}
 
 	@Override
-	public String getModalHeader() {
+	public Result getModalHeader() {
 		return this.modal.getHeaderResult();
 	}
 
 	@Override
-	public String getModalBody() {
+	public Result getModalBody() {
 		return this.modal.getBodyResult();
 	}
 
@@ -85,12 +85,8 @@ public abstract class ListFacadeAdapter<T> extends ListFacade {
 	}
 
 	@Override
-	public String getModalFooter() {
+	public Result getModalFooter() {
 		return this.modal.getFooterResult();
-	}
-	
-	public Result getModalFooter2() {
-		return this.modal.getFooterResult2();
 	}
 
 }
