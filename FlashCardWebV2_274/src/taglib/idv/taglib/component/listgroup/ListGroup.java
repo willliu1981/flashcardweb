@@ -3,6 +3,7 @@ package idv.taglib.component.listgroup;
 import idv.taglib.component.itf.TaglibComponent;
 import idv.taglib.component.itf.TaglibRenderer;
 import idv.taglib.component.listgroup.renderer.ListGroupRenderere;
+import idv.taglib.control.Result;
 import idv.taglib.listgroup.listmodel.ListGroupModel;
 
 public class ListGroup<T> implements TaglibComponent<T> {
@@ -46,18 +47,18 @@ public class ListGroup<T> implements TaglibComponent<T> {
 	}
 
 	@Override
-	public String getHeaderResult() {
-		return this.renderer.getRenderedHeader();
+	public Result getHeaderResult() {
+		return this.renderer.getRenderedHeader(null);
 	}
 
 	@Override
-	public String getFooterResult() {
-		return this.renderer.getRenderedFooter();
+	public Result getFooterResult() {
+		return this.renderer.getRenderedFooter(null);
 	}
 
 	@Override
-	public String getBodyResult() {
-		return ((ListGroupRenderere<T>) this.renderer).getRenderedBody();
+	public Result getBodyResult() {
+		return ((ListGroupRenderere<T>) this.renderer).getRenderedBody(null);
 	}
 
 }

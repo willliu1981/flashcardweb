@@ -1,21 +1,13 @@
 package idv.taglib.component.itf;
 
-import idv.excpetion.ExceptionFactory;
 import idv.taglib.control.Handler;
 
-public interface TaglibRenderer<T> extends Renderable {
-	static String EMPTY = "";
+public interface TaglibRenderer<T> {
 
-	String getRenderedHeader();
+	String getRenderedHeader(Handler handler);
 
-	String getRenderedBody();
+	String getRenderedBody(Handler handler);
 
-	String getRenderedFooter();
+	String getRenderedFooter(Handler handler);
 
-	default String getRenderedFooter(Handler handler) {
-		throw ExceptionFactory
-				.getDefaultUnsupportedOperationException(new Object() {
-				});
-
-	}
 }

@@ -3,12 +3,12 @@ package idv.fc.taglib.impl.list.flashcardholder;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import idv.fc.model.Flashcard;
 import idv.fc.model.FlashcardHolder;
 import idv.taglib.component.common.impl.Badge;
 import idv.taglib.component.listgroup.ListGroupItemHeading;
 import idv.taglib.component.listgroup.ListGroupItemText;
 import idv.taglib.component.listgroup.renderer.ListGroupRenderere;
+import idv.taglib.control.Handler;
 import idv.taglib.factory.ListFacade;
 import tool.taglib.Scripts;
 import tool.taglib.Taglibs;
@@ -26,7 +26,7 @@ public class FlashcardHolderListGroupRenderer
 	}
 
 	@Override
-	public String getRenderedHeader() {
+	public String getRenderedHeader(Handler handler) {
 		StringBuilder sbScript = new StringBuilder();
 		sbScript.append("location.href='")
 				.append(this.facade.getContextPath().getPath()).append("/")
@@ -92,8 +92,8 @@ public class FlashcardHolderListGroupRenderer
 	}
 
 	@Override
-	public String getRenderedFooter() {
-		return EMPTY;
+	public String getRenderedFooter(Handler handler) {
+		return Handler.EMPTY;
 	}
 
 }

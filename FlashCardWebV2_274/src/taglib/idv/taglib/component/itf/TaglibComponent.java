@@ -5,11 +5,11 @@ import idv.taglib.control.Result;
 
 public interface TaglibComponent<T> {
 
-	String getBodyResult();
+	Result getBodyResult();
 
-	String getHeaderResult();
+	Result getHeaderResult();
 
-	String getFooterResult();
+	Result getFooterResult();
 
 	default Result getFooterResult2() {
 		throw new MyUnsupportedOperationException(

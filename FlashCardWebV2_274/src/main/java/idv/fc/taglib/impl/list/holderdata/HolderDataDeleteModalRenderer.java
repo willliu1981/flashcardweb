@@ -6,9 +6,9 @@ import java.util.stream.Stream;
 import idv.fc.model.HolderData;
 import idv.taglib.component.common.impl.Form;
 import idv.taglib.component.common.impl.ModalBodyItem;
-import idv.taglib.component.itf.Renderable;
 import idv.taglib.component.modal.ModalTitle;
 import idv.taglib.component.modal.renderer.ModalRenderer;
+import idv.taglib.control.Handler;
 import idv.taglib.factory.ListFacade;
 import tool.taglib.Taglibs;
 
@@ -25,7 +25,7 @@ public class HolderDataDeleteModalRenderer extends ModalRenderer<HolderData> {
 	 * only Title info
 	 */
 	@Override
-	public String getRenderedHeader() {
+	public String getRenderedHeader(Handler handler) {
 		ModalTitle title = new ModalTitle();
 		title.setBody(this.title);
 
@@ -33,7 +33,7 @@ public class HolderDataDeleteModalRenderer extends ModalRenderer<HolderData> {
 	}
 
 	@Override
-	public String getRenderedBody() {
+	public String getRenderedBody(Handler handler) {
 		ModalBodyItem label1 = new ModalBodyItem();
 		label1.addStyleSheet("font-size:24px;");
 
@@ -45,7 +45,7 @@ public class HolderDataDeleteModalRenderer extends ModalRenderer<HolderData> {
 	}
 
 	@Override
-	public String getRenderedFooter() {
+	public String getRenderedFooter(Handler handler) {
 		StringBuilder sbAction = Taglibs.getStringBuilder()
 				.append(this.facade.getContextPath().getPath()).append("/")
 				.append(this.facade.getPathForCRUD()).append("/");
@@ -54,7 +54,7 @@ public class HolderDataDeleteModalRenderer extends ModalRenderer<HolderData> {
 		form.setId("modal_form");
 		form.setAction(sbAction.toString());
 		form.setMethod("post");
-		form.setBody(Renderable.BODY);
+		form.setBody(Handler.BODY);
 
 		return form.getHtmlCode();
 	}

@@ -7,24 +7,27 @@ import idv.taglib.control.Handler;
 import idv.taglib.control.Result;
 
 public class Modal<T> implements TaglibComponent<T> {
-	private Handler footerHandler = new DefaultHandler();
 	private TaglibRenderer<T> renderer;
 
 	@Override
-	public String getHeaderResult() {
-		return renderer.getRenderedHeader();
+	public Result getHeaderResult() {
+		Handler defaultHandler = new DefaultHandler();
+		 String renderedHeader = renderer.getRenderedHeader(defaultHandler);
 	}
 
 	@Override
-	public String getFooterResult() {
-		return renderer.getRenderedFooter(footerHandler);
+	public Result getBodyResult() {
+		DefaultHandler defaultHandler = new DefaultHandler();
+		 String renderedBody = renderer.getRenderedBody(defaultHandler);
+		return 
 	}
 
 	@Override
-	public Result getFooterResult2() {
-		String renderedFooter = renderer.getRenderedFooter(footerHandler);
+	public Result getFooterResult() {
+		Handler defaultHandler = new DefaultHandler();
+		String renderedFooter = renderer.getRenderedFooter(defaultHandler);
 		Result result = new Result();
-		result.setHandler(footerHandler);
+		result.setHandler(defaultHandler);
 		result.setResult(renderedFooter);
 		return result;
 	}
@@ -33,10 +36,14 @@ public class Modal<T> implements TaglibComponent<T> {
 	public void setRenderer(TaglibRenderer<T> renderer) {
 		this.renderer = renderer;
 	}
-
-	@Override
-	public String getBodyResult() {
-		return renderer.getRenderedBody();
+	
+	protected Result createResult(TaglibRenderer<T> renderer) {
+		Handler defaultHandler = new DefaultHandler();
+		String renderedFooter = renderer.getRenderedFooter(defaultHandler);
+		Result result = new Result();
+		result.setHandler(defaultHandler);
+		result.setResult(renderedFooter);
+		return result;
 	}
 
 }

@@ -7,7 +7,6 @@ import idv.excpetion.MyUnsupportedOperationException;
 import idv.fc.model.FlashcardHolder;
 import idv.taglib.component.common.impl.Form;
 import idv.taglib.component.common.impl.ModalBodyItem;
-import idv.taglib.component.itf.Renderable;
 import idv.taglib.component.modal.ModalTitle;
 import idv.taglib.component.modal.renderer.ModalRenderer;
 import idv.taglib.control.Handler;
@@ -28,7 +27,7 @@ public class FlashcardHolderDeleteModalRenderer
 	 * only Title info
 	 */
 	@Override
-	public String getRenderedHeader() {
+	public String getRenderedHeader(Handler handler) {
 		ModalTitle title = new ModalTitle();
 		title.setBody(this.title);
 
@@ -36,7 +35,7 @@ public class FlashcardHolderDeleteModalRenderer
 	}
 
 	@Override
-	public String getRenderedBody() {
+	public String getRenderedBody(Handler handler) {
 		ModalBodyItem label1 = new ModalBodyItem();
 		label1.addStyleSheet("font-size:24px;");
 
@@ -57,16 +56,12 @@ public class FlashcardHolderDeleteModalRenderer
 		form.setId("modal_form");
 		form.setAction(sbAction.toString());
 		form.setMethod("post");
-		form.setBody(Renderable.BODY);
+		form.setBody(Handler.BODY);
 		handler.setAttribute("btnCloseName", "開閉");
 
 		return form.getHtmlCode();
 	}
 
-	@Override
-	public String getRenderedFooter() {
-		throw new MyUnsupportedOperationException(
-				new Object().getClass().getEnclosingMethod() + " 方法尚未實作");
-	}
+
 
 }

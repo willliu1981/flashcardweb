@@ -7,24 +7,23 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 
 import idv.fc.taglib.impl.list.ListFacadeAdapter;
-import idv.taglib.component.itf.Renderable;
-import tool.Debug;
+import idv.taglib.control.Handler;
 
-public class ModalFooterTag extends ListTag implements Renderable {
+public class ModalFooterTag extends ListTag  {
 
 	@Override
 	public void doTag() throws JspException, IOException {
 		JspWriter out = this.getJspContext().getOut();
 		StringWriter sw = new StringWriter();
 
-		ListFacadeAdapter facade = (ListFacadeAdapter) this.getFacade();
+		ListFacadeAdapter<?> facade = (ListFacadeAdapter<?>) this.getFacade();
 
 		String modalBody = facade.getModalFooter2().getStrResult();
 
 		this.getJspBody().invoke(sw);
 		StringBuffer buffer = sw.getBuffer();
 
-		String replace = modalBody.replace(this.BODY, buffer.toString());
+		String replace = modalBody.replace(Handler.BODY, buffer.toString());
 		String close = facade.getModalFooter2().getHandler()
 				.getAttribute("btnCloseName").toString();
 		replace = replace.replace("{btnCloseName}", close);
