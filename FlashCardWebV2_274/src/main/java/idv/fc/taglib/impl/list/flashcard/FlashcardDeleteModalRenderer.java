@@ -4,12 +4,12 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import idv.fc.model.Flashcard;
-import idv.taglib.component.common.Renderable;
 import idv.taglib.component.common.impl.Form;
 import idv.taglib.component.common.impl.ModalBodyItem;
-import idv.taglib.component.facade.ListFacade;
+import idv.taglib.component.itf.Renderable;
 import idv.taglib.component.modal.ModalTitle;
 import idv.taglib.component.modal.renderer.ModalRenderer;
+import idv.taglib.factory.ListFacade;
 import tool.taglib.Taglibs;
 
 public class FlashcardDeleteModalRenderer extends ModalRenderer<Flashcard> {

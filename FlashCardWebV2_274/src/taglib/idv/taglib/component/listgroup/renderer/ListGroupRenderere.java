@@ -1,6 +1,6 @@
 package idv.taglib.component.listgroup.renderer;
 
-import idv.taglib.component.common.TaglibRenderer;
+import idv.taglib.component.itf.TaglibRenderer;
 
 public abstract class ListGroupRenderere<T> implements TaglibRenderer<T> {
 

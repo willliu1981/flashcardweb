@@ -1,8 +1,8 @@
 package idv.taglib.component.listgroup;
 
-import idv.taglib.component.common.CommonComponentItem;
+import idv.taglib.component.common.CommonComponent;
 
-public class ListGroupItemText extends CommonComponentItem {
+public class ListGroupItemText extends CommonComponent {
 
 	public ListGroupItemText() {
 		this.addHtmlClass("list-group-item-text");

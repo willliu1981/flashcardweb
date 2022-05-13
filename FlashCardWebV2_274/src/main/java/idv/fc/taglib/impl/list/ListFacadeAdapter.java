@@ -3,9 +3,9 @@ package idv.fc.taglib.impl.list;
 import java.util.List;
 
 import idv.taglib.component.ContextPath;
-import idv.taglib.component.facade.ListFacade;
 import idv.taglib.component.listgroup.ListGroup;
 import idv.taglib.component.modal.Modal;
+import idv.taglib.factory.ListFacade;
 
 public abstract class ListFacadeAdapter<T> extends ListFacade {
 	public static final String EMPTY = "";

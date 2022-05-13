@@ -1,7 +1,7 @@
 package idv.taglib.component.listgroup;
 
-import idv.taglib.component.common.TaglibComponent;
-import idv.taglib.component.common.TaglibRenderer;
+import idv.taglib.component.itf.TaglibComponent;
+import idv.taglib.component.itf.TaglibRenderer;
 import idv.taglib.component.listgroup.renderer.ListGroupRenderere;
 import idv.taglib.listgroup.listmodel.ListGroupModel;
 

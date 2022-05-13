@@ -3,7 +3,7 @@ package idv.fc.dao.abstraction;
 import java.sql.SQLException;
 import java.util.List;
 
-import idv.fc.exception.FindErrorException;
+import idv.excpetion.FindErrorException;
 
 public interface Dao<T> {
 	void create(T model) throws SQLException;

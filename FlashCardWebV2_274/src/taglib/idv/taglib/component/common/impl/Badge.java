@@ -1,8 +1,8 @@
 package idv.taglib.component.common.impl;
 
-import idv.taglib.component.common.CommonComponentItem;
+import idv.taglib.component.common.CommonComponent;
 
-public class Badge extends CommonComponentItem {
+public class Badge extends CommonComponent {
 
 	public Badge() {
 		this.addHtmlClass("badge");

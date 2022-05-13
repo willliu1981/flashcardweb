@@ -1,8 +1,8 @@
 package idv.taglib.component.common.impl;
 
-import idv.taglib.component.common.CommonComponentItem;
+import idv.taglib.component.common.CommonComponent;
 
-public class ModalBodyItem extends CommonComponentItem {
+public class ModalBodyItem extends CommonComponent {
 
 	public ModalBodyItem() {
 		this.addHtmlClass("modal-body-item");

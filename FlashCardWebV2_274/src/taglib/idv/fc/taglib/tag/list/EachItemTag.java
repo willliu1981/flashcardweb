@@ -5,7 +5,7 @@ import java.io.IOException;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-import idv.taglib.component.facade.ListFacade;
+import idv.taglib.factory.ListFacade;
 import tool.Debug;
 
 public class EachItemTag extends ListTag {

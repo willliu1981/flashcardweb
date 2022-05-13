@@ -1,4 +1,4 @@
-package idv.taglib.component.facade;
+package idv.taglib.factory;
 
 import idv.fc.taglib.impl.list.flashcard.FlashcardListFacade;
 import idv.fc.taglib.impl.list.flashcardholder.FlashcardHolderListFacade;

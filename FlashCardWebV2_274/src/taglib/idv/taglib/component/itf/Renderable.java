@@ -1,4 +1,4 @@
-package idv.taglib.component.common;
+package idv.taglib.component.itf;
 
 public interface Renderable {
 	/* String BODY = "${body}"

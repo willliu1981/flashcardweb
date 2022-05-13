@@ -14,7 +14,7 @@ import com.github.pagehelper.PageInfo;
 import idv.fc.model.Flashcard;
 import idv.fc.service.impl.FlashcardServiceImpl;
 import idv.fc.taglib.impl.list.flashcard.FlashcardListFacade;
-import idv.taglib.component.facade.FacadeFactory;
+import idv.taglib.factory.FacadeFactory;
 import tool.spring.SpringUtil;
 
 @Controller

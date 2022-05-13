@@ -7,7 +7,7 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-import idv.taglib.component.facade.ListFacade;
+import idv.taglib.factory.ListFacade;
 
 public class ModalBodyTag extends ListTag {
 

@@ -9,8 +9,8 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-import idv.taglib.component.facade.ListFacade;
-import idv.taglib.component.facade.FacadeFactory;
+import idv.taglib.factory.FacadeFactory;
+import idv.taglib.factory.ListFacade;
 import tool.Debug;
 import tool.taglib.Taglibs;
 

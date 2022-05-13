@@ -1,8 +1,8 @@
 package idv.taglib.component.common.impl;
 
-import idv.taglib.component.common.CommonComponentItem;
+import idv.taglib.component.common.CommonComponent;
 
-public class Form extends CommonComponentItem {
+public class Form extends CommonComponent {
 
 	public Form() {
 		this.setHtmlTag("form");

@@ -1,4 +1,4 @@
-package idv.fc.exception;
+package idv.excpetion;
 
 public class FindErrorException extends Exception {
 

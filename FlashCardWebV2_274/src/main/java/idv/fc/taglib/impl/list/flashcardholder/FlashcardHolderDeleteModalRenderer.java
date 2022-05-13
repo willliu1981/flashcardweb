@@ -3,16 +3,19 @@ package idv.fc.taglib.impl.list.flashcardholder;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import idv.excpetion.MyUnsupportedOperationException;
 import idv.fc.model.FlashcardHolder;
-import idv.taglib.component.common.Renderable;
 import idv.taglib.component.common.impl.Form;
 import idv.taglib.component.common.impl.ModalBodyItem;
-import idv.taglib.component.facade.ListFacade;
+import idv.taglib.component.itf.Renderable;
 import idv.taglib.component.modal.ModalTitle;
 import idv.taglib.component.modal.renderer.ModalRenderer;
+import idv.taglib.factory.ListFacade;
+import idv.taglib.handle.Handler;
 import tool.taglib.Taglibs;
 
-public class FlashcardHolderDeleteModalRenderer extends ModalRenderer<FlashcardHolder> {
+public class FlashcardHolderDeleteModalRenderer
+		extends ModalRenderer<FlashcardHolder> {
 	private ListFacade facade;
 	private String title;
 
@@ -45,7 +48,7 @@ public class FlashcardHolderDeleteModalRenderer extends ModalRenderer<FlashcardH
 	}
 
 	@Override
-	public String getRenderedFooter() {
+	public String getRenderedFooter(Handler handler) {
 		StringBuilder sbAction = Taglibs.getStringBuilder()
 				.append(this.facade.getContextPath().getPath()).append("/")
 				.append(this.facade.getPathForCRUD()).append("/");
@@ -57,6 +60,12 @@ public class FlashcardHolderDeleteModalRenderer extends ModalRenderer<FlashcardH
 		form.setBody(Renderable.BODY);
 
 		return form.getHtmlCode();
+	}
+
+	@Override
+	public String getRenderedFooter() {
+		throw new MyUnsupportedOperationException(
+				new Object().getClass().getEnclosingMethod() + " 方法尚未實作");
 	}
 
 }
