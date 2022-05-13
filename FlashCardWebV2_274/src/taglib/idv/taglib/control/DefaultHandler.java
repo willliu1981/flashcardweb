@@ -21,7 +21,5 @@ public class DefaultHandler implements Handler {
 	public Map<String, String> getAttributes() {
 		return attrs;
 	}
-	
-	
 
 }

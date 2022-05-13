@@ -2,6 +2,8 @@ package idv.fc.taglib.tag.list;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
@@ -31,8 +33,11 @@ public class ModalFooterTag extends ListTag {
 		Handler handler = this.getFacade().getModalFooter().getHandler();
 
 		handler.getAttributes().forEach((k, v) -> {
-			int idx = buffer.indexOf(k);
-			buffer.replace(idx - 1, idx + k.length() + 1, v);
+			Pattern compile = Pattern.compile("\\{[ ]*" + k.trim() + "*[ ]*\\}");
+			Matcher matcher = compile.matcher(buffer.toString());
+			String replaceAll = matcher.replaceAll(v);
+			buffer.setLength(0);
+			buffer.append(replaceAll);
 		});
 
 		out.print(buffer.toString());
