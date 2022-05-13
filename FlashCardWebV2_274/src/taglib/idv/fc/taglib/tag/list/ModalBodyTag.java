@@ -14,7 +14,7 @@ public class ModalBodyTag extends ListTag {
 	@Override
 	public void doTag() throws JspException, IOException {
 		JspWriter out = this.getJspContext().getOut();
-		out.print(this.getFacade().getModalBody());
+		out.print(this.getFacade().getModalBody().getStrResult());
 
 	}
 

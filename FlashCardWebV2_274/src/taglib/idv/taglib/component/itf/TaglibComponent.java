@@ -2,7 +2,6 @@ package idv.taglib.component.itf;
 
 import java.util.function.Function;
 
-import idv.excpetion.MyUnsupportedOperationException;
 import idv.taglib.control.DefaultHandler;
 import idv.taglib.control.Handler;
 import idv.taglib.control.Result;

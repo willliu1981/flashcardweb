@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import idv.debug.Debug;
 import test.Car;
 import test.ICar;
-import tool.Debug;
 import tool.spring.MySpringUtil;
 
 public class Test1 {

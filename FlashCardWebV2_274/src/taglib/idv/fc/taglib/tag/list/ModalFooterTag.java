@@ -6,6 +6,7 @@ import java.io.StringWriter;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 
+import idv.debug.Debug;
 import idv.fc.taglib.impl.list.ListFacadeAdapter;
 import idv.taglib.control.Handler;
 
@@ -16,13 +17,12 @@ public class ModalFooterTag extends ListTag {
 		JspWriter out = this.getJspContext().getOut();
 		StringWriter sw = new StringWriter();
 
-		String modalBody = facade.getModalFooter().getStrResult();
-
+		String modalBody = this.getFacade().getModalFooter().getStrResult();
 		this.getJspBody().invoke(sw);
 		StringBuffer buffer = sw.getBuffer();
 
 		String replace = modalBody.replace(Handler.BODY, buffer.toString());
-		String close = facade.getModalFooter().getHandler()
+		String close = this.getFacade().getModalFooter().getHandler()
 				.getAttribute("btnCloseName").toString();
 		replace = replace.replace("{btnCloseName}", close);
 

@@ -1,6 +1,5 @@
 package idv.taglib.factory;
 
-import idv.excpetion.MyUnsupportedOperationException;
 import idv.fc.taglib.impl.list.flashcard.FlashcardListFacade;
 import idv.fc.taglib.impl.list.flashcardholder.FlashcardHolderListFacade;
 import idv.fc.taglib.impl.list.holderdata.HolderDataListFacade;

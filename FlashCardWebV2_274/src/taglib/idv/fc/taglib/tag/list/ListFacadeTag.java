@@ -9,12 +9,12 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
+import idv.debug.Debug;
 import idv.taglib.factory.FacadeFactory;
 import idv.taglib.factory.ListFacade;
-import tool.Debug;
 import tool.taglib.Taglibs;
 
-public class FacadeTag<T extends ListFacade> extends SimpleTagSupport {
+public class ListFacadeTag<T extends ListFacade> extends SimpleTagSupport {
 
 	private Class<ListFacade> facadeType;
 	private String datas = Taglibs.FacadeTag_DATAS;//default datas var
@@ -44,7 +44,6 @@ public class FacadeTag<T extends ListFacade> extends SimpleTagSupport {
 
 		request.setAttribute(Taglibs.FacadeTag_FACADE_VAR_KEY, var);
 		request.setAttribute(var, listFacade);
-
 	}
 
 }

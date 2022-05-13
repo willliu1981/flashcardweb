@@ -80,13 +80,13 @@ public abstract class ListFacadeAdapter<T> extends ListFacade {
 	}
 
 	@Override
-	public ContextPath getContextPath() {
-		return this.contextPath;
+	public Result getModalFooter() {
+		return this.modal.getFooterResult();
 	}
 
 	@Override
-	public Result getModalFooter() {
-		return this.modal.getFooterResult();
+	public ContextPath getContextPath() {
+		return this.contextPath;
 	}
 
 }

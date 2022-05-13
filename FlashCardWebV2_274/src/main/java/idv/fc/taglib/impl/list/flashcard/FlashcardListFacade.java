@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import idv.debug.Debug;
 import idv.fc.model.Flashcard;
 import idv.fc.taglib.impl.list.ListFacadeAdapter;
 import idv.taglib.component.ContextPath;
@@ -13,7 +14,6 @@ import idv.taglib.component.modal.Modal;
 import idv.taglib.factory.ListFacade;
 import idv.taglib.listgroup.listmodel.DefaultListGroupModel;
 import idv.taglib.listgroup.listmodel.ListGroupModel;
-import tool.Debug;
 
 public class FlashcardListFacade extends ListFacadeAdapter<Flashcard> {
 	private final String pathForCRUD = "flashcard";

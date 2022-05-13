@@ -5,8 +5,8 @@ import java.io.IOException;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
+import idv.debug.Debug;
 import idv.taglib.factory.ListFacade;
-import tool.Debug;
 
 public class EachItemTag extends ListTag {
 	private String var = "item";

@@ -8,7 +8,7 @@ import idv.taglib.factory.ListFacade;
 import tool.taglib.Taglibs;
 
 public class ListTag extends SimpleTagSupport {
-	protected ListFacade facade;
+	private ListFacade facade;//定使用private , 避免直接取得未處理過的 facade
 
 	public void setListFacade(ListFacade facade) {
 		this.facade = facade;

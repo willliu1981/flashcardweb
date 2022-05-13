@@ -1,6 +1,6 @@
 package test2;
 
-import tool.Debug;
+import idv.debug.Debug;
 
 public class Test3 {
 

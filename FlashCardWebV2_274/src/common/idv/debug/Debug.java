@@ -1,4 +1,4 @@
-package tool;
+package idv.debug;
 
 import java.util.Arrays;
 import java.util.List;
@@ -39,7 +39,7 @@ public class Debug {
 			boolean any) {
 		String head = "(Debug) ";
 		head += objForClassInfo == null ? ""
-				: objForClassInfo.toString() + " : ";
+				: objForClassInfo.getClass().getEnclosingMethod() + " :\n\t> ";
 
 		String prefixString = "";
 		if (prefix == null) {

@@ -55,6 +55,7 @@ public class HolderDataDeleteModalRenderer extends ModalRenderer<HolderData> {
 		form.setAction(sbAction.toString());
 		form.setMethod("post");
 		form.setBody(Handler.BODY);
+		handler.setAttribute("btnCloseName", "開閉");
 
 		return form.getHtmlCode();
 	}

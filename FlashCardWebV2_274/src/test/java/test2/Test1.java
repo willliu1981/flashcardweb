@@ -5,7 +5,7 @@ import java.lang.reflect.Type;
 
 import org.junit.jupiter.api.Test;
 
-import tool.Debug;
+import idv.debug.Debug;
 
 public class Test1 {
 	@Test

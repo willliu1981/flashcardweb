@@ -39,8 +39,6 @@
 參照:
 .	header.jsp active param: (參照 header.jsp : path mapping)
 
-.	custom tag uml: https://drive.google.com/drive/folders/17kSGrGZJplPIwBr6o-3FIPrys3gJ_nw3?usp=sharing
-
 
 
 
@@ -49,11 +47,15 @@
 .	dao id 雖然為 String , 但依然能向sql 的 int id 進行存取 (mybatis)
 
 
-
+注意:
+.	會影響 tld 的址參照目: Facade、 Tag class 
 
 
 備註:
 .	java web ssm.mm 人智圖
+
+.	custom tag uml: https://drive.google.com/drive/folders/17kSGrGZJplPIwBr6o-3FIPrys3gJ_nw3?usp=sharing
+
 
 
 

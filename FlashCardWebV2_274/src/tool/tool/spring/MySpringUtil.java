@@ -5,8 +5,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
+import idv.debug.Debug;
 import spring.XmlUrlFactory;
-import tool.Debug;
 
 @Component
 public class MySpringUtil extends SpringUtil {

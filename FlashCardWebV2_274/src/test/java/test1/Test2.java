@@ -12,8 +12,8 @@ import org.springframework.util.AlternativeJdkIdGenerator;
 import org.springframework.util.JdkIdGenerator;
 import org.springframework.util.SimpleIdGenerator;
 
+import idv.debug.Debug;
 import idv.fc.model.Flashcard;
-import tool.Debug;
 import tool.idgenerator.IDGenerator;
 import tool.spring.MySpringUtil;
 

@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import tool.Debug;
+import idv.debug.Debug;
 
 public class Test3 {
 

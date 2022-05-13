@@ -11,7 +11,7 @@
 	<!-- 設定頁面的 facade 變數 -->
 	<tag>
 		<name>setFacade</name>
-		<tag-class>idv.fc.taglib.tag.list.FacadeTag</tag-class>
+		<tag-class>idv.fc.taglib.tag.list.ListFacadeTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>facadeType</name>
@@ -38,7 +38,7 @@
 		<attribute>
 			<name>listFacade</name>
 			<rtexprvalue>true</rtexprvalue>
-			<type>idv.fc.taglib.component.ListFacade</type>
+			<type>idv.taglib.factory.ListFacade</type>
 			<required>false</required>
 		</attribute>
 	</tag>
@@ -50,7 +50,7 @@
 		<attribute>
 			<name>listFacade</name>
 			<rtexprvalue>true</rtexprvalue>
-			<type>idv.fc.taglib.component.ListFacade</type>
+			<type>idv.taglib.factory.ListFacade</type>
 			<required>false</required>
 		</attribute>
 		<attribute>
@@ -74,7 +74,7 @@
 		<attribute>
 			<name>listFacade</name>
 			<rtexprvalue>true</rtexprvalue>
-			<type>idv.fc.taglib.component.ListFacade</type>
+			<type>idv.taglib.factory.ListFacade</type>
 			<required>false</required>
 		</attribute>
 	</tag>
@@ -86,7 +86,7 @@
 		<attribute>
 			<name>listFacade</name>
 			<rtexprvalue>true</rtexprvalue>
-			<type>idv.fc.taglib.component.ListFacade</type>
+			<type>idv.taglib.factory.ListFacade</type>
 			<required>false</required>
 		</attribute>
 	</tag>
@@ -98,7 +98,7 @@
 		<attribute>
 			<name>listFacade</name>
 			<rtexprvalue>true</rtexprvalue>
-			<type>idv.fc.taglib.component.ListFacade</type>
+			<type>idv.taglib.factory.ListFacade</type>
 			<required>false</required>
 		</attribute>
 	</tag>

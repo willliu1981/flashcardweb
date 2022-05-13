@@ -3,7 +3,7 @@ package tool.idgenerator;
 import java.util.Map;
 import java.util.UUID;
 
-import tool.Debug;
+import idv.debug.Debug;
 
 public class IDGenerator {
 

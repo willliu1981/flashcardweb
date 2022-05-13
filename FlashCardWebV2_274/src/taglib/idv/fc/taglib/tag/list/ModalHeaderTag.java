@@ -10,7 +10,7 @@ public class ModalHeaderTag extends ListTag {
 	@Override
 	public void doTag() throws JspException, IOException {
 		JspWriter out = this.getJspContext().getOut();
-		out.print(this.getFacade().getModalHeader());
+		out.print(this.getFacade().getModalHeader().getStrResult());
 
 	}
 

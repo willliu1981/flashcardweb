@@ -4,12 +4,12 @@ import java.util.function.Function;
 
 import org.junit.jupiter.api.Test;
 
+import idv.debug.Debug;
 import idv.fc.model.Flashcard;
 import idv.taglib.component.itf.TaglibRenderer;
 import idv.taglib.control.DefaultHandler;
 import idv.taglib.control.Handler;
 import idv.taglib.control.Result;
-import tool.Debug;
 
 public class Test4 {
 
