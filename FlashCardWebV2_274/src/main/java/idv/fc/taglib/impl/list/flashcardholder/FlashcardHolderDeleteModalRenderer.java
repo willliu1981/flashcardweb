@@ -58,6 +58,7 @@ public class FlashcardHolderDeleteModalRenderer
 		form.setMethod("post");
 		form.setBody(Handler.BODY);
 		handler.setAttribute("btnCloseName", "開閉");
+		handler.setAttribute("btnDeleteName", "刪除");
 
 		return form.getHtmlCode();
 	}

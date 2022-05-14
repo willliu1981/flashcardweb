@@ -21,15 +21,15 @@ public class ModalFooterTag extends ListTag {
 		StringWriter sw = new StringWriter();
 
 		this.getJspBody().invoke(sw);
-		StringBuffer buffer = sw.getBuffer();
+		StringBuffer data = sw.getBuffer();
 
-		ListTag.processJspBodyReplacement(buffer,
+		ListTag.processJspBodyReplacement(data,
 				this.getFacade().getModalFooter());
 
-		processRendererAttributeReplacement(buffer,
+		processRendererAttributeReplacement(data,
 				this.getFacade().getModalFooter().getHandler());
 
-		out.print(buffer.toString());
+		out.print(data.toString());
 	}
 
 }

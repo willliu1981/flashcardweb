@@ -1,6 +1,5 @@
 package idv.fc.taglib.tag.list;
 
-import java.io.StringWriter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,30 +38,28 @@ public class ListTag extends SimpleTagSupport {
 	}
 
 	//處理 由jsp傳來的 body ,取代 result 中 Handler.BODY 佔位符的位置
-	protected static void processJspBodyReplacement(StringBuffer buffer,
+	protected static void processJspBodyReplacement(StringBuffer data,
 			Result result) {
-		String modalBody = result.getStrResult();
-		String jspBody = buffer.toString();
 
-		buffer.setLength(0);
-		buffer.append(modalBody);
-		int indexOf = buffer.indexOf(Handler.BODY);
-		buffer.replace(indexOf, indexOf + Handler.BODY.length(), jspBody);
+		String replaced = result.getStrResult().replace(Handler.BODY,
+				data.toString());
 
+		data.setLength(0);
+		data.append(replaced);
 	}
 
 	//處理 handler 中, 以 attributes 遍歷並取代 buffer 所有佔位符的位置 
-	protected static void processRendererAttributeReplacement(
-			StringBuffer buffer, Handler handler) {
+	protected static void processRendererAttributeReplacement(StringBuffer data,
+			Handler handler) {
 
 		//替換 attribute
 		handler.getAttributes().forEach((k, v) -> {
 			Pattern compile = Pattern
 					.compile("\\{[ ]*" + k.trim() + "*[ ]*\\}");
-			Matcher matcher = compile.matcher(buffer.toString());
+			Matcher matcher = compile.matcher(data.toString());
 			String replaceAll = matcher.replaceAll(v);
-			buffer.setLength(0);
-			buffer.append(replaceAll);
+			data.setLength(0);
+			data.append(replaceAll);
 		});
 
 	}
