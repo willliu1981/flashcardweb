@@ -1,4 +1,4 @@
-package tool.taglib;
+package idv.taglib.tool;
 
 public class Taglibs {
 

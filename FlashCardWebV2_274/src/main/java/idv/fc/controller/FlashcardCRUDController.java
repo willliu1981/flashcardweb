@@ -7,9 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.google.gson.Gson;
 
 import idv.fc.model.Flashcard;
 import idv.fc.service.abstraction.IFlashcardService;
@@ -24,8 +21,10 @@ public class FlashcardCRUDController extends BaseController {
 	IFlashcardService flashcardService;
 
 	@RequestMapping(value = "flashcard", method = RequestMethod.GET)
-	public String toAdd() {
-		return FLASHCARDS + "/" + FLASHCARD + "/addFlashcardPage";
+	public String toAdd(HashMap<String, Object> map) {
+		map.put("data", new Flashcard());
+		return FLASHCARDS + "/" + FLASHCARD + "/modelEditPage";
+		//return FLASHCARDS + "/" + FLASHCARD + "/addFlashcardPage";
 	}
 
 	@RequestMapping(value = "flashcard/{id}", method = RequestMethod.GET)
@@ -33,8 +32,10 @@ public class FlashcardCRUDController extends BaseController {
 			@PathVariable("id") String id) {
 		Flashcard find = flashcardService.getById(id);
 
-		map.put("flashcard", find);
-		return FLASHCARDS + "/" + FLASHCARD + "/editFlashcardPage";
+		map.put("data", find);
+
+		return FLASHCARDS + "/" + FLASHCARD + "/modelEditPage";
+		//return FLASHCARDS + "/" + FLASHCARD + "/editFlashcardPage";
 	}
 
 	/*

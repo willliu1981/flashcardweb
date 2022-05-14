@@ -12,8 +12,8 @@ import idv.taglib.component.listgroup.renderer.ListGroupRenderere;
 import idv.taglib.control.Handler;
 import idv.taglib.factory.ComponentFactory;
 import idv.taglib.factory.ListFacade;
-import tool.taglib.Scripts;
-import tool.taglib.Taglibs;
+import idv.taglib.tool.Scripts;
+import idv.taglib.tool.Taglibs;
 
 public class FlashcardListGroupRenderer extends ListGroupRenderere<Flashcard> {
 	private ListFacade facade;

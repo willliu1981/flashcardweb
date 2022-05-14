@@ -12,7 +12,7 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 import idv.debug.Debug;
 import idv.taglib.factory.FacadeFactory;
 import idv.taglib.factory.ListFacade;
-import tool.taglib.Taglibs;
+import idv.taglib.tool.Taglibs;
 
 public class ListFacadeTag<T extends ListFacade> extends SimpleTagSupport {
 

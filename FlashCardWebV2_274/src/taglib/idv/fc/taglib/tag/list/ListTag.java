@@ -10,7 +10,7 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 import idv.taglib.control.Handler;
 import idv.taglib.control.Result;
 import idv.taglib.factory.ListFacade;
-import tool.taglib.Taglibs;
+import idv.taglib.tool.Taglibs;
 
 public class ListTag extends SimpleTagSupport {
 	private ListFacade facade;//定使用private , 避免直接取得未處理過的 facade

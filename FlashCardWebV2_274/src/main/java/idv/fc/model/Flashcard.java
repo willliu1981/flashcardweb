@@ -11,11 +11,11 @@ public class Flashcard {
 	private Integer numberOfQuizTimes;
 	private Integer passTheQuizTimes;
 
-	private Flashcard() {
+	public Flashcard() {
 		super();
 	}
 
-	private Flashcard(Integer id, String term, String definition) {
+	public Flashcard(Integer id, String term, String definition) {
 		super();
 		this.id = id;
 		this.term = term;

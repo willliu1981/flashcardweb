@@ -7,10 +7,10 @@ import java.util.List;
 public class FacadeFactory {
 
 	public static <T extends ListFacade, E> T getListFacade(List<E> datas,
-			Class<T> listFacadeType) {
+			Class<T> facadeType) {
 		T newInstance = null;
 		try {
-			Constructor<T> constructor = listFacadeType
+			Constructor<T> constructor = facadeType
 					.getDeclaredConstructor(List.class);
 			newInstance = constructor.newInstance(datas);
 
@@ -24,10 +24,10 @@ public class FacadeFactory {
 	}
 
 	public static <T extends EditFacade, E> T getEditFacade(List<E> datas,
-			Class<T> listFacadeType) {
+			Class<T> facadeType) {
 		T newInstance = null;
 		try {
-			Constructor<T> constructor = listFacadeType
+			Constructor<T> constructor = facadeType
 					.getDeclaredConstructor(List.class);
 			newInstance = constructor.newInstance(datas);
 

@@ -42,8 +42,9 @@ public class TestController extends BaseController {
 				FlashcardListFacade.class);
 
 		request.getServletContext().setAttribute("facade", facade);
-
-		return "test/fcManagedTestPage";
+		Flashcard flashcard = datas.get(0);
+		map.put("command", flashcard);
+		return "test/testForm";
 
 	}
 
