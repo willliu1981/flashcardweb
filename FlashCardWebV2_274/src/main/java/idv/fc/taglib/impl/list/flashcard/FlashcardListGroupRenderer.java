@@ -5,10 +5,12 @@ import java.util.stream.Stream;
 
 import idv.fc.model.Flashcard;
 import idv.taglib.component.common.impl.Badge;
+import idv.taglib.component.itf.TaglibComponentItem;
 import idv.taglib.component.listgroup.ListGroupItemHeading;
 import idv.taglib.component.listgroup.ListGroupItemText;
 import idv.taglib.component.listgroup.renderer.ListGroupRenderere;
 import idv.taglib.control.Handler;
+import idv.taglib.factory.ComponentFactory;
 import idv.taglib.factory.ListFacade;
 import tool.taglib.Scripts;
 import tool.taglib.Taglibs;
@@ -37,11 +39,12 @@ public class FlashcardListGroupRenderer extends ListGroupRenderere<Flashcard> {
 		badge.setBody("ADD");
 		badge.onClick(sbScript.toString());
 
-		StringBuilder sbTitleMsg = Taglibs.getStringBuilder().append("<h3>")
-				.append(title).append("</h3>");
+		TaglibComponentItem cmptTitle = ComponentFactory
+				.getDefaultComponent("h3").addStyleSheet("color:green")
+				.setBody(title);
 
 		return Taglibs.getStringBuilder().append(badge.getHtmlCode())
-				.append(sbTitleMsg).toString();
+				.append(cmptTitle.getHtmlCode()).toString();
 	}
 
 	@Override

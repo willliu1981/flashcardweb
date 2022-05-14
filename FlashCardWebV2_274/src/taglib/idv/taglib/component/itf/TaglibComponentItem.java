@@ -11,7 +11,7 @@ import tool.taglib.TaglibComponentItems;
  */
 public interface TaglibComponentItem {
 
-	void setBody(String text);
+	TaglibComponentItem setBody(String text);
 
 	String getBody();
 

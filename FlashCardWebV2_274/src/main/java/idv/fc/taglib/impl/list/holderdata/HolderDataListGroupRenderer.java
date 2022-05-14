@@ -38,8 +38,9 @@ public class HolderDataListGroupRenderer
 		badge.setBody("ADD");
 		badge.onClick(sbScript.toString());
 
-		StringBuilder sbTitleMsg = Taglibs.getStringBuilder().append("<h3>")
-				.append(title).append("</h3>");
+		StringBuilder sbTitleMsg = Taglibs.getStringBuilder()
+				.append("<h3 style='color:orange;'>").append(title)
+				.append("</h3>");
 
 		return Taglibs.getStringBuilder().append(badge.getHtmlCode())
 				.append(sbTitleMsg).toString();

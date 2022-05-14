@@ -38,7 +38,7 @@ public class FlashcardHolderListGroupRenderer
 		badge.setBody("ADD");
 		badge.onClick(sbScript.toString());
 
-		StringBuilder sbTitleMsg = Taglibs.getStringBuilder().append("<h3>")
+		StringBuilder sbTitleMsg = Taglibs.getStringBuilder().append("<h3 style='color:cyan;'>")
 				.append(title).append("</h3>");
 
 		return Taglibs.getStringBuilder().append(badge.getHtmlCode())

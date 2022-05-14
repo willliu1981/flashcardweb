@@ -23,8 +23,9 @@ public abstract class CommonComponent implements TaglibComponentItem {
 	}
 
 	@Override
-	public void setBody(String text) {
+	public TaglibComponentItem setBody(String text) {
 		this.text = text;
+		return this;
 	}
 
 	@Override
