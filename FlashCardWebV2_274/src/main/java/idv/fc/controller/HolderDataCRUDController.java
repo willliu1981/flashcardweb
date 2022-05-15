@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import idv.fc.model.Flashcard;
 import idv.fc.model.HolderData;
 import idv.fc.service.abstraction.IHolderDataService;
 
@@ -15,14 +16,15 @@ import idv.fc.service.abstraction.IHolderDataService;
 public class HolderDataCRUDController extends BaseController {
 	protected String WEB_FLASHCARDS = "flashcards";//web base page
 	protected String FLASHCARDS = "flashcards";//jsp base page
-	protected String FLASHCARDHOLDER = "holderData";//jsp second-folder-path page
+	protected String HOLDERDATA = "holderData";//jsp second-folder-path page
 
 	@Autowired
 	IHolderDataService holderDataService;
 
 	@RequestMapping(value = "holderData", method = RequestMethod.GET)
-	public String toAdd() {
-		return FLASHCARDS + "/" + FLASHCARDHOLDER + "/addHolderDataPage";
+	public String toAdd(HashMap<String, Object> map) {
+		map.put("data", new Flashcard());
+		return FLASHCARDS + "/" + HOLDERDATA + "/modelEditPage";
 	}
 
 	@RequestMapping(value = "holderData/{id}", method = RequestMethod.GET)
@@ -30,8 +32,8 @@ public class HolderDataCRUDController extends BaseController {
 			@PathVariable("id") String id) {
 		HolderData find = holderDataService.getById(id);
 
-		map.put("holderData", find);
-		return FLASHCARDS + "/" + FLASHCARDHOLDER + "/editHolderDataPage";
+		map.put("data", find);
+		return FLASHCARDS + "/" + HOLDERDATA + "/modelEditPage";
 	}
 
 	/*

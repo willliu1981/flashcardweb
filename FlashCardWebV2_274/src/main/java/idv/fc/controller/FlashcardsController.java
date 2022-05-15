@@ -19,7 +19,7 @@ import idv.fc.model.HolderData;
 import idv.fc.service.abstraction.IFlashcardHolderService;
 import idv.fc.service.abstraction.IFlashcardService;
 import idv.fc.service.abstraction.IHolderDataService;
-import idv.taglib.factory.ListFacade;
+import idv.taglib.factory.lister.ListFacade;
 
 @Controller
 @RequestMapping(value = "flashcards")

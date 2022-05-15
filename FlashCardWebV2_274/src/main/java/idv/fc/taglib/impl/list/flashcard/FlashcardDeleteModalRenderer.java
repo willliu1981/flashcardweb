@@ -10,7 +10,7 @@ import idv.taglib.component.common.impl.ModalBodyItem;
 import idv.taglib.component.modal.ModalTitle;
 import idv.taglib.component.modal.renderer.ModalRenderer;
 import idv.taglib.control.Handler;
-import idv.taglib.factory.ListFacade;
+import idv.taglib.factory.lister.ListFacade;
 import idv.taglib.tool.Taglibs;
 
 public class FlashcardDeleteModalRenderer extends ModalRenderer<Flashcard> {

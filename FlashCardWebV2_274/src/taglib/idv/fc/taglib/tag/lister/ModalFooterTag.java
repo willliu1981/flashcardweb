@@ -1,4 +1,4 @@
-package idv.fc.taglib.tag.list;
+package idv.fc.taglib.tag.lister;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -9,9 +9,9 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 
 import idv.debug.Debug;
-import idv.fc.taglib.impl.list.ListFacadeAdapter;
 import idv.taglib.control.Handler;
 import idv.taglib.control.Result;
+import idv.taglib.factory.lister.ListFacadeAdapter;
 
 public class ModalFooterTag extends ListTag {
 

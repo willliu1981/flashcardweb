@@ -9,7 +9,7 @@ import idv.taglib.component.listgroup.ListGroupItemHeading;
 import idv.taglib.component.listgroup.ListGroupItemText;
 import idv.taglib.component.listgroup.renderer.ListGroupRenderere;
 import idv.taglib.control.Handler;
-import idv.taglib.factory.ListFacade;
+import idv.taglib.factory.lister.ListFacade;
 import idv.taglib.tool.Scripts;
 import idv.taglib.tool.Taglibs;
 

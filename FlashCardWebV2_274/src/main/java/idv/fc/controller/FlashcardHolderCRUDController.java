@@ -28,8 +28,9 @@ public class FlashcardHolderCRUDController extends BaseController {
 	IFlashcardHolderService flashcardHolderService;
 
 	@RequestMapping(value = "flashcardHolder", method = RequestMethod.GET)
-	public String toAdd() {
-		return FLASHCARDS + "/" + FLASHCARDHOLDER + "/addFlashcardHolderPage";
+	public String toAdd(HashMap<String, Object> map) {
+		map.put("data", new Flashcard());
+		return FLASHCARDS + "/" + FLASHCARDHOLDER + "/modelEditPage";
 	}
 
 	@RequestMapping(value = "flashcardHolder/{id}", method = RequestMethod.GET)
@@ -37,8 +38,8 @@ public class FlashcardHolderCRUDController extends BaseController {
 			@PathVariable("id") String id) {
 		FlashcardHolder find = flashcardHolderService.getById(id);
 
-		map.put("flashcardHolder", find);
-		return FLASHCARDS + "/" + FLASHCARDHOLDER + "/editFlashcardHolderPage";
+		map.put("data", find);
+		return FLASHCARDS + "/" + FLASHCARDHOLDER + "/modelEditPage";
 	}
 
 	/*

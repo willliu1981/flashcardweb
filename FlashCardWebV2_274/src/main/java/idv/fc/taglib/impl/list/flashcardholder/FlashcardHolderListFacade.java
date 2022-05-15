@@ -3,9 +3,9 @@ package idv.fc.taglib.impl.list.flashcardholder;
 import java.util.List;
 
 import idv.fc.model.FlashcardHolder;
-import idv.fc.taglib.impl.list.ListFacadeAdapter;
 import idv.taglib.component.listgroup.ListGroup;
 import idv.taglib.component.modal.Modal;
+import idv.taglib.factory.lister.ListFacadeAdapter;
 import idv.taglib.listgroup.listmodel.DefaultListGroupModel;
 
 public class FlashcardHolderListFacade

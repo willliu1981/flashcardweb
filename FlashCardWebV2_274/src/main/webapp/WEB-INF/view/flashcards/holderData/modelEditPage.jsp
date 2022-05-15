@@ -8,12 +8,6 @@
 </head>
 <body>
     <c:if test="${empty data.id}" var="toAdd" />
-    <c:set var="modelName" value="Flashcard" />
-    <c:set var="jumboAdd" value="新增 ${modelName }" />
-    <c:set var="jumboEdit" value="編輯 ${modelName }" />
-
-    <c:set var="listAdd" value="新增 ${modelName }" />
-    <c:set var="listEdit" value="編輯 ${modelName }" />
 
     <!-- include header nav -->
     <jsp:include page="/WEB-INF/view/public/header.jsp" flush="true">
@@ -23,7 +17,7 @@
 
     <!-- 引入巨屏 -->
     <jsp:include page="/WEB-INF/view/public/jumbotron.jsp">
-        <jsp:param name="title" value="${toAdd ? jumboAdd : jumboEdit} " />
+        <jsp:param name="title" value="${toAdd?'新增':'編輯'} Flashcar" />
     </jsp:include>
 
     <div class="container">
@@ -32,8 +26,8 @@
             <fieldset>
                 <legend>
                     <c:choose>
-                        <c:when test="${toAdd }">${listAdd }</c:when>
-                        <c:otherwise>${listEdit }
+                        <c:when test="${toAdd }">新增 Flashcar</c:when>
+                        <c:otherwise>編輯 Flashcar
                        <%--  <input type="hidden" name="id" value="${data.id}" /> --%>
                             <input type="hidden" name="_method" value="put" />
                         </c:otherwise>

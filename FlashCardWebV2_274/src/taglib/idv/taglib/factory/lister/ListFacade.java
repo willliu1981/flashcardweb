@@ -1,4 +1,4 @@
-package idv.taglib.factory;
+package idv.taglib.factory.lister;
 
 import idv.fc.taglib.impl.list.flashcard.FlashcardListFacade;
 import idv.fc.taglib.impl.list.flashcardholder.FlashcardHolderListFacade;
@@ -22,8 +22,6 @@ public abstract class ListFacade {
 	public abstract Result getModalBody();
 
 	public abstract Result getModalFooter();
-
-
 
 	public abstract void setContextPath(String contextPath);
 

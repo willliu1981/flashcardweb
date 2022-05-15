@@ -1,4 +1,4 @@
-package idv.fc.taglib.tag.list;
+package idv.fc.taglib.tag.lister;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,7 +11,7 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import idv.debug.Debug;
 import idv.taglib.factory.FacadeFactory;
-import idv.taglib.factory.ListFacade;
+import idv.taglib.factory.lister.ListFacade;
 import idv.taglib.tool.Taglibs;
 
 public class ListFacadeTag<T extends ListFacade> extends SimpleTagSupport {
