@@ -41,7 +41,7 @@
 
 
     <!-- 引入 list -->
-    <jsp:include page="/WEB-INF/view/public/test/listForTest2.jsp"></jsp:include>
+    <%-- <jsp:include page="/WEB-INF/view/public/test/listForTest2.jsp"></jsp:include> --%>
 
     <!-- 引入分頁  -->
     <jsp:include page="/WEB-INF/view/public/pager.jsp"></jsp:include>
