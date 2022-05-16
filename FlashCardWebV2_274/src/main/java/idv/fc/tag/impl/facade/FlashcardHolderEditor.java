@@ -1,13 +1,13 @@
 package idv.fc.tag.impl.facade;
 
-import idv.fc.model.Flashcard;
+import idv.fc.model.FlashcardHolder;
 import idv.kw.tag.component.DefaultComponent;
 import idv.kw.tag.facade.Editor;
 
-public class FlashcardEditor extends Editor<Flashcard> {
+public class FlashcardHolderEditor extends Editor<FlashcardHolder> {
 	private boolean isAdd = false;
 
-	public FlashcardEditor(Flashcard data) {
+	public FlashcardHolderEditor(FlashcardHolder data) {
 		super(data);
 	}
 
@@ -16,22 +16,22 @@ public class FlashcardEditor extends Editor<Flashcard> {
 		isAdd = this.getData().getId() == null;
 
 		if (isAdd) {
-			this.addAttribute("jumboTitle", "新增 Flashcard");
-			this.addAttribute("formTitle", "新增 Flashcard");
+			this.addAttribute("jumboTitle", "新增 Flashcard Holder");
+			this.addAttribute("formTitle", "新增 Flashcard Holder");
 		} else {
-			this.addAttribute("jumboTitle", "編輯 Flashcard");
-			this.addAttribute("formTitle", "編輯 Flashcard");
+			this.addAttribute("jumboTitle", "編輯 Flashcard Holder");
+			this.addAttribute("formTitle", "編輯 Flashcard Holder");
 		}
 
-		this.addAttribute("path", "flashcard");
+		this.addAttribute("path", "flashcardHolder");
 		this.addAttribute("formBody", this.getBody());
 	}
 
 	public String getBody() {
 		StringBuffer buffer = new StringBuffer();
 
-		createTerm(buffer);
-		createDefinition(buffer);
+		createName(buffer);
+		createFCID(buffer);
 		if (!isAdd) {
 			createHiddenForPut(buffer);
 		}
@@ -39,7 +39,7 @@ public class FlashcardEditor extends Editor<Flashcard> {
 		return buffer.toString();
 	}
 
-	protected void createTerm(StringBuffer buffer) {
+	protected void createName(StringBuffer buffer) {
 		DefaultComponent cmptFormGroup = new DefaultComponent("div");
 		cmptFormGroup.addHtmlClass("form-group");
 
@@ -47,20 +47,20 @@ public class FlashcardEditor extends Editor<Flashcard> {
 		StringBuffer bufBody = new StringBuffer();
 		{
 			DefaultComponent cmptLabel = new DefaultComponent("label");
-			cmptLabel.addAttribute("for", "term");
+			cmptLabel.addAttribute("for", "name");
 			cmptLabel.addHtmlClass("col-lg-2 control-label");
-			cmptLabel.setBody("Term");
+			cmptLabel.setBody("Name");
 
 			DefaultComponent cmptDiv = new DefaultComponent("div");
 			cmptDiv.addHtmlClass("col-lg-10");
 			{
 				DefaultComponent cmptInput = new DefaultComponent("input");
 				cmptInput.addHtmlClass("form-control");
-				cmptInput.addAttribute("name", "term");
-				cmptInput.addAttribute("id", "term");
+				cmptInput.addAttribute("name", "name");
+				cmptInput.addAttribute("id", "name");
 				cmptInput.addAttribute("placeholder", "ex: apple");
 				if (!isAdd) {
-					cmptInput.addAttribute("value", this.getData().getTerm());
+					cmptInput.addAttribute("value", this.getData().getName());
 				}
 				//加入組件
 				cmptDiv.setBody(cmptInput.toString());
@@ -74,7 +74,7 @@ public class FlashcardEditor extends Editor<Flashcard> {
 		buffer.append(cmptFormGroup.toString());
 	}
 
-	protected void createDefinition(StringBuffer buffer) {
+	protected void createFCID(StringBuffer buffer) {
 		DefaultComponent cmptFormGroup = new DefaultComponent("div");
 		cmptFormGroup.addHtmlClass("form-group");
 
@@ -82,21 +82,21 @@ public class FlashcardEditor extends Editor<Flashcard> {
 		StringBuffer bufBody = new StringBuffer();
 		{
 			DefaultComponent cmptLabel = new DefaultComponent("label");
-			cmptLabel.addAttribute("for", "definition");
+			cmptLabel.addAttribute("for", "fcId");
 			cmptLabel.addHtmlClass("col-lg-2 control-label");
-			cmptLabel.setBody("Definition");
+			cmptLabel.setBody("Flashcard Id");
 
 			DefaultComponent cmptDiv = new DefaultComponent("div");
 			cmptDiv.addHtmlClass("col-lg-10");
 			{
 				DefaultComponent cmptInput = new DefaultComponent("input");
 				cmptInput.addHtmlClass("form-control");
-				cmptInput.addAttribute("name", "definition");
-				cmptInput.addAttribute("id", "definition");
-				cmptInput.addAttribute("placeholder", "ex: 蘋果");
-				if (!isAdd) {
+				cmptInput.addAttribute("name", "fcId");
+				cmptInput.addAttribute("id", "fcId");
+				cmptInput.addAttribute("placeholder", "ex: 123");
+				if (!isAdd && this.getData().getFcId() != null) {
 					cmptInput.addAttribute("value",
-							this.getData().getDefinition());
+							this.getData().getFcId().toString());
 				}
 				//加入組件
 				cmptDiv.setBody(cmptInput.toString());

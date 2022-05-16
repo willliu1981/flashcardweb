@@ -7,16 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.Gson;
-
-import idv.debug.Debug;
-import idv.fc.model.Flashcard;
 import idv.fc.model.FlashcardHolder;
 import idv.fc.service.abstraction.IFlashcardHolderService;
-import tool.idgenerator.IDGenerator;
-import tool.spring.SpringUtil;
+import idv.fc.tag.impl.facade.FlashcardHolderEditor;
 
 @Controller
 public class FlashcardHolderCRUDController extends BaseController {
@@ -29,8 +23,10 @@ public class FlashcardHolderCRUDController extends BaseController {
 
 	@RequestMapping(value = "flashcardHolder", method = RequestMethod.GET)
 	public String toAdd(HashMap<String, Object> map) {
-		map.put("data", new Flashcard());
-		return FLASHCARDS + "/" + FLASHCARDHOLDER + "/modelEditPage";
+		map.put("data", new FlashcardHolder());
+		map.put("erType", FlashcardHolderEditor.class);
+
+		return FLASHCARDS + "/" + "modelEditPage";
 	}
 
 	@RequestMapping(value = "flashcardHolder/{id}", method = RequestMethod.GET)
@@ -39,7 +35,9 @@ public class FlashcardHolderCRUDController extends BaseController {
 		FlashcardHolder find = flashcardHolderService.getById(id);
 
 		map.put("data", find);
-		return FLASHCARDS + "/" + FLASHCARDHOLDER + "/modelEditPage";
+		map.put("erType", FlashcardHolderEditor.class);
+
+		return FLASHCARDS + "/" + "modelEditPage";
 	}
 
 	/*

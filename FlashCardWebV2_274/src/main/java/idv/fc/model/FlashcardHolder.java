@@ -10,11 +10,11 @@ public class FlashcardHolder {
 	private Integer numberOfQuizTimes;
 	private Integer passTheQuizTimes;
 
-	private FlashcardHolder() {
+	public FlashcardHolder() {
 		super();
 	}
 
-	private FlashcardHolder(Integer id, String name, Integer fcId) {
+	public FlashcardHolder(Integer id, String name, Integer fcId) {
 		super();
 		this.id = id;
 		this.name = name;

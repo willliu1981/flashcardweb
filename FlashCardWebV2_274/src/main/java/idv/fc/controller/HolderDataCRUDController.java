@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import idv.fc.model.Flashcard;
 import idv.fc.model.HolderData;
 import idv.fc.service.abstraction.IHolderDataService;
+import idv.fc.tag.impl.facade.HolderDataEditor;
 
 @Controller
 public class HolderDataCRUDController extends BaseController {
@@ -23,8 +23,10 @@ public class HolderDataCRUDController extends BaseController {
 
 	@RequestMapping(value = "holderData", method = RequestMethod.GET)
 	public String toAdd(HashMap<String, Object> map) {
-		map.put("data", new Flashcard());
-		return FLASHCARDS + "/" + HOLDERDATA + "/modelEditPage";
+		map.put("data", new HolderData());
+		map.put("erType", HolderDataEditor.class);
+
+		return FLASHCARDS + "/" + "modelEditPage";
 	}
 
 	@RequestMapping(value = "holderData/{id}", method = RequestMethod.GET)
@@ -33,7 +35,9 @@ public class HolderDataCRUDController extends BaseController {
 		HolderData find = holderDataService.getById(id);
 
 		map.put("data", find);
-		return FLASHCARDS + "/" + HOLDERDATA + "/modelEditPage";
+		map.put("erType", HolderDataEditor.class);
+
+		return FLASHCARDS + "/" + "modelEditPage";
 	}
 
 	/*

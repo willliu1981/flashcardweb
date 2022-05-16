@@ -14,8 +14,6 @@ public class TagFactory {
 			Class<T> facadeType, Class<?> dataType) {
 		T newInstance = null;
 		try {
-			Debug.test(new Object() {
-			}, facadeType);
 			Constructor<T> constructor = facadeType
 					.getDeclaredConstructor(dataType);
 			newInstance = constructor.newInstance(data);

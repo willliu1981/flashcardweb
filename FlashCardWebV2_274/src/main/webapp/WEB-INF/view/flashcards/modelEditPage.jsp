@@ -22,7 +22,7 @@
 
     <div class="container">
         <er:form facade="${editor}">
-            <frm:form action="${pageContext.request.contextPath}/flashcard" modelAttribute="data"
+            <frm:form action="${pageContext.request.contextPath}/{path}" modelAttribute="data"
                 cssClass="form-horizontal">
                 <fieldset>
                     <legend> {formTitle} </legend>

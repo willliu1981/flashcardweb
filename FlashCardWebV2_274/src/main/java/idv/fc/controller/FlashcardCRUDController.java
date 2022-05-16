@@ -25,6 +25,7 @@ public class FlashcardCRUDController extends BaseController {
 	public String toAdd(HashMap<String, Object> map) {
 		map.put("data", new Flashcard());
 		map.put("erType", FlashcardEditor.class);
+		
 		return FLASHCARDS + "/" + "modelEditPage";
 	}
 
@@ -35,6 +36,7 @@ public class FlashcardCRUDController extends BaseController {
 
 		map.put("data", find);
 		map.put("erType", FlashcardEditor.class);
+		
 		return FLASHCARDS + "/" + "modelEditPage";
 	}
 
