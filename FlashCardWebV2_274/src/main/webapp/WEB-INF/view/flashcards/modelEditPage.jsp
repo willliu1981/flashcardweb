@@ -8,8 +8,7 @@
 <jsp:include page="/WEB-INF/view/public/bootstrapCommon.jsp" />
 </head>
 <body>
-    <c:if test="${empty data.id}" var="toAdd" />
-    <er:setEditor type="${erType }" var="editor" />
+    <er:setEditor type="${erType}" var="editor" />
 
     <!-- include header nav -->
     <jsp:include page="/WEB-INF/view/public/header.jsp" flush="true">

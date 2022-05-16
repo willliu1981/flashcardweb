@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import idv.fc.model.Flashcard;
 import idv.fc.service.abstraction.IFlashcardService;
 import idv.fc.tag.impl.facade.FlashcardAddEditor;
-import idv.kw.tag.factory.TagFactory;
+import idv.fc.tag.impl.facade.FlashcardEditEditor;
 
 @Controller
 public class FlashcardCRUDController extends BaseController {
@@ -35,7 +35,7 @@ public class FlashcardCRUDController extends BaseController {
 		Flashcard find = flashcardService.getById(id);
 
 		map.put("data", find);
-		//map.put("type", TagFactory.getFacade(find, FlashcardAddEditor.class));
+		map.put("erType", FlashcardEditEditor.class);
 		return FLASHCARDS + "/" + "modelEditPage";
 	}
 
