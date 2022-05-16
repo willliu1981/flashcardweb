@@ -18,6 +18,16 @@
 			<type>java.lang.Class</type>
 			<required>true</required>
 		</attribute>
+		<attribute>
+			<name>data</name>
+			<type>java.lang.String</type>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<name>var</name>
+			<type>java.lang.String</type>
+			<required>false</required>
+		</attribute>
 	</tag>
 
 </taglib>

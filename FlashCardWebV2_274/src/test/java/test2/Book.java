@@ -5,6 +5,8 @@ import java.util.function.Supplier;
 import idv.excpetion.ExceptionFactory;
 
 public class Book extends Product<Integer> {
+
+
 	private String name;
 	private Integer price;
 
