@@ -84,8 +84,12 @@
 <!---->
 	<jsp-config>
 		<taglib>
-			<taglib-uri>https://fc.idv/jsp/tlds/listTags</taglib-uri>
-			<taglib-location>/WEB-INF/lib/taglib/list/listTag.tld</taglib-location>
+			<taglib-uri>https://idv.kw/tags/list</taglib-uri>
+			<taglib-location>/WEB-INF/lib/taglib/dataprocess/listTag.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>https://idv.kw/tags/editor</taglib-uri>
+			<taglib-location>/WEB-INF/lib/taglib/dataprocess/editorTag.tld</taglib-location>
 		</taglib>
 	</jsp-config>
 

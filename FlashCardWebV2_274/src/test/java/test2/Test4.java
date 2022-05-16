@@ -10,9 +10,9 @@ import org.junit.jupiter.api.Test;
 import idv.debug.Debug;
 import idv.fc.model.Flashcard;
 import idv.taglib.component.itf.TaglibRenderer;
-import idv.taglib.control.DefaultHandler;
-import idv.taglib.control.Handler;
-import idv.taglib.control.Result;
+import idv.taglib.controlmodel.DefaultHandler;
+import idv.taglib.controlmodel.Handler;
+import idv.taglib.controlmodel.Result;
 import idv.test.TestLog;
 
 public class Test4 extends TestLog {

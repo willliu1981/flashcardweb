@@ -1,6 +1,6 @@
 package idv.taglib.component.itf;
 
-import idv.taglib.control.Handler;
+import idv.taglib.controlmodel.Handler;
 
 public interface TaglibRenderer<T> {
 

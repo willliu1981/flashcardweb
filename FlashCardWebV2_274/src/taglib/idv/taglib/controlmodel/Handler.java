@@ -1,4 +1,4 @@
-package idv.taglib.control;
+package idv.taglib.controlmodel;
 
 import java.util.Map;
 

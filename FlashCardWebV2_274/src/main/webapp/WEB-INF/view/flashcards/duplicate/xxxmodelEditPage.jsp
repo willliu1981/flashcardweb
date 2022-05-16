@@ -14,7 +14,6 @@
         <jsp:param name="active" value="" />
     </jsp:include>
 
-
     <!-- 引入巨屏 -->
     <jsp:include page="/WEB-INF/view/public/jumbotron.jsp">
         <jsp:param name="title" value="${toAdd?'新增':'編輯'} Flashcar" />

@@ -2,7 +2,7 @@ package idv.taglib.component.adapter;
 
 import idv.taglib.component.itf.TaglibComponent;
 import idv.taglib.component.itf.TaglibRenderer;
-import idv.taglib.control.Result;
+import idv.taglib.controlmodel.Result;
 
 public abstract class TablibComponentAdapter<T> implements TaglibComponent<T> {
 	protected TaglibRenderer<T> renderer;

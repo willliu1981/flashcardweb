@@ -1,4 +1,4 @@
-package idv.taglib.control;
+package idv.taglib.controlmodel;
 
 public class Result {
 	private Handler handler;

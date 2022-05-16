@@ -8,7 +8,7 @@ import idv.taglib.component.common.impl.Badge;
 import idv.taglib.component.listgroup.ListGroupItemHeading;
 import idv.taglib.component.listgroup.ListGroupItemText;
 import idv.taglib.component.listgroup.renderer.ListGroupRenderere;
-import idv.taglib.control.Handler;
+import idv.taglib.controlmodel.Handler;
 import idv.taglib.factory.lister.ListFacade;
 import idv.taglib.tool.Scripts;
 import idv.taglib.tool.Taglibs;

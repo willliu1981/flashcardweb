@@ -18,5 +18,4 @@ public class ListHeaderTag extends ListTag {
 		out.print(this.getFacade().getListHeader().getStrResult());
 
 	}
-
 }

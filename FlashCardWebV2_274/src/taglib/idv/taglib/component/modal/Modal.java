@@ -2,7 +2,7 @@ package idv.taglib.component.modal;
 
 import idv.taglib.component.adapter.TablibComponentAdapter;
 import idv.taglib.component.itf.TaglibRenderer;
-import idv.taglib.control.Result;
+import idv.taglib.controlmodel.Result;
 
 public class Modal<T> extends TablibComponentAdapter<T> {
 

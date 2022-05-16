@@ -1,4 +1,4 @@
-package idv.taglib.component;
+package idv.taglib.controlmodel;
 
 public class ContextPath {
 	private String path;

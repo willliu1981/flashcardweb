@@ -16,7 +16,7 @@
 
 	<context:component-scan base-package="tool"></context:component-scan>
 
-	<bean id="IDGenerator" class="tool.idgenerator.IDGeneratorFactory">
+	<!-- <bean id="IDGenerator" class="tool.idgenerator.IDGeneratorFactory">
 		<property name="idMappings">
 			<map>
 				<entry key="idv.fc.model.Flashcard" value="fc" />
@@ -24,7 +24,7 @@
 			</map>
 		</property>
 	</bean>
-
+ -->
 
 
 

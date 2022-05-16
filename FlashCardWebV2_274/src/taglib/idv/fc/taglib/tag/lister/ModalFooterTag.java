@@ -9,8 +9,8 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 
 import idv.debug.Debug;
-import idv.taglib.control.Handler;
-import idv.taglib.control.Result;
+import idv.taglib.controlmodel.Handler;
+import idv.taglib.controlmodel.Result;
 import idv.taglib.factory.lister.ListFacadeAdapter;
 
 public class ModalFooterTag extends ListTag {

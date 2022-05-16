@@ -3,8 +3,8 @@ package idv.taglib.factory.lister;
 import idv.fc.taglib.impl.list.flashcard.FlashcardListFacade;
 import idv.fc.taglib.impl.list.flashcardholder.FlashcardHolderListFacade;
 import idv.fc.taglib.impl.list.holderdata.HolderDataListFacade;
-import idv.taglib.component.ContextPath;
-import idv.taglib.control.Result;
+import idv.taglib.controlmodel.ContextPath;
+import idv.taglib.controlmodel.Result;
 
 public abstract class ListFacade {
 	public static final Class<FlashcardListFacade> FLASHCARD = FlashcardListFacade.class;

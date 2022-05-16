@@ -11,7 +11,7 @@
 	<!-- 設定頁面的 facade 變數 -->
 	<tag>
 		<name>setFacade</name>
-		<tag-class>idv.fc.taglib.tag.list.ListFacadeTag</tag-class>
+		<tag-class>idv.fc.taglib.tag.lister.ListFacadeTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>facadeType</name>
@@ -33,7 +33,7 @@
 
 	<tag>
 		<name>listHeader</name>
-		<tag-class>idv.fc.taglib.tag.list.ListHeaderTag</tag-class>
+		<tag-class>idv.fc.taglib.tag.lister.ListHeaderTag</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
 			<name>listFacade</name>
@@ -45,7 +45,7 @@
 
 	<tag>
 		<name>eachItem</name>
-		<tag-class>idv.fc.taglib.tag.list.EachItemTag</tag-class>
+		<tag-class>idv.fc.taglib.tag.lister.EachItemTag</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
 			<name>listFacade</name>
@@ -62,14 +62,14 @@
 
 	<tag>
 		<name>item</name>
-		<tag-class>idv.fc.taglib.tag.list.ItemTag</tag-class>
+		<tag-class>idv.fc.taglib.tag.lister.ItemTag</tag-class>
 		<body-content>scriptless</body-content>
 	</tag>
 
 
 	<tag>
 		<name>modalHeader</name>
-		<tag-class>idv.fc.taglib.tag.list.ModalHeaderTag</tag-class>
+		<tag-class>idv.fc.taglib.tag.lister.ModalHeaderTag</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
 			<name>listFacade</name>
@@ -81,7 +81,7 @@
 
 	<tag>
 		<name>modalBody</name>
-		<tag-class>idv.fc.taglib.tag.list.ModalBodyTag</tag-class>
+		<tag-class>idv.fc.taglib.tag.lister.ModalBodyTag</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
 			<name>listFacade</name>
@@ -93,7 +93,7 @@
 
 	<tag>
 		<name>modalFooter</name>
-		<tag-class>idv.fc.taglib.tag.list.ModalFooterTag</tag-class>
+		<tag-class>idv.fc.taglib.tag.lister.ModalFooterTag</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
 			<name>listFacade</name>

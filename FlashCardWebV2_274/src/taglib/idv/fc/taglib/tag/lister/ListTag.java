@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-import idv.taglib.control.Handler;
-import idv.taglib.control.Result;
+import idv.taglib.controlmodel.Handler;
+import idv.taglib.controlmodel.Result;
 import idv.taglib.factory.lister.ListFacade;
 import idv.taglib.tool.Taglibs;
 
