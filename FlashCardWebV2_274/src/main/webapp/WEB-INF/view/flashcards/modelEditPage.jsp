@@ -21,20 +21,13 @@
     </jsp:include>
 
     <div class="container">
-        <er:form type="${type}" data="data">
+        <er:form type="${type}" data="data" var="editor">
             <frm:form action="${pageContext.request.contextPath}/flashcard" modelAttribute="data"
                 cssClass="form-horizontal">
                 <fieldset>
-                    <legend>
-                        {formTitle}
-                        <%--  <c:choose>
-                            <c:when test="${toAdd }">新增 Flashcar</c:when>
-                            <c:otherwise>編輯 Flashcar
-                                <input type="hidden" name="_method" value="put" />
-                            </c:otherwise>
-                        </c:choose> --%>
-                    </legend>
-                    <div class="form-group">
+                    <legend> {formTitle} </legend>
+                    {formBody}
+                    <%--  <div class="form-group">
                         <label for="term" class="col-lg-2 control-label">Term</label>
                         <div class="col-lg-10">
                             <frm:input path="term" id="term" cssClass="form-control" placeholder="ex: apple" />
@@ -46,7 +39,7 @@
                         <div class="col-lg-10">
                             <frm:input path="definition" id="definition" cssClass="form-control" placeholder="ex: 蘋果" />
                         </div>
-                    </div>
+                    </div> --%>
 
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">

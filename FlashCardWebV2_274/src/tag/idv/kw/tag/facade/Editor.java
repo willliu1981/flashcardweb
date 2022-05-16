@@ -1,5 +1,6 @@
 package idv.kw.tag.facade;
 
+import idv.excpetion.ExceptionFactory;
 import idv.kw.tag.itf.TagFacade;
 import idv.kw.tag.model.Attribute;
 import idv.kw.tag.model.Result;
@@ -34,22 +35,6 @@ public abstract class Editor<T> implements TagFacade {
 		return attributes;
 	}
 
-	@Override
-	public Result getHeader() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public Result getBody() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Result getFooter() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }
