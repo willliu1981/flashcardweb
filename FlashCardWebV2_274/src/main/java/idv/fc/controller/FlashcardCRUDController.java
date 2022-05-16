@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import idv.fc.model.Flashcard;
 import idv.fc.service.abstraction.IFlashcardService;
-import idv.fc.tag.impl.facade.FlashcardAddEditor;
-import idv.fc.tag.impl.facade.FlashcardEditEditor;
+import idv.fc.tag.impl.facade.FlashcardEditor;
 
 @Controller
 public class FlashcardCRUDController extends BaseController {
@@ -25,7 +24,7 @@ public class FlashcardCRUDController extends BaseController {
 	@RequestMapping(value = "flashcard", method = RequestMethod.GET)
 	public String toAdd(HashMap<String, Object> map) {
 		map.put("data", new Flashcard());
-		map.put("erType", FlashcardAddEditor.class);
+		map.put("erType", FlashcardEditor.class);
 		return FLASHCARDS + "/" + "modelEditPage";
 	}
 
@@ -35,7 +34,7 @@ public class FlashcardCRUDController extends BaseController {
 		Flashcard find = flashcardService.getById(id);
 
 		map.put("data", find);
-		map.put("erType", FlashcardEditEditor.class);
+		map.put("erType", FlashcardEditor.class);
 		return FLASHCARDS + "/" + "modelEditPage";
 	}
 

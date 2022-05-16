@@ -4,16 +4,25 @@ import idv.fc.model.Flashcard;
 import idv.kw.tag.component.DefaultComponent;
 import idv.kw.tag.facade.Editor;
 
-public class FlashcardAddEditor extends Editor<Flashcard> {
+public class FlashcardEditor extends Editor<Flashcard> {
+	private boolean isAdd = false;
 
-	public FlashcardAddEditor(Flashcard data) {
+	public FlashcardEditor(Flashcard data) {
 		super(data);
 	}
 
 	@Override
 	public void init() {
-		this.addAttribute("jumboTitle", "新增 Flashcard");
-		this.addAttribute("formTitle", "新增 Flashcard");
+		isAdd = this.getData().getId() == null;
+
+		if (isAdd) {
+			this.addAttribute("jumboTitle", "新增 Flashcard");
+			this.addAttribute("formTitle", "新增 Flashcard");
+		} else {
+			this.addAttribute("jumboTitle", "編輯 Flashcard");
+			this.addAttribute("formTitle", "編輯 Flashcard");
+		}
+
 		this.addAttribute("formBody", this.getBody());
 	}
 
@@ -22,6 +31,9 @@ public class FlashcardAddEditor extends Editor<Flashcard> {
 
 		createTerm(buffer);
 		createDefinition(buffer);
+		if (!isAdd) {
+			createHiddenForPut(buffer);
+		}
 
 		return buffer.toString();
 	}
@@ -35,7 +47,7 @@ public class FlashcardAddEditor extends Editor<Flashcard> {
 	        </div>
 	    </div>
 	 */
-	private void createTerm(StringBuffer buffer) {
+	protected void createTerm(StringBuffer buffer) {
 		DefaultComponent cmptFormGroup = new DefaultComponent("div");
 		cmptFormGroup.addHtmlClass("form-group");
 
@@ -55,6 +67,9 @@ public class FlashcardAddEditor extends Editor<Flashcard> {
 				cmptInput.addAttribute("name", "term");
 				cmptInput.addAttribute("id", "term");
 				cmptInput.addAttribute("placeholder", "ex: apple");
+				if (!isAdd) {
+					cmptInput.addAttribute("value", this.getData().getTerm());
+				}
 				//加入組件
 				cmptDiv.setBody(cmptInput.toString());
 			}
@@ -67,7 +82,7 @@ public class FlashcardAddEditor extends Editor<Flashcard> {
 		buffer.append(cmptFormGroup.toString());
 	}
 
-	private void createDefinition(StringBuffer buffer) {
+	protected void createDefinition(StringBuffer buffer) {
 		DefaultComponent cmptFormGroup = new DefaultComponent("div");
 		cmptFormGroup.addHtmlClass("form-group");
 
@@ -87,6 +102,10 @@ public class FlashcardAddEditor extends Editor<Flashcard> {
 				cmptInput.addAttribute("name", "definition");
 				cmptInput.addAttribute("id", "definition");
 				cmptInput.addAttribute("placeholder", "ex: 蘋果");
+				if (!isAdd) {
+					cmptInput.addAttribute("value",
+							this.getData().getDefinition());
+				}
 				//加入組件
 				cmptDiv.setBody(cmptInput.toString());
 			}
@@ -97,6 +116,20 @@ public class FlashcardAddEditor extends Editor<Flashcard> {
 		//加入組件
 		cmptFormGroup.setBody(bufBody.toString());
 		buffer.append(cmptFormGroup.toString());
+	}
+
+	protected void createHiddenForPut(StringBuffer buffer) {
+		DefaultComponent cmpMethod = new DefaultComponent("input");
+		cmpMethod.addAttribute("type", "hidden");
+		cmpMethod.addAttribute("name", "_method");
+		cmpMethod.addAttribute("value", "put");
+
+		DefaultComponent cmptId = new DefaultComponent("input");
+		cmptId.addAttribute("type", "hidden");
+		cmptId.addAttribute("name", "id");
+		cmptId.addAttribute("value", this.getData().getId().toString());
+
+		buffer.append(cmpMethod.toString()).append(cmptId);
 	}
 
 }
