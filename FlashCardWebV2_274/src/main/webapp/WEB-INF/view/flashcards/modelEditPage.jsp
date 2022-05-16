@@ -9,6 +9,7 @@
 </head>
 <body>
     <c:if test="${empty data.id}" var="toAdd" />
+    <er:setEditor type="${erType }" var="editor" />
 
     <!-- include header nav -->
     <jsp:include page="/WEB-INF/view/public/header.jsp" flush="true">
@@ -17,30 +18,16 @@
 
     <!-- 引入巨屏 -->
     <jsp:include page="/WEB-INF/view/public/jumbotron.jsp">
-        <jsp:param name="title" value="${toAdd?'新增':'編輯'} Flashcar" />
+        <jsp:param name="title" value="${editor.attributes.jumboTitle}" />
     </jsp:include>
 
     <div class="container">
-        <er:form type="${type}" data="data" var="editor">
+        <er:form facade="${editor}">
             <frm:form action="${pageContext.request.contextPath}/flashcard" modelAttribute="data"
                 cssClass="form-horizontal">
                 <fieldset>
                     <legend> {formTitle} </legend>
                     {formBody}
-                    <%--  <div class="form-group">
-                        <label for="term" class="col-lg-2 control-label">Term</label>
-                        <div class="col-lg-10">
-                            <frm:input path="term" id="term" cssClass="form-control" placeholder="ex: apple" />
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="definition" class="col-lg-2 control-label">Definition</label>
-                        <div class="col-lg-10">
-                            <frm:input path="definition" id="definition" cssClass="form-control" placeholder="ex: 蘋果" />
-                        </div>
-                    </div> --%>
-
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">
                             <button type="reset" class="btn btn-default" style="color: black;">Cancel</button>

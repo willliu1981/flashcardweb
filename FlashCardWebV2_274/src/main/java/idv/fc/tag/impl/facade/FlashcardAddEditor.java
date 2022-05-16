@@ -12,6 +12,7 @@ public class FlashcardAddEditor extends Editor<Flashcard> {
 
 	@Override
 	public void init() {
+		this.addAttribute("jumboTitle", "新增 Flashcard");
 		this.addAttribute("formTitle", "新增 Flashcard");
 		this.addAttribute("formBody", this.getBody());
 	}

@@ -9,9 +9,9 @@
 	<short-name>List TLD</short-name>
 
 	<tag>
-		<name>form</name>
-		<tag-class>idv.kw.tag.tags.FormTag</tag-class>
-		<body-content>scriptless</body-content>
+		<name>setEditor</name>
+		<tag-class>idv.kw.tag.tags.SetEditorTag</tag-class>
+		<body-content>empty</body-content>
 		<attribute>
 			<name>type</name>
 			<rtexprvalue>true</rtexprvalue>
@@ -28,6 +28,25 @@
 			<type>java.lang.String</type>
 			<required>false</required>
 		</attribute>
+		<attribute>
+			<name>scope</name>
+			<type>java.lang.String</type>
+			<required>false</required>
+		</attribute>
 	</tag>
+
+	<tag>
+		<name>form</name>
+		<tag-class>idv.kw.tag.tags.FormTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>facade</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>idv.kw.tag.itf.TagFacade</type>
+			<required>true</required>
+		</attribute>
+	</tag>
+
+
 
 </taglib>
