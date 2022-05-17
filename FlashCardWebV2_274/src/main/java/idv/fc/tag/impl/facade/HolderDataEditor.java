@@ -3,6 +3,7 @@ package idv.fc.tag.impl.facade;
 import idv.fc.model.HolderData;
 import idv.kw.tag.component.DefaultComponent;
 import idv.kw.tag.facade.Editor;
+import idv.kw.tag.factory.TagBuilder;
 
 public class HolderDataEditor extends Editor<HolderData> {
 	private boolean isAdd = false;
@@ -42,7 +43,7 @@ public class HolderDataEditor extends Editor<HolderData> {
 		DefaultComponent cmptFormGroup = new DefaultComponent("div");
 		cmptFormGroup.addHtmlClass("form-group");
 
-		//term body
+		//body
 		StringBuffer bufBody = new StringBuffer();
 		{
 			DefaultComponent cmptLabel = new DefaultComponent("label");
@@ -59,7 +60,8 @@ public class HolderDataEditor extends Editor<HolderData> {
 				cmptInput.addAttribute("id", "fhId");
 				cmptInput.addAttribute("placeholder", "ex: 123");
 				if (!isAdd) {
-					cmptInput.addAttribute("value", this.getData().getFhId().toString());
+					cmptInput.addAttribute("value",
+							this.getData().getFhId().toString());
 				}
 				//加入組件
 				cmptDiv.setBody(cmptInput.toString());

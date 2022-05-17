@@ -9,7 +9,7 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-import idv.kw.tag.factory.TagFactory;
+import idv.kw.tag.factory.FacadeFactory;
 import idv.kw.tag.itf.TagFacade;
 
 public class SetEditorTag<T extends TagFacade> extends SimpleTagSupport {
@@ -30,7 +30,7 @@ public class SetEditorTag<T extends TagFacade> extends SimpleTagSupport {
 		HttpServletRequest request = (HttpServletRequest) ((PageContext) this
 				.getJspContext()).getRequest();
 		Object attribute = request.getAttribute(data);
-		return TagFactory.getFacade(attribute, type, attribute.getClass());
+		return FacadeFactory.getFacade(attribute, type, attribute.getClass());
 	}
 
 	public void setData(String data) {

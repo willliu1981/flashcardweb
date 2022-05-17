@@ -1,8 +1,7 @@
-package idv.fc.dao.impl;
+package idv.fc.dao.itf;
 
 import org.springframework.stereotype.Repository;
 
-import idv.fc.dao.abstraction.Dao;
 import idv.fc.model.Flashcard;
 
 @Repository

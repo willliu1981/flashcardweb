@@ -3,6 +3,7 @@ package idv.fc.tag.impl.facade;
 import idv.fc.model.Flashcard;
 import idv.kw.tag.component.DefaultComponent;
 import idv.kw.tag.facade.Editor;
+import idv.kw.tag.factory.TagBuilder;
 
 public class FlashcardEditor extends Editor<Flashcard> {
 	private boolean isAdd = false;

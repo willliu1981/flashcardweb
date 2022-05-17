@@ -1,4 +1,4 @@
-package idv.fc.dao.abstraction;
+package idv.fc.dao.itf;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

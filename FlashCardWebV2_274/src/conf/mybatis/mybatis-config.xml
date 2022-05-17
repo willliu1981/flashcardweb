@@ -16,6 +16,7 @@
 	<typeAliases>
 		<!-- <typeAlias type="idv.fc.pojo.Vocabulary" alias="Vocabulary" /> -->
 		<package name="idv.fc.model" />
+		<package name="idv.fc.dto" />
 	</typeAliases>
 
 	<plugins>

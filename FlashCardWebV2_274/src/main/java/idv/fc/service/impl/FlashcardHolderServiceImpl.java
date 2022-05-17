@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import idv.fc.dao.impl.FlashcardHolderDao;
+import idv.fc.dao.itf.FlashcardHolderDao;
 import idv.fc.model.FlashcardHolder;
 import idv.fc.service.abstraction.IFlashcardHolderService;
 

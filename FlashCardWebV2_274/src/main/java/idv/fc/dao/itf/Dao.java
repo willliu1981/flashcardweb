@@ -1,4 +1,4 @@
-package idv.fc.dao.abstraction;
+package idv.fc.dao.itf;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -13,8 +13,6 @@ public interface Dao<T> {
 	void update(T model) throws SQLException;
 
 	void delete(Object id) throws SQLException;
-
-	T queryById(Object id) throws FindErrorException;
 
 	T selectById(Object id) throws SQLException;
 

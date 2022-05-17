@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import idv.fc.dao.impl.HolderDataDao;
+import idv.fc.dao.itf.HolderDataDao;
 import idv.fc.model.HolderData;
 import idv.fc.service.abstraction.IHolderDataService;
 

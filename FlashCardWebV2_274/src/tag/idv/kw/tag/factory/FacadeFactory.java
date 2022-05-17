@@ -8,7 +8,7 @@ import idv.debug.Debug;
 import idv.fc.model.Flashcard;
 import idv.kw.tag.itf.TagFacade;
 
-public class TagFactory {
+public class FacadeFactory {
 
 	public static <T extends TagFacade> T getFacade(Object data,
 			Class<T> facadeType, Class<?> dataType) {

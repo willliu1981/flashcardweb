@@ -10,7 +10,7 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-import idv.kw.tag.factory.TagFactory;
+import idv.kw.tag.factory.FacadeFactory;
 import idv.kw.tag.itf.TagFacade;
 import idv.kw.tag.model.Attribute;
 

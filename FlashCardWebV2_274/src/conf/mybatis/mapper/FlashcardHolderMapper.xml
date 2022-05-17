@@ -19,11 +19,26 @@
 
 	<update id="update" parameterType="FlashcardHolder">
 		update flashcardHolder set
-		name=#{name},fc_id=#{fcId} where id = #{id};
+		name=#{name},fc_id=#{fcId} where
+		id = #{id};
 	</update>
 
 	<delete id="delete">
 		delete from flashcardHolder where id = #{id};
 	</delete>
+
+	<resultMap type="FlashcardHolder" id="baseFHResultMap">
+		<id column="id" property="id" />
+
+		<association property="flashcard" column="fc_id"
+			select="idv.fc.dao.itf.FlashcardDao.selectById">
+			<id column="fc_id" property="flashcard" />
+		</association>
+	</resultMap>
+
+
+	<select id="selectByIdJoinFc" resultMap="baseFHResultMap">
+		select * from flashcardHolder where id = #{id}
+	</select>
 
 </mapper>
