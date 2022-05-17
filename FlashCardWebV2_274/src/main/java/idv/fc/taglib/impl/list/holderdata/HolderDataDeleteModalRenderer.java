@@ -3,7 +3,7 @@ package idv.fc.taglib.impl.list.holderdata;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import idv.fc.model.HolderData;
+import idv.fc.dto.HolderDataDTO;
 import idv.taglib.component.common.impl.Form;
 import idv.taglib.component.common.impl.ModalBodyItem;
 import idv.taglib.component.modal.ModalTitle;
@@ -12,7 +12,8 @@ import idv.taglib.controlmodel.Handler;
 import idv.taglib.factory.lister.ListFacade;
 import idv.taglib.tool.Taglibs;
 
-public class HolderDataDeleteModalRenderer extends ModalRenderer<HolderData> {
+public class HolderDataDeleteModalRenderer
+		extends ModalRenderer<HolderDataDTO> {
 	private ListFacade facade;
 	private String title;
 

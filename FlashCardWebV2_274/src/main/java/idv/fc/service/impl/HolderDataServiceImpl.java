@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import idv.fc.dao.itf.HolderDataDao;
+import idv.fc.dto.HolderDataDTO;
 import idv.fc.model.HolderData;
 import idv.fc.service.abstraction.IHolderDataService;
 
@@ -56,6 +57,11 @@ public class HolderDataServiceImpl implements IHolderDataService {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public List<HolderDataDTO> getAllJoinFH() {
+		return this.HolderDataDao.selectAllJoinFh();
 	}
 
 }

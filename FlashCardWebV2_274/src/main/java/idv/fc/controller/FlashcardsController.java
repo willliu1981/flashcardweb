@@ -14,6 +14,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import idv.fc.dto.FlashcardHolderDTO;
+import idv.fc.dto.HolderDataDTO;
 import idv.fc.model.Flashcard;
 import idv.fc.model.HolderData;
 import idv.fc.service.abstraction.IFlashcardHolderService;
@@ -97,7 +98,7 @@ public class FlashcardsController extends BaseController {
 		map.put("flashcardHolders", all);
 		PageInfo<FlashcardHolderDTO> pageInfo = new PageInfo<>(all,
 				MAX_NAV_PAGE_NUMBER);
-		
+
 		map.put("pageInfo", pageInfo);
 		map.put("datas", all);
 		map.put("type", FlashcardHolderDTOListFacade.class);
@@ -121,8 +122,8 @@ public class FlashcardsController extends BaseController {
 		}
 
 		PageHelper.startPage(intPageNumber, MAX_PAGE_NUMBER);
-		List<HolderData> all = holderDataService.getAll();
-		PageInfo<HolderData> pageInfo = new PageInfo<>(all,
+		List<HolderDataDTO> all = holderDataService.getAllJoinFH();
+		PageInfo<HolderDataDTO> pageInfo = new PageInfo<>(all,
 				MAX_NAV_PAGE_NUMBER);
 
 		map.put("pageInfo", pageInfo);

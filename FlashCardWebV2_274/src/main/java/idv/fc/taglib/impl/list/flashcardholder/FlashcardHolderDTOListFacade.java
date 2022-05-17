@@ -34,7 +34,7 @@ public class FlashcardHolderDTOListFacade
 				this, title);
 		listGroup.setRenderer(lgRenderer);
 
-		FlashcardHolderDTOListGroupRenderer dmRenderer = new FlashcardHolderDTOListGroupRenderer(
+		FlashcardHolderDTODeleteModalRenderer dmRenderer = new FlashcardHolderDTODeleteModalRenderer(
 				this, title);
 		modal.setRenderer(dmRenderer);
 	}

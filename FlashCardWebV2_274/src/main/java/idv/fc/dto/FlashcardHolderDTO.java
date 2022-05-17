@@ -9,10 +9,6 @@ public class FlashcardHolderDTO {
 	private FlashcardHolder fh = new FlashcardHolder();
 	private Flashcard flashcard;
 
-	/*	public FlashcardHolderDTO(FlashcardHolder fh) {
-			this.fh = fh;
-		}
-	*/
 	public Integer getId() {
 		return fh.getId();
 	}
