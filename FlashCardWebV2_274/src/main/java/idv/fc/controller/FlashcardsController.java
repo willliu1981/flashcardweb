@@ -13,12 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+import idv.fc.dto.FlashcardHolderDTO;
 import idv.fc.model.Flashcard;
-import idv.fc.model.FlashcardHolder;
 import idv.fc.model.HolderData;
 import idv.fc.service.abstraction.IFlashcardHolderService;
 import idv.fc.service.abstraction.IFlashcardService;
 import idv.fc.service.abstraction.IHolderDataService;
+import idv.fc.taglib.impl.list.flashcardholder.FlashcardHolderDTOListFacade;
 import idv.taglib.factory.lister.ListFacade;
 
 @Controller
@@ -90,14 +91,16 @@ public class FlashcardsController extends BaseController {
 		}
 
 		PageHelper.startPage(intPageNumber, MAX_PAGE_NUMBER);
-		List<FlashcardHolder> all = flashcardHolderService.getAll();
-		map.put("flashcardHolders", all);
-		PageInfo<FlashcardHolder> pageInfo = new PageInfo<>(all,
-				MAX_NAV_PAGE_NUMBER);
+		//List<FlashcardHolder> all = flashcardHolderService.getAll();
+		List<FlashcardHolderDTO> all = flashcardHolderService.getAllJoinFc();
 
+		map.put("flashcardHolders", all);
+		PageInfo<FlashcardHolderDTO> pageInfo = new PageInfo<>(all,
+				MAX_NAV_PAGE_NUMBER);
+		
 		map.put("pageInfo", pageInfo);
 		map.put("datas", all);
-		map.put("type", ListFacade.FLASHCARDHOLDER);
+		map.put("type", FlashcardHolderDTOListFacade.class);
 
 		return FLASHCARDS + "/modelManagedPage";
 	}

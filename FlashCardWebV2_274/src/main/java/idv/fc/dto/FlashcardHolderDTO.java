@@ -6,13 +6,13 @@ import idv.fc.model.Flashcard;
 import idv.fc.model.FlashcardHolder;
 
 public class FlashcardHolderDTO {
-	private FlashcardHolder fh;
+	private FlashcardHolder fh = new FlashcardHolder();
 	private Flashcard flashcard;
 
-	public FlashcardHolderDTO(FlashcardHolder fh) {
-		this.fh = fh;
-	}
-
+	/*	public FlashcardHolderDTO(FlashcardHolder fh) {
+			this.fh = fh;
+		}
+	*/
 	public Integer getId() {
 		return fh.getId();
 	}
@@ -67,6 +67,12 @@ public class FlashcardHolderDTO {
 
 	public void setFlashcard(Flashcard fc) {
 		this.flashcard = fc;
+	}
+
+	@Override
+	public String toString() {
+		return "FlashcardHolderDTO [fh=" + fh + ", flashcard=" + flashcard
+				+ "]";
 	}
 
 }

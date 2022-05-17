@@ -48,6 +48,7 @@
 
 特別加註:
 .	dao id 雖然為 String , 但依然能向sql 的 int id 進行存取 (mybatis)
+.	mysql timestamp 若為 000-000...時,出現無法轉換的問題, 在jdbc.url 加上 zeroDateTimeBehavior=convertToNull
 
 
 注意:

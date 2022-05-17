@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import idv.fc.dao.itf.FlashcardHolderDao;
+import idv.fc.dto.FlashcardHolderDTO;
 import idv.fc.model.FlashcardHolder;
 import idv.fc.service.abstraction.IFlashcardHolderService;
 
@@ -57,6 +58,11 @@ public class FlashcardHolderServiceImpl implements IFlashcardHolderService {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public List<FlashcardHolderDTO> getAllJoinFc() {
+		return this.flashcardHolderDao.selectAllJoinFc();
 	}
 
 }

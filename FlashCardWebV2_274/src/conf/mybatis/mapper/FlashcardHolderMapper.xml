@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="idv.fc.dao.impl.FlashcardHolderDao">
+<mapper namespace="idv.fc.dao.itf.FlashcardHolderDao">
 
 	<select id="selectAll" resultType="FlashcardHolder">
 		select * from flashcardHolder
@@ -27,18 +27,32 @@
 		delete from flashcardHolder where id = #{id};
 	</delete>
 
-	<resultMap type="FlashcardHolder" id="baseFHResultMap">
-		<id column="id" property="id" />
+	<resultMap type="FlashcardHolderDTO" id="baseFHResultMap">
 
+		<result column="fc_id" property="fcId" />
+		<!-- <id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="create_date" property="createDate" />
+		<result column="number_of_quiz_times" property="numberOfQuizTimes" />
+		<result column="pass_the_quiz_times" property="passTheQuizTimes" />
+		<result column="update_for_quiz_date" property="updateForQuizDate" />
+-->
 		<association property="flashcard" column="fc_id"
 			select="idv.fc.dao.itf.FlashcardDao.selectById">
-			<id column="fc_id" property="flashcard" />
+			<!-- 
+			<id column="id" property="id" />
+			<result column="term" property="term" />
+			<result column="definition" property="definition" />
+			<result column="create_date" property="createDate" />
+			<result column="number_of_quiz_times" property="numberOfQuizTimes" />
+			<result column="pass_the_quiz_times" property="passTheQuizTimes" />
+			-->
 		</association>
 	</resultMap>
 
 
-	<select id="selectByIdJoinFc" resultMap="baseFHResultMap">
-		select * from flashcardHolder where id = #{id}
+	<select id="selectAllJoinFc" resultMap="baseFHResultMap">
+		select * from flashcardHolder
 	</select>
 
 </mapper>

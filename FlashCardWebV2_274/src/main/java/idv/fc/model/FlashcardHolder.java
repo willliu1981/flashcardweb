@@ -9,6 +9,7 @@ public class FlashcardHolder {
 	private Timestamp createDate;
 	private Integer numberOfQuizTimes;
 	private Integer passTheQuizTimes;
+	private Timestamp updateForQuizDate;
 
 	public FlashcardHolder() {
 		super();
@@ -75,6 +76,14 @@ public class FlashcardHolder {
 				+ ", createDate=" + createDate + ", numberOfQuizTimes="
 				+ numberOfQuizTimes + ", passTheQuizTimes=" + passTheQuizTimes
 				+ "]";
+	}
+
+	public Timestamp getUpdateForQuizDate() {
+		return updateForQuizDate;
+	}
+
+	public void setUpdateForQuizDate(Timestamp updateForQuizDate) {
+		this.updateForQuizDate = updateForQuizDate;
 	}
 
 }
