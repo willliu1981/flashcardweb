@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
-import idv.fc.dto.FlashcardHolderDTO;
-import idv.fc.dto.HolderDataDTO;
 import idv.fc.model.Flashcard;
 import idv.fc.model.HolderData;
+import idv.fc.model.dto.FlashcardHolderDTO;
+import idv.fc.model.dto.HolderDataDTO;
 import idv.fc.service.abstraction.IFlashcardHolderService;
 import idv.fc.service.abstraction.IFlashcardService;
 import idv.fc.service.abstraction.IHolderDataService;

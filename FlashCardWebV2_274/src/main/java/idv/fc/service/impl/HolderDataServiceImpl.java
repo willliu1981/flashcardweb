@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import idv.fc.dao.itf.HolderDataDao;
-import idv.fc.dto.HolderDataDTO;
 import idv.fc.model.HolderData;
+import idv.fc.model.dto.HolderDataDTO;
 import idv.fc.service.abstraction.IHolderDataService;
 
 @Service("holderDataService")

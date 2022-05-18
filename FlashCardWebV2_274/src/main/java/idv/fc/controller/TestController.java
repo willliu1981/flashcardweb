@@ -27,7 +27,7 @@ public class TestController extends BaseController {
 		return "test/test1";
 	}
 
-	@RequestMapping(value = "test2")
+	@RequestMapping(value = "test3")
 	public String test2(Map<String, Object> map, HttpServletRequest request) {
 
 		FlashcardServiceImpl service = SpringUtil.getBean("flashcardService",
@@ -44,8 +44,29 @@ public class TestController extends BaseController {
 		request.getServletContext().setAttribute("facade", facade);
 		Flashcard flashcard = datas.get(0);
 		map.put("command", flashcard);
-		return "test/testForm";
+		return "test/test7";
 
+	}
+
+	@RequestMapping(value = "test4")
+	public String test3(Map<String, Object> map, HttpServletRequest request) {
+
+		FlashcardServiceImpl service = SpringUtil.getBean("flashcardService",
+				FlashcardServiceImpl.class);
+
+		List<Flashcard> datas = service.getAll();
+
+		/*		List<QuizDTO> collect = datas.stream().map(item -> new QuizDTO(item))
+						.collect(Collectors.toList());
+		
+				Debug.test(new Object() {
+				}, collect);
+		*/
+
+		request.setAttribute("datas", datas);
+		//map.put("datas", datas);
+		//map.put("dd", collect.get(0));
+		return "test/test8";
 	}
 
 }

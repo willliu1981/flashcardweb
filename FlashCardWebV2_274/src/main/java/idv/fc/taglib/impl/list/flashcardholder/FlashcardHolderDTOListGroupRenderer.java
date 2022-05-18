@@ -3,8 +3,8 @@ package idv.fc.taglib.impl.list.flashcardholder;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import idv.fc.dto.FlashcardHolderDTO;
 import idv.fc.model.FlashcardHolder;
+import idv.fc.model.dto.FlashcardHolderDTO;
 import idv.taglib.component.common.impl.Badge;
 import idv.taglib.component.listgroup.ListGroupItemHeading;
 import idv.taglib.component.listgroup.ListGroupItemText;

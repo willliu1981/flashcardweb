@@ -3,7 +3,7 @@ package idv.fc.taglib.impl.list.holderdata;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import idv.fc.dto.HolderDataDTO;
+import idv.fc.model.dto.HolderDataDTO;
 import idv.taglib.component.common.impl.Form;
 import idv.taglib.component.common.impl.ModalBodyItem;
 import idv.taglib.component.modal.ModalTitle;

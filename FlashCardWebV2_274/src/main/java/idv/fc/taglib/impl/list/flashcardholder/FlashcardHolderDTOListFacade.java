@@ -2,7 +2,7 @@ package idv.fc.taglib.impl.list.flashcardholder;
 
 import java.util.List;
 
-import idv.fc.dto.FlashcardHolderDTO;
+import idv.fc.model.dto.FlashcardHolderDTO;
 import idv.taglib.component.listgroup.ListGroup;
 import idv.taglib.component.modal.Modal;
 import idv.taglib.factory.lister.ListFacadeAdapter;

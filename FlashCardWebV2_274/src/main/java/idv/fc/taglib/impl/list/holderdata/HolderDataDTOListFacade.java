@@ -2,7 +2,7 @@ package idv.fc.taglib.impl.list.holderdata;
 
 import java.util.List;
 
-import idv.fc.dto.HolderDataDTO;
+import idv.fc.model.dto.HolderDataDTO;
 import idv.taglib.component.listgroup.ListGroup;
 import idv.taglib.component.modal.Modal;
 import idv.taglib.factory.lister.ListFacadeAdapter;

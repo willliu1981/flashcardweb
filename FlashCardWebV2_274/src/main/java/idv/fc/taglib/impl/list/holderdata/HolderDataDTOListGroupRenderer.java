@@ -3,8 +3,8 @@ package idv.fc.taglib.impl.list.holderdata;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import idv.fc.dto.HolderDataDTO;
 import idv.fc.model.HolderData;
+import idv.fc.model.dto.HolderDataDTO;
 import idv.taglib.component.common.impl.Badge;
 import idv.taglib.component.listgroup.ListGroupItemHeading;
 import idv.taglib.component.listgroup.ListGroupItemText;

@@ -1,4 +1,4 @@
-package idv.fc.dto;
+package idv.fc.model.dto;
 
 import java.sql.Timestamp;
 
@@ -42,3 +42,7 @@ public class HolderDataDTO {
 	}
 
 }
+
+
+
+

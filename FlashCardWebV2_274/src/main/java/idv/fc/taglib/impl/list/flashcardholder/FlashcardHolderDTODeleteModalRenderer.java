@@ -3,7 +3,7 @@ package idv.fc.taglib.impl.list.flashcardholder;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import idv.fc.dto.FlashcardHolderDTO;
+import idv.fc.model.dto.FlashcardHolderDTO;
 import idv.taglib.component.common.impl.Form;
 import idv.taglib.component.common.impl.ModalBodyItem;
 import idv.taglib.component.modal.ModalTitle;

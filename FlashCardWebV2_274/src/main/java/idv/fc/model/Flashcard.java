@@ -1,8 +1,9 @@
 package idv.fc.model;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Flashcard {
+public class Flashcard implements Serializable {
 
 	private Integer id;
 	private String term;
@@ -70,12 +71,12 @@ public class Flashcard {
 		this.passTheQuizTimes = passTheQuizTimes;
 	}
 
-	@Override
-	public String toString() {
-		return "Flashcard [id=" + id + ", term=" + term + ", definition="
-				+ definition + ", createDate=" + createDate
-				+ ", numberOfQuizTimes=" + numberOfQuizTimes
-				+ ", passTheQuizTimes=" + passTheQuizTimes + "]";
-	}
+	/*	@Override
+		public String toString() {
+			return "Flashcard [id=" + id + ", term=" + term + ", definition="
+					+ definition + ", createDate=" + createDate
+					+ ", numberOfQuizTimes=" + numberOfQuizTimes
+					+ ", passTheQuizTimes=" + passTheQuizTimes + "]";
+		}*/
 
 }
