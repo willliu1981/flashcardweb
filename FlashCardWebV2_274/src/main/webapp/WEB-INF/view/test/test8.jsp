@@ -17,21 +17,23 @@
     List<Flashcard> dds = new ArrayList<>();
     dds.add(f1);
     dds.add(f2);
+
+    request.setAttribute("dds", dds);
     %>
 
-<%-- 
+
     <h1>data=${datas[0].term }</h1>
 
     <c:forEach var="it" items="${datas} ">
         ${it.term}
 
-    </c:forEach> --%>
-    
-    <h1>data=${dds[0].term }</h1>
+    </c:forEach>
 
-    <c:forEach var="it" items="${dds} ">
-      <%--   ${it.term} --%>
-
+    <c:forEach var="it" items="${ dds }">
+        <tr>
+            <td>: ${it.term }</td>
+            <td>: ${it.definition }</td>
+        </tr>
     </c:forEach>
 
 

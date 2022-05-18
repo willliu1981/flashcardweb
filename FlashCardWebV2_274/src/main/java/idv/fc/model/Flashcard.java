@@ -71,12 +71,12 @@ public class Flashcard implements Serializable {
 		this.passTheQuizTimes = passTheQuizTimes;
 	}
 
-	/*	@Override
-		public String toString() {
-			return "Flashcard [id=" + id + ", term=" + term + ", definition="
-					+ definition + ", createDate=" + createDate
-					+ ", numberOfQuizTimes=" + numberOfQuizTimes
-					+ ", passTheQuizTimes=" + passTheQuizTimes + "]";
-		}*/
+	@Override
+	public String toString() {
+		return "Flashcard [id=" + id + ", term=" + term + ", definition="
+				+ definition + ", createDate=" + createDate
+				+ ", numberOfQuizTimes=" + numberOfQuizTimes
+				+ ", passTheQuizTimes=" + passTheQuizTimes + "]";
+	}
 
 }

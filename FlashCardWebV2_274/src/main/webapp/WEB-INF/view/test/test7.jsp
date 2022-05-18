@@ -18,19 +18,18 @@
 
 .myCaption {
 	font-size: 133px;
-	height: 60%;;
+	height: 75%;;
 	color: green;
 }
 </style>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+	$(".item").first().addClass("active");
+  });
+</script>
 </head>
 <body>
-
-    data=${datas[0].term }
-
-    <c:forEach var="item" items="${datas} ">
-        <c:out value="${item.term}"></c:out>
-
-    </c:forEach>
 
 
     <!-- 輪播 -->
@@ -45,27 +44,26 @@
         </ol> -->
 
 
-
-
-
             <!-- Wrapper for slides -->
-            <%--  <div class="carousel-inner" role="listbox">
-                <c:forEach var="data" items="${datas } ">
-                    <div class="item ${pageNum==1?'active':'' }">
+            <div class="carousel-inner" role="listbox">
+                <c:forEach var="data" items="${datas}">
+                    <div class="item">
                         <img src="${pageContext.request.contextPath}/picture/card_1.png" />
                         <div class="carousel-caption myCaption">
-                            <span>
-                                <c:out value="${data.term }"></c:out>
-                            </span>
-                        </div>
-                        <div class="carousel-caption myCaption">
-                            <span>
-                                <c:out value="${data.defition }"></c:out>
-                            </span>
+                            <div>
+                                <span>
+                                    <c:out value="${data.term }"></c:out>
+                                </span>
+                            </div>
+                            <div>
+                                <span>
+                                    <c:out value="${data.definition }"></c:out>
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </c:forEach>
-            </div> --%>
+            </div>
 
             <!-- Controls -->
             <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">

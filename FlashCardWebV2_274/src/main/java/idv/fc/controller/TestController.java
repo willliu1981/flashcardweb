@@ -2,6 +2,7 @@ package idv.fc.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+import idv.debug.Debug;
 import idv.fc.model.Flashcard;
+import idv.fc.model.dto.QuizDTO;
 import idv.fc.service.impl.FlashcardServiceImpl;
 import idv.fc.taglib.impl.list.flashcard.FlashcardListFacade;
 import idv.taglib.factory.FacadeFactory;
@@ -49,24 +52,18 @@ public class TestController extends BaseController {
 	}
 
 	@RequestMapping(value = "test4")
-	public String test3(Map<String, Object> map, HttpServletRequest request) {
+	public String test3(Map<String, Object> map) {
 
 		FlashcardServiceImpl service = SpringUtil.getBean("flashcardService",
 				FlashcardServiceImpl.class);
 
 		List<Flashcard> datas = service.getAll();
 
-		/*		List<QuizDTO> collect = datas.stream().map(item -> new QuizDTO(item))
-						.collect(Collectors.toList());
-		
-				Debug.test(new Object() {
-				}, collect);
-		*/
+		List<QuizDTO> collect = datas.stream().map(item -> new QuizDTO(item))
+				.collect(Collectors.toList());
 
-		request.setAttribute("datas", datas);
-		//map.put("datas", datas);
-		//map.put("dd", collect.get(0));
-		return "test/test8";
+		map.put("datas", collect);
+		return "test/test7";
 	}
 
 }

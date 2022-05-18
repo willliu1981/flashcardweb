@@ -37,6 +37,8 @@
 .	custom tag  , 取得 ContextPat
 		ServletContext servletContext = ((PageContext) getJspContext()).getServletContext();
 		String appContext = servletContext.getContextPath();
+		
+.	jstl forEach 的 items 使用EL 時 前後不能有空格, ex: items="${datas} "
 
 
 參照:
