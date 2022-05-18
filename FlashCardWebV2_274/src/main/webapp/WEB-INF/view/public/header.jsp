@@ -50,7 +50,7 @@
                         </ul></li>
                     <li <c:if test="${param.active eq 'quizManager'}">class="active"</c:if>><a
                             <c:if test="${param.active eq 'quizManager'}">class="hrefDisabled"</c:if>
-                            href="${pageContext.request.contextPath}/<c:out value="${quizManager}"></c:out>">測驗</a></li>
+                            href="${pageContext.request.contextPath}/<c:out value="${quizManager}"></c:out>">測驗管理</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#" data-target="#myModal" data-toggle="modal">關於</a></li>

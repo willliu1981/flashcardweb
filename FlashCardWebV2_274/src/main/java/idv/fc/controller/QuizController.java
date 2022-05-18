@@ -38,7 +38,7 @@ public class QuizController extends BaseController {
 				.collect(Collectors.toList());
 
 		map.put("datas", collect);
-		return "redirect:/test/test4";
+		return "quiz/quizPlay";
 	}
 
 }

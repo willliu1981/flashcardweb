@@ -11,7 +11,7 @@
   $(document).ready(function() {
 	//submit
 	$(".form-group .btn-primary").click(function() {
-	  var contextPath = $(this).attr("myContextPath");
+	  var contextPath = $(this).attr("data-myContextPath");
 	  var mod = $("input:radio:checked").val();
 	  var num = $("#inputNum").val();
 
@@ -63,7 +63,7 @@
                     <div class="col-lg-10 col-lg-offset-2">
                         <button type="reset" class="btn btn-default" style="color: black;">Cancel</button>
                         <button type="button" class="btn btn-primary"
-                            myContextPath="${pageContext.request.contextPath }">Start</button>
+                            data-myContextPath="${pageContext.request.contextPath }">Start</button>
                     </div>
                 </div>
             </fieldset>
