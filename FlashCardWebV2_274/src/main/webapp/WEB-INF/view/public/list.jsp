@@ -5,7 +5,7 @@
 <html>
 <head>
 <script type="text/javascript">
-  function modelValues(id,... datas) {
+  function modalValues(id,... datas) {
 	var items=$(".modal-body").find(".modal-body-item");
 
 	/* show datas */

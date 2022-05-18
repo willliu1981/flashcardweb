@@ -10,7 +10,7 @@
     <c:set var="flashcardManager" value="flashcards/fcManager" />
     <c:set var="flashcardHolderManager" value="flashcards/fhManager" />
     <c:set var="holderDataManager" value="flashcards/hdManager" />
-    <c:set var="quizManager" value="quiz/manager" />
+    <c:set var="quizManager" value="quiz/quizManager" />
 
     <!-- 導航欄 -->
     <nav class="navbar navbar-inverse navbar-fixed-top">

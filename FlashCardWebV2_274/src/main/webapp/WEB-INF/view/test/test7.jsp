@@ -66,7 +66,7 @@
             </div>
 
             <!-- Controls -->
-            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <a class="left carousel-control carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
                 <span class="glyphicon glyphicon-triangle-left glyphicon-chevron-left" style="font-size: 75px;"
                     aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>

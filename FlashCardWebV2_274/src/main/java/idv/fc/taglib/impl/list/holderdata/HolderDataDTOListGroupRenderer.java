@@ -58,7 +58,7 @@ public class HolderDataDTOListGroupRenderer
 				.addAttribute("data-toggle", "modal");
 		deleteBadge.setBody("DELETE");
 		deleteBadge.onClick(
-				Scripts.getScript("modelValues", model.getId().toString(),
+				Scripts.getScript(SCRIPT_MODAL_VALUES, model.getId().toString(),
 						model.getId().toString(), model.getFhId().toString()));
 		//delete badge end
 

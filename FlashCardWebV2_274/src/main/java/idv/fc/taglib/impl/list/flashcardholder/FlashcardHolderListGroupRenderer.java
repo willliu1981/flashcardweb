@@ -55,7 +55,7 @@ public class FlashcardHolderListGroupRenderer
 		deleteBadge.addAttribute("data-target", "#listDeleteModal")
 				.addAttribute("data-toggle", "modal");
 		deleteBadge.setBody("DELETE");
-		deleteBadge.onClick(Scripts.getScript("modelValues",
+		deleteBadge.onClick(Scripts.getScript(SCRIPT_MODAL_VALUES,
 				model.getId().toString(), model.getName(),
 				model.getFcId() == null ? "N/A" : model.getFcId().toString()));
 		//delete badge end
