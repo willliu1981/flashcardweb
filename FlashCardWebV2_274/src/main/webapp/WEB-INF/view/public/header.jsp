@@ -10,6 +10,7 @@
     <c:set var="flashcardManager" value="flashcards/fcManager" />
     <c:set var="flashcardHolderManager" value="flashcards/fhManager" />
     <c:set var="holderDataManager" value="flashcards/hdManager" />
+    <c:set var="quizManager" value="quiz/manager" />
 
     <!-- 導航欄 -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -47,6 +48,9 @@
                                     <c:if test="${param.active eq 'holderDataManager'}">class="hrefDisabled"</c:if>
                                     href="${pageContext.request.contextPath}/<c:out value="${holderDataManager}"></c:out>">HolderData</a></li>
                         </ul></li>
+                    <li <c:if test="${param.active eq 'quizManager'}">class="active"</c:if>><a
+                            <c:if test="${param.active eq 'quizManager'}">class="hrefDisabled"</c:if>
+                            href="${pageContext.request.contextPath}/<c:out value="${quizManager}"></c:out>">測驗</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#" data-target="#myModal" data-toggle="modal">關於</a></li>
