@@ -33,11 +33,9 @@ public class QuizController extends BaseController {
 	public String quizStart(@PathVariable("mod") String mod,
 			@PathVariable("num") Integer num, Map<String, Object> map) {
 
-		List<Flashcard> all = flashcardService.getAll();
-		List<QuizDTO> collect = all.stream().map(item -> new QuizDTO(item))
-				.collect(Collectors.toList());
+		List<QuizDTO> all = flashcardService.getAll(mod, num);
 
-		map.put("datas", collect);
+		map.put("datas", all);
 		return "quiz/quizPlay";
 	}
 

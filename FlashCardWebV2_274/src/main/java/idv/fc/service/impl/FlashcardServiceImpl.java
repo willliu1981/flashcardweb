@@ -2,12 +2,14 @@ package idv.fc.service.impl;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import idv.fc.dao.itf.FlashcardDao;
 import idv.fc.model.Flashcard;
+import idv.fc.model.dto.QuizDTO;
 import idv.fc.service.abstraction.IFlashcardService;
 
 @Service("flashcardService")
@@ -57,5 +59,6 @@ public class FlashcardServiceImpl implements IFlashcardService {
 			e.printStackTrace();
 		}
 	}
+
 
 }

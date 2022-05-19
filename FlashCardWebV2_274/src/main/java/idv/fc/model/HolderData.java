@@ -6,6 +6,7 @@ public class HolderData {
 	private Integer id;
 	private Integer fhId;//fk , FlashcardHolder
 	private Timestamp createDate;
+	private Integer statusId;
 
 	public HolderData() {
 		super();
@@ -38,6 +39,20 @@ public class HolderData {
 
 	public void setCreateDate(Timestamp createDate) {
 		this.createDate = createDate;
+	}
+
+	public Integer getStatusId() {
+		return statusId;
+	}
+
+	public void setStatusId(Integer statusId) {
+		this.statusId = statusId;
+	}
+
+	@Override
+	public String toString() {
+		return "HolderData [id=" + id + ", fhId=" + fhId + ", createDate="
+				+ createDate + ", statusId=" + statusId + "]";
 	}
 
 }

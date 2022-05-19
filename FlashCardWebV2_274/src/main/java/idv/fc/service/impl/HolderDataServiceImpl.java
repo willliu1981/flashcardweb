@@ -64,4 +64,12 @@ public class HolderDataServiceImpl implements IHolderDataService {
 		return this.HolderDataDao.selectAllJoinFh();
 	}
 
+	@Override
+	public List<HolderDataDTO> getAllJoinFH(String mod, Integer num) {
+		return this.HolderDataDao.selectAllJoinFh();
+		
+		
+		return null;
+	}
+
 }
