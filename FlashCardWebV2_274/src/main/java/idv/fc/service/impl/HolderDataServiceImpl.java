@@ -6,8 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import idv.debug.Debug;
 import idv.fc.dao.itf.HolderDataDao;
+import idv.fc.dao.itf.StatusDao;
 import idv.fc.model.HolderData;
+import idv.fc.model.Status;
 import idv.fc.model.dto.HolderDataDTO;
 import idv.fc.service.abstraction.IHolderDataService;
 
@@ -15,17 +18,20 @@ import idv.fc.service.abstraction.IHolderDataService;
 public class HolderDataServiceImpl implements IHolderDataService {
 
 	@Autowired
-	private HolderDataDao HolderDataDao;
+	private HolderDataDao holderDataDao;
+
+	@Autowired
+	private StatusDao statusDao;
 
 	@Override
 	public List<HolderData> getAll() {
-		return HolderDataDao.selectAll();
+		return holderDataDao.selectAll();
 	}
 
 	@Override
 	public HolderData getById(String id) {
 		try {
-			return HolderDataDao.selectById(id);
+			return holderDataDao.selectById(id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -35,7 +41,11 @@ public class HolderDataServiceImpl implements IHolderDataService {
 	@Override
 	public void addNew(HolderData holderData) {
 		try {
-			HolderDataDao.create(holderData);
+			Status status = new Status();
+			statusDao.create(status);
+
+			holderData.setStatusId(status.getId());
+			holderDataDao.create(holderData);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -44,7 +54,7 @@ public class HolderDataServiceImpl implements IHolderDataService {
 	@Override
 	public void edit(HolderData holderData) {
 		try {
-			HolderDataDao.update(holderData);
+			holderDataDao.update(holderData);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -53,7 +63,7 @@ public class HolderDataServiceImpl implements IHolderDataService {
 	@Override
 	public void remove(String id) {
 		try {
-			HolderDataDao.delete(id);
+			holderDataDao.delete(id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -61,14 +71,13 @@ public class HolderDataServiceImpl implements IHolderDataService {
 
 	@Override
 	public List<HolderDataDTO> getAllJoinFH() {
-		return this.HolderDataDao.selectAllJoinFh();
+		return this.holderDataDao.selectAllJoinFh();
 	}
 
 	@Override
 	public List<HolderDataDTO> getAllJoinFH(String mod, Integer num) {
-		return this.HolderDataDao.selectAllJoinFh();
-		
-		
+		this.holderDataDao.selectAllJoinFh();
+		//待編輯
 		return null;
 	}
 

@@ -45,6 +45,7 @@ public class FlashcardHolderCRUDController extends BaseController {
 	 */
 	@RequestMapping(value = "flashcardHolder", method = RequestMethod.POST)
 	public String add(FlashcardHolder flashcardHolder) {
+
 		if (flashcardHolder.getFcId() != null
 				|| flashcardHolder.getId().equals("")) {
 			flashcardHolder.setFcId(null);

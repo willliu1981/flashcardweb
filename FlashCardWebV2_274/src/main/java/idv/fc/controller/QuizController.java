@@ -18,9 +18,6 @@ import idv.fc.service.abstraction.IFlashcardService;
 public class QuizController extends BaseController {
 	private String QUIZ = "quiz";
 
-	@Autowired
-	IFlashcardService flashcardService;
-
 	/*
 	 * 管理 Quiz
 	 */
@@ -33,9 +30,9 @@ public class QuizController extends BaseController {
 	public String quizStart(@PathVariable("mod") String mod,
 			@PathVariable("num") Integer num, Map<String, Object> map) {
 
-		List<QuizDTO> all = flashcardService.getAll(mod, num);
-
-		map.put("datas", all);
+		/*	List<QuizDTO> all = flashcardService.getAll(mod, num);
+		
+			map.put("datas", all);*/
 		return "quiz/quizPlay";
 	}
 

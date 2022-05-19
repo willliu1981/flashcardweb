@@ -14,7 +14,7 @@
 
 	<insert id="create" parameterType="HolderData">
 		insert into HolderData
-		(fh_id)values(#{fhId});
+		(fh_id,status_id)values(#{fhId},#{statusId});
 	</insert>
 
 	<update id="update" parameterType="HolderData">
