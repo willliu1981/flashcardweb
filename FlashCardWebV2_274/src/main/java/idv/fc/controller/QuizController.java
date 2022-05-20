@@ -39,11 +39,12 @@ public class QuizController extends BaseController {
 
 		List<HolderDataDTO> all = holderDataService.getAllJoinFH(mod, num);
 
+		Debug.test(new Object() {
+		}, "quiz", all);
+
 		List<Flashcard> collect = all.stream()
 				.map(x -> x.getFlashcardHolderDTO().getFlashcard())
 				.collect(Collectors.toList());
-
-		Debug.test(collect);
 
 		map.put("datas", collect);
 		return "quiz/quizPlay";

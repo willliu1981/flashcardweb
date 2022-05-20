@@ -10,7 +10,11 @@ public class HolderDataDTO {
 	private HolderData hd = new HolderData();
 	private FlashcardHolderDTO flashcardHolderDTO;
 	private Status status;
+	
+	private String aa;
 
+	
+	
 	public Integer getId() {
 		return hd.getId();
 	}
@@ -55,6 +59,14 @@ public class HolderDataDTO {
 
 	public void setFlashcardHolderDTO(FlashcardHolderDTO flashcardHolderDTO) {
 		this.flashcardHolderDTO = flashcardHolderDTO;
+	}
+
+	public String getAa() {
+		return aa;
+	}
+
+	public void setAa(String aa) {
+		this.aa = aa;
 	}
 
 }

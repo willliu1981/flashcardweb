@@ -1,13 +1,12 @@
 package idv.fc.service.impl;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 
 import idv.debug.Debug;
 import idv.fc.dao.itf.HolderDataDao;
@@ -77,12 +76,21 @@ public class HolderDataServiceImpl implements IHolderDataService {
 		return this.holderDataDao.selectAllJoinFh();
 	}
 
+	/**
+	 * mod 來自quizmanagedPage.jsp 的radioMod 值
+	 */
 	@Override
 	public List<HolderDataDTO> getAllJoinFH(String mod, Integer num) {
-		//來自quizmanagedPage.jsp 的radioMod 值
 		List<HolderDataDTO> selectAllJoinFh = null;
 		if (mod.equals("period")) {
-			selectAllJoinFh = this.holderDataDao.selectAllJoinFh();
+			List<HolderDataDTO> all = this.holderDataDao.selectAllJoinFh();
+			selectAllJoinFh = all.stream().filter(x -> {
+				if (x.getStatus().getEndTimeOfPhase() == null) {
+					return true;
+				}
+				return x.getStatus().getEndTimeOfPhase().before(new Date());
+			}).collect(Collectors.toList());
+
 		} else {
 			selectAllJoinFh = this.holderDataDao.selectAllJoinFh();
 		}
