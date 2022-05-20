@@ -1,9 +1,11 @@
 package idv.fc.service.impl;
 
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -81,21 +83,29 @@ public class HolderDataServiceImpl implements IHolderDataService {
 	 */
 	@Override
 	public List<HolderDataDTO> getAllJoinFH(String mod, Integer num) {
-		List<HolderDataDTO> selectAllJoinFh = null;
+		List<HolderDataDTO> resultList = null;
+
+		//決策
 		if (mod.equals("period")) {
 			List<HolderDataDTO> all = this.holderDataDao.selectAllJoinFh();
-			selectAllJoinFh = all.stream().filter(x -> {
+			List<HolderDataDTO> filterTime = all.stream().filter(x -> {
 				if (x.getStatus().getEndTimeOfPhase() == null) {
 					return true;
 				}
 				return x.getStatus().getEndTimeOfPhase().before(new Date());
 			}).collect(Collectors.toList());
 
+			resultList = filterTime.stream().collect(Collectors
+					.collectingAndThen(Collectors.toList(), collected -> {
+						Collections.shuffle(collected);
+						return collected.stream();
+					})).limit(num).collect(Collectors.toList());
+
 		} else {
-			selectAllJoinFh = this.holderDataDao.selectAllJoinFh();
+			resultList = this.holderDataDao.selectAllJoinFh();
 		}
 
-		return selectAllJoinFh;
+		return resultList;
 	}
 
 }

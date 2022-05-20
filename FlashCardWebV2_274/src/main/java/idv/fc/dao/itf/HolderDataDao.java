@@ -10,9 +10,5 @@ import idv.fc.model.dto.HolderDataDTO;
 @Repository
 public interface HolderDataDao extends Dao<HolderData> {
 
-	default List<HolderDataDTO> selectAllJoinFh() {
-		return this.selectAllJoinFh(null);
-	}
-
-	List<HolderDataDTO> selectAllJoinFh(Integer status_id);
+	List<HolderDataDTO> selectAllJoinFh();
 }
