@@ -5,17 +5,17 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import idv.debug.Debug;
 import idv.fc.dao.itf.HolderDataDao;
 import idv.fc.dao.itf.StatusDao;
 import idv.fc.model.HolderData;
 import idv.fc.model.Status;
 import idv.fc.model.dto.HolderDataDTO;
+import idv.fc.quiz.strategy.itf.PeriodStrategy;
+import idv.fc.quiz.strategy.itf.QuizModContext;
 import idv.fc.service.abstraction.IHolderDataService;
 
 @Service("holderDataService")
@@ -83,23 +83,16 @@ public class HolderDataServiceImpl implements IHolderDataService {
 	 */
 	@Override
 	public List<HolderDataDTO> getAllJoinFH(String mod, Integer num) {
+		List<HolderDataDTO> all = this.holderDataDao.selectAllJoinFh();
 		List<HolderDataDTO> resultList = null;
+
+		QuizModContext<HolderDataDTO> modContext = new QuizModContext<>(all);
 
 		//決策
 		if (mod.equals("period")) {
-			List<HolderDataDTO> all = this.holderDataDao.selectAllJoinFh();
-			List<HolderDataDTO> filterTime = all.stream().filter(x -> {
-				if (x.getStatus().getEndTimeOfPhase() == null) {
-					return true;
-				}
-				return x.getStatus().getEndTimeOfPhase().before(new Date());
-			}).collect(Collectors.toList());
+			modContext.setStrategy(new PeriodStrategy());
 
-			resultList = filterTime.stream().collect(Collectors
-					.collectingAndThen(Collectors.toList(), collected -> {
-						Collections.shuffle(collected);
-						return collected.stream();
-					})).limit(num).collect(Collectors.toList());
+			return modContext.executeStrategy(mod, num);
 
 		} else {
 			resultList = this.holderDataDao.selectAllJoinFh();
