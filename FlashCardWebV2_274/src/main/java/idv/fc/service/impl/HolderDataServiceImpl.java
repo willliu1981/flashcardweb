@@ -82,7 +82,7 @@ public class HolderDataServiceImpl implements IHolderDataService {
 		//來自quizmanagedPage.jsp 的radioMod 值
 		List<HolderDataDTO> selectAllJoinFh = null;
 		if (mod.equals("period")) {
-			selectAllJoinFh = this.holderDataDao.selectAllJoinFh(8);
+			selectAllJoinFh = this.holderDataDao.selectAllJoinFh();
 		} else {
 			selectAllJoinFh = this.holderDataDao.selectAllJoinFh();
 		}
