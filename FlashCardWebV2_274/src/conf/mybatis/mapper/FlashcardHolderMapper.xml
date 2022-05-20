@@ -28,25 +28,10 @@
 	</delete>
 
 	<resultMap type="FlashcardHolderDTO" id="baseFHResultMap">
+		<id column="id" property="id"/>
 
-		<result column="fc_id" property="fcId" />
-		<!-- <id column="id" property="id" />
-		<result column="name" property="name" />
-		<result column="create_date" property="createDate" />
-		<result column="number_of_quiz_times" property="numberOfQuizTimes" />
-		<result column="pass_the_quiz_times" property="passTheQuizTimes" />
-		<result column="update_for_quiz_date" property="updateForQuizDate" />
--->
 		<association property="flashcard" column="fc_id"
 			select="idv.fc.dao.itf.FlashcardDao.selectById">
-			<!-- 
-			<id column="id" property="id" />
-			<result column="term" property="term" />
-			<result column="definition" property="definition" />
-			<result column="create_date" property="createDate" />
-			<result column="number_of_quiz_times" property="numberOfQuizTimes" />
-			<result column="pass_the_quiz_times" property="passTheQuizTimes" />
-			-->
 		</association>
 	</resultMap>
 

@@ -27,7 +27,7 @@
 	</delete>
 
 	<resultMap type="HolderDataDTO" id="baseHDResultMap">
-		<result column="fh_id" property="fhId" />
+		<id column="id" property="id" />
 
 		<association property="flashcardHolderDTO" column="fh_id"
 			select="idv.fc.dao.itf.FlashcardHolderDao.selectByIdJoinFc">

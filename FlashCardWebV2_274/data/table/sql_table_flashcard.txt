@@ -6,4 +6,4 @@ CREATE TABLE `flashcard` (
   `number_of_quiz_times` int(11) DEFAULT '0',
   `pass_the_quiz_times` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
