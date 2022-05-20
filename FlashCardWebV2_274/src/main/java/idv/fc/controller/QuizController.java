@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import idv.debug.Debug;
 import idv.fc.model.Flashcard;
+import idv.fc.model.dto.FlashcardHolderDTO;
 import idv.fc.model.dto.HolderDataDTO;
 import idv.fc.model.dto.QuizDTO;
 import idv.fc.service.abstraction.IFlashcardService;
@@ -38,10 +39,13 @@ public class QuizController extends BaseController {
 
 		List<HolderDataDTO> all = holderDataService.getAllJoinFH(mod, num);
 
-		Debug.test(new Object() {
-		}, "datas", all);
+		List<Flashcard> collect = all.stream()
+				.map(x -> x.getFlashcardHolderDTO().getFlashcard())
+				.collect(Collectors.toList());
 
-		map.put("datas", all);
+		Debug.test(collect);
+
+		map.put("datas", collect);
 		return "quiz/quizPlay";
 	}
 
