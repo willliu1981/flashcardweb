@@ -9,14 +9,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import idv.debug.Debug;
 import idv.fc.model.Flashcard;
+import idv.fc.model.dto.HolderDataDTO;
 import idv.fc.model.dto.QuizDTO;
 import idv.fc.service.abstraction.IFlashcardService;
+import idv.fc.service.abstraction.IHolderDataService;
 
 @Controller
 @RequestMapping(value = "quiz")
 public class QuizController extends BaseController {
 	private String QUIZ = "quiz";
+
+	@Autowired
+	IHolderDataService holderDataService;
 
 	/*
 	 * 管理 Quiz
@@ -30,9 +36,12 @@ public class QuizController extends BaseController {
 	public String quizStart(@PathVariable("mod") String mod,
 			@PathVariable("num") Integer num, Map<String, Object> map) {
 
-		/*	List<QuizDTO> all = flashcardService.getAll(mod, num);
-		
-			map.put("datas", all);*/
+		List<HolderDataDTO> all = holderDataService.getAllJoinFH(mod, num);
+
+		Debug.test(new Object() {
+		}, "datas", all);
+
+		map.put("datas", all);
 		return "quiz/quizPlay";
 	}
 

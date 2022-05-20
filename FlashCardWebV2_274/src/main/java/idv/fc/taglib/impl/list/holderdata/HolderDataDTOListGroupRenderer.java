@@ -83,7 +83,7 @@ public class HolderDataDTOListGroupRenderer
 		//gap
 		String gap = "<span style='width:10px; display: inline-block;'></span>";
 		text.addStyleSheet("font-size:22px");
-		text.setBody(gap + gap + model.getFlashcardHolder().getName() + gap
+		text.setBody(gap + gap + model.getFlashcardHolderDTO().getName() + gap
 				+ "(" + model.getFhId().toString() + ")");
 
 		return Stream

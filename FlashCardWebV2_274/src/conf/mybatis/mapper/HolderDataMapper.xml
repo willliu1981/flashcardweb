@@ -29,13 +29,22 @@
 	<resultMap type="HolderDataDTO" id="baseHDResultMap">
 		<result column="fh_id" property="fhId" />
 
-		<association property="flashcardHolder" column="fh_id"
-			select="idv.fc.dao.itf.FlashcardHolderDao.selectById">
+		<association property="flashcardHolderDTO" column="fh_id"
+			select="idv.fc.dao.itf.FlashcardHolderDao.selectByIdJoinFc">
+		</association>
+		
+		<association property="status" column="status_id"
+			select="idv.fc.dao.itf.StatusDao.selectById">
 		</association>
 	</resultMap>
 
 	<select id="selectAllJoinFh" resultMap="baseHDResultMap">
 		select * from holderData
+		<where>
+			<if test="statusId !=null">
+				and status_id=#{statusId}
+			</if>
+		</where>
 	</select>
 
 </mapper>

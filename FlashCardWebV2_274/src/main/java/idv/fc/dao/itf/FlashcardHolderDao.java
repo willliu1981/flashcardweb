@@ -11,4 +11,7 @@ import idv.fc.model.dto.FlashcardHolderDTO;
 public interface FlashcardHolderDao extends Dao<FlashcardHolder> {
 
 	List<FlashcardHolderDTO> selectAllJoinFc();
+
+	FlashcardHolderDTO selectByIdJoinFc(Object id);
+
 }

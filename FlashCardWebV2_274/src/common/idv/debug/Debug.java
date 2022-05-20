@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import tool.toolkit.Toolkit;
+
 public class Debug {
 	private static String PREFIXSEPARATOR = " : ";
 	public static final String BEFORE = "before";
@@ -37,6 +39,8 @@ public class Debug {
 
 	public static void test(Object objForClassInfo, Object prefix, Object msg,
 			boolean any) {
+		StringBuilder sb = Toolkit.getStringBuilder();
+
 		String head = "(Debug) ";
 		head += objForClassInfo == null ? ""
 				: objForClassInfo.getClass().getEnclosingMethod() + " :\n\t> ";
@@ -65,25 +69,28 @@ public class Debug {
 
 		} else if (msg instanceof List) {
 			List<?> list = (List<?>) msg;
-			System.out.println(head + "foreach(List)...");
-			list.forEach((x) -> System.out.printf("  %s\n", x));
+			sb.append(head + "foreach(List)...").append("\n");
+			list.forEach(x -> sb.append("\t\t").append(x).append("\n"));
+			System.out.println(sb.toString());
 
 		} else if (msg.getClass().isArray()) {
-			System.out.println(head + "foreach(Array)...");
+			sb.append(head + "foreach(Array)...").append("\n");
 
 			try {
 				Object[] os = (Object[]) msg;
 				Arrays.asList(os)
-						.forEach((x) -> System.out.printf("  %s\n", x));
+						.forEach(x -> sb.append("\t\t").append(x).append("\n"));
+				System.out.println(sb.toString());
+
 			} catch (ClassCastException e) {
-				System.out.println("can't cast(Debug):" + msg);
+				System.out.println("\tcan't cast(Debug):" + msg);
 			}
 
 		} else if (msg instanceof String) {
-			System.out.println(head + msg);
+			System.out.println("\t" + head + msg);
 
 		} else {
-			System.out.println(head + msg);
+			System.out.println("\t" + head + msg);
 		}
 	}
 

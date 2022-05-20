@@ -6,6 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
 import idv.debug.Debug;
 import idv.fc.dao.itf.HolderDataDao;
 import idv.fc.dao.itf.StatusDao;
@@ -76,9 +79,15 @@ public class HolderDataServiceImpl implements IHolderDataService {
 
 	@Override
 	public List<HolderDataDTO> getAllJoinFH(String mod, Integer num) {
-		this.holderDataDao.selectAllJoinFh();
-		//待編輯
-		return null;
+		//來自quizmanagedPage.jsp 的radioMod 值
+		List<HolderDataDTO> selectAllJoinFh = null;
+		if (mod.equals("period")) {
+			selectAllJoinFh = this.holderDataDao.selectAllJoinFh(8);
+		} else {
+			selectAllJoinFh = this.holderDataDao.selectAllJoinFh();
+		}
+
+		return selectAllJoinFh;
 	}
 
 }

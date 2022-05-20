@@ -4,7 +4,8 @@ import java.sql.Timestamp;
 
 public class Status {
 	private Integer id;
-	private Timestamp timeOfPhase;//進度時間戳記
+	private Timestamp beginTimeOfPhase;//進度時間戳記
+	private Timestamp endTimeOfPhase;//進度時間戳記
 	private Timestamp createDate;
 	private Integer phase;//進度
 
@@ -16,12 +17,12 @@ public class Status {
 		this.id = id;
 	}
 
-	public Timestamp getTimeOfPhase() {
-		return timeOfPhase;
+	public Timestamp getBeginTimeOfPhase() {
+		return beginTimeOfPhase;
 	}
 
-	public void setTimeOfPhase(Timestamp timeOfPhase) {
-		this.timeOfPhase = timeOfPhase;
+	public void setBeginTimeOfPhase(Timestamp timeOfPhase) {
+		this.beginTimeOfPhase = timeOfPhase;
 	}
 
 	public Timestamp getCreateDate() {
@@ -42,8 +43,17 @@ public class Status {
 
 	@Override
 	public String toString() {
-		return "Status [id=" + id + ", timeOfPhase=" + timeOfPhase
-				+ ", createDate=" + createDate + ", phase=" + phase + "]";
+		return "Status [id=" + id + ", beginTimeOfPhase=" + beginTimeOfPhase
+				+ ", endTimeOfPhase=" + endTimeOfPhase + ", createDate="
+				+ createDate + ", phase=" + phase + "]";
+	}
+
+	public Timestamp getEndTimeOfPhase() {
+		return endTimeOfPhase;
+	}
+
+	public void setEndTimeOfPhase(Timestamp endTimeOfPhase) {
+		this.endTimeOfPhase = endTimeOfPhase;
 	}
 
 }

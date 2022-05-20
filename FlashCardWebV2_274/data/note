@@ -6,6 +6,8 @@
 
 .	FlashcardFacade 等 重構
 
+.	HolderDataServicImple.addNew : 可測事務管理
+
 
 問題:
 .	MySpringUtil 結構混亂
@@ -17,6 +19,7 @@
 .	sql 驗證 default
 .	transaction , ai , list search , create fc with fh or create fh with fc 
 .	測試 mysql table 名稱有底線的情況
+
 
 
 易犯錯誤:

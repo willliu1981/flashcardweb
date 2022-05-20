@@ -4,10 +4,12 @@ import java.sql.Timestamp;
 
 import idv.fc.model.FlashcardHolder;
 import idv.fc.model.HolderData;
+import idv.fc.model.Status;
 
 public class HolderDataDTO {
 	private HolderData hd = new HolderData();
-	private FlashcardHolder flashcardHolder;
+	private FlashcardHolderDTO flashcardHolderDTO;
+	private Status status;
 
 	public Integer getId() {
 		return hd.getId();
@@ -33,16 +35,26 @@ public class HolderDataDTO {
 		hd.setCreateDate(createDate);
 	}
 
-	public FlashcardHolder getFlashcardHolder() {
-		return flashcardHolder;
+	public Status getStatus() {
+		return status;
 	}
 
-	public void setFlashcardHolder(FlashcardHolder flashcardHolder) {
-		this.flashcardHolder = flashcardHolder;
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	@Override
+	public String toString() {
+		return "HolderDataDTO [hd=" + hd + ", flashcardHolderDTO="
+				+ flashcardHolderDTO + ", status=" + status + "]";
+	}
+
+	public FlashcardHolderDTO getFlashcardHolderDTO() {
+		return flashcardHolderDTO;
+	}
+
+	public void setFlashcardHolderDTO(FlashcardHolderDTO flashcardHolderDTO) {
+		this.flashcardHolderDTO = flashcardHolderDTO;
 	}
 
 }
-
-
-
-

@@ -55,4 +55,9 @@
 		select * from flashcardHolder
 	</select>
 
+
+	<select id="selectByIdJoinFc" resultMap="baseFHResultMap">
+		select * from flashcardHolder where id = #{id}
+	</select>
+
 </mapper>
