@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="webjars/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+	$.ajax({
+	  type : "get",
+	  url : "test/test2",
+	  success : function(resp) {
+		console.log(resp);
+
+	  }
+
+	});
+
+  });
+</script>
+
+</head>
+<body>
+    Test html
+    <input type="text" name="id" value="" />
+</body>
+</html>

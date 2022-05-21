@@ -67,7 +67,7 @@
     </div>
 
     <div class="container">
-        <a href="${pageContext.request.contextPath}/test/test4">
+        <a href="${pageContext.request.contextPath}/test/test1">
             <font size="5">test</font>
         </a>
     </div>

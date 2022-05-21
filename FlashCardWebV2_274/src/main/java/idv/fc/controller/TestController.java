@@ -8,11 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.gson.Gson;
 
-import idv.debug.Debug;
 import idv.fc.model.Flashcard;
 import idv.fc.model.dto.QuizDTO;
 import idv.fc.service.impl.FlashcardServiceImpl;
@@ -27,7 +28,20 @@ public class TestController extends BaseController {
 	@RequestMapping(value = "test1")
 	public String test1() {
 
-		return "test/test1";
+		return "redirect:/test.html";
+	}
+
+	@RequestMapping(value = "test2")
+	@ResponseBody
+	public String test2(Map<String, Object> map) {
+
+		Gson g = new Gson();
+		FlashcardServiceImpl service = SpringUtil.getBean("flashcardService",
+				FlashcardServiceImpl.class);
+
+		List<Flashcard> datas = service.getAll();
+
+		return g.toJson(datas.get(0));
 	}
 
 	@RequestMapping(value = "test3")
