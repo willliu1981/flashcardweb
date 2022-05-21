@@ -3,6 +3,8 @@ package idv.fc.taglib.impl.list.holderdata;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.apache.commons.lang3.StringUtils;
+
 import idv.fc.model.HolderData;
 import idv.fc.model.dto.HolderDataDTO;
 import idv.taglib.component.common.impl.Badge;
@@ -13,6 +15,7 @@ import idv.taglib.controlmodel.Handler;
 import idv.taglib.factory.lister.ListFacade;
 import idv.taglib.tool.Scripts;
 import idv.taglib.tool.Taglibs;
+import tool.toolkit.Toolkit;
 
 public class HolderDataDTOListGroupRenderer
 		extends ListGroupRenderere<HolderDataDTO> {
@@ -49,6 +52,9 @@ public class HolderDataDTOListGroupRenderer
 
 	@Override
 	public String getRenderedEachBody(HolderDataDTO model) {
+		String fhId = String.valueOf(Toolkit.getEmptyResover()
+				.resolve(() -> model.getFhId().toString()).orElse("null"));
+
 		//delete badge begin
 		Badge deleteBadge = new Badge();
 		deleteBadge.addStyleSheet(badgeSpanSheet);
@@ -57,9 +63,8 @@ public class HolderDataDTOListGroupRenderer
 		deleteBadge.addAttribute("data-target", "#listDeleteModal")
 				.addAttribute("data-toggle", "modal");
 		deleteBadge.setBody("DELETE");
-		deleteBadge.onClick(
-				Scripts.getScript(SCRIPT_MODAL_VALUES, model.getId().toString(),
-						model.getId().toString(), model.getFhId().toString()));
+		deleteBadge.onClick(Scripts.getScript(SCRIPT_MODAL_VALUES,
+				model.getId().toString(), model.getId().toString(), fhId));
 		//delete badge end
 
 		//edit badge begin
@@ -84,7 +89,7 @@ public class HolderDataDTOListGroupRenderer
 		String gap = "<span style='width:10px; display: inline-block;'></span>";
 		text.addStyleSheet("font-size:22px");
 		text.setBody(gap + gap + model.getFlashcardHolderDTO().getName() + gap
-				+ "(" + model.getFhId().toString() + ")");
+				+ "(" + fhId + ")");
 
 		return Stream
 				.of(deleteBadge.getHtmlCode(), editBadge.getHtmlCode(),

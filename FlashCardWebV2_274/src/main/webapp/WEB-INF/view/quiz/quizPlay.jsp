@@ -19,7 +19,7 @@
 .myCaption {
 	font-size: 133px;
 	height: 75%;;
-	color: green;
+	color: rgb(10,100,10);
 }
 </style>
 
@@ -80,6 +80,16 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
+    </div>
+
+    <div class="container" style="text-align:center;">
+        <input type="button" class="btn start-slide" value="Start">
+        <input type="button" class="btn pause-slide" value="Pause">
+        <input type="button" class="btn prev-slide" value="Previous Slide">
+        <input type="button" class="btn next-slide" value="Next Slide">
+        <input type="button" class="btn slide-one" value="Slide 1">
+        <input type="button" class="btn slide-two" value="Slide 2">
+        <input type="button" class="btn slide-three" value="Slide 3">
     </div>
 </body>
 </html>
