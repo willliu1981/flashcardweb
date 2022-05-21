@@ -1,5 +1,6 @@
 package idv.fc.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -31,17 +32,20 @@ public class TestController extends BaseController {
 		return "redirect:/test.html";
 	}
 
-	@RequestMapping(value = "test2")
+	@RequestMapping(value = "test2", produces = "application/json")
 	@ResponseBody
-	public String test2(Map<String, Object> map) {
-
+	public Map<String, Object> test2(Map<String, Object> map1) {
+		Map<String, Object> map = new HashMap<>();
 		Gson g = new Gson();
 		FlashcardServiceImpl service = SpringUtil.getBean("flashcardService",
 				FlashcardServiceImpl.class);
 
 		List<Flashcard> datas = service.getAll();
 
-		return g.toJson(datas.get(0));
+		map.put("datas", datas);
+		map.put("msg", "xxxabc");
+
+		return map;
 	}
 
 	@RequestMapping(value = "test3")

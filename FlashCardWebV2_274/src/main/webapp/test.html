@@ -10,11 +10,48 @@
 	  type : "get",
 	  url : "test/test2",
 	  success : function(resp) {
-		console.log(resp);
+		const charge = [];
+		const msg = resp.msg;
 
+		for (i = 0; i < resp.datas.length; i++) {
+		  charge.push(resp.datas[i]);
+
+		}
+
+		console.log(charge['0']);
+		/* charge.push(...resp);
+		console.log(resp);
+		console.log(charge);
+		console.log(charge.aa);
+		console.log(charge.datas); */
+
+		createDomElementMsg(msg);
+		createDomElement(charge);
 	  }
 
 	});
+
+	function createDomElementMsg(msg) {
+	  $('#msg').val(msg);
+	}
+	
+
+	
+  function createDomElement(charge) {
+    const domElements = charge.map( place => {
+      return `
+        <li>
+          <p class="location">位置： ${ place.term }</p>
+          <p class="address">地址：${ place.definition }</p>
+        </li>
+      `;
+    }).join("");
+
+    const chargeList = document.querySelector('.charge-list');
+    chargeList.innerHTML = domElements;
+  }
+	
+	
 
   });
 </script>
@@ -22,6 +59,7 @@
 </head>
 <body>
     Test html
-    <input type="text" name="id" value="" />
+    <input type="text" id="msg" name="msg" value="" />
+    <ul class="charge-list"></ul>
 </body>
 </html>
