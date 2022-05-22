@@ -37,7 +37,7 @@ public class FlashcardCRUDController extends BaseController {
 		map.put("data", find);
 		map.put("erType", FlashcardEditor.class);
 		
-		return FLASHCARDS + "/" + "modelEditPage";
+		return FLASHCARDS + "/" + "modelEditPage.jsp";
 	}
 
 	/*

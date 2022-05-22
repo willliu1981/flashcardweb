@@ -52,9 +52,26 @@
 	$(selector).addClass("active");
 	$(selector + " a").addClass("hrefDisabled");
   }
+</script>
 
-  //list badge 作用
-  function badgeAct(path) {
+<!-- list -->
+<script type="text/javascript">
+  $(function() {
+	var flashcard = "flashcard";
+
+	//badge-add
+	$(".list-group .list-group-item .badge-add").attr("onclick",
+		"badgeLocate('" + flashcard + "')");
+
+	//badge-edit
+	$(".list-group .list-group-item .badge-edit").attr("onclick",
+		"badgeLocate('" + flashcard + "/2" + "')");
+
+  });
+
+  //badge 重定向
+  function badgeLocate(path) {
+	console.log("path=" + path);
 	window.location.href = contextPath + "/" + path;
   }
 </script>
@@ -160,7 +177,7 @@
     <!-- list -->
     <div class="container">
         <ul class="list-group myBadgeCursor">
-            <li class="list-group-item"><span class="badge" onclick="badgeAct('flashcard')">
+            <li class="list-group-item"><span class="badge badge-add" onclick="">
                     <font size="5">ADD</font>
                 </span>
                 <h3>FlashcardHolder</h3></li>
@@ -170,7 +187,7 @@
                         onclick='modelValues("${fh.id}","${fh.name}")'>
                         <font size="4">DELETE</font>
                     </span>
-                    <span class="badge badgeSpan" onclick="location.href='${pageContext.request.contextPath}/???'">
+                    <span class="badge badgeSpan badge-edit" onclick="">
                         <font size="4">EDIT</font>
                     </span>
                     <h4 class="h4" class="list-group-item-heading">???</h4>
