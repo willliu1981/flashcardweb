@@ -17,11 +17,31 @@
 }
 </style>
 
+<!-- global variable -->
+<script type="text/javascript">
+  const contextPath = "/FlashCardWebV2";
+  const flashcards = "flashcards";
+</script>
+
+<script type="text/javascript">
+  $(function() {
+	$.ajax({
+	  type : "get",
+	  url : contextPath + "/" + "flashcards",
+	  success : function(resp) {
+		console.log("datas=" + resp.datas[0].term);
+		console.log("info=" + resp.pageInfo);
+	  },
+
+	  error : function(thrownError) {
+		alert("error:" + thrownError);
+	  }
+	});
+  });
+</script>
+
 <!-- nav -->
 <script type="text/javascript">
-  var contextPath = "/FlashCardWebV2";
-  var flashcards = "flashcards";
-
   $(document).ready(
 	  function() {
 		$(".navbar-header a").attr("href", contextPath);
@@ -199,8 +219,32 @@
     <!-- /list -->
 
     <!-- 分頁 -->
-    <!-- /分頁 -->
+    <div class="container">
+        <ul class="pager ">
+            <li>
+                <ul class="pagination">
+                    <li></li>
+                    <!-- 首頁 -->
+                    <li class="disabled??? pager-first"><a class="hrefDisabled???" href="???/1">&laquo; </a></li>
 
+                    <!-- 上一頁 -->
+                    <li class="disabled???"><a class="hrefDisabled???" href="???/{pageInfo.pageNum-1}">Previous
+                        </a></li>
+                    <!-- 中間頁數 -->
+                    <!-- foreach pageInfo.navigateFirstPage to pageInfo.navigateLastPage-->
+                    <li class="active???"><a class="hrefDisabled???" href="???/?"> </a></li>
+
+                    <!-- 下一頁 -->
+                    <li class="disabled???"><a class="hrefDisabled???" href="?/{pageInfo.pageNum+1}">Next </a></li>
+
+                    <!-- 最末頁 -->
+                    <li class="disabled???"><a class="hrefDisabled???" href="?/???">&raquo; </a></li>
+                    <li></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <!-- /分頁 -->
 
     <!-- 模態框 用於 list delete-->
     <div class="modal fade" tabindex="-1" role="dialog" id="listDeleteModal">

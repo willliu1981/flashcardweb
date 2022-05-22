@@ -1,19 +1,27 @@
 package idv.fc.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
+import idv.debug.Debug;
 import idv.fc.model.Flashcard;
 import idv.fc.service.abstraction.IFlashcardService;
 import idv.fc.tag.impl.facade.FlashcardEditor;
 
 @Controller
 public class FlashcardCRUDController extends BaseController {
+	private static final Integer PAGE_HELPER_MAX_PAGE_NUMBER = 5;
+	private static final Integer PAGE_INFO_MAX_NAV_PAGE_NUMBER = 5;
 	protected String WEB_FLASHCARDS = "flashcards";//web base page
 	protected String FLASHCARDS = "flashcards";//jsp base page
 	protected String FLASHCARD = "flashcard";//jsp second-level page
@@ -21,11 +29,36 @@ public class FlashcardCRUDController extends BaseController {
 	@Autowired
 	IFlashcardService flashcardService;
 
+	/**
+	 * path flashcards : 注意與 FlashcardController 的path 關係
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping(value = "flashcards", produces = "application/json", method = RequestMethod.GET)
+	@ResponseBody
+	public HashMap<String, Object> getAllFlashcard() {
+
+		HashMap<String, Object> json = new HashMap<>();
+
+		int intPageNumber = 1;//default pageNumber
+		PageHelper.startPage(intPageNumber, PAGE_HELPER_MAX_PAGE_NUMBER);
+		List<Flashcard> all = flashcardService.getAll();
+		PageInfo<Flashcard> pageInfo = new PageInfo<>(all,
+				PAGE_INFO_MAX_NAV_PAGE_NUMBER);
+
+		json.put("datas", all);
+		json.put("pageInfo", pageInfo);
+		
+		pageInfo.get
+
+		return json;
+	}
+
 	@RequestMapping(value = "flashcard", method = RequestMethod.GET)
 	public String toAdd(HashMap<String, Object> map) {
 		map.put("data", new Flashcard());
 		map.put("erType", FlashcardEditor.class);
-		
+
 		return FLASHCARDS + "/" + "modelEditPage.jsp";
 	}
 
@@ -36,7 +69,7 @@ public class FlashcardCRUDController extends BaseController {
 
 		map.put("data", find);
 		map.put("erType", FlashcardEditor.class);
-		
+
 		return FLASHCARDS + "/" + "modelEditPage.jsp";
 	}
 

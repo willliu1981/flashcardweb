@@ -9,13 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
-import idv.debug.Debug;
 import idv.fc.model.Flashcard;
-import idv.fc.model.HolderData;
 import idv.fc.model.dto.FlashcardHolderDTO;
 import idv.fc.model.dto.HolderDataDTO;
 import idv.fc.service.abstraction.IFlashcardHolderService;
@@ -56,6 +55,7 @@ public class FlashcardsController extends BaseController {
 		return FLASHCARDS + "/modelManager/flashcardManagedPage.html";
 	}
 
+	
 	// manage flashcard begin
 	@RequestMapping(value = "fcManagerOld")
 	public String toFlashcardManagerOld(HashMap<String, Object> map,
