@@ -27,6 +27,7 @@
 <script type="text/javascript">
   const contextPath = "/FlashCardWebV2";
   const flashcards = "flashcards";
+  const flashcard = "flashcard";
   var pageInfo;
   var datas;
 </script>
@@ -75,8 +76,7 @@
 	      `;
 	    }).join("");
 
-	    const dataList = document.querySelector('.list-group');
-	    dataList.innerHTML = domElements;
+	    $('.list-group-item-replaced').replaceWith(domElements);
 	  }
   });
 </script>
@@ -140,26 +140,25 @@
 <!-- pager -->
 <script type="text/javascript">
   //(延後載入)
-  /*  console.log("a" + pageInfo.isHasPreviousPage());
-   console.log("b" + pageInfo.isHasNextPage()); */
-
   function doPager() {
 	if (pageInfo.pageNum == 1) {
 	  act(".pager li ul .pager-first");
 	}
 
-	/* if (!pageInfo.isHasPreviousPage) {
+	if (!pageInfo.hasPreviousPage) {
 	  act(".pager li ul .pager-previous");
 	}
+	
+	createDomElement(pageInfo.navigatepageNums);
 
-	if (!pageInfo.isHasNextPage) {
+	if (!pageInfo.hasNextPage) {
 	  act(".pager li ul .pager-next");
-	}*/
+	}
+
 
 	if (pageInfo.isLastPage) {
 	  act(".pager li ul .pager-last");
 	}
-
   }
 
   //使失效中
@@ -167,6 +166,17 @@
 	$(selector).addClass("disabled");
 	$(selector + " a").addClass("hrefDisabled");
   }
+  
+  function createDomElement(navigatepageNums) {
+    const domElements = navigatepageNums.map( place => {
+      return `
+      	<li class="active???"><a class="hrefDisabled???" href=contextPath+"/"+flashcard+"/"+${place}>${place}</a></li>
+      `;
+    }).join("");
+
+    $('.pager-pageNum-replaced').replaceWith(domElements);
+  }
+  
 </script>
 
 
@@ -268,19 +278,8 @@
                     <font size="5">ADD</font>
                 </span>
                 <h3>FlashcardHolder</h3></li>
-            <!-- foreach begin-->
-            <!--   <li class="list-group-item"><a href="#" class="list-group-item">
-                    <span class="badge" style="background: red;" data-target="#listDeleteModal" data-toggle="modal"
-                        onclick='modelValues("${fh.id}","${fh.name}")'>
-                        <font size="4">DELETE</font>
-                    </span>
-                    <span class="badge badgeSpan badge-edit" onclick="">
-                        <font size="4">EDIT</font>
-                    </span>
-                    <h4 class="h4" class="list-group-item-heading">???</h4>
-                    <p class="h4" class="list-group-item-text">???</p>
-                </a></li> -->
-            <!-- foreach end-->
+
+            <li class="list-group-item-replaced"></li>
         </ul>
     </div>
     <!-- /list -->
@@ -300,7 +299,7 @@
 
                     <!-- 中間頁數 -->
                     <!-- foreach pageInfo.navigateFirstPage to pageInfo.navigateLastPage-->
-                    <li class="active??? pager-pageNum"><a class="hrefDisabled???" href="???/?"> </a></li>
+                    <li class="pager-pageNum-replaced"></li>
                     <!-- /foreach pageInfo.navigateFirstPage to pageInfo.navigateLastPage-->
 
                     <!-- 下一頁 -->
