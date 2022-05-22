@@ -150,33 +150,21 @@
 <script type="text/javascript">
   //(延後載入)
   function doPager() {
-	if (pageInfo.pageNum == 1) {
-	  act(".pager li ul .pager-first");
-	}
+	  $(".pager li ul .pager-first a").attr("onclick","getDatas("+1+")");
+	  act(".pager li ul .pager-first",pageInfo.pageNum == 1);
 
-	if (!pageInfo.hasPreviousPage) {
-	  act(".pager li ul .pager-previous");
-	}
+	  $(".pager li ul .pager-previous a").attr("onclick","getDatas("+(pageInfo.pageNum-1)+")");
+	  act(".pager li ul .pager-previous",!pageInfo.hasPreviousPage);
 	
-	createPagerDomElement(pageInfo.navigatepageNums);
+		createPagerDomElement(pageInfo.navigatepageNums);
 
+	  $(".pager li ul .pager-next a").attr("onclick","getDatas("+(pageInfo.pageNum+1)+")");
+	  act(".pager li ul .pager-next",!pageInfo.hasNextPage);
 
-	if (!pageInfo.hasNextPage) {
-	  act(".pager li ul .pager-next");
-	}
-
-
-	if (pageInfo.isLastPage) {
-	  act(".pager li ul .pager-last");
-	}
+	  $(".pager li ul .pager-last a").attr("onclick","getDatas("+pageInfo.navigateLastPage+")");
+	  act(".pager li ul .pager-last",pageInfo.isLastPage);
   }
 
-  //使失效中
-  function act(selector) {
-	$(selector).addClass("disabled");
-	$(selector + " a").addClass("hrefDisabled");
-  }
-  
   function createPagerDomElement(navigatepageNums) {
 	$(".pager-previous").next().addClass("pager-pageNum-replaced");
   	$(".pager-pageNum-replaced").nextUntil(".pager-next").remove(); 
@@ -185,12 +173,10 @@
       var path=contextPath+"/"+flashcards+"/"+place;
       
       if(pageNum==place){
-			console.log("num1 ");
     	return `
-      	<li class="active"><a class="hrefDisabled" href='javascript:;' onclick='getDatas(${place})'>${place}</a></li>
+      	<li class="active"><a class="hrefDisabled" href='javascript:;' onclick=''>${place}</a></li>
       `;
       }else{
-			console.log("num2 ");
     	return `
       	<li><a href='javascript:;' onclick='getDatas(${place})'>${place}</a></li>
       `;
@@ -198,6 +184,17 @@
     }).join("");
 	
     $('.pager-pageNum-replaced').replaceWith(domElements);
+  }
+  
+  //使失效中
+  function act(selector,ineffective) {
+	if(ineffective){
+    	$(selector).addClass("disabled");
+    	$(selector + " a").addClass("hrefDisabled");
+	}else{
+    	$(selector).removeClass("disabled");
+    	$(selector + " a").removeClass("hrefDisabled");
+	}
   }
   
 </script>
@@ -314,11 +311,12 @@
                 <ul class="pagination">
                     <li></li>
                     <!-- 首頁 -->
-                    <li class="disabled??? pager-first"><a class="hrefDisabled???" href="???/1">&laquo; </a></li>
+                    <li class="disabled??? pager-first"><a class="hrefDisabled???" href="javascript:;">&laquo;
+                        </a></li>
 
                     <!-- 上一頁 -->
-                    <li class="disabled??? pager-previous"><a class="hrefDisabled???"
-                            href="???/{pageInfo.pageNum-1}">Previous </a></li>
+                    <li class="disabled??? pager-previous"><a class="hrefDisabled???" href="javascript:;">Previous
+                        </a></li>
 
                     <!-- 中間頁數 -->
                     <!-- foreach pageInfo.navigateFirstPage to pageInfo.navigateLastPage-->
@@ -326,11 +324,10 @@
                     <!-- /foreach pageInfo.navigateFirstPage to pageInfo.navigateLastPage-->
 
                     <!-- 下一頁 -->
-                    <li class="disabled??? pager-next"><a class="hrefDisabled???" href="?/{pageInfo.pageNum+1}">Next
-                        </a></li>
+                    <li class="disabled??? pager-next"><a class="hrefDisabled???" href="javascript:;">Next </a></li>
 
                     <!-- 最末頁 -->
-                    <li class="disabled??? pager-last"><a class="hrefDisabled???" href="?/???">&raquo; </a></li>
+                    <li class="disabled??? pager-last"><a class="hrefDisabled???" href="javascript:;">&raquo; </a></li>
                     <li></li>
                 </ul>
             </li>

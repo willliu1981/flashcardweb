@@ -73,7 +73,7 @@ public class FlashcardCRUDController extends BaseController {
 				PAGE_INFO_MAX_NAV_PAGE_NUMBER);
 
 		/*json.put("datas", all);*/
-		json.put("pageInfo", pageInfo);
+		json.put("pageInfo", pageInfo.getNavigateLastPage());
 
 		Debug.test(new Object() {
 		}, "info", pageInfo.getList());
