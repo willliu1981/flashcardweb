@@ -15,12 +15,20 @@
 .myBadgeCursor>li>.badge {
 	cursor: pointer;
 }
+
+.badgeSpan { /* 用於 list badge (delete)*/
+	text-align: center;
+	padding-left: 20px;
+	padding-right: 20px;
+}
 </style>
 
 <!-- global variable -->
 <script type="text/javascript">
   const contextPath = "/FlashCardWebV2";
   const flashcards = "flashcards";
+  var pageInfo;
+  var datas;
 </script>
 
 <script type="text/javascript">
@@ -29,14 +37,47 @@
 	  type : "get",
 	  url : contextPath + "/" + "flashcards",
 	  success : function(resp) {
-		console.log("datas=" + resp.datas[0].term);
-		console.log("info=" + resp.pageInfo);
+		/* console.log("datas=" + resp.datas[0].term);
+		console.log("info=" + resp.pageInfo.pageNum); */
+
+		datas = [];
+		for (i = 0; i < resp.datas.length; i++) {
+		  datas.push(resp.datas[i]);
+		}
+		createDomElement(datas);
+
+		pageInfo = resp.pageInfo;
+
+		//處理分頁
+		doPager();
 	  },
 
 	  error : function(thrownError) {
 		alert("error:" + thrownError);
 	  }
 	});
+	
+	//創建list item
+	  function createDomElement(datas) {
+	    const domElements = datas.map( place => {
+	      return `
+	      <li class="list-group-item"><a href="#" class="list-group-item">
+              <span class="badge" style="background: red;" data-target="#listDeleteModal" data-toggle="modal"
+                  onclick='modelValues("${place.id}","${place.name}")'>
+                  <font size="4">DELETE</font>
+              </span>
+              <span class="badge badgeSpan badge-edit" onclick="">
+                  <font size="4">EDIT</font>
+              </span>
+              <h4 class="h4" class="list-group-item-heading">${ place.term }</h4>
+              <p class="h4" class="list-group-item-text">${ place.definition }</p>
+      	  </a></li>
+	      `;
+	    }).join("");
+
+	    const dataList = document.querySelector('.list-group');
+	    dataList.innerHTML = domElements;
+	  }
   });
 </script>
 
@@ -96,13 +137,39 @@
   }
 </script>
 
-<style type="text/css">
-.badgeSpan { /* 用於 list badge (delete)*/
-	text-align: center;
-	padding-left: 20px;
-	padding-right: 20px;
-}
-</style>
+<!-- pager -->
+<script type="text/javascript">
+  //(延後載入)
+  /*  console.log("a" + pageInfo.isHasPreviousPage());
+   console.log("b" + pageInfo.isHasNextPage()); */
+
+  function doPager() {
+	if (pageInfo.pageNum == 1) {
+	  act(".pager li ul .pager-first");
+	}
+
+	/* if (!pageInfo.isHasPreviousPage) {
+	  act(".pager li ul .pager-previous");
+	}
+
+	if (!pageInfo.isHasNextPage) {
+	  act(".pager li ul .pager-next");
+	}*/
+
+	if (pageInfo.isLastPage) {
+	  act(".pager li ul .pager-last");
+	}
+
+  }
+
+  //使失效中
+  function act(selector) {
+	$(selector).addClass("disabled");
+	$(selector + " a").addClass("hrefDisabled");
+  }
+</script>
+
+
 
 <script type="text/javascript">
   //$("#listDeleteModal").model("hide");
@@ -202,7 +269,7 @@
                 </span>
                 <h3>FlashcardHolder</h3></li>
             <!-- foreach begin-->
-            <li class="list-group-item"><a href="#" class="list-group-item">
+            <!--   <li class="list-group-item"><a href="#" class="list-group-item">
                     <span class="badge" style="background: red;" data-target="#listDeleteModal" data-toggle="modal"
                         onclick='modelValues("${fh.id}","${fh.name}")'>
                         <font size="4">DELETE</font>
@@ -212,7 +279,7 @@
                     </span>
                     <h4 class="h4" class="list-group-item-heading">???</h4>
                     <p class="h4" class="list-group-item-text">???</p>
-                </a></li>
+                </a></li> -->
             <!-- foreach end-->
         </ul>
     </div>
@@ -220,7 +287,7 @@
 
     <!-- 分頁 -->
     <div class="container">
-        <ul class="pager ">
+        <ul class="pager">
             <li>
                 <ul class="pagination">
                     <li></li>
@@ -228,17 +295,20 @@
                     <li class="disabled??? pager-first"><a class="hrefDisabled???" href="???/1">&laquo; </a></li>
 
                     <!-- 上一頁 -->
-                    <li class="disabled???"><a class="hrefDisabled???" href="???/{pageInfo.pageNum-1}">Previous
-                        </a></li>
+                    <li class="disabled??? pager-previous"><a class="hrefDisabled???"
+                            href="???/{pageInfo.pageNum-1}">Previous </a></li>
+
                     <!-- 中間頁數 -->
                     <!-- foreach pageInfo.navigateFirstPage to pageInfo.navigateLastPage-->
-                    <li class="active???"><a class="hrefDisabled???" href="???/?"> </a></li>
+                    <li class="active??? pager-pageNum"><a class="hrefDisabled???" href="???/?"> </a></li>
+                    <!-- /foreach pageInfo.navigateFirstPage to pageInfo.navigateLastPage-->
 
                     <!-- 下一頁 -->
-                    <li class="disabled???"><a class="hrefDisabled???" href="?/{pageInfo.pageNum+1}">Next </a></li>
+                    <li class="disabled??? pager-next"><a class="hrefDisabled???" href="?/{pageInfo.pageNum+1}">Next
+                        </a></li>
 
                     <!-- 最末頁 -->
-                    <li class="disabled???"><a class="hrefDisabled???" href="?/???">&raquo; </a></li>
+                    <li class="disabled??? pager-last"><a class="hrefDisabled???" href="?/???">&raquo; </a></li>
                     <li></li>
                 </ul>
             </li>

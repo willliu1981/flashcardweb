@@ -40,7 +40,7 @@ public class FlashcardCRUDController extends BaseController {
 
 		HashMap<String, Object> json = new HashMap<>();
 
-		int intPageNumber = 1;//default pageNumber
+		int intPageNumber = 3;//default pageNumber
 		PageHelper.startPage(intPageNumber, PAGE_HELPER_MAX_PAGE_NUMBER);
 		List<Flashcard> all = flashcardService.getAll();
 		PageInfo<Flashcard> pageInfo = new PageInfo<>(all,
@@ -48,8 +48,6 @@ public class FlashcardCRUDController extends BaseController {
 
 		json.put("datas", all);
 		json.put("pageInfo", pageInfo);
-		
-		pageInfo.get
 
 		return json;
 	}
