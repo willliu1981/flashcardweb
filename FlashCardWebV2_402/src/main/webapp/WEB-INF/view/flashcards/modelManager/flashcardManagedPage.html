@@ -27,40 +27,49 @@
 <script type="text/javascript">
   const contextPath = "/FlashCardWebV2";
   const flashcards = "flashcards";
-  const flashcard = "flashcard";
   var pageInfo;
   var datas;
+  var pageNum=1;
 </script>
 
+<!-- get datas -->
 <script type="text/javascript">
   $(function() {
-	$.ajax({
-	  type : "get",
-	  url : contextPath + "/" + "flashcards",
-	  success : function(resp) {
-		/* console.log("datas=" + resp.datas[0].term);
-		console.log("info=" + resp.pageInfo.pageNum); */
-
-		datas = [];
-		for (i = 0; i < resp.datas.length; i++) {
-		  datas.push(resp.datas[i]);
-		}
-		createDomElement(datas);
-
-		pageInfo = resp.pageInfo;
-
-		//處理分頁
-		doPager();
-	  },
-
-	  error : function(thrownError) {
-		alert("error:" + thrownError);
-	  }
-	});
+	getDatas(pageNum);
 	
+  });
+  
+  //get datas from ajax
+  function getDatas(num){
+	  pageNum=num;
+	  $.ajax({
+		  type : "get",
+		  dataType:"json",
+		  url : contextPath + "/" + "flashcards"+"/"+num,
+		  success : function(resp) {
+			datas = [];
+			pageInfo = resp.pageInfo;
+			for (i = 0; i < pageInfo.list.length; i++) {
+			  datas.push(pageInfo.list[i]);
+			}
+			createListDomElement(datas);
+
+
+			//處理分頁
+			doPager();
+		  },
+
+		  error : function(thrownError) {
+			alert("error:" + thrownError);
+		  }
+		});
+	  
 	//創建list item
-	  function createDomElement(datas) {
-	    const domElements = datas.map( place => {
+	  function createListDomElement(ds) {
+	  	$(".list-group-item-title").next().addClass("list-group-item-replaced");
+	  	$(".list-group-item-replaced").nextUntil(".list-group-item-footer").remove(); 
+	  
+	    const domElements = ds.map( place => {
 	      return `
 	      <li class="list-group-item"><a href="#" class="list-group-item">
               <span class="badge" style="background: red;" data-target="#listDeleteModal" data-toggle="modal"
@@ -78,7 +87,7 @@
 
 	    $('.list-group-item-replaced').replaceWith(domElements);
 	  }
-  });
+	}
 </script>
 
 <!-- nav -->
@@ -149,7 +158,8 @@
 	  act(".pager li ul .pager-previous");
 	}
 	
-	createDomElement(pageInfo.navigatepageNums);
+	createPagerDomElement(pageInfo.navigatepageNums);
+
 
 	if (!pageInfo.hasNextPage) {
 	  act(".pager li ul .pager-next");
@@ -167,13 +177,26 @@
 	$(selector + " a").addClass("hrefDisabled");
   }
   
-  function createDomElement(navigatepageNums) {
+  function createPagerDomElement(navigatepageNums) {
+	$(".pager-previous").next().addClass("pager-pageNum-replaced");
+  	$(".pager-pageNum-replaced").nextUntil(".pager-next").remove(); 
+	
     const domElements = navigatepageNums.map( place => {
-      return `
-      	<li class="active???"><a class="hrefDisabled???" href=contextPath+"/"+flashcard+"/"+${place}>${place}</a></li>
+      var path=contextPath+"/"+flashcards+"/"+place;
+      
+      if(pageNum==place){
+			console.log("num1 ");
+    	return `
+      	<li class="active"><a class="hrefDisabled" href='javascript:;' onclick='getDatas(${place})'>${place}</a></li>
       `;
+      }else{
+			console.log("num2 ");
+    	return `
+      	<li><a href='javascript:;' onclick='getDatas(${place})'>${place}</a></li>
+      `;
+      }
     }).join("");
-
+	
     $('.pager-pageNum-replaced').replaceWith(domElements);
   }
   
@@ -274,7 +297,7 @@
     <!-- list -->
     <div class="container">
         <ul class="list-group myBadgeCursor">
-            <li class="list-group-item"><span class="badge badge-add" onclick="">
+            <li class="list-group-item list-group-item-title"><span class="badge badge-add" onclick="">
                     <font size="5">ADD</font>
                 </span>
                 <h3>FlashcardHolder</h3></li>

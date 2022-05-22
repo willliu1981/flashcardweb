@@ -55,14 +55,13 @@ public class FlashcardsController extends BaseController {
 		return FLASHCARDS + "/modelManager/flashcardManagedPage.html";
 	}
 
-	
 	// manage flashcard begin
-	@RequestMapping(value = "fcManagerOld")
+	/*@RequestMapping(value = "fcManagerOld")
 	public String toFlashcardManagerOld(HashMap<String, Object> map,
 			HttpServletRequest request) {
 		return toFlashcardManagerWithPageNumberOld(map, null, request);
 	}
-
+	
 	@RequestMapping(value = "fcManagerOld/{pageNumber}")
 	public String toFlashcardManagerWithPageNumberOld(
 			HashMap<String, Object> map,
@@ -72,17 +71,17 @@ public class FlashcardsController extends BaseController {
 		if (pageNumber != null && !pageNumber.equals("")) {
 			intPageNumber = Integer.valueOf(pageNumber);
 		}
-
+	
 		PageHelper.startPage(intPageNumber, MAX_PAGE_NUMBER);
 		List<Flashcard> all = flashcardService.getAll();
 		PageInfo<Flashcard> pageInfo = new PageInfo<>(all, MAX_NAV_PAGE_NUMBER);
-
+	
 		map.put("pageInfo", pageInfo);
 		map.put("datas", all);
 		map.put("type", ListFacade.FLASHCARD);
-
+	
 		return FLASHCARDS + "/modelManagedPage";
-	}
+	}*/
 	//manage flashcard end
 
 	//manage flashcardHolder begin
