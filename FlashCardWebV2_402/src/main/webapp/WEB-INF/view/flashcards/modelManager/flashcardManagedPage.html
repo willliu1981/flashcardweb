@@ -17,7 +17,7 @@
 }
 </style>
 
-<!--  -->
+<!-- nav -->
 <script type="text/javascript">
   var contextPath = "/FlashCardWebV2";
   var flashcards = "flashcards";
@@ -25,19 +25,38 @@
   $(document).ready(
 	  function() {
 		$(".navbar-header a").attr("href", contextPath);
+
 		$(".navbar-collapse .flashcardManager a").attr("href",
 			contextPath + "/" + flashcards + "/fcsManager");
 
-	  });
-</script>
+		$(".navbar-collapse ul .dropdown ul .flashcardManager-flashcard a")
+			.attr("href", contextPath + "/" + flashcards + "/fcManager");
 
-<!-- 使用 a href 失效 -->
-<script type="text/javascript">
-  $(function() {
-	$('a.hrefDisabled').on("click", function(e) {
-	  e.preventDefault();
-	});
-  });
+		$(".navbar-collapse ul .dropdown ul .flashcardManager-flashcard a")
+			.attr("href", contextPath + "/" + flashcards + "/fhManager");
+
+		$(".navbar-collapse ul .dropdown ul .flashcardManager-flashcard a")
+			.attr("href", contextPath + "/" + flashcards + "/hdManager");
+
+		//使作用中
+		act(".navbar-collapse ul .dropdown ul .flashcardManager-flashcard");
+
+		//使 a href 失效 
+		$('a.hrefDisabled').on("click", function(e) {
+		  e.preventDefault();
+		});
+	  });
+
+  //使作用中
+  function act(selector) {
+	$(selector).addClass("active");
+	$(selector + " a").addClass("hrefDisabled");
+  }
+
+  //list badge 作用
+  function badgeAct(path) {
+	window.location.href = contextPath + "/" + path;
+  }
 </script>
 
 <style type="text/css">
@@ -87,14 +106,12 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li class="active???"><a class="hrefDisabled???"
-                                    href="${pageContext.request.contextPath}/???">Flashcard </a></li>
+                            <li class="active???xx flashcardManager-flashcard"><a class="hrefDisabled???" href="">Flashcard</a></li>
 
-                            <li class="active????"><a class="hrefDisabled???"
-                                    href="${pageContext.request.contextPath}/???">FlashcardHolder </a></li>
+                            <li class="active???? flashcardManager-flashcardHolder"><a class="hrefDisabled???"
+                                    href="">FlashcardHolder</a></li>
 
-                            <li class="active???"><a class="hrefDisabled"
-                                    href="${pageContext.request.contextPath}/???">HolderData </a></li>
+                            <li class="active??? flashcardManager-holderData"><a class="hrefDisabled" href="">HolderData</a></li>
                         </ul></li>
                     <li class="active???"><a class="hrefDisabled???" href="${pageContext.request.contextPath}/??? ">測驗管理
                         </a></li>
@@ -107,7 +124,7 @@
     </nav>
     <!-- /導航欄 -->
 
-    <!-- 模態框 -->
+    <!-- 模態框 (關於)-->
     <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -130,21 +147,20 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal -->
+    <!-- /.modal (關於)-->
 
     <!-- 巨屏 -->
     <div class="jumbotron">
         <div class="container">
             <h1>FlashCard</h1>
-            <p>???</p>
+            <p>管理 Flashcard</p>
         </div>
     </div>
 
     <!-- list -->
     <div class="container">
         <ul class="list-group myBadgeCursor">
-            <li class="list-group-item"><span class="badge"
-                    onclick="location.href='${pageContext.request.contextPath}/???'">
+            <li class="list-group-item"><span class="badge" onclick="badgeAct('flashcard')">
                     <font size="5">ADD</font>
                 </span>
                 <h3>FlashcardHolder</h3></li>

@@ -17,7 +17,7 @@
 }
 </style>
 
-<!--  -->
+<!-- nav -->
 <script type="text/javascript">
   var contextPath = "/FlashCardWebV2";
   var flashcards = "flashcards";
@@ -25,8 +25,12 @@
   $(document).ready(
 	  function() {
 		$(".navbar-header a").attr("href", contextPath);
+		
 		$(".navbar-collapse .flashcardManager a").attr("href",
 			contextPath + "/" + flashcards + "/fcsManager");
+		
+		$(".navbar-collapse dropdown ul .flashcardManager-flashcard a").attr("href",
+			contextPath + "/" + flashcards + "/fcManager");
 
 	  });
 </script>
@@ -82,13 +86,13 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li class="active??? flashcardManager"><a class="hrefDisabled???" href="">字卡管理 </a></li>
-                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                    <li class="dropdown" ><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                             aria-expanded="false">
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li class="active???"><a class="hrefDisabled???"
-                                    href="${pageContext.request.contextPath}/???">Flashcard </a></li>
+                            <li class="active??? flashcardManager-flashcard"><a class="hrefDisabled???"
+                                    href="">Flashcardx </a></li>
 
                             <li class="active????"><a class="hrefDisabled???"
                                     href="${pageContext.request.contextPath}/???">FlashcardHolder </a></li>
