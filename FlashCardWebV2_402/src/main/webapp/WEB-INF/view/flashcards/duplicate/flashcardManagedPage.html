@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+<title>FLASH CARD</title>
+<link rel="styleSheet" type="text/css" href="../css/EvenTable.css">
+<link rel="stylesheet" href="../css/bootstrap.min.cyborg.css">
+<link rel="stylesheet" href="../webjars/bootstrap/3.4.1/css/bootstrap-theme.min.css">
+
+<script type="text/javascript" src="../webjars/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="../webjars/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style type="text/css">
+/* 用於list-group 下,改變游標圖示  */
+.myBadgeCursor>li>.badge {
+	cursor: pointer;
+}
+</style>
+
+<!-- 使用 a href 失效 -->
+<script type="text/javascript">
+  $(function() {
+	$('a.hrefDisabled').on("click", function(e) {
+	  e.preventDefault();
+	});
+  });
+</script>
+
+<style type="text/css">
+.badgeSpan { /* 用於 list badge (delete)*/
+	text-align: center;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+</style>
+
+<script type="text/javascript">
+  //$("#listDeleteModal").model("hide");
+  function modelValues(id, name) {
+	$("#modal_fhName").text(name);
+	$("#modal_form").attr("action", function(i, orig) {
+	  return orig + id;
+	});
+  }
+</script>
+
+</head>
+<body>
+    <!-- 清單前往 web 的 path
+    <c:set var="pathFlashcardHolder" value="flashcardHolder" /> -->
+
+    <!-- 分頁前往 web 的 base path
+    <c:set var="pathForPager" value="flashcards/fhManager" scope="request" /> -->
+
+    <!-- 導航欄 -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand ${param.active eq 'home'?'hrefDisabled':''}"
+                    href="/">FlashCard </a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active???"><a class="hrefDisabled???" href="${pageContext.request.contextPath}/???">字卡管理
+                        </a></li>
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-expanded="false">
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li class="active???"><a class="hrefDisabled???"
+                                    href="${pageContext.request.contextPath}/???">Flashcard </a></li>
+
+                            <li class="active????"><a class="hrefDisabled???"
+                                    href="${pageContext.request.contextPath}/???">FlashcardHolder </a></li>
+
+                            <li class="active???"><a class="hrefDisabled"
+                                    href="${pageContext.request.contextPath}/???">HolderData </a></li>
+                        </ul></li>
+                    <li class="active???"><a class="hrefDisabled???" href="${pageContext.request.contextPath}/??? ">測驗管理
+                        </a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#" data-target="#myModal" data-toggle="modal">關於</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- /導航欄 -->
+
+    <!-- 模態框 -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">FlashCard</h4>
+                </div>
+                <div class="modal-body">
+                    <p>編輯中&hellip;</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <font color="black"> Close</font>
+                    </button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <!-- 巨屏 -->
+    <div class="jumbotron">
+        <div class="container">
+            <h1>FlashCard</h1>
+            <p>???</p>
+        </div>
+    </div>
+
+    <!-- list -->
+    <div class="container">
+        <ul class="list-group myBadgeCursor">
+            <li class="list-group-item"><span class="badge"
+                    onclick="location.href='${pageContext.request.contextPath}/???'">
+                    <font size="5">ADD</font>
+                </span>
+                <h3>FlashcardHolder</h3></li>
+            <!-- foreach begin-->
+            <li class="list-group-item"><a href="#" class="list-group-item">
+                    <span class="badge" style="background: red;" data-target="#listDeleteModal" data-toggle="modal"
+                        onclick='modelValues("${fh.id}","${fh.name}")'>
+                        <font size="4">DELETE</font>
+                    </span>
+                    <span class="badge badgeSpan" onclick="location.href='${pageContext.request.contextPath}/???'">
+                        <font size="4">EDIT</font>
+                    </span>
+                    <h4 class="h4" class="list-group-item-heading">???</h4>
+                    <p class="h4" class="list-group-item-text">???</p>
+                </a></li>
+            <!-- foreach end-->
+        </ul>
+    </div>
+    <!-- /list -->
+
+    <!-- 分頁 -->
+    <!-- /分頁 -->
+
+
+    <!-- 模態框 用於 list delete-->
+    <div class="modal fade" tabindex="-1" role="dialog" id="listDeleteModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">FlashcardHolder</h4>
+                </div>
+                <div class="modal-body">
+                    <label id="modal_fhName" style="font-size: 20px;">name</label>
+                </div>
+                <div class="modal-footer">
+                    <form id="modal_form" action="${pageContext.request.contextPath}/flashcardHolder/" method="post">
+                        <input type="hidden" name="_method" value="delete" />
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            <font color="black">Close</font>
+                        </button>
+                        <button id="model_delete" type="submit" class="btn btn-primary" style="background: red;">Delete
+                            Data</button>
+                    </form>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal (for list delete)-->
+
+</body>
+</html>

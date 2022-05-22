@@ -1,0 +1,6 @@
+#	/src/taglib
+
+.	*component.common	:一般的組件
+.	*.component.*	:特定的組件
+
+.	*.listmodel	:List items

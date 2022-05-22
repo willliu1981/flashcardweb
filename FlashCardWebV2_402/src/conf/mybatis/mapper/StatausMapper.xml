@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="idv.fc.dao.itf.StatusDao">
+
+	<select id="selectById" resultType="Status">
+		select * from Status where id = #{id}
+	</select>
+
+	<insert id="create" parameterType="Status" useGeneratedKeys="true" keyProperty="id">
+		insert into
+		Status ()values();
+	</insert>
+
+
+</mapper>
