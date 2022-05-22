@@ -44,20 +44,28 @@ public class FlashcardsController extends BaseController {
 	/*
 	 * 管理 Flashcard & FlashcardHolder
 	 */
+
 	@RequestMapping(value = "fcsManager")
 	public String toFlashcardsManager() {
-		return FLASHCARDS + "/fcsManagedPage";
+		return FLASHCARDS + "/fcsManagedPage.jsp";
 	}
 
 	// manage flashcard begin
 	@RequestMapping(value = "fcManager")
-	public String toFlashcardManager(HashMap<String, Object> map,
-			HttpServletRequest request) {
-		return toFlashcardManagerWithPageNumber(map, null, request);
+	public String toFlashcardManager() {
+		return FLASHCARDS + "/modelManager/flashcardManagedPage.html";
 	}
 
-	@RequestMapping(value = "fcManager/{pageNumber}")
-	public String toFlashcardManagerWithPageNumber(HashMap<String, Object> map,
+	// manage flashcard begin
+	@RequestMapping(value = "fcManagerOld")
+	public String toFlashcardManagerOld(HashMap<String, Object> map,
+			HttpServletRequest request) {
+		return toFlashcardManagerWithPageNumberOld(map, null, request);
+	}
+
+	@RequestMapping(value = "fcManagerOld/{pageNumber}")
+	public String toFlashcardManagerWithPageNumberOld(
+			HashMap<String, Object> map,
 			@PathVariable(value = "pageNumber") String pageNumber,
 			HttpServletRequest request) {
 		int intPageNumber = 1;//default pageNumber

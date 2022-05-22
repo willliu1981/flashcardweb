@@ -14,6 +14,11 @@
         http://www.springframework.org/schema/mvc
         https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
+<!-- 
+	<mvc:resources location="/img/" mapping="/img/**" />
+	<mvc:resources location="/js/" mapping="/js/**" />
+	<mvc:resources location="/css/" mapping="/css/**" />
+ -->
 
 	<mvc:default-servlet-handler />
 	<mvc:annotation-driven conversion-service="converterUtil" />
@@ -26,7 +31,7 @@
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/view/"></property>
-		<property name="suffix" value=".jsp"></property>
+		<!-- <property name="suffix" value=".html"></property> -->
 	</bean>
 
 	<bean id="converterUtil"
@@ -37,8 +42,6 @@
 			</list>
 		</property>
 	</bean>
-
-
 
 
 

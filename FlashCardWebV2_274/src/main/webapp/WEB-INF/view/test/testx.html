@@ -2,10 +2,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript" src="webjars/jquery/3.4.1/jquery.min.js"></script>
+<title>xxx</title>
+<script type="text/javascript" src="FlashCardWebV2/webjars/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function() {
+	var root= $("#pageContext").val();
+	
+	console.log("root12=" + root);
+	
 	$.ajax({
 	  type : "get",
 	  url : "test/test2",

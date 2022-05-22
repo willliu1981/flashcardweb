@@ -29,7 +29,13 @@ public class TestController extends BaseController {
 	@RequestMapping(value = "test1")
 	public String test1() {
 
-		return "redirect:/test.html";
+		return "redirect:/flashcards/fcManager";
+	}
+	
+	@RequestMapping(value = "test1_1")
+	public String test1_1() {
+		
+		return "redirect:WEB-INF/view/test/testx.html";
 	}
 
 	@RequestMapping(value = "test2", produces = "application/json")
