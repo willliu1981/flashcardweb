@@ -5,6 +5,10 @@ import java.sql.Timestamp;
 
 public class Flashcard implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String term;
 	private String definition;

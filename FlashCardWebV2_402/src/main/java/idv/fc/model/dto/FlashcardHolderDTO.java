@@ -5,7 +5,11 @@ import java.sql.Timestamp;
 import idv.fc.model.Flashcard;
 import idv.fc.model.FlashcardHolder;
 
-public class FlashcardHolderDTO {
+public class FlashcardHolderDTO implements java.io.Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private FlashcardHolder fh = new FlashcardHolder();
 	private Flashcard flashcard;
 
@@ -65,10 +69,14 @@ public class FlashcardHolderDTO {
 		this.flashcard = fc;
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
-		return "FlashcardHolderDTO [fh=" + fh + ", flashcard=" + flashcard
-				+ "]";
+		return "FlashcardHolderDTO [flashcard=" + flashcard + ", getId()="
+				+ getId() + ", getName()=" + getName() + ", getFcId()="
+				+ getFcId() + ", getCreateDate()=" + getCreateDate()
+				+ ", getNumberOfQuizTimes()=" + getNumberOfQuizTimes()
+				+ ", getPassTheQuizTimes()=" + getPassTheQuizTimes()
+				+ ", getFlashcard()=" + getFlashcard() + "]";
 	}
-
+	*/
 }

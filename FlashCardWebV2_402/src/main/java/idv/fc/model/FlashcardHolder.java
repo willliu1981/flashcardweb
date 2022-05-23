@@ -2,7 +2,11 @@ package idv.fc.model;
 
 import java.sql.Timestamp;
 
-public class FlashcardHolder {
+public class FlashcardHolder  implements java.io.Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id; //ai
 	private String name;
 	private Integer fcId;//fk: flashcard id
@@ -72,10 +76,10 @@ public class FlashcardHolder {
 
 	@Override
 	public String toString() {
-		return "HandledCard [id=" + id + ", name=" + name + ", fcId=" + fcId
+		return "FlashcardHolder [id=" + id + ", name=" + name + ", fcId=" + fcId
 				+ ", createDate=" + createDate + ", numberOfQuizTimes="
 				+ numberOfQuizTimes + ", passTheQuizTimes=" + passTheQuizTimes
-				+ "]";
+				+ ", updateForQuizDate=" + updateForQuizDate + "]";
 	}
 
 	public Timestamp getUpdateForQuizDate() {

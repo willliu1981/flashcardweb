@@ -2,6 +2,9 @@ package idv.fc.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,11 +16,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
-import idv.debug.Debug;
-import idv.fc.model.Flashcard;
 import idv.fc.model.FlashcardHolder;
+import idv.fc.model.dto.FlashcardHolderDTO;
+import idv.fc.model.dto.FlashcardHolderListDTO;
 import idv.fc.service.abstraction.IFlashcardHolderService;
 import idv.fc.tag.impl.facade.FlashcardHolderEditor;
+import tool.toolkit.Toolkit;
 
 @Controller
 public class FlashcardHolderCRUDController extends BaseController {
@@ -29,16 +33,16 @@ public class FlashcardHolderCRUDController extends BaseController {
 
 	@Autowired
 	IFlashcardHolderService flashcardHolderService;
-	
+
 	@RequestMapping(value = "flashcardHolders", produces = "application/json", method = RequestMethod.GET)
 	@ResponseBody
-	public HashMap<String, Object> getAllFlashcard() {
-		return getAllFlashcardWhitPageNum(null);
+	public HashMap<String, Object> getAllFlashcardHolder() {
+		return getAllFlashcardHolderWhitPageNum(null);
 	}
 
 	@RequestMapping(value = "flashcardHolders/{pageNum}", produces = "application/json", method = RequestMethod.GET)
 	@ResponseBody
-	public HashMap<String, Object> getAllFlashcardWhitPageNum(
+	public HashMap<String, Object> getAllFlashcardHolderWhitPageNum(
 			@PathVariable("pageNum") Integer pageNum) {
 
 		HashMap<String, Object> json = new HashMap<>();
@@ -48,8 +52,17 @@ public class FlashcardHolderCRUDController extends BaseController {
 			intPageNumber = Integer.valueOf(pageNum);
 		}
 		PageHelper.startPage(intPageNumber, PAGE_HELPER_MAX_PAGE_NUMBER);
-		List<FlashcardHolder> all = flashcardHolderService.getAll();
-		PageInfo<FlashcardHolder> pageInfo = new PageInfo<>(all,
+		//List<FlashcardHolder> all = flashcardHolderService.getAll();
+		List<FlashcardHolderDTO> all = flashcardHolderService.getAllJoinFc();
+
+		List<FlashcardHolderListDTO> listDTO = all.stream()
+				.map(x -> new FlashcardHolderListDTO(x.getId(), x.getName(),
+						Toolkit.getEmptyResover()
+								.resolve(() -> x.getFlashcard().getTerm())
+								.orElse("")))
+				.collect(Collectors.toList());
+
+		PageInfo<FlashcardHolderListDTO> pageInfo = new PageInfo<>(listDTO,
 				PAGE_INFO_MAX_NAV_PAGE_NUMBER);
 
 		json.put("pageInfo", pageInfo);
