@@ -74,13 +74,7 @@ public class FlashcardHolder  implements java.io.Serializable {
 		this.passTheQuizTimes = passTheQuizTimes;
 	}
 
-	@Override
-	public String toString() {
-		return "FlashcardHolder [id=" + id + ", name=" + name + ", fcId=" + fcId
-				+ ", createDate=" + createDate + ", numberOfQuizTimes="
-				+ numberOfQuizTimes + ", passTheQuizTimes=" + passTheQuizTimes
-				+ ", updateForQuizDate=" + updateForQuizDate + "]";
-	}
+	
 
 	public Timestamp getUpdateForQuizDate() {
 		return updateForQuizDate;
@@ -88,6 +82,14 @@ public class FlashcardHolder  implements java.io.Serializable {
 
 	public void setUpdateForQuizDate(Timestamp updateForQuizDate) {
 		this.updateForQuizDate = updateForQuizDate;
+	}
+
+	@Override
+	public String toString() {
+		return "FlashcardHolder [id=" + id + ", name=" + name + ", fcId=" + fcId
+				+ ", createDate=" + createDate + ", numberOfQuizTimes="
+				+ numberOfQuizTimes + ", passTheQuizTimes=" + passTheQuizTimes
+				+ ", updateForQuizDate=" + updateForQuizDate + "]";
 	}
 
 }

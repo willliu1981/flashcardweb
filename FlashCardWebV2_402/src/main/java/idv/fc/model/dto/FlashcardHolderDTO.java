@@ -69,14 +69,11 @@ public class FlashcardHolderDTO implements java.io.Serializable {
 		this.flashcard = fc;
 	}
 
-	/*@Override
+	@Override
 	public String toString() {
-		return "FlashcardHolderDTO [flashcard=" + flashcard + ", getId()="
-				+ getId() + ", getName()=" + getName() + ", getFcId()="
-				+ getFcId() + ", getCreateDate()=" + getCreateDate()
-				+ ", getNumberOfQuizTimes()=" + getNumberOfQuizTimes()
-				+ ", getPassTheQuizTimes()=" + getPassTheQuizTimes()
-				+ ", getFlashcard()=" + getFlashcard() + "]";
+		return "FlashcardHolderDTO [fh=" + fh + ", flashcard=" + flashcard
+				+ "]";
 	}
-	*/
+
+	
 }
