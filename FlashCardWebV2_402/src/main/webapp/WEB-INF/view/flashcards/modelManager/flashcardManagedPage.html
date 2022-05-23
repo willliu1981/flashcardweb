@@ -74,7 +74,7 @@
 	      return `
 	      <li class="list-group-item"><a href="#" class="list-group-item">
               <span class="badge" style="background: red;" data-target="#listDeleteModal" data-toggle="modal"
-                  onclick='modelValues("${place.id}","${place.name}")'>
+                  onclick='modelValues("${place.id}","${place.term}","${place.definition}")'>
                   <font size="4">DELETE</font>
               </span>
               <span class="badge badgeSpan badge-edit" onclick="badgeEditLocate(this)" data-id="${place.id}">
@@ -90,7 +90,7 @@
 	  }
 	}
   
-  //badge 重定向
+  //badge edit 重定向
   function badgeEditLocate(element) {
 	window.location.href = contextPath + "/" + flashcard+"/"+$(element).attr('data-id');
   }
@@ -195,24 +195,19 @@
 </script>
 
 
-
+<!-- modal (list delete) -->
 <script type="text/javascript">
-  //$("#listDeleteModal").model("hide");
-  function modelValues(id, name) {
-	$("#modal_fhName").text(name);
-	$("#modal_form").attr("action", function(i, orig) {
-	  return orig + id;
-	});
-  }
+	
+	 function modelValues(id, term,definition) {
+		$("#modal_term").text(term);
+		$("#modal_definition").text(definition);
+		$("#modal_form").attr("action", contextPath+ "/"+flashcard+"/"+id);
+	  }
+
 </script>
 
 </head>
 <body>
-    <!-- 清單前往 web 的 path
-    <c:set var="pathFlashcardHolder" value="flashcardHolder" /> -->
-
-    <!-- 分頁前往 web 的 base path
-    <c:set var="pathForPager" value="flashcards/fhManager" scope="request" /> -->
 
     <!-- 導航欄 -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -339,10 +334,13 @@
                     <h4 class="modal-title">Flashcard</h4>
                 </div>
                 <div class="modal-body">
-                    <label id="modal_fhName" style="font-size: 20px;">name</label>
+                    <label id="modal_term" style="font-size: 20px;">term</label>
+                </div>
+                <div class="modal-body">
+                    <label id="modal_definition" style="font-size: 20px;">definition</label>
                 </div>
                 <div class="modal-footer">
-                    <form id="modal_form" action="${pageContext.request.contextPath}/flashcardHolder/" method="post">
+                    <form id="modal_form" action="" method="post">
                         <input type="hidden" name="_method" value="delete" />
                         <button type="button" class="btn btn-default" data-dismiss="modal">
                             <font color="black">Close</font>

@@ -38,21 +38,6 @@ public class FlashcardCRUDController extends BaseController {
 	@RequestMapping(value = "flashcards", produces = "application/json", method = RequestMethod.GET)
 	@ResponseBody
 	public HashMap<String, Object> getAllFlashcard() {
-
-		/*		HashMap<String, Object> json = new HashMap<>();
-		
-				int intPageNumber = 3;//default pageNumber
-				PageHelper.startPage(intPageNumber, PAGE_HELPER_MAX_PAGE_NUMBER);
-				List<Flashcard> all = flashcardService.getAll();
-				PageInfo<Flashcard> pageInfo = new PageInfo<>(all,
-						PAGE_INFO_MAX_NAV_PAGE_NUMBER);
-		
-				json.put("datas", all);
-				json.put("pageInfo", pageInfo);
-		
-				Debug.test(new Object() {
-				}, "info", pageInfo);
-		*/
 		return getAllFlashcardWhitPageNum(null);
 	}
 
