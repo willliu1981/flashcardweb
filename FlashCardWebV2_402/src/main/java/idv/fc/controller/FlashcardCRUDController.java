@@ -59,9 +59,6 @@ public class FlashcardCRUDController extends BaseController {
 
 		json.put("pageInfo", pageInfo);
 
-		Debug.test(new Object() {
-		}, "info", pageInfo.getList());
-
 		return json;
 	}
 

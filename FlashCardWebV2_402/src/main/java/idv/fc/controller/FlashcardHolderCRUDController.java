@@ -1,32 +1,68 @@
 package idv.fc.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
+import idv.debug.Debug;
+import idv.fc.model.Flashcard;
 import idv.fc.model.FlashcardHolder;
 import idv.fc.service.abstraction.IFlashcardHolderService;
 import idv.fc.tag.impl.facade.FlashcardHolderEditor;
 
 @Controller
 public class FlashcardHolderCRUDController extends BaseController {
+	private static final Integer PAGE_HELPER_MAX_PAGE_NUMBER = 5;
+	private static final Integer PAGE_INFO_MAX_NAV_PAGE_NUMBER = 5;
 	protected String WEB_FLASHCARDS = "flashcards";//web base page
 	protected String FLASHCARDS = "flashcards";//jsp base page
 	protected String FLASHCARDHOLDER = "flashcardHolder";//jsp second-level page
 
 	@Autowired
 	IFlashcardHolderService flashcardHolderService;
+	
+	@RequestMapping(value = "flashcardHolders", produces = "application/json", method = RequestMethod.GET)
+	@ResponseBody
+	public HashMap<String, Object> getAllFlashcard() {
+		return getAllFlashcardWhitPageNum(null);
+	}
+
+	@RequestMapping(value = "flashcardHolders/{pageNum}", produces = "application/json", method = RequestMethod.GET)
+	@ResponseBody
+	public HashMap<String, Object> getAllFlashcardWhitPageNum(
+			@PathVariable("pageNum") Integer pageNum) {
+
+		HashMap<String, Object> json = new HashMap<>();
+
+		int intPageNumber = 1;//default pageNumber
+		if (pageNum != null && !pageNum.equals("")) {
+			intPageNumber = Integer.valueOf(pageNum);
+		}
+		PageHelper.startPage(intPageNumber, PAGE_HELPER_MAX_PAGE_NUMBER);
+		List<FlashcardHolder> all = flashcardHolderService.getAll();
+		PageInfo<FlashcardHolder> pageInfo = new PageInfo<>(all,
+				PAGE_INFO_MAX_NAV_PAGE_NUMBER);
+
+		json.put("pageInfo", pageInfo);
+
+		return json;
+	}
 
 	@RequestMapping(value = "flashcardHolder", method = RequestMethod.GET)
 	public String toAdd(HashMap<String, Object> map) {
 		map.put("data", new FlashcardHolder());
 		map.put("erType", FlashcardHolderEditor.class);
 
-		return FLASHCARDS + "/" + "modelEditPage";
+		return FLASHCARDS + "/" + "modelEditPage.jsp";
 	}
 
 	@RequestMapping(value = "flashcardHolder/{id}", method = RequestMethod.GET)
@@ -37,7 +73,7 @@ public class FlashcardHolderCRUDController extends BaseController {
 		map.put("data", find);
 		map.put("erType", FlashcardHolderEditor.class);
 
-		return FLASHCARDS + "/" + "modelEditPage";
+		return FLASHCARDS + "/" + "modelEditPage.jsp";
 	}
 
 	/*

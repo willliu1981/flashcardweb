@@ -27,7 +27,7 @@
 <script type="text/javascript">
   const contextPath = "/FlashCardWebV2";
   const flashcards = "flashcards";
-  const model = "flashcard";//*** 修改這裡 
+  const model = "flashcardHolder";//*** 修改這裡 
   var pageInfo;
   var datas;
   var pageNum=1;
@@ -46,7 +46,7 @@
 	  $.ajax({
 		  type : "get",
 		  dataType:"json",
-		  url : contextPath + "/" + "flashcards"+"/"+num,//*** 修改這裡 
+		  url : contextPath + "/" + "flashcardHolders"+"/"+num,//*** 修改這裡 
 		  success : function(resp) {
 			datas = [];
 			pageInfo = resp.pageInfo;
@@ -117,7 +117,7 @@
 			.attr("href", contextPath + "/" + flashcards + "/hdManager");
 
 		//使作用中
-		act(".navbar-collapse ul .dropdown ul .modelManager-flashcard");//*** 修改這裡 
+		act(".navbar-collapse ul .dropdown ul .modelManager-flashcardHolder");//*** 修改這裡 
 
 		//使 a href 失效 
 		$('a.hrefDisabled').on("click", function(e) {
@@ -279,7 +279,7 @@
     <div class="jumbotron">
         <div class="container">
             <h1>FlashCard</h1>
-            <p>管理 Flashcard</p><!-- //*** 修改這裡  -->
+            <p>管理 Flashcard Holder</p><!-- //*** 修改這裡  -->
         </div>
     </div>
 
@@ -289,7 +289,7 @@
             <li class="list-group-item list-group-item-title"><span class="badge badge-add" onclick="">
                     <font size="5">ADD</font>
                 </span>
-                <h3>Flashcard</h3></li><!-- //*** 修改這裡  -->
+                <h3>Flashcard Holder</h3></li><!-- //*** 修改這裡  -->
 
             <li class="list-group-item-replaced"></li>
         </ul>

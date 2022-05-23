@@ -56,35 +56,40 @@ public class FlashcardsController extends BaseController {
 	}
 	//manage flashcard end
 
-	//manage flashcardHolder begin
 	@RequestMapping(value = "fhManager")
-	public String toFlashcardHolderManager(HashMap<String, Object> map) {
-		return toFlashcardHolderManagerWithPageNumber(map, null);
+	public String toFlashcardHolderManager() {
+		return FLASHCARDS + "/modelManager/flashcardHolderManagedPage.html";
 	}
 
-	@RequestMapping(value = "fhManager/{pageNumber}")
-	public String toFlashcardHolderManagerWithPageNumber(
-			HashMap<String, Object> map,
-			@PathVariable(value = "pageNumber") String pageNumber) {
-		int intPageNumber = 1;//default pageNumber
-		if (pageNumber != null && !pageNumber.equals("")) {
-			intPageNumber = Integer.valueOf(pageNumber);
+	//manage flashcardHolder begin
+	/*	@RequestMapping(value = "fhManager")
+		public String toFlashcardHolderManager(HashMap<String, Object> map) {
+			return toFlashcardHolderManagerWithPageNumber(map, null);
 		}
-
-		PageHelper.startPage(intPageNumber, MAX_PAGE_NUMBER);
-		//List<FlashcardHolder> all = flashcardHolderService.getAll();
-		List<FlashcardHolderDTO> all = flashcardHolderService.getAllJoinFc();
-
-		map.put("flashcardHolders", all);
-		PageInfo<FlashcardHolderDTO> pageInfo = new PageInfo<>(all,
-				MAX_NAV_PAGE_NUMBER);
-
-		map.put("pageInfo", pageInfo);
-		map.put("datas", all);
-		map.put("type", FlashcardHolderDTOListFacade.class);
-
-		return FLASHCARDS + "/modelManagedPage";
-	}
+	
+		@RequestMapping(value = "fhManager/{pageNumber}")
+		public String toFlashcardHolderManagerWithPageNumber(
+				HashMap<String, Object> map,
+				@PathVariable(value = "pageNumber") String pageNumber) {
+			int intPageNumber = 1;//default pageNumber
+			if (pageNumber != null && !pageNumber.equals("")) {
+				intPageNumber = Integer.valueOf(pageNumber);
+			}
+	
+			PageHelper.startPage(intPageNumber, MAX_PAGE_NUMBER);
+			//List<FlashcardHolder> all = flashcardHolderService.getAll();
+			List<FlashcardHolderDTO> all = flashcardHolderService.getAllJoinFc();
+	
+			map.put("flashcardHolders", all);
+			PageInfo<FlashcardHolderDTO> pageInfo = new PageInfo<>(all,
+					MAX_NAV_PAGE_NUMBER);
+	
+			map.put("pageInfo", pageInfo);
+			map.put("datas", all);
+			map.put("type", FlashcardHolderDTOListFacade.class);
+	
+			return FLASHCARDS + "/modelManagedPage";
+		}*/
 	//manage flashcardHolder end
 
 	//manage holderData begin
