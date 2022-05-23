@@ -55,7 +55,18 @@ public class FlashcardHolderCRUDController extends BaseController {
 		PageHelper.startPage(intPageNumber, PAGE_HELPER_MAX_PAGE_NUMBER);
 		List<FlashcardHolderDTO> all = flashcardHolderService.getAllJoinFc();
 
+		List<FlashcardHolderListDTO> collect = all.stream()
+				.map(x -> new FlashcardHolderListDTO(x.getFlashcardHolder(),
+						x.getFlashcard()))
+				.collect(Collectors.toList());
 
+		PageInfo<FlashcardHolderListDTO> pageInfo = new PageInfo<>(collect,
+				PAGE_INFO_MAX_NAV_PAGE_NUMBER);
+
+		json.put("pageInfo", pageInfo);
+
+		Debug.test(new Object() {
+		}, "xx", pageInfo);
 
 		return json;
 	}

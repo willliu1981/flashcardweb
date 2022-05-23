@@ -28,7 +28,7 @@
 	</delete>
 
 	<resultMap type="FlashcardHolderDTO" id="baseFHResultMap">
-		<id column="id" property="id"/>
+		<id column="id" property="id" />
 
 		<association property="flashcard" column="fc_id"
 			select="idv.fc.dao.itf.FlashcardDao.selectById">

@@ -6,59 +6,61 @@ import idv.fc.model.Flashcard;
 import idv.fc.model.FlashcardHolder;
 
 public class FlashcardHolderDTO implements java.io.Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
-	private FlashcardHolder fh = new FlashcardHolder();
+	private FlashcardHolder flashcardHolder = new FlashcardHolder();
 	private Flashcard flashcard;
 
+	public FlashcardHolder getFlashcardHolder() {
+		return flashcardHolder;
+	}
+
 	public Integer getId() {
-		return fh.getId();
+		return flashcardHolder.getId();
 	}
 
 	public void setId(Integer id) {
-		fh.setId(id);
+		flashcardHolder.setId(id);
 	}
 
 	public String getName() {
-		return fh.getName();
+		return flashcardHolder.getName();
 	}
 
 	public void setName(String name) {
-		fh.setName(name);
+		flashcardHolder.setName(name);
 	}
 
 	public Integer getFcId() {
-		return fh.getFcId();
+		return flashcardHolder.getFcId();
 	}
 
 	public void setFcId(Integer fcId) {
-		fh.setFcId(fcId);
+		flashcardHolder.setFcId(fcId);
 	}
 
 	public Timestamp getCreateDate() {
-		return fh.getCreateDate();
+		return flashcardHolder.getCreateDate();
 	}
 
 	public void setCreateDate(Timestamp createDate) {
-		fh.setCreateDate(createDate);
+		flashcardHolder.setCreateDate(createDate);
 	}
 
 	public Integer getNumberOfQuizTimes() {
-		return fh.getNumberOfQuizTimes();
+		return flashcardHolder.getNumberOfQuizTimes();
 	}
 
 	public void setNumberOfQuizTimes(Integer numberOfQuizTimes) {
-		fh.setNumberOfQuizTimes(numberOfQuizTimes);
+		flashcardHolder.setNumberOfQuizTimes(numberOfQuizTimes);
 	}
 
 	public Integer getPassTheQuizTimes() {
-		return fh.getPassTheQuizTimes();
+		return flashcardHolder.getPassTheQuizTimes();
 	}
 
 	public void setPassTheQuizTimes(Integer passTheQuizTimes) {
-		fh.setPassTheQuizTimes(passTheQuizTimes);
+		flashcardHolder.setPassTheQuizTimes(passTheQuizTimes);
 	}
 
 	public Flashcard getFlashcard() {
@@ -71,9 +73,8 @@ public class FlashcardHolderDTO implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "FlashcardHolderDTO [fh=" + fh + ", flashcard=" + flashcard
-				+ "]";
+		return "FlashcardHolderDTO [fh=" + flashcardHolder + ", flashcard="
+				+ flashcard + "]";
 	}
 
-	
 }

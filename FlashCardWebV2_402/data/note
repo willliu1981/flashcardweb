@@ -14,6 +14,8 @@
 
 .	有時啟動會出現 load IDGeneratorFactory 的問題, clean 或等待一些時間, 原因未知 
 
+.	controller @ResponseBody 回傳的json, 無法使用 靜態proxy 做成的DTO,會出現不明狀況
+
 
 待測:
 .	sql 驗證 default
