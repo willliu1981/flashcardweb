@@ -71,10 +71,10 @@ public class FlashcardHolderDTO implements java.io.Serializable {
 		this.flashcard = fc;
 	}
 
-	@Override
-	public String toString() {
-		return "FlashcardHolderDTO [fh=" + flashcardHolder + ", flashcard="
-				+ flashcard + "]";
-	}
+	/*	@Override
+		public String toString() {
+			return "FlashcardHolderDTO [fh=" + flashcardHolder + ", flashcard="
+					+ flashcard + "]";
+		}*/
 
 }

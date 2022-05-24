@@ -55,7 +55,8 @@
 	</bean>
  -->
 
-	<!-- <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+	<!-- -->
+	<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
 		<property name="supportedMediaTypes">
 			<list>
 				<value>text/html;charset=UTF-8</value>
@@ -73,21 +74,22 @@
 				</property>
 			</bean>
 		</property>
-	</bean> -->
+	</bean> 
 
 
-	<!-- <mvc:annotation-driven>
+	<!-- -->
+	<mvc:annotation-driven>
 		<mvc:message-converters>
 			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
 				<property name="objectMapper">
 					<bean class="com.fasterxml.jackson.databind.ObjectMapper">
-                    处理responseBody 里面日期类型
+                    <!-- 处理responseBody 里面日期类型 -->
 						<property name="dateFormat">
 							<bean class="java.text.SimpleDateFormat">
 								<constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss" />
 							</bean>
 						</property>
-                    为null字段时不显示
+                    <!-- 为null字段时不显示 -->
 						<property name="serializationInclusion">
 							<value type="com.fasterxml.jackson.annotation.JsonInclude.Include">NON_NULL</value>
 						</property>
@@ -95,6 +97,6 @@
 				</property>
 			</bean>
 		</mvc:message-converters>
-	</mvc:annotation-driven> -->
+	</mvc:annotation-driven> 
 
 </beans>

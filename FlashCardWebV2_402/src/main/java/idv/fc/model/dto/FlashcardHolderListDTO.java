@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import idv.fc.model.Flashcard;
 import idv.fc.model.FlashcardHolder;
 
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
+//@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class FlashcardHolderListDTO implements java.io.Serializable{
 	/**
 	 * 
@@ -91,10 +91,10 @@ public class FlashcardHolderListDTO implements java.io.Serializable{
 		flashcardHolder.setUpdateForQuizDate(updateForQuizDate);
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		return "FlashcardHolderListDTO [fh=" + flashcardHolder + ", flashcard="
 				+ flashcard + "]";
-	}
+	}*/
 
 }
