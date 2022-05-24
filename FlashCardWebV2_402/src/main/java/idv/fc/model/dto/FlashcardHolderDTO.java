@@ -7,12 +7,15 @@ import idv.fc.model.FlashcardHolder;
 
 public class FlashcardHolderDTO implements java.io.Serializable {
 
-	private static final long serialVersionUID = 1L;
 	private FlashcardHolder flashcardHolder = new FlashcardHolder();
 	private Flashcard flashcard;
 
 	public FlashcardHolder getFlashcardHolder() {
 		return flashcardHolder;
+	}
+
+	public void setFlashcardHolder(FlashcardHolder flashcardHolder) {
+		this.flashcardHolder = flashcardHolder;
 	}
 
 	public Integer getId() {

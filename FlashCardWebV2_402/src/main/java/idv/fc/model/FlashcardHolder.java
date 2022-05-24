@@ -6,7 +6,6 @@ public class FlashcardHolder  implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
 	private Integer id; //ai
 	private String name;
 	private Integer fcId;//fk: flashcard id

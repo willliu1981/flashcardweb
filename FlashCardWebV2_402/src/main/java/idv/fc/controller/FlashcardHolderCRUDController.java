@@ -18,9 +18,7 @@ import com.google.gson.Gson;
 
 import idv.debug.Debug;
 import idv.fc.model.FlashcardHolder;
-import idv.fc.model.dto.FHDTO2;
 import idv.fc.model.dto.FlashcardHolderDTO;
-import idv.fc.model.dto.FlashcardHolderListDTO;
 import idv.fc.service.abstraction.IFlashcardHolderService;
 import idv.fc.tag.impl.facade.FlashcardHolderEditor;
 
@@ -57,37 +55,36 @@ public class FlashcardHolderCRUDController extends BaseController {
 		List<FlashcardHolderDTO> queryResult = flashcardHolderService
 				.getAllJoinFc();
 
-		List<FlashcardHolderListDTO> collect = queryResult.stream()
-				.map(x -> new FlashcardHolderListDTO(x.getFlashcardHolder(),
-						x.getFlashcard()))
-				.collect(Collectors.toList());
+		List<FlashcardHolderDTO> collect = queryResult.stream().map(x -> {
+			FlashcardHolderDTO flashcardHolderDTO = new FlashcardHolderDTO();
+			flashcardHolderDTO.setId(x.getId());
+			flashcardHolderDTO.setFcId(x.getFcId());
+			flashcardHolderDTO.setName(x.getName());
+			flashcardHolderDTO.setNumberOfQuizTimes(x.getNumberOfQuizTimes());
+			flashcardHolderDTO.setPassTheQuizTimes(x.getPassTheQuizTimes());
+			flashcardHolderDTO.setCreateDate(x.getCreateDate());
+			flashcardHolderDTO.setFlashcard(x.getFlashcard());
 
-		PageInfo<FlashcardHolderDTO> pageInfo1 = new PageInfo<>(queryResult,
-				PAGE_INFO_MAX_NAV_PAGE_NUMBER);
+			return flashcardHolderDTO;
+		}).collect(Collectors.toList());
 
-		/*
-				PageInfo<FlashcardHolderListDTO> pageInfo2 = new PageInfo<>(collect,
-						PAGE_INFO_MAX_NAV_PAGE_NUMBER);*/
-
-		jsonMap.put("pageInfo", pageInfo1);
+		List<FlashcardHolder> queryResultWithoutDTO = flashcardHolderService
+				.getAll();
 
 		Debug.test(new Object() {
-		}, "xxxxxx collect : ", collect);
+		}, "queryResult", queryResult.get(0));
 
 		Debug.test(new Object() {
-		}, "xxxxxx2 query : ", queryResult);
+		}, "queryResultWithoutDTO", queryResultWithoutDTO.get(0));
 
 		Gson g = new Gson();
-
-		String myjson = g.toJson(collect);
-
-		Debug.test(new Object() {
-		}, "xx collect \t", myjson);
-
-		String myjson2 = g.toJson(queryResult);
+		String json = g.toJson(collect);
 
 		Debug.test(new Object() {
-		}, "xx queryResult \t", myjson2);
+		}, "json", json);
+
+		PageInfo<FlashcardHolderDTO> pageInfo = new PageInfo<>(collect);
+		jsonMap.put("pageInfo", pageInfo);
 
 		return jsonMap;
 	}
