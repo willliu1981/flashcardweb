@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+import idv.debug.Debug;
 import idv.fc.model.Flashcard;
 import idv.fc.model.dto.FlashcardHolderDTO;
 import idv.fc.model.dto.HolderDataDTO;
@@ -114,7 +115,7 @@ public class FlashcardsController extends BaseController {
 		map.put("pageInfo", pageInfo);
 		map.put("datas", all);
 		map.put("type", ListFacade.HOLDERDATA);
-
+		
 		return FLASHCARDS + "/modelManagedPage";
 	}
 	//manage holderData end

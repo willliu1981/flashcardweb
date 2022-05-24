@@ -27,6 +27,7 @@
 <script type="text/javascript">
   const contextPath = "/FlashCardWebV2";
   const flashcards = "flashcards";
+  const models = "flashcardHolders";//*** 修改這裡 
   const model = "flashcardHolder";//*** 修改這裡 
   var pageInfo;
   var datas;
@@ -74,7 +75,7 @@
 	      return `
 	      <li class="list-group-item"><a href="#" class="list-group-item">
               <span class="badge" style="background: red;" data-target="#listDeleteModal" data-toggle="modal"
-                  onclick='modelValues("${place.id}","${place.term}","${place.definition}")'>
+                  onclick='modelValues("${place.id}","${place.name}","${place.flashcard==null?"n/a": place.flashcard.term }")'><!--//*** 修改這裡 -->
                   <font size="4">DELETE</font>
               </span>
               <span class="badge badgeSpan badge-edit" onclick="badgeEditLocate(this)" data-id="${place.id}">
@@ -94,6 +95,25 @@
   function badgeEditLocate(element) {
 	window.location.href = contextPath + "/" + model+"/"+$(element).attr('data-id');
   }
+</script>
+
+<!-- list -->
+<script type="text/javascript">
+  $(function() {
+    $(".list-group .list-group-item .badge-add").click(function(){
+      window.location.href = contextPath + "/" + model;
+    }); 
+  });
+</script>
+
+<!-- modal (list delete) -->
+<script type="text/javascript">
+    //*** 修改這裡 
+     function modelValues(id,name,term) {
+        $("#modal_name").text(name);
+        $("#modal_term").text(term); 
+        $("#modal_form").attr("action", contextPath+ "/"+model+"/"+id);
+      }
 </script>
 
 <!-- nav -->
@@ -132,21 +152,11 @@
   }
 </script>
 
-<!-- list -->
-<script type="text/javascript">
-  $(function() {
-	$(".list-group .list-group-item .badge-add").click(function(){
-	  window.location.href = contextPath + "/" + model;
-	});	
-
-  });
-
-</script>
-
 <!-- pager -->
 <script type="text/javascript">
   //(延後載入)
   function doPager() {
+	console.log("xxx "+pageInfo.navigatepageNums);
 	  $(".pager li ul .pager-first a").attr("onclick","getDatas("+1+")");
 	  act(".pager li ul .pager-first",pageInfo.pageNum == 1);
 
@@ -167,7 +177,7 @@
   	$(".pager-pageNum-replaced").nextUntil(".pager-next").remove(); 
 	
     const domElements = navigatepageNums.map( place => {
-      var path=contextPath+"/"+flashcards+"/"+place;
+      var path=contextPath+"/"+models+"/"+place;
       
       if(pageNum==place){
     	return `
@@ -194,18 +204,6 @@
 	}
   }
   
-</script>
-
-
-<!-- modal (list delete) -->
-<script type="text/javascript">
-	
-	 function modelValues(id, term,definition) {
-		$("#modal_name").text(name);//*** 修改這裡 
-		$("#modal_term").text(term);//*** 修改這裡 
-		$("#modal_form").attr("action", contextPath+ "/"+model+"/"+id);
-	  }
-
 </script>
 
 </head>
@@ -296,35 +294,6 @@
     </div>
     <!-- /list -->
 
-    <!-- 分頁 -->
-    <div class="container">
-        <ul class="pager">
-            <li>
-                <ul class="pagination">
-                    <li></li>
-                    <!-- 首頁 -->
-                    <li class="disabled??? pager-first"><a class="hrefDisabled???" href="javascript:;">&laquo;
-                        </a></li>
-
-                    <!-- 上一頁 -->
-                    <li class="disabled??? pager-previous"><a class="hrefDisabled???" href="javascript:;">Previous
-                        </a></li>
-
-                    <!-- 中間頁數 -->
-                    <li class="pager-pageNum-replaced"></li>
-
-                    <!-- 下一頁 -->
-                    <li class="disabled??? pager-next"><a class="hrefDisabled???" href="javascript:;">Next </a></li>
-
-                    <!-- 最末頁 -->
-                    <li class="disabled??? pager-last"><a class="hrefDisabled???" href="javascript:;">&raquo; </a></li>
-                    <li></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-    <!-- /分頁 -->
-
     <!-- 模態框 用於 list delete-->
     <div class="modal fade" tabindex="-1" role="dialog" id="listDeleteModal">
         <div class="modal-dialog" role="document">
@@ -360,6 +329,35 @@
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal (for list delete)-->
+
+    <!-- 分頁 -->
+    <div class="container">
+        <ul class="pager">
+            <li>
+                <ul class="pagination">
+                    <li></li>
+                    <!-- 首頁 -->
+                    <li class="disabled??? pager-first"><a class="hrefDisabled???" href="javascript:;">&laquo;
+                        </a></li>
+
+                    <!-- 上一頁 -->
+                    <li class="disabled??? pager-previous"><a class="hrefDisabled???" href="javascript:;">Previous
+                        </a></li>
+
+                    <!-- 中間頁數 -->
+                    <li class="pager-pageNum-replaced"></li>
+
+                    <!-- 下一頁 -->
+                    <li class="disabled??? pager-next"><a class="hrefDisabled???" href="javascript:;">Next </a></li>
+
+                    <!-- 最末頁 -->
+                    <li class="disabled??? pager-last"><a class="hrefDisabled???" href="javascript:;">&raquo; </a></li>
+                    <li></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <!-- /分頁 -->
 
 </body>
 </html>

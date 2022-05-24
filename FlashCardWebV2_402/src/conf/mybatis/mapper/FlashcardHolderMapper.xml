@@ -31,7 +31,7 @@
 		<id column="id" property="id" />
 
 		<association property="flashcard" column="fc_id"
-			select="idv.fc.dao.itf.FlashcardDao.selectById">
+			select="idv.fc.dao.itf.FlashcardDao.selectById" fetchType="eager">
 		</association>
 	</resultMap>
 
@@ -42,7 +42,8 @@
 
 
 	<select id="selectByIdJoinFc" resultMap="baseFHResultMap">
-		select * from flashcardHolder where id = #{id}
+		select * from flashcardHolder
+		where id = #{id}
 	</select>
 
 </mapper>

@@ -1,10 +1,8 @@
 package idv.fc.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,10 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.google.gson.Gson;
 
-import idv.debug.Debug;
-import idv.fc.model.Flashcard;
 import idv.fc.model.FlashcardHolder;
 import idv.fc.model.dto.FlashcardHolderDTO;
 import idv.fc.service.abstraction.IFlashcardHolderService;
@@ -52,20 +47,14 @@ public class FlashcardHolderCRUDController extends BaseController {
 		if (pageNum != null && !pageNum.equals("")) {
 			intPageNumber = Integer.valueOf(pageNum);
 		}
-		PageHelper.startPage(intPageNumber, 6);
+		PageHelper.startPage(intPageNumber, 5);
 
 		List<FlashcardHolderDTO> queryResult = flashcardHolderService
 				.getAllJoinFc();
 
-		List<FlashcardHolderDTO> collect = queryResult.stream().map(x -> {
-			FlashcardHolderDTO dto = new FlashcardHolderDTO();
-			dto.setId(x.getId());
-			dto.setName(x.getName());
-			dto.setFlashcard(x.getFlashcard());
-			return dto;
-		}).collect(Collectors.toList());
+		PageInfo<FlashcardHolderDTO> pageInfo = new PageInfo<>(queryResult,
+				PAGE_INFO_MAX_NAV_PAGE_NUMBER);
 
-		PageInfo<FlashcardHolderDTO> pageInfo = new PageInfo<>(collect);
 		jsonMap.put("pageInfo", pageInfo);
 
 		return jsonMap;

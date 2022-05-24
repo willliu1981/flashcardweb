@@ -2,6 +2,7 @@ package idv.fc.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import com.github.pagehelper.PageInfo;
 
 import idv.debug.Debug;
 import idv.fc.model.Flashcard;
+import idv.fc.model.dto.FlashcardHolderDTO;
 import idv.fc.service.abstraction.IFlashcardService;
 import idv.fc.tag.impl.facade.FlashcardEditor;
 
@@ -46,20 +48,21 @@ public class FlashcardCRUDController extends BaseController {
 	public HashMap<String, Object> getAllFlashcardWhitPageNum(
 			@PathVariable("pageNum") Integer pageNum) {
 
-		HashMap<String, Object> json = new HashMap<>();
+		HashMap<String, Object> jsonMap = new HashMap<>();
 
 		int intPageNumber = 1;//default pageNumber
 		if (pageNum != null && !pageNum.equals("")) {
 			intPageNumber = Integer.valueOf(pageNum);
 		}
 		PageHelper.startPage(intPageNumber, PAGE_HELPER_MAX_PAGE_NUMBER);
-		List<Flashcard> all = flashcardService.getAll();
-		PageInfo<Flashcard> pageInfo = new PageInfo<>(all,
+		List<Flashcard> queryResult = flashcardService.getAll();
+
+		PageInfo<Flashcard> pageInfo = new PageInfo<>(queryResult,
 				PAGE_INFO_MAX_NAV_PAGE_NUMBER);
 
-		json.put("pageInfo", pageInfo);
+		jsonMap.put("pageInfo", pageInfo);
 
-		return json;
+		return jsonMap; 
 	}
 
 	@RequestMapping(value = "flashcard", method = RequestMethod.GET)

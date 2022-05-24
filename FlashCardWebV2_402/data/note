@@ -17,6 +17,8 @@
 .	controller @ResponseBody 回傳的json, 無法使用 靜態proxy 做成的DTO,會出現不明狀況
 
 
+
+
 待測:
 .	sql 驗證 default
 .	transaction , ai , list search , create fc with fh or create fh with fc 
@@ -62,6 +64,10 @@
 
 注意:
 .	會影響 tld 的址參照項目: Facade、 Tag class 
+
+.	myabatis 分步查詢結果無法放入 json, 手動處理DTO PageInfo 也會出錯,
+	PageInfo 似乎依賴於原查詢結果(參數放入原result)
+	無法 json 序列化是分步查詢懶加載導致
 
 
 備註:

@@ -27,8 +27,7 @@
 <script type="text/javascript">
   const contextPath = "/FlashCardWebV2";
   const flashcards = "flashcards";
-  const models = "flashcards";//*** 修改這裡 
-  const model = "flashcard";//*** 修改這裡 
+  const model = "holderData";//*** 修改這裡 
   var pageInfo;
   var datas;
   var pageNum=1;
@@ -47,15 +46,15 @@
 	  $.ajax({
 		  type : "get",
 		  dataType:"json",
-		  url : contextPath + "/" + "flashcards"+"/"+num,//*** 修改這裡 
+		  url : contextPath + "/" + "holderDatas"+"/"+num,//*** 修改這裡 
 		  success : function(resp) {
+			
 			datas = [];
 			pageInfo = resp.pageInfo;
 			for (i = 0; i < pageInfo.list.length; i++) {
 			  datas.push(pageInfo.list[i]);
 			}
 			createListDomElement(datas);
-
 
 			//處理分頁
 			doPager();
@@ -75,14 +74,14 @@
 	      return `
 	      <li class="list-group-item"><a href="#" class="list-group-item">
               <span class="badge" style="background: red;" data-target="#listDeleteModal" data-toggle="modal"
-                  onclick='modelValues("${place.id}","${place.term}","${place.definition}")'><!--//*** 修改這裡 -->
+                  onclick='modelValues("${place.id}","${place.term}","${place.definition}")'>
                   <font size="4">DELETE</font>
               </span>
               <span class="badge badgeSpan badge-edit" onclick="badgeEditLocate(this)" data-id="${place.id}">
                   <font size="4">EDIT</font>
               </span>
-              <h4 class="h4" class="list-group-item-heading">${ place.term }</h4><!--//*** 修改這裡 -->
-              <p class="h4" class="list-group-item-text">${ place.definition }</p><!--//*** 修改這裡 -->
+              <h4 class="h4" class="list-group-item-heading">${ place.name }</h4><!--//*** 修改這裡 -->
+              <p class="h4" class="list-group-item-text">${place.flashcard==null?"n/a": place.flashcard.term }</p><!--//*** 修改這裡 -->
       	  </a></li>
 	      `;
 	    }).join("");
@@ -95,25 +94,6 @@
   function badgeEditLocate(element) {
 	window.location.href = contextPath + "/" + model+"/"+$(element).attr('data-id');
   }
-</script>
-
-<!-- list -->
-<script type="text/javascript">
-  $(function() {
-    $(".list-group .list-group-item .badge-add").click(function(){
-      window.location.href = contextPath + "/" + model;
-    }); 
-  });
-</script>
-
-<!-- modal (list delete) -->
-<script type="text/javascript">
-    //*** 修改這裡 
-     function modelValues(id,term,definition) {
-        $("#modal_term").text(term);
-        $("#modal_definition").text(definition);
-        $("#modal_form").attr("action", contextPath+ "/"+model+"/"+id);
-      }
 </script>
 
 <!-- nav -->
@@ -137,7 +117,7 @@
 			.attr("href", contextPath + "/" + flashcards + "/hdManager");
 
 		//使作用中
-		act(".navbar-collapse ul .dropdown ul .modelManager-flashcard");//*** 修改這裡 
+		act(".navbar-collapse ul .dropdown ul .modelManager-holderData");//*** 修改這裡 
 
 		//使 a href 失效 
 		$('a.hrefDisabled').on("click", function(e) {
@@ -150,6 +130,17 @@
 	$(selector).addClass("active");
 	$(selector + " a").addClass("hrefDisabled");
   }
+</script>
+
+<!-- list -->
+<script type="text/javascript">
+  $(function() {
+	$(".list-group .list-group-item .badge-add").click(function(){
+	  window.location.href = contextPath + "/" + model;
+	});	
+
+  });
+
 </script>
 
 <!-- pager -->
@@ -176,7 +167,7 @@
   	$(".pager-pageNum-replaced").nextUntil(".pager-next").remove(); 
 	
     const domElements = navigatepageNums.map( place => {
-      var path=contextPath+"/"+models+"/"+place;
+      var path=contextPath+"/"+flashcards+"/"+place;
       
       if(pageNum==place){
     	return `
@@ -203,6 +194,18 @@
 	}
   }
   
+</script>
+
+
+<!-- modal (list delete) -->
+<script type="text/javascript">
+	
+	 function modelValues(id, term,definition) {
+		$("#modal_name").text(name);//*** 修改這裡 
+		$("#modal_term").text(term);//*** 修改這裡 
+		$("#modal_form").attr("action", contextPath+ "/"+model+"/"+id);
+	  }
+
 </script>
 
 </head>
@@ -274,7 +277,7 @@
     <div class="jumbotron">
         <div class="container">
             <h1>FlashCard</h1>
-            <p>管理 Flashcard</p>
+            <p>管理 Holder Data</p>
             <!-- //*** 修改這裡  -->
         </div>
     </div>
@@ -285,9 +288,8 @@
             <li class="list-group-item list-group-item-title"><span class="badge badge-add" onclick="">
                     <font size="5">ADD</font>
                 </span>
-                <h3>Flashcard</h3></li>
+                <h3>Holder Data</h3></li>
             <!-- //*** 修改這裡  -->
-
             <li class="list-group-item-replaced"></li>
         </ul>
     </div>
@@ -330,15 +332,15 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title">Flashcard</h4>
+                    <h4 class="modal-title">Flashcard Holder</h4>
+                    <!-- //*** 修改這裡  -->
+                </div>
+                <div class="modal-body">
+                    <label id="modal_name" style="font-size: 20px;">name</label>
                     <!-- //*** 修改這裡  -->
                 </div>
                 <div class="modal-body">
                     <label id="modal_term" style="font-size: 20px;">term</label>
-                    <!-- //*** 修改這裡  -->
-                </div>
-                <div class="modal-body">
-                    <label id="modal_definition" style="font-size: 20px;">definition</label>
                     <!-- //*** 修改這裡  -->
                 </div>
                 <div class="modal-footer">
