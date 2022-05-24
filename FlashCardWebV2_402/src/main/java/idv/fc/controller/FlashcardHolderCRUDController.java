@@ -1,5 +1,6 @@
 package idv.fc.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import com.github.pagehelper.PageInfo;
 import com.google.gson.Gson;
 
 import idv.debug.Debug;
+import idv.fc.model.Flashcard;
 import idv.fc.model.FlashcardHolder;
 import idv.fc.model.dto.FlashcardHolderDTO;
 import idv.fc.service.abstraction.IFlashcardHolderService;
@@ -56,32 +58,12 @@ public class FlashcardHolderCRUDController extends BaseController {
 				.getAllJoinFc();
 
 		List<FlashcardHolderDTO> collect = queryResult.stream().map(x -> {
-			FlashcardHolderDTO flashcardHolderDTO = new FlashcardHolderDTO();
-			flashcardHolderDTO.setId(x.getId());
-			flashcardHolderDTO.setFcId(x.getFcId());
-			flashcardHolderDTO.setName(x.getName());
-			flashcardHolderDTO.setNumberOfQuizTimes(x.getNumberOfQuizTimes());
-			flashcardHolderDTO.setPassTheQuizTimes(x.getPassTheQuizTimes());
-			flashcardHolderDTO.setCreateDate(x.getCreateDate());
-			flashcardHolderDTO.setFlashcard(x.getFlashcard());
-
-			return flashcardHolderDTO;
+			FlashcardHolderDTO dto = new FlashcardHolderDTO();
+			dto.setId(x.getId());
+			dto.setName(x.getName());
+			dto.setFlashcard(x.getFlashcard());
+			return dto;
 		}).collect(Collectors.toList());
-
-		List<FlashcardHolder> queryResultWithoutDTO = flashcardHolderService
-				.getAll();
-
-		Debug.test(new Object() {
-		}, "queryResult", queryResult.get(0));
-
-		Debug.test(new Object() {
-		}, "queryResultWithoutDTO", queryResultWithoutDTO.get(0));
-
-		Gson g = new Gson();
-		String json = g.toJson(collect);
-
-		Debug.test(new Object() {
-		}, "json", json);
 
 		PageInfo<FlashcardHolderDTO> pageInfo = new PageInfo<>(collect);
 		jsonMap.put("pageInfo", pageInfo);

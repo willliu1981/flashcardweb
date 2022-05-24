@@ -48,6 +48,7 @@
 		  dataType:"json",
 		  url : contextPath + "/" + "flashcardHolders"+"/"+num,//*** 修改這裡 
 		  success : function(resp) {
+			
 			datas = [];
 			pageInfo = resp.pageInfo;
 			for (i = 0; i < pageInfo.list.length; i++) {
@@ -80,7 +81,7 @@
                   <font size="4">EDIT</font>
               </span>
               <h4 class="h4" class="list-group-item-heading">${ place.name }</h4><!--//*** 修改這裡 -->
-              <p class="h4" class="list-group-item-text">${ place.term }</p><!--//*** 修改這裡 -->
+              <p class="h4" class="list-group-item-text">${place.flashcard==null?"n/a": place.flashcard.term }</p><!--//*** 修改這裡 -->
       	  </a></li>
 	      `;
 	    }).join("");
