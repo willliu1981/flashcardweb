@@ -2,10 +2,13 @@ package idv.fc.model.dto;
 
 import java.sql.Timestamp;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import idv.fc.model.Flashcard;
 import idv.fc.model.FlashcardHolder;
 
-public class FlashcardHolderListDTO {
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
+public class FlashcardHolderListDTO implements java.io.Serializable{
 	/**
 	 * 
 	 */

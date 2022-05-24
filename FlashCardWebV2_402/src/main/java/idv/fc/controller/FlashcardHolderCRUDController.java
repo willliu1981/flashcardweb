@@ -14,15 +14,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.gson.Gson;
 
 import idv.debug.Debug;
 import idv.fc.model.FlashcardHolder;
-import idv.fc.model.dto.FHDTO;
 import idv.fc.model.dto.FlashcardHolderDTO;
 import idv.fc.model.dto.FlashcardHolderListDTO;
 import idv.fc.service.abstraction.IFlashcardHolderService;
 import idv.fc.tag.impl.facade.FlashcardHolderEditor;
-import tool.toolkit.Toolkit;
 
 @Controller
 public class FlashcardHolderCRUDController extends BaseController {
@@ -53,7 +52,10 @@ public class FlashcardHolderCRUDController extends BaseController {
 			intPageNumber = Integer.valueOf(pageNum);
 		}
 		PageHelper.startPage(intPageNumber, PAGE_HELPER_MAX_PAGE_NUMBER);
+
 		List<FlashcardHolderDTO> all = flashcardHolderService.getAllJoinFc();
+
+		List<FlashcardHolder> all2 = flashcardHolderService.getAll();
 
 		List<FlashcardHolderListDTO> collect = all.stream()
 				.map(x -> new FlashcardHolderListDTO(x.getFlashcardHolder(),
@@ -66,7 +68,14 @@ public class FlashcardHolderCRUDController extends BaseController {
 		json.put("pageInfo", pageInfo);
 
 		Debug.test(new Object() {
-		}, "xx", pageInfo);
+		}, "xxxxxx");
+
+		Gson g = new Gson();
+
+		String json2 = g.toJson(all);
+
+		Debug.test(new Object() {
+		}, "xx", json2);
 
 		return json;
 	}
