@@ -47,7 +47,7 @@ public class FlashcardHolderCRUDController extends BaseController {
 		if (pageNum != null && !pageNum.equals("")) {
 			intPageNumber = Integer.valueOf(pageNum);
 		}
-		PageHelper.startPage(intPageNumber, 5);
+		PageHelper.startPage(intPageNumber, PAGE_HELPER_MAX_PAGE_NUMBER);
 
 		List<FlashcardHolderDTO> queryResult = flashcardHolderService
 				.getAllJoinFc();
@@ -86,7 +86,7 @@ public class FlashcardHolderCRUDController extends BaseController {
 	public String add(FlashcardHolder flashcardHolder) {
 
 		if (flashcardHolder.getFcId() != null
-				|| flashcardHolder.getId().equals("")) {
+				&& flashcardHolder.getFcId().equals("")) {
 			flashcardHolder.setFcId(null);
 		}
 		flashcardHolderService.addNew(flashcardHolder);
