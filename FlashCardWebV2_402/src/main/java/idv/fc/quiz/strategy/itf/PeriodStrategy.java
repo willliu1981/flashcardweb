@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import idv.debug.Debug;
 import idv.fc.model.dto.HolderDataDTO;
 
 public class PeriodStrategy implements QuizStrategy<HolderDataDTO> {
@@ -17,11 +18,13 @@ public class PeriodStrategy implements QuizStrategy<HolderDataDTO> {
 			if (x.getStatus().getEndTimeOfPhase() == null) {
 				return true;
 			}
-			
+
 			boolean before = x.getStatus().getEndTimeOfPhase()
 					.before(new Date());
 
-			return before;
+			Debug.test(new Object() {
+			}, "test#");
+			return true;//test
 		}).collect(Collectors.toList());
 
 		List<HolderDataDTO> collect = filterTime.stream().collect(

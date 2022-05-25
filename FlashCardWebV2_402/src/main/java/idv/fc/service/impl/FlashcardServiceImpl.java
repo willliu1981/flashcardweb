@@ -34,18 +34,18 @@ public class FlashcardServiceImpl implements IFlashcardService {
 	}
 
 	@Override
-	public void addNew(Flashcard flashcard) {
+	public void addNew(Flashcard model) {
 		try {
-			flashcardDao.create(flashcard);
+			flashcardDao.create(model);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
 	@Override
-	public void edit(Flashcard flashcard) {
+	public void edit(Flashcard model) {
 		try {
-			flashcardDao.update(flashcard);
+			flashcardDao.update(model);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

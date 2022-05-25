@@ -16,6 +16,11 @@ public class FlashcardHolderDTO extends FlashcardHolder
 		this.flashcard = fc;
 	}
 
+	@Override
+	public String toString() {
+		return "FlashcardHolderDTO [flashcard=" + flashcard + "]";
+	}
+
 
 
 }

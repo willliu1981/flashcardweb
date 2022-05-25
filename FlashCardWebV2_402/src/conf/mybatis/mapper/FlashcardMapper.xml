@@ -19,7 +19,10 @@
 
 	<update id="update" parameterType="Flashcard">
 		update flashcard set
-		term=#{term},definition=#{definition} where id = #{id};
+		term=#{term},definition=#{definition},
+		number_of_quiz_times=#{numberOfQuizTimes},
+		pass_the_quiz_times=#{passTheQuizTimes}
+		where id = #{id};
 	</update>
 
 	<delete id="delete">

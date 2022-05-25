@@ -13,6 +13,13 @@
 		Status ()values();
 	</insert>
 
+	<update id="update" parameterType="Status">
+		update Status set
+		begin_time_of_phase=#{beginTimeOfPhase},
+		end_time_of_phase=#{endTimeOfPhase},
+		phase=#{phase} where id = #{id};
+	</update>
+
 	<delete id="delete">
 		delete from Status where id = #{id};
 	</delete>

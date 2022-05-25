@@ -19,7 +19,10 @@
 
 	<update id="update" parameterType="FlashcardHolder">
 		update flashcardHolder set
-		name=#{name},fc_id=#{fcId} where
+		name=#{name},fc_id=#{fcId},
+		number_of_quiz_times=#{numberOfQuizTimes},
+		update_for_quiz_date=#{updateForQuizDate},
+		pass_the_quiz_times=#{passTheQuizTimes} where
 		id = #{id};
 	</update>
 
@@ -29,6 +32,7 @@
 
 	<resultMap type="FlashcardHolderDTO" id="baseFHResultMap">
 		<id column="id" property="id" />
+		<result column="fc_id" property="fcId"/>
 
 		<association property="flashcard" column="fc_id"
 			select="idv.fc.dao.itf.FlashcardDao.selectById" fetchType="eager">

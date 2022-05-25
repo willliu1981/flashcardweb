@@ -20,8 +20,13 @@ import com.google.gson.Gson;
 
 import idv.debug.Debug;
 import idv.fc.model.Flashcard;
+import idv.fc.model.Status;
+import idv.fc.model.dto.FlashcardHolderDTO;
 import idv.fc.model.dto.HolderDataDTO;
+import idv.fc.service.abstraction.IFlashcardHolderService;
+import idv.fc.service.abstraction.IFlashcardService;
 import idv.fc.service.abstraction.IHolderDataService;
+import idv.fc.service.abstraction.IStatusService;
 
 @Controller
 @RequestMapping(value = "quiz")
@@ -29,7 +34,16 @@ public class QuizController extends BaseController {
 	private String QUIZ = "quiz";
 
 	@Autowired
+	IFlashcardService flashcardService;
+
+	@Autowired
+	IFlashcardHolderService flashcardHolderService;
+
+	@Autowired
 	IHolderDataService holderDataService;
+
+	@Autowired
+	private IStatusService statusService;
 
 	/*
 	 * 管理 Quiz
@@ -45,11 +59,18 @@ public class QuizController extends BaseController {
 
 		List<HolderDataDTO> all = holderDataService.getAllJoinFH(mod, num);
 
+		Debug.test(new Object() {
+		}, "xxx1", all);
+
 		List<Flashcard> collect = all.stream()
 				.map(x -> x.getFlashcardHolderDTO().getFlashcard())
 				.collect(Collectors.toList());
 
-		String json = collect.stream().map(x -> x.getId().toString())
+		Debug.test(new Object() {
+		}, "xxx2", collect);
+
+		String json = collect.stream().filter(x -> x != null)
+				.map(x -> x.getId().toString())
 				.collect(Collectors.joining(",", "[", "]"));
 
 		map.put("datas", collect);
@@ -60,8 +81,7 @@ public class QuizController extends BaseController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String toFinish() {
-		Debug.test(new Object() {
-		}, "xxxx2");
+
 		return "quiz/quizFinish.jsp";
 	}
 
@@ -75,28 +95,32 @@ public class QuizController extends BaseController {
 
 		List<HolderDataDTO> all = holderDataService.getAllJoinFH();
 
-		Stream<HolderDataDTO> stream = all.stream().filter(x -> list
-				.contains(x.getFlashcardHolderDTO().getFlashcard().getId()));
+		Stream<HolderDataDTO> stream = all.stream()
+				.filter(x -> x.getFlashcardHolderDTO().getFlashcard() != null
+						&& list.contains(x.getFlashcardHolderDTO()
+								.getFlashcard().getId()));
 
 		stream.forEach(x -> {
-			x.getStatus()
-					.setBeginTimeOfPhase(new Timestamp(new Date().getTime()));
-			x.getStatus().setPhase(x.getStatus().getPhase() + 1);
+			Status status = x.getStatus();
+			status.setBeginTimeOfPhase(new Timestamp(new Date().getTime()));
+			status.setPhase(status.getPhase() + 1);
 
-			x.getFlashcardHolderDTO().setNumberOfQuizTimes(
-					x.getFlashcardHolderDTO().getNumberOfQuizTimes() + 1);
+			FlashcardHolderDTO flashcardHolderDTO = x.getFlashcardHolderDTO();
+			flashcardHolderDTO.setNumberOfQuizTimes(
+					flashcardHolderDTO.getNumberOfQuizTimes() + 1);
 
-			x.getFlashcardHolderDTO().getFlashcard()
-					.setNumberOfQuizTimes(x.getFlashcardHolderDTO()
-							.getFlashcard().getNumberOfQuizTimes() + 1);
+			Flashcard flashcard = x.getFlashcardHolderDTO().getFlashcard();
+			flashcard
+					.setNumberOfQuizTimes(flashcard.getNumberOfQuizTimes() + 1);
+
+			this.flashcardService.edit(flashcard);
+			this.flashcardHolderService.edit(flashcardHolderDTO);
+			this.statusService.edit(status);
 
 		});
 
 		Map<String, String> result = new HashMap<>();
 		result.put("code", "1");
-
-		Debug.test(new Object() {
-		}, "xxxx");
 
 		return result;
 	}

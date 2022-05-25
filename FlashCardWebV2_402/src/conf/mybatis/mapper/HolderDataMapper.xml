@@ -28,6 +28,7 @@
 
 	<resultMap type="HolderDataDTO" id="baseHDResultMap">
 		<id column="id" property="id" />
+		<result column="fh_id" property="fhId"/>
 
 		<association property="flashcardHolderDTO" column="fh_id"
 			select="idv.fc.dao.itf.FlashcardHolderDao.selectByIdJoinFc" fetchType="eager">

@@ -1,10 +1,7 @@
 package idv.fc.service.impl;
 
 import java.sql.SQLException;
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +14,7 @@ import idv.fc.model.dto.HolderDataDTO;
 import idv.fc.quiz.strategy.itf.PeriodStrategy;
 import idv.fc.quiz.strategy.itf.QuizModContext;
 import idv.fc.service.abstraction.IHolderDataService;
+import idv.fc.service.abstraction.IStatusService;
 
 @Service("holderDataService")
 public class HolderDataServiceImpl implements IHolderDataService {
@@ -26,6 +24,9 @@ public class HolderDataServiceImpl implements IHolderDataService {
 
 	@Autowired
 	private StatusDao statusDao;
+
+	@Autowired
+	private IStatusService statusService;
 
 	@Override
 	public List<HolderData> getAll() {
@@ -46,7 +47,7 @@ public class HolderDataServiceImpl implements IHolderDataService {
 	public void addNew(HolderData holderData) {
 		try {
 			Status status = new Status();
-			statusDao.create(status);
+			statusService.addNew(status);
 
 			holderData.setStatusId(status.getId());
 			holderDataDao.create(holderData);
@@ -70,7 +71,7 @@ public class HolderDataServiceImpl implements IHolderDataService {
 			/*holderDataDao.delete(id);*/
 			//藉由刪除status 由sql 自動(連瑣)刪除 holderData 
 			Integer statusId = holderDataDao.selectById(id).getStatusId();
-			statusDao.delete(statusId);
+			statusService.remove(statusId.toString());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -94,8 +95,11 @@ public class HolderDataServiceImpl implements IHolderDataService {
 		//決策
 		if (mod.equals("period")) {
 			modContext.setStrategy(new PeriodStrategy());
-
-			return modContext.executeStrategy(mod, num);
+			
+			List<HolderDataDTO> executeStrategy = modContext
+					.executeStrategy(mod, num);
+			
+			return executeStrategy;
 
 		} else {
 			resultList = this.holderDataDao.selectAllJoinFh();

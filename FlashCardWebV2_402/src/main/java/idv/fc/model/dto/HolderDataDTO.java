@@ -55,4 +55,10 @@ public class HolderDataDTO {
 		this.flashcardHolderDTO = flashcardHolderDTO;
 	}
 
+	@Override
+	public String toString() {
+		return "HolderDataDTO [hd=" + hd + ", flashcardHolderDTO="
+				+ flashcardHolderDTO + ", status=" + status + "]";
+	}
+
 }
