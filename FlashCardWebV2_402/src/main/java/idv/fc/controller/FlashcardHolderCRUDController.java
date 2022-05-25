@@ -23,20 +23,50 @@ import idv.fc.tag.impl.facade.FlashcardHolderEditor;
 public class FlashcardHolderCRUDController extends BaseController {
 	private static final Integer PAGE_HELPER_MAX_PAGE_NUMBER = 5;
 	private static final Integer PAGE_INFO_MAX_NAV_PAGE_NUMBER = 5;
-	protected String WEB_FLASHCARDS = "flashcards";//web base page
-	protected String FLASHCARDS = "flashcards";//jsp base page
-	protected String FLASHCARDHOLDER = "flashcardHolder";//jsp second-level page
+	protected final String WEB_FLASHCARDS = "flashcards";//web base page
+	protected final String PAGE_FLASHCARDS = "flashcards";//jsp/html base page
+	protected final String FLASHCARDHOLDER = "flashcardHolder";//crud path
+	protected final String FLASHCARDHOLDERS = "flashcardHolders";//crud path
 
 	@Autowired
 	IFlashcardHolderService flashcardHolderService;
 
-	@RequestMapping(value = "flashcardHolders", produces = "application/json", method = RequestMethod.GET)
+	/*
+	 * to crud page
+	 */
+
+	@RequestMapping(value = FLASHCARDHOLDER, method = RequestMethod.GET)
+	public String toAdd(HashMap<String, Object> map) {
+		map.put("data", new FlashcardHolder());
+		map.put("erType", FlashcardHolderEditor.class);
+
+		return PAGE_FLASHCARDS + "/modelEditPage.jsp";
+	}
+
+	@RequestMapping(value = FLASHCARDHOLDER
+			+ "/{id}", method = RequestMethod.GET)
+	public String toEdit(HashMap<String, Object> map,
+			@PathVariable("id") String id) {
+		FlashcardHolder find = flashcardHolderService.getById(id);
+
+		map.put("data", find);
+		map.put("erType", FlashcardHolderEditor.class);
+
+		return PAGE_FLASHCARDS + "/modelEditPage.jsp";
+	}
+
+	/*
+	 * process 
+	 */
+
+	@RequestMapping(value = FLASHCARDHOLDERS, produces = "application/json", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, Object> getAllFlashcardHolder() {
 		return getAllFlashcardHolderWhitPageNum(null);
 	}
 
-	@RequestMapping(value = "flashcardHolders/{pageNum}", produces = "application/json", method = RequestMethod.GET)
+	@RequestMapping(value = FLASHCARDHOLDERS
+			+ "/{pageNum}", produces = "application/json", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, Object> getAllFlashcardHolderWhitPageNum(
 			@PathVariable("pageNum") Integer pageNum) {
@@ -60,29 +90,7 @@ public class FlashcardHolderCRUDController extends BaseController {
 		return jsonMap;
 	}
 
-	@RequestMapping(value = "flashcardHolder", method = RequestMethod.GET)
-	public String toAdd(HashMap<String, Object> map) {
-		map.put("data", new FlashcardHolder());
-		map.put("erType", FlashcardHolderEditor.class);
-
-		return FLASHCARDS + "/" + "modelEditPage.jsp";
-	}
-
-	@RequestMapping(value = "flashcardHolder/{id}", method = RequestMethod.GET)
-	public String toEdit(HashMap<String, Object> map,
-			@PathVariable("id") String id) {
-		FlashcardHolder find = flashcardHolderService.getById(id);
-
-		map.put("data", find);
-		map.put("erType", FlashcardHolderEditor.class);
-
-		return FLASHCARDS + "/" + "modelEditPage.jsp";
-	}
-
-	/*
-	 * process begin
-	 */
-	@RequestMapping(value = "flashcardHolder", method = RequestMethod.POST)
+	@RequestMapping(value =FLASHCARDHOLDER, method = RequestMethod.POST)
 	public String add(FlashcardHolder flashcardHolder) {
 
 		if (flashcardHolder.getFcId() != null
@@ -94,7 +102,7 @@ public class FlashcardHolderCRUDController extends BaseController {
 		return "redirect:/" + WEB_FLASHCARDS + "/fhManager";
 	}
 
-	@RequestMapping(value = "flashcardHolder", method = RequestMethod.PUT)
+	@RequestMapping(value = FLASHCARDHOLDER, method = RequestMethod.PUT)
 	public String edit(FlashcardHolder flashcardHolder) {
 		if (flashcardHolder.getFcId() == null
 				|| flashcardHolder.getId().equals("")) {
@@ -105,7 +113,7 @@ public class FlashcardHolderCRUDController extends BaseController {
 		return "redirect:/" + WEB_FLASHCARDS + "/fhManager";
 	}
 
-	@RequestMapping(value = "flashcardHolder/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = FLASHCARDHOLDER+"/{id}", method = RequestMethod.DELETE)
 	public String remove(@PathVariable("id") String id) {
 		flashcardHolderService.remove(id);
 

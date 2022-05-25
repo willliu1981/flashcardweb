@@ -80,6 +80,10 @@
 	PageInfo 似乎依賴於原查詢結果(參數放入原result)
 	無法 json 序列化是分步查詢懶加載導致
 
+.	刪除holderData 時,須一併刪除status, 但flashcardholder 不必刪除
+		# 由於外鍵關係, 刪除flashcardHolder 或 status 都會連同holderData 自動刪除,
+		  但是刪除flashcard 只會讓flashcardHolder 設置為null
+
 
 備註:
 .	java web ssm.mm 人智圖

@@ -30,17 +30,16 @@
 		<id column="id" property="id" />
 
 		<association property="flashcardHolderDTO" column="fh_id"
-			select="idv.fc.dao.itf.FlashcardHolderDao.selectByIdJoinFc">
+			select="idv.fc.dao.itf.FlashcardHolderDao.selectByIdJoinFc" fetchType="eager">
 		</association>
 
 		<association property="status" column="status_id"
-			select="idv.fc.dao.itf.StatusDao.selectById">
+			select="idv.fc.dao.itf.StatusDao.selectById" fetchType="eager">
 		</association>
 	</resultMap>
 
 	<select id="selectAllJoinFh" resultMap="baseHDResultMap">
 		select * from holderData
-
 	</select>
 
 </mapper>

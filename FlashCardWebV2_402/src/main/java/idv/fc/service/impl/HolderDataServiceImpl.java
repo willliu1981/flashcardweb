@@ -67,7 +67,10 @@ public class HolderDataServiceImpl implements IHolderDataService {
 	@Override
 	public void remove(String id) {
 		try {
-			holderDataDao.delete(id);
+			/*holderDataDao.delete(id);*/
+			//藉由刪除status 由sql 自動(連瑣)刪除 holderData 
+			Integer statusId = holderDataDao.selectById(id).getStatusId();
+			statusDao.delete(statusId);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

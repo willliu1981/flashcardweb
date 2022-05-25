@@ -27,10 +27,8 @@ import idv.taglib.factory.lister.ListFacade;
 @Controller
 @RequestMapping(value = "flashcards")
 public class FlashcardsController extends BaseController {
-	private static final Integer MAX_PAGE_NUMBER = 5;
-	private static final Integer MAX_NAV_PAGE_NUMBER = 5;
 	protected String WEB_FLASHCARDS = "flashcards";//web base page
-	protected String FLASHCARDS = "flashcards";//jsp base path
+	protected String FLASHCARDS = "flashcards";//jsp/html base path
 
 	@Autowired
 	IFlashcardService flashcardService;
@@ -50,73 +48,19 @@ public class FlashcardsController extends BaseController {
 		return FLASHCARDS + "/fcsManagedPage.jsp";
 	}
 
-	// manage flashcard begin
 	@RequestMapping(value = "fcManager")
 	public String toFlashcardManager() {
 		return FLASHCARDS + "/modelManager/flashcardManagedPage.html";
 	}
-	//manage flashcard end
 
 	@RequestMapping(value = "fhManager")
 	public String toFlashcardHolderManager() {
 		return FLASHCARDS + "/modelManager/flashcardHolderManagedPage.html";
 	}
 
-	//manage flashcardHolder begin
-	/*	@RequestMapping(value = "fhManager")
-		public String toFlashcardHolderManager(HashMap<String, Object> map) {
-			return toFlashcardHolderManagerWithPageNumber(map, null);
-		}
-	
-		@RequestMapping(value = "fhManager/{pageNumber}")
-		public String toFlashcardHolderManagerWithPageNumber(
-				HashMap<String, Object> map,
-				@PathVariable(value = "pageNumber") String pageNumber) {
-			int intPageNumber = 1;//default pageNumber
-			if (pageNumber != null && !pageNumber.equals("")) {
-				intPageNumber = Integer.valueOf(pageNumber);
-			}
-	
-			PageHelper.startPage(intPageNumber, MAX_PAGE_NUMBER);
-			//List<FlashcardHolder> all = flashcardHolderService.getAll();
-			List<FlashcardHolderDTO> all = flashcardHolderService.getAllJoinFc();
-	
-			map.put("flashcardHolders", all);
-			PageInfo<FlashcardHolderDTO> pageInfo = new PageInfo<>(all,
-					MAX_NAV_PAGE_NUMBER);
-	
-			map.put("pageInfo", pageInfo);
-			map.put("datas", all);
-			map.put("type", FlashcardHolderDTOListFacade.class);
-	
-			return FLASHCARDS + "/modelManagedPage";
-		}*/
-	//manage flashcardHolder end
-
-	//manage holderData begin
 	@RequestMapping(value = "hdManager")
 	public String toHolderDataManager(HashMap<String, Object> map) {
-		return toHolderDataManagerWithPageNumber(map, null);
+		return FLASHCARDS + "/modelManager/holderDataManagedPage.html";
 	}
 
-	@RequestMapping(value = "hdManager/{pageNumber}")
-	public String toHolderDataManagerWithPageNumber(HashMap<String, Object> map,
-			@PathVariable(value = "pageNumber") String pageNumber) {
-		int intPageNumber = 1;//default pageNumber
-		if (pageNumber != null && !pageNumber.equals("")) {
-			intPageNumber = Integer.valueOf(pageNumber);
-		}
-
-		PageHelper.startPage(intPageNumber, MAX_PAGE_NUMBER);
-		List<HolderDataDTO> all = holderDataService.getAllJoinFH();
-		PageInfo<HolderDataDTO> pageInfo = new PageInfo<>(all,
-				MAX_NAV_PAGE_NUMBER);
-
-		map.put("pageInfo", pageInfo);
-		map.put("datas", all);
-		map.put("type", ListFacade.HOLDERDATA);
-		
-		return FLASHCARDS + "/modelManagedPage";
-	}
-	//manage holderData end
 }

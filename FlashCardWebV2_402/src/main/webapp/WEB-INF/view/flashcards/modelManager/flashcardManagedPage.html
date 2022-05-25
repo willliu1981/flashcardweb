@@ -26,7 +26,7 @@
 <!-- global variable -->
 <script type="text/javascript">
   const contextPath = "/FlashCardWebV2";
-  const flashcards = "flashcards";
+  const flashcards = "flashcards";//base path
   const models = "flashcards";//*** 修改這裡 
   const model = "flashcard";//*** 修改這裡 
   var pageInfo;
@@ -47,7 +47,7 @@
 	  $.ajax({
 		  type : "get",
 		  dataType:"json",
-		  url : contextPath + "/" + models+"/"+num,//*** 修改這裡 
+		  url : contextPath + "/" + models+"/"+num, 
 		  success : function(resp) {
 			datas = [];
 			pageInfo = resp.pageInfo;

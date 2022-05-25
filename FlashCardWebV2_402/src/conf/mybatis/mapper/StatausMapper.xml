@@ -13,5 +13,9 @@
 		Status ()values();
 	</insert>
 
+	<delete id="delete">
+		delete from Status where id = #{id};
+	</delete>
+
 
 </mapper>

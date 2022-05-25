@@ -11,6 +11,10 @@ public class HolderDataDTO {
 	private FlashcardHolderDTO flashcardHolderDTO;
 	private Status status;
 
+	public String getName() {
+		return this.flashcardHolderDTO.getName();
+	}
+
 	public Integer getId() {
 		return hd.getId();
 	}
@@ -41,12 +45,6 @@ public class HolderDataDTO {
 
 	public void setStatus(Status status) {
 		this.status = status;
-	}
-
-	@Override
-	public String toString() {
-		return "HolderDataDTO [hd=" + hd + ", flashcardHolderDTO="
-				+ flashcardHolderDTO + ", status=" + status + "]";
 	}
 
 	public FlashcardHolderDTO getFlashcardHolderDTO() {

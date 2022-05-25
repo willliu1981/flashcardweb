@@ -24,26 +24,51 @@ import idv.fc.tag.impl.facade.FlashcardEditor;
 public class FlashcardCRUDController extends BaseController {
 	private static final Integer PAGE_HELPER_MAX_PAGE_NUMBER = 5;
 	private static final Integer PAGE_INFO_MAX_NAV_PAGE_NUMBER = 5;
-	protected String WEB_FLASHCARDS = "flashcards";//web base page
-	protected String FLASHCARDS = "flashcards";//jsp base page
-	protected String FLASHCARD = "flashcard";//jsp second-level page
+	protected final String WEB_FLASHCARDS = "flashcards";//web base page
+	protected final String PAGE_FLASHCARDS = "flashcards";//jsp/html base page
+	protected final String FLASHCARD = "flashcard";//crud path
+	protected final String FLASHCARDS = "flashcards";//crud path ; 注意與 FlashcardsController 的path 關係
 
 	@Autowired
 	IFlashcardService flashcardService;
+	
+	//注意: path flashcards 與 FlashcardsController 的path 關係
 
-	/**
-	 * path flashcards : 注意與 FlashcardController 的path 關係
-	 * @param map
-	 * @return
+	/*
+	 * to crud page
 	 */
 
-	@RequestMapping(value = "flashcards", produces = "application/json", method = RequestMethod.GET)
+	@RequestMapping(value = FLASHCARD, method = RequestMethod.GET)
+	public String toAdd(HashMap<String, Object> map) {
+		map.put("data", new Flashcard());
+		map.put("erType", FlashcardEditor.class);
+
+		return PAGE_FLASHCARDS + "/" + "modelEditPage.jsp";
+	}
+
+	@RequestMapping(value = FLASHCARD + "/{id}", method = RequestMethod.GET)
+	public String toEdit(HashMap<String, Object> map,
+			@PathVariable("id") String id) {
+		Flashcard find = flashcardService.getById(id);
+
+		map.put("data", find);
+		map.put("erType", FlashcardEditor.class);
+
+		return PAGE_FLASHCARDS + "/" + "modelEditPage.jsp";
+	}
+
+	/*
+	 * process 
+	 */
+
+	@RequestMapping(value = FLASHCARDS, produces = "application/json", method = RequestMethod.GET)
 	@ResponseBody
 	public HashMap<String, Object> getAllFlashcard() {
 		return getAllFlashcardWhitPageNum(null);
 	}
 
-	@RequestMapping(value = "flashcards/{pageNum}", produces = "application/json", method = RequestMethod.GET)
+	@RequestMapping(value = FLASHCARDS
+			+ "/{pageNum}", produces = "application/json", method = RequestMethod.GET)
 	@ResponseBody
 	public HashMap<String, Object> getAllFlashcardWhitPageNum(
 			@PathVariable("pageNum") Integer pageNum) {
@@ -62,46 +87,24 @@ public class FlashcardCRUDController extends BaseController {
 
 		jsonMap.put("pageInfo", pageInfo);
 
-		return jsonMap; 
+		return jsonMap;
 	}
 
-	@RequestMapping(value = "flashcard", method = RequestMethod.GET)
-	public String toAdd(HashMap<String, Object> map) {
-		map.put("data", new Flashcard());
-		map.put("erType", FlashcardEditor.class);
-
-		return FLASHCARDS + "/" + "modelEditPage.jsp";
-	}
-
-	@RequestMapping(value = "flashcard/{id}", method = RequestMethod.GET)
-	public String toEdit(HashMap<String, Object> map,
-			@PathVariable("id") String id) {
-		Flashcard find = flashcardService.getById(id);
-
-		map.put("data", find);
-		map.put("erType", FlashcardEditor.class);
-
-		return FLASHCARDS + "/" + "modelEditPage.jsp";
-	}
-
-	/*
-	 * process begin
-	 */
-	@RequestMapping(value = "flashcard", method = RequestMethod.POST)
+	@RequestMapping(value = FLASHCARD, method = RequestMethod.POST)
 	public String add(Flashcard flashcard) {
 		flashcardService.addNew(flashcard);
 
 		return "redirect:/" + WEB_FLASHCARDS + "/fcManager";
 	}
 
-	@RequestMapping(value = "flashcard", method = RequestMethod.PUT)
+	@RequestMapping(value = FLASHCARD, method = RequestMethod.PUT)
 	public String edit(Flashcard flashcard) {
 		flashcardService.edit(flashcard);
 
 		return "redirect:/" + WEB_FLASHCARDS + "/fcManager";
 	}
 
-	@RequestMapping(value = "flashcard/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = FLASHCARD + "/{id}", method = RequestMethod.DELETE)
 	public String remove(@PathVariable("id") String id) {
 		flashcardService.remove(id);
 

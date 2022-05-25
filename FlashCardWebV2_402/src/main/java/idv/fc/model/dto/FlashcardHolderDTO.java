@@ -1,7 +1,5 @@
 package idv.fc.model.dto;
 
-import java.sql.Timestamp;
-
 import idv.fc.model.Flashcard;
 import idv.fc.model.FlashcardHolder;
 
@@ -18,10 +16,6 @@ public class FlashcardHolderDTO extends FlashcardHolder
 		this.flashcard = fc;
 	}
 
-	/*	@Override
-		public String toString() {
-			return "FlashcardHolderDTO [fh=" + flashcardHolder + ", flashcard="
-					+ flashcard + "]";
-		}*/
+
 
 }
