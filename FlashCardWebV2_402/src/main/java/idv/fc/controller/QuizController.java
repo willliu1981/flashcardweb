@@ -30,7 +30,7 @@ public class QuizController extends BaseController {
 	 */
 	@RequestMapping(value = "quizManager")
 	public String toQuizManager() {
-		return QUIZ + "/" + "quizManagedPage";
+		return QUIZ + "/" + "quizManagedPage.jsp";
 	}
 
 	@RequestMapping(value = "{mod}/{num}")
@@ -39,15 +39,12 @@ public class QuizController extends BaseController {
 
 		List<HolderDataDTO> all = holderDataService.getAllJoinFH(mod, num);
 
-		Debug.test(new Object() {
-		}, "quiz", all);
-
 		List<Flashcard> collect = all.stream()
 				.map(x -> x.getFlashcardHolderDTO().getFlashcard())
 				.collect(Collectors.toList());
 
 		map.put("datas", collect);
-		return "quiz/quizPlay";
+		return "quiz/quizPlay.jsp";
 	}
 
 }

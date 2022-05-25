@@ -17,9 +17,9 @@
 }
 
 .myCaption {
-	font-size: 133px;
-	height: 75%;;
-	color: rgb(10,100,10);
+	font-size: 100px;
+	height: 85%;;
+	color: rgb(	225,225,225);
 }
 </style>
 
@@ -50,7 +50,7 @@
             <div class="carousel-inner" role="listbox">
                 <c:forEach var="data" items="${datas}">
                     <div class="item">
-                        <img src="${pageContext.request.contextPath}/picture/card_1.png" />
+                        <img src="${pageContext.request.contextPath}/picture/blackboard_1.png" />
                         <div class="carousel-caption myCaption">
                             <div>
                                 <span>
@@ -70,13 +70,13 @@
             <!-- Controls -->
             <a class="left carousel-control carousel-control" href="#carousel-example-generic" role="button"
                 data-slide="prev">
-                <span class="glyphicon glyphicon-triangle-left glyphicon-chevron-left" style="font-size: 75px;"
-                    aria-hidden="true"></span>
+                <span class="glyphicon " style="font-size: 75px;"
+                    aria-hidden="true"></span><!-- glyphicon-triangle-left glyphicon-chevron-left -->
                 <span class="sr-only">Previous</span>
             </a>
             <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                <span class="glyphicon glyphicon-triangle-right glyphicon-chevron-right" style="font-size: 75px;"
-                    aria-hidden="true"></span>
+                <span class="glyphicon " style="font-size: 75px;"
+                    aria-hidden="true"></span><!-- glyphicon-triangle-right glyphicon-chevron-right -->
                 <span class="sr-only">Next</span>
             </a>
         </div>
