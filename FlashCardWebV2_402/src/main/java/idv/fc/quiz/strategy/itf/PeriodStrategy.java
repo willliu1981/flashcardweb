@@ -12,18 +12,25 @@ public class PeriodStrategy implements QuizStrategy<HolderDataDTO> {
 	@Override
 	public List<HolderDataDTO> doOperation(List<HolderDataDTO> origDatas,
 			String mod, Integer num) {
+
 		List<HolderDataDTO> filterTime = origDatas.stream().filter(x -> {
 			if (x.getStatus().getEndTimeOfPhase() == null) {
 				return true;
 			}
-			return x.getStatus().getEndTimeOfPhase().before(new Date());
+			
+			boolean before = x.getStatus().getEndTimeOfPhase()
+					.before(new Date());
+
+			return before;
 		}).collect(Collectors.toList());
 
-		return filterTime.stream().collect(
+		List<HolderDataDTO> collect = filterTime.stream().collect(
 				Collectors.collectingAndThen(Collectors.toList(), collected -> {
 					Collections.shuffle(collected);
 					return collected.stream();
 				})).limit(num).collect(Collectors.toList());
+
+		return collect;
 	}
 
 }
