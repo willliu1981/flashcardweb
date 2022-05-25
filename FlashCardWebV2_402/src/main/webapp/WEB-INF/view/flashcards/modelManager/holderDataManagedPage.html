@@ -29,6 +29,7 @@
   const flashcards = "flashcards";//base path
   const models = "holderDatas";//*** 修改這裡 
   const model = "holderData";//*** 修改這裡 
+  const quiz = "quiz";
   var pageInfo;
   var datas;
   var pageNum=1;
@@ -134,9 +135,12 @@
 
 		$(".navbar-collapse ul .dropdown ul .modelManager-holderData a")
 			.attr("href", contextPath + "/" + flashcards + "/hdManager");
+		
+		$(".navbar-collapse ul .quizManager a")
+		.attr("href", contextPath + "/" + quiz + "/quizManager");
 
 		//使作用中
-		act(".navbar-collapse ul .dropdown ul .modelManager-holderData");//*** 修改這裡 
+		doNavAction(".navbar-collapse ul .dropdown ul .modelManager-holderData");//*** 修改這裡 
 
 		//使 a href 失效 
 		$('a.hrefDisabled').on("click", function(e) {
@@ -145,7 +149,7 @@
 	  });
 
   //使作用中
-  function act(selector) {
+  function doNavAction(selector) {
 	$(selector).addClass("active");
 	$(selector + " a").addClass("hrefDisabled");
   }
@@ -157,18 +161,18 @@
   function doPager() {
 	console.log("xxx "+pageInfo.navigatepageNums);
 	  $(".pager li ul .pager-first a").attr("onclick","getDatas("+1+")");
-	  act(".pager li ul .pager-first",pageInfo.pageNum == 1);
+	  doPagerAction(".pager li ul .pager-first",pageInfo.pageNum == 1);
 
 	  $(".pager li ul .pager-previous a").attr("onclick","getDatas("+(pageInfo.pageNum-1)+")");
-	  act(".pager li ul .pager-previous",!pageInfo.hasPreviousPage);
+	  doPagerAction(".pager li ul .pager-previous",!pageInfo.hasPreviousPage);
 	
 		createPagerDomElement(pageInfo.navigatepageNums);
 
 	  $(".pager li ul .pager-next a").attr("onclick","getDatas("+(pageInfo.pageNum+1)+")");
-	  act(".pager li ul .pager-next",!pageInfo.hasNextPage);
+	  doPagerAction(".pager li ul .pager-next",!pageInfo.hasNextPage);
 
 	  $(".pager li ul .pager-last a").attr("onclick","getDatas("+pageInfo.navigateLastPage+")");
-	  act(".pager li ul .pager-last",pageInfo.isLastPage);
+	  doPagerAction(".pager li ul .pager-last",pageInfo.isLastPage);
   }
 
   function createPagerDomElement(navigatepageNums) {
@@ -193,7 +197,7 @@
   }
   
   //使失效中
-  function act(selector,ineffective) {
+  function doPagerAction(selector,ineffective) {
 	if(ineffective){
     	$(selector).addClass("disabled");
     	$(selector + " a").addClass("hrefDisabled");
@@ -229,13 +233,13 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li class="active???xx modelManager-flashcard"><a class="hrefDisabled???" href="">Flashcard</a></li>
+                            <li class="active??? modelManager-flashcard"><a class="hrefDisabled???" href="">Flashcard</a></li>
 
                             <li class="active???? modelManager-flashcardHolder"><a class="hrefDisabled???" href="">FlashcardHolder</a></li>
 
-                            <li class="active??? modelManager-holderData"><a class="hrefDisabled" href="">HolderData</a></li>
+                            <li class="active??? modelManager-holderData"><a class="hrefDisabled???" href="">HolderData</a></li>
                         </ul></li>
-                    <li class="active???"><a class="hrefDisabled???" href="">測驗管理 </a></li>
+                    <li class="active??? quizManager"><a class="hrefDisabled???" href="">測驗管理 </a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#" data-target="#myModal" data-toggle="modal">關於</a></li>
