@@ -55,6 +55,17 @@
 參照:
 .	header.jsp active param: (參照 header.jsp : path mapping)
 
+.	table:
+		flashcard : 暫由 admin 新增, 基本上(term)不重複
+		flashcardHolder : 由 user 新增, 對應一個flashcard, flashcard-id (fc_id) 可空, 
+			基本上一個user 僅能創造一個 不重複flashcard-id 的 holder 
+		holderData : 由 user 新增, 對應一個flashcardHolder 和一個status, 並且兩者id 不可為空,
+			其中status 不可重複
+		status : 由 user 新增HolderData 時 自動建立, 並由holderData-id (hd_id) 關聯至holderData
+		
+		# user 擁有多個flashcardHolder 和 多個holderData, 分別可指定它們關聯的對象
+			flashcardHolder 不必馬上指定對象id, holderData 需要創建的同時指定對象id
+
 
 特別加註:
 .	dao id 雖然為 String , 但依然能向sql 的 int id 進行存取 (mybatis)

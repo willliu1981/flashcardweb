@@ -5,5 +5,6 @@ CREATE TABLE `flashcard` (
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `number_of_quiz_times` int(11) DEFAULT '0',
   `pass_the_quiz_times` int(11) DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `term_UNIQUE` (`term`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci

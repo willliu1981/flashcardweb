@@ -3,6 +3,7 @@ CREATE TABLE `holderdata` (
   `fh_id` int(11) NOT NULL,
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `status_id` int(11) NOT NULL,
+  `u_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `status_id_UNIQUE` (`status_id`),
   KEY `fk_fh_id_idx` (`fh_id`),
