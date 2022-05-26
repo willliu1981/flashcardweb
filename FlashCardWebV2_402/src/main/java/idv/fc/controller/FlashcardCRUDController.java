@@ -31,7 +31,7 @@ public class FlashcardCRUDController extends BaseController {
 
 	@Autowired
 	IFlashcardService flashcardService;
-	
+
 	//注意: path flashcards 與 FlashcardsController 的path 關係
 
 	/*

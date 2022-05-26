@@ -25,6 +25,10 @@ public class FlashcardHolderEditor extends Editor<FlashcardHolder> {
 
 		this.addAttribute("path", "flashcardHolder");
 		this.addAttribute("formBody", this.getBody());
+		
+		//selected list
+		this.addAttribute("selectedModelTitle", "Flashcard");
+		this.addAttribute("selectedModelQueryPath", "flashcards");
 	}
 
 	public String getBody() {
