@@ -50,6 +50,8 @@
 		
 .	js/jq 取得contextPath : 在html tag 加上 attribute ,值為由EL 取得 contextPath,
 		再由 js/jq 提取 attr ,用法見 quizManagerPage.jsp
+		
+.	jquery `` 樣板模式可能會和jsp 衝突, 使用 $<c:out value="{place}" /> 
 
 
 參照:

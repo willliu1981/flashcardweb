@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.gson.Gson;
 
 import idv.debug.Debug;
 import idv.fc.model.Flashcard;
-import idv.fc.model.dto.FlashcardHolderDTO;
+import idv.fc.model.dto.simpledto.SimplePageInfoDTO;
+import idv.fc.model.dto.simpledto.SimpleVO;
 import idv.fc.service.abstraction.IFlashcardService;
 import idv.fc.tag.impl.facade.FlashcardEditor;
 
@@ -86,6 +88,56 @@ public class FlashcardCRUDController extends BaseController {
 				PAGE_INFO_MAX_NAV_PAGE_NUMBER);
 
 		jsonMap.put("pageInfo", pageInfo);
+
+		return jsonMap;
+	}
+
+	/*
+	 * 從flashcard holder edit 的處理頁面 使用ajax 呼叫,用以取得 該model 的list
+	 */
+	@RequestMapping(value = "simple/"
+			+ FLASHCARDS, produces = "application/json", method = RequestMethod.GET)
+	@ResponseBody
+	public HashMap<String, Object> getAllFlashcardForSelectedList() {
+		return getAllFlashcardWhitPageNum(null);
+	}
+
+	/*
+	 * 從flashcard holder edit 的處理頁面 使用ajax 呼叫,用以取得 該model 的list
+	 */
+	@RequestMapping(value = "simple/" + FLASHCARDS
+			+ "/{pageNum}", produces = "application/json", method = RequestMethod.GET)
+	@ResponseBody
+	public HashMap<String, Object> getAllFlashcardForSelectedListWhitPageNum(
+			@PathVariable("pageNum") Integer pageNum) {
+
+		HashMap<String, Object> jsonMap = new HashMap<>();
+
+		int intPageNumber = 1;//default pageNumber
+		if (pageNum != null && !pageNum.equals("")) {
+			intPageNumber = Integer.valueOf(pageNum);
+		}
+		PageHelper.startPage(intPageNumber, PAGE_HELPER_MAX_PAGE_NUMBER);
+		List<Flashcard> queryResult = flashcardService.getAll();
+
+		PageInfo<Flashcard> pageInfo = new PageInfo<>(queryResult,
+				PAGE_INFO_MAX_NAV_PAGE_NUMBER);
+
+		SimplePageInfoDTO dto = new SimplePageInfoDTO();
+		dto.setHasNextPage(pageInfo.isHasNextPage());
+		dto.setHasPreviouPage(pageInfo.isHasPreviousPage());
+		dto.setIsLastPage(pageInfo.isIsLastPage());
+		dto.setPageNum(String.valueOf(pageInfo.getPageNum()));
+
+		List<SimpleVO> collect = pageInfo.getList().stream()
+				.map(x -> new SimpleVO(x.getId().toString(), x.getTerm()))
+				.collect(Collectors.toList());
+		dto.setList(collect);
+		dto.setNavigatepageNums(pageInfo.getNavigatepageNums());
+		
+		jsonMap.put("pageInfo", dto);
+
+		int[] navigatepageNums = pageInfo.getNavigatepageNums();
 
 		return jsonMap;
 	}

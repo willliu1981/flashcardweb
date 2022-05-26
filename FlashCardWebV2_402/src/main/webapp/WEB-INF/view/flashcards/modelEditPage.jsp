@@ -16,40 +16,68 @@
       
 </script>
 
-</head>
-<body>
-    <er:setEditor type="${erType}" var="editor" />
 
-    <!-- include header nav -->
-    <jsp:include page="/WEB-INF/view/public/header.jsp" flush="true">
-        <jsp:param name="active" value="" />
-    </jsp:include>
 
-    <!-- 引入巨屏 -->
-    <jsp:include page="/WEB-INF/view/public/jumbotron.jsp">
-        <jsp:param name="title" value="${editor.attributes.jumboTitle}" />
-    </jsp:include>
+<!-- get datas and list -->
+<script type="text/javascript">
+      $(function() {
+        getDatas(pageNum);
+        
+      });
+      
+      //get datas from ajax
+      function getDatas(num){
+          contextPath=$(".list-group-item-title").attr("data-contextPath");
+          models=$(".list-group-item-title").attr("data-queryPath");
+          pageNum=num;
+          
+          $.ajax({
+              type : "get",
+              dataType:"json",
+              url :  contextPath+"/simple/"+models+"/"+num, 
+              success : function(resp) {
+                
+                datas = [];
+                pageInfo = resp.pageInfo;
+                for (i = 0; i < pageInfo.list.length; i++) {
+                  datas.push(pageInfo.list[i]);
+                }
+                
+                createListDomElement(datas);
+    
+                //處理分頁
+                doPager(); 
+              },
+    
+              error : function(thrownError) {
+                alert("error:" + thrownError);
+              }
+            });
+          
+        //創建list item
+          function createListDomElement(ds) {
+            $(".list-group-item-title").next().addClass("list-group-item-replaced");
+            $(".list-group-item-replaced").nextUntil(".list-group-item-footer").remove(); 
+            
+            const domElements = ds.map( place => {
+              
+              return `
+              <li class="list-group-item"><a href="javascript:;" class="list-group-item">
+                  <span class="badge" onclick="">
+                      <font size="5">cited</font>
+                  </span>
+                  <h4 class="h4" class="list-group-item-heading"> $<c:out value="{place.value}" /> </h4>
+              </a></li>
+          	  ` ;
+            }).join("");
+            $('.list-group-item-replaced').replaceWith(domElements);
+          }
+        }
+      
+    </script>
 
-    <div class="container">
-        <er:form facade="${editor}">
-            <frm:form action="${pageContext.request.contextPath}/{path}" modelAttribute="data"
-                cssClass="form-horizontal">
-                <fieldset>
-                    <legend> {formTitle} </legend>
-                    {formBody}
-                    <div class="form-group">
-                        <div class="col-lg-10 col-lg-offset-2">
-                            <button type="reset" class="btn btn-default" style="color: black;">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </div>
-                </fieldset>
-            </frm:form>
-        </er:form>
-    </div>
-
-    <!-- 分頁 -->
-    <script type="text/javascript">
+<!-- pager -->
+<script type="text/javascript">
       //(延後載入)
       function doPager() {
           $(".pager li ul .pager-first a").attr("onclick","getDatas("+1+")");
@@ -76,11 +104,11 @@
           
           if(pageNum==place){
             return `
-            <li class="active"><a class="hrefDisabled" href='javascript:;' onclick=''>${place}</a></li>
+            <li class="active"><a class="hrefDisabled" href='javascript:;' onclick=''>$<c:out value="{place}" /></a></li>
           `;
           }else{
             return `
-            <li><a href='javascript:;' onclick='getDatas(${place})'>${place}</a></li>
+            <li><a href='javascript:;' onclick='getDatas(${place})'>$<c:out value="{place}" /></a></li>
           `;
           }
         }).join("");
@@ -101,6 +129,41 @@
       
     </script>
 
+</head>
+<body>
+    <er:setEditor type="${erType}" var="editor" />
+
+    <!-- include header nav -->
+    <jsp:include page="/WEB-INF/view/public/header.jsp" flush="true">
+        <jsp:param name="active" value="" />
+    </jsp:include>
+
+    <!-- 引入巨屏 -->
+    <jsp:include page="/WEB-INF/view/public/jumbotron.jsp">
+        <jsp:param name="title" value="${editor.attributes.jumboTitle}" />
+    </jsp:include>
+
+    <c:out value="xxxx=$&#123;editor.attributes.jumboTitle&#125;" escapeXml="true" />
+
+    <div class="container">
+        <er:form facade="${editor}">
+            <frm:form action="${pageContext.request.contextPath}/{path}" modelAttribute="data"
+                cssClass="form-horizontal">
+                <fieldset>
+                    <legend> {formTitle} </legend>
+                    {formBody}
+                    <div class="form-group">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <button type="reset" class="btn btn-default" style="color: black;">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </frm:form>
+        </er:form>
+    </div>
+
+    <!-- 分頁 -->
     <div class="container">
         <ul class="pager">
             <li>
@@ -130,67 +193,6 @@
     <!-- /分頁 -->
 
     <!-- list -->
-    <!-- get datas -->
-    <script type="text/javascript">
-    
-      $(function() {
-    	getDatas(pageNum);
-    	
-      });
-      
-      //get datas from ajax
-      function getDatas(num){
-    	  contextPath=$(".list-group-item-title").attr("data-contextPath");
-    	  models=$(".list-group-item-title").attr("data-queryPath");
-    	  pageNum=num;
-    	  
-    	  $.ajax({
-    		  type : "get",
-    		  dataType:"json",
-    		  url :  contextPath+"/"+models+"/"+num, 
-    		  success : function(resp) {
-    			
-    			datas = [];
-    			pageInfo = resp.pageInfo;
-    			for (i = 0; i < pageInfo.list.length; i++) {
-    			  datas.push(pageInfo.list[i]);
-    			}
-    			
-    			console.log("xxx="+datas);
-    			
-    			createListDomElement(datas);
-    
-    			//處理分頁
-    			doPager();
-    		  },
-    
-    		  error : function(thrownError) {
-    			alert("error:" + thrownError);
-    		  }
-    		});
-    	  
-    	//創建list item
-    	  function createListDomElement(ds) {
-    	  	$(".list-group-item-title").next().addClass("list-group-item-replaced");
-    	  	$(".list-group-item-replaced").nextUntil(".list-group-item-footer").remove(); 
-    	  
-    	    const domElements = ds.map( place => {
-    	      return `
-        	      <li class="list-group-item"><a href="#" class="list-group-item">
-                      <span class="badge" onclick="">
-                          <font size="5">cited</font>
-                      </span>
-                      <h4 class="h4" class="list-group-item-heading">${ place.value }</h4>
-              	  </a></li>
-    	      `;
-    	    }).join("");
-    
-    	    $('.list-group-item-replaced').replaceWith(domElements);
-    	  }
-    	}
-      
-    </script>
-
     <div class="container">
         <ul class="list-group myBadgeCursor">
             <li class="list-group-item list-group-item-title" data-contextPath="${contextPath }"
