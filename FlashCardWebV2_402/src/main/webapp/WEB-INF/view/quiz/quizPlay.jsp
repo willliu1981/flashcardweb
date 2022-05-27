@@ -24,15 +24,24 @@
 }
 </style>
 
+<!-- global variable -->
+<script type="text/javascript">
+  var pause = 0;//0='cycle' , 1='pause'
+  var carousel;//'.carousel'
+  var ids;//ids array
+  var itemNums;//item count
+</script>
+
+<!-- process quiz finish  -->
 <script type="text/javascript">
   const contextPath = "/FlashCardWebV2";
 
   $(document).ready(function() {
 	$(".item").first().addClass("active");
 
-	var ids = $(".btn-quiz-finish").attr("data-ids");
+	ids = $(".control-button .finish-slide").attr("data-ids");
 
-	$(".btn-quiz-finish").click(function() {
+	$(".control-button .finish-slide").click(function() {
 	  $.ajax({
 		type : "post",
 		data : {
@@ -45,13 +54,75 @@
 		  window.location.href = contextPath + "/quiz";
 		},
 		error : function(data) {
-		  console.log("error=" +data);
+		  console.log("error=" + data);
 		}
 	  });
 	});
 
   });
 </script>
+
+<!-- control button -->
+<script type="text/javascript">
+  $(function() {
+	carousel = $('.carousel');
+	itemNums = carousel.attr('data-itemNums');
+
+	$('.control-button .pause-slide').click(function() {
+	  carousel.carousel('pause');
+	});
+
+	$('.control-button .start-slide').click(function() {
+	  carousel.carousel('cycle');
+	});
+
+	$('.control-button .prev-slide').click(function() {
+	  carousel.carousel('prev');
+	});
+
+	$('.control-button .next-slide').click(function() {
+	  carousel.carousel('next');
+	});
+
+	$('.control-button .restart-slide').click(function() {
+	  carousel.carousel(0);
+	});
+
+	// .active and last item
+	var carouselItems = carousel.find('.item');
+	carousel.on('slid.bs.carousel', function(e) {
+	  let currentIdx = carouselItems.siblings('.active').index();
+	  if (currentIdx == itemNums-1) {
+		$('.control-button .finish-slide').attr('type','button');
+	  }
+	});
+  });
+
+  $(document).bind('keyup', function(e) {
+	if (e.keyCode == 37) {
+	  $('.control-button .prev-slide').trigger('click');
+
+	} else if (e.keyCode == 39) {
+	  $('.control-button .next-slide').trigger('click');
+
+	  //'r'
+	} else if (e.keyCode == 82) {
+	  $('.control-button .restart-slide').trigger('click');
+
+	} else if (e.keyCode == 32) {
+	  pause = 1 - pause;
+
+	  if (pause == 0) {
+		$('.control-button .start-slide').trigger('click');
+
+	  } else {
+		$('.control-button .pause-slide').trigger('click');
+	  }
+	}
+
+  });
+</script>
+
 </head>
 <body>
 
@@ -68,7 +139,7 @@
     <!-- 輪播 -->
     <div class="container">
         <div id="carousel-example-generic" class="carousel slide my-carousel " data-ride="carousel" data-interval="3000"
-            data-pause="hover" data-wrap="false" data-keyboard="true">
+            data-pause="hover" data-wrap="false" data-keyboard="true" data-itemNums="${datas.size() }">
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
@@ -106,18 +177,14 @@
         </div>
     </div>
 
-    <div class="container" style="text-align: center;">
+    <div class="container control-button" style="text-align: center;">
         <input type="button" class="btn start-slide" value="Start">
         <input type="button" class="btn pause-slide" value="Pause">
         <input type="button" class="btn prev-slide" value="Previous Slide">
         <input type="button" class="btn next-slide" value="Next Slide">
-        <input type="button" class="btn slide-one" value="Slide 1">
-        <input type="button" class="btn slide-two" value="Slide 2">
-        <input type="button" class="btn slide-three" value="Slide 3">
+        <input type="button" class="btn restart-slide" value="Restart">
+        <input type="hidden" class="btn finish-slide" value="Finish" data-ids="${ids}">
     </div>
 
-    <div class="container">
-        <button class="btn btn-default btn-quiz-finish" data-ids="${ids}">Finish</button>
-    </div>
 </body>
 </html>
