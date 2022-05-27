@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import tool.toolkit.Toolkit;
+import tool.toolkit.ToolKit;
 
 public class Debug {
 	private static String PREFIXSEPARATOR = " : ";
@@ -39,7 +39,7 @@ public class Debug {
 
 	public static void test(Object objForClassInfo, Object prefix, Object msg,
 			boolean any) {
-		StringBuilder sb = Toolkit.getStringBuilder();
+		StringBuilder sb = ToolKit.getStringBuilder();
 
 		String head = "(Debug) ";
 		head += objForClassInfo == null ? ""

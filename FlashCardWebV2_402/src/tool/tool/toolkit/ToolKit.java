@@ -1,6 +1,6 @@
 package tool.toolkit;
 
-public class Toolkit {
+public class ToolKit {
 	public static StringBuilder getStringBuilder() {
 		return new StringBuilder();
 	}

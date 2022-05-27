@@ -21,14 +21,20 @@
 <!-- get datas and list -->
 <script type="text/javascript">
       $(function() {
-        getDatas(pageNum);
+          contextPath=$(".list-group-item-title").attr("data-contextPath");
+          models=$(".list-group-item-title").attr("data-queryPath");
+
+          getDatas(pageNum);
         
       });
       
       //get datas from ajax
       function getDatas(num){
-          contextPath=$(".list-group-item-title").attr("data-contextPath");
-          models=$(".list-group-item-title").attr("data-queryPath");
+          //失效時不處理
+      	  if($(this).hasClass('hrefDisabled')){
+      		return;
+      	  }
+    	
           pageNum=num;
           
           $.ajax({
@@ -80,18 +86,18 @@
 <script type="text/javascript">
       //(延後載入)
       function doPager() {
-          $(".pager li ul .pager-first a").attr("onclick","getDatas("+1+")");
+          $(".pager li ul .pager-first a").attr("onclick","getDatas.call($(this),"+1+")");
           doPagerAction(".pager li ul .pager-first",pageInfo.pageNum == 1);
           
-          $(".pager li ul .pager-previous a").attr("onclick","getDatas("+(parseInt(pageInfo.pageNum)-1)+")");
+          $(".pager li ul .pager-previous a").attr("onclick","getDatas.call($(this),"+(parseInt(pageInfo.pageNum)-1)+")");
           doPagerAction(".pager li ul .pager-previous",!pageInfo.hasPreviouPage);
         
             createPagerDomElement(pageInfo.navigatepageNums);
     
-          $(".pager li ul .pager-next a").attr("onclick","getDatas("+(parseInt(pageInfo.pageNum)+1)+")");
+          $(".pager li ul .pager-next a").attr("onclick","getDatas.call($(this),"+(parseInt(pageInfo.pageNum)+1)+")");
           doPagerAction(".pager li ul .pager-next",!pageInfo.hasNextPage);
     
-          $(".pager li ul .pager-last a").attr("onclick","getDatas("+pageInfo.navigateLastPage+")");
+          $(".pager li ul .pager-last a").attr("onclick","getDatas.call($(this),"+pageInfo.navigateLastPage+")");
           doPagerAction(".pager li ul .pager-last",pageInfo.isLastPage);
       }
     
@@ -108,7 +114,7 @@
           `;
           }else{
             return `
-            <li><a href='javascript:;' onclick='getDatas($<c:out value="{place}" />)'>$<c:out value="{place}" /></a></li>
+            <li><a href='javascript:;' onclick='getDatas.call($(this),$<c:out value="{place}" />)'>$<c:out value="{place}" /></a></li>
           `;
           }
         }).join("");

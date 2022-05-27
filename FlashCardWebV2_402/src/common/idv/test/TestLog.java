@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import tool.toolkit.Toolkit;
+import tool.toolkit.ToolKit;
 
 public class TestLog {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -36,7 +36,7 @@ public class TestLog {
 
 	//class TestStringBuilder
 	public static class TestStringBuilder {
-		protected StringBuilder _sb = Toolkit.getStringBuilder();
+		protected StringBuilder _sb = ToolKit.getStringBuilder();
 
 		public void init() {
 			_sb.setLength(0);
