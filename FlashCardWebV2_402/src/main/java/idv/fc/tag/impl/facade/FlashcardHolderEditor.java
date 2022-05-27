@@ -6,6 +6,8 @@ import idv.kw.tag.facade.Editor;
 
 public class FlashcardHolderEditor extends Editor<FlashcardHolder> {
 	private boolean isAdd = false;
+	//html class : 接受 setected list value
+	private static final String FORM_CONTROL_ACCEPTABLE = "form-control-acceptable";
 
 	public FlashcardHolderEditor(FlashcardHolder data) {
 		super(data);
@@ -23,12 +25,14 @@ public class FlashcardHolderEditor extends Editor<FlashcardHolder> {
 			this.addAttribute("formTitle", "編輯 Flashcard Holder");
 		}
 
-		this.addAttribute("path", "flashcardHolder");
+		this.addAttribute("path", "flashcardHolder"); 
 		this.addAttribute("formBody", this.getBody());
-		
+
 		//selected list
+		this.addAttribute("selectedModelRenderable", "true");
 		this.addAttribute("selectedModelTitle", "Flashcard");
 		this.addAttribute("selectedModelQueryPath", "flashcards");
+		this.addAttribute("selectedModelAccept", FORM_CONTROL_ACCEPTABLE);
 	}
 
 	public String getBody() {
@@ -94,7 +98,8 @@ public class FlashcardHolderEditor extends Editor<FlashcardHolder> {
 			cmptDiv.addHtmlClass("col-lg-10");
 			{
 				DefaultComponent cmptInput = new DefaultComponent("input");
-				cmptInput.addHtmlClass("form-control");
+				cmptInput.addHtmlClass("form-control")
+						.addHtmlClass(FORM_CONTROL_ACCEPTABLE);
 				cmptInput.addAttribute("name", "fcId");
 				cmptInput.addAttribute("id", "fcId");
 				cmptInput.addAttribute("placeholder", "ex: 123");

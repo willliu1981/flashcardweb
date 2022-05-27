@@ -162,18 +162,18 @@
 <script type="text/javascript">
   //(延後載入)
   function doPager() {
-	  $(".pager li ul .pager-first a").attr("onclick","getDatas.call($(this),"+1+")");
+	  $(".pager li ul .pager-first a").attr("onclick","getDatas.call(this,"+1+")");
 	  doPagerAction(".pager li ul .pager-first",pageInfo.pageNum == 1);
 
-	  $(".pager li ul .pager-previous a").attr("onclick","getDatas.call($(this),"+(pageInfo.pageNum-1)+")");
+	  $(".pager li ul .pager-previous a").attr("onclick","getDatas.call(this,"+(pageInfo.pageNum-1)+")");
 	  doPagerAction(".pager li ul .pager-previous",!pageInfo.hasPreviousPage);
 	
 		createPagerDomElement(pageInfo.navigatepageNums);
 
-	  $(".pager li ul .pager-next a").attr("onclick","getDatas.call($(this),"+(pageInfo.pageNum+1)+")");
+	  $(".pager li ul .pager-next a").attr("onclick","getDatas.call(this,"+(pageInfo.pageNum+1)+")");
 	  doPagerAction(".pager li ul .pager-next",!pageInfo.hasNextPage);
 
-	  $(".pager li ul .pager-last a").attr("onclick","getDatas.call($(this),"+pageInfo.navigateLastPage+")");
+	  $(".pager li ul .pager-last a").attr("onclick","getDatas.call(this,"+pageInfo.navigateLastPage+")");
 	  doPagerAction(".pager li ul .pager-last",pageInfo.isLastPage);
   }
 
@@ -190,7 +190,7 @@
       `;
       }else{
     	return `
-      	<li><a href='javascript:;' onclick='getDatas.call($(this),${place})'>${place}</a></li>
+      	<li><a href='javascript:;' onclick='getDatas.call(this,${place})'>${place}</a></li>
       `;
       }
     }).join("");

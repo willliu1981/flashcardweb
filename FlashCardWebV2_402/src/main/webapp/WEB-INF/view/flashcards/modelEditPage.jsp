@@ -13,6 +13,7 @@
       var models;
       var pageNum=1;
       var pageInfo;
+      var acceptableClassName;
       
 </script>
 
@@ -23,8 +24,13 @@
       $(function() {
           contextPath=$(".list-group-item-title").attr("data-contextPath");
           models=$(".list-group-item-title").attr("data-queryPath");
+          acceptableClassName= $(".form-horizontal").attr('data-acceptableClassName');
 
-          getDatas(pageNum);
+          var selectedModelRenderable=$("#selectedModelRenderable").val();
+          
+          if(selectedModelRenderable){
+          	getDatas(pageNum);
+          }
         
       });
       
@@ -68,7 +74,9 @@
             const domElements = ds.map( place => {
               
               return `
-              <li class="list-group-item"><a href="javascript:;" class="list-group-item">
+              <li class="list-group-item"><a href="javascript:;" class="list-group-item"
+              onclick="doSelectd.call(this)" data-id="$<c:out value='{place.id}' />" 
+              	data-value="$<c:out value='{place.value}' />" >
                   <span class="badge" onclick="">
                       <font size="5">cited</font>
                   </span>
@@ -80,24 +88,33 @@
           }
         }
       
+      //selected list item
+      function doSelectd(){
+    	var selectedId=$(this).attr('data-id');
+    	var selectedValue=$(this).attr('data-value');
+    	
+    	console.log("xxx"+acceptableClassName);
+    	$("."+acceptableClassName).val(selectedId);
+      }
+      
     </script>
 
 <!-- pager -->
 <script type="text/javascript">
       //(延後載入)
       function doPager() {
-          $(".pager li ul .pager-first a").attr("onclick","getDatas.call($(this),"+1+")");
+          $(".pager li ul .pager-first a").attr("onclick","getDatas.call(this,"+1+")");
           doPagerAction(".pager li ul .pager-first",pageInfo.pageNum == 1);
           
-          $(".pager li ul .pager-previous a").attr("onclick","getDatas.call($(this),"+(parseInt(pageInfo.pageNum)-1)+")");
+          $(".pager li ul .pager-previous a").attr("onclick","getDatas.call(this,"+(parseInt(pageInfo.pageNum)-1)+")");
           doPagerAction(".pager li ul .pager-previous",!pageInfo.hasPreviouPage);
         
             createPagerDomElement(pageInfo.navigatepageNums);
     
-          $(".pager li ul .pager-next a").attr("onclick","getDatas.call($(this),"+(parseInt(pageInfo.pageNum)+1)+")");
+          $(".pager li ul .pager-next a").attr("onclick","getDatas.call(this,"+(parseInt(pageInfo.pageNum)+1)+")");
           doPagerAction(".pager li ul .pager-next",!pageInfo.hasNextPage);
     
-          $(".pager li ul .pager-last a").attr("onclick","getDatas.call($(this),"+pageInfo.navigateLastPage+")");
+          $(".pager li ul .pager-last a").attr("onclick","getDatas.call(this,"+pageInfo.navigateLastPage+")");
           doPagerAction(".pager li ul .pager-last",pageInfo.isLastPage);
       }
     
@@ -114,7 +131,7 @@
           `;
           }else{
             return `
-            <li><a href='javascript:;' onclick='getDatas.call($(this),$<c:out value="{place}" />)'>$<c:out value="{place}" /></a></li>
+            <li><a href='javascript:;' onclick='getDatas.call(this,$<c:out value="{place}" />)'>$<c:out value="{place}" /></a></li>
           `;
           }
         }).join("");
@@ -149,15 +166,17 @@
         <jsp:param name="title" value="${editor.attributes.jumboTitle}" />
     </jsp:include>
 
+    <!-- form -->
     <div class="container">
         <er:form facade="${editor}">
             <frm:form action="${pageContext.request.contextPath}/{path}" modelAttribute="data"
-                cssClass="form-horizontal">
+                cssClass="form-horizontal" data-acceptableClassName="${editor.attributes.selectedModelAccept }">
                 <fieldset>
                     <legend> {formTitle} </legend>
                     {formBody}
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">
+                            <input type="hidden" name="id">
                             <button type="reset" class="btn btn-default" style="color: black;">Cancel</button>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
@@ -167,48 +186,53 @@
         </er:form>
     </div>
 
-    <!-- 分頁 -->
-    <div class="container">
-        <ul class="pager">
-            <li>
-                <ul class="pagination">
-                    <li></li>
-                    <!-- 首頁 -->
-                    <li class="disabled??? pager-first"><a class="hrefDisabled???" href="javascript:;">&laquo;
-                        </a></li>
+    <!-- 具有 selected list  -->
+    <input type="hidden" id="selectedModelRenderable" value="${editor.attributes.selectedModelRenderable}" />
+    <c:if test="${editor.attributes.selectedModelRenderable}">
+        <!-- 分頁 -->
+        <div class="container">
+            <ul class="pager">
+                <li>
+                    <ul class="pagination">
+                        <li></li>
+                        <!-- 首頁 -->
+                        <li class="disabled??? pager-first"><a class="hrefDisabled???" href="javascript:;">&laquo;
+                            </a></li>
 
-                    <!-- 上一頁 -->
-                    <li class="disabled??? pager-previous"><a class="hrefDisabled???" href="javascript:;">Previous
-                        </a></li>
+                        <!-- 上一頁 -->
+                        <li class="disabled??? pager-previous"><a class="hrefDisabled???" href="javascript:;">Previous
+                            </a></li>
 
-                    <!-- 中間頁數 -->
-                    <li class="pager-pageNum-replaced"></li>
+                        <!-- 中間頁數 -->
+                        <li class="pager-pageNum-replaced"></li>
 
-                    <!-- 下一頁 -->
-                    <li class="disabled??? pager-next"><a class="hrefDisabled???" href="javascript:;">Next </a></li>
+                        <!-- 下一頁 -->
+                        <li class="disabled??? pager-next"><a class="hrefDisabled???" href="javascript:;">Next
+                            </a></li>
 
-                    <!-- 最末頁 -->
-                    <li class="disabled??? pager-last"><a class="hrefDisabled???" href="javascript:;">&raquo; </a></li>
-                    <li></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-    <!-- /分頁 -->
+                        <!-- 最末頁 -->
+                        <li class="disabled??? pager-last"><a class="hrefDisabled???" href="javascript:;">&raquo;
+                            </a></li>
+                        <li></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- /分頁 -->
 
-    <!-- list -->
-    <div class="container">
-        <ul class="list-group myBadgeCursor">
-            <li class="list-group-item list-group-item-title" data-contextPath="${contextPath }"
-                data-queryPath="${editor.attributes.selectedModelQueryPath}"><span class="badge" onclick="">
-                    <font size="5">totle</font>
-                </span>
-                <h3>${editor.attributes.selectedModelTitle}</h3></li>
+        <!-- list -->
+        <div class="container" style="width: 50%;">
+            <ul class="list-group myBadgeCursor">
+                <li class="list-group-item list-group-item-title" data-contextPath="${contextPath }"
+                    data-queryPath="${editor.attributes.selectedModelQueryPath}"><span class="badge" onclick="">
+                        <font size="5">totle</font>
+                    </span>
+                    <h3>${editor.attributes.selectedModelTitle}</h3></li>
 
-            <li class="list-group-item-replaced"></li>
-        </ul>
-    </div>
-    <!-- /list -->
-
+                <li class="list-group-item-replaced"></li>
+            </ul>
+        </div>
+        <!-- /list -->
+    </c:if>
 </body>
 </html>
