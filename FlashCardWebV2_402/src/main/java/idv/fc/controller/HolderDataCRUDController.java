@@ -38,9 +38,10 @@ public class HolderDataCRUDController extends BaseController {
 	 */
 
 	@RequestMapping(value = HOLDERDATA, method = RequestMethod.GET)
-	public String toAdd(HashMap<String, Object> map) {
-		map.put("data", new HolderData());
-		map.put("erType", HolderDataEditor.class);
+	public String toAdd(HttpServletRequest request) {
+		request.setAttribute("data", new HolderData());
+		request.setAttribute("erType", HolderDataEditor.class);
+		request.setAttribute("contextPath", request.getContextPath()); //***selected-list 修改這裡
 
 		return PAGE_FLASHCARDS + "/" + "modelEditPage.jsp";
 	}

@@ -43,9 +43,10 @@ public class FlashcardHolderCRUDController extends BaseController {
 	 */
 
 	@RequestMapping(value = FLASHCARDHOLDER, method = RequestMethod.GET)
-	public String toAdd(HashMap<String, Object> map) {
-		map.put("data", new FlashcardHolder());
-		map.put("erType", FlashcardHolderEditor.class);
+	public String toAdd(HttpServletRequest request) {
+		request.setAttribute("data", new FlashcardHolder());
+		request.setAttribute("erType", FlashcardHolderEditor.class);
+		request.setAttribute("contextPath", request.getContextPath()); //***selected-list 修改這裡
 
 		return PAGE_FLASHCARDS + "/modelEditPage.jsp";
 	}
@@ -167,6 +168,7 @@ public class FlashcardHolderCRUDController extends BaseController {
 		dto.setHasPreviouPage(pageInfo.isHasPreviousPage());
 		dto.setIsLastPage(pageInfo.isIsLastPage());
 		dto.setPageNum(pageInfo.getPageNum());
+		dto.setNavigateLastPage(pageInfo.getNavigateLastPage());
 
 		List<SimpleVO> collect = pageInfo.getList().stream()
 				.map(x -> new SimpleVO(x.getId().toString(), x.getName()))
