@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SimplePageInfoDTO {
-	private String pageNum;
+	private Integer pageNum;
 	private boolean isHasPreviouPage;
 	private boolean isHasNextPage;
 	private boolean isIsLastPage;
@@ -19,11 +19,11 @@ public class SimplePageInfoDTO {
 		this.navigatepageNums = navigatepageNums;
 	}
 
-	public String getPageNum() {
+	public Integer getPageNum() {
 		return pageNum;
 	}
 
-	public void setPageNum(String pageNum) {
+	public void setPageNum(Integer pageNum) {
 		this.pageNum = pageNum;
 	}
 

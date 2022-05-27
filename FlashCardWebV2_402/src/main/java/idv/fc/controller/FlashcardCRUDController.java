@@ -127,8 +127,8 @@ public class FlashcardCRUDController extends BaseController {
 		dto.setHasNextPage(pageInfo.isHasNextPage());
 		dto.setHasPreviouPage(pageInfo.isHasPreviousPage());
 		dto.setIsLastPage(pageInfo.isIsLastPage());
-		dto.setPageNum(String.valueOf(pageInfo.getPageNum()));
-
+		dto.setPageNum(pageInfo.getPageNum());
+		
 		List<SimpleVO> collect = pageInfo.getList().stream()
 				.map(x -> new SimpleVO(x.getId().toString(), x.getTerm()))
 				.collect(Collectors.toList());

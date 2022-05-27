@@ -53,6 +53,8 @@
 		
 .	jquery `` 樣板模式可能會和jsp 衝突, 使用 $<c:out value="{place}" /> 
 
+.	.hrefDisabled 使失效function 須放在所有 script 之後
+
 
 參照:
 .	header.jsp active param: (參照 header.jsp : path mapping)
@@ -73,6 +75,9 @@
 .	dao id 雖然為 String , 但依然能向sql 的 int id 進行存取 (mybatis)
 
 .	mysql timestamp 若為 000-000...時,出現無法轉換的問題, 在jdbc.url 加上 zeroDateTimeBehavior=convertToNull
+
+.	jsp 的 js 和 html js 有一些差異,例如: (value+1) 改成 (parseInt(value)+1)
+
 
 
 注意:

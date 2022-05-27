@@ -82,13 +82,13 @@
       function doPager() {
           $(".pager li ul .pager-first a").attr("onclick","getDatas("+1+")");
           doPagerAction(".pager li ul .pager-first",pageInfo.pageNum == 1);
-    
-          $(".pager li ul .pager-previous a").attr("onclick","getDatas("+(pageInfo.pageNum-1)+")");
-          doPagerAction(".pager li ul .pager-previous",!pageInfo.hasPreviousPage);
+          
+          $(".pager li ul .pager-previous a").attr("onclick","getDatas("+(parseInt(pageInfo.pageNum)-1)+")");
+          doPagerAction(".pager li ul .pager-previous",!pageInfo.hasPreviouPage);
         
             createPagerDomElement(pageInfo.navigatepageNums);
     
-          $(".pager li ul .pager-next a").attr("onclick","getDatas("+(pageInfo.pageNum+1)+")");
+          $(".pager li ul .pager-next a").attr("onclick","getDatas("+(parseInt(pageInfo.pageNum)+1)+")");
           doPagerAction(".pager li ul .pager-next",!pageInfo.hasNextPage);
     
           $(".pager li ul .pager-last a").attr("onclick","getDatas("+pageInfo.navigateLastPage+")");
@@ -108,7 +108,7 @@
           `;
           }else{
             return `
-            <li><a href='javascript:;' onclick='getDatas(${place})'>$<c:out value="{place}" /></a></li>
+            <li><a href='javascript:;' onclick='getDatas($<c:out value="{place}" />)'>$<c:out value="{place}" /></a></li>
           `;
           }
         }).join("");
@@ -142,8 +142,6 @@
     <jsp:include page="/WEB-INF/view/public/jumbotron.jsp">
         <jsp:param name="title" value="${editor.attributes.jumboTitle}" />
     </jsp:include>
-
-    <c:out value="xxxx=$&#123;editor.attributes.jumboTitle&#125;" escapeXml="true" />
 
     <div class="container">
         <er:form facade="${editor}">

@@ -19,12 +19,12 @@
 }
 </style>
 
-<!-- 使用 a href 失效 -->
+<!-- 使 a href 失效 -->
 <script type="text/javascript">
   $(function() {
-	$('a.hrefDisabled').on("click", function(e) {
-	  e.preventDefault();
-	});
+    $('.hrefDisabled').on("click", function(e) {
+      e.preventDefault();
+    });
   });
 </script>
 </head>

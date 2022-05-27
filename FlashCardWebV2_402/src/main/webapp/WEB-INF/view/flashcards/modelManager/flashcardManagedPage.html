@@ -33,6 +33,7 @@
   var pageInfo;
   var datas;
   var pageNum=1;
+  
 </script>
 
 <!-- get datas -->
@@ -44,6 +45,11 @@
   
   //get datas from ajax
   function getDatas(num){
+	  //失效時不處理
+	  if($(this).hasClass('hrefDisabled')){
+		return;
+	  }
+ 
 	  pageNum=num;
 	  $.ajax({
 		  type : "get",
@@ -143,11 +149,7 @@
 
 		//使作用中
 		doNavAction(".navbar-collapse ul .dropdown ul .modelManager-flashcard");//*** 修改這裡 
-
-		//使 a href 失效 
-		$('a.hrefDisabled').on("click", function(e) {
-		  e.preventDefault();
-		});
+ 
 	  });
   
 
@@ -162,18 +164,18 @@
 <script type="text/javascript">
   //(延後載入)
   function doPager() {
-	  $(".pager li ul .pager-first a").attr("onclick","getDatas("+1+")");
+	  $(".pager li ul .pager-first a").attr("onclick","getDatas.call($(this),"+1+")");
 	  doPagerAction(".pager li ul .pager-first",pageInfo.pageNum == 1);
 
-	  $(".pager li ul .pager-previous a").attr("onclick","getDatas("+(pageInfo.pageNum-1)+")");
+	  $(".pager li ul .pager-previous a").attr("onclick","getDatas.call($(this),"+(pageInfo.pageNum-1)+")");
 	  doPagerAction(".pager li ul .pager-previous",!pageInfo.hasPreviousPage);
 	
 		createPagerDomElement(pageInfo.navigatepageNums);
 
-	  $(".pager li ul .pager-next a").attr("onclick","getDatas("+(pageInfo.pageNum+1)+")");
+	  $(".pager li ul .pager-next a").attr("onclick","getDatas.call($(this),"+(pageInfo.pageNum+1)+")");
 	  doPagerAction(".pager li ul .pager-next",!pageInfo.hasNextPage);
 
-	  $(".pager li ul .pager-last a").attr("onclick","getDatas("+pageInfo.navigateLastPage+")");
+	  $(".pager li ul .pager-last a").attr("onclick","getDatas.call($(this),"+pageInfo.navigateLastPage+")");
 	  doPagerAction(".pager li ul .pager-last",pageInfo.isLastPage);
   }
 
@@ -190,7 +192,7 @@
       `;
       }else{
     	return `
-      	<li><a href='javascript:;' onclick='getDatas(${place})'>${place}</a></li>
+      	<li><a href='javascript:;' onclick='getDatas.call($(this),${place})'>${place}</a></li>
       `;
       }
     }).join("");
@@ -211,7 +213,15 @@
   
 </script>
 
-</head>
+
+<!-- 使 a href 失效 -->
+<script type="text/javascript">
+  $(function() {
+    $('.hrefDisabled').on("click", function(e) {
+      disableHref();
+    });
+  });
+</script>
 <body>
 
     <!-- 導航欄 -->
@@ -298,6 +308,10 @@
         </ul>
     </div>
     <!-- /list -->
+
+
+
+    <button id="test1" type="button" onclick="aa()">xxx</button>
 
     <!-- 分頁 -->
     <div class="container">
