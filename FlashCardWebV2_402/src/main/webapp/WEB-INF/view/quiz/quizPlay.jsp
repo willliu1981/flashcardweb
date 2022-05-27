@@ -22,6 +22,8 @@
 	left: 0%;
 	color: rgb(225, 225, 225);
 }
+
+
 </style>
 
 <!-- global variable -->
@@ -70,10 +72,20 @@
 
 	$('.control-button .pause-slide').click(function() {
 	  carousel.carousel('pause');
+
+	  $('.control-pauseMsg .pauseMsg').text('pause');
+	  $('.control-pauseMsg .pauseMsg').fadeIn(200);
+	  $('.control-pauseMsg .pauseMsg').fadeOut(500);
+
 	});
 
 	$('.control-button .start-slide').click(function() {
 	  carousel.carousel('cycle');
+	  
+	  $('.control-pauseMsg .pauseMsg').text('start');
+	  $('.control-pauseMsg .pauseMsg').fadeIn(200);
+	  $('.control-pauseMsg .pauseMsg').fadeOut(500);
+	  
 	});
 
 	$('.control-button .prev-slide').click(function() {
@@ -90,10 +102,11 @@
 
 	// .active and last item
 	var carouselItems = carousel.find('.item');
+	$('.control-button .finish-slide').fadeOut(100);
 	carousel.on('slid.bs.carousel', function(e) {
 	  let currentIdx = carouselItems.siblings('.active').index();
-	  if (currentIdx == itemNums-1) {
-		$('.control-button .finish-slide').attr('type','button');
+	  if (currentIdx == itemNums - 1) {
+		$('.control-button .finish-slide').fadeIn("slow");
 	  }
 	});
   });
@@ -117,6 +130,7 @@
 
 	  } else {
 		$('.control-button .pause-slide').trigger('click');
+
 	  }
 	}
 
@@ -176,15 +190,28 @@
             </a>
         </div>
     </div>
+    <!-- //輪播 -->
 
-    <div class="container control-button" style="text-align: center;">
-        <input type="button" class="btn start-slide" value="Start">
-        <input type="button" class="btn pause-slide" value="Pause">
-        <input type="button" class="btn prev-slide" value="Previous Slide">
-        <input type="button" class="btn next-slide" value="Next Slide">
-        <input type="button" class="btn restart-slide" value="Restart">
-        <input type="hidden" class="btn finish-slide" value="Finish" data-ids="${ids}">
+    <!-- control button -->
+    <div class="container " style="text-align: center;">
+        <div class="container control-pauseMsg">
+            <span class="pauseMsg h1"></span>
+            <p></p>
+        </div>
+
+        <div class="container control-button">
+            <input type="button" class="btn start-slide" value="Start">
+            <input type="button" class="btn pause-slide" value="Pause">
+            <input type="button" class="btn prev-slide" value="Previous Slide">
+            <input type="button" class="btn next-slide" value="Next Slide">
+            <input type="button" class="btn restart-slide" value="Restart">
+            <input type="button" class="btn finish-slide" value="Finish" data-ids="${ids}">
+        </div>
     </div>
 
+    <!-- footer -->
+    <div class="container container-footer">
+        <h4>Copyright &copy; 2021-2022 FlashCard. All rights reserved.</h4>
+    </div>
 </body>
 </html>

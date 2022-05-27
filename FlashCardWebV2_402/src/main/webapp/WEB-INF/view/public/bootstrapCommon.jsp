@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
 <title>FLASH CARD</title>
-<link rel="styleSheet" type="text/css" href="${pageContext.request.contextPath}/css/EvenTable.css">
+<%-- <link rel="styleSheet" type="text/css" href="${pageContext.request.contextPath}/css/EvenTable.css"> --%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.cyborg.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/webjars/bootstrap/3.4.1/css/bootstrap-theme.min.css">
 
@@ -16,6 +16,10 @@
 /* 用於list-group 下,改變游標圖示  */
 .myBadgeCursor>li>.badge {
 	cursor: pointer;
+}
+
+body{
+    background-image:url(/FlashCardWebV2/picture/flame1.jpg);
 }
 </style>
 

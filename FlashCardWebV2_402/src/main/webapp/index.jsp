@@ -77,7 +77,7 @@
         </a>
     </div>
 
-    <div class="container">
+    <div class="container container-footer">
         <h4>Copyright &copy; 2021-2022 FlashCard. All rights reserved.</h4>
     </div>
 
