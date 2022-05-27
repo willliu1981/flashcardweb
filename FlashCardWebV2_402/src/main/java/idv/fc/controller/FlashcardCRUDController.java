@@ -92,6 +92,27 @@ public class FlashcardCRUDController extends BaseController {
 		return jsonMap;
 	}
 
+	@RequestMapping(value = FLASHCARD, method = RequestMethod.POST)
+	public String add(Flashcard flashcard) {
+		flashcardService.addNew(flashcard);
+
+		return "redirect:/" + WEB_FLASHCARDS + "/fcManager";
+	}
+
+	@RequestMapping(value = FLASHCARD, method = RequestMethod.PUT)
+	public String edit(Flashcard flashcard) {
+		flashcardService.edit(flashcard);
+
+		return "redirect:/" + WEB_FLASHCARDS + "/fcManager";
+	}
+
+	@RequestMapping(value = FLASHCARD + "/{id}", method = RequestMethod.DELETE)
+	public String remove(@PathVariable("id") String id) {
+		flashcardService.remove(id);
+
+		return "redirect:/" + WEB_FLASHCARDS + "/fcManager";
+	}
+
 	/*
 	 * 從flashcard holder edit 的處理頁面 使用ajax 呼叫,用以取得 該model 的list
 	 */
@@ -99,7 +120,7 @@ public class FlashcardCRUDController extends BaseController {
 			+ FLASHCARDS, produces = "application/json", method = RequestMethod.GET)
 	@ResponseBody
 	public HashMap<String, Object> getAllFlashcardForSelectedList() {
-		return getAllFlashcardWhitPageNum(null);
+		return getAllFlashcardForSelectedListWhitPageNum(null);
 	}
 
 	/*
@@ -128,39 +149,16 @@ public class FlashcardCRUDController extends BaseController {
 		dto.setHasPreviouPage(pageInfo.isHasPreviousPage());
 		dto.setIsLastPage(pageInfo.isIsLastPage());
 		dto.setPageNum(pageInfo.getPageNum());
-		
+
 		List<SimpleVO> collect = pageInfo.getList().stream()
 				.map(x -> new SimpleVO(x.getId().toString(), x.getTerm()))
 				.collect(Collectors.toList());
 		dto.setList(collect);
 		dto.setNavigatepageNums(pageInfo.getNavigatepageNums());
-		
+
 		jsonMap.put("pageInfo", dto);
 
-		int[] navigatepageNums = pageInfo.getNavigatepageNums();
-
 		return jsonMap;
-	}
-
-	@RequestMapping(value = FLASHCARD, method = RequestMethod.POST)
-	public String add(Flashcard flashcard) {
-		flashcardService.addNew(flashcard);
-
-		return "redirect:/" + WEB_FLASHCARDS + "/fcManager";
-	}
-
-	@RequestMapping(value = FLASHCARD, method = RequestMethod.PUT)
-	public String edit(Flashcard flashcard) {
-		flashcardService.edit(flashcard);
-
-		return "redirect:/" + WEB_FLASHCARDS + "/fcManager";
-	}
-
-	@RequestMapping(value = FLASHCARD + "/{id}", method = RequestMethod.DELETE)
-	public String remove(@PathVariable("id") String id) {
-		flashcardService.remove(id);
-
-		return "redirect:/" + WEB_FLASHCARDS + "/fcManager";
 	}
 
 }

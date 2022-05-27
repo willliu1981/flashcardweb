@@ -3,6 +3,7 @@ package idv.fc.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,8 +18,11 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import idv.debug.Debug;
+import idv.fc.model.Flashcard;
 import idv.fc.model.FlashcardHolder;
 import idv.fc.model.dto.FlashcardHolderDTO;
+import idv.fc.model.dto.simpledto.SimplePageInfoDTO;
+import idv.fc.model.dto.simpledto.SimpleVO;
 import idv.fc.service.abstraction.IFlashcardHolderService;
 import idv.fc.tag.impl.facade.FlashcardHolderEditor;
 
@@ -48,13 +52,13 @@ public class FlashcardHolderCRUDController extends BaseController {
 
 	@RequestMapping(value = FLASHCARDHOLDER
 			+ "/{id}", method = RequestMethod.GET)
-	public String toEdit(HashMap<String, Object> map,
-			@PathVariable("id") String id, HttpServletRequest request) {
+	public String toEdit(@PathVariable("id") String id,
+			HttpServletRequest request) {
 		FlashcardHolder find = flashcardHolderService.getById(id);
 
-		map.put("data", find);
-		map.put("erType", FlashcardHolderEditor.class);
-		map.put("contextPath", request.getContextPath());
+		request.setAttribute("data", find);
+		request.setAttribute("erType", FlashcardHolderEditor.class);
+		request.setAttribute("contextPath", request.getContextPath()); //***selected-list 修改這裡
 
 		return PAGE_FLASHCARDS + "/modelEditPage.jsp";
 	}
@@ -123,6 +127,56 @@ public class FlashcardHolderCRUDController extends BaseController {
 		flashcardHolderService.remove(id);
 
 		return "redirect:/" + WEB_FLASHCARDS + "/fhManager";
+	}
+
+	/*
+	 * 從holder data edit 的處理頁面 使用ajax 呼叫,用以取得 該model 的list
+	 */
+	@RequestMapping(value = "simple/"
+			+ FLASHCARDHOLDERS, produces = "application/json", method = RequestMethod.GET)
+	@ResponseBody
+	public HashMap<String, Object> getAllFlashcardHolderForSelectedList() {
+		return getAllFlashcardHolderForSelectedListWhitPageNum(null);
+	}
+
+	/*
+	 * 從holder data edit 的處理頁面 使用ajax 呼叫,用以取得 該model 的list
+	 */
+	@RequestMapping(value = "simple/" + FLASHCARDHOLDERS
+			+ "/{pageNum}", produces = "application/json", method = RequestMethod.GET)
+	@ResponseBody
+	public HashMap<String, Object> getAllFlashcardHolderForSelectedListWhitPageNum(
+			@PathVariable("pageNum") Integer pageNum) {
+		Debug.test(new Object() {
+		}, "xxxxx");
+
+		HashMap<String, Object> jsonMap = new HashMap<>();
+
+		int intPageNumber = 1;//default pageNumber
+		if (pageNum != null && !pageNum.equals("")) {
+			intPageNumber = Integer.valueOf(pageNum);
+		}
+		PageHelper.startPage(intPageNumber, PAGE_HELPER_MAX_PAGE_NUMBER);
+		List<FlashcardHolder> queryResult = flashcardHolderService.getAll();
+
+		PageInfo<FlashcardHolder> pageInfo = new PageInfo<>(queryResult,
+				PAGE_INFO_MAX_NAV_PAGE_NUMBER);
+
+		SimplePageInfoDTO dto = new SimplePageInfoDTO();
+		dto.setHasNextPage(pageInfo.isHasNextPage());
+		dto.setHasPreviouPage(pageInfo.isHasPreviousPage());
+		dto.setIsLastPage(pageInfo.isIsLastPage());
+		dto.setPageNum(pageInfo.getPageNum());
+
+		List<SimpleVO> collect = pageInfo.getList().stream()
+				.map(x -> new SimpleVO(x.getId().toString(), x.getName()))
+				.collect(Collectors.toList());
+		dto.setList(collect);
+		dto.setNavigatepageNums(pageInfo.getNavigatepageNums());
+
+		jsonMap.put("pageInfo", dto);
+
+		return jsonMap;
 	}
 
 }

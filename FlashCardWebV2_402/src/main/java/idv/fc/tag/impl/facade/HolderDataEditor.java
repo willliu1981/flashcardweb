@@ -7,6 +7,8 @@ import idv.kw.tag.factory.TagBuilder;
 
 public class HolderDataEditor extends Editor<HolderData> {
 	private boolean isAdd = false;
+	//html class : 使能接受 setected-list 的 value   //***selected-list 修改這裡
+	private static final String FORM_CONTROL_ACCEPTABLE = "form-control-acceptable";
 
 	public HolderDataEditor(HolderData data) {
 		super(data);
@@ -26,6 +28,12 @@ public class HolderDataEditor extends Editor<HolderData> {
 
 		this.addAttribute("path", "holderData");
 		this.addAttribute("formBody", this.getBody());
+
+		//selected list   //***selected-list 修改這裡
+		this.addAttribute("selectedModelRenderable", "true");//用於頁面判斷是否有 selected-list 功能
+		this.addAttribute("selectedModelTitle", "FlashcardHolder");
+		this.addAttribute("selectedModelQueryPath", "flashcardHolders");
+		this.addAttribute("selectedModelAccept", FORM_CONTROL_ACCEPTABLE);//和頁面約定的class name
 	}
 
 	public String getBody() {
@@ -55,7 +63,8 @@ public class HolderDataEditor extends Editor<HolderData> {
 			cmptDiv.addHtmlClass("col-lg-10");
 			{
 				DefaultComponent cmptInput = new DefaultComponent("input");
-				cmptInput.addHtmlClass("form-control");
+				cmptInput.addHtmlClass("form-control")
+						.addHtmlClass(FORM_CONTROL_ACCEPTABLE); //***selected-list 修改這裡
 				cmptInput.addAttribute("name", "fhId");
 				cmptInput.addAttribute("id", "fhId");
 				cmptInput.addAttribute("placeholder", "ex: 123");

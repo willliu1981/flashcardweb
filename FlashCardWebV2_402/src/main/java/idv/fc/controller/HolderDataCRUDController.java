@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,12 +46,13 @@ public class HolderDataCRUDController extends BaseController {
 	}
 
 	@RequestMapping(value = HOLDERDATA + "/{id}", method = RequestMethod.GET)
-	public String toEdit(HashMap<String, Object> map,
-			@PathVariable("id") String id) {
+	public String toEdit(@PathVariable("id") String id,
+			HttpServletRequest request) {
 		HolderData find = holderDataService.getById(id);
 
-		map.put("data", find);
-		map.put("erType", HolderDataEditor.class);
+		request.setAttribute("data", find);
+		request.setAttribute("erType", HolderDataEditor.class);
+		request.setAttribute("contextPath", request.getContextPath()); //***selected-list 修改這裡
 
 		return PAGE_FLASHCARDS + "/" + "modelEditPage.jsp";
 	}
@@ -102,8 +105,7 @@ public class HolderDataCRUDController extends BaseController {
 		return "redirect:/" + WEB_FLASHCARDS + "/hdManager";
 	}
 
-	@RequestMapping(value = HOLDERDATA
-			+ "/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = HOLDERDATA + "/{id}", method = RequestMethod.DELETE)
 	public String remove(@PathVariable("id") String id) {
 		holderDataService.remove(id);
 

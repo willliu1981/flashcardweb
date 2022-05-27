@@ -7,7 +7,7 @@
 <head>
 <jsp:include page="/WEB-INF/view/public/bootstrapCommon.jsp" />
 
-<!-- selected model global variable -->
+<!-- selected model global variable --> <!-- //***selected-list  -->
 <script type="text/javascript">
       var contextPath;
       var models;
@@ -19,7 +19,7 @@
 
 
 
-<!-- get datas and list -->
+<!-- get datas and list --> <!-- //***selected-list  -->
 <script type="text/javascript">
       $(function() {
           contextPath=$(".list-group-item-title").attr("data-contextPath");
@@ -34,7 +34,7 @@
         
       });
       
-      //get datas from ajax
+      //get datas from ajax  
       function getDatas(num){
           //失效時不處理
       	  if($(this).hasClass('hrefDisabled')){
@@ -76,7 +76,7 @@
               return `
               <li class="list-group-item"><a href="javascript:;" class="list-group-item"
               onclick="doSelectd.call(this)" data-id="$<c:out value='{place.id}' />" 
-              	data-value="$<c:out value='{place.value}' />" >
+              	data-value="$<c:out value='{place.value}' />" ><!-- //***selected-list  -->
                   <span class="badge" onclick="">
                       <font size="5">cited</font>
                   </span>
@@ -88,18 +88,17 @@
           }
         }
       
-      //selected list item
+      //selected list item  //***selected-list 
       function doSelectd(){
     	var selectedId=$(this).attr('data-id');
     	var selectedValue=$(this).attr('data-value');
     	
-    	console.log("xxx"+acceptableClassName);
     	$("."+acceptableClassName).val(selectedId);
       }
       
     </script>
 
-<!-- pager -->
+<!-- pager --> <!-- //***selected-list  -->
 <script type="text/javascript">
       //(延後載入)
       function doPager() {
@@ -187,6 +186,7 @@
     </div>
 
     <!-- 具有 selected list  -->
+    <!--  //***selected-list -->
     <input type="hidden" id="selectedModelRenderable" value="${editor.attributes.selectedModelRenderable}" />
     <c:if test="${editor.attributes.selectedModelRenderable}">
         <!-- 分頁 -->

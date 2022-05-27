@@ -6,7 +6,7 @@ import idv.kw.tag.facade.Editor;
 
 public class FlashcardHolderEditor extends Editor<FlashcardHolder> {
 	private boolean isAdd = false;
-	//html class : 接受 setected list value
+	//html class : 使能接受 setected-list 的 value   //***selected-list 修改這裡
 	private static final String FORM_CONTROL_ACCEPTABLE = "form-control-acceptable";
 
 	public FlashcardHolderEditor(FlashcardHolder data) {
@@ -28,11 +28,11 @@ public class FlashcardHolderEditor extends Editor<FlashcardHolder> {
 		this.addAttribute("path", "flashcardHolder"); 
 		this.addAttribute("formBody", this.getBody());
 
-		//selected list
-		this.addAttribute("selectedModelRenderable", "true");
+		//selected list  //***selected-list 修改這裡
+		this.addAttribute("selectedModelRenderable", "true");//用於頁面判斷是否有 selected-list 功能
 		this.addAttribute("selectedModelTitle", "Flashcard");
 		this.addAttribute("selectedModelQueryPath", "flashcards");
-		this.addAttribute("selectedModelAccept", FORM_CONTROL_ACCEPTABLE);
+		this.addAttribute("selectedModelAccept", FORM_CONTROL_ACCEPTABLE);//和頁面約定的class name
 	}
 
 	public String getBody() {
@@ -99,7 +99,7 @@ public class FlashcardHolderEditor extends Editor<FlashcardHolder> {
 			{
 				DefaultComponent cmptInput = new DefaultComponent("input");
 				cmptInput.addHtmlClass("form-control")
-						.addHtmlClass(FORM_CONTROL_ACCEPTABLE);
+						.addHtmlClass(FORM_CONTROL_ACCEPTABLE); //***selected-list 修改這裡
 				cmptInput.addAttribute("name", "fcId");
 				cmptInput.addAttribute("id", "fcId");
 				cmptInput.addAttribute("placeholder", "ex: 123");
