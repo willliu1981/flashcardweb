@@ -1,21 +1,27 @@
 package idv.fc.quiz.strategy;
 
 import java.util.List;
+import java.util.Map;
 
 public class QuizModStrategyContext<T> {
-	private QuizStrategy<T> strategy;
-	private List<T> datas;
+	private String strategy;
+	private Map<String, QuizStrategy<T>> strategys;
 
-	public QuizModStrategyContext(List<T> datas) {
+	public QuizModStrategyContext() {
 		super();
-		this.datas = datas;
 	}
 
-	public List<T> executeStrategy(String mod, Integer num) {
-		return this.strategy.doOperation(datas, mod, num);
+	public QuizModStrategyContext(Map<String, QuizStrategy<T>> strategys) {
+		super();
+		this.strategys = strategys;
 	}
 
-	public void setStrategy(QuizStrategy<T> strategy) {
+	public List<T> executeStrategy(List<T> datas, Integer num) {
+
+		return this.strategys.get(strategy).doOperation(datas, num);
+	}
+
+	public void setStrategy(String strategy) {
 		this.strategy = strategy;
 	}
 

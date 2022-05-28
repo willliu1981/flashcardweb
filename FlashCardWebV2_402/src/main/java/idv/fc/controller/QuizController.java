@@ -59,15 +59,9 @@ public class QuizController extends BaseController {
 
 		List<HolderDataDTO> all = holderDataService.getAllJoinFH(mod, num);
 
-		Debug.test(new Object() {
-		}, "xxx1", all);
-
 		List<Flashcard> collect = all.stream()
 				.map(x -> x.getFlashcardHolderDTO().getFlashcard())
 				.collect(Collectors.toList());
-
-		Debug.test(new Object() {
-		}, "xxx2", collect);
 
 		String json = collect.stream().filter(x -> x != null)
 				.map(x -> x.getId().toString())

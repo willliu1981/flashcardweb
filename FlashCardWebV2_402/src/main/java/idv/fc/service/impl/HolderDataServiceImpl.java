@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import idv.fc.dao.itf.HolderDataDao;
@@ -11,9 +12,8 @@ import idv.fc.dao.itf.StatusDao;
 import idv.fc.model.HolderData;
 import idv.fc.model.Status;
 import idv.fc.model.dto.HolderDataDTO;
-import idv.fc.quiz.strategy.CommonStrategy;
-import idv.fc.quiz.strategy.PeriodStrategy;
 import idv.fc.quiz.strategy.QuizModStrategyContext;
+import idv.fc.quiz.strategy.QuizModStrategyContextFactory;
 import idv.fc.service.abstraction.IHolderDataService;
 import idv.fc.service.abstraction.IStatusService;
 
@@ -28,6 +28,10 @@ public class HolderDataServiceImpl implements IHolderDataService {
 
 	@Autowired
 	private IStatusService statusService;
+
+	@Autowired
+	@Qualifier("&xxx")
+	private QuizModStrategyContextFactory xxx;
 
 	@Override
 	public List<HolderData> getAll() {
@@ -91,24 +95,34 @@ public class HolderDataServiceImpl implements IHolderDataService {
 		List<HolderDataDTO> all = this.holderDataDao.selectAllJoinFh();
 		List<HolderDataDTO> resultList = null;
 
-		QuizModStrategyContext<HolderDataDTO> modContext = new QuizModStrategyContext<>(all);
+		/*QuizModStrategyContext<HolderDataDTO> modContext = new QuizModStrategyContext<>(
+				all);*/
+
 		//決策
 		if (mod.equals("period")) {
-			modContext.setStrategy(new PeriodStrategy());
+			/*	modContext.setStrategy(new PeriodStrategy());
+			
+				List<HolderDataDTO> executeStrategy = modContext
+						.executeStrategy(mod, num);*/
+			QuizModStrategyContext<HolderDataDTO> object;
+			List<HolderDataDTO> executeStrategy = null;
+			try {
+				object = xxx.getObject();
+				object.setStrategy(mod);
+				executeStrategy = object.executeStrategy(all, num);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 
-			List<HolderDataDTO> executeStrategy = modContext
-					.executeStrategy(mod, num);
-
-			//List<HolderDataDTO> result = new PeriodStrategy().doOperation(resultList, mod, num);
 			return executeStrategy;
 
 		} else if (mod.equals("common")) {
-			modContext.setStrategy(new CommonStrategy());
+			/*	modContext.setStrategy(new CommonStrategy());
+			
+				List<HolderDataDTO> executeStrategy = modContext
+						.executeStrategy(mod, num);*/
 
-			List<HolderDataDTO> executeStrategy = modContext
-					.executeStrategy(mod, num);
-
-			return executeStrategy;
+			return null;
 		}
 
 		return resultList;
