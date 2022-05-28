@@ -11,8 +11,9 @@ import idv.fc.dao.itf.StatusDao;
 import idv.fc.model.HolderData;
 import idv.fc.model.Status;
 import idv.fc.model.dto.HolderDataDTO;
-import idv.fc.quiz.strategy.itf.PeriodStrategy;
-import idv.fc.quiz.strategy.itf.QuizModContext;
+import idv.fc.quiz.strategy.CommonStrategy;
+import idv.fc.quiz.strategy.PeriodStrategy;
+import idv.fc.quiz.strategy.QuizModStrategyContext;
 import idv.fc.service.abstraction.IHolderDataService;
 import idv.fc.service.abstraction.IStatusService;
 
@@ -90,19 +91,24 @@ public class HolderDataServiceImpl implements IHolderDataService {
 		List<HolderDataDTO> all = this.holderDataDao.selectAllJoinFh();
 		List<HolderDataDTO> resultList = null;
 
-		QuizModContext<HolderDataDTO> modContext = new QuizModContext<>(all);
-
+		QuizModStrategyContext<HolderDataDTO> modContext = new QuizModStrategyContext<>(all);
 		//決策
 		if (mod.equals("period")) {
 			modContext.setStrategy(new PeriodStrategy());
-			
+
 			List<HolderDataDTO> executeStrategy = modContext
 					.executeStrategy(mod, num);
-			
+
+			//List<HolderDataDTO> result = new PeriodStrategy().doOperation(resultList, mod, num);
 			return executeStrategy;
 
-		} else {
-			resultList = this.holderDataDao.selectAllJoinFh();
+		} else if (mod.equals("common")) {
+			modContext.setStrategy(new CommonStrategy());
+
+			List<HolderDataDTO> executeStrategy = modContext
+					.executeStrategy(mod, num);
+
+			return executeStrategy;
 		}
 
 		return resultList;

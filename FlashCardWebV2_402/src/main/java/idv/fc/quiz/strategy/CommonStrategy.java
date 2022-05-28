@@ -1,4 +1,4 @@
-package idv.fc.quiz.strategy.itf;
+package idv.fc.quiz.strategy;
 
 import java.util.Collections;
 import java.util.Date;
@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import idv.debug.Debug;
 import idv.fc.model.dto.HolderDataDTO;
 
-public class PeriodStrategy implements QuizStrategy<HolderDataDTO> {
+public class CommonStrategy implements QuizStrategy<HolderDataDTO> {
 
 	@Override
 	public List<HolderDataDTO> doOperation(List<HolderDataDTO> origDatas,

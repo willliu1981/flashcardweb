@@ -54,7 +54,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputNum" class="col-lg-2 control-label">待測數量</label>
+                    <label for="inputNum" class="col-lg-2 control-label">測驗數量</label>
                     <div class="col-lg-10">
                         <input type="text" class="form-control" id="inputNum" value="20">
                     </div>

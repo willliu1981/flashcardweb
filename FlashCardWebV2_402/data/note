@@ -6,6 +6,8 @@
 
 .	HolderDataServicImple.addNew : 可測事務管理
 
+.	model crud controller : 部分重構: 部分改為service 的邏輯
+
 
 問題:
 .	MySpringUtil 結構混亂
@@ -54,6 +56,8 @@
 .	.hrefDisabled 使失效function 須放在所有 script 之後
 
 
+
+
 參照:
 .	header.jsp active param: (參照 header.jsp : path mapping)
 
@@ -67,7 +71,19 @@
 		
 		# user 擁有多個flashcardHolder 和 多個holderData, 分別可指定它們關聯的對象
 			flashcardHolder 不必馬上指定對象id, holderData 需要創建的同時指定對象id
-
+			
+.	quiz strategy:
+		週期模式: filter 到/過 下次測驗的時間 
+			第二層: 隨機、熟練度、時間距離
+		
+		一般模式: filter 全部
+			 隨機: 
+			 就練度: pass 次數/ total 次數 
+			 時間距離: 上次測驗的時間
+			 
+			 
+				
+		
 
 特別加註:
 .	dao id 雖然為 String , 但依然能向sql 的 int id 進行存取 (mybatis)
@@ -75,6 +91,8 @@
 .	mysql timestamp 若為 000-000...時,出現無法轉換的問題, 在jdbc.url 加上 zeroDateTimeBehavior=convertToNull
 
 .	jsp 的 js 和 html js 有一些差異,例如: (value+1) 改成 (parseInt(value)+1)
+
+.	eclipse 開啟 bootstrap.min.css 編輯檔案 會嚴重卡住
 
 
 

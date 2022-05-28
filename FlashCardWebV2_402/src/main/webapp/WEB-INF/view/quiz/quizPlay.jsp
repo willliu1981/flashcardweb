@@ -202,10 +202,10 @@
         <div class="container control-button">
             <input type="button" class="btn start-slide" value="Start">
             <input type="button" class="btn pause-slide" value="Pause">
-            <input type="button" class="btn prev-slide" value="Previous Slide">
-            <input type="button" class="btn next-slide" value="Next Slide">
+            <input type="button" class="btn prev-slide" value="Previous">
+            <input type="button" class="btn next-slide" value="Next">
             <input type="button" class="btn restart-slide" value="Restart">
-            <input type="button" class="btn finish-slide" value="Finish" data-ids="${ids}">
+            <input type="button" class="btn finish-slide" value="Finish" data-ids="${ids}" style="color:rgb(255,140,0);">
         </div>
     </div>
 

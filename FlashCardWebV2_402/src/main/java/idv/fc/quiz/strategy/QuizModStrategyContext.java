@@ -1,12 +1,12 @@
-package idv.fc.quiz.strategy.itf;
+package idv.fc.quiz.strategy;
 
 import java.util.List;
 
-public class QuizModContext<T> {
+public class QuizModStrategyContext<T> {
 	private QuizStrategy<T> strategy;
 	private List<T> datas;
 
-	public QuizModContext(List<T> datas) {
+	public QuizModStrategyContext(List<T> datas) {
 		super();
 		this.datas = datas;
 	}
