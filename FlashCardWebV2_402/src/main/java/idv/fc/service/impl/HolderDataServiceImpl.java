@@ -33,6 +33,10 @@ public class HolderDataServiceImpl implements IHolderDataService {
 	@Qualifier("&xxx")
 	private QuizModStrategyContextFactory xxx;
 
+	@Autowired
+	@Qualifier("xxx")
+	private QuizModStrategyContext<HolderDataDTO> xxx2;
+
 	@Override
 	public List<HolderData> getAll() {
 		return holderDataDao.selectAll();
@@ -98,14 +102,15 @@ public class HolderDataServiceImpl implements IHolderDataService {
 		/*QuizModStrategyContext<HolderDataDTO> modContext = new QuizModStrategyContext<>(
 				all);*/
 
+		QuizModStrategyContext<HolderDataDTO> object;
+		List<HolderDataDTO> executeStrategy = null;
+
 		//決策
 		if (mod.equals("period")) {
 			/*	modContext.setStrategy(new PeriodStrategy());
 			
 				List<HolderDataDTO> executeStrategy = modContext
 						.executeStrategy(mod, num);*/
-			QuizModStrategyContext<HolderDataDTO> object;
-			List<HolderDataDTO> executeStrategy = null;
 			try {
 				object = xxx.getObject();
 				object.setStrategy(mod);
@@ -121,8 +126,10 @@ public class HolderDataServiceImpl implements IHolderDataService {
 			
 				List<HolderDataDTO> executeStrategy = modContext
 						.executeStrategy(mod, num);*/
+			xxx2.setStrategy(mod);
+			executeStrategy = xxx2.executeStrategy(all, num);
 
-			return null;
+			return executeStrategy;
 		}
 
 		return resultList;

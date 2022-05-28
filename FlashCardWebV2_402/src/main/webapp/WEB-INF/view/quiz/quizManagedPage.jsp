@@ -47,7 +47,7 @@
                             </label>
                         </div>
                         <div class="radio">
-                            <label> <input type="radio" name="radioMod" id="radioMod2" value="proficiency">
+                            <label> <input type="radio" name="radioMod" id="radioMod2" value="common">
                                 熟練度模式
                             </label>
                         </div>
