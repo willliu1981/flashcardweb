@@ -9,8 +9,7 @@ import org.springframework.stereotype.Component;
 
 import idv.fc.model.dto.HolderDataDTO;
 
-//@Component("quizModStrategyContextBean")
-@Component("xxx")
+@Component("strategyContext")
 public class QuizModStrategyContextFactory
 		implements FactoryBean<QuizModStrategyContext<HolderDataDTO>> {
 
@@ -24,7 +23,7 @@ public class QuizModStrategyContextFactory
 	public QuizModStrategyContext<HolderDataDTO> getObject() throws Exception {
 		Map<String, QuizStrategy<HolderDataDTO>> strategys = new HashMap<>();
 		strategys.put("period", periodStrategy);
-		strategys.put("period", commonStrategy);
+		strategys.put("common", commonStrategy);
 
 		return new QuizModStrategyContext<HolderDataDTO>(strategys);
 	}

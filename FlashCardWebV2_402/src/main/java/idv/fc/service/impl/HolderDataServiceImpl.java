@@ -30,12 +30,8 @@ public class HolderDataServiceImpl implements IHolderDataService {
 	private IStatusService statusService;
 
 	@Autowired
-	@Qualifier("&xxx")
-	private QuizModStrategyContextFactory xxx;
-
-	@Autowired
-	@Qualifier("xxx")
-	private QuizModStrategyContext<HolderDataDTO> xxx2;
+	//@Qualifier("strategyContext")
+	private QuizModStrategyContext<HolderDataDTO> strategyContext;
 
 	@Override
 	public List<HolderData> getAll() {
@@ -97,42 +93,10 @@ public class HolderDataServiceImpl implements IHolderDataService {
 	@Override
 	public List<HolderDataDTO> getAllJoinFH(String mod, Integer num) {
 		List<HolderDataDTO> all = this.holderDataDao.selectAllJoinFh();
-		List<HolderDataDTO> resultList = null;
 
-		/*QuizModStrategyContext<HolderDataDTO> modContext = new QuizModStrategyContext<>(
-				all);*/
+		strategyContext.setStrategy(mod);
 
-		QuizModStrategyContext<HolderDataDTO> object;
-		List<HolderDataDTO> executeStrategy = null;
-
-		//決策
-		if (mod.equals("period")) {
-			/*	modContext.setStrategy(new PeriodStrategy());
-			
-				List<HolderDataDTO> executeStrategy = modContext
-						.executeStrategy(mod, num);*/
-			try {
-				object = xxx.getObject();
-				object.setStrategy(mod);
-				executeStrategy = object.executeStrategy(all, num);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-			return executeStrategy;
-
-		} else if (mod.equals("common")) {
-			/*	modContext.setStrategy(new CommonStrategy());
-			
-				List<HolderDataDTO> executeStrategy = modContext
-						.executeStrategy(mod, num);*/
-			xxx2.setStrategy(mod);
-			executeStrategy = xxx2.executeStrategy(all, num);
-
-			return executeStrategy;
-		}
-
-		return resultList;
+		return strategyContext.executeStrategy(all, num);
 	}
 
 }
