@@ -62,7 +62,11 @@ public class QuizController extends BaseController {
 		List<HolderDataDTO> all = holderDataService.getAllJoinFH(filter, mod,
 				num);
 
-		List<Flashcard> collect = all.stream().peek(x -> Debug.test("peek", x))
+		Debug.test(new Object() {
+		}, filter, mod);
+
+		List<Flashcard> collect = all.stream()
+				.peek(x -> Debug.test("quiz ctr", "peek", x))
 				.map(x -> x.getFlashcardHolderDTO().getFlashcard())
 				.collect(Collectors.toList());
 
