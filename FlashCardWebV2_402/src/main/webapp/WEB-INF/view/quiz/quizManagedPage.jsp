@@ -12,11 +12,11 @@
 	//submit
 	$(".form-group .btn-primary").click(function() {
 	  var contextPath = $(this).attr("data-myContextPath");
+	  var filter = $("#select-filter").val();
 	  var mod = $("#select-mod").val();
-	  var detail = $("#select-detail").val();
 	  var num = $("#inputNum").val();
 
-	  location.href = contextPath + "/quiz/" + detail + "/" + mod + "/" + num;
+	  location.href = contextPath + "/quiz/" + filter + "/" + mod + "/" + num;
 	});
 
   });
@@ -44,9 +44,9 @@
                     <label class="col-sm-2 control-label">測驗策略</label>
                     <div class="col-sm-10">
                         <div class="form-group">
-                            <label for="select" class="col-sm-2 control-label">模式</label>
-                            <div class="col-sm-10">
-                                <select class="form-control" id="select-mod">
+                            <!-- <label for="select" class="col-sm-2 control-label"> </label> -->
+                            <div class="col-sm-12">
+                                <select class="form-control" id="select-filter">
                                     <option value="period">週期模式</option>
                                     <option value="common">一般模式</option>
                                 </select>
@@ -56,9 +56,9 @@
                                 <p></p>
                             </div>
 
-                            <label for="select" class="col-sm-2 control-label">detail</label>
-                            <div class="col-sm-10">
-                                <select class="form-control" size="3" id="select-detail">
+                            <!-- <label for="select" class="col-sm-2 control-label"> </label> -->
+                            <div class="col-sm-12">
+                                <select class="form-control" size="3" id="select-mod">
                                     <option value="random">隨機</option>
                                     <option value="proficiency">熟練度</option>
                                     <option value="time">距離時間</option>

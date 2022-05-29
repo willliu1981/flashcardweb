@@ -8,24 +8,43 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import idv.fc.model.dto.HolderDataDTO;
+import idv.fc.quiz.strategy.filterimpl.CommonFilter;
+import idv.fc.quiz.strategy.filterimpl.PeriodFilter;
+import idv.fc.quiz.strategy.modimpl.ProficiencyMod;
+import idv.fc.quiz.strategy.modimpl.RandomMod;
+import idv.fc.quiz.strategy.modimpl.TimeMod;
 
 @Component("strategyContext")
 public class QuizModStrategyContextFactory
 		implements FactoryBean<QuizModStrategyContext<HolderDataDTO>> {
 
 	@Autowired
-	private PeriodStrategy periodStrategy;
+	private PeriodFilter periodFilter;
 
 	@Autowired
-	private CommonStrategy commonStrategy;
+	private CommonFilter commonFilter;
+
+	@Autowired
+	private RandomMod randomMod;
+
+	@Autowired
+	private ProficiencyMod proficiencyMod;
+
+	@Autowired
+	private TimeMod timeMod;
 
 	@Override
 	public QuizModStrategyContext<HolderDataDTO> getObject() throws Exception {
-		Map<String, QuizStrategy<HolderDataDTO>> strategys = new HashMap<>();
-		strategys.put("period", periodStrategy);
-		strategys.put("common", commonStrategy);
+		Map<String, QuizFilter<HolderDataDTO>> filters = new HashMap<>();
+		filters.put("period", periodFilter);
+		filters.put("common", commonFilter);
 
-		return new QuizModStrategyContext<HolderDataDTO>(strategys);
+		Map<String, QuizMod<HolderDataDTO>> mods = new HashMap<>();
+		mods.put("random", randomMod);
+		mods.put("proficiency", proficiencyMod);
+		mods.put("time", timeMod);
+
+		return new QuizModStrategyContext<HolderDataDTO>(filters, mods);
 	}
 
 	@Override

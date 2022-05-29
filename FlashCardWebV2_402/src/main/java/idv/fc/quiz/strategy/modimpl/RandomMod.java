@@ -1,36 +1,24 @@
-package idv.fc.quiz.strategy;
+package idv.fc.quiz.strategy.modimpl;
 
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.annotation.Resource;
-
 import org.springframework.stereotype.Repository;
 
 import idv.debug.Debug;
 import idv.fc.model.dto.HolderDataDTO;
+import idv.fc.quiz.strategy.QuizMod;
 
-@Repository("commonStrategy")
-public class CommonStrategy implements QuizStrategy<HolderDataDTO> {
+@Repository("randomMod")
+public class RandomMod implements QuizMod<HolderDataDTO> {
 
 	@Override
 	public List<HolderDataDTO> doOperation(List<HolderDataDTO> origDatas,
 			Integer num) {
 
-		List<HolderDataDTO> filterTime = origDatas.stream().filter(x -> {
-			if (x.getStatus().getEndTimeOfPhase() == null) {
-				return true;
-			}
-
-			boolean before = x.getStatus().getEndTimeOfPhase()
-					.before(new Date());
-
-			return true;//test
-		}).collect(Collectors.toList());
-
-		List<HolderDataDTO> collect = filterTime.stream().collect(
+		List<HolderDataDTO> collect = origDatas.stream().collect(
 				Collectors.collectingAndThen(Collectors.toList(), collected -> {
 					Collections.shuffle(collected);
 					return collected.stream();

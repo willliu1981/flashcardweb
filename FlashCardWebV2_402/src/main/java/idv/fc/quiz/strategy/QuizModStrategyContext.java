@@ -4,31 +4,34 @@ import java.util.List;
 import java.util.Map;
 
 public class QuizModStrategyContext<T> {
-	private String strategy;
-	private String detail;
-	private Map<String, QuizStrategy<T>> strategys;
+	private String filter;
+	private String mod;
+	private Map<String, QuizFilter<T>> fliters;
+	private Map<String, QuizMod<T>> mods;
 
 	public QuizModStrategyContext() {
 		super();
 	}
 
-	public QuizModStrategyContext(Map<String, QuizStrategy<T>> strategys) {
+	public QuizModStrategyContext(Map<String, QuizFilter<T>> fliters,
+			Map<String, QuizMod<T>> mods) {
 		super();
-		this.strategys = strategys;
+		this.fliters = fliters;
+		this.mods = mods;
 	}
 
 	public List<T> executeStrategy(List<T> datas, Integer num) {
-
-		return this.strategys.get(strategy).doOperation(datas, num);
+		List<T> fliterResults = this.fliters.get(filter).doOperation(datas);
+		List<T> modResults = this.mods.get(mod).doOperation(fliterResults, num);
+		return modResults;
 	}
 
-	public void setStrategy(String strategy) {
-		this.strategy = strategy;
+	public void setFilter(String strategy) {
+		this.filter = strategy;
 	}
 
-
-	public void setDetail(String detail) {
-		this.detail = detail;
+	public void setMod(String detail) {
+		this.mod = detail;
 	}
 
 }
