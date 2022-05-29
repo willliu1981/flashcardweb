@@ -9,6 +9,6 @@ public interface IHolderDataService extends IService<HolderData> {
 
 	List<HolderDataDTO> getAllJoinFH();
 
-	List<HolderDataDTO> getAllJoinFH(String mod, Integer num);
+	List<HolderDataDTO> getAllJoinFH(String mod, String detail, Integer num);
 
 }

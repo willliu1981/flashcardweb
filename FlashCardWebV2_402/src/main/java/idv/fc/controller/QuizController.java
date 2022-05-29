@@ -53,11 +53,13 @@ public class QuizController extends BaseController {
 		return QUIZ + "/" + "quizManagedPage.jsp";
 	}
 
-	@RequestMapping(value = "{mod}/{num}")
+	@RequestMapping(value = "{mod}/{detail}/{num}")
 	public String quizStart(@PathVariable("mod") String mod,
+			@PathVariable("detail") String detail,
 			@PathVariable("num") Integer num, Map<String, Object> map) {
 
-		List<HolderDataDTO> all = holderDataService.getAllJoinFH(mod, num);
+		List<HolderDataDTO> all = holderDataService.getAllJoinFH(mod, detail,
+				num);
 
 		List<Flashcard> collect = all.stream()
 				.map(x -> x.getFlashcardHolderDTO().getFlashcard())

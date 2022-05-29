@@ -73,10 +73,10 @@
 			flashcardHolder 不必馬上指定對象id, holderData 需要創建的同時指定對象id
 			
 .	quiz strategy:
-		週期模式: filter 到/過 下次測驗的時間 
+		週期模式: filter 到/過 下次測驗的時間 (default=隨機)
 			第二層: 隨機、熟練度、時間距離
 		
-		一般模式: filter 全部
+		一般模式: filter 全部 (default=隨機)
 			 隨機: 
 			 就練度: pass 次數/ total 次數 
 			 時間距離: 上次測驗的時間

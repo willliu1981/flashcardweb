@@ -12,11 +12,13 @@
 	//submit
 	$(".form-group .btn-primary").click(function() {
 	  var contextPath = $(this).attr("data-myContextPath");
-	  var mod = $("input:radio:checked").val();
+	  var mod = $("#select-mod").val();
+	  var detail = $("#select-detail").val();
 	  var num = $("#inputNum").val();
 
-	  location.href = contextPath + "/quiz/" + mod + "/" + num;
+	  location.href = contextPath + "/quiz/" + detail + "/" + mod + "/" + num;
 	});
+
   });
 </script>
 
@@ -39,17 +41,29 @@
             <fieldset>
                 <legend>Quiz</legend>
                 <div class="form-group">
-                    <label class="col-lg-2 control-label">測驗策略</label>
-                    <div class="col-lg-10">
-                        <div class="radio">
-                            <label> <input type="radio" name="radioMod" id="radioMod1" value="period" checked>
-                                週期模式
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label> <input type="radio" name="radioMod" id="radioMod2" value="common">
-                                熟練度模式
-                            </label>
+                    <label class="col-sm-2 control-label">測驗策略</label>
+                    <div class="col-sm-10">
+                        <div class="form-group">
+                            <label for="select" class="col-sm-2 control-label">模式</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="select-mod">
+                                    <option value="period">週期模式</option>
+                                    <option value="common">一般模式</option>
+                                </select>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <p></p>
+                            </div>
+
+                            <label for="select" class="col-sm-2 control-label">detail</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" size="3" id="select-detail">
+                                    <option value="random">隨機</option>
+                                    <option value="proficiency">熟練度</option>
+                                    <option value="time">距離時間</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>

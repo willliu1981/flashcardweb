@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class QuizModStrategyContext<T> {
 	private String strategy;
+	private String detail;
 	private Map<String, QuizStrategy<T>> strategys;
 
 	public QuizModStrategyContext() {
@@ -23,6 +24,11 @@ public class QuizModStrategyContext<T> {
 
 	public void setStrategy(String strategy) {
 		this.strategy = strategy;
+	}
+
+
+	public void setDetail(String detail) {
+		this.detail = detail;
 	}
 
 }

@@ -91,7 +91,8 @@ public class HolderDataServiceImpl implements IHolderDataService {
 	 * mod 來自quizmanagedPage.jsp 的radioMod 值
 	 */
 	@Override
-	public List<HolderDataDTO> getAllJoinFH(String mod, Integer num) {
+	public List<HolderDataDTO> getAllJoinFH(String mod, String detail,
+			Integer num) {
 		List<HolderDataDTO> all = this.holderDataDao.selectAllJoinFh();
 
 		strategyContext.setStrategy(mod);
