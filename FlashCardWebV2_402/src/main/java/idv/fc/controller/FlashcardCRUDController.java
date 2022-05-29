@@ -101,7 +101,12 @@ public class FlashcardCRUDController extends BaseController {
 
 	@RequestMapping(value = FLASHCARD, method = RequestMethod.PUT)
 	public String edit(Flashcard flashcard) {
-		flashcardService.edit(flashcard);
+		Flashcard byId = flashcardService.getById(flashcard.getId().toString());
+
+		byId.setTerm(flashcard.getTerm());
+		byId.setDefinition(flashcard.getDefinition());
+
+		flashcardService.edit(byId);
 
 		return "redirect:/" + WEB_FLASHCARDS + "/fcManager";
 	}

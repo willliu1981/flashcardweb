@@ -117,7 +117,13 @@ public class FlashcardHolderCRUDController extends BaseController {
 				|| flashcardHolder.getId().equals("")) {
 			flashcardHolder.setFcId(null);
 		}
-		flashcardHolderService.edit(flashcardHolder);
+
+		FlashcardHolder byId = flashcardHolderService
+				.getById(flashcardHolder.getId().toString());
+		byId.setName(flashcardHolder.getName());
+		byId.setFcId(flashcardHolder.getFcId());
+
+		flashcardHolderService.edit(byId);
 
 		return "redirect:/" + WEB_FLASHCARDS + "/fhManager";
 	}
@@ -148,8 +154,6 @@ public class FlashcardHolderCRUDController extends BaseController {
 	@ResponseBody
 	public HashMap<String, Object> getAllFlashcardHolderForSelectedListWhitPageNum(
 			@PathVariable("pageNum") Integer pageNum) {
-		Debug.test(new Object() {
-		}, "xxxxx");
 
 		HashMap<String, Object> jsonMap = new HashMap<>();
 

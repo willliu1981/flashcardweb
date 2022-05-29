@@ -16,6 +16,8 @@
 
 .	controller @ResponseBody 回傳的json, 無法使用 靜態proxy 做成的DTO,會出現不明狀況
 
+.	holderData update fh_id 時, 考慮 status 是否重置
+
 
 
 

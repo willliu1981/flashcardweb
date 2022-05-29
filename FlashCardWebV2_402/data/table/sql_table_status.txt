@@ -2,7 +2,7 @@ CREATE TABLE `status` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `begin_time_of_phase` timestamp NULL DEFAULT NULL,
   `end_time_of_phase` timestamp NULL DEFAULT NULL,
-  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `phase` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci

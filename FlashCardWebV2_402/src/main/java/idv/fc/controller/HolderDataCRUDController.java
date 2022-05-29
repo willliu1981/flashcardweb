@@ -101,7 +101,11 @@ public class HolderDataCRUDController extends BaseController {
 
 	@RequestMapping(value = HOLDERDATA, method = RequestMethod.PUT)
 	public String edit(HolderData model) {
-		holderDataService.edit(model);
+		HolderData byId = holderDataService.getById(model.getId().toString());
+		
+		byId.setFhId(model.getFhId());
+		
+		holderDataService.edit(byId);
 
 		return "redirect:/" + WEB_FLASHCARDS + "/hdManager";
 	}
