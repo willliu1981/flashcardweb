@@ -16,6 +16,12 @@ public class TimeMod implements QuizMod<HolderDataDTO> {
 			Integer num) {
 
 		List<HolderDataDTO> collect = origDatas.stream().sorted((x1, x2) -> {
+			if (x1.getStatus().getBeginTimeOfPhase() == null) {
+				return -1;
+			} else if (x2.getStatus().getBeginTimeOfPhase() == null) {
+				return 1;
+			}
+
 			if (x1.getStatus().getBeginTimeOfPhase()
 					.equals(x2.getStatus().getBeginTimeOfPhase())) {
 				return 0;
