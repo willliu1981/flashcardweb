@@ -1,4 +1,4 @@
-package idv.fc.quiz.strategy.modimpl;
+package idv.fc.quiz.playstrategy.modimpl;
 
 import java.util.Collections;
 import java.util.Date;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import idv.debug.Debug;
 import idv.fc.model.dto.HolderDataDTO;
-import idv.fc.quiz.strategy.QuizMod;
+import idv.fc.quiz.playstrategy.QuizMod;
 
 @Repository("proficiencyMod")
 public class ProficiencyMod implements QuizMod<HolderDataDTO> {

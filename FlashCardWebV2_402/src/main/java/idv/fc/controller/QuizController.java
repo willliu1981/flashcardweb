@@ -62,11 +62,7 @@ public class QuizController extends BaseController {
 		List<HolderDataDTO> all = holderDataService.getAllJoinFH(filter, mod,
 				num);
 
-		Debug.test(new Object() {
-		}, filter, mod);
-
 		List<Flashcard> collect = all.stream()
-				.peek(x -> Debug.test("quiz ctr", "peek", x))
 				.map(x -> x.getFlashcardHolderDTO().getFlashcard())
 				.collect(Collectors.toList());
 
@@ -90,35 +86,9 @@ public class QuizController extends BaseController {
 	@ResponseBody
 	public Map<String, String> doFinish(String ids) {
 
-		List<Integer> list = Arrays
-				.stream(new Gson().fromJson(ids, Integer[].class))
-				.collect(Collectors.toList());
+		Integer[] arrIds = new Gson().fromJson(ids, Integer[].class);
 
-		List<HolderDataDTO> all = holderDataService.getAllJoinFH();
-
-		Stream<HolderDataDTO> stream = all.stream()
-				.filter(x -> x.getFlashcardHolderDTO().getFlashcard() != null
-						&& list.contains(x.getFlashcardHolderDTO()
-								.getFlashcard().getId()));
-
-		stream.forEach(x -> {
-			Status status = x.getStatus();
-			status.setBeginTimeOfPhase(new Timestamp(new Date().getTime()));
-			status.setPhase(status.getPhase() + 1);
-
-			FlashcardHolderDTO flashcardHolderDTO = x.getFlashcardHolderDTO();
-			flashcardHolderDTO.setNumberOfQuizTimes(
-					flashcardHolderDTO.getNumberOfQuizTimes() + 1);
-
-			Flashcard flashcard = x.getFlashcardHolderDTO().getFlashcard();
-			flashcard
-					.setNumberOfQuizTimes(flashcard.getNumberOfQuizTimes() + 1);
-
-			this.flashcardService.edit(flashcard);
-			this.flashcardHolderService.edit(flashcardHolderDTO);
-			this.statusService.edit(status);
-
-		});
+		holderDataService.updateForQuizFinish(arrIds);
 
 		Map<String, String> result = new HashMap<>();
 		result.put("code", "1");

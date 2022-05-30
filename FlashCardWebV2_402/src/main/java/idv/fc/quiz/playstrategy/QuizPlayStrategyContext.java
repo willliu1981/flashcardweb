@@ -1,19 +1,19 @@
-package idv.fc.quiz.strategy;
+package idv.fc.quiz.playstrategy;
 
 import java.util.List;
 import java.util.Map;
 
-public class QuizModStrategyContext<T> {
+public class QuizPlayStrategyContext<T> {
 	private String filter;
 	private String mod;
 	private Map<String, QuizFilter<T>> fliters;
 	private Map<String, QuizMod<T>> mods;
 
-	public QuizModStrategyContext() {
+	public QuizPlayStrategyContext() {
 		super();
 	}
 
-	public QuizModStrategyContext(Map<String, QuizFilter<T>> fliters,
+	public QuizPlayStrategyContext(Map<String, QuizFilter<T>> fliters,
 			Map<String, QuizMod<T>> mods) {
 		super();
 		this.fliters = fliters;

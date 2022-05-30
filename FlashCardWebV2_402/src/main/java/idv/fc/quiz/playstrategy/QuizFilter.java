@@ -1,4 +1,4 @@
-package idv.fc.quiz.strategy;
+package idv.fc.quiz.playstrategy;
 
 import java.util.List;
 

@@ -53,7 +53,7 @@
 		url : contextPath + "/quiz",
 		success : function(data) {
 		  console.log("data=" + data.code);
-		  window.location.href = contextPath + "/quiz";
+		  window.location.href = contextPath + "/quiz/quizManager";//quiz完成時, 導向目的地
 		},
 		error : function(data) {
 		  console.log("error=" + data);

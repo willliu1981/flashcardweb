@@ -1,6 +1,6 @@
 
 進度(需求):
-.	QuizFinish page
+.	quiz 完成後的phase 規則
 
 .	FlashcardFacade 等 重構
 
@@ -57,7 +57,8 @@
 
 .	.hrefDisabled 使失效function 須放在所有 script 之後
 
-
+.	HolderDataServiceImpl:: updateForQuizFinish 中 getEndTimeOfPhase 的 primary time,
+		所取得的值是否為null 會受到 package tool 中 TimestampConverter 轉換結果的影響
 
 
 參照:

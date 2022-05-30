@@ -1,4 +1,4 @@
-package idv.fc.quiz.strategy.modimpl;
+package idv.fc.quiz.playstrategy.modimpl;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Repository;
 
 import idv.fc.model.dto.HolderDataDTO;
-import idv.fc.quiz.strategy.QuizMod;
+import idv.fc.quiz.playstrategy.QuizMod;
 
 @Repository("timeMod")
 public class TimeMod implements QuizMod<HolderDataDTO> {

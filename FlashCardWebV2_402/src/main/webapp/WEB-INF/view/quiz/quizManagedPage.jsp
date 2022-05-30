@@ -47,7 +47,7 @@
                             <!-- <label for="select" class="col-sm-2 control-label"> </label> -->
                             <div class="col-sm-12">
                                 <select class="form-control" id="select-filter">
-                                    <option value="period">週期模式</option>
+                                    <option value="period" selected>週期模式</option>
                                     <option value="common">一般模式</option>
                                 </select>
                             </div>
@@ -59,7 +59,7 @@
                             <!-- <label for="select" class="col-sm-2 control-label"> </label> -->
                             <div class="col-sm-12">
                                 <select class="form-control" size="3" id="select-mod">
-                                    <option value="random">隨機</option>
+                                    <option value="random" selected>隨機</option>
                                     <option value="proficiency">熟練度</option>
                                     <option value="time">距離時間</option>
                                 </select>

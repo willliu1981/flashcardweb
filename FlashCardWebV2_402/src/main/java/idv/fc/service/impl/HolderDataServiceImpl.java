@@ -1,19 +1,26 @@
 package idv.fc.service.impl;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import idv.fc.dao.itf.HolderDataDao;
 import idv.fc.dao.itf.StatusDao;
+import idv.fc.model.Flashcard;
 import idv.fc.model.HolderData;
 import idv.fc.model.Status;
+import idv.fc.model.dto.FlashcardHolderDTO;
 import idv.fc.model.dto.HolderDataDTO;
-import idv.fc.quiz.strategy.QuizModStrategyContext;
-import idv.fc.quiz.strategy.QuizModStrategyContextFactory;
+import idv.fc.quiz.playstrategy.QuizPlayStrategyContext;
+import idv.fc.service.abstraction.IFlashcardHolderService;
+import idv.fc.service.abstraction.IFlashcardService;
 import idv.fc.service.abstraction.IHolderDataService;
 import idv.fc.service.abstraction.IStatusService;
 
@@ -27,11 +34,20 @@ public class HolderDataServiceImpl implements IHolderDataService {
 	private StatusDao statusDao;
 
 	@Autowired
+	IFlashcardService flashcardService;
+
+	@Autowired
+	IFlashcardHolderService flashcardHolderService;
+
+	@Autowired
+	IHolderDataService holderDataService;
+
+	@Autowired
 	private IStatusService statusService;
 
 	@Autowired
 	//@Qualifier("strategyContext")
-	private QuizModStrategyContext<HolderDataDTO> strategyContext;
+	private QuizPlayStrategyContext<HolderDataDTO> strategyContext;
 
 	@Override
 	public List<HolderData> getAll() {
@@ -99,6 +115,48 @@ public class HolderDataServiceImpl implements IHolderDataService {
 		strategyContext.setMod(mod);
 
 		return strategyContext.executeStrategy(all, num);
+	}
+
+	@Override
+	public void updateForQuizFinish(Integer[] datas) {
+
+		List<Integer> list = Arrays.stream(datas).collect(Collectors.toList());
+
+		List<HolderDataDTO> all = holderDataService.getAllJoinFH();
+
+		Stream<HolderDataDTO> stream = all.stream()
+				.filter(x -> x.getFlashcardHolderDTO().getFlashcard() != null
+						&& list.contains(x.getFlashcardHolderDTO()
+								.getFlashcard().getId()));
+
+		stream.forEach(x -> {
+			Status status = x.getStatus();
+			status.setBeginTimeOfPhase(new Timestamp(new Date().getTime()));
+			status.setPhase(status.getPhase() + 1);
+
+			Timestamp priEndTime = null;
+			if ((priEndTime = status.getEndTimeOfPhase()) == null) {
+				priEndTime = new Timestamp(new Date().getTime());
+			}
+			
+			
+			
+			status.setEndTimeOfPhase(null);
+
+			FlashcardHolderDTO flashcardHolderDTO = x.getFlashcardHolderDTO();
+			flashcardHolderDTO.setNumberOfQuizTimes(
+					flashcardHolderDTO.getNumberOfQuizTimes() + 1);
+
+			Flashcard flashcard = x.getFlashcardHolderDTO().getFlashcard();
+			flashcard
+					.setNumberOfQuizTimes(flashcard.getNumberOfQuizTimes() + 1);
+
+			this.flashcardService.edit(flashcard);
+			this.flashcardHolderService.edit(flashcardHolderDTO);
+			this.statusService.edit(status);
+
+		});
+
 	}
 
 }
