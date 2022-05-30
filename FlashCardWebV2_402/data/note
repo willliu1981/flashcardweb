@@ -1,12 +1,14 @@
 
 進度(需求):
-.	quiz 完成後的phase 規則
+.	quizPlay : 
+		datas 為empty 時 處理
+		btn finish 提示(考慮使用 modal) 	
+
 
 .	FlashcardFacade 等 重構
 
 .	HolderDataServicImple.addNew : 可測事務管理
 
-.	model crud controller : 部分重構: 部分改為service 的邏輯
 
 
 問題:

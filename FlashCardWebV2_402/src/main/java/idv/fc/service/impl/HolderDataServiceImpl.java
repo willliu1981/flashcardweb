@@ -18,6 +18,8 @@ import idv.fc.model.HolderData;
 import idv.fc.model.Status;
 import idv.fc.model.dto.FlashcardHolderDTO;
 import idv.fc.model.dto.HolderDataDTO;
+import idv.fc.quiz.phaseexception.QuizPhaseInvalidException;
+import idv.fc.quiz.phasestrategy.QuizPhaseStrategyContext;
 import idv.fc.quiz.playstrategy.QuizPlayStrategyContext;
 import idv.fc.service.abstraction.IFlashcardHolderService;
 import idv.fc.service.abstraction.IFlashcardService;
@@ -46,8 +48,10 @@ public class HolderDataServiceImpl implements IHolderDataService {
 	private IStatusService statusService;
 
 	@Autowired
-	//@Qualifier("strategyContext")
-	private QuizPlayStrategyContext<HolderDataDTO> strategyContext;
+	private QuizPlayStrategyContext<HolderDataDTO> playStrategyContext;
+
+	@Autowired
+	private QuizPhaseStrategyContext phaseStrategyContext;
 
 	@Override
 	public List<HolderData> getAll() {
@@ -111,10 +115,10 @@ public class HolderDataServiceImpl implements IHolderDataService {
 			Integer num) {
 		List<HolderDataDTO> all = this.holderDataDao.selectAllJoinFh();
 
-		strategyContext.setFilter(filter);
-		strategyContext.setMod(mod);
+		playStrategyContext.setFilter(filter);
+		playStrategyContext.setMod(mod);
 
-		return strategyContext.executeStrategy(all, num);
+		return playStrategyContext.executeStrategy(all, num);
 	}
 
 	@Override
@@ -130,18 +134,27 @@ public class HolderDataServiceImpl implements IHolderDataService {
 								.getFlashcard().getId()));
 
 		stream.forEach(x -> {
+			//---status 
 			Status status = x.getStatus();
 			status.setBeginTimeOfPhase(new Timestamp(new Date().getTime()));
-			status.setPhase(status.getPhase() + 1);
 
 			Timestamp priEndTime = null;
 			if ((priEndTime = status.getEndTimeOfPhase()) == null) {
 				priEndTime = new Timestamp(new Date().getTime());
 			}
-			
-			
-			
-			status.setEndTimeOfPhase(null);
+
+			Integer phase = status.getPhase();
+
+			Timestamp phaseResultTime = null;
+			try {
+				phaseResultTime = phaseStrategyContext
+						.executeStrategy(priEndTime, phase);
+				status.setEndTimeOfPhase(phaseResultTime);
+				status.setPhase(status.getPhase() + 1);
+			} catch (QuizPhaseInvalidException e) {
+				status.setEndTimeOfPhase(null);
+			}
+			//---//status 
 
 			FlashcardHolderDTO flashcardHolderDTO = x.getFlashcardHolderDTO();
 			flashcardHolderDTO.setNumberOfQuizTimes(

@@ -14,7 +14,7 @@ import idv.fc.quiz.playstrategy.modimpl.ProficiencyMod;
 import idv.fc.quiz.playstrategy.modimpl.RandomMod;
 import idv.fc.quiz.playstrategy.modimpl.TimeMod;
 
-@Component("strategyContext")
+@Component
 public class QuizPlayStrategyContextFactory
 		implements FactoryBean<QuizPlayStrategyContext<HolderDataDTO>> {
 

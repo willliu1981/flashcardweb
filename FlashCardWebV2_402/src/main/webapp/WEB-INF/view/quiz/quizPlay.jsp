@@ -22,8 +22,6 @@
 	left: 0%;
 	color: rgb(225, 225, 225);
 }
-
-
 </style>
 
 <!-- global variable -->
@@ -31,7 +29,7 @@
   var pause = 0;//0='cycle' , 1='pause'
   var carousel;//'.carousel'
   var ids;//ids array
-  var itemNums;//item count
+  var itemsLength;//item count
 </script>
 
 <!-- process quiz finish  -->
@@ -68,7 +66,7 @@
 <script type="text/javascript">
   $(function() {
 	carousel = $('.carousel');
-	itemNums = carousel.attr('data-itemNums');
+	itemsLength = carousel.attr('data-itemsLength');
 
 	$('.control-button .pause-slide').click(function() {
 	  carousel.carousel('pause');
@@ -81,11 +79,11 @@
 
 	$('.control-button .start-slide').click(function() {
 	  carousel.carousel('cycle');
-	  
+
 	  $('.control-pauseMsg .pauseMsg').text('start');
 	  $('.control-pauseMsg .pauseMsg').fadeIn(200);
 	  $('.control-pauseMsg .pauseMsg').fadeOut(500);
-	  
+
 	});
 
 	$('.control-button .prev-slide').click(function() {
@@ -100,15 +98,19 @@
 	  carousel.carousel(0);
 	});
 
-	// .active and last item
+	// .active and last item (使 finish 顯示)
 	var carouselItems = carousel.find('.item');
 	$('.control-button .finish-slide').fadeOut(100);
 	carousel.on('slid.bs.carousel', function(e) {
 	  let currentIdx = carouselItems.siblings('.active').index();
-	  if (currentIdx == itemNums - 1) {
+	  if (currentIdx == itemsLength - 1) {
 		$('.control-button .finish-slide').fadeIn("slow");
 	  }
 	});
+
+	if (itemsLength == 1) {
+	  $('.control-button .finish-slide').fadeIn("slow");
+	}
   });
 
   $(document).bind('keyup', function(e) {
@@ -153,7 +155,7 @@
     <!-- 輪播 -->
     <div class="container">
         <div id="carousel-example-generic" class="carousel slide my-carousel " data-ride="carousel" data-interval="3000"
-            data-pause="hover" data-wrap="false" data-keyboard="true" data-itemNums="${datas.size() }">
+            data-pause="hover" data-wrap="false" data-keyboard="true" data-itemsLength="${datas.size() }">
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
@@ -200,12 +202,13 @@
         </div>
 
         <div class="container control-button">
+            <input type="button" class="btn restart-slide" value="Restart">
             <input type="button" class="btn start-slide" value="Start">
             <input type="button" class="btn pause-slide" value="Pause">
             <input type="button" class="btn prev-slide" value="Previous">
             <input type="button" class="btn next-slide" value="Next">
-            <input type="button" class="btn restart-slide" value="Restart">
-            <input type="button" class="btn finish-slide" value="Finish" data-ids="${ids}" style="color:rgb(255,140,0);">
+            <input type="button" class="btn finish-slide" value="Finish" data-ids="${ids}"
+                style="color: rgb(255, 140, 0);">
         </div>
     </div>
 
