@@ -8,18 +8,34 @@
 </style>
 
 <script type="text/javascript">
-  $(document).ready(function() {
-	//submit
-	$(".form-group .btn-primary").click(function() {
-	  var contextPath = $(this).attr("data-myContextPath");
-	  var filter = $("#select-filter").val();
-	  var mod = $("#select-mod").val();
-	  var num = $("#inputNum").val();
+  $(document).ready(
+	  function() {
+		//submit
+		$(".form-group .btn-primary").click(
+			function() {
+			  var contextPath = $(this).attr("data-myContextPath");
+			  var filter = $("#select-filter").val();
+			  var mod = $("#select-mod").val();
+			  var num = $("#inputNum").val();
 
-	  location.href = contextPath + "/quiz/" + filter + "/" + mod + "/" + num;
-	});
+			  $.ajax({
+				type : "get",
+				datatype : "json",
+				url : contextPath + "/quiz/datas/" + filter + "/" + mod + "/"
+					+ num,
+				success : function(resp) {
+				  console.log("datas=" + resp.datas.length);
+				  if (resp.datas.length == 0) {
+					alert("沒有資料");
+				  } else {
+					location.href = contextPath + "/quiz/" + filter + "/" + mod
+						+ "/" + num;
+				  }
+				}
+			  });
 
-  });
+			});
+	  });
 </script>
 
 </head>

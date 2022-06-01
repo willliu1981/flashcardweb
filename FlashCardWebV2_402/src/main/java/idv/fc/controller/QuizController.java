@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 
+import idv.debug.Debug;
 import idv.fc.model.Flashcard;
 import idv.fc.model.dto.HolderDataDTO;
 import idv.fc.service.abstraction.IFlashcardHolderService;
@@ -46,25 +48,37 @@ public class QuizController extends BaseController {
 		return QUIZ + "/" + "quizManagedPage.jsp";
 	}
 
-	@RequestMapping(value = "{filter}/{mod}/{num}")
-	public String quizStart(@PathVariable("filter") String filter,
-			@PathVariable("mod") String mod, @PathVariable("num") Integer num,
-			Map<String, Object> map) {
+	@RequestMapping(value = "datas/{filter}/{mod}/{num}", produces = "application/json")
+	@ResponseBody
+	public Map<String, Object> toGetStartDatas(
+			@PathVariable("filter") String filter,
+			@PathVariable("mod") String mod, @PathVariable("num") Integer num) {
+		Map<String, Object> map = new HashMap<>();
 
 		//經由strategy 取得datas
 		List<HolderDataDTO> all = holderDataService.getAllJoinFH(filter, mod,
 				num);
 
 		List<Flashcard> collect = all.stream()
+				.filter(x -> x.getFlashcardHolderDTO().getFlashcard() != null)
 				.map(x -> x.getFlashcardHolderDTO().getFlashcard())
 				.collect(Collectors.toList());
 
-		String json = collect.stream().filter(x -> x != null)
-				.map(x -> x.getId().toString())
-				.collect(Collectors.joining(",", "[", "]"));
+		JsonArray jArray = new JsonArray();
+		collect.stream().forEach(x -> jArray.add(x.getId()));
 
 		map.put("datas", collect);
-		map.put("ids", json);
+		map.put("ids", jArray.toString());
+
+		return map;
+	}
+
+	@RequestMapping(value = "{filter}/{mod}/{num}")
+	public String toQuizStart(@PathVariable("filter") String filter,
+			@PathVariable("mod") String mod, @PathVariable("num") Integer num,
+			Map<String, Object> map) {
+
+		toGetStartDatas(filter, mod, num).forEach((k, v) -> map.put(k, v));
 
 		return "quiz/quizPlay.jsp";
 	}

@@ -138,17 +138,11 @@ public class HolderDataServiceImpl implements IHolderDataService {
 			Status status = x.getStatus();
 			status.setBeginTimeOfPhase(new Timestamp(new Date().getTime()));
 
-			Timestamp priEndTime = null;
-			if ((priEndTime = status.getEndTimeOfPhase()) == null) {
-				priEndTime = new Timestamp(new Date().getTime());
-			}
-
 			Integer phase = status.getPhase();
-
 			Timestamp phaseResultTime = null;
 			try {
-				phaseResultTime = phaseStrategyContext
-						.executeStrategy(priEndTime, phase);
+				phaseResultTime = phaseStrategyContext.executeStrategy(
+						new Timestamp(new Date().getTime()), phase);
 				status.setEndTimeOfPhase(phaseResultTime);
 				status.setPhase(status.getPhase() + 1);
 			} catch (QuizPhaseInvalidException e) {

@@ -18,17 +18,17 @@
 	cursor: pointer;
 }
 
-body{
-    background-image:url(/FlashCardWebV2/picture/flame1.jpg);
+body {
+	background-image: url(/FlashCardWebV2/picture/flame1.jpg);
 }
 </style>
 
 <!-- 使 a href 失效 -->
 <script type="text/javascript">
   $(function() {
-    $('.hrefDisabled').on("click", function(e) {
-      e.preventDefault();
-    });
+	$('.hrefDisabled').on("click", function(e) {
+	  e.preventDefault();
+	});
   });
 </script>
 </head>

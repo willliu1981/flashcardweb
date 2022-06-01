@@ -25,6 +25,7 @@ public class PeriodFilter implements QuizFilter<HolderDataDTO> {
 				return false;
 			}
 
+			//begin time or end time ==null, 代表該phase 尚未開始,即無初始紀錄
 			if (x.getStatus().getEndTimeOfPhase() == null) {
 				return true;
 			}
