@@ -1,24 +1,19 @@
 package idv.fc.service.impl;
 
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import idv.debug.Debug;
 import idv.fc.dao.itf.HolderDataDao;
 import idv.fc.dao.itf.StatusDao;
-import idv.fc.model.Flashcard;
 import idv.fc.model.HolderData;
 import idv.fc.model.Status;
-import idv.fc.model.dto.FlashcardHolderDTO;
 import idv.fc.model.dto.HolderDataDTO;
-import idv.fc.quiz.phaseexception.QuizPhaseInvalidException;
 import idv.fc.quiz.phasestrategy.QuizPhaseStrategyContext;
 import idv.fc.quiz.playstrategy.QuizPlayStrategyContext;
 import idv.fc.service.abstraction.IFlashcardHolderService;
@@ -40,9 +35,6 @@ public class HolderDataServiceImpl implements IHolderDataService {
 
 	@Autowired
 	IFlashcardHolderService flashcardHolderService;
-
-	@Autowired
-	IHolderDataService holderDataService;
 
 	@Autowired
 	private IStatusService statusService;
@@ -118,50 +110,31 @@ public class HolderDataServiceImpl implements IHolderDataService {
 		playStrategyContext.setFilter(filter);
 		playStrategyContext.setMod(mod);
 
-		return playStrategyContext.executeStrategy(all, num);
+		return playStrategyContext.executeStrategyForGetAll(all, num);
 	}
 
 	@Override
-	public void updateForQuizFinish(Integer[] datas) {
+	public void updateForQuizFinish(Integer[] datas, String mod) {
 
 		List<Integer> list = Arrays.stream(datas).collect(Collectors.toList());
 
-		List<HolderDataDTO> all = holderDataService.getAllJoinFH();
+		List<HolderDataDTO> all = this.getAllJoinFH();
 
-		Stream<HolderDataDTO> stream = all.stream()
+		//根據 datas array 核對資料庫中數據 找回資料
+		List<HolderDataDTO> find = all.stream()
 				.filter(x -> x.getFlashcardHolderDTO().getFlashcard() != null
 						&& list.contains(x.getFlashcardHolderDTO()
-								.getFlashcard().getId()));
+								.getFlashcard().getId()))
+				.collect(Collectors.toList());
 
-		stream.forEach(x -> {
-			//---status 
-			Status status = x.getStatus();
-			status.setBeginTimeOfPhase(new Timestamp(new Date().getTime()));
-
-			Integer phase = status.getPhase();
-			Timestamp phaseResultTime = null;
-			try {
-				phaseResultTime = phaseStrategyContext.executeStrategy(
-						new Timestamp(new Date().getTime()), phase);
-				status.setEndTimeOfPhase(phaseResultTime);
-				status.setPhase(status.getPhase() + 1);
-			} catch (QuizPhaseInvalidException e) {
-				status.setEndTimeOfPhase(null);
-			}
-			//---//status 
-
-			FlashcardHolderDTO flashcardHolderDTO = x.getFlashcardHolderDTO();
-			flashcardHolderDTO.setNumberOfQuizTimes(
-					flashcardHolderDTO.getNumberOfQuizTimes() + 1);
-
-			Flashcard flashcard = x.getFlashcardHolderDTO().getFlashcard();
-			flashcard
-					.setNumberOfQuizTimes(flashcard.getNumberOfQuizTimes() + 1);
-
-			this.flashcardService.edit(flashcard);
-			this.flashcardHolderService.edit(flashcardHolderDTO);
-			this.statusService.edit(status);
-
+		List<HolderDataDTO> findForUpdate = playStrategyContext
+				.executeStrategyForUpdate(find, mod);
+		//進行update
+		findForUpdate.stream().forEach(x -> {
+			this.flashcardService
+					.edit(x.getFlashcardHolderDTO().getFlashcard());
+			this.flashcardHolderService.edit(x.getFlashcardHolderDTO());
+			this.statusService.edit(x.getStatus());
 		});
 
 	}

@@ -95,7 +95,7 @@ public class QuizController extends BaseController {
 
 		Integer[] arrIds = new Gson().fromJson(ids, Integer[].class);
 
-		holderDataService.updateForQuizFinish(arrIds);
+		holderDataService.updateForQuizFinish(arrIds, "period");
 
 		Map<String, String> result = new HashMap<>();
 		result.put("code", "1");

@@ -1,7 +1,5 @@
 
 進度(需求):
-.	quizPlay : 
-		datas 為empty 時 處理
 
 .	HolderDataServicImple.addNew : 可測事務管理
 

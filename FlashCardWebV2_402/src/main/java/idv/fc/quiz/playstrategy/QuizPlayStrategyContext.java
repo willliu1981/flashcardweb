@@ -20,10 +20,18 @@ public class QuizPlayStrategyContext<T> {
 		this.mods = mods;
 	}
 
-	public List<T> executeStrategy(List<T> datas, Integer num) {
+	//datas: primary datas
+	public List<T> executeStrategyForGetAll(List<T> datas, Integer num) {
 		List<T> fliterResults = this.fliters.get(filter).doOperation(datas);
 		List<T> modResults = this.mods.get(mod).doOperation(fliterResults, num);
 		return modResults;
+	}
+
+	//datas: datas of result
+	public List<T> executeStrategyForUpdate(List<T> datas, String mod) {
+		List<T> fliterResults = this.fliters.get(filter)
+				.doOperationForUpdate(datas);
+		return fliterResults;
 	}
 
 	public void setFilter(String strategy) {

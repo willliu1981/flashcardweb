@@ -11,6 +11,6 @@ public interface IHolderDataService extends IService<HolderData> {
 
 	List<HolderDataDTO> getAllJoinFH(String mod, String detail, Integer num);
 	
-	void updateForQuizFinish(Integer[]  datas);
+	void updateForQuizFinish(Integer[]  datas, String mod);
 
 }
