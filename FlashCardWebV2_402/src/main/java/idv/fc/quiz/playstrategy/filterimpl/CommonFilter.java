@@ -6,25 +6,30 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 
+import idv.debug.Debug;
 import idv.fc.model.Flashcard;
 import idv.fc.model.Status;
 import idv.fc.model.dto.FlashcardHolderDTO;
 import idv.fc.model.dto.HolderDataDTO;
-import idv.fc.quiz.phaseexception.QuizPhaseInvalidException;
-import idv.fc.quiz.phasestrategy.QuizPhaseStrategyContext;
 import idv.fc.quiz.playstrategy.QuizFilter;
+import idv.fc.quiz.playstrategy.QuizPlayStrategyContext;
+import idv.fc.quiz.playstrategy.QuizPlayStrategyContextFactory;
 
 @Repository("commonFilter")
 public class CommonFilter implements QuizFilter<HolderDataDTO> {
-	
+
 	@Autowired
-	private QuizPhaseStrategyContext phaseStrategyContext;
+	@Lazy
+	private QuizPlayStrategyContext<HolderDataDTO> playStrategyContext;
 
 	@Override
-	public List<HolderDataDTO> doOperation(List<HolderDataDTO> origDatas) {
+	public List<HolderDataDTO> doOperationForGetAll(
+			List<HolderDataDTO> origDatas) {
 
+		
 		return origDatas;
 	}
 
@@ -32,41 +37,54 @@ public class CommonFilter implements QuizFilter<HolderDataDTO> {
 	public List<HolderDataDTO> doOperationForUpdate(
 			List<HolderDataDTO> origDatas) {
 
+		Debug.test(new Object() {
+		}, "init", origDatas);
 
-		 origDatas.stream().map(x -> {
-				//---status 
-				Status status = x.getStatus();
-				status.setBeginTimeOfPhase(new Timestamp(new Date().getTime()));
+		playStrategyContext.setFilter(QuizPlayStrategyContextFactory.PERIOD);
+		List<HolderDataDTO> executeStrategyForGetAll = playStrategyContext
+				.executeStrategyForGetAll(origDatas, origDatas.size());
 
-				Integer phase = status.getPhase();
-				Timestamp phaseResultTime = null;
-				try {
-					phaseResultTime = phaseStrategyContext.executeStrategy(
-							new Timestamp(new Date().getTime()), phase);
-					status.setEndTimeOfPhase(phaseResultTime);
-					status.setPhase(status.getPhase() + 1);
-				} catch (QuizPhaseInvalidException e) {
-					status.setEndTimeOfPhase(null);
-				}
-				//---//status 
+		List<HolderDataDTO> part1 = playStrategyContext
+				.executeStrategyForUpdate(executeStrategyForGetAll);
 
-				FlashcardHolderDTO flashcardHolderDTO = x.getFlashcardHolderDTO();
-				flashcardHolderDTO.setNumberOfQuizTimes(
-						flashcardHolderDTO.getNumberOfQuizTimes() + 1);
+		Debug.test(new Object() {
+		}, "part1", part1);
 
-				Flashcard flashcard = x.getFlashcardHolderDTO().getFlashcard();
-				flashcard
-						.setNumberOfQuizTimes(flashcard.getNumberOfQuizTimes() + 1);
+		//差集
+		List<HolderDataDTO> part2 = origDatas.stream()
+				.filter(x -> !part1.contains(x)).collect(Collectors.toList());
 
-				HolderDataDTO newDTO = new HolderDataDTO();
-				newDTO.setFlashcardHolderDTO(flashcardHolderDTO);
-				newDTO.setStatus(status);
+		Debug.test(new Object() {
+		}, "part2", part2);
 
-				return newDTO;
-			}).collect(Collectors.toList());
-		
-		
-		return null;
+		part2.stream().map(x -> {
+			//---status 
+			Status status = x.getStatus();
+			status.setBeginTimeOfPhase(new Timestamp(new Date().getTime()));
+
+			//---//status 
+
+			FlashcardHolderDTO flashcardHolderDTO = x.getFlashcardHolderDTO();
+			flashcardHolderDTO.setNumberOfQuizTimes(
+					flashcardHolderDTO.getNumberOfQuizTimes() + 1);
+
+			Flashcard flashcard = x.getFlashcardHolderDTO().getFlashcard();
+			flashcard
+					.setNumberOfQuizTimes(flashcard.getNumberOfQuizTimes() + 1);
+
+			return x;
+		}).collect(Collectors.toList());
+
+		part1.addAll(part2);
+		Debug.test(new Object() {
+		}, "all", part1);
+		List<HolderDataDTO> all = part1.stream().distinct()
+				.collect(Collectors.toList());
+
+		Debug.test(new Object() {
+		}, "distinct", all);
+
+		return all;
 	}
 
 }

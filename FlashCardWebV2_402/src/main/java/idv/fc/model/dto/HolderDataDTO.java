@@ -2,7 +2,6 @@ package idv.fc.model.dto;
 
 import java.sql.Timestamp;
 
-import idv.fc.model.FlashcardHolder;
 import idv.fc.model.HolderData;
 import idv.fc.model.Status;
 
@@ -57,8 +56,32 @@ public class HolderDataDTO {
 
 	@Override
 	public String toString() {
-		return "HolderDataDTO [hd=" + hd + ", flashcardHolderDTO="
-				+ flashcardHolderDTO + ", status=" + status + "]";
+		return "HolderDataDTO [hd=" + hd.getId() + ", flashcardHolderDTO="
+				+ flashcardHolderDTO.getId() + ", status=" + status.getId()
+				+ "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return this.getId();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (obj == null) {
+			return false;
+		}
+
+		if (!obj.getClass().equals(this.getClass())) {
+			return false;
+		}
+		HolderDataDTO other = (HolderDataDTO) obj;
+
+		return this.getId().equals(other.getId());
 	}
 
 }

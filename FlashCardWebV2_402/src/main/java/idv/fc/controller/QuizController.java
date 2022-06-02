@@ -79,6 +79,7 @@ public class QuizController extends BaseController {
 			Map<String, Object> map) {
 
 		toGetStartDatas(filter, mod, num).forEach((k, v) -> map.put(k, v));
+		map.put("filter", filter);
 
 		return "quiz/quizPlay.jsp";
 	}
@@ -91,11 +92,11 @@ public class QuizController extends BaseController {
 
 	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public Map<String, String> doFinish(String ids) {
+	public Map<String, String> doFinish(String ids, String filter) {
 
 		Integer[] arrIds = new Gson().fromJson(ids, Integer[].class);
 
-		holderDataService.updateForQuizFinish(arrIds, "period");
+		holderDataService.updateForQuizFinish(arrIds, filter);
 
 		Map<String, String> result = new HashMap<>();
 		result.put("code", "1");

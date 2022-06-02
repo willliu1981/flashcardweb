@@ -26,7 +26,8 @@ public class PeriodFilter implements QuizFilter<HolderDataDTO> {
 	private QuizPhaseStrategyContext phaseStrategyContext;
 
 	@Override
-	public List<HolderDataDTO> doOperation(List<HolderDataDTO> origDatas) {
+	public List<HolderDataDTO> doOperationForGetAll(
+			List<HolderDataDTO> origDatas) {
 
 		List<HolderDataDTO> filterTime = origDatas.stream().filter(x -> {
 
@@ -77,11 +78,7 @@ public class PeriodFilter implements QuizFilter<HolderDataDTO> {
 			flashcard
 					.setNumberOfQuizTimes(flashcard.getNumberOfQuizTimes() + 1);
 
-			HolderDataDTO newDTO = new HolderDataDTO();
-			newDTO.setFlashcardHolderDTO(flashcardHolderDTO);
-			newDTO.setStatus(status);
-
-			return newDTO;
+			return x;
 		}).collect(Collectors.toList());
 	}
 

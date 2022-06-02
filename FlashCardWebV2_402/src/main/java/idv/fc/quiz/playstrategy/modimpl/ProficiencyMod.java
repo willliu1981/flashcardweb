@@ -44,7 +44,7 @@ public class ProficiencyMod implements QuizMod<HolderDataDTO> {
 				return 0;
 			}
 
-			return p1 < p2 ? -1 : 1;
+			return p1 > p2 ? -1 : 1;
 		}).limit(num).collect(Collectors.toList());
 
 		return collect;

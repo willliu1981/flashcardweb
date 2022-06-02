@@ -42,9 +42,6 @@ public class HolderDataServiceImpl implements IHolderDataService {
 	@Autowired
 	private QuizPlayStrategyContext<HolderDataDTO> playStrategyContext;
 
-	@Autowired
-	private QuizPhaseStrategyContext phaseStrategyContext;
-
 	@Override
 	public List<HolderData> getAll() {
 		return holderDataDao.selectAll();
@@ -114,21 +111,26 @@ public class HolderDataServiceImpl implements IHolderDataService {
 	}
 
 	@Override
-	public void updateForQuizFinish(Integer[] datas, String mod) {
+	public void updateForQuizFinish(Integer[] datas, String filter) {
 
 		List<Integer> list = Arrays.stream(datas).collect(Collectors.toList());
 
 		List<HolderDataDTO> all = this.getAllJoinFH();
 
-		//根據 datas array 核對資料庫中數據 找回資料
+		/*
+		 * 根據 datas array 核對資料庫中數據 找回資料
+		 * #找到的是以 flashcard 的 id 的所有 flashcard holder 資料,
+		 * 	可能會與原來 selected 的資料不一樣,會有更多結果的情況
+		 */
 		List<HolderDataDTO> find = all.stream()
 				.filter(x -> x.getFlashcardHolderDTO().getFlashcard() != null
 						&& list.contains(x.getFlashcardHolderDTO()
 								.getFlashcard().getId()))
 				.collect(Collectors.toList());
 
+		playStrategyContext.setFilter(filter);
 		List<HolderDataDTO> findForUpdate = playStrategyContext
-				.executeStrategyForUpdate(find, mod);
+				.executeStrategyForUpdate(find);
 		//進行update
 		findForUpdate.stream().forEach(x -> {
 			this.flashcardService

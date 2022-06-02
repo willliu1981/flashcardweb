@@ -35,17 +35,20 @@
 <!-- process quiz finish  -->
 <script type="text/javascript">
   const contextPath = "/FlashCardWebV2";
+  var filter;
 
   $(document).ready(function() {
 	$(".item").first().addClass("active");
 
 	ids = $(".control-button .finish-slide").attr("data-ids");
+	filter = $(".control-button .finish-slide").attr("data-filter");
 
 	$(".control-button .finish-slide").click(function() {
 	  $.ajax({
 		type : "post",
 		data : {
-		  ids : ids
+		  ids : ids,
+		  filter : filter
 		},
 		dataType : "json",
 		url : contextPath + "/quiz",
@@ -202,7 +205,7 @@
         </div>
 
         <div class="container control-button">
-            <input type="button" class="btn finish-slide" value="Finish" data-ids="${ids}"
+            <input type="button" class="btn finish-slide" value="Finish" data-ids="${ids}" data-filter="${filter}"
                 style="color: rgb(255, 140, 0);">
             <input type="button" class="btn restart-slide" value="Restart">
             <input type="button" class="btn start-slide" value="Start">

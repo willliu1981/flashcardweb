@@ -3,7 +3,7 @@
 
 .	HolderDataServicImple.addNew : 可測事務管理
 
-
+.	熟練度strategy 重構
 
 問題:
 .	MySpringUtil 結構混亂
@@ -11,6 +11,12 @@
 .	有時啟動會出現 load IDGeneratorFactory 的問題, clean 或等待一些時間, 原因未知 
 
 .	holderData update fh_id 時, 考慮 status 是否重置
+
+.	quiz finish update 找到的是以 flashcard 的 id 的所有 flashcard holder 資料,
+		 可能會與原來 selected 的資料不一樣,會有更多結果的情況
+		 
+.	quiz controller 或 strategy 會叫用兩次,待查 
+		
 
 
 
@@ -92,6 +98,7 @@
 .	jsp 的 js 和 html js 有一些差異,例如: (value+1) 改成 (parseInt(value)+1)
 
 .	eclipse 開啟 bootstrap.min.css 編輯檔案 會嚴重卡住
+
 
 
 
