@@ -18,9 +18,32 @@ public class FlashcardHolderDTO extends FlashcardHolder
 
 	@Override
 	public String toString() {
-		return "FlashcardHolderDTO [flashcard=" + flashcard + "]";
+		return "FlashcardHolderDTO [flashcard=" + flashcard.getId()
+				+ ", FlashcardHolder=" + getId() + "]";
 	}
 
+	@Override
+	public int hashCode() {
+		return this.getId();
+	}
 
+	@Override
+	public boolean equals(Object obj) {
+
+		if (this == obj) {
+			return true;
+		}
+
+		if (obj == null) {
+			return false;
+		}
+
+		if (!obj.getClass().equals(this.getClass())) {
+			return false;
+		}
+		FlashcardHolderDTO other = (FlashcardHolderDTO) obj;
+
+		return this.getId().equals(other.getId());
+	}
 
 }

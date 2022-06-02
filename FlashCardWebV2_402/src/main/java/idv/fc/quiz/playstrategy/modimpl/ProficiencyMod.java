@@ -11,6 +11,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Repository;
 
 import idv.debug.Debug;
+import idv.fc.model.dto.FlashcardHolderDTO;
 import idv.fc.model.dto.HolderDataDTO;
 import idv.fc.quiz.playstrategy.QuizMod;
 
@@ -22,30 +23,46 @@ public class ProficiencyMod implements QuizMod<HolderDataDTO> {
 			Integer num) {
 		test(origDatas);
 
-		List<HolderDataDTO> collect = origDatas.stream().sorted((x1, x2) -> {
+		List<FlashcardHolderDTO> collect = origDatas.stream()
+				.sorted((x1, x2) -> {
 
-			double p1 = 0, p2 = 0;
+					double p1 = 0, p2 = 0;
 
-			if (x1.getFlashcardHolderDTO().getNumberOfQuizTimes() == 0) {
-				return -1;
-			} else if (x2.getFlashcardHolderDTO().getNumberOfQuizTimes() == 0) {
-				return -1;
-			}
+					if (x1.getFlashcardHolderDTO()
+							.getNumberOfQuizTimes() == 0) {
+						return -1;
+					} else if (x2.getFlashcardHolderDTO()
+							.getNumberOfQuizTimes() == 0) {
+						return -1;
+					}
 
-			p1 = x1.getFlashcardHolderDTO().getPassTheQuizTimes() / (double) x1
-					.getFlashcardHolderDTO().getNumberOfQuizTimes();
+					p1 = x1.getFlashcardHolderDTO().getPassTheQuizTimes()
+							/ (double) x1.getFlashcardHolderDTO()
+									.getNumberOfQuizTimes();
 
-			p2 = x2.getFlashcardHolderDTO().getPassTheQuizTimes() / (double) x2
-					.getFlashcardHolderDTO().getNumberOfQuizTimes();
+					p2 = x2.getFlashcardHolderDTO().getPassTheQuizTimes()
+							/ (double) x2.getFlashcardHolderDTO()
+									.getNumberOfQuizTimes();
 
-			if (p1 == p2) {
-				return 0;
-			}
+					if (p1 == p2) {
+						return 0;
+					}
 
-			return p1 < p2 ? -1 : 1;
-		}).limit(num).collect(Collectors.toList());
+					return p1 < p2 ? -1 : 1;
+				}).map(x -> x.getFlashcardHolderDTO()).distinct().limit(num)
+				.collect(Collectors.toList());
 
-		return collect;
+		Debug.test(new Object() {
+		}, "collect", collect);
+
+		List<HolderDataDTO> finalDatas = origDatas.stream()
+				.filter(x -> collect.contains(x.getFlashcardHolderDTO()))
+				.collect(Collectors.toList());
+
+		Debug.test(new Object() {
+		}, "finalDatas", finalDatas);
+
+		return finalDatas;
 	}
 
 	private void test(List<HolderDataDTO> origDatas) {
