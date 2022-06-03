@@ -1,9 +1,14 @@
 
 進度(需求):
 
-.	HolderDataServicImple.addNew : 可測事務管理
+.	熟練度 : pass of quiz times 實作 
 
-.	熟練度strategy 重構
+.	datas 被引用的數量
+
+.	發音
+
+.	holder data : 新增可選取全部功能
+
 
 問題:
 .	MySpringUtil 結構混亂
@@ -16,6 +21,8 @@
 		
 .	quizfinish updata: 出現 flashcard holder 的 nums of quiz time 計算兩次以上
 		當 holder data 擁有同一個 flashcard holder 時會發生,待解
+		
+.	bootstrape 的最後一頁(>>) 並非是所有資料的最後一頁
 
 
 
@@ -26,6 +33,7 @@
 
 .	測試 mysql table 名稱有底線的情況
 
+.	HolderDataServicImple.addNew : 可測事務管理
 
 
 易犯錯誤:

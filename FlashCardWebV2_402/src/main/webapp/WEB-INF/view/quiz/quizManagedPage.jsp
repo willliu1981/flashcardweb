@@ -63,8 +63,8 @@
                             <!-- <label for="select" class="col-sm-2 control-label"> </label> -->
                             <div class="col-sm-12">
                                 <select class="form-control" id="select-filter">
-                                    <option value="period" selected>週期模式</option>
-                                    <option value="common">一般模式</option>
+                                    <option value="period" style="color: cyan;" selected>週期模式</option>
+                                    <option value="common" style="color: cyan;">一般模式</option>
                                 </select>
                             </div>
 
