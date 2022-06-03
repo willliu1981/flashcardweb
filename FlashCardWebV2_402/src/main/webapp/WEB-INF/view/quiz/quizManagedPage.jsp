@@ -77,7 +77,7 @@
                                 <select class="form-control" size="3" id="select-mod">
                                     <option value="random" selected>隨機</option>
                                     <option value="proficiency">熟練度</option>
-                                    <option value="time">距離時間</option>
+                                    <option value="time">時間</option>
                                 </select>
                             </div>
                         </div>

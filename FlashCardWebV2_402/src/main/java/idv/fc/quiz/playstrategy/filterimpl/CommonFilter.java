@@ -29,7 +29,6 @@ public class CommonFilter implements QuizFilter<HolderDataDTO> {
 	public List<HolderDataDTO> doOperationForGetAll(
 			List<HolderDataDTO> origDatas) {
 
-		
 		return origDatas;
 	}
 
@@ -78,8 +77,7 @@ public class CommonFilter implements QuizFilter<HolderDataDTO> {
 		part1.addAll(part2);
 		Debug.test(new Object() {
 		}, "all", part1);
-		List<HolderDataDTO> all = part1.stream().distinct()
-				.collect(Collectors.toList());
+		List<HolderDataDTO> all = part1.stream().collect(Collectors.toList());
 
 		Debug.test(new Object() {
 		}, "distinct", all);

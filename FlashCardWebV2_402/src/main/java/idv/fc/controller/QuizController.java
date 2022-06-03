@@ -59,15 +59,18 @@ public class QuizController extends BaseController {
 		List<HolderDataDTO> all = holderDataService.getAllJoinFH(filter, mod,
 				num);
 
-		List<Flashcard> collect = all.stream()
-				.filter(x -> x.getFlashcardHolderDTO().getFlashcard() != null)
-				.map(x -> x.getFlashcardHolderDTO().getFlashcard())
+		List<Integer> hdIds = all.stream().map(x -> x.getId())
+				.collect(Collectors.toList());
+
+		List<Flashcard> flashcards = all.stream()
+				.filter(x -> hdIds.contains(x.getId()))
+				.map(x -> x.getFlashcardHolderDTO().getFlashcard()).distinct()
 				.collect(Collectors.toList());
 
 		JsonArray jArray = new JsonArray();
-		collect.stream().forEach(x -> jArray.add(x.getId()));
+		hdIds.stream().forEach(x -> jArray.add(x));
 
-		map.put("datas", collect);
+		map.put("datas", flashcards);
 		map.put("ids", jArray.toString());
 
 		return map;

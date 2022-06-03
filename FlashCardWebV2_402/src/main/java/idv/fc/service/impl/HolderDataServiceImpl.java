@@ -115,22 +115,15 @@ public class HolderDataServiceImpl implements IHolderDataService {
 
 		List<Integer> list = Arrays.stream(datas).collect(Collectors.toList());
 
-		List<HolderDataDTO> all = this.getAllJoinFH();
+		List<HolderDataDTO> all = this.holderDataDao.selectAllJoinFh();
 
-		/*
-		 * 根據 datas array 核對資料庫中數據 找回資料
-		 * #找到的是以 flashcard 的 id 的所有 flashcard holder 資料,
-		 * 	可能會與原來 selected 的資料不一樣,會有更多結果的情況
-		 */
-		List<HolderDataDTO> find = all.stream()
-				.filter(x -> x.getFlashcardHolderDTO().getFlashcard() != null
-						&& list.contains(x.getFlashcardHolderDTO()
-								.getFlashcard().getId()))
+		List<HolderDataDTO> collect = all.stream()
+				.filter(x -> list.contains(x.getId()))
 				.collect(Collectors.toList());
 
 		playStrategyContext.setFilter(filter);
 		List<HolderDataDTO> findForUpdate = playStrategyContext
-				.executeStrategyForUpdate(find);
+				.executeStrategyForUpdate(collect);
 		//進行update
 		findForUpdate.stream().forEach(x -> {
 			this.flashcardService

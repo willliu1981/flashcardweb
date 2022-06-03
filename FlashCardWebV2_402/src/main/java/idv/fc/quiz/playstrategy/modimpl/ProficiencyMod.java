@@ -21,52 +21,8 @@ public class ProficiencyMod implements QuizMod<HolderDataDTO> {
 	@Override
 	public List<HolderDataDTO> doOperation(List<HolderDataDTO> origDatas,
 			Integer num) {
-		test(origDatas);
 
-		List<FlashcardHolderDTO> collect = origDatas.stream()
-				.sorted((x1, x2) -> {
-
-					double p1 = 0, p2 = 0;
-
-					if (x1.getFlashcardHolderDTO()
-							.getNumberOfQuizTimes() == 0) {
-						return -1;
-					} else if (x2.getFlashcardHolderDTO()
-							.getNumberOfQuizTimes() == 0) {
-						return -1;
-					}
-
-					p1 = x1.getFlashcardHolderDTO().getPassTheQuizTimes()
-							/ (double) x1.getFlashcardHolderDTO()
-									.getNumberOfQuizTimes();
-
-					p2 = x2.getFlashcardHolderDTO().getPassTheQuizTimes()
-							/ (double) x2.getFlashcardHolderDTO()
-									.getNumberOfQuizTimes();
-
-					if (p1 == p2) {
-						return 0;
-					}
-
-					return p1 < p2 ? -1 : 1;
-				}).map(x -> x.getFlashcardHolderDTO()).distinct().limit(num)
-				.collect(Collectors.toList());
-
-		Debug.test(new Object() {
-		}, "collect", collect);
-
-		List<HolderDataDTO> finalDatas = origDatas.stream()
-				.filter(x -> collect.contains(x.getFlashcardHolderDTO()))
-				.collect(Collectors.toList());
-
-		Debug.test(new Object() {
-		}, "finalDatas", finalDatas);
-
-		return finalDatas;
-	}
-
-	private void test(List<HolderDataDTO> origDatas) {
-		origDatas.stream().sorted((x1, x2) -> {
+		List<HolderDataDTO> collect = origDatas.stream().sorted((x1, x2) -> {
 
 			double p1 = 0, p2 = 0;
 
@@ -87,15 +43,9 @@ public class ProficiencyMod implements QuizMod<HolderDataDTO> {
 			}
 
 			return p1 < p2 ? -1 : 1;
-		}).forEach(x -> {
-			double p;
+		}).limit(num).collect(Collectors.toList());
 
-			p = x.getFlashcardHolderDTO().getPassTheQuizTimes()
-					/ (double) x.getFlashcardHolderDTO().getNumberOfQuizTimes();
-
-			Debug.test(new Object() {
-			}, "fh id=" + x.getFlashcardHolderDTO().getId(), p);
-		});
+		return collect;
 	}
 
 }
