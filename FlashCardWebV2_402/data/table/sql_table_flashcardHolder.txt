@@ -7,7 +7,8 @@ CREATE TABLE `flashcardholder` (
   `pass_the_quiz_times` int(11) DEFAULT '0',
   `update_for_quiz_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `u_id` int(11) NOT NULL DEFAULT '0',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `hc_fc_fk` (`fc_id`),
   CONSTRAINT `fk_fc_id` FOREIGN KEY (`fc_id`) REFERENCES `flashcard` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
