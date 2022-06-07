@@ -8,6 +8,8 @@ import java.time.temporal.ChronoUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import idv.CC;
+import idv.debug.Debug;
 import idv.fc.quiz.phaseexception.QuizPhaseInvalidException;
 import idv.fc.quiz.phasestrategy.IPhaseStrategy;
 import idv.fc.quiz.strategy.PhaseRuleExecutor;
@@ -26,7 +28,9 @@ public class PhaseStrategy implements IPhaseStrategy {
 
 		Timestamp newTime = null;
 		ZonedDateTime zoneTime = priTime.toInstant().atZone(ZoneId.of("UTC"));
+		
 		switch (currentPhase) {
+		case 0:
 		case 1:
 			newTime = Timestamp
 					.from(zoneTime.plus(2, ChronoUnit.DAYS).toInstant());
