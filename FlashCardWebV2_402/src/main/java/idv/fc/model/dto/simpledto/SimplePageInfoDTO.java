@@ -11,6 +11,7 @@ public class SimplePageInfoDTO {
 	private boolean isIsLastPage;
 	private List<SimpleVO> list = new ArrayList<>();
 	private int[] navigatepageNums;
+	private int[] citedNums;
 
 	public int[] getNavigatepageNums() {
 		return navigatepageNums;
@@ -66,6 +67,14 @@ public class SimplePageInfoDTO {
 
 	public void setList(List<SimpleVO> list) {
 		this.list = list;
+	}
+
+	public int[] getCitedNums() {
+		return citedNums;
+	}
+
+	public void setCitedNums(int[] citedNums) {
+		this.citedNums = citedNums;
 	}
 
 }

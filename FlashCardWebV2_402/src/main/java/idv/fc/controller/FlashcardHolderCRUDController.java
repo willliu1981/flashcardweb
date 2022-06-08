@@ -14,11 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+import idv.CC;
 import idv.debug.Debug;
-import idv.fc.model.Flashcard;
 import idv.fc.model.FlashcardHolder;
 import idv.fc.model.dto.FlashcardHolderDTO;
 import idv.fc.model.dto.simpledto.SimplePageInfoDTO;
@@ -161,26 +162,15 @@ public class FlashcardHolderCRUDController extends BaseController {
 		if (pageNum != null && !pageNum.equals("")) {
 			intPageNumber = Integer.valueOf(pageNum);
 		}
-		PageHelper.startPage(intPageNumber, PAGE_HELPER_MAX_PAGE_NUMBER);
-		List<FlashcardHolder> queryResult = flashcardHolderService.getAll();
 
-		PageInfo<FlashcardHolder> pageInfo = new PageInfo<>(queryResult,
-				PAGE_INFO_MAX_NAV_PAGE_NUMBER);
+		Page<Object> startPage = PageHelper.startPage(intPageNumber,
+				PAGE_HELPER_MAX_PAGE_NUMBER);
 
-		SimplePageInfoDTO dto = new SimplePageInfoDTO();
-		dto.setHasNextPage(pageInfo.isHasNextPage());
-		dto.setHasPreviouPage(pageInfo.isHasPreviousPage());
-		dto.setIsLastPage(pageInfo.isIsLastPage());
-		dto.setPageNum(pageInfo.getPageNum());
-		dto.setNavigateLastPage(pageInfo.getNavigateLastPage());
+		SimplePageInfoDTO allWithSimplePageInfoDTO = flashcardHolderService
+				.getAllWithSimplePageInfoDTO(startPage,
+						PAGE_INFO_MAX_NAV_PAGE_NUMBER);
 
-		List<SimpleVO> collect = pageInfo.getList().stream()
-				.map(x -> new SimpleVO(x.getId().toString(), x.getName()))
-				.collect(Collectors.toList());
-		dto.setList(collect);
-		dto.setNavigatepageNums(pageInfo.getNavigatepageNums());
-
-		jsonMap.put("pageInfo", dto);
+		jsonMap.put("pageInfo", allWithSimplePageInfoDTO);
 
 		return jsonMap;
 	}
