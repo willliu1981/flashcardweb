@@ -5,9 +5,7 @@ import idv.kw.tag.component.DefaultComponent;
 import idv.kw.tag.facade.Editor;
 
 public class FlashcardHolderEditor extends Editor<FlashcardHolder> {
-	private boolean isAdd = false;
-	//html class : 使能接受 setected-list 的 value   //***selected-list 修改這裡
-	private static final String FORM_CONTROL_ACCEPTABLE = "form-control-acceptable";
+	private boolean isEdit = false;
 
 	public FlashcardHolderEditor(FlashcardHolder data) {
 		super(data);
@@ -15,14 +13,14 @@ public class FlashcardHolderEditor extends Editor<FlashcardHolder> {
 
 	@Override
 	public void init() {
-		isAdd = this.getData().getId() == null;
+		isEdit = this.getData().getId() != null;
 
-		if (isAdd) {
-			this.addAttribute("jumboTitle", "新增 Flashcard Holder");
-			this.addAttribute("formTitle", "新增 Flashcard Holder");
-		} else {
+		if (isEdit) {
 			this.addAttribute("jumboTitle", "編輯 Flashcard Holder");
 			this.addAttribute("formTitle", "編輯 Flashcard Holder");
+		} else {
+			this.addAttribute("jumboTitle", "新增 Flashcard Holder");
+			this.addAttribute("formTitle", "新增 Flashcard Holder");
 		}
 
 		this.addAttribute("path", "flashcardHolder");
@@ -32,7 +30,6 @@ public class FlashcardHolderEditor extends Editor<FlashcardHolder> {
 		this.addAttribute("selectedModelRenderable", "true");//用於頁面判斷是否有 selected-list 功能
 		this.addAttribute("selectedModelTitle", "Flashcard");
 		this.addAttribute("selectedModelQueryPath", "flashcards");
-		this.addAttribute("selectedModelAccept", FORM_CONTROL_ACCEPTABLE);//和頁面約定的class name
 	}
 
 	public String getBody() {
@@ -40,7 +37,7 @@ public class FlashcardHolderEditor extends Editor<FlashcardHolder> {
 
 		createName(buffer);
 		createFCID(buffer);
-		if (!isAdd) {
+		if (isEdit) {
 			createHiddenForPut(buffer);
 		}
 
@@ -62,12 +59,13 @@ public class FlashcardHolderEditor extends Editor<FlashcardHolder> {
 			DefaultComponent cmptDiv = new DefaultComponent("div");
 			cmptDiv.addHtmlClass("col-lg-10");
 			{
+
 				DefaultComponent cmptInput = new DefaultComponent("input");
 				cmptInput.addHtmlClass("form-control");
 				cmptInput.addAttribute("name", "name");
 				cmptInput.addAttribute("id", "name");
 				cmptInput.addAttribute("placeholder", "ex: apple");
-				if (!isAdd) {
+				if (isEdit) {
 					cmptInput.addAttribute("value", this.getData().getName());
 				}
 				//加入組件
@@ -97,18 +95,29 @@ public class FlashcardHolderEditor extends Editor<FlashcardHolder> {
 			DefaultComponent cmptDiv = new DefaultComponent("div");
 			cmptDiv.addHtmlClass("col-lg-10");
 			{
-				DefaultComponent cmptInput = new DefaultComponent("input");
-				cmptInput.addHtmlClass("form-control")
-						.addHtmlClass(FORM_CONTROL_ACCEPTABLE); //***selected-list 修改這裡
-				cmptInput.addAttribute("name", "fcId");
-				cmptInput.addAttribute("id", "fcId");
-				cmptInput.addAttribute("placeholder", "ex: 123");
-				if (!isAdd && this.getData().getFcId() != null) {
-					cmptInput.addAttribute("value",
+				DefaultComponent cmptInputValue = new DefaultComponent("input");
+				cmptInputValue.addHtmlClass("form-control");
+				cmptInputValue.addAttribute("type", "text");
+				cmptInputValue.addAttribute("id", "selectedValue");
+				cmptInputValue.addAttribute("placeholder", "ex: 123");
+				if (isEdit) {
+					cmptInputValue.addAttribute("value",
+							this.getData().getFcId().toString());
+				}
+
+				DefaultComponent cmptInputID = new DefaultComponent("input");
+				cmptInputID.addHtmlClass("form-control");
+				cmptInputID.addAttribute("type", "hidden");
+				cmptInputID.addAttribute("name", "fcId");
+				cmptInputID.addAttribute("id", "selectedId");
+				cmptInputID.addAttribute("placeholder", "ex: 123");
+				if (isEdit && this.getData().getFcId() != null) {
+					cmptInputID.addAttribute("value",
 							this.getData().getFcId().toString());
 				}
 				//加入組件
-				cmptDiv.addBody(cmptInput.toString());
+				cmptDiv.addBody(cmptInputValue.toString())
+						.addBody(cmptInputID.toString());
 			}
 			//加入組件
 			bufBody.append(cmptLabel.toString()).append(cmptDiv.toString());

@@ -15,4 +15,6 @@ public interface FlashcardHolderDao extends Dao<FlashcardHolder> {
 
 	FlashcardHolderDTO selectByIdJoinFc(Object id);
 
+	int selectCountByFCID(Integer id);
+
 }

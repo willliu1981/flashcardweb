@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 
 import idv.fc.model.Flashcard;
 import idv.fc.model.dto.QuizDTO;
+import idv.fc.service.abstraction.IFlashcardService;
 import idv.fc.service.impl.FlashcardServiceImpl;
 import tool.spring.SpringUtil;
 
@@ -37,7 +38,7 @@ public class TestController extends BaseController {
 	public Map<String, Object> test2(Map<String, Object> map1) {
 		Map<String, Object> map = new HashMap<>();
 		Gson g = new Gson();
-		FlashcardServiceImpl service = SpringUtil.getBean("flashcardService",
+		IFlashcardService service = SpringUtil.getBean("flashcardService",
 				FlashcardServiceImpl.class);
 
 		List<Flashcard> datas = service.getAll();
@@ -53,7 +54,7 @@ public class TestController extends BaseController {
 	@RequestMapping(value = "test4")
 	public String test3(Map<String, Object> map) {
 
-		FlashcardServiceImpl service = SpringUtil.getBean("flashcardService",
+		IFlashcardService service = SpringUtil.getBean("flashcardService",
 				FlashcardServiceImpl.class);
 
 		List<Flashcard> datas = service.getAll();

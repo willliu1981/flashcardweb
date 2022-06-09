@@ -80,8 +80,8 @@ public class HolderDataEditor extends Editor<HolderData> {
 							this.getData().getFhId().toString());
 				}
 				//加入組件
-				cmptDiv.addBody(cmptInputValue.toString());
-				cmptDiv.addBody(cmptInputID.toString());
+				cmptDiv.addBody(cmptInputValue.toString())
+						.addBody(cmptInputID.toString());
 			}
 			//加入組件
 			bufBody.append(cmptLabel.toString()).append(cmptDiv.toString());

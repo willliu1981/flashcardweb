@@ -32,7 +32,7 @@
 
 	<resultMap type="FlashcardHolderDTO" id="baseFHResultMap">
 		<id column="id" property="id" />
-		<result column="fc_id" property="fcId"/>
+		<result column="fc_id" property="fcId" />
 
 		<association property="flashcard" column="fc_id"
 			select="idv.fc.dao.itf.FlashcardDao.selectById" fetchType="eager">
@@ -48,6 +48,11 @@
 	<select id="selectByIdJoinFc" resultMap="baseFHResultMap">
 		select * from flashcardHolder
 		where id = #{id}
+	</select>
+
+	<select id="selectCountByFCID" resultType="int">
+		select count(*) from FlashcardHolder where
+		fc_id=#{fcId}
 	</select>
 
 </mapper>

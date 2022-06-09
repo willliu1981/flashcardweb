@@ -25,6 +25,7 @@
 		
 .	bootstrape 的最後一頁(>>) 並非是所有資料的最後一頁
 
+.	edit page : edit模式時,由於 editor 並非DTO, 所以無法顯示value,
 
 
 待測:

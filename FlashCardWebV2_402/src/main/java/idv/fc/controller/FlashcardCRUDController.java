@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.gson.Gson;
@@ -143,28 +144,46 @@ public class FlashcardCRUDController extends BaseController {
 		if (pageNum != null && !pageNum.equals("")) {
 			intPageNumber = Integer.valueOf(pageNum);
 		}
+
+		Page<Object> startPage = PageHelper.startPage(intPageNumber,
+				PAGE_HELPER_MAX_PAGE_NUMBER);
+
+		SimplePageInfoDTO allWithSimplePageInfoDTO = flashcardService
+				.getAllWithSimplePageInfoDTO(startPage,
+						PAGE_INFO_MAX_NAV_PAGE_NUMBER);
+
+		jsonMap.put("pageInfo", allWithSimplePageInfoDTO);
+
+		return jsonMap;
+
+		/*HashMap<String, Object> jsonMap = new HashMap<>();
+		
+		int intPageNumber = 1;//default pageNumber
+		if (pageNum != null && !pageNum.equals("")) {
+			intPageNumber = Integer.valueOf(pageNum);
+		}
 		PageHelper.startPage(intPageNumber, PAGE_HELPER_MAX_PAGE_NUMBER);
 		List<Flashcard> queryResult = flashcardService.getAll();
-
+		
 		PageInfo<Flashcard> pageInfo = new PageInfo<>(queryResult,
 				PAGE_INFO_MAX_NAV_PAGE_NUMBER);
-
+		
 		SimplePageInfoDTO dto = new SimplePageInfoDTO();
 		dto.setHasNextPage(pageInfo.isHasNextPage());
 		dto.setHasPreviouPage(pageInfo.isHasPreviousPage());
 		dto.setIsLastPage(pageInfo.isIsLastPage());
 		dto.setPageNum(pageInfo.getPageNum());
 		dto.setNavigateLastPage(pageInfo.getNavigateLastPage());
-
+		
 		List<SimpleVO> collect = pageInfo.getList().stream()
 				.map(x -> new SimpleVO(x.getId().toString(), x.getTerm()))
 				.collect(Collectors.toList());
 		dto.setList(collect);
 		dto.setNavigatepageNums(pageInfo.getNavigatepageNums());
-
+		
 		jsonMap.put("pageInfo", dto);
-
-		return jsonMap;
+		
+		return jsonMap;*/
 	}
 
 }
