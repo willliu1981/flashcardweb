@@ -90,22 +90,7 @@
             }).join(""); 
            //*/
             
-            
-           /*
-           const domElements = ds.map( place => {
-              
-              return `
-              <li class="list-group-item"><a href="javascript:;" class="list-group-item"
-              onclick="doSelectd.call(this)" data-id="$<c:out value='{place.id}' />" 
-              	data-value="$<c:out value='{place.value}' />" ><!-- //***selected-list  -->
-                  <span class="badge" onclick="">
-                      <font size="5">cited</font>
-                  </span>
-                  <h4 class="h4" class="list-group-item-heading"> $<c:out value="{place.value}" /> </h4>
-              </a></li>
-          	  ` ;
-            }).join("");
-             //*/
+         
              
             $('.list-group-item-replaced').replaceWith(domElements);
           }
@@ -116,7 +101,7 @@
     	var selectedId=$(this).attr('data-id');
     	var selectedValue=$(this).attr('data-value');
     	
-    	$("."+acceptableClassName).val(selectedId);
+    	$("#selectedId").val(selectedId);
       }
       
     </script>

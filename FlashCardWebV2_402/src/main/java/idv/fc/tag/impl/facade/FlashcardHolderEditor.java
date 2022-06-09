@@ -25,7 +25,7 @@ public class FlashcardHolderEditor extends Editor<FlashcardHolder> {
 			this.addAttribute("formTitle", "編輯 Flashcard Holder");
 		}
 
-		this.addAttribute("path", "flashcardHolder"); 
+		this.addAttribute("path", "flashcardHolder");
 		this.addAttribute("formBody", this.getBody());
 
 		//selected list  //***selected-list 修改這裡

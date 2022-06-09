@@ -84,14 +84,8 @@ public class FlashcardHolderServiceImpl implements IFlashcardHolderService {
 		List<FlashcardHolder> all = this.getAll();
 
 		int[] citedNumsArray = all.stream().mapToInt(x -> {
-			Debug.test(new CC() {
-			}, "fcid", x.getId());
 			return holderDataDao.selectCountByFHID(x.getId());
 		}).toArray();
-
-		Debug.test(new CC() {
-		}, "xxx", Arrays.stream(citedNumsArray).boxed()
-				.collect(Collectors.toList()));
 
 		PageInfo<FlashcardHolder> pageInfo = new PageInfo<>(all,
 				maxNavPageNums);
