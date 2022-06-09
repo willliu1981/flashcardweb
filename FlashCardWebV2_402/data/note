@@ -3,11 +3,12 @@
 
 .	熟練度 : pass of quiz times 實作 
 
-.	datas 被引用的數量
-
 .	發音
 
 .	holder data : 新增可選取全部功能
+
+. 	Debug 無法cast array, 嚐試使用 Arrays.stream(citedNumsArray).boxed()
+				.collect(Collectors.toList())
 
 
 問題:

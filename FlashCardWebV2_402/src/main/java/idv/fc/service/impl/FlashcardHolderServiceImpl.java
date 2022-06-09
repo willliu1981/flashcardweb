@@ -1,6 +1,7 @@
 package idv.fc.service.impl;
 
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,6 +14,7 @@ import com.github.pagehelper.PageInfo;
 import idv.CC;
 import idv.debug.Debug;
 import idv.fc.dao.itf.FlashcardHolderDao;
+import idv.fc.dao.itf.HolderDataDao;
 import idv.fc.model.FlashcardHolder;
 import idv.fc.model.dto.FlashcardHolderDTO;
 import idv.fc.model.dto.simpledto.SimplePageInfoDTO;
@@ -23,8 +25,10 @@ import idv.fc.service.abstraction.IFlashcardHolderService;
 public class FlashcardHolderServiceImpl implements IFlashcardHolderService {
 
 	@Autowired
-	//@Resource
 	private FlashcardHolderDao flashcardHolderDao;
+
+	@Autowired
+	private HolderDataDao holderDataDao;
 
 	@Override
 	public List<FlashcardHolder> getAll() {
@@ -79,8 +83,15 @@ public class FlashcardHolderServiceImpl implements IFlashcardHolderService {
 
 		List<FlashcardHolder> all = this.getAll();
 
+		int[] citedNumsArray = all.stream().mapToInt(x -> {
+			Debug.test(new CC() {
+			}, "fcid", x.getId());
+			return holderDataDao.selectCountByFHID(x.getId());
+		}).toArray();
+
 		Debug.test(new CC() {
-		}, "size", all.size());
+		}, "xxx", Arrays.stream(citedNumsArray).boxed()
+				.collect(Collectors.toList()));
 
 		PageInfo<FlashcardHolder> pageInfo = new PageInfo<>(all,
 				maxNavPageNums);
@@ -91,6 +102,7 @@ public class FlashcardHolderServiceImpl implements IFlashcardHolderService {
 		dto.setIsLastPage(pageInfo.isIsLastPage());
 		dto.setPageNum(pageInfo.getPageNum());
 		dto.setNavigateLastPage(pageInfo.getNavigateLastPage());
+		dto.setCitedNums(citedNumsArray);
 
 		List<SimpleVO> collect = pageInfo.getList().stream()
 				.map(x -> new SimpleVO(x.getId().toString(), x.getName()))

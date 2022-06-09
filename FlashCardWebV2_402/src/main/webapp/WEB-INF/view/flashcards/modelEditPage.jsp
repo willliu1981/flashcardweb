@@ -7,7 +7,8 @@
 <head>
 <jsp:include page="/WEB-INF/view/public/bootstrapCommon.jsp" />
 
-<!-- selected model global variable --> <!-- //***selected-list  -->
+<!-- selected model global variable -->
+<!-- //***selected-list  -->
 <script type="text/javascript">
       var contextPath;
       var models;
@@ -19,7 +20,8 @@
 
 
 
-<!-- get datas and list --> <!-- //***selected-list  -->
+<!-- get datas and list -->
+<!-- //***selected-list  -->
 <script type="text/javascript">
       $(function() {
           contextPath=$(".list-group-item-title").attr("data-contextPath");
@@ -55,7 +57,7 @@
                   datas.push(pageInfo.list[i]);
                 }
                 
-                createListDomElement(datas);
+                createListDomElement(datas,resp.pageInfo.citedNums);
     
                 //處理分頁
                 doPager(); 
@@ -67,11 +69,30 @@
             });
           
         //創建list item
-          function createListDomElement(ds) {
+          function createListDomElement(ds,citedNums) {
             $(".list-group-item-title").next().addClass("list-group-item-replaced");
             $(".list-group-item-replaced").nextUntil(".list-group-item-footer").remove(); 
             
-            const domElements = ds.map( place => {
+           //*  
+           const domElements =  $.map(ds,function(place,i){
+        	 	let nums=  citedNums[i];
+        	 	
+              return `
+              <li class="list-group-item"><a href="javascript:;" class="list-group-item"
+              onclick="doSelectd.call(this)" data-id="$<c:out value='{place.id}' />" 
+              	data-value="$<c:out value='{place.value}' />" ><!-- //***selected-list  -->
+                  <span class="badge" onclick="">
+                      <font size="5">$<c:out value='{nums}' /></font>
+                  </span>
+                  <h4 class="h4" class="list-group-item-heading"> $<c:out value="{place.value}" /> </h4>
+              </a></li>
+          	  ` ;
+            }).join(""); 
+           //*/
+            
+            
+           /*
+           const domElements = ds.map( place => {
               
               return `
               <li class="list-group-item"><a href="javascript:;" class="list-group-item"
@@ -84,6 +105,8 @@
               </a></li>
           	  ` ;
             }).join("");
+             //*/
+             
             $('.list-group-item-replaced').replaceWith(domElements);
           }
         }
@@ -98,7 +121,8 @@
       
     </script>
 
-<!-- pager --> <!-- //***selected-list  -->
+<!-- pager -->
+<!-- //***selected-list  -->
 <script type="text/javascript">
       //(延後載入)
       function doPager() {
