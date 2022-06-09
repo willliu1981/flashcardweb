@@ -57,7 +57,7 @@ public class FlashcardHolderEditor extends Editor<FlashcardHolder> {
 			DefaultComponent cmptLabel = new DefaultComponent("label");
 			cmptLabel.addAttribute("for", "name");
 			cmptLabel.addHtmlClass("col-lg-2 control-label");
-			cmptLabel.setBody("Name");
+			cmptLabel.addBody("Name");
 
 			DefaultComponent cmptDiv = new DefaultComponent("div");
 			cmptDiv.addHtmlClass("col-lg-10");
@@ -71,14 +71,14 @@ public class FlashcardHolderEditor extends Editor<FlashcardHolder> {
 					cmptInput.addAttribute("value", this.getData().getName());
 				}
 				//加入組件
-				cmptDiv.setBody(cmptInput.toString());
+				cmptDiv.addBody(cmptInput.toString());
 			}
 			//加入組件
 			bufBody.append(cmptLabel.toString()).append(cmptDiv.toString());
 		}
 
 		//加入組件
-		cmptFormGroup.setBody(bufBody.toString());
+		cmptFormGroup.addBody(bufBody.toString());
 		buffer.append(cmptFormGroup.toString());
 	}
 
@@ -92,7 +92,7 @@ public class FlashcardHolderEditor extends Editor<FlashcardHolder> {
 			DefaultComponent cmptLabel = new DefaultComponent("label");
 			cmptLabel.addAttribute("for", "fcId");
 			cmptLabel.addHtmlClass("col-lg-2 control-label");
-			cmptLabel.setBody("Flashcard Id");
+			cmptLabel.addBody("Flashcard Id");
 
 			DefaultComponent cmptDiv = new DefaultComponent("div");
 			cmptDiv.addHtmlClass("col-lg-10");
@@ -108,14 +108,14 @@ public class FlashcardHolderEditor extends Editor<FlashcardHolder> {
 							this.getData().getFcId().toString());
 				}
 				//加入組件
-				cmptDiv.setBody(cmptInput.toString());
+				cmptDiv.addBody(cmptInput.toString());
 			}
 			//加入組件
 			bufBody.append(cmptLabel.toString()).append(cmptDiv.toString());
 		}
 
 		//加入組件
-		cmptFormGroup.setBody(bufBody.toString());
+		cmptFormGroup.addBody(bufBody.toString());
 		buffer.append(cmptFormGroup.toString());
 	}
 

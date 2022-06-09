@@ -14,7 +14,6 @@
       var models;
       var pageNum=1;
       var pageInfo;
-      var acceptableClassName;
       
 </script>
 
@@ -26,7 +25,6 @@
       $(function() {
           contextPath=$(".list-group-item-title").attr("data-contextPath");
           models=$(".list-group-item-title").attr("data-queryPath");
-          acceptableClassName= $(".form-horizontal").attr('data-acceptableClassName');
 
           var selectedModelRenderable=$("#selectedModelRenderable").val();
           
@@ -102,6 +100,7 @@
     	var selectedValue=$(this).attr('data-value');
     	
     	$("#selectedId").val(selectedId);
+    	$("#selectedValue").val(selectedValue);
       }
       
     </script>
@@ -178,7 +177,7 @@
     <div class="container">
         <er:form facade="${editor}">
             <frm:form action="${pageContext.request.contextPath}/{path}" modelAttribute="data"
-                cssClass="form-horizontal" data-acceptableClassName="${editor.attributes.selectedModelAccept }">
+                cssClass="form-horizontal">
                 <fieldset>
                     <legend> {formTitle} </legend>
                     {formBody}

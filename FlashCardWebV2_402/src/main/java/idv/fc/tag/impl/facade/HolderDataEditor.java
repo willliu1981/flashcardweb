@@ -54,30 +54,41 @@ public class HolderDataEditor extends Editor<HolderData> {
 			DefaultComponent cmptLabel = new DefaultComponent("label");
 			cmptLabel.addAttribute("for", "fhId");
 			cmptLabel.addHtmlClass("col-lg-2 control-label");
-			cmptLabel.setBody("Flashcard Holder Id");
+			cmptLabel.addBody("Flashcard Holder Id");
 
 			DefaultComponent cmptDiv = new DefaultComponent("div");
 			cmptDiv.addHtmlClass("col-lg-10");
 			{
-				DefaultComponent cmptInput = new DefaultComponent("input");
-				cmptInput.addHtmlClass("form-control");
-				cmptInput.addAttribute("type", "hidden");
-				cmptInput.addAttribute("name", "fhId");
-				cmptInput.addAttribute("id", "selectedId");
-				cmptInput.addAttribute("placeholder", "ex: 123");
+				DefaultComponent cmptInputValue = new DefaultComponent("input");
+				cmptInputValue.addHtmlClass("form-control");
+				cmptInputValue.addAttribute("type", "text");
+				cmptInputValue.addAttribute("id", "selectedValue");
+				cmptInputValue.addAttribute("placeholder", "ex: 123");
 				if (isEdit) {
-					cmptInput.addAttribute("value",
+					cmptInputValue.addAttribute("value",
+							this.getData().getFhId().toString());
+				}
+
+				DefaultComponent cmptInputID = new DefaultComponent("input");
+				cmptInputID.addHtmlClass("form-control");
+				cmptInputID.addAttribute("type", "hidden");
+				cmptInputID.addAttribute("name", "fhId");
+				cmptInputID.addAttribute("id", "selectedId");
+				cmptInputID.addAttribute("placeholder", "ex: 123");
+				if (isEdit) {
+					cmptInputID.addAttribute("value",
 							this.getData().getFhId().toString());
 				}
 				//加入組件
-				cmptDiv.setBody(cmptInput.toString());
+				cmptDiv.addBody(cmptInputValue.toString());
+				cmptDiv.addBody(cmptInputID.toString());
 			}
 			//加入組件
 			bufBody.append(cmptLabel.toString()).append(cmptDiv.toString());
 		}
 
 		//加入組件
-		cmptFormGroup.setBody(bufBody.toString());
+		cmptFormGroup.addBody(bufBody.toString());
 		buffer.append(cmptFormGroup.toString());
 	}
 

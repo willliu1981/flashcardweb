@@ -8,7 +8,7 @@ import idv.kw.tag.tool.Components;
 public interface IComponent {
 	String EMPTY="";
 	
-	IComponent setBody(String text);
+	IComponent addBody(String text);
 
 	String getBody();
 

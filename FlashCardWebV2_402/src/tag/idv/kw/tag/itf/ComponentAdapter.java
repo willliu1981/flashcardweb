@@ -21,8 +21,12 @@ public abstract class ComponentAdapter implements IComponent {
 	}
 
 	@Override
-	public IComponent setBody(String text) {
-		this.text = text;
+	public IComponent addBody(String text) {
+		if (this.text == null) {
+			this.text = "";
+		}
+		this.text += text;
+
 		return this;
 	}
 
