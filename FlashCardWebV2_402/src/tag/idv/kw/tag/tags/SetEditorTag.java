@@ -33,7 +33,6 @@ public class SetEditorTag<T extends TagFacade> extends SimpleTagSupport {
 				.getJspContext()).getRequest();
 
 		Object attribute = request.getAttribute(data);
-		HolderDataDTO dto = (HolderDataDTO) attribute;
 		return FacadeFactory.getFacade(attribute, type, attribute.getClass());
 	}
 

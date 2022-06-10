@@ -1,7 +1,5 @@
 package idv.fc.tag.impl.facade;
 
-import idv.CC;
-import idv.debug.Debug;
 import idv.fc.model.dto.HolderDataDTO;
 import idv.kw.tag.component.DefaultComponent;
 import idv.kw.tag.facade.Editor;

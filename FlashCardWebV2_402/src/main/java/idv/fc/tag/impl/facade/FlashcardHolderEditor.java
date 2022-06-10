@@ -1,13 +1,13 @@
 package idv.fc.tag.impl.facade;
 
-import idv.fc.model.FlashcardHolder;
+import idv.fc.model.dto.FlashcardHolderDTO;
 import idv.kw.tag.component.DefaultComponent;
 import idv.kw.tag.facade.Editor;
 
-public class FlashcardHolderEditor extends Editor<FlashcardHolder> {
+public class FlashcardHolderEditor extends Editor<FlashcardHolderDTO> {
 	private boolean isEdit = false;
 
-	public FlashcardHolderEditor(FlashcardHolder data) {
+	public FlashcardHolderEditor(FlashcardHolderDTO data) {
 		super(data);
 	}
 
@@ -102,7 +102,7 @@ public class FlashcardHolderEditor extends Editor<FlashcardHolder> {
 				cmptInputValue.addAttribute("placeholder", "ex: 123");
 				if (isEdit) {
 					cmptInputValue.addAttribute("value",
-							this.getData().getFcId().toString());
+							this.getData().getFlashcard().getTerm());
 				}
 
 				DefaultComponent cmptInputID = new DefaultComponent("input");

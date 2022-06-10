@@ -15,4 +15,6 @@ public interface IFlashcardHolderService extends IService<FlashcardHolder> {
 
 	SimplePageInfoDTO getAllWithSimplePageInfoDTO(Page<Object> startPage, int maxNavPageNums);
 
+	FlashcardHolderDTO getDTOById(String id);
+
 }

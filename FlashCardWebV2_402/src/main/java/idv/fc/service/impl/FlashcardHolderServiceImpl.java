@@ -17,6 +17,7 @@ import idv.fc.dao.itf.FlashcardHolderDao;
 import idv.fc.dao.itf.HolderDataDao;
 import idv.fc.model.FlashcardHolder;
 import idv.fc.model.dto.FlashcardHolderDTO;
+import idv.fc.model.dto.HolderDataDTO;
 import idv.fc.model.dto.simpledto.SimplePageInfoDTO;
 import idv.fc.model.dto.simpledto.SimpleVO;
 import idv.fc.service.abstraction.IFlashcardHolderService;
@@ -33,6 +34,11 @@ public class FlashcardHolderServiceImpl implements IFlashcardHolderService {
 	@Override
 	public List<FlashcardHolder> getAll() {
 		return flashcardHolderDao.selectAll();
+	}
+	
+	@Override
+	public FlashcardHolderDTO getDTOById(String id) {
+		return flashcardHolderDao.selectByIdJoinFc(id);
 	}
 
 	@Override

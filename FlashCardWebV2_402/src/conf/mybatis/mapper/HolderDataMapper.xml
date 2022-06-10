@@ -4,14 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="idv.fc.dao.itf.HolderDataDao">
 
-	<select id="selectAll" resultType="HolderData">
-		select * from HolderData
-	</select>
-
-	<select id="selectById" resultType="HolderData">
-		select * from HolderData where id = #{id}
-	</select>
-
 	<resultMap type="HolderDataDTO" id="baseHDResultMap">
 		<id column="id" property="id" />
 		<result column="fh_id" property="fhId" />
@@ -24,6 +16,27 @@
 			select="idv.fc.dao.itf.StatusDao.selectById" fetchType="lazy">
 		</association>
 	</resultMap>
+
+	<resultMap type="HolderDataDTO" id="baseEagerLoadingResultMap">
+		<id column="id" property="id" />
+		<result column="fh_id" property="fhId" />
+
+		<association property="flashcardHolderDTO" column="fh_id"
+			select="idv.fc.dao.itf.FlashcardHolderDao.selectByIdJoinFc" fetchType="eager">
+		</association>
+
+		<association property="status" column="status_id"
+			select="idv.fc.dao.itf.StatusDao.selectById" fetchType="eager">
+		</association>
+	</resultMap>
+
+	<select id="selectAll" resultType="HolderData">
+		select * from HolderData
+	</select>
+
+	<select id="selectById" resultType="HolderData">
+		select * from HolderData where id = #{id}
+	</select>
 
 	<select id="selectByIdJoinFH" resultMap="baseEagerLoadingResultMap">
 		select * from HolderData where id = #{id}
@@ -43,18 +56,7 @@
 		delete from HolderData where id = #{id};
 	</delete>
 
-	<resultMap type="HolderDataDTO" id="baseEagerLoadingResultMap">
-		<id column="id" property="id" />
-		<result column="fh_id" property="fhId" />
 
-		<association property="flashcardHolderDTO" column="fh_id"
-			select="idv.fc.dao.itf.FlashcardHolderDao.selectByIdJoinFc" fetchType="eager">
-		</association>
-
-		<association property="status" column="status_id"
-			select="idv.fc.dao.itf.StatusDao.selectById" fetchType="eager">
-		</association>
-	</resultMap>
 
 	<select id="selectAllJoinFh" resultMap="baseEagerLoadingResultMap">
 		select * from holderData

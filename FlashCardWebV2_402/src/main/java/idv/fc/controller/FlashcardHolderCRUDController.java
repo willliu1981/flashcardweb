@@ -45,7 +45,7 @@ public class FlashcardHolderCRUDController extends BaseController {
 
 	@RequestMapping(value = FLASHCARDHOLDER, method = RequestMethod.GET)
 	public String toAdd(HttpServletRequest request) {
-		request.setAttribute("data", new FlashcardHolder());
+		request.setAttribute("data", new FlashcardHolderDTO());
 		request.setAttribute("erType", FlashcardHolderEditor.class);
 		request.setAttribute("contextPath", request.getContextPath()); //***selected-list 修改這裡
 
@@ -56,7 +56,7 @@ public class FlashcardHolderCRUDController extends BaseController {
 			+ "/{id}", method = RequestMethod.GET)
 	public String toEdit(@PathVariable("id") String id,
 			HttpServletRequest request) {
-		FlashcardHolder find = flashcardHolderService.getById(id);
+		FlashcardHolderDTO find = flashcardHolderService.getDTOById(id);
 
 		request.setAttribute("data", find);
 		request.setAttribute("erType", FlashcardHolderEditor.class);
