@@ -25,7 +25,9 @@
 		
 .	bootstrape 的最後一頁(>>) 並非是所有資料的最後一頁
 
-.	edit page : edit模式時,由於 editor 並非DTO, 所以無法顯示value,
+
+
+
 
 
 待測:
@@ -71,6 +73,7 @@
 		所取得的值是否為null 會受到 package tool 中 TimestampConverter 轉換結果的影響
 
 
+
 參照:
 .	header.jsp active param: (參照 header.jsp : path mapping)
 
@@ -107,7 +110,9 @@
 
 .	eclipse 開啟 bootstrap.min.css 編輯檔案 會嚴重卡住
 
+.	toEdit/toAdd 修改其中一個 model 需同時修改兩者之controller method
 
+.	匿名內部類無法反射創建實體,似乎mybatis association的結果無法用於反射,也無法用於json 的操作
 
 
 注意:

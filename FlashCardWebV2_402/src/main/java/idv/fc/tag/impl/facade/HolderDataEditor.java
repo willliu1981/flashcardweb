@@ -1,14 +1,15 @@
 package idv.fc.tag.impl.facade;
 
-import idv.fc.model.HolderData;
+import idv.CC;
+import idv.debug.Debug;
+import idv.fc.model.dto.HolderDataDTO;
 import idv.kw.tag.component.DefaultComponent;
 import idv.kw.tag.facade.Editor;
-import idv.kw.tag.factory.TagBuilder;
 
-public class HolderDataEditor extends Editor<HolderData> {
+public class HolderDataEditor extends Editor<HolderDataDTO> {
 	private boolean isEdit;
 
-	public HolderDataEditor(HolderData data) {
+	public HolderDataEditor(HolderDataDTO data) {
 		super(data);
 	}
 
@@ -54,7 +55,7 @@ public class HolderDataEditor extends Editor<HolderData> {
 			DefaultComponent cmptLabel = new DefaultComponent("label");
 			cmptLabel.addAttribute("for", "fhId");
 			cmptLabel.addHtmlClass("col-lg-2 control-label");
-			cmptLabel.addBody("Flashcard Holder Id");
+			cmptLabel.addBody("Flashcard Holder name");
 
 			DefaultComponent cmptDiv = new DefaultComponent("div");
 			cmptDiv.addHtmlClass("col-lg-10");
@@ -66,7 +67,7 @@ public class HolderDataEditor extends Editor<HolderData> {
 				cmptInputValue.addAttribute("placeholder", "ex: 123");
 				if (isEdit) {
 					cmptInputValue.addAttribute("value",
-							this.getData().getFhId().toString());
+							this.getData().getFlashcardHolderDTO().getName());
 				}
 
 				DefaultComponent cmptInputID = new DefaultComponent("input");

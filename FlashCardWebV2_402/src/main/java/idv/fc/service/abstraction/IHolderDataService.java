@@ -13,4 +13,6 @@ public interface IHolderDataService extends IService<HolderData> {
 	
 	void updateForQuizFinish(Integer[]  datas, String filter);
 
+	HolderDataDTO getDTOById(String id);
+
 }

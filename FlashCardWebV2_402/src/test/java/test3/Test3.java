@@ -1,10 +1,28 @@
 package test3;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
 public class Test3 {
 
-	public static void main(String[] args) {
-		String property = System.getProperty("file.encoding");
-		System.out.println("哈囉=" + property);
+	interface CCC {
+
+	}
+
+	public static void main(String[] args) throws NoSuchMethodException,
+			SecurityException, InstantiationException, IllegalAccessException,
+			IllegalArgumentException, InvocationTargetException {
+
+		CCC c = new CCC() {
+		};
+
+		Constructor<CCC> declaredConstructor = CCC.class
+				.getDeclaredConstructor();
+
+		CCC newInstance = declaredConstructor.newInstance();
+
+		System.out.println(newInstance);
+
 	}
 
 }

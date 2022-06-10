@@ -12,6 +12,23 @@
 		select * from HolderData where id = #{id}
 	</select>
 
+	<resultMap type="HolderDataDTO" id="baseHDResultMap">
+		<id column="id" property="id" />
+		<result column="fh_id" property="fhId" />
+
+		<association property="flashcardHolderDTO" column="fh_id"
+			select="idv.fc.dao.itf.FlashcardHolderDao.selectByIdJoinFc" fetchType="lazy">
+		</association>
+
+		<association property="status" column="status_id"
+			select="idv.fc.dao.itf.StatusDao.selectById" fetchType="lazy">
+		</association>
+	</resultMap>
+
+	<select id="selectByIdJoinFH" resultMap="baseEagerLoadingResultMap">
+		select * from HolderData where id = #{id}
+	</select>
+
 	<insert id="create" parameterType="HolderData">
 		insert into HolderData
 		(fh_id,status_id)values(#{fhId},#{statusId});
@@ -26,7 +43,7 @@
 		delete from HolderData where id = #{id};
 	</delete>
 
-	<resultMap type="HolderDataDTO" id="baseHDResultMap">
+	<resultMap type="HolderDataDTO" id="baseEagerLoadingResultMap">
 		<id column="id" property="id" />
 		<result column="fh_id" property="fhId" />
 
@@ -39,12 +56,13 @@
 		</association>
 	</resultMap>
 
-	<select id="selectAllJoinFh" resultMap="baseHDResultMap">
+	<select id="selectAllJoinFh" resultMap="baseEagerLoadingResultMap">
 		select * from holderData
 	</select>
 
 	<select id="selectCountByFHID" resultType="int">
-		select count(*) from holderData where fh_id=#{fhId}
+		select count(*) from holderData where
+		fh_id=#{fhId}
 	</select>
 
 </mapper>

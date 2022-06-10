@@ -8,13 +8,11 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import idv.debug.Debug;
 import idv.fc.dao.itf.HolderDataDao;
 import idv.fc.dao.itf.StatusDao;
 import idv.fc.model.HolderData;
 import idv.fc.model.Status;
 import idv.fc.model.dto.HolderDataDTO;
-import idv.fc.quiz.phasestrategy.QuizPhaseStrategyContext;
 import idv.fc.quiz.playstrategy.QuizPlayStrategyContext;
 import idv.fc.service.abstraction.IFlashcardHolderService;
 import idv.fc.service.abstraction.IFlashcardService;
@@ -48,13 +46,8 @@ public class HolderDataServiceImpl implements IHolderDataService {
 	}
 
 	@Override
-	public HolderData getById(String id) {
-		try {
-			return holderDataDao.selectById(id);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
+	public HolderDataDTO getDTOById(String id) {
+		return holderDataDao.selectByIdJoinFH(id);
 	}
 
 	@Override
@@ -132,6 +125,11 @@ public class HolderDataServiceImpl implements IHolderDataService {
 			this.statusService.edit(x.getStatus());
 		});
 
+	}
+
+	@Override
+	public HolderData getById(String id) {
+		return null;
 	}
 
 }

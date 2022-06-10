@@ -11,6 +11,8 @@ import idv.fc.model.dto.HolderDataDTO;
 public interface HolderDataDao extends Dao<HolderData> {
 
 	List<HolderDataDTO> selectAllJoinFh();
+	
+	HolderDataDTO selectByIdJoinFH(Object fhId);
 
 	Integer selectCountByFHID(Integer fhId);
 }

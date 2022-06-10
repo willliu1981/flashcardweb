@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+import idv.CC;
+import idv.debug.Debug;
 import idv.fc.model.HolderData;
 import idv.fc.model.dto.HolderDataDTO;
 import idv.fc.service.abstraction.IHolderDataService;
@@ -39,7 +41,7 @@ public class HolderDataCRUDController extends BaseController {
 
 	@RequestMapping(value = HOLDERDATA, method = RequestMethod.GET)
 	public String toAdd(HttpServletRequest request) {
-		request.setAttribute("data", new HolderData());
+		request.setAttribute("data", new HolderDataDTO());
 		request.setAttribute("erType", HolderDataEditor.class);
 		request.setAttribute("contextPath", request.getContextPath()); //***selected-list 修改這裡
 
@@ -49,7 +51,7 @@ public class HolderDataCRUDController extends BaseController {
 	@RequestMapping(value = HOLDERDATA + "/{id}", method = RequestMethod.GET)
 	public String toEdit(@PathVariable("id") String id,
 			HttpServletRequest request) {
-		HolderData find = holderDataService.getById(id);
+		HolderDataDTO find = holderDataService.getDTOById(id);
 
 		request.setAttribute("data", find);
 		request.setAttribute("erType", HolderDataEditor.class);
@@ -102,9 +104,9 @@ public class HolderDataCRUDController extends BaseController {
 	@RequestMapping(value = HOLDERDATA, method = RequestMethod.PUT)
 	public String edit(HolderData model) {
 		HolderData byId = holderDataService.getById(model.getId().toString());
-		
+
 		byId.setFhId(model.getFhId());
-		
+
 		holderDataService.edit(byId);
 
 		return "redirect:/" + WEB_FLASHCARDS + "/hdManager";
