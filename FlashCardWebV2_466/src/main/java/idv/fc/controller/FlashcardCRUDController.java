@@ -2,7 +2,6 @@ package idv.fc.controller;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,12 +13,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.google.gson.Gson;
 
+import idv.CC;
 import idv.debug.Debug;
 import idv.fc.model.Flashcard;
 import idv.fc.model.dto.simpledto.SimplePageInfoDTO;
-import idv.fc.model.dto.simpledto.SimpleVO;
 import idv.fc.service.abstraction.IFlashcardService;
 import idv.fc.tag.impl.facade.FlashcardEditor;
 
@@ -44,8 +42,8 @@ public class FlashcardCRUDController extends BaseController {
 	@RequestMapping(value = FLASHCARD, method = RequestMethod.GET)
 	public String toAdd(HashMap<String, Object> map) {
 		map.put("data", new Flashcard());
-		map.put("erType", FlashcardEditor.class);
-
+		/*map.put("erType", FlashcardEditor.class);
+		*/
 		return PAGE_FLASHCARDS + "/modelEditor/" + "flashcardAddPage.html";
 	}
 
@@ -184,6 +182,27 @@ public class FlashcardCRUDController extends BaseController {
 		jsonMap.put("pageInfo", dto);
 		
 		return jsonMap;*/
+	}
+
+	//判斷是否有重複
+	@RequestMapping(value = FLASHCARD
+			+ "/byTerm/{term}", produces = "application/json", method = RequestMethod.GET)
+	@ResponseBody
+	public HashMap<String, Object> queryByTerm(
+			@PathVariable("term") String term) {
+		HashMap<String, Object> jsonMap = new HashMap<>();
+
+		Debug.test(new CC() {
+		}, term);
+
+		Flashcard byTerm = this.flashcardService.getByTerm(term);
+		if (byTerm != null) {
+			jsonMap.put("isExist", true);
+		} else {
+			jsonMap.put("isExist", false);
+		}
+
+		return jsonMap;
 	}
 
 }

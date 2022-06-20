@@ -12,5 +12,7 @@ public interface IFlashcardService extends IService<Flashcard> {
 
 	SimplePageInfoDTO getAllWithSimplePageInfoDTO(Page<Object> startPage, int maxNavPageNums);
 
+	Flashcard getByTerm(String term);
+
 
 }

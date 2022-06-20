@@ -103,7 +103,7 @@
     	$("#selectedValue").val(selectedValue);
       }
       
-    </script>
+</script>
 
 <!-- pager -->
 <!-- //***selected-list  -->

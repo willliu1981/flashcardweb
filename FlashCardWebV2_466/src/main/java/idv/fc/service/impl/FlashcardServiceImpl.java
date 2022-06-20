@@ -13,7 +13,6 @@ import com.github.pagehelper.PageInfo;
 import idv.fc.dao.itf.FlashcardDao;
 import idv.fc.dao.itf.FlashcardHolderDao;
 import idv.fc.model.Flashcard;
-import idv.fc.model.FlashcardHolder;
 import idv.fc.model.dto.simpledto.SimplePageInfoDTO;
 import idv.fc.model.dto.simpledto.SimpleVO;
 import idv.fc.service.abstraction.IFlashcardService;
@@ -36,6 +35,16 @@ public class FlashcardServiceImpl implements IFlashcardService {
 	public Flashcard getById(String id) {
 		try {
 			return flashcardDao.selectById(id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public Flashcard getByTerm(String term) {
+		try {
+			return this.flashcardDao.selectByTerm(term);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

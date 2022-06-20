@@ -71,7 +71,7 @@ public class Decrypt {
 	}
 
 	@Test
-	public void test() {
+aaaaaa	public void test() {
 
 		System.out.println(this.deCode("-11"));
 	}

@@ -11,6 +11,10 @@
 	<select id="selectById" resultType="Flashcard">
 		select * from flashcard where id = #{id}
 	</select>
+	
+	<select id="selectByTerm" resultType="Flashcard">
+		select * from flashcard where term = #{term}
+	</select>
 
 	<insert id="create" parameterType="Flashcard">
 		insert into flashcard

@@ -11,15 +11,27 @@
 <style type="text/css">
 /* 用於list-group 下,改變游標圖示  */
 .myBadgeCursor>li>.badge {
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .badgeSpan { /* 用於 list badge (delete)*/
-    text-align: center;
-    padding-left: 20px;
-    padding-right: 20px;
+	text-align: center;
+	padding-left: 20px;
+	padding-right: 20px;
 }
 </style>
+
+<!-- global variable -->
+<script type="text/javascript">
+  const contextPath = "/FlashCardWebV2";
+  const flashcards = "flashcards";//base path
+  const models = "flashcards";//*** 修改這裡 
+  const model = "flashcard";//*** 修改這裡 
+  const quiz = "quiz";
+  var pageInfo;
+  var datas;
+  var pageNum = 1;
+</script>
 
 <!-- nav -->
 <script type="text/javascript">
@@ -56,6 +68,45 @@
 	$(selector + " a").addClass("hrefDisabled");
   }
 </script>
+
+<!-- 使向後端取得判是否已存在重複資料的延遲發送 -->
+<script type="text/javascript">
+  $(document).ready(function() {
+	let element = $("#term");
+	let orinColor = element.css("background-color");
+
+	$("#term").keyup(function() {
+	  let term = element.val();
+	  if (term == null || term == "" || term == undefined) {
+		term = null;
+	  }
+
+	  clearTimeout($(this).data('timer'));
+
+	  var timer = setTimeout(function() {
+		$.ajax({
+		  url : model + "/byTerm/" + term,
+		  dataType : 'JSON',
+		  success : function(resp) {
+			if (resp.isExist) {
+			  element.css({
+				"color" : "red"
+			  });
+			} else {
+			  element.css({
+				"color" : orinColor
+			  });
+			}
+		  }
+		});
+	  }, 500);
+
+	  $(this).data('timer', timer);
+	});
+  });
+</script>
+
+
 </head>
 <body>
 
@@ -107,19 +158,19 @@
 
     <!-- form -->
     <div class="container">
-        <form class="form-horizontal">
+        <form class="form-horizontal" action="flashcard" method="post">
             <fieldset>
                 <legend>新增 Flashcard</legend>
                 <div class="form-group">
                     <label for="term" class="col-lg-2 control-label">term</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" id="term" placeholder="term">
+                        <input type="text" class="form-control" id="term" name="term" placeholder="ex: apple">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="definition" class="col-lg-2 control-label">definition</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" id="definition" placeholder="definition">
+                        <input type="text" class="form-control" id="definition" name="definition" placeholder="ex: 蘋果">
                     </div>
                 </div>
 
