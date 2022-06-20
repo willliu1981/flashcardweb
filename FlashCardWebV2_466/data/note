@@ -7,8 +7,14 @@
 
 .	holder data : 新增可選取全部功能
 
+.	holder data 新增時,預設name
+
 . 	Debug 無法cast array, 嚐試使用 Arrays.stream(citedNumsArray).boxed()
 				.collect(Collectors.toList())
+				
+.	新增相同flashcard 出現錯誤, 並且提示已有相同資料
+
+.	增加search功能
 
 
 問題:

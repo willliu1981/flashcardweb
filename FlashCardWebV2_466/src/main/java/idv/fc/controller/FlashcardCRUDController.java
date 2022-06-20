@@ -46,7 +46,7 @@ public class FlashcardCRUDController extends BaseController {
 		map.put("data", new Flashcard());
 		map.put("erType", FlashcardEditor.class);
 
-		return PAGE_FLASHCARDS + "/" + "modelEditPage.jsp";
+		return PAGE_FLASHCARDS + "/modelEditor/" + "flashcardAddPage.html";
 	}
 
 	@RequestMapping(value = FLASHCARD + "/{id}", method = RequestMethod.GET)

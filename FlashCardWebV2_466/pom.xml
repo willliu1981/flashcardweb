@@ -282,13 +282,13 @@
 		<!-- https://mvnrepository.com/artifact/org.aspectj/com.springsource.org.aspectj.weaver -->
 
 
-		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver 
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
-			<version>1.9.7</version>
-			<!--<scope>runtime</scope>-->
-		</dependency>
+			<version>1.9.7</version>-->
+			<!--<scope>runtime</scope>
+		</dependency>-->
 
 		<!-- https://mvnrepository.com/artifact/net.sourceforge.cglib/com.springsource.net.sf.cglib 
 		<dependency>

@@ -157,7 +157,7 @@
 
     <!-- 輪播 -->
     <div class="container">
-        <div id="carousel-example-generic" class="carousel slide my-carousel " data-ride="carousel" data-interval="3000"
+        <div id="carousel-example-generic" class="carousel slide my-carousel " data-ride="carousel" data-interval="5000"
             data-pause="hover" data-wrap="false" data-keyboard="true" data-itemsLength="${datas.size() }">
 
             <!-- Wrapper for slides -->
