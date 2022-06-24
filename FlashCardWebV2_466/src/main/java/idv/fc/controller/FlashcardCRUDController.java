@@ -40,10 +40,8 @@ public class FlashcardCRUDController extends BaseController {
 	 */
 
 	@RequestMapping(value = FLASHCARD, method = RequestMethod.GET)
-	public String toAdd(HashMap<String, Object> map) {
-		map.put("data", new Flashcard());
-		/*map.put("erType", FlashcardEditor.class);
-		*/
+	public String toAdd() {
+
 		return PAGE_FLASHCARDS + "/modelEditor/" + "flashcardAddPage.html";
 	}
 

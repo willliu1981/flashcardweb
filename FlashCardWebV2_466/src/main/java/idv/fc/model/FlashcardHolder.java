@@ -83,12 +83,11 @@ public class FlashcardHolder  implements java.io.Serializable {
 		this.updateForQuizDate = updateForQuizDate;
 	}
 
-	/*@Override
+	@Override
 	public String toString() {
-		return "FlashcardHolder [id=" + id + ", name=" + name + ", fcId=" + fcId
-				+ ", createDate=" + createDate + ", numberOfQuizTimes="
-				+ numberOfQuizTimes + ", passTheQuizTimes=" + passTheQuizTimes
-				+ ", updateForQuizDate=" + updateForQuizDate + "]";
-	}*/
+		return "FlashcardHolder [id=" + id + ", name=" + name + "]";
+	}
+
+
 
 }

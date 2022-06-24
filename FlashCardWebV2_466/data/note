@@ -9,15 +9,15 @@
 
 .	holder data 新增時,預設name
 
-. 	Debug 無法cast array, 嚐試使用 Arrays.stream(citedNumsArray).boxed()
-				.collect(Collectors.toList())
-				
-.	新增相同flashcard 出現錯誤, 並且提示已有相同資料
-
 .	增加search功能
+
+.	flashcard add/update : 當term為null 時的處理
+
+.	增修資料時,顯示definition
 
 
 問題:
+
 .	MySpringUtil 結構混亂
 
 .	有時啟動會出現 load IDGeneratorFactory 的問題, clean 或等待一些時間, 原因未知 
@@ -78,6 +78,9 @@
 .	HolderDataServiceImpl:: updateForQuizFinish 中 getEndTimeOfPhase 的 primary time,
 		所取得的值是否為null 會受到 package tool 中 TimestampConverter 轉換結果的影響
 
+. 	Debug 無法cast array, 嚐試使用 Arrays.stream(citedNumsArray).boxed()
+				.collect(Collectors.toList())
+				
 
 
 參照:
@@ -120,6 +123,8 @@
 
 .	匿名內部類無法反射創建實體,似乎mybatis association的結果無法用於反射,也無法用於json 的操作
 
+. 	瀏覽器緩存造成controller 失效問題,不可在get的請求路徑方法上寫業務邏輯,
+	否則先要解決緩問題
 
 注意:
 .	會影響 tld 的址參照項目: Facade、 Tag class 

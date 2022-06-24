@@ -3,9 +3,8 @@ package idv.fc.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,9 +22,7 @@ import idv.debug.Debug;
 import idv.fc.model.FlashcardHolder;
 import idv.fc.model.dto.FlashcardHolderDTO;
 import idv.fc.model.dto.simpledto.SimplePageInfoDTO;
-import idv.fc.model.dto.simpledto.SimpleVO;
 import idv.fc.service.abstraction.IFlashcardHolderService;
-import idv.fc.tag.impl.facade.FlashcardHolderEditor;
 
 @Controller
 public class FlashcardHolderCRUDController extends BaseController {
@@ -44,25 +41,43 @@ public class FlashcardHolderCRUDController extends BaseController {
 	 */
 
 	@RequestMapping(value = FLASHCARDHOLDER, method = RequestMethod.GET)
-	public String toAdd(HttpServletRequest request) {
-		request.setAttribute("data", new FlashcardHolderDTO());
-		request.setAttribute("erType", FlashcardHolderEditor.class);
-		request.setAttribute("contextPath", request.getContextPath()); //***selected-list 修改這裡
+	public String toAdd() {
 
-		return PAGE_FLASHCARDS + "/modelEditPage.jsp";
+		return PAGE_FLASHCARDS + "/modelEditor/"
+				+ "flashcardHolderAddPage.html";
 	}
 
 	@RequestMapping(value = FLASHCARDHOLDER
 			+ "/{id}", method = RequestMethod.GET)
-	public String toEdit(@PathVariable("id") String id,
-			HttpServletRequest request) {
-		FlashcardHolderDTO find = flashcardHolderService.getDTOById(id);
+	public String toEdit(@PathVariable("id") String id, HttpSession session) {
+		session.setAttribute("id", id);
 
-		request.setAttribute("data", find);
-		request.setAttribute("erType", FlashcardHolderEditor.class);
-		request.setAttribute("contextPath", request.getContextPath()); //***selected-list 修改這裡
+		Debug.test(new CC() {
+		}, "session to edit", session.getAttribute("id"));
 
-		return PAGE_FLASHCARDS + "/modelEditPage.jsp";
+		return PAGE_FLASHCARDS + "/modelEditor/"
+				+ "flashcardHolderEditPage.html";
+	}
+
+	/**
+	 * flashcardHolderAddPage 回顯data
+	 */
+	@RequestMapping(value = "abc", produces = "application/json", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getById(Map<String, Object> map,
+			HttpSession session) {
+		Debug.test(new CC() {
+		}, "session", session.getAttribute("id"));
+
+		FlashcardHolder result = this.flashcardHolderService
+				.getById(session.getAttribute("id").toString());
+
+		map.put("data", result.getName());
+
+		Debug.test(new CC() {
+		}, "xxx", result);
+
+		return map;
 	}
 
 	/*
