@@ -99,7 +99,9 @@
   
   //badge edit 重定向
   function badgeEditLocate(element) {
-	window.location.href = contextPath + "/" + model+"/"+$(element).attr('data-id');
+	let submit=$("#listedit_hidden_submit");
+	submit.attr("action",contextPath + "/" + model+"/"+$(element).attr('data-id'));
+	submit.submit();
   }
 </script>
 
@@ -295,6 +297,7 @@
 
     <!-- list -->
     <div class="container">
+        <form id="listedit_hidden_submit" action="" method="post"></form>
         <ul class="list-group myBadgeCursor">
             <li class="list-group-item list-group-item-title"><span class="badge badge-add" onclick="">
                     <font size="5">ADD</font>

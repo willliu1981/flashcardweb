@@ -48,7 +48,7 @@ public class FlashcardHolderCRUDController extends BaseController {
 	}
 
 	@RequestMapping(value = FLASHCARDHOLDER
-			+ "/{id}", method = RequestMethod.GET)
+			+ "/{id}", method = RequestMethod.POST)
 	public String toEdit(@PathVariable("id") String id, HttpSession session) {
 		session.setAttribute("id", id);
 
