@@ -48,12 +48,9 @@ public class FlashcardHolderCRUDController extends BaseController {
 	}
 
 	@RequestMapping(value = FLASHCARDHOLDER
-			+ "/{id}", method = RequestMethod.POST)
+			+ "/{id}", method = RequestMethod.POST) //使用post 以解決瀏覽器緩存問題
 	public String toEdit(@PathVariable("id") String id, HttpSession session) {
 		session.setAttribute("id", id);
-
-		Debug.test(new CC() {
-		}, "session to edit", session.getAttribute("id"));
 
 		return PAGE_FLASHCARDS + "/modelEditor/"
 				+ "flashcardHolderEditPage.html";
@@ -62,20 +59,15 @@ public class FlashcardHolderCRUDController extends BaseController {
 	/**
 	 * flashcardHolderAddPage 回顯data
 	 */
-	@RequestMapping(value = "abc", produces = "application/json", method = RequestMethod.GET)
+	@RequestMapping(value = FLASHCARDHOLDER
+			+ "/echo", produces = "application/json", method = RequestMethod.GET)
 	@ResponseBody
-	public Map<String, Object> getById(Map<String, Object> map,
-			HttpSession session) {
-		Debug.test(new CC() {
-		}, "session", session.getAttribute("id"));
+	public Map<String, Object> getById(HttpSession session) {
+		Map<String, Object> map = new HashMap<>();
+		FlashcardHolderDTO result = this.flashcardHolderService
+				.getDTOById(session.getAttribute("id").toString());
 
-		FlashcardHolder result = this.flashcardHolderService
-				.getById(session.getAttribute("id").toString());
-
-		map.put("data", result.getName());
-
-		Debug.test(new CC() {
-		}, "xxx", result);
+		map.put("data", result);
 
 		return map;
 	}

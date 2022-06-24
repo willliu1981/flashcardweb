@@ -41,13 +41,11 @@
 	$.ajax({
 	  type : "get",
 	  dataType : "json",
-	  url : contextPath + "/" + "abc",
+	  url : contextPath + "/" + model + "/echo",
 	  success : function(resp) {
-		console.log("xxx1=" + resp.id);
-		console.log("xxx2=" + resp.fcId);
-
+		$("#name").val(resp.data.name);
+		$("#flashcard_term").val(resp.data.flashcard.term);
 	  },
-
 	  error : function(thrownError) {
 		alert("error:" + thrownError);
 	  }
@@ -186,13 +184,14 @@
                 <div class="form-group">
                     <label for="term" class="col-lg-2 control-label">Name</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" id="term" name="term" placeholder="ex: apple">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="ex: apple">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="definition" class="col-lg-2 control-label">Flashcard</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" id="definition" name="definition" placeholder="ex: 蘋果">
+                        <input type="text" class="form-control" id="flashcard_term" name="flashcard_term"
+                            placeholder="ex: apple">
                     </div>
                 </div>
 
