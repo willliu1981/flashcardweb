@@ -5,15 +5,12 @@
 
 .	發音
 
-.	holder data : 新增可選取全部功能
-
-.	holder data 新增時,預設name
 
 .	增加search功能
 
 .	flashcard add/update : 當term為null 時的處理
 
-.	增修資料時,顯示definition
+.	當 flashcard Holder 的 fcid 有重複時,flashcardHolder name 自動新增別名
 
 
 問題:

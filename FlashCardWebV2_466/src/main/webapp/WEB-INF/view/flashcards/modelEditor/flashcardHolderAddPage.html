@@ -35,6 +35,7 @@
   var pageNum = 1;
   var id;
   var listSelectedId;
+  var listSelectedValue;
 </script>
 
 <!-- init -->
@@ -122,14 +123,14 @@
       //selected list item  //***selected-list //*** 修改這裡
       function doSelectd(){
     	listSelectedId=$(this).attr('data-id');
-        var selectedValue=$(this).attr('data-value');
+    	listSelectedValue=$(this).attr('data-value');
         
         clearListAdd();
         $(this).find(".badge-add").css({"visibility":"visible"});
         $(this).find(".badge-add").addClass("isAdd","");
         $("#name").val(selectedValue);
         $("#flashcard_id").val(listSelectedId);
-        $("#flashcard_term").val(selectedValue);
+        $("#flashcard_term").val(listSelectedValue);
       }
       
       function listAdd(){
@@ -140,7 +141,7 @@
     	$.ajax({
     	  type:"post",
     	  url:"flashcardHolder",//*** 修改這裡
-    	  data:{name:name,fcId:listSelectedId},
+    	  data:{name:listSelectedValue,fcId:listSelectedId},
     	  success:function(){
     		getData(pageNum);
     	  },

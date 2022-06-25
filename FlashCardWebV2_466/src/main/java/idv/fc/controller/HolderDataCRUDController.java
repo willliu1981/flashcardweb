@@ -99,7 +99,7 @@ public class HolderDataCRUDController extends BaseController {
 	public String edit(HolderData model) {
 		HolderData result = holderDataService.getById(model.getId().toString());
 
-		Debug.test(new CC() {},model.getId(),result);
+		Debug.test(new CC() {},model.getFhId());
 		
 		result.setFhId(model.getFhId());
 
