@@ -122,7 +122,7 @@ public class FlashcardHolderCRUDController extends BaseController {
 	@RequestMapping(value = FLASHCARDHOLDER, method = RequestMethod.PUT)
 	public String edit(FlashcardHolder flashcardHolder) {
 		if (flashcardHolder.getFcId() == null
-				|| flashcardHolder.getId().equals("")) {
+				|| flashcardHolder.getFcId().equals("")) {
 			flashcardHolder.setFcId(null);
 		}
 

@@ -28,11 +28,155 @@
   const models = "flashcardHolders";//*** 修改這裡 
   const model = "flashcardHolder";//*** 修改這裡 
   const quiz = "quiz";
+  listModels = "flashcards";//*** 修改這裡 
   var pageInfo;
   var datas;
   var pageNum = 1;
   var id;
 </script>
+
+<!-- init -->
+<script type="text/javascript">
+    $(function() {
+      $("#form").attr("action",contextPath+"/"+model);
+    });
+</script>
+
+<!-- get data、pager and list -->
+<!-- get data 和 pager 及 list 需同時存在 -->
+<!-- get data and list -->
+<script type="text/javascript">
+      $(function() {
+          getData(pageNum);
+      });
+      
+      //get data from ajax  
+      function getData(num){
+          //失效時不處理
+          //$(this) 代表某個呼叫getData 時傳入的一個物件,ex: getData(this,num)
+          if($(this).hasClass('hrefDisabled')){
+            return;
+          }
+        
+          pageNum=num;
+          
+          $.ajax({
+              type : "get",
+              dataType:"json",
+              url :  contextPath+"/simple/"+listModels+"/"+num, 
+              success : function(resp) {
+                
+                let data = [];
+                pageInfo = resp.pageInfo;
+                for (i = 0; i < pageInfo.list.length; i++) {
+                  data.push(pageInfo.list[i]);
+                }
+                
+                createListDomElement(data,resp.pageInfo.citedNums);
+    
+                //處理分頁
+                doPager(); 
+              },
+              error : function(thrownError) {
+                alert("get data error:" + thrownError);
+              }
+            });
+          
+        //創建list item
+          function createListDomElement(ds,citedNums) {
+            $(".list-group-item-title").next().addClass("list-group-item-replaced");
+            $(".list-group-item-replaced").nextUntil(".list-group-item-footer").remove(); 
+            
+           //*  
+           const domElements =  $.map(ds,function(place,i){
+                let nums=  citedNums[i];
+                
+              return `
+              <li class="list-group-item"><a href="javascript:;" class="list-group-item"
+              onclick="doSelectd.call(this)" data-id="${place.id}" 
+                data-value="${place.value}" ><!-- //***selected-list  -->
+                  <span class="badge" onclick="">
+                      <font size="5">${nums}</font>
+                  </span>
+                  <h4 class="h4" class="list-group-item-heading">${place.value}</h4>
+              </a></li>
+              ` ;
+            }).join(""); 
+           //*/
+            
+         
+             
+            $('.list-group-item-replaced').replaceWith(domElements);
+          }
+        }
+      
+      //selected list item  //***selected-list 
+      function doSelectd(){
+        var selectedId=$(this).attr('data-id');
+        var selectedValue=$(this).attr('data-value');
+        
+        $("#name").val(selectedValue);
+        $("#flashcard_id").val(selectedId);
+        $("#flashcard_term").val(selectedValue);
+      }
+      
+</script>
+<!-- /get data and list -->
+
+<!-- pager -->
+<script type="text/javascript">
+      //(延後載入)
+      function doPager() {
+          $(".pager li ul .pager-first a").attr("onclick","getData.call(this,"+1+")");
+          doPagerAction(".pager li ul .pager-first",pageInfo.pageNum == 1);
+          
+          $(".pager li ul .pager-previous a").attr("onclick","getData.call(this,"+(parseInt(pageInfo.pageNum)-1)+")");
+          doPagerAction(".pager li ul .pager-previous",!pageInfo.hasPreviouPage);
+        
+            createPagerDomElement(pageInfo.navigatepageNums);
+    
+          $(".pager li ul .pager-next a").attr("onclick","getData.call(this,"+(parseInt(pageInfo.pageNum)+1)+")");
+          doPagerAction(".pager li ul .pager-next",!pageInfo.hasNextPage);
+    
+          $(".pager li ul .pager-last a").attr("onclick","getData.call(this,"+pageInfo.navigateLastPage+")");
+          doPagerAction(".pager li ul .pager-last",pageInfo.isLastPage);
+      }
+    
+      function createPagerDomElement(navigatepageNums) {
+        $(".pager-previous").next().addClass("pager-pageNum-replaced");
+        $(".pager-pageNum-replaced").nextUntil(".pager-next").remove(); 
+        
+        const domElements = navigatepageNums.map( place => {
+          var path=contextPath+"/"+listModels+"/"+place;
+          
+          if(pageNum==place){
+            return `
+            <li class="active"><a class="hrefDisabled" href='javascript:;' onclick=''>${place}</a></li>
+          `;
+          }else{
+            return `
+            <li><a href='javascript:;' onclick='getData.call(this,${place})'>${place}</a></li>
+          `;
+          }
+        }).join("");
+        
+        $('.pager-pageNum-replaced').replaceWith(domElements);
+      }
+      
+      //使失效中
+      function doPagerAction(selector,ineffective) {
+        if(ineffective){
+            $(selector).addClass("disabled");
+            $(selector + " a").addClass("hrefDisabled");
+        }else{
+            $(selector).removeClass("disabled");
+            $(selector + " a").removeClass("hrefDisabled");
+        }
+      }
+      
+    </script>
+<!-- /pager -->
+<!-- /get data、pager and list -->
 
 <!-- nav -->
 <script type="text/javascript">
@@ -159,25 +303,25 @@
 
     <!-- form -->
     <div class="container">
-        <form class="form-horizontal" action="flashcard" method="post">
+        <form id="form" class="form-horizontal" action="flashcard" method="post">
             <fieldset>
                 <legend>新增 Flashcard Holder</legend>
                 <div class="form-group">
-                    <label for="term" class="col-lg-2 control-label">Name</label>
+                    <label for="name" class="col-lg-2 control-label">Name</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" id="term" name="term" placeholder="ex: apple">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="ex: apple">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="definition" class="col-lg-2 control-label">Flashcard</label>
+                    <label for="flashcard_term" class="col-lg-2 control-label">Flashcard</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" id="definition" name="definition" placeholder="ex: 蘋果">
+                        <input type="text" class="form-control" id="flashcard_term" placeholder="ex: 蘋果">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
-                        <input type="hidden" name="id">
+                        <input type="hidden" id="flashcard_id" name="fcId">
                         <button type="reset" class="btn btn-default" style="color: black;">Cancel</button>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
@@ -186,6 +330,51 @@
         </form>
     </div>
 
+    <!--  list and pager -->
+    <!-- 分頁 -->
+    <div class="container">
+        <ul class="pager">
+            <li>
+                <ul class="pagination">
+                    <li></li>
+                    <!-- 首頁 -->
+                    <li class="disabled??? pager-first"><a class="hrefDisabled???" href="javascript:;">&laquo;
+                        </a></li>
+
+                    <!-- 上一頁 -->
+                    <li class="disabled??? pager-previous"><a class="hrefDisabled???" href="javascript:;">Previous
+                        </a></li>
+
+                    <!-- 中間頁數 -->
+                    <li class="pager-pageNum-replaced"></li>
+
+                    <!-- 下一頁 -->
+                    <li class="disabled??? pager-next"><a class="hrefDisabled???" href="javascript:;">Next </a></li>
+
+                    <!-- 最末頁 -->
+                    <li class="disabled??? pager-last"><a class="hrefDisabled???" href="javascript:;">&raquo; </a></li>
+                    <li></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <!-- /分頁 -->
+
+    <!-- list -->
+    <div class="container" style="width: 50%;">
+        <ul class="list-group myBadgeCursor">
+            <li class="list-group-item list-group-item-title" data-contextPath="${contextPath }"
+                data-queryPath="${editor.attributes.selectedModelQueryPath}"><span class="badge" onclick="">
+                    <font size="5">totle</font>
+                </span>
+                <h3>Flashcard</h3></li>
+            <!-- //*** 修改這裡  -->
+
+            <li class="list-group-item-replaced"></li>
+        </ul>
+    </div>
+    <!-- /list -->
+    <!--  /list and pager -->
 
 </body>
 </html>

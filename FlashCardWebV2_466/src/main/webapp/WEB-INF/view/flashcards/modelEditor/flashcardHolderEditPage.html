@@ -33,10 +33,16 @@
   var id;
 </script>
 
+<!-- init -->
+<script type="text/javascript">
+    $(function() {
+      $("#form").attr("action",contextPath+"/"+model);
+    });
+</script>
+
 <!-- echo and init -->
 <script type="text/javascript">
   $(document).ready(function() {
-	$("#form").attr("action",contextPath+"/"+model);
 
 	$.ajax({
 	  type : "get",
@@ -128,6 +134,7 @@
         var selectedId=$(this).attr('data-id');
         var selectedValue=$(this).attr('data-value');
         
+        $("#name").val(selectedValue);
         $("#flashcard_id").val(selectedId);
         $("#flashcard_term").val(selectedValue);
       }
@@ -230,9 +237,10 @@
 <!-- 使向後端取得判是否已存在重複資料的延遲發送 -->
 <script type="text/javascript">
   $(document).ready(function() {
-	let element = $("#term");
+	let element = $("#term");//*** 修改這裡 
 	let orinColor = element.css("background-color");
 
+	//*** 修改這裡 
 	$("#term").keyup(function() {
 	  let term = element.val();
 	  if (term == null || term == "" || term == undefined) {
@@ -242,6 +250,7 @@
 	  clearTimeout($(this).data('timer'));
 
 	  var timer = setTimeout(function() {
+		//*** 修改這裡 
 		$.ajax({
 		  url : model + "/byTerm/" + term,
 		  dataType : 'JSON',
@@ -316,6 +325,7 @@
     </div>
 
     <!-- form -->
+    <!-- //*** 修改這裡  -->
     <div class="container">
         <form id="form" class="form-horizontal" action="" method="post">
             <fieldset>
@@ -346,7 +356,7 @@
         </form>
     </div>
 
-    <!--  selected list  -->
+    <!--  list and pager -->
     <!-- 分頁 -->
     <div class="container">
         <ul class="pager">
@@ -384,10 +394,12 @@
                     <font size="5">totle</font>
                 </span>
                 <h3>Flashcard</h3></li>
+            <!-- //*** 修改這裡  -->
 
             <li class="list-group-item-replaced"></li>
         </ul>
     </div>
     <!-- /list -->
+    <!--  /list and pager -->
 </body>
 </html>
