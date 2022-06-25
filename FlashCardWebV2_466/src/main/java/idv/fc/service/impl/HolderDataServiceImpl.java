@@ -129,6 +129,11 @@ public class HolderDataServiceImpl implements IHolderDataService {
 
 	@Override
 	public HolderData getById(String id) {
+		try {
+			return this.holderDataDao.selectById(id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 

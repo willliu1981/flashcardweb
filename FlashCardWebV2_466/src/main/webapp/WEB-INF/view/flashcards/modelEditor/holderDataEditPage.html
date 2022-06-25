@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>FLASH CARD</title>
-<link rel="stylesheet" href="css/bootstrap.min.cyborg.css">
-<link rel="stylesheet" href="webjars/bootstrap/3.4.1/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="../css/bootstrap.min.cyborg.css">
+<link rel="stylesheet" href="../webjars/bootstrap/3.4.1/css/bootstrap-theme.min.css">
 
-<script type="text/javascript" src="webjars/jquery/3.4.1/jquery.min.js"></script>
-<script type="text/javascript" src="webjars/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../webjars/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="../webjars/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <style type="text/css">
 /* 用於list-group 下,改變游標圖示  */
 .myBadgeCursor>li>.badge {
@@ -25,16 +25,12 @@
 <script type="text/javascript">
   const contextPath = "/FlashCardWebV2";
   const flashcards = "flashcards";//base path
-  const models = "flashcardHolders";//*** 修改這裡 
-  const model = "flashcardHolder";//*** 修改這裡 
+  const model = "holderData";//*** 修改這裡 
   const quiz = "quiz";
-  listModels = "flashcards";//*** 修改這裡 
+  listModels = "flashcardHolders";//*** 修改這裡 
   var pageInfo;
-  var data;
-  var citedNums;
   var pageNum = 1;
   var id;
-  var listSelectedId;
 </script>
 
 <!-- init -->
@@ -42,6 +38,26 @@
     $(function() {
       $("#form").attr("action",contextPath+"/"+model);
     });
+</script>
+
+<!-- echo and init -->
+<script type="text/javascript">
+  $(document).ready(function() {
+	//*** 修改這裡 
+	$.ajax({
+	  type : "get",
+	  dataType : "json",
+	  url : contextPath + "/" + model + "/echo",
+	  success : function(resp) {
+		$("#id").val(resp.data.id);
+		$("#flashcardHolder_id").val(resp.data.fhId);
+		$("#flashcardHolder_name").val(resp.data.flashcardHolderName);
+	  },
+	  error : function(thrownError) {
+		alert("echo error:" + thrownError);
+	  }
+	});
+  });
 </script>
 
 <!-- get data、pager and list -->
@@ -68,15 +84,13 @@
               url :  contextPath+"/simple/"+listModels+"/"+num, 
               success : function(resp) {
                 
-                data = [];
+                let data = [];
                 pageInfo = resp.pageInfo;
                 for (i = 0; i < pageInfo.list.length; i++) {
                   data.push(pageInfo.list[i]);
                 }
                 
-                citedNums=resp.pageInfo.citedNums;
-                
-                createListDomElement(data,citedNums);
+                createListDomElement(data,resp.pageInfo.citedNums);
     
                 //處理分頁
                 doPager(); 
@@ -86,68 +100,37 @@
               }
             });
           
+        //創建list item
+          function createListDomElement(ds,citedNums) {
+            $(".list-group-item-title").next().addClass("list-group-item-replaced");
+            $(".list-group-item-replaced").nextUntil(".list-group-item-footer").remove(); 
+            
+           const domElements =  $.map(ds,function(place,i){
+                let nums=  citedNums[i];
+                
+              return `
+              <li class="list-group-item"><a href="javascript:;" class="list-group-item"
+              onclick="doSelectd.call(this)" data-id="${place.id}" 
+                data-value="${place.value}" ><!-- //***selected-list  -->
+                  <span class="badge" onclick="">
+                      <font size="5">${nums}</font>
+                  </span>
+                  <h4 class="h4" class="list-group-item-heading">${place.value}</h4>
+              </a></li>
+              ` ;
+            }).join(""); 
+             
+            $('.list-group-item-replaced').replaceWith(domElements);
+          }
         }
       
-      //創建list item
-      function createListDomElement(ds,citedNums) {
-        $(".list-group-item-title").next().addClass("list-group-item-replaced");
-        $(".list-group-item-replaced").nextUntil(".list-group-item-footer").remove(); 
-        
-       const domElements =  $.map(ds,function(place,i){
-            let nums=  citedNums[i];
-            
-          return `
-          <li class="list-group-item"><a href="javascript:;" class="list-group-item"
-          onclick="doSelectd.call(this)" data-id="${place.id}" 
-            data-value="${place.value}" ><!-- //***selected-list  -->
-              <span class="badge badge-add" onclick="listAdd.call(this)" style="visibility:hidden;background-color:orange;cursor:copy">
-                  <font size="5">+</font>
-              </span>
-              <span class="badge" onclick="">
-                  <font size="5">${nums}</font>
-              </span>
-              <h4 class="h4" class="list-group-item-heading">${place.value}</h4>
-          </a></li>
-          ` ;
-        }).join(""); 
-        
-        $('.list-group-item-replaced').replaceWith(domElements);
-      }
-      
-      function clearListAdd(){
-    	$(".badge-add").css("visibility","hidden");
-    	$(".badge-add").removeClass("isAdd");
-      }
-    
-      //selected list item  //***selected-list //*** 修改這裡
+      //selected list item  //***selected-list 
       function doSelectd(){
-    	listSelectedId=$(this).attr('data-id');
+        var selectedId=$(this).attr('data-id');
         var selectedValue=$(this).attr('data-value');
         
-        clearListAdd();
-        $(this).find(".badge-add").css({"visibility":"visible"});
-        $(this).find(".badge-add").addClass("isAdd","");
-        $("#name").val(selectedValue);
-        $("#flashcard_id").val(listSelectedId);
-        $("#flashcard_term").val(selectedValue);
-      }
-      
-      function listAdd(){
-    	if(!$(this).hasClass("isAdd")){
-    	  return;
-    	}
-    	//*** 修改這裡
-    	$.ajax({
-    	  type:"post",
-    	  url:"flashcardHolder",//*** 修改這裡
-    	  data:{name:name,fcId:listSelectedId},
-    	  success:function(){
-    		getData(pageNum);
-    	  },
-    	  error:function(err){
-    		console.log("listAdd error :"+err);
-    	  }
-    	});
+        $("#flashcardHolder_id").val(selectedId);
+        $("#flashcardHolder_name").val(selectedValue);
       }
       
 </script>
@@ -243,6 +226,7 @@
 	$(selector + " a").addClass("hrefDisabled");
   }
 </script>
+<!-- /nav -->
 
 </head>
 <body>
@@ -288,32 +272,29 @@
     <div class="jumbotron">
         <div class="container">
             <h1>FlashCard</h1>
-            <p>管理 Flashcard Holder</p>
+            <p>管理 Holder Data</p>
             <!-- //*** 修改這裡  -->
         </div>
     </div>
 
     <!-- form -->
+    <!-- //*** 修改這裡  -->
     <div class="container">
-        <form id="form" class="form-horizontal" action="flashcard" method="post">
+        <form id="form" class="form-horizontal" action="" method="post">
             <fieldset>
-                <legend>新增 Flashcard Holder</legend>
+                <legend>編輯 Holder Data</legend>
                 <div class="form-group">
-                    <label for="name" class="col-lg-2 control-label">Name</label>
+                    <label for="flashcardHolder_name" class="col-lg-2 control-label">Flashcard Holder Name</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" id="name" name="name" placeholder="ex: apple">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="flashcard_term" class="col-lg-2 control-label">Flashcard</label>
-                    <div class="col-lg-10">
-                        <input type="text" class="form-control" id="flashcard_term" placeholder="Please select from list">
+                        <input type="text" class="form-control" id="flashcardHolder_name" placeholder="ex: apple">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
-                        <input type="hidden" id="flashcard_id" name="fcId">
+                        <input type="hidden" name="_method" value="put">
+                        <input type="hidden" id="id" name="id">
+                        <input type="hidden" id="flashcardHolder_id" name="fhId">
                         <button type="reset" class="btn btn-default" style="color: black;">Cancel</button>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
@@ -355,18 +336,17 @@
     <!-- list -->
     <div class="container" style="width: 50%;">
         <ul class="list-group myBadgeCursor">
-            <li class="list-group-item list-group-item-title" ><span class="badge" onclick="">
+            <li class="list-group-item list-group-item-title" data-contextPath="${contextPath }"
+                data-queryPath="${editor.attributes.selectedModelQueryPath}"><span class="badge" onclick="">
                     <font size="5">totle</font>
                 </span>
-                <h3>Flashcard</h3></li>
+                <h3>Flashcard Holder</h3></li>
             <!-- //*** 修改這裡  -->
-
 
             <li class="list-group-item-replaced"></li>
         </ul>
     </div>
     <!-- /list -->
     <!--  /list and pager -->
-
 </body>
 </html>

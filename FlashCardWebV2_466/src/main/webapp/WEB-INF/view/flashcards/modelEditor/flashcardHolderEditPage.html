@@ -43,15 +43,15 @@
 <!-- echo and init -->
 <script type="text/javascript">
   $(document).ready(function() {
-
+	//*** 修改這裡 
 	$.ajax({
 	  type : "get",
 	  dataType : "json",
 	  url : contextPath + "/" + model + "/echo",
 	  success : function(resp) {
-		console.log("xxx:" +resp);
 		$("#id").val(resp.data.id);
 		$("#name").val(resp.data.name);
+		$("#flashcard_id").val(resp.data.flashcard.id);
 		$("#flashcard_term").val(resp.data.flashcard.term);
 	  },
 	  error : function(thrownError) {
@@ -106,7 +106,6 @@
             $(".list-group-item-title").next().addClass("list-group-item-replaced");
             $(".list-group-item-replaced").nextUntil(".list-group-item-footer").remove(); 
             
-           //*  
            const domElements =  $.map(ds,function(place,i){
                 let nums=  citedNums[i];
                 
@@ -121,9 +120,6 @@
               </a></li>
               ` ;
             }).join(""); 
-           //*/
-            
-         
              
             $('.list-group-item-replaced').replaceWith(domElements);
           }
@@ -233,46 +229,6 @@
   }
 </script>
 <!-- /nav -->
-
-<!-- 使向後端取得判是否已存在重複資料的延遲發送 -->
-<script type="text/javascript">
-  $(document).ready(function() {
-	let element = $("#term");//*** 修改這裡 
-	let orinColor = element.css("background-color");
-
-	//*** 修改這裡 
-	$("#term").keyup(function() {
-	  let term = element.val();
-	  if (term == null || term == "" || term == undefined) {
-		term = null;
-	  }
-
-	  clearTimeout($(this).data('timer'));
-
-	  var timer = setTimeout(function() {
-		//*** 修改這裡 
-		$.ajax({
-		  url : model + "/byTerm/" + term,
-		  dataType : 'JSON',
-		  success : function(resp) {
-			if (resp.isExist) {
-			  element.css({
-				"color" : "red"
-			  });
-			} else {
-			  element.css({
-				"color" : orinColor
-			  });
-			}
-		  }
-		});
-	  }, 500);
-
-	  $(this).data('timer', timer);
-	});
-  });
-</script>
-<!-- /使向後端取得判是否已存在重複資料的延遲發送 -->
 
 
 </head>

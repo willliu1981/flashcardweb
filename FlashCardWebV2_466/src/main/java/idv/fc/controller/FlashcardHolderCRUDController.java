@@ -50,27 +50,12 @@ public class FlashcardHolderCRUDController extends BaseController {
 	@RequestMapping(value = FLASHCARDHOLDER
 			+ "/{id}", method = RequestMethod.POST) //使用post 以解決瀏覽器緩存問題
 	public String toEdit(@PathVariable("id") String id, HttpSession session) {
-		session.setAttribute("id", id);
+		session.setAttribute("flashcardHolderEditId", id);
 
 		return PAGE_FLASHCARDS + "/modelEditor/"
 				+ "flashcardHolderEditPage.html";
 	}
 
-	/**
-	 * flashcardHolderAddPage 回顯data
-	 */
-	@RequestMapping(value = FLASHCARDHOLDER
-			+ "/echo", produces = "application/json", method = RequestMethod.GET)
-	@ResponseBody
-	public Map<String, Object> getById(HttpSession session) {
-		Map<String, Object> map = new HashMap<>();
-		FlashcardHolderDTO result = this.flashcardHolderService
-				.getDTOById(session.getAttribute("id").toString());
-
-		map.put("data", result);
-
-		return map;
-	}
 
 	/*
 	 * process 
@@ -126,12 +111,12 @@ public class FlashcardHolderCRUDController extends BaseController {
 			flashcardHolder.setFcId(null);
 		}
 
-		FlashcardHolder byId = flashcardHolderService
+		FlashcardHolder result = flashcardHolderService
 				.getById(flashcardHolder.getId().toString());
-		byId.setName(flashcardHolder.getName());
-		byId.setFcId(flashcardHolder.getFcId());
+		result.setName(flashcardHolder.getName());
+		result.setFcId(flashcardHolder.getFcId());
 
-		flashcardHolderService.edit(byId);
+		flashcardHolderService.edit(result);
 
 		return "redirect:/" + WEB_FLASHCARDS + "/fhManager";
 	}
@@ -180,6 +165,22 @@ public class FlashcardHolderCRUDController extends BaseController {
 		jsonMap.put("pageInfo", allWithSimplePageInfoDTO);
 
 		return jsonMap;
+	}
+	
+	/**
+	 * flashcardHolderAddPage 回顯data
+	 */
+	@RequestMapping(value = FLASHCARDHOLDER
+			+ "/echo", produces = "application/json", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getById(HttpSession session) {
+		Map<String, Object> map = new HashMap<>();
+		FlashcardHolderDTO result = this.flashcardHolderService
+				.getDTOById(session.getAttribute("flashcardHolderEditId").toString());
+
+		map.put("data", result);
+
+		return map;
 	}
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import com.github.pagehelper.PageInfo;
 import idv.CC;
 import idv.debug.Debug;
 import idv.fc.model.HolderData;
+import idv.fc.model.dto.FlashcardHolderDTO;
 import idv.fc.model.dto.HolderDataDTO;
 import idv.fc.service.abstraction.IHolderDataService;
 import idv.fc.tag.impl.facade.HolderDataEditor;
@@ -40,24 +42,16 @@ public class HolderDataCRUDController extends BaseController {
 	 */
 
 	@RequestMapping(value = HOLDERDATA, method = RequestMethod.GET)
-	public String toAdd(HttpServletRequest request) {
-		request.setAttribute("data", new HolderDataDTO());
-		request.setAttribute("erType", HolderDataEditor.class);
-		request.setAttribute("contextPath", request.getContextPath()); //***selected-list 修改這裡
+	public String toAdd() {
 
-		return PAGE_FLASHCARDS + "/" + "modelEditPage.jsp";
+		return PAGE_FLASHCARDS + "/modelEditor/" + "holderDataAddPage.html";
 	}
 
-	@RequestMapping(value = HOLDERDATA + "/{id}", method = RequestMethod.GET)
-	public String toEdit(@PathVariable("id") String id,
-			HttpServletRequest request) {
-		HolderDataDTO find = holderDataService.getDTOById(id);
+	@RequestMapping(value = HOLDERDATA + "/{id}", method = RequestMethod.POST)
+	public String toEdit(@PathVariable("id") String id, HttpSession session) {
+		session.setAttribute("holderDataEditId", id);
 
-		request.setAttribute("data", find);
-		request.setAttribute("erType", HolderDataEditor.class);
-		request.setAttribute("contextPath", request.getContextPath()); //***selected-list 修改這裡
-
-		return PAGE_FLASHCARDS + "/" + "modelEditPage.jsp";
+		return PAGE_FLASHCARDS + "/modelEditor/" + "holderDataEditPage.html";
 	}
 
 	/*
@@ -103,11 +97,13 @@ public class HolderDataCRUDController extends BaseController {
 
 	@RequestMapping(value = HOLDERDATA, method = RequestMethod.PUT)
 	public String edit(HolderData model) {
-		HolderData byId = holderDataService.getById(model.getId().toString());
+		HolderData result = holderDataService.getById(model.getId().toString());
 
-		byId.setFhId(model.getFhId());
+		Debug.test(new CC() {},model.getId(),result);
+		
+		result.setFhId(model.getFhId());
 
-		holderDataService.edit(byId);
+		holderDataService.edit(result);
 
 		return "redirect:/" + WEB_FLASHCARDS + "/hdManager";
 	}
@@ -119,4 +115,20 @@ public class HolderDataCRUDController extends BaseController {
 		return "redirect:/" + WEB_FLASHCARDS + "/hdManager";
 	}
 
+	
+	/**
+	 * flashcardHolderAddPage 回顯data
+	 */
+	@RequestMapping(value = HOLDERDATA
+			+ "/echo", produces = "application/json", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getById(HttpSession session) {
+		Map<String, Object> map = new HashMap<>();
+		HolderDataDTO result = this.holderDataService
+				.getDTOById(session.getAttribute("holderDataEditId").toString());
+
+		map.put("data", result);
+
+		return map;
+	}
 }

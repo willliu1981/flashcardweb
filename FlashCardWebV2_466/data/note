@@ -125,6 +125,9 @@
 
 . 	瀏覽器緩存造成controller 失效問題,不可在get的請求路徑方法上寫業務邏輯,
 	否則先要解決緩問題
+		例如:flashcardHolderManagerPage.html
+			//badge edit 重定向
+	  		function badgeEditLocate(element)
 
 注意:
 .	會影響 tld 的址參照項目: Facade、 Tag class 

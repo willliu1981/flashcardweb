@@ -13,6 +13,10 @@ public class HolderDataDTO {
 	public String getName() {
 		return this.flashcardHolderDTO.getName();
 	}
+	
+	public String getFlashcardHolderName() {
+		return this.flashcardHolderDTO.getName();
+	}
 
 	public Integer getId() {
 		return hd.getId();
