@@ -30,9 +30,11 @@
   const quiz = "quiz";
   listModels = "flashcards";//*** 修改這裡 
   var pageInfo;
-  var datas;
+  var data;
+  var citedNums;
   var pageNum = 1;
   var id;
+  var listSelectedId;
 </script>
 
 <!-- init -->
@@ -66,13 +68,15 @@
               url :  contextPath+"/simple/"+listModels+"/"+num, 
               success : function(resp) {
                 
-                let data = [];
+                data = [];
                 pageInfo = resp.pageInfo;
                 for (i = 0; i < pageInfo.list.length; i++) {
                   data.push(pageInfo.list[i]);
                 }
                 
-                createListDomElement(data,resp.pageInfo.citedNums);
+                citedNums=resp.pageInfo.citedNums;
+                
+                createListDomElement(data,citedNums);
     
                 //處理分頁
                 doPager(); 
@@ -82,42 +86,68 @@
               }
             });
           
-        //創建list item
-          function createListDomElement(ds,citedNums) {
-            $(".list-group-item-title").next().addClass("list-group-item-replaced");
-            $(".list-group-item-replaced").nextUntil(".list-group-item-footer").remove(); 
-            
-           //*  
-           const domElements =  $.map(ds,function(place,i){
-                let nums=  citedNums[i];
-                
-              return `
-              <li class="list-group-item"><a href="javascript:;" class="list-group-item"
-              onclick="doSelectd.call(this)" data-id="${place.id}" 
-                data-value="${place.value}" ><!-- //***selected-list  -->
-                  <span class="badge" onclick="">
-                      <font size="5">${nums}</font>
-                  </span>
-                  <h4 class="h4" class="list-group-item-heading">${place.value}</h4>
-              </a></li>
-              ` ;
-            }).join(""); 
-           //*/
-            
-         
-             
-            $('.list-group-item-replaced').replaceWith(domElements);
-          }
         }
       
+      //創建list item
+      function createListDomElement(ds,citedNums) {
+        $(".list-group-item-title").next().addClass("list-group-item-replaced");
+        $(".list-group-item-replaced").nextUntil(".list-group-item-footer").remove(); 
+        
+       const domElements =  $.map(ds,function(place,i){
+            let nums=  citedNums[i];
+            
+          return `
+          <li class="list-group-item"><a href="javascript:;" class="list-group-item"
+          onclick="doSelectd.call(this)" data-id="${place.id}" 
+            data-value="${place.value}" ><!-- //***selected-list  -->
+              <span class="badge badge-add" onclick="listAdd.call(this)" style="visibility:hidden;background-color:orange;cursor:copy">
+                  <font size="5">+</font>
+              </span>
+              <span class="badge" onclick="">
+                  <font size="5">${nums}</font>
+              </span>
+              <h4 class="h4" class="list-group-item-heading">${place.value}</h4>
+          </a></li>
+          ` ;
+        }).join(""); 
+        
+        $('.list-group-item-replaced').replaceWith(domElements);
+      }
+      
+      function refreshListAdd(){
+    	$(".badge-add").css("visibility","hidden");
+    	$(".badge-add").removeClass("isAdd");
+      }
+    
       //selected list item  //***selected-list 
       function doSelectd(){
-        var selectedId=$(this).attr('data-id');
+    	listSelectedId=$(this).attr('data-id');
         var selectedValue=$(this).attr('data-value');
         
+        refreshListAdd();
+        $(this).find(".badge-add").css({"visibility":"visible"});
+        $(this).find(".badge-add").addClass("isAdd","");
         $("#name").val(selectedValue);
-        $("#flashcard_id").val(selectedId);
+        $("#flashcard_id").val(listSelectedId);
         $("#flashcard_term").val(selectedValue);
+      }
+      
+      function listAdd(){
+    	if(!$(this).hasClass("isAdd")){
+    	  return;
+    	}
+    	
+    	$.ajax({
+    	  type:"post",
+    	  url:"flashcardHolder",
+    	  data:{id:id,name:name,fcId:listSelectedId},
+    	  success:function(){
+    		getData(pageNum);
+    	  },
+    	  error:function(err){
+    		console.log("listAdd error :"+err);
+    	  }
+    	});
       }
       
 </script>
@@ -369,6 +399,7 @@
                 </span>
                 <h3>Flashcard</h3></li>
             <!-- //*** 修改這裡  -->
+
 
             <li class="list-group-item-replaced"></li>
         </ul>

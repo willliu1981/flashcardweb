@@ -71,11 +71,7 @@
             <font size="5">test1</font>
         </a>
     </div>
-    <div class="container">
-        <a href="${pageContext.request.contextPath}/test/test1_1">
-            <font size="5">test2</font>
-        </a>
-    </div>
+
 
     <div class="container container-footer">
         <h4>Copyright &copy; 2021-2022 FlashCard. All rights reserved.</h4>

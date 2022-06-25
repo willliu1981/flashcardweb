@@ -24,7 +24,7 @@ public class TestController extends BaseController {
 	@RequestMapping(value = "test1")
 	public String test1() {
 
-		return "redirect:/flashcards/fcManager";
+		return "test/test9.html";
 	}
 	
 	@RequestMapping(value = "test1_1")
