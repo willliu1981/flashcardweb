@@ -1,4 +1,4 @@
-package idv.fc.tag.impl.facade;
+package idv.fc._depreciated;
 
 import idv.fc.model.Flashcard;
 import idv.kw.tag.component.DefaultComponent;

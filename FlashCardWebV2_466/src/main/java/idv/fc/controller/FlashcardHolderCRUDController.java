@@ -168,7 +168,7 @@ public class FlashcardHolderCRUDController extends BaseController {
 	}
 	
 	/**
-	 * flashcardHolderAddPage 回顯data
+	 * flashcardHolderEditPage 回顯data
 	 */
 	@RequestMapping(value = FLASHCARDHOLDER
 			+ "/echo", produces = "application/json", method = RequestMethod.GET)

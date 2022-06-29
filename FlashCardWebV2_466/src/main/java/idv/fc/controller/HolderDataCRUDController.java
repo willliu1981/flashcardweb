@@ -19,11 +19,11 @@ import com.github.pagehelper.PageInfo;
 
 import idv.CC;
 import idv.debug.Debug;
+import idv.fc._depreciated.HolderDataEditor;
 import idv.fc.model.HolderData;
 import idv.fc.model.dto.FlashcardHolderDTO;
 import idv.fc.model.dto.HolderDataDTO;
 import idv.fc.service.abstraction.IHolderDataService;
-import idv.fc.tag.impl.facade.HolderDataEditor;
 
 @Controller
 public class HolderDataCRUDController extends BaseController {
@@ -117,7 +117,7 @@ public class HolderDataCRUDController extends BaseController {
 
 	
 	/**
-	 * flashcardHolderAddPage 回顯data
+	 * holderDataEditPage 回顯data
 	 */
 	@RequestMapping(value = HOLDERDATA
 			+ "/echo", produces = "application/json", method = RequestMethod.GET)

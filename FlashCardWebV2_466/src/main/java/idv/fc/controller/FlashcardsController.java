@@ -5,7 +5,10 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import idv.CC;
+import idv.debug.Debug;
 import idv.fc.service.abstraction.IFlashcardHolderService;
 import idv.fc.service.abstraction.IFlashcardService;
 import idv.fc.service.abstraction.IHolderDataService;
@@ -29,7 +32,7 @@ public class FlashcardsController extends BaseController {
 	 * 管理 Flashcard & FlashcardHolder
 	 */
 
-	@RequestMapping(value = "fcsManager")
+	@RequestMapping(value = "fcsManager" ,method=RequestMethod.GET)
 	public String toFlashcardsManager() {
 		return FLASHCARDS + "/fcsManagedPage.jsp";
 	}

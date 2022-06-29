@@ -2,6 +2,10 @@ package idv.fc.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +23,6 @@ import idv.debug.Debug;
 import idv.fc.model.Flashcard;
 import idv.fc.model.dto.simpledto.SimplePageInfoDTO;
 import idv.fc.service.abstraction.IFlashcardService;
-import idv.fc.tag.impl.facade.FlashcardEditor;
 
 @Controller
 public class FlashcardCRUDController extends BaseController {
@@ -40,20 +43,18 @@ public class FlashcardCRUDController extends BaseController {
 	 */
 
 	@RequestMapping(value = FLASHCARD, method = RequestMethod.GET)
-	public String toAdd() {
+	public String toAdd(HttpServletResponse res) {
 
+		res.addHeader("Cache-Control", "no-cache");
 		return PAGE_FLASHCARDS + "/modelEditor/" + "flashcardAddPage.html";
 	}
 
 	@RequestMapping(value = FLASHCARD + "/{id}", method = RequestMethod.GET)
 	public String toEdit(HashMap<String, Object> map,
-			@PathVariable("id") String id) {
-		Flashcard find = flashcardService.getById(id);
+			@PathVariable("id") String id, HttpSession session) {
+		session.setAttribute("flashcardEditId", id);
 
-		map.put("data", find);
-		map.put("erType", FlashcardEditor.class);
-
-		return PAGE_FLASHCARDS + "/" + "modelEditPage.jsp";
+		return PAGE_FLASHCARDS + "/modelEditor/" + "flashcardEditPage.html";
 	}
 
 	/*
@@ -203,4 +204,19 @@ public class FlashcardCRUDController extends BaseController {
 		return jsonMap;
 	}
 
+	/**
+	 * flashcardEditPage 回顯data
+	 */
+	@RequestMapping(value = FLASHCARD
+			+ "/echo", produces = "application/json", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getById(HttpSession session) {
+		Map<String, Object> map = new HashMap<>();
+		Flashcard result = this.flashcardService
+				.getById(session.getAttribute("flashcardEditId").toString());
+
+		map.put("data", result);
+
+		return map;
+	}
 }
