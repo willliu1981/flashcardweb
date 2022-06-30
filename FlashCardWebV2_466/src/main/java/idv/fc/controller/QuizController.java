@@ -56,7 +56,7 @@ public class QuizController extends BaseController {
 		Map<String, Object> map = new HashMap<>();
 
 		//經由strategy 取得datas
-		List<HolderDataDTO> all = holderDataService.getAllJoinFH(filter, mod,
+		List<HolderDataDTO> all = holderDataService.getAllJoinFHWithFilterAndMod(filter, mod,
 				num);
 
 		List<Integer> hdIds = all.stream().map(x -> x.getId())

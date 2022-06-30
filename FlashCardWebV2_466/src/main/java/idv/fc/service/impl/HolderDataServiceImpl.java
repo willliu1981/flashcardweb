@@ -93,14 +93,18 @@ public class HolderDataServiceImpl implements IHolderDataService {
 	 * mod 來自quizmanagedPage.jsp 的radioMod 值
 	 */
 	@Override
-	public List<HolderDataDTO> getAllJoinFH(String filter, String mod,
-			Integer num) {
+	public List<HolderDataDTO> getAllJoinFHWithFilterAndMod(String filter,
+			String mod, Integer num) {
 		List<HolderDataDTO> all = this.holderDataDao.selectAllJoinFh();
+		List<HolderDataDTO> allWithoutEmptyFlashcard = all.stream()
+				.filter(x -> x.getFlashcardHolderDTO().getFlashcard() != null)
+				.collect(Collectors.toList());
 
 		playStrategyContext.setFilter(filter);
 		playStrategyContext.setMod(mod);
 
-		return playStrategyContext.executeStrategyForGetAll(all, num);
+		return playStrategyContext
+				.executeStrategyForGetAll(allWithoutEmptyFlashcard, num);
 	}
 
 	@Override

@@ -5,7 +5,7 @@
 
 .	發音
 
-.   增加search功能,於add or edit 中新增search(重要)
+.   (重要)增加search功能,
 		flashcard holder 若沒有flashcard id, holder data 應不允加入
 		
 .	flashcard add/update : 當term為null 時的處理

@@ -9,7 +9,7 @@ public interface IHolderDataService extends IService<HolderData> {
 
 	List<HolderDataDTO> getAllJoinFH();
 
-	List<HolderDataDTO> getAllJoinFH(String mod, String detail, Integer num);
+	List<HolderDataDTO> getAllJoinFHWithFilterAndMod(String mod, String detail, Integer num);
 	
 	void updateForQuizFinish(Integer[]  datas, String filter);
 

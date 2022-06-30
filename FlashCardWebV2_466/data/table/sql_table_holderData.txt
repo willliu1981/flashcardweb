@@ -9,4 +9,4 @@ CREATE TABLE `holderdata` (
   KEY `fk_fh_id_idx` (`fh_id`),
   CONSTRAINT `fk_fh_id` FOREIGN KEY (`fh_id`) REFERENCES `flashcardholder` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_status_id` FOREIGN KEY (`status_id`) REFERENCES `status` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+) ENGINE=InnoDB AUTO_INCREMENT=249 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
