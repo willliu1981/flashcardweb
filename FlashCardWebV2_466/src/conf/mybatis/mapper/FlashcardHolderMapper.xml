@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="idv.fc.dao.itf.FlashcardHolderDao">
+
+	<select id="selectAll" resultType="FlashcardHolder">
+		select * from flashcardHolder
+	</select>
+
+	<select id="selectById" resultType="FlashcardHolder">
+		select * from flashcardHolder where id = #{id}
+	</select>
+
+	<insert id="create" parameterType="FlashcardHolder">
+		insert into flashcardHolder
+		(name,fc_id)values(#{name},#{fcId});
+	</insert>
+
+	<update id="update" parameterType="FlashcardHolder">
+		update flashcardHolder set
+		name=#{name},fc_id=#{fcId},
+		number_of_quiz_times=#{numberOfQuizTimes},
+		update_for_quiz_date=#{updateForQuizDate},
+		pass_the_quiz_times=#{passTheQuizTimes} where
+		id = #{id};
+	</update>
+
+	<delete id="delete">
+		delete from flashcardHolder where id = #{id};
+	</delete>
+
+	<resultMap type="FlashcardHolderDTO" id="baseFHResultMap">
+		<id column="id" property="id" />
+		<result column="fc_id" property="fcId" />
+
+		<association property="flashcard" column="fc_id"
+			select="idv.fc.dao.itf.FlashcardDao.selectById" fetchType="eager">
+		</association>
+	</resultMap>
+
+
+	<select id="selectAllJoinFc" resultMap="baseFHResultMap">
+		select * from flashcardHolder
+	</select>
+
+
+	<select id="selectByIdJoinFc" resultMap="baseFHResultMap">
+		select * from flashcardHolder
+		where id = #{id}
+	</select>
+
+	<select id="selectCountByFCID" resultType="int">
+		select count(*) from FlashcardHolder where
+		fc_id=#{fcId}
+	</select>
+
+</mapper>
