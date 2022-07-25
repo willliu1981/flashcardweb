@@ -167,7 +167,7 @@
           $(".pager li ul .pager-next a").attr("onclick","getData.call(this,"+(parseInt(pageInfo.pageNum)+1)+")");
           doPagerAction(".pager li ul .pager-next",!pageInfo.hasNextPage);
     
-          $(".pager li ul .pager-last a").attr("onclick","getData.call(this,"+pageInfo.navigateLastPage+")");
+          $(".pager li ul .pager-last a").attr("onclick","getData.call(this,"+pageInfo.pages+")");
           doPagerAction(".pager li ul .pager-last",pageInfo.isLastPage);
       }
     

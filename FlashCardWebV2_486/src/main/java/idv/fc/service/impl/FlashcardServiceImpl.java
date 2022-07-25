@@ -95,7 +95,7 @@ public class FlashcardServiceImpl implements IFlashcardService {
 		dto.setHasPreviouPage(pageInfo.isHasPreviousPage());
 		dto.setIsLastPage(pageInfo.isIsLastPage());
 		dto.setPageNum(pageInfo.getPageNum());
-		dto.setNavigateLastPage(pageInfo.getNavigateLastPage());
+		dto.setPages(pageInfo.getPages());
 		dto.setCitedNums(citedNumsArray);
 
 		List<SimpleVO> collect = pageInfo.getList().stream()

@@ -140,7 +140,7 @@ public class QuizController extends BaseController {
 		simpleFcs.setFilter(filter);
 
 		jsonMap.put("data", simpleFcs);
-		
+
 		return jsonMap;
 	}
 

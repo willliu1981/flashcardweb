@@ -172,7 +172,7 @@
 	  $(".pager li ul .pager-next a").attr("onclick","getDatas.call(this,"+(pageInfo.pageNum+1)+")");
 	  doPagerAction(".pager li ul .pager-next",!pageInfo.hasNextPage);
 
-	  $(".pager li ul .pager-last a").attr("onclick","getDatas.call(this,"+pageInfo.navigateLastPage+")");
+	  $(".pager li ul .pager-last a").attr("onclick","getDatas.call(this,"+pageInfo.pages+")");
 	  doPagerAction(".pager li ul .pager-last",pageInfo.isLastPage);
   }
 

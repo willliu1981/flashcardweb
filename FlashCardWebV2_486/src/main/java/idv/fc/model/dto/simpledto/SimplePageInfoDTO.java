@@ -5,7 +5,7 @@ import java.util.List;
 
 public class SimplePageInfoDTO {
 	private Integer pageNum;
-	private Integer navigateLastPage;
+	private Integer pages;
 	private boolean isHasPreviouPage;
 	private boolean isHasNextPage;
 	private boolean isIsLastPage;
@@ -19,14 +19,6 @@ public class SimplePageInfoDTO {
 
 	public void setNavigatepageNums(int[] navigatepageNums) {
 		this.navigatepageNums = navigatepageNums;
-	}
-
-	public Integer getNavigateLastPage() {
-		return navigateLastPage;
-	}
-
-	public void setNavigateLastPage(Integer navigateLastPage) {
-		this.navigateLastPage = navigateLastPage;
 	}
 
 	public Integer getPageNum() {
@@ -75,6 +67,14 @@ public class SimplePageInfoDTO {
 
 	public void setCitedNums(int[] citedNums) {
 		this.citedNums = citedNums;
+	}
+
+	public Integer getPages() {
+		return pages;
+	}
+
+	public void setPages(Integer pages) {
+		this.pages = pages;
 	}
 
 }
