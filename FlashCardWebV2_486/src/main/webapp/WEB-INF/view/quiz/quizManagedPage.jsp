@@ -24,7 +24,7 @@
 				url : contextPath + "/quiz/data/" + filter + "/" + mod + "/"
 					+ num,
 				success : function(resp) {
-				  if (resp.data.size == 0) {
+				  if (resp.data.length == 0) {
 					alert("沒有資料");
 				  } else {
 					location.href = contextPath + "/quiz/" + filter + "/" + mod
