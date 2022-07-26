@@ -39,29 +39,29 @@
 <!-- get datas -->
 <script type="text/javascript">
   $(function() {
-	getDatas(pageNum);
+	getData(pageNum);
 	
   });
   
   //get datas from ajax
-  function getDatas(num){
+  function getData(num){
 	  //失效時不處理
 	  if($(this).hasClass('hrefDisabled')){
 		return;
 	  }
  
-	  pageNum=num;
+	  pageNum=parseInt(num);
 	  $.ajax({
 		  type : "get",
 		  dataType:"json",
-		  url : contextPath + "/" + models+"/"+num, 
+		  url : contextPath + "/" + models+"/"+pageNum, 
 		  success : function(resp) {
-			datas = [];
+			data = [];
 			pageInfo = resp.pageInfo;
 			for (i = 0; i < pageInfo.list.length; i++) {
-			  datas.push(pageInfo.list[i]);
+			  data.push(pageInfo.list[i]);
 			}
-			createListDomElement(datas);
+			createListDomElement(data);
 
 
 			//處理分頁
@@ -162,35 +162,41 @@
 
 <!-- pager -->
 <script type="text/javascript">
-  $(function(){
-	$(".form-control-pagenum").change(function(){
-	  console.log('xxx '+this.val());
+	$(function(){
+	  let pagenumElement=$(".form-control-pagenum");
+	  
+	  pagenumElement.change(function(){
+    	  let pagenum=pagenumElement.val();
+    	  if(pagenum<=0){
+    		pagenum=1;
+    	  }else if(pagenum>pageInfo.pages){
+    		pagenum=pageInfo.pages;
+    	  }
+    	  
+    	  $(".pager li ul .pager-goto a").attr("onclick","getData.call(this,'"+pagenum+"')");
+	  });
+	  
+	  pagenumElement.mousedown(function (){
+		pagenumElement.val("");
+	  });
+	 
 	});
-  });
-  
+
   //(延後載入)
   function doPager() {
-	  $(".pager li ul .pager-first a").attr("onclick","getDatas.call(this,"+1+")");
+	  $(".pager li ul .pager-first a").attr("onclick","getData.call(this,"+1+")");
 	  doPagerAction(".pager li ul .pager-first",pageInfo.pageNum == 1);
 
-	  $(".pager li ul .pager-previous a").attr("onclick","getDatas.call(this,"+(pageInfo.pageNum-1)+")");
+	  $(".pager li ul .pager-previous a").attr("onclick","getData.call(this,"+(pageInfo.pageNum-1)+")");
 	  doPagerAction(".pager li ul .pager-previous",!pageInfo.hasPreviousPage);
 	
 		createPagerDomElement(pageInfo.navigatepageNums);
 
-	  $(".pager li ul .pager-next a").attr("onclick","getDatas.call(this,"+(pageInfo.pageNum+1)+")");
+	  $(".pager li ul .pager-next a").attr("onclick","getData.call(this,"+(pageInfo.pageNum+1)+")");
 	  doPagerAction(".pager li ul .pager-next",!pageInfo.hasNextPage);
 
-	  $(".pager li ul .pager-last a").attr("onclick","getDatas.call(this,"+pageInfo.pages+")");
+	  $(".pager li ul .pager-last a").attr("onclick","getData.call(this,"+pageInfo.pages+")");
 	  doPagerAction(".pager li ul .pager-last",pageInfo.isLastPage);
-	  
-	  let pagenum=$(".form-control-pagenum").val();
-	  if(pagenum<=0){
-		pagenum=1;
-	  }else if(pagenum>pageInfo.pages){
-		pagenum=pageInfo.pages;
-	  }
-	  $(".pager li ul .pager-goto a").attr("onclick","getDatas.call(this,"+pagenum+")");
   }
 
   function createPagerDomElement(navigatepageNums) {
@@ -206,7 +212,7 @@
       `;
       }else{
     	return `
-      	<li><a href='javascript:;' onclick='getDatas.call(this,${place})'>${place}</a></li>
+      	<li><a href='javascript:;' onclick='getData.call(this,${place})'>${place}</a></li>
       `;
       }
     }).join("");
@@ -383,14 +389,16 @@
                             </a></li>
 
                         <li></li>
-                    </ul>
-
+                    </ul> <!-- goto page num -->
                     <ul class="pagination" style="margin-left: 20px;">
                         <li></li>
-                        <li class="pager-goto"><a href="javascript:;">
-                                <table style="background-color: rgba(255, 255, 255, 0.0);">
+                        <li class="pager-goto"><a href="javascript:;" style="height: 38px; vertical-align: middle;">Goto</a></li>
+                    </ul>
+
+                    <ul class="pagination">
+                        <li class="pager-goto-pagenum"><a href="javascript:;">
+                                <table>
                                     <tr>
-                                        <td style="padding-right: 5px;">Goto</td>
                                         <td><input type="text" class="form-control form-control-pagenum"
                                                 style="height: 26px;" size="4" /></td>
                                     </tr>
@@ -398,7 +406,6 @@
                             </a></li>
                         <li></li>
                     </ul>
-
                 </li>
             </ul>
         </div>

@@ -60,8 +60,7 @@
             return;
           }
         
-          pageNum=num;
-          
+          pageNum=parseInt(num);
           $.ajax({
               type : "get",
               dataType:"json",
@@ -154,6 +153,26 @@
 
 <!-- pager -->
 <script type="text/javascript">
+    $(function(){
+      let pagenumElement=$(".form-control-pagenum");
+      
+      pagenumElement.change(function(){
+    	  let pagenum=pagenumElement.val();
+    	  if(pagenum<=0){
+    		pagenum=1;
+    	  }else if(pagenum>pageInfo.pages){
+    		pagenum=pageInfo.pages;
+    	  }
+    	  
+    	  $(".pager li ul .pager-goto a").attr("onclick","getData.call(this,'"+pagenum+"')");
+      });
+      
+      pagenumElement.mousedown(function (){
+		pagenumElement.val("");
+	  });
+     
+    });
+
       //(延後載入)
       function doPager() {
           $(".pager li ul .pager-first a").attr("onclick","getData.call(this,"+1+")");
@@ -300,7 +319,8 @@
                 <div class="form-group">
                     <label for="flashcardHolder_name" class="col-lg-2 control-label">Flashcard Holder Name</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" id="flashcardHolder_name"  placeholder="Please select from list">
+                        <input type="text" class="form-control" id="flashcardHolder_name"
+                            placeholder="Please select from list">
                     </div>
                 </div>
 
@@ -339,6 +359,24 @@
                     <!-- 最末頁 -->
                     <li class="disabled??? pager-last"><a class="hrefDisabled???" href="javascript:;">&raquo; </a></li>
                     <li></li>
+                </ul> 
+                
+                <!-- goto page num -->
+                <ul class="pagination" style="margin-left: 20px;">
+                    <li></li>
+                    <li class="pager-goto"><a href="javascript:;" style="height: 38px; vertical-align: middle;">Goto</a></li>
+                </ul>
+
+                <ul class="pagination">
+                    <li class="pager-goto-pagenum"><a href="javascript:;">
+                            <table>
+                                <tr>
+                                    <td><input type="text" class="form-control form-control-pagenum"
+                                            style="height: 26px;" size="4" /></td>
+                                </tr>
+                            </table>
+                        </a></li>
+                    <li></li>
                 </ul>
             </li>
         </ul>
@@ -348,7 +386,7 @@
     <!-- list -->
     <div class="container" style="width: 50%;">
         <ul class="list-group myBadgeCursor">
-            <li class="list-group-item list-group-item-title"  ><span class="badge" onclick="">
+            <li class="list-group-item list-group-item-title"><span class="badge" onclick="">
                     <font size="5">totle</font>
                 </span>
                 <h3>Flashcard Holder</h3></li>
