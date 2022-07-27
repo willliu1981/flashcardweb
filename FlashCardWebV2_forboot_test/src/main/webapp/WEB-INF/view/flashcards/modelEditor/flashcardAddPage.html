@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>FLASH CARD</title>
+<link rel="stylesheet" href="css/bootstrap.min.cyborg.css">
+<link rel="stylesheet" href="webjars/bootstrap/3.4.1/css/bootstrap-theme.min.css">
+
+<script type="text/javascript" src="webjars/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="webjars/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style type="text/css">
+/* 用於list-group 下,改變游標圖示  */
+.myBadgeCursor>li>.badge {
+	cursor: pointer;
+}
+
+.badgeSpan { /* 用於 list badge (delete)*/
+	text-align: center;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+</style>
+
+<!-- global variable -->
+<script type="text/javascript">
+  const contextPath = "/FlashCardWebV2";
+  const flashcards = "flashcards";//base path
+  const models = "flashcards";//*** 修改這裡 
+  const model = "flashcard";//*** 修改這裡 
+  const quiz = "quiz";
+  var pageInfo;
+  var datas;
+  var pageNum = 1;
+</script>
+
+<!-- nav -->
+<script type="text/javascript">
+  $(document)
+	  .ready(
+		  function() {
+
+			$(".navbar-header a").attr("href", contextPath);
+
+			$(".navbar-collapse .modelManager a").attr("href",
+				contextPath + "/" + flashcards + "/fcsManager");
+
+			let mm_fc = $(".navbar-collapse ul .dropdown ul .modelManager-flashcard a");
+			mm_fc.attr("href", contextPath + "/" + flashcards + "/fcManager");
+			mm_fc.text = "字卡管理";
+
+			$(
+				".navbar-collapse ul .dropdown ul .modelManager-flashcardHolder a")
+				.attr("href", contextPath + "/" + flashcards + "/fhManager");
+
+			$(".navbar-collapse ul .dropdown ul .modelManager-holderData a")
+				.attr("href", contextPath + "/" + flashcards + "/hdManager");
+
+			$(".navbar-collapse ul .quizManager a").attr("href",
+				contextPath + "/" + quiz + "/quizManager");
+
+			//使作用中
+			/* doNavAction(".navbar-collapse ul .dropdown ul .modelManager-flashcard"); *///*** 修改這裡 
+		  });
+
+  //使作用中
+  function doNavAction(selector) {
+	$(selector).addClass("active");
+	$(selector + " a").addClass("hrefDisabled");
+  }
+</script>
+<!-- /nav -->
+
+<!-- 使向後端取得判是否已存在重複資料的延遲發送 -->
+<script type="text/javascript">
+  $(document).ready(function() {
+	let element = $("#term");
+	let orinColor = element.css("background-color");
+
+	$("#term").keyup(function() {
+	  let term = element.val();
+	  if (term == null || term == "" || term == undefined) {
+		term = null;
+	  }
+
+	  clearTimeout($(this).data('timer'));
+
+	  var timer = setTimeout(function() {
+		$.ajax({
+		  url : model + "/byTerm/" + term,
+		  dataType : 'JSON',
+		  success : function(resp) {
+			if (resp.isExist) {
+			  element.css({
+				"color" : "red"
+			  });
+			} else {
+			  element.css({
+				"color" : orinColor
+			  });
+			}
+		  }
+		});
+	  }, 500);
+
+	  $(this).data('timer', timer);
+	});
+  });
+</script>
+
+
+</head>
+<body>
+
+    <!-- 導航欄 -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="">FlashCard </a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active??? modelManager"><a class="hrefDisabled???" href="">字卡管理 </a></li>
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-expanded="false">
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li class="active??? modelManager-flashcard"><a class="hrefDisabled???" href="">Flashcard</a></li>
+
+                            <li class="active???? modelManager-flashcardHolder"><a class="hrefDisabled???" href="">FlashcardHolder</a></li>
+
+                            <li class="active??? modelManager-holderData"><a class="hrefDisabled???" href="">HolderData</a></li>
+                        </ul></li>
+                    <li class="active??? quizManager"><a class="hrefDisabled???" href="">測驗管理 </a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#" data-target="#myModal" data-toggle="modal">關於</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- /導航欄 -->
+
+    <!-- 巨屏 -->
+    <div class="jumbotron">
+        <div class="container">
+            <h1>FlashCard</h1>
+            <p>管理 Flashcard</p>
+            <!-- //*** 修改這裡  -->
+        </div>
+    </div>
+
+    <!-- form -->
+    <div class="container">
+        <form class="form-horizontal" action="flashcard" method="post">
+            <fieldset>
+                <legend>新增 Flashcard</legend>
+                <div class="form-group">
+                    <label for="term" class="col-lg-2 control-label">Term</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="term" name="term" placeholder="ex: apple">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="definition" class="col-lg-2 control-label">Definition</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="definition" name="definition" placeholder="ex: 蘋果">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <input type="hidden" name="id">
+                        <button type="reset" class="btn btn-default" style="color: black;">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+
+</body>
+</html>
