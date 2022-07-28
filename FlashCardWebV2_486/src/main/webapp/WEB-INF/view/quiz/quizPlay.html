@@ -423,25 +423,9 @@ play() 在208附近
 
 
     <script>
-        function Product(name, price) {
-          this.name = name;
-          this.price = price;
-          this.xxx=123;
-        }
-    
-        function Food(name, price) {
-          Product.call(this, name, price);
-          this.category = 'food';
-          this.fn1=function xxxx(){
-        	price*=2;
-        	return price;
-          };
-          return price;
-        }
-        
         function test(){
-         var fn=  new Food('cheese', 5);
-        	console.log(fn);    // 输出: cheese
+         console.log("xxx");
+         console.log(3|'');
           
         }
     

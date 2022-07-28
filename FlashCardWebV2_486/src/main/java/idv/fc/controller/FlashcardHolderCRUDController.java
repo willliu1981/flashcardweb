@@ -56,7 +56,6 @@ public class FlashcardHolderCRUDController extends BaseController {
 				+ "flashcardHolderEditPage.html";
 	}
 
-
 	/*
 	 * process 
 	 */
@@ -100,6 +99,19 @@ public class FlashcardHolderCRUDController extends BaseController {
 			flashcardHolder.setFcId(null);
 		}
 		flashcardHolderService.addNew(flashcardHolder);
+
+		return "redirect:/" + WEB_FLASHCARDS + "/fhManager";
+	}
+
+	//@RequestMapping(value = FLASHCARDHOLDER, method = RequestMethod.POST)
+	public String addOld(String[] names, String[] fcids) {
+
+		for (int i = 0; i < fcids.length; i++) {
+			FlashcardHolder holder = new FlashcardHolder();
+			holder.setName(names[i]);
+			holder.setFcId(Integer.parseInt(fcids[i]));
+			flashcardHolderService.addNew(holder);
+		}
 
 		return "redirect:/" + WEB_FLASHCARDS + "/fhManager";
 	}
@@ -166,7 +178,7 @@ public class FlashcardHolderCRUDController extends BaseController {
 
 		return jsonMap;
 	}
-	
+
 	/**
 	 * flashcardHolderEditPage 回顯data
 	 */
@@ -175,8 +187,8 @@ public class FlashcardHolderCRUDController extends BaseController {
 	@ResponseBody
 	public Map<String, Object> getById(HttpSession session) {
 		Map<String, Object> map = new HashMap<>();
-		FlashcardHolderDTO result = this.flashcardHolderService
-				.getDTOById(session.getAttribute("flashcardHolderEditId").toString());
+		FlashcardHolderDTO result = this.flashcardHolderService.getDTOById(
+				session.getAttribute("flashcardHolderEditId").toString());
 
 		map.put("data", result);
 

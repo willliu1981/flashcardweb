@@ -19,6 +19,16 @@
 	padding-left: 20px;
 	padding-right: 20px;
 }
+
+.listAdd {
+	visibility: visible;
+	background-color: orange;
+	cursor: copy;
+}
+
+.removeListAdd {
+	visibility: hidden;
+}
 </style>
 
 <!-- global variable -->
@@ -28,14 +38,12 @@
   const models = "flashcardHolders";//*** 修改這裡 
   const model = "flashcardHolder";//*** 修改這裡 
   const quiz = "quiz";
-  listModels = "flashcards";//*** 修改這裡 
+  const listModels = "flashcards";//*** 修改這裡 
   var pageInfo;
   var data;
   var citedNums;
   var pageNum = 1;
   var id;
-  var listSelectedId;
-  var listSelectedValue;
 </script>
 
 <!-- init -->
@@ -97,10 +105,10 @@
             let nums=  citedNums[i];
             
           return `
-          <li class="list-group-item"><a href="javascript:;" class="list-group-item"
+          <li class="list-group-item"><a href="javascript:;" class="list-group-item list-item"
           onclick="doSelectd.call(this)" data-id="${place.id}" 
             data-value="${place.value}" ><!-- //***selected-list  -->
-              <span class="badge badge-add" onclick="listAdd.call(this)" style="visibility:hidden;background-color:orange;cursor:copy">
+              <span class="badge badge-add removeListAdd " onclick="listAdd.call(this)"  >
                   <font size="5">+</font>
               </span>
               <span class="badge" onclick="">
@@ -115,39 +123,53 @@
       }
       
       function clearListAdd(){
-    	$(".badge-add").css("visibility","hidden");
-    	$(".badge-add").removeClass("isAdd");
+    	$(".badge-add").remove("listAdd");
+    	$(".badge-add").hasClass("removeListAdd");
       }
+      
+      function switchListAdd(_this){
+    	if(_this.find(".badge-add").hasClass("listAdd")){
+    	  _this.find(".badge-add").removeClass("listAdd");
+    	  _this.find(".badge-add").addClass("removeListAdd");
+    	}else{
+    	  _this.find(".badge-add").removeClass("removeListAdd");
+    	  _this.find(".badge-add").addClass("listAdd");
+    	}
+      } 
     
       //selected list item  //***selected-list //*** 修改這裡
       function doSelectd(){
-    	listSelectedId=$(this).attr('data-id');
-    	listSelectedValue=$(this).attr('data-value');
-        
-        clearListAdd();
-        $(this).find(".badge-add").css({"visibility":"visible"});
-        $(this).find(".badge-add").addClass("isAdd","");
-        $("#name").val(selectedValue);
-        $("#flashcard_id").val(listSelectedId);
-        $("#flashcard_term").val(listSelectedValue);
+    	let id=$(this).attr('data-id');
+    	let value=$(this).attr('data-value');
+    	
+        switchListAdd($(this));
+        $("#name").val(value);
+        $("#flashcard_id").val(id);
+        $("#flashcard_term").val(value);
       }
       
+      
       function listAdd(){
-    	if(!$(this).hasClass("isAdd")){
-    	  return;
-    	}
-    	//*** 修改這裡
-    	$.ajax({
-    	  type:"post",
-    	  url:"flashcardHolder",//*** 修改這裡
-    	  data:{name:listSelectedValue,fcId:listSelectedId},
-    	  success:function(){
-    		getData(pageNum);
-    	  },
-    	  error:function(err){
-    		console.log("listAdd error :"+err);
-    	  }
-    	});
+       	$(".listAdd").each(function (){
+       		clearListAdd();
+       	  	
+       		let parent=$(this).parent();
+       		let value=parent.attr('data-value');
+       		let id=parent.attr('data-id');
+       		
+        	//*** 修改這裡
+        	$.ajax({
+        	  type:"post",
+        	  url:"flashcardHolder",//*** 修改這裡
+        	  data:{name:value,fcId:id},
+        	  success:function(){
+        		getData(pageNum);
+        	  },
+        	  error:function(err){
+        		console.log("listAdd error :"+err);
+        	  }
+        	});
+      	});
       }
       
 </script>
@@ -350,26 +372,28 @@
             <li>
                 <ul class="pagination">
                     <li></li>
+
                     <!-- 首頁 -->
-                    <li class="disabled??? pager-first"><a class="hrefDisabled???" href="javascript:;">&laquo;
-                        </a></li>
+                    <li class="disabled??? pager-first"><a class="hrefDisabled???" href="javascript:;"
+                            style="width: 55px;">&laquo;</a></li>
 
                     <!-- 上一頁 -->
-                    <li class="disabled??? pager-previous"><a class="hrefDisabled???" href="javascript:;">Previous
-                        </a></li>
+                    <li class="disabled??? pager-previous"><a class="hrefDisabled???" href="javascript:;"
+                            style="width: 55px;">&lsaquo;</a></li>
 
                     <!-- 中間頁數 -->
                     <li class="pager-pageNum-replaced"></li>
 
                     <!-- 下一頁 -->
-                    <li class="disabled??? pager-next"><a class="hrefDisabled???" href="javascript:;">Next </a></li>
+                    <li class="disabled??? pager-next"><a class="hrefDisabled???" href="javascript:;"
+                            style="width: 55px;">&rsaquo;</a></li>
 
                     <!-- 最末頁 -->
-                    <li class="disabled??? pager-last"><a class="hrefDisabled???" href="javascript:;">&raquo; </a></li>
+                    <li class="disabled??? pager-last"><a class="hrefDisabled???" href="javascript:;"
+                            style="width: 55px;">&raquo;</a></li>
+
                     <li></li>
-                </ul> 
-                
-                <!-- goto page num -->
+                </ul> <!-- goto page num -->
                 <ul class="pagination" style="margin-left: 20px;">
                     <li></li>
                     <li class="pager-goto"><a href="javascript:;" style="height: 38px; vertical-align: middle;">Goto</a></li>

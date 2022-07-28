@@ -1,6 +1,8 @@
 
 進度(需求):
 
+.	edit page : 從清單加入資料時,提示至少已有一筆已加入
+
 .   (重要)增加search功能,
 		flashcard holder 若沒有flashcard id, holder data 應不允加入
 		
@@ -8,7 +10,6 @@
 
 .	當 flashcard Holder 的 fcid 有重複時,flashcardHolder name 自動新增別名
 
-.	edit page : 從清單加入資料時,提示至少已有一筆已加入
 
 .	flashcard holder ,一鍵加入新的單詞
 
