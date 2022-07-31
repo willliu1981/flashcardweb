@@ -26,6 +26,15 @@
 		order by term
 	</select>
 
+	<select id="countByTermUsingLike" resultType="Integer">
+		select count(*) from flashcard
+		<trim prefix="where">
+			<if test="term != null and term !=''">
+				term like "%"#{pattern}"%"
+			</if>
+		</trim>
+	</select>
+
 	<select id="countByTermUsingLikeLeadByPattern" resultType="Integer">
 		select count(*) from flashcard
 		<trim prefix="where">

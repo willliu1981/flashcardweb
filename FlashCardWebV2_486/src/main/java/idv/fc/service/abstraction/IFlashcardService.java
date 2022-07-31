@@ -13,8 +13,9 @@ public interface IFlashcardService extends IService<Flashcard> {
 
 	Flashcard getByTerm(String term);
 
-	SimplePageInfoDTO getByTermUsingLikeCondition(Page<Object> startPage, int maxNavPageNums, String pattern);
+	SimplePageInfoDTO getByTermUsingLikeCondition(Page<Object> startPage,
+			int maxNavPageNums, String pattern);
 
-	Integer countByTermUsingLikeConditionLeadByPattern(String pattern);
+	Integer getSearchPageNum(int pageSize, String pattern);
 
 }

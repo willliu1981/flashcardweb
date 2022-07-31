@@ -17,5 +17,8 @@ public interface FlashcardDao extends Dao<Flashcard> {
 
 	public Integer countByTermUsingLikeLeadByPattern(String pattern)
 			throws SQLException;
+	
+	public Integer countByTermUsingLike(String pattern)
+			throws SQLException;
 
 }

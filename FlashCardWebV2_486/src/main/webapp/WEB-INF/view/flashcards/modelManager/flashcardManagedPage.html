@@ -34,6 +34,7 @@
   var datas;
   var pageNum=1;
   var searchResult=[];
+  var searchMod=0;//0:no search ; 1:search
   
 </script>
 
@@ -50,12 +51,34 @@
 	  if($(this).hasClass('hrefDisabled')){
 		return;
 	  }
+	  
+	  let pattern=$("#searchInput").val();
+	 if( pattern){
+	  searchMod=1;
+	 }else{
+	  searchMod=0;
+	 }
+	 
  
-	  pageNum=parseInt(num);
+	  num=parseInt(num);
+	  let url;
+	  if(searchMod==1){
+		//search
+		if(num>=0){
+			url=contextPath+"/"+model+"/like/"+pattern+"/num";
+		}else{
+		  	url=contextPath+"/"+model+"/like/"+pattern;
+		}
+	  }else{
+		//no search
+		url =contextPath + "/" + models+"/"+num;
+	  }
+	  
+	  pageNum=num;
 	  $.ajax({
 		  type : "get",
 		  dataType:"json",
-		  url : contextPath + "/" + models+"/"+pageNum, 
+		  url : url, 
 		  success : function(resp) {
 			data = [];
 			pageInfo = resp.pageInfo;
@@ -64,7 +87,7 @@
 			}
 			createListDomElement(data);
 
-
+			
 			//處理分頁
 			doPager();
 		  },
@@ -113,6 +136,7 @@
     }); 
     
     
+    //search
     $("#searchButton").click(function (){
       let pattern=$("#searchInput").val();
       if(pattern ==null || pattern==''){
@@ -120,27 +144,7 @@
     	return;
       }
       
-      $.ajax({
-    	type:"get",
-    	dataType:"json",
-    	url:contextPath+"/"+model+"/like/"+pattern+"/4",
-    	success:function(data){
-    	  searchResult=[];
-    	  let pegeInfo=data.pegeInfo;
-    	  
-    		console.log('xxx xx '+pegeInfo.searchPageNum);
-    	   for(i=0;i<pegeInfo.list.length;i++){
-    		searchResult.push(pegeInfo.list[i]);
-    		console.log('xxx x '+searchResult[i].value);
-    	  } 
-    	  
-    	  
-    	  
-    	},
-    	error:function(err){
-    	  alert("error:"+err)
-    	}
-      });
+      getData(-1);
     });
   });
 </script>
@@ -205,6 +209,7 @@
     		pagenum=pageInfo.pages;
     	  }
     	  
+    	  //前往指定page num
     	  $(".pager li ul .pager-goto a").attr("onclick","getData.call(this,'"+pagenum+"')");
 	  });
 	  

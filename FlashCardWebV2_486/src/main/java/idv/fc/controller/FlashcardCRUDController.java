@@ -26,8 +26,8 @@ import idv.fc.service.abstraction.IFlashcardService;
 
 @Controller
 public class FlashcardCRUDController extends BaseController {
-	private static final Integer PAGE_HELPER_MAX_PAGE_NUMBER = 5;
-	private static final Integer PAGE_INFO_MAX_NAV_PAGE_NUMBER = 5;
+	private static final Integer PAGESIZE = 5;
+	private static final Integer NAVIGATE_PAGES = 5;
 	protected final String WEB_FLASHCARDS = "flashcards";//web base page
 	protected final String PAGE_FLASHCARDS = "flashcards";//jsp/html base page
 	protected final String FLASHCARD = "flashcard";//crud path
@@ -79,11 +79,11 @@ public class FlashcardCRUDController extends BaseController {
 		if (pageNum != null && !pageNum.equals("")) {
 			intPageNumber = Integer.valueOf(pageNum);
 		}
-		PageHelper.startPage(intPageNumber, PAGE_HELPER_MAX_PAGE_NUMBER);
+		PageHelper.startPage(intPageNumber, PAGESIZE);
 		List<Flashcard> queryResult = flashcardService.getAll();
 
 		PageInfo<Flashcard> pageInfo = new PageInfo<>(queryResult,
-				PAGE_INFO_MAX_NAV_PAGE_NUMBER);
+				NAVIGATE_PAGES);
 
 		jsonMap.put("pageInfo", pageInfo);
 
@@ -142,12 +142,10 @@ public class FlashcardCRUDController extends BaseController {
 			intPageNumber = Integer.valueOf(pageNum);
 		}
 
-		Page<Object> startPage = PageHelper.startPage(intPageNumber,
-				PAGE_HELPER_MAX_PAGE_NUMBER);
+		Page<Object> startPage = PageHelper.startPage(intPageNumber, PAGESIZE);
 
 		SimplePageInfoDTO allWithSimplePageInfoDTO = flashcardService
-				.getAllWithSimplePageInfoDTO(startPage,
-						PAGE_INFO_MAX_NAV_PAGE_NUMBER);
+				.getAllWithSimplePageInfoDTO(startPage, NAVIGATE_PAGES);
 
 		jsonMap.put("pageInfo", allWithSimplePageInfoDTO);
 
@@ -203,6 +201,22 @@ public class FlashcardCRUDController extends BaseController {
 
 	//query by like condition
 	@RequestMapping(value = FLASHCARD
+			+ "/like/{pattern}", produces = "application/json", method = RequestMethod.GET)
+	@ResponseBody
+	public HashMap<String, Object> queryByTermOrDefinitionUsingLikeCondition(
+			@PathVariable("pattern") String pattern) {
+
+		Integer searchPageNum = this.flashcardService.getSearchPageNum(PAGESIZE,
+				pattern);
+		HashMap<String, Object> map = this
+				.queryByTermOrDefinitionUsingLikeCondition(pattern,
+						searchPageNum);
+
+		return map;
+	}
+
+	//query by like condition (pageNum)
+	@RequestMapping(value = FLASHCARD
 			+ "/like/{pattern}/{pageNum}", produces = "application/json", method = RequestMethod.GET)
 	@ResponseBody
 	public HashMap<String, Object> queryByTermOrDefinitionUsingLikeCondition(
@@ -215,25 +229,11 @@ public class FlashcardCRUDController extends BaseController {
 			intPageNumber = Integer.valueOf(pageNum);
 		}
 
-		Integer countLeadByPattern = this.flashcardService
-				.countByTermUsingLikeConditionLeadByPattern(pattern);
-
-		Page<Object> startPage = PageHelper.startPage(intPageNumber,
-				PAGE_HELPER_MAX_PAGE_NUMBER);
+		Page<Object> startPage = PageHelper.startPage(intPageNumber, PAGESIZE);
 
 		SimplePageInfoDTO pageInfo = this.flashcardService
-				.getByTermUsingLikeCondition(startPage,
-						PAGE_INFO_MAX_NAV_PAGE_NUMBER, pattern);
-
-		//set searchPageNum
-		int total = (int) startPage.getTotal();
-		int pageNumOfSearchResults = (total - countLeadByPattern - 1)
-				/ startPage.getPageSize();
-
-		Debug.test(new CC() {
-		}, total + "-" + countLeadByPattern, pageNumOfSearchResults);
-
-		pageInfo.setSearchPageNum(pageNumOfSearchResults);
+				.getByTermUsingLikeCondition(startPage, NAVIGATE_PAGES,
+						pattern);
 
 		jsonMap.put("pegeInfo", pageInfo);
 

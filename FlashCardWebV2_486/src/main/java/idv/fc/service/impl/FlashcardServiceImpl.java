@@ -110,18 +110,7 @@ public class FlashcardServiceImpl implements IFlashcardService {
 		return dto;
 	}
 
-	@Override
-	public Integer countByTermUsingLikeConditionLeadByPattern(String pattern) {
-		Integer count = null;
 
-		try {
-			count = this.flashcardDao
-					.countByTermUsingLikeLeadByPattern(pattern);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return count;
-	}
 
 	@Override
 	public SimplePageInfoDTO getByTermUsingLikeCondition(Page<Object> startPage,
@@ -150,6 +139,22 @@ public class FlashcardServiceImpl implements IFlashcardService {
 		dto.setNavigatepageNums(pageInfo.getNavigatepageNums());
 
 		return dto;
+	}
+
+	@Override
+	public Integer getSearchPageNum(int pageSize, String pattern) {
+		int total, totalOfLeadBy, pageNum = 0;
+		try {
+			total = this.flashcardDao.countByTermUsingLike(pattern);
+			totalOfLeadBy = this.flashcardDao
+					.countByTermUsingLikeLeadByPattern(pattern);
+
+			pageNum = (total - totalOfLeadBy - 1) / pageSize;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return pageNum;
 	}
 
 }
