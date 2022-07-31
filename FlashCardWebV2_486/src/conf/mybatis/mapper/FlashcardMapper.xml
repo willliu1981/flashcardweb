@@ -16,18 +16,24 @@
 		select * from flashcard where term = #{term}
 	</select>
 
-	<select id="selectByTermOrDefinitionUsingLike" resultType="Flashcard">
+	<select id="selectByTermUsingLike" resultType="Flashcard">
 		select * from flashcard
-		<trim prefix="where" prefixOverrides="or">
+		<trim prefix="where">
 			<if test="term != null and term !=''">
 				term like "%"#{pattern}"%"
 			</if>
-			<if test="definition != null and definition !=''">
-				or definition like "%"#{pattern}"%"
-			</if>
 		</trim>
 		order by term
+	</select>
 
+	<select id="countByTermUsingLikeLeadByPattern" resultType="Integer">
+		select count(*) from flashcard
+		<trim prefix="where">
+			<if test="term != null and term !=''">
+				term like "%"#{pattern}"%"
+				and term &gt; #{pattern}
+			</if>
+		</trim>
 	</select>
 
 	<insert id="create" parameterType="Flashcard">
@@ -46,5 +52,6 @@
 	<delete id="delete">
 		delete from flashcard where id = #{id};
 	</delete>
+
 
 </mapper>

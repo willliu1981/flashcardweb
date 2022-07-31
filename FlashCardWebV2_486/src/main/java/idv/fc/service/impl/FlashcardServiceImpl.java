@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 
+import idv.CC;
+import idv.debug.Debug;
 import idv.fc.dao.itf.FlashcardDao;
 import idv.fc.dao.itf.FlashcardHolderDao;
 import idv.fc.model.Flashcard;
@@ -109,13 +111,25 @@ public class FlashcardServiceImpl implements IFlashcardService {
 	}
 
 	@Override
-	public SimplePageInfoDTO getByTermOrDefinitionUsingLikeCondition(
-			Page<Object> startPage, int maxNavPageNums, String pattern) {
+	public Integer countByTermUsingLikeConditionLeadByPattern(String pattern) {
+		Integer count = null;
+
+		try {
+			count = this.flashcardDao
+					.countByTermUsingLikeLeadByPattern(pattern);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+
+	@Override
+	public SimplePageInfoDTO getByTermUsingLikeCondition(Page<Object> startPage,
+			int maxNavPageNums, String pattern) {
 		List<Flashcard> result = new ArrayList<>();
 
 		try {
-			result = this.flashcardDao
-					.selectByTermOrDefinitionUsingLike(pattern);
+			result = this.flashcardDao.selectByTermUsingLike(pattern);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

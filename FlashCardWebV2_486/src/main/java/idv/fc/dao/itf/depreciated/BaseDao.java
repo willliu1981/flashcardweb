@@ -1,4 +1,4 @@
-package idv.fc.dao.itf;
+package idv.fc.dao.itf.depreciated;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.List;
 
 import javax.sql.DataSource;
+
+import idv.fc.dao.itf.Dao;
 
 public abstract class BaseDao<T> implements Dao<T> {
 	private DataSource dataSource;

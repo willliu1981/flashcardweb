@@ -13,6 +13,8 @@ public interface IFlashcardService extends IService<Flashcard> {
 
 	Flashcard getByTerm(String term);
 
-	SimplePageInfoDTO getByTermOrDefinitionUsingLikeCondition(Page<Object> startPage, int maxNavPageNums, String pattern);
+	SimplePageInfoDTO getByTermUsingLikeCondition(Page<Object> startPage, int maxNavPageNums, String pattern);
+
+	Integer countByTermUsingLikeConditionLeadByPattern(String pattern);
 
 }

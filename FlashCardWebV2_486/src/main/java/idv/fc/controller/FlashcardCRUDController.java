@@ -215,16 +215,30 @@ public class FlashcardCRUDController extends BaseController {
 			intPageNumber = Integer.valueOf(pageNum);
 		}
 
+		Integer countLeadByPattern = this.flashcardService
+				.countByTermUsingLikeConditionLeadByPattern(pattern);
+
 		Page<Object> startPage = PageHelper.startPage(intPageNumber,
 				PAGE_HELPER_MAX_PAGE_NUMBER);
 
-		SimplePageInfoDTO pegeInfo = this.flashcardService
-				.getByTermOrDefinitionUsingLikeCondition(startPage,
+		SimplePageInfoDTO pageInfo = this.flashcardService
+				.getByTermUsingLikeCondition(startPage,
 						PAGE_INFO_MAX_NAV_PAGE_NUMBER, pattern);
-		jsonMap.put("pegeInfo", pegeInfo);
 
-		System.out.println("xxxx "+pegeInfo);
-		
+		//set searchPageNum
+		int total = (int) startPage.getTotal();
+		int pageNumOfSearchResults = (total - countLeadByPattern - 1)
+				/ startPage.getPageSize();
+
+		Debug.test(new CC() {
+		}, total + "-" + countLeadByPattern, pageNumOfSearchResults);
+
+		pageInfo.setSearchPageNum(pageNumOfSearchResults);
+
+		jsonMap.put("pegeInfo", pageInfo);
+
+		System.out.println("xxxx " + pageInfo);
+
 		return jsonMap;
 	}
 
