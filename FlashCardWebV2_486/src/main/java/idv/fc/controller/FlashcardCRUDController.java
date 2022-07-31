@@ -191,9 +191,6 @@ public class FlashcardCRUDController extends BaseController {
 			@PathVariable("term") String term) {
 		HashMap<String, Object> jsonMap = new HashMap<>();
 
-		Debug.test(new CC() {
-		}, term);
-
 		Flashcard byTerm = this.flashcardService.getByTerm(term);
 		if (byTerm != null) {
 			jsonMap.put("isExist", true);
@@ -201,6 +198,33 @@ public class FlashcardCRUDController extends BaseController {
 			jsonMap.put("isExist", false);
 		}
 
+		return jsonMap;
+	}
+
+	//query by like condition
+	@RequestMapping(value = FLASHCARD
+			+ "/like/{pattern}/{pageNum}", produces = "application/json", method = RequestMethod.GET)
+	@ResponseBody
+	public HashMap<String, Object> queryByTermOrDefinitionUsingLikeCondition(
+			@PathVariable("pattern") String pattern,
+			@PathVariable("pageNum") Integer pageNum) {
+		HashMap<String, Object> jsonMap = new HashMap<>();
+
+		int intPageNumber = 1;//default pageNumber
+		if (pageNum != null && !pageNum.equals("")) {
+			intPageNumber = Integer.valueOf(pageNum);
+		}
+
+		Page<Object> startPage = PageHelper.startPage(intPageNumber,
+				PAGE_HELPER_MAX_PAGE_NUMBER);
+
+		SimplePageInfoDTO pegeInfo = this.flashcardService
+				.getByTermOrDefinitionUsingLikeCondition(startPage,
+						PAGE_INFO_MAX_NAV_PAGE_NUMBER, pattern);
+		jsonMap.put("pegeInfo", pegeInfo);
+
+		System.out.println("xxxx "+pegeInfo);
+		
 		return jsonMap;
 	}
 

@@ -1,6 +1,7 @@
 package idv.fc.service.impl;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -97,6 +98,36 @@ public class FlashcardServiceImpl implements IFlashcardService {
 		dto.setPageNum(pageInfo.getPageNum());
 		dto.setPages(pageInfo.getPages());
 		dto.setCitedNums(citedNumsArray);
+
+		List<SimpleVO> collect = pageInfo.getList().stream()
+				.map(x -> new SimpleVO(x.getId().toString(), x.getTerm()))
+				.collect(Collectors.toList());
+		dto.setList(collect);
+		dto.setNavigatepageNums(pageInfo.getNavigatepageNums());
+
+		return dto;
+	}
+
+	@Override
+	public SimplePageInfoDTO getByTermOrDefinitionUsingLikeCondition(
+			Page<Object> startPage, int maxNavPageNums, String pattern) {
+		List<Flashcard> result = new ArrayList<>();
+
+		try {
+			result = this.flashcardDao
+					.selectByTermOrDefinitionUsingLike(pattern);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		PageInfo<Flashcard> pageInfo = new PageInfo<>(result, maxNavPageNums);
+
+		SimplePageInfoDTO dto = new SimplePageInfoDTO();
+		dto.setHasNextPage(pageInfo.isHasNextPage());
+		dto.setHasPreviouPage(pageInfo.isHasPreviousPage());
+		dto.setIsLastPage(pageInfo.isIsLastPage());
+		dto.setPageNum(pageInfo.getPageNum());
+		dto.setPages(pageInfo.getPages());
 
 		List<SimpleVO> collect = pageInfo.getList().stream()
 				.map(x -> new SimpleVO(x.getId().toString(), x.getTerm()))

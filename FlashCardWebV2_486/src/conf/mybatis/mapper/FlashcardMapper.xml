@@ -11,9 +11,23 @@
 	<select id="selectById" resultType="Flashcard">
 		select * from flashcard where id = #{id}
 	</select>
-	
+
 	<select id="selectByTerm" resultType="Flashcard">
 		select * from flashcard where term = #{term}
+	</select>
+
+	<select id="selectByTermOrDefinitionUsingLike" resultType="Flashcard">
+		select * from flashcard
+		<trim prefix="where" prefixOverrides="or">
+			<if test="term != null and term !=''">
+				term like "%"#{pattern}"%"
+			</if>
+			<if test="definition != null and definition !=''">
+				or definition like "%"#{pattern}"%"
+			</if>
+		</trim>
+		order by term
+
 	</select>
 
 	<insert id="create" parameterType="Flashcard">

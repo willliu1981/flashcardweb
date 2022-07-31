@@ -1,10 +1,13 @@
 
 進度(需求):
 
-.	edit page : 從清單加入資料時,提示至少已有一筆已加入
-
 .   (重要)增加search功能,
 		flashcard holder 若沒有flashcard id, holder data 應不允加入
+
+.	edit page : 從清單加入資料時,提示至少已有一筆已加入
+
+.   model manager list 顯示擁有資料筆數
+
 		
 .	flashcard add/update : 當term為null 時的處理
 

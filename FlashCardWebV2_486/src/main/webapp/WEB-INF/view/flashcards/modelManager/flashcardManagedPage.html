@@ -33,6 +33,7 @@
   var pageInfo;
   var datas;
   var pageNum=1;
+  var searchResult=[];
   
 </script>
 
@@ -110,6 +111,36 @@
     $(".list-group .list-group-item .badge-add").click(function(){
       window.location.href = contextPath + "/" + model;
     }); 
+    
+    
+    $("#searchButton").click(function (){
+      let pattern=$("#searchInput").val();
+      if(pattern ==null || pattern==''){
+    	alert('搜索資料是空的');
+    	return;
+      }
+      
+      $.ajax({
+    	type:"get",
+    	dataType:"json",
+    	url:contextPath+"/"+model+"/like/"+pattern+"/5",
+    	success:function(data){
+    	  searchResult=[];
+    	  let pegeInfo=data.pegeInfo;
+    	  
+    	   for(i=0;i<pegeInfo.list.length;i++){
+    		searchResult.push(pegeInfo.list[i]);
+    		console.log('xxx x '+searchResult[i].value);
+    	  } 
+    	  
+    	  
+    	  
+    	},
+    	error:function(err){
+    	  alert("error:"+err)
+    	}
+      });
+    });
   });
 </script>
 
@@ -333,17 +364,14 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
                     <form class="navbar-form navbar-left" role="search">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search">
+                            <input id="searchInput" type="text" class="form-control" placeholder="Search">
                         </div>
-                        <button type="submit" class="btn btn-default">Search</button>
+                        <button id="searchButton" type="button" class="btn btn-default ">Search</button>
                     </form>
 
-                    <!-- <a class="navbar-brand" href="#">Search</a> -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><span class="badge badge-add" onclick="">
-                                <font size="5">ADD</font>
-                            </span></li>
-                    </ul>
+                    <!--  <ul class="nav navbar-nav navbar-right">
+                        <li><a href="javascript:;">ADD</a></li>
+                    </ul> -->
                 </div>
             </div>
         </nav>
