@@ -83,14 +83,10 @@
 			data = [];
 			pageInfo = resp.pageInfo;
 			
-			console.log('xxxxxx21 '+pageInfo.list.length);
-			
 			for (i = 0; i < pageInfo.list.length; i++) {
 			  data.push(pageInfo.list[i]);
 			}
 			pageNum=pageInfo.pageNum;
-			
-			console.log('xxxxxx22 '+pageNum);
 			
 			createListDomElement(data);
 
@@ -106,9 +102,15 @@
 	  
 	//創建list item
 	  function createListDomElement(ds) {
-	  	$(".list-group-item-title").next().addClass("list-group-item-replaced");
-	  	$(".list-group-item-replaced").nextUntil(".list-group-item-footer").remove(); 
+	    let elementReplaced=$(".list-group-item-title").next();
+	    elementReplaced.addClass("list-group-item-replaced");
+	    elementReplaced.hide();
+	    elementReplaced.nextUntil(".list-group-item-footer").remove(); 
 	  
+	  	if(ds.length==0){
+	  	  return ;
+	  	}
+	  	
 	    const domElements = ds.map( place => {
 	      return `
 	      <li class="list-group-item"><a href="#" class="list-group-item">
