@@ -82,8 +82,8 @@ public class FlashcardServiceImpl implements IFlashcardService {
 	}
 
 	@Override
-	public SimplePageInfoDTO getAllWithSimplePageInfoDTO(Page<Object> startPage,
-			int maxNavPageNums) {
+	public SimplePageInfoDTO getAllWithSimplePageInfoDTORequireCitedNumsArray(
+			Page<Object> startPage, int maxNavPageNums) {
 
 		List<Flashcard> all = this.getAll();
 
@@ -102,7 +102,8 @@ public class FlashcardServiceImpl implements IFlashcardService {
 		dto.setCitedNums(citedNumsArray);
 
 		List<SimpleVO> collect = pageInfo.getList().stream()
-				.map(x -> new SimpleVO(x.getId().toString(), x.getTerm()))
+				.map(x -> new SimpleVO(x.getId().toString(),
+						new String[] { x.getTerm() }))
 				.collect(Collectors.toList());
 		dto.setList(collect);
 		dto.setNavigatepageNums(pageInfo.getNavigatepageNums());
@@ -110,7 +111,31 @@ public class FlashcardServiceImpl implements IFlashcardService {
 		return dto;
 	}
 
+	//no require citedNumsArray
+	@Override
+	public SimplePageInfoDTO getAllWithSimplePageInfoDTO(Page<Object> startPage,
+			int maxNavPageNums) {
 
+		List<Flashcard> all = this.getAll();
+
+		PageInfo<Flashcard> pageInfo = new PageInfo<>(all, maxNavPageNums);
+
+		SimplePageInfoDTO dto = new SimplePageInfoDTO();
+		dto.setHasNextPage(pageInfo.isHasNextPage());
+		dto.setHasPreviouPage(pageInfo.isHasPreviousPage());
+		dto.setIsLastPage(pageInfo.isIsLastPage());
+		dto.setPageNum(pageInfo.getPageNum());
+		dto.setPages(pageInfo.getPages());
+
+		List<SimpleVO> collect = pageInfo.getList().stream()
+				.map(x -> new SimpleVO(x.getId().toString(),
+						new String[] { x.getTerm(), x.getDefinition() }))
+				.collect(Collectors.toList());
+		dto.setList(collect);
+		dto.setNavigatepageNums(pageInfo.getNavigatepageNums());
+
+		return dto;
+	}
 
 	@Override
 	public SimplePageInfoDTO getByTermUsingLikeCondition(Page<Object> startPage,
@@ -133,7 +158,8 @@ public class FlashcardServiceImpl implements IFlashcardService {
 		dto.setPages(pageInfo.getPages());
 
 		List<SimpleVO> collect = pageInfo.getList().stream()
-				.map(x -> new SimpleVO(x.getId().toString(), x.getTerm()))
+				.map(x -> new SimpleVO(x.getId().toString(),
+						new String[] { x.getTerm(), x.getDefinition() }))
 				.collect(Collectors.toList());
 		dto.setList(collect);
 		dto.setNavigatepageNums(pageInfo.getNavigatepageNums());
@@ -143,17 +169,26 @@ public class FlashcardServiceImpl implements IFlashcardService {
 
 	@Override
 	public Integer getSearchPageNum(int pageSize, String pattern) {
-		int total, totalOfLeadBy, pageNum = 0;
+		int total = 0, totalOfLeadBy = 0, pageNum = 0;
 		try {
 			total = this.flashcardDao.countByTermUsingLike(pattern);
 			totalOfLeadBy = this.flashcardDao
 					.countByTermUsingLikeLeadByPattern(pattern);
 
-			pageNum = (total - totalOfLeadBy - 1) / pageSize;
+			/*
+			 * 原始應為 total - totalOfLeadBy + 1 - 1
+			 * +1 表示:前面為不包含,因此+1 即為下一筆資料
+			 * -1 表示:剛好整除時會進行+1,因此-1可防止這個問題
+			 * 
+			 * 補充: pageSize + 1 的+1: 因為 navigate的第一頁從1開始
+			 */
+			pageNum = (total - totalOfLeadBy) / pageSize + 1;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
+		Debug.test(new CC() {
+		}, "page num " + total, totalOfLeadBy);
 		return pageNum;
 	}
 

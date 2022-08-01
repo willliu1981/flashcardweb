@@ -35,7 +35,7 @@ public class FlashcardHolderServiceImpl implements IFlashcardHolderService {
 	public List<FlashcardHolder> getAll() {
 		return flashcardHolderDao.selectAll();
 	}
-	
+
 	@Override
 	public FlashcardHolderDTO getDTOById(String id) {
 		return flashcardHolderDao.selectByIdJoinFc(id);
@@ -105,7 +105,8 @@ public class FlashcardHolderServiceImpl implements IFlashcardHolderService {
 		dto.setCitedNums(citedNumsArray);
 
 		List<SimpleVO> collect = pageInfo.getList().stream()
-				.map(x -> new SimpleVO(x.getId().toString(), x.getName()))
+				.map(x -> new SimpleVO(x.getId().toString(),
+						new String[] { x.getName() }))
 				.collect(Collectors.toList());
 		dto.setList(collect);
 		dto.setNavigatepageNums(pageInfo.getNavigatepageNums());

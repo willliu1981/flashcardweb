@@ -79,13 +79,17 @@ public class FlashcardCRUDController extends BaseController {
 		if (pageNum != null && !pageNum.equals("")) {
 			intPageNumber = Integer.valueOf(pageNum);
 		}
-		PageHelper.startPage(intPageNumber, PAGESIZE);
-		List<Flashcard> queryResult = flashcardService.getAll();
 
-		PageInfo<Flashcard> pageInfo = new PageInfo<>(queryResult,
-				NAVIGATE_PAGES);
+		Page<Object> startPage = PageHelper.startPage(intPageNumber, PAGESIZE);
+
+		SimplePageInfoDTO pageInfo = flashcardService
+				.getAllWithSimplePageInfoDTO(startPage, NAVIGATE_PAGES);
 
 		jsonMap.put("pageInfo", pageInfo);
+
+		System.out.println("no search/size " + pageInfo.getList().size());
+		System.out.println(
+				"no search/class name " + pageInfo.getList().getClass());
 
 		return jsonMap;
 	}
@@ -145,7 +149,8 @@ public class FlashcardCRUDController extends BaseController {
 		Page<Object> startPage = PageHelper.startPage(intPageNumber, PAGESIZE);
 
 		SimplePageInfoDTO allWithSimplePageInfoDTO = flashcardService
-				.getAllWithSimplePageInfoDTO(startPage, NAVIGATE_PAGES);
+				.getAllWithSimplePageInfoDTORequireCitedNumsArray(startPage,
+						NAVIGATE_PAGES);
 
 		jsonMap.put("pageInfo", allWithSimplePageInfoDTO);
 
@@ -199,7 +204,12 @@ public class FlashcardCRUDController extends BaseController {
 		return jsonMap;
 	}
 
-	//query by like condition
+	/**
+	 * for search
+	 * query by like condition(no pageNum and auto create pageNum
+	 * @param pattern
+	 * @return
+	 */
 	@RequestMapping(value = FLASHCARD
 			+ "/like/{pattern}", produces = "application/json", method = RequestMethod.GET)
 	@ResponseBody
@@ -211,11 +221,19 @@ public class FlashcardCRUDController extends BaseController {
 		HashMap<String, Object> map = this
 				.queryByTermOrDefinitionUsingLikeCondition(pattern,
 						searchPageNum);
+		SimplePageInfoDTO pageInfo = (SimplePageInfoDTO) map.get("pageInfo");
+
 
 		return map;
 	}
 
-	//query by like condition (pageNum)
+	/**
+	 * for search
+	 * query by like condition (pageNum)
+	 * @param pattern
+	 * @param pageNum
+	 * @return
+	 */
 	@RequestMapping(value = FLASHCARD
 			+ "/like/{pattern}/{pageNum}", produces = "application/json", method = RequestMethod.GET)
 	@ResponseBody
@@ -235,9 +253,7 @@ public class FlashcardCRUDController extends BaseController {
 				.getByTermUsingLikeCondition(startPage, NAVIGATE_PAGES,
 						pattern);
 
-		jsonMap.put("pegeInfo", pageInfo);
-
-		System.out.println("xxxx " + pageInfo);
+		jsonMap.put("pageInfo", pageInfo);
 
 		return jsonMap;
 	}

@@ -65,7 +65,7 @@
 	  if(searchMod==1){
 		//search
 		if(num>=0){
-			url=contextPath+"/"+model+"/like/"+pattern+"/num";
+			url=contextPath+"/"+model+"/like/"+pattern+"/"+num;
 		}else{
 		  	url=contextPath+"/"+model+"/like/"+pattern;
 		}
@@ -74,7 +74,7 @@
 		url =contextPath + "/" + models+"/"+num;
 	  }
 	  
-	  pageNum=num;
+	 
 	  $.ajax({
 		  type : "get",
 		  dataType:"json",
@@ -82,9 +82,16 @@
 		  success : function(resp) {
 			data = [];
 			pageInfo = resp.pageInfo;
+			
+			console.log('xxxxxx21 '+pageInfo.list.length);
+			
 			for (i = 0; i < pageInfo.list.length; i++) {
 			  data.push(pageInfo.list[i]);
 			}
+			pageNum=pageInfo.pageNum;
+			
+			console.log('xxxxxx22 '+pageNum);
+			
 			createListDomElement(data);
 
 			
@@ -106,14 +113,14 @@
 	      return `
 	      <li class="list-group-item"><a href="#" class="list-group-item">
               <span class="badge" style="background: red;" data-target="#listDeleteModal" data-toggle="modal"
-                  onclick='modelValues("${place.id}","${place.term}","${place.definition}")'><!--//*** 修改這裡 -->
+                  onclick='modelValues("${place.id}","${place.value[0]}","${place.value[1]}")'><!--//*** 修改這裡 -->
                   <font size="4">DELETE</font>
               </span>
               <span class="badge badgeSpan badge-edit" onclick="badgeEditLocate(this)" data-id="${place.id}">
                   <font size="4">EDIT</font>
               </span>
-              <h4 class="h4" class="list-group-item-heading">${ place.term }</h4><!--//*** 修改這裡 -->
-              <p class="h4" class="list-group-item-text">${ place.definition }</p><!--//*** 修改這裡 -->
+              <h4 class="h4" class="list-group-item-heading">${ place.value[0]}</h4><!--//*** 修改這裡 -->
+              <p class="h4" class="list-group-item-text">${ place.value[1] }</p><!--//*** 修改這裡 -->
       	  </a></li>
 	      `;
 	    }).join("");

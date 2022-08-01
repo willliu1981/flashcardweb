@@ -19,7 +19,7 @@
 	<select id="selectByTermUsingLike" resultType="Flashcard">
 		select * from flashcard
 		<trim prefix="where">
-			<if test="term != null and term !=''">
+			<if test="pattern != null and pattern !=''">
 				term like "%"#{pattern}"%"
 			</if>
 		</trim>
@@ -29,7 +29,7 @@
 	<select id="countByTermUsingLike" resultType="Integer">
 		select count(*) from flashcard
 		<trim prefix="where">
-			<if test="term != null and term !=''">
+			<if test="pattern != null and pattern !=''">
 				term like "%"#{pattern}"%"
 			</if>
 		</trim>
@@ -38,7 +38,7 @@
 	<select id="countByTermUsingLikeLeadByPattern" resultType="Integer">
 		select count(*) from flashcard
 		<trim prefix="where">
-			<if test="term != null and term !=''">
+			<if test="pattern != null and pattern !=''">
 				term like "%"#{pattern}"%"
 				and term &gt; #{pattern}
 			</if>

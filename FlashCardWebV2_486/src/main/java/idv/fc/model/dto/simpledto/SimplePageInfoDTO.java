@@ -13,7 +13,6 @@ public class SimplePageInfoDTO {
 	private int[] navigatepageNums;
 	private int[] citedNums;
 	private int count;
-	private Integer searchPageNum;
 
 	public int[] getNavigatepageNums() {
 		return navigatepageNums;
@@ -85,14 +84,6 @@ public class SimplePageInfoDTO {
 
 	public void setCount(int count) {
 		this.count = count;
-	}
-
-	public Integer getSearchPageNum() {
-		return searchPageNum;
-	}
-
-	public void setSearchPageNum(Integer pageNumOfSearchResults) {
-		this.searchPageNum = pageNumOfSearchResults;
 	}
 
 }

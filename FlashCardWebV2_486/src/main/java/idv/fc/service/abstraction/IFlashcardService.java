@@ -8,7 +8,7 @@ import idv.fc.model.dto.simpledto.SimplePageInfoDTO;
 
 public interface IFlashcardService extends IService<Flashcard> {
 
-	SimplePageInfoDTO getAllWithSimplePageInfoDTO(Page<Object> startPage,
+	SimplePageInfoDTO getAllWithSimplePageInfoDTORequireCitedNumsArray(Page<Object> startPage,
 			int maxNavPageNums);
 
 	Flashcard getByTerm(String term);
@@ -17,5 +17,8 @@ public interface IFlashcardService extends IService<Flashcard> {
 			int maxNavPageNums, String pattern);
 
 	Integer getSearchPageNum(int pageSize, String pattern);
+
+	SimplePageInfoDTO getAllWithSimplePageInfoDTO(Page<Object> startPage,
+			int maxNavPageNums);
 
 }
