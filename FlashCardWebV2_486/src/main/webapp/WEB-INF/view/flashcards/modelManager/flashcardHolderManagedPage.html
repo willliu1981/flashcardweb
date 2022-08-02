@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
 <title>FLASH CARD</title>
-<link rel="stylesheet" href="../css/bootstrap.min.cyborg.css">
-<link rel="stylesheet" href="../webjars/bootstrap/3.4.1/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="../../css/bootstrap.min.cyborg.css">
+<link rel="stylesheet" href="../../webjars/bootstrap/3.4.1/css/bootstrap-theme.min.css">
 
-<script type="text/javascript" src="../webjars/jquery/3.4.1/jquery.min.js"></script>
-<script type="text/javascript" src="../webjars/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../webjars/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="../../webjars/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <style type="text/css">
 /* 用於list-group 下,改變游標圖示  */
 .myBadgeCursor>li>.badge {
@@ -25,6 +25,7 @@
 <!-- global variable -->
 <script type="text/javascript">
   const contextPath = "/FlashCardWebV2";
+  var version;
   const flashcards = "flashcards";//base path
   const models = "flashcardHolders";//*** 修改這裡 
   const model = "flashcardHolder";//*** 修改這裡 
@@ -34,6 +35,22 @@
   var pageNum=1;
 
 </script>
+
+
+<!-- import version and process nav element -->
+<script type="text/javascript" src="../../js/version.js"></script>
+<script type="text/javascript" src="../../js/nav.js"></script>
+
+<!-- process nav url 
+processVersion() => ajax => processNav() => navDoAction()
+-->
+<script type="text/javascript">
+$(function (){
+  processVersion();
+});
+</script>
+<!-- /import version and process nav element -->
+
 
 <!-- get data -->
 <script type="text/javascript">
@@ -53,7 +70,7 @@
 	  $.ajax({
 		  type : "get",
 		  dataType:"json",
-		  url : contextPath + "/" + models+"/"+num, 
+		  url : contextPath + "/"+version+"/" + models+"/"+num, 
 		  success : function(resp) {
 			
 			data = [];
@@ -100,7 +117,7 @@
   //badge edit 重定向
   function badgeEditLocate(element) {
 	let submit=$("#listedit_hidden_submit");
-	submit.attr("action",contextPath + "/" + model+"/"+$(element).attr('data-id'));
+	submit.attr("action",contextPath +"/"+version+"/" + model+"/"+$(element).attr('data-id'));
 	submit.submit();
   }
 </script>
@@ -109,7 +126,7 @@
 <script type="text/javascript">
   $(function() {
     $(".list-group .list-group-item .badge-add").click(function(){
-      window.location.href = contextPath + "/" + model;
+      window.location.href = contextPath +"/"+version+"/" + model;
     }); 
   });
 </script>
@@ -120,7 +137,7 @@
      function modelValues(id,name,term) {
         $("#modal_name").text(name);
         $("#modal_term").text(term); 
-        $("#modal_form").attr("action", contextPath+ "/"+model+"/"+id);
+        $("#modal_form").attr("action", contextPath+"/"+version+"/"+model+"/"+id);
       }
 </script>
 
@@ -128,35 +145,9 @@
 <script type="text/javascript">
   $(document).ready(
 	  function() {
-		$(".navbar-header a").attr("href", contextPath);
-
-		$(".navbar-collapse .modelManager a").attr("href",
-			contextPath + "/" + flashcards + "/fcsManager");
-
-		let mm_fc=$(".navbar-collapse ul .dropdown ul .modelManager-flashcard a");
-		mm_fc
-			.attr("href", contextPath + "/" + flashcards + "/fcManager");
-		mm_fc.text="字卡管理";
-
-		$(".navbar-collapse ul .dropdown ul .modelManager-flashcardHolder a")
-			.attr("href", contextPath + "/" + flashcards + "/fhManager");
-
-		$(".navbar-collapse ul .dropdown ul .modelManager-holderData a")
-			.attr("href", contextPath + "/" + flashcards + "/hdManager");
-		
-		$(".navbar-collapse ul .quizManager a")
-		.attr("href", contextPath + "/" + quiz + "/quizManager");
-
-		//使作用中
-		doNavAction(".navbar-collapse ul .dropdown ul .modelManager-flashcardHolder");//*** 修改這裡 
-
+		//使發生作用
+		doAction(".navbar-collapse ul .dropdown ul .modelManager-flashcardHolder");//*** 修改這裡 
 	  });
-
-  //使作用中
-  function doNavAction(selector) {
-	$(selector).addClass("active");
-	$(selector + " a").addClass("hrefDisabled");
-  }
 </script>
 
 <!-- pager -->
@@ -203,7 +194,7 @@
   	$(".pager-pageNum-replaced").nextUntil(".pager-next").remove(); 
 	
     const domElements = navigatepageNums.map( place => {
-      var path=contextPath+"/"+models+"/"+place;
+      var path=contextPath+"/"+version+"/"+models+"/"+place;
       
       if(pageNum==place){
     	return `
@@ -374,29 +365,27 @@
                 <ul class="pagination">
                     <li></li>
 
-                        <!-- 首頁 -->
-                        <li class="disabled??? pager-first"><a class="hrefDisabled???" href="javascript:;"
-                                style="width: 55px;">&laquo;</a></li>
+                    <!-- 首頁 -->
+                    <li class="disabled??? pager-first"><a class="hrefDisabled???" href="javascript:;"
+                            style="width: 55px;">&laquo;</a></li>
 
-                        <!-- 上一頁 -->
-                        <li class="disabled??? pager-previous"><a class="hrefDisabled???" href="javascript:;"
-                                style="width: 55px;">&lsaquo;</a></li>
+                    <!-- 上一頁 -->
+                    <li class="disabled??? pager-previous"><a class="hrefDisabled???" href="javascript:;"
+                            style="width: 55px;">&lsaquo;</a></li>
 
-                        <!-- 中間頁數 -->
-                        <li class="pager-pageNum-replaced"></li>
+                    <!-- 中間頁數 -->
+                    <li class="pager-pageNum-replaced"></li>
 
-                        <!-- 下一頁 -->
-                        <li class="disabled??? pager-next"><a class="hrefDisabled???" href="javascript:;"
-                                style="width: 55px;">&rsaquo;</a></li>
+                    <!-- 下一頁 -->
+                    <li class="disabled??? pager-next"><a class="hrefDisabled???" href="javascript:;"
+                            style="width: 55px;">&rsaquo;</a></li>
 
-                        <!-- 最末頁 -->
-                        <li class="disabled??? pager-last"><a class="hrefDisabled???" href="javascript:;"
-                                style="width: 55px;">&raquo;</a></li>
+                    <!-- 最末頁 -->
+                    <li class="disabled??? pager-last"><a class="hrefDisabled???" href="javascript:;"
+                            style="width: 55px;">&raquo;</a></li>
 
-                        <li></li>
-                </ul>
-
-                <!-- goto page num -->
+                    <li></li>
+                </ul> <!-- goto page num -->
                 <ul class="pagination" style="margin-left: 20px;">
                     <li></li>
                     <li class="pager-goto"><a href="javascript:;" style="height: 38px; vertical-align: middle;">Goto</a></li>

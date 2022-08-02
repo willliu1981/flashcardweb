@@ -25,6 +25,7 @@ import idv.fc.model.dto.simpledto.SimplePageInfoDTO;
 import idv.fc.service.abstraction.IFlashcardHolderService;
 
 @Controller
+@RequestMapping(value = "*/")
 public class FlashcardHolderCRUDController extends BaseController {
 	private static final Integer PAGE_HELPER_MAX_PAGE_NUMBER = 5;
 	private static final Integer PAGE_INFO_MAX_NAV_PAGE_NUMBER = 5;

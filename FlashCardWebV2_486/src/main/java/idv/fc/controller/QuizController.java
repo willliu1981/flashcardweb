@@ -26,7 +26,7 @@ import idv.fc.service.abstraction.IHolderDataService;
 import idv.fc.service.abstraction.IStatusService;
 
 @Controller
-@RequestMapping(value = "quiz")
+@RequestMapping(value = "*/quiz")
 public class QuizController extends BaseController {
 	private String QUIZ = "quiz";
 	private final String FLASHCARDS = "flashcards";

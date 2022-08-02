@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>FLASH CARD</title>
-<link rel="stylesheet" href="../css/bootstrap.min.cyborg.css">
-<link rel="stylesheet" href="../webjars/bootstrap/3.4.1/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="../../css/bootstrap.min.cyborg.css">
+<link rel="stylesheet" href="../../webjars/bootstrap/3.4.1/css/bootstrap-theme.min.css">
 
-<script type="text/javascript" src="../webjars/jquery/3.4.1/jquery.min.js"></script>
-<script type="text/javascript" src="../webjars/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../webjars/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="../../webjars/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <style type="text/css">
 /* 用於list-group 下,改變游標圖示  */
 .myBadgeCursor>li>.badge {
@@ -24,6 +24,7 @@
 <!-- global variable -->
 <script type="text/javascript">
   const contextPath = "/FlashCardWebV2";
+  var version;
   const flashcards = "flashcards";//base path
   const model = "holderData";//*** 修改這裡 
   const quiz = "quiz";
@@ -33,10 +34,24 @@
   var id;
 </script>
 
+<!-- import version and process nav element -->
+<script type="text/javascript" src="../../js/version.js"></script>
+<script type="text/javascript" src="../../js/nav.js"></script>
+
+<!-- process nav url 
+processVersion() => ajax => processNav() => navDoAction()
+-->
+<script type="text/javascript">
+$(function (){
+  processVersion();
+});
+</script>
+<!-- /import version and process nav element -->
+
 <!-- init -->
 <script type="text/javascript">
     $(function() {
-      $("#form").attr("action",contextPath+"/"+model);
+      $("#form").attr("action",contextPath +"/"+version+"/"+model);
     });
 </script>
 
@@ -47,7 +62,7 @@
 	$.ajax({
 	  type : "get",
 	  dataType : "json",
-	  url : contextPath + "/" + model + "/echo",
+	  url : contextPath +"/"+version + "/" + model + "/echo",
 	  success : function(resp) {
 		$("#id").val(resp.data.id);
 		$("#flashcardHolder_id").val(resp.data.fhId);
@@ -80,7 +95,7 @@
           $.ajax({
               type : "get",
               dataType:"json",
-              url :  contextPath+"/simple/"+listModels+"/"+num, 
+              url :  contextPath +"/"+version+"/simple/"+listModels+"/"+num, 
               success : function(resp) {
                 
                 let data = [];
@@ -179,7 +194,7 @@
         $(".pager-pageNum-replaced").nextUntil(".pager-next").remove(); 
         
         const domElements = navigatepageNums.map( place => {
-          var path=contextPath+"/"+listModels+"/"+place;
+          var path=contextPath +"/"+version+"/"+listModels+"/"+place;
           
           if(pageNum==place){
             return `
@@ -212,38 +227,7 @@
 
 <!-- nav -->
 <script type="text/javascript">
-  $(document)
-	  .ready(
-		  function() {
 
-			$(".navbar-header a").attr("href", contextPath);
-
-			$(".navbar-collapse .modelManager a").attr("href",
-				contextPath + "/" + flashcards + "/fcsManager");
-
-			let mm_fc = $(".navbar-collapse ul .dropdown ul .modelManager-flashcard a");
-			mm_fc.attr("href", contextPath + "/" + flashcards + "/fcManager");
-			mm_fc.text = "字卡管理";
-
-			$(
-				".navbar-collapse ul .dropdown ul .modelManager-flashcardHolder a")
-				.attr("href", contextPath + "/" + flashcards + "/fhManager");
-
-			$(".navbar-collapse ul .dropdown ul .modelManager-holderData a")
-				.attr("href", contextPath + "/" + flashcards + "/hdManager");
-
-			$(".navbar-collapse ul .quizManager a").attr("href",
-				contextPath + "/" + quiz + "/quizManager");
-
-			//使作用中
-			/* doNavAction(".navbar-collapse ul .dropdown ul .modelManager-flashcard"); *///*** 修改這裡 
-		  });
-
-  //使作用中
-  function doNavAction(selector) {
-	$(selector).addClass("active");
-	$(selector + " a").addClass("hrefDisabled");
-  }
 </script>
 <!-- /nav -->
 

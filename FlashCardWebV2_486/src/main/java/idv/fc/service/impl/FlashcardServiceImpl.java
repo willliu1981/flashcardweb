@@ -187,8 +187,6 @@ public class FlashcardServiceImpl implements IFlashcardService {
 			e.printStackTrace();
 		}
 
-		Debug.test(new CC() {
-		}, "page num " + total, totalOfLeadBy);
 		return pageNum;
 	}
 

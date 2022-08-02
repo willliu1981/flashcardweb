@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="idv.fc.controller.FlashcardsController"%>
 <!DOCTYPE html>
 <html>
 <head>
 <jsp:include page="/WEB-INF/view/public/bootstrapCommon.jsp" />
+
 <style type="text/css">
 #carousel-example-generic .carousel-inner>.item>img {
 	display: block;
@@ -20,6 +22,7 @@
     <!-- include header nav -->
     <jsp:include page="/WEB-INF/view/public/header.jsp" flush="true">
         <jsp:param name="active" value="home" />
+        <jsp:param name="version" value="${initParam['version']}" />
     </jsp:include>
 
 
@@ -76,7 +79,6 @@
     <div class="container container-footer">
         <h4>Copyright &copy; 2021-2022 FlashCard. All rights reserved.</h4>
     </div>
-
 
 </body>
 </html>

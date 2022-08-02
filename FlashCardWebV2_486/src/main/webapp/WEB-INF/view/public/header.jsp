@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
+
 <html>
 
 <body>
     <!-- path mapping  (亦用於 include page 的 active)-->
     <c:set var="home" value="index.jsp" />
-    <c:set var="flashcardsManager" value="flashcards/fcsManager" />
-    <c:set var="flashcardManager" value="flashcards/fcManager" />
-    <c:set var="flashcardHolderManager" value="flashcards/fhManager" />
-    <c:set var="holderDataManager" value="flashcards/hdManager" />
-    <c:set var="quizManager" value="quiz/quizManager" />
+    <c:set var="flashcardsManager" value="${param.version}/flashcards/fcsManager" />
+    <c:set var="flashcardManager" value="${param.version}/flashcards/fcManager" />
+    <c:set var="flashcardHolderManager" value="${param.version}/flashcards/fhManager" />
+    <c:set var="holderDataManager" value="${param.version}/flashcards/hdManager" />
+    <c:set var="quizManager" value="${param.version}/quiz/quizManager" />
 
     <!-- 導航欄 -->
     <nav class="navbar navbar-inverse navbar-fixed-top">

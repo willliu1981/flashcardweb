@@ -25,6 +25,7 @@ import idv.fc.model.dto.simpledto.SimplePageInfoDTO;
 import idv.fc.service.abstraction.IFlashcardService;
 
 @Controller
+@RequestMapping(value = "*/")
 public class FlashcardCRUDController extends BaseController {
 	private static final Integer PAGESIZE = 5;
 	private static final Integer NAVIGATE_PAGES = 5;
@@ -53,6 +54,8 @@ public class FlashcardCRUDController extends BaseController {
 	public String toEdit(HashMap<String, Object> map,
 			@PathVariable("id") String id, HttpSession session) {
 		session.setAttribute("flashcardEditId", id);
+		
+		Debug.test(new CC() {},"xxxxx");
 
 		return PAGE_FLASHCARDS + "/modelEditor/" + "flashcardEditPage.html";
 	}
@@ -86,10 +89,6 @@ public class FlashcardCRUDController extends BaseController {
 				.getAllWithSimplePageInfoDTO(startPage, NAVIGATE_PAGES);
 
 		jsonMap.put("pageInfo", pageInfo);
-
-		System.out.println("no search/size " + pageInfo.getList().size());
-		System.out.println(
-				"no search/class name " + pageInfo.getList().getClass());
 
 		return jsonMap;
 	}

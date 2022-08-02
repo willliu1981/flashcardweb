@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
 
 <title>FLASH CARD</title>
-<link rel="stylesheet" href="../css/bootstrap.min.cyborg.css">
-<link rel="stylesheet" href="../webjars/bootstrap/3.4.1/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="../../css/bootstrap.min.cyborg.css">
+<link rel="stylesheet" href="../../webjars/bootstrap/3.4.1/css/bootstrap-theme.min.css">
 
-<script type="text/javascript" src="../webjars/jquery/3.4.1/jquery.min.js"></script>
-<script type="text/javascript" src="../webjars/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../webjars/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="../../webjars/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <style type="text/css">
 /* 用於list-group 下,改變游標圖示  */
 .myBadgeCursor>li>.badge {
@@ -25,7 +25,8 @@
 
 <!-- global variable -->
 <script type="text/javascript">
-  const contextPath = "/FlashCardWebV2";
+const contextPath = "/FlashCardWebV2";
+  var version;
   const flashcards = "flashcards";//base path
   const models = "flashcards";//*** 修改這裡 
   const model = "flashcard";//*** 修改這裡 
@@ -37,6 +38,20 @@
   var searchMod=0;//0:no search ; 1:search
   
 </script>
+
+<!-- import version and process nav element -->
+<script type="text/javascript" src="../../js/version.js"></script>
+<script type="text/javascript" src="../../js/nav.js"></script>
+
+<!-- process nav url 
+processVersion() => ajax => processNav() => navDoAction()
+-->
+<script type="text/javascript">
+$(function (){
+  processVersion();
+});
+</script>
+<!-- /import version and process nav element -->
 
 <!-- get datas -->
 <script type="text/javascript">
@@ -65,13 +80,14 @@
 	  if(searchMod==1){
 		//search
 		if(num>=0){
-			url=contextPath+"/"+model+"/like/"+pattern+"/"+num;
+			url=contextPath+"/"+version+"/"+ model+"/like/"+pattern+"/"+num;
 		}else{
-		  	url=contextPath+"/"+model+"/like/"+pattern;
+		  	url=contextPath+"/"+version+"/"+model+"/like/"+pattern;
 		}
 	  }else{
 		//no search
-		url =contextPath + "/" + models+"/"+num;
+		url =contextPath + "/"+version+"/" + models+"/"+num;
+		console.log('xxxx '+url);
 	  }
 	  
 	 
@@ -133,7 +149,8 @@
   
   //badge edit 重定向
   function badgeEditLocate(element) {
-	window.location.href = contextPath + "/" + model+"/"+$(element).attr('data-id');
+	console.log('xxxx '+version);
+	window.location.href = contextPath+"/"+version+"/"  + model+"/"+$(element).attr('data-id');
   }
 </script>
 
@@ -141,7 +158,7 @@
 <script type="text/javascript">
   $(function() {
     $(".list-group .list-group-item .badge-add").click(function(){
-      window.location.href = contextPath + "/" + model;
+      window.location.href = contextPath + "/"+version+"/" + model;
     }); 
     
     
@@ -164,45 +181,16 @@
      function modelValues(id,term,definition) {
         $("#modal_term").text(term);
         $("#modal_definition").text(definition);
-        $("#modal_form").attr("action", contextPath+ "/"+model+"/"+id);
+        $("#modal_form").attr("action", contextPath+ "/"+version+"/"+model+"/"+id);
       }
 </script>
 
 <!-- nav -->
 <script type="text/javascript">
-  $(document).ready(
-	  function() {
-		
-		$(".navbar-header a").attr("href", contextPath);
-
-		$(".navbar-collapse .modelManager a").attr("href",
-			contextPath + "/" + flashcards + "/fcsManager");
-
-		let mm_fc=$(".navbar-collapse ul .dropdown ul .modelManager-flashcard a");
-		mm_fc
-			.attr("href", contextPath + "/" + flashcards + "/fcManager");
-		mm_fc.text="字卡管理";
-
-		$(".navbar-collapse ul .dropdown ul .modelManager-flashcardHolder a")
-			.attr("href", contextPath + "/" + flashcards + "/fhManager");
-
-		$(".navbar-collapse ul .dropdown ul .modelManager-holderData a")
-			.attr("href", contextPath + "/" + flashcards + "/hdManager");
-		
-		$(".navbar-collapse ul .quizManager a")
-			.attr("href", contextPath + "/" + quiz + "/quizManager");
-
-		//使作用中
-		doNavAction(".navbar-collapse ul .dropdown ul .modelManager-flashcard");//*** 修改這裡 
- 
-	  });
-  
-
-  //使作用中
-  function doNavAction(selector) {
-	$(selector).addClass("active");
-	$(selector + " a").addClass("hrefDisabled");
-  }
+      $(function () {
+        //使發生作用
+        doAction(".navbar-collapse ul .dropdown ul .modelManager-flashcard");//*** 修改這裡
+      });
 </script>
 
 <!-- pager -->
@@ -250,7 +238,7 @@
   	$(".pager-pageNum-replaced").nextUntil(".pager-next").remove(); 
 	
     const domElements = navigatepageNums.map( place => {
-      var path=contextPath+"/"+models+"/"+place;
+      var path=contextPath+"/"+version+"/"+models+"/"+place;
       
       if(pageNum==place){
     	return `
@@ -266,7 +254,7 @@
     $('.pager-pageNum-replaced').replaceWith(domElements);
   }
   
-  //使失效中
+  //使失效
   function doPagerAction(selector,ineffective) {
 	if(ineffective){
     	$(selector).addClass("disabled");
@@ -284,7 +272,7 @@
 <script type="text/javascript">
   $(function() {
     $('.hrefDisabled').on("click", function(e) {
-      disableHref();
+      e.preventDefault();
     });
   });
 </script>
@@ -491,5 +479,7 @@
     </div>
     <!-- /.modal (for list delete)-->
 
+    <!-- <div><a href="FlashcardWebV2/flashcards/test">xxx </a></div>
+<div>xxx2</div> -->
 </body>
 </html>

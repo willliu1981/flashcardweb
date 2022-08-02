@@ -75,6 +75,11 @@
 		</param-value>
 	</context-param>
 
+	<context-param>
+		<param-name>version</param-name>
+		<param-value>va3</param-value>
+	</context-param>
+
 	<listener>
 		<listener-class>
 			org.springframework.web.context.ContextLoaderListener

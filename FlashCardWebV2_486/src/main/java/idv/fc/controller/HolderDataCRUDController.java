@@ -26,6 +26,7 @@ import idv.fc.model.dto.HolderDataDTO;
 import idv.fc.service.abstraction.IHolderDataService;
 
 @Controller
+@RequestMapping(value = "*/")
 public class HolderDataCRUDController extends BaseController {
 	private static final Integer PAGE_HELPER_MAX_PAGE_NUMBER = 5;
 	private static final Integer PAGE_INFO_MAX_NAV_PAGE_NUMBER = 5;

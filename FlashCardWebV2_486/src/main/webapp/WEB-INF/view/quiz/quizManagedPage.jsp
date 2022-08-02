@@ -43,6 +43,7 @@
     <!-- include header nav -->
     <jsp:include page="/WEB-INF/view/public/header.jsp" flush="true">
         <jsp:param name="active" value="quizManager" />
+        <jsp:param name="version" value="${initParam['version']}" />
     </jsp:include>
 
     <!-- 引入巨屏 -->
