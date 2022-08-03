@@ -56,11 +56,17 @@ play() 在208附近
 
 <!-- global variable -->
 <script type="text/javascript">
-  const contextPath = "/FlashCardWebV2";
   const flashcards = "flashcards";//base path
   const models = "flashcards";//*** 修改這裡 
   const model = "flashcard";//*** 修改這裡 
   const quiz = "quiz";
+  const basePath = {
+		context : "/FlashCardWebV2",
+		version : "",
+		path : function() {
+		  return this.context + "/" + this.version;
+		}
+	  };
   var pageInfo;
   var pageNum = 1;
 
@@ -73,40 +79,24 @@ play() 在208附近
   
 </script>
 
+<!-- import version and process other  element -->
+<script type="text/javascript" src="../../../../js/version.js"></script>
+<script type="text/javascript" src="../../../../js/nav.js"></script>
+
+<!-- 
+processVersion() => ajax => processNav() => other
+-->
+<script type="text/javascript">
+  $(function() {
+    processVersion();
+
+  });
+</script>
+<!-- /import version and process nav element -->
+
 <!-- nav -->
 <script type="text/javascript">
-  $(document)
-	  .ready(
-		  function() {
-
-			$(".navbar-header a").attr("href", contextPath);
-
-			$(".navbar-collapse .modelManager a").attr("href",
-				contextPath + "/" + flashcards + "/fcsManager");
-
-			let mm_fc = $(".navbar-collapse ul .dropdown ul .modelManager-flashcard a");
-			mm_fc.attr("href", contextPath + "/" + flashcards + "/fcManager");
-			mm_fc.text = "字卡管理";
-
-			$(
-				".navbar-collapse ul .dropdown ul .modelManager-flashcardHolder a")
-				.attr("href", contextPath + "/" + flashcards + "/fhManager");
-
-			$(".navbar-collapse ul .dropdown ul .modelManager-holderData a")
-				.attr("href", contextPath + "/" + flashcards + "/hdManager");
-
-			$(".navbar-collapse ul .quizManager a").attr("href",
-				contextPath + "/" + quiz + "/quizManager");
-
-			//使作用中
-			/* doNavAction(".navbar-collapse ul .dropdown ul .modelManager-flashcard"); *///*** 修改這裡 
-		  });
-
-  //使作用中
-  function doNavAction(selector) {
-	$(selector).addClass("active");
-	$(selector + " a").addClass("hrefDisabled");
-  }
+ 
 </script>
 <!-- /nav -->
 
@@ -117,7 +107,7 @@ play() 在208附近
 	  $.ajax({
 		  type : "get",
 		  dataType:"json",
-		  url : contextPath + "/quiz/simple/flashcards", 
+		  url : basePath.path() + "/quiz/simple/flashcards", 
 		  success : function(resp) {
 			
 			var fcs = resp.data.flashcards;
@@ -152,7 +142,7 @@ play() 在208附近
 		const domElements = data.map( place => {
 	      return `
 	      <div class="item" >
-	        <img src="${contextPath}/picture/blackboard_1.png" />
+	        <img src="${basePath.context}/picture/blackboard_1.png" />
 	          <div class="carousel-caption myCaption">
 	              <div>
 	                  <span>
@@ -233,10 +223,10 @@ play() 在208附近
           filter : filter
         },
         dataType : "json",
-        url : contextPath + "/quiz",
+        url : basePath.path() + "/quiz",
         success : function(data) {
           console.log("data=" + data.code);
-          window.location.href = contextPath + "/quiz/quizManager";//quiz完成時, 導向目的地
+          window.location.href = basePath.path() + "/quiz/quizManager";//quiz完成時, 導向目的地
         },
         error : function(data) {
           console.log("error=" + data);
@@ -421,19 +411,6 @@ play() 在208附近
         </div>
     </div>
 
-
-    <script>
-        function test(){
-         console.log("xxx");
-         console.log(3|'');
-          
-        }
-    
-
-	</script>
-
-
-    <button type="button" onclick="test()">test</button>
 
     <!-- footer -->
     <div class="container container-footer">

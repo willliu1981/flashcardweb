@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,12 +83,12 @@ public class QuizController extends BaseController {
 	@RequestMapping(value = "{filter}/{mod}/{num}")
 	public String toQuizStart(@PathVariable("filter") String filter,
 			@PathVariable("mod") String mod, @PathVariable("num") Integer num,
-			HttpSession session) {
+			HttpSession session,HttpServletResponse res) {
 
 		session.setAttribute("filter", filter);
 		session.setAttribute("mod", mod);
 		session.setAttribute("num", num);
-
+		res.addHeader("Cache-Control", "no-cache");
 		return "quiz/quizPlay.html";
 	}
 

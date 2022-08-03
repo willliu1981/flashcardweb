@@ -7,13 +7,40 @@
 <style type="text/css">
 </style>
 
+<!-- global variable -->
+<script type="text/javascript">
+  const flashcards = "flashcards";//base path
+  const quiz = "quiz"; 
+  const basePath = {
+	context : "/FlashCardWebV2",
+	version : "",
+	path : function() {
+	  return this.context + "/" + this.version;
+	}
+  };
+</script>
+
+<!-- import version and process other  element -->
+<script type="text/javascript" src="../../js/version.js"></script>
+<script type="text/javascript" src="../../js/nav.js"></script>
+
+<!-- 
+processVersion() => ajax => processNav() => other
+-->
+<script type="text/javascript">
+  $(function() {
+	processVersion();
+
+  });
+</script>
+<!-- /import version and process nav element -->
+
 <script type="text/javascript">
   $(document).ready(
 	  function() {
 		//submit
-		$(".form-group .btn-primary").click(
+		$(".form-group .btn-start").click(
 			function() {
-			  var contextPath = $(this).attr("data-myContextPath");
 			  var filter = $("#select-filter").val();
 			  var mod = $("#select-mod").val();
 			  var num = $("#inputNum").val();
@@ -21,14 +48,14 @@
 			  $.ajax({
 				type : "get",
 				datatype : "json",
-				url : contextPath + "/quiz/data/" + filter + "/" + mod + "/"
-					+ num,
+				url : basePath.path() + "/quiz/data/" + filter + "/" + mod
+					+ "/" + num,
 				success : function(resp) {
 				  if (resp.data.length == 0) {
 					alert("沒有資料");
 				  } else {
-					location.href = contextPath + "/quiz/" + filter + "/" + mod
-						+ "/" + num;
+					location.href = basePath.path() + "/quiz/" + filter + "/"
+						+ mod + "/" + num;
 				  }
 				}
 			  });
@@ -92,8 +119,7 @@
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
                         <button type="reset" class="btn btn-default" style="color: black;">Cancel</button>
-                        <button type="button" class="btn btn-primary"
-                            data-myContextPath="${pageContext.request.contextPath }">Start</button>
+                        <button type="button" class="btn btn-primary btn-start">Start</button>
                     </div>
                 </div>
             </fieldset>
