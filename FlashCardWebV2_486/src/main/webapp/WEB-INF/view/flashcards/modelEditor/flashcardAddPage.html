@@ -23,30 +23,31 @@
 
 <!-- global variable -->
 <script type="text/javascript">
-  const contextPath = "/FlashCardWebV2";
-  var version;
   const flashcards = "flashcards";//base path
   const models = "flashcards";//*** 修改這裡 
   const model = "flashcard";//*** 修改這裡 
   const quiz = "quiz";
+  const basePath={context:"/FlashCardWebV2",version:"",path:function(){
+	return this.context+"/"+this.version;
+  }};
   var pageInfo;
   var datas;
   var pageNum = 1;
 </script>
 
-<!-- import version and process nav element -->
+<!-- import version and process other  element -->
 <script type="text/javascript" src="../js/version.js"></script>
 <script type="text/javascript" src="../js/nav.js"></script>
 
-<!-- process nav url 
-processVersion() => ajax => processNav() => navDoAction()
+<!-- 
+processVersion() => ajax => processNav() => other
 -->
 <script type="text/javascript">
-  $(function() {
-	processVersion();
-	
-	processFormAction( version + "/" + model);
-  });
+$(function (){
+  processVersion();
+  
+  processFormAction( basePath.path() + "/" + model);
+});
 </script>
 <!-- /import version and process nav element -->
 
@@ -96,7 +97,7 @@ processVersion() => ajax => processNav() => navDoAction()
 <!-- form -->
 <script type="text/javascript">
   function processFormAction(path) {
-	$(".form-add").attr('action',path);
+	$(".form-update").attr('action',path);
   };
 </script>
 
@@ -151,7 +152,7 @@ processVersion() => ajax => processNav() => navDoAction()
 
     <!-- form -->
     <div class="container">
-        <form class="form-horizontal form-add" action="" method="post">
+        <form class="form-horizontal form-update" action="" method="post">
             <fieldset>
                 <legend>新增 Flashcard</legend>
                 <div class="form-group">

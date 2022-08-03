@@ -67,8 +67,7 @@ public class FlashcardsController extends BaseController {
 	@ResponseBody
 	public HashMap<String, Object> getVersion(HttpServletRequest request) {
 		HashMap<String, Object> map = new HashMap<>();
-		map.put("version",
-				request.getServletContext().getInitParameter("version"));
+		map.put("version", BaseController.getStaticVersion(request));
 		return map;
 	}
 

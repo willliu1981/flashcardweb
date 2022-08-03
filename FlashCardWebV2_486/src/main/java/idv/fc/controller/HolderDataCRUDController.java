@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,15 +44,16 @@ public class HolderDataCRUDController extends BaseController {
 	 */
 
 	@RequestMapping(value = HOLDERDATA, method = RequestMethod.GET)
-	public String toAdd() {
-
+	public String toAdd(HttpServletResponse res) {
+		res.addHeader("Cache-Control", "no-cache");
 		return PAGE_FLASHCARDS + "/modelEditor/" + "holderDataAddPage.html";
 	}
 
 	@RequestMapping(value = HOLDERDATA + "/{id}", method = RequestMethod.POST)
-	public String toEdit(@PathVariable("id") String id, HttpSession session) {
+	public String toEdit(@PathVariable("id") String id, HttpSession session,
+			HttpServletResponse res) {
 		session.setAttribute("holderDataEditId", id);
-
+		res.addHeader("Cache-Control", "no-cache");
 		return PAGE_FLASHCARDS + "/modelEditor/" + "holderDataEditPage.html";
 	}
 
@@ -90,33 +92,37 @@ public class HolderDataCRUDController extends BaseController {
 	}
 
 	@RequestMapping(value = HOLDERDATA, method = RequestMethod.POST)
-	public String add(HolderData model) {
+	public String add(HolderData model, HttpServletRequest request) {
 		holderDataService.addNew(model);
 
-		return "redirect:/" + WEB_FLASHCARDS + "/hdManager";
+		return "redirect:/" + BaseController.getStaticVersion(request) + "/"
+				+ WEB_FLASHCARDS + "/hdManager";
 	}
 
 	@RequestMapping(value = HOLDERDATA, method = RequestMethod.PUT)
-	public String edit(HolderData model) {
+	public String edit(HolderData model, HttpServletRequest request) {
 		HolderData result = holderDataService.getById(model.getId().toString());
 
-		Debug.test(new CC() {},model.getFhId());
-		
+		Debug.test(new CC() {
+		}, model.getFhId());
+
 		result.setFhId(model.getFhId());
 
 		holderDataService.edit(result);
 
-		return "redirect:/" + WEB_FLASHCARDS + "/hdManager";
+		return "redirect:/" + BaseController.getStaticVersion(request) + "/"
+				+ WEB_FLASHCARDS + "/hdManager";
 	}
 
 	@RequestMapping(value = HOLDERDATA + "/{id}", method = RequestMethod.DELETE)
-	public String remove(@PathVariable("id") String id) {
+	public String remove(@PathVariable("id") String id,
+			HttpServletRequest request) {
 		holderDataService.remove(id);
 
-		return "redirect:/" + WEB_FLASHCARDS + "/hdManager";
+		return "redirect:/" + BaseController.getStaticVersion(request) + "/"
+				+ WEB_FLASHCARDS + "/hdManager";
 	}
 
-	
 	/**
 	 * holderDataEditPage 回顯data
 	 */
@@ -125,8 +131,8 @@ public class HolderDataCRUDController extends BaseController {
 	@ResponseBody
 	public Map<String, Object> getById(HttpSession session) {
 		Map<String, Object> map = new HashMap<>();
-		HolderDataDTO result = this.holderDataService
-				.getDTOById(session.getAttribute("holderDataEditId").toString());
+		HolderDataDTO result = this.holderDataService.getDTOById(
+				session.getAttribute("holderDataEditId").toString());
 
 		map.put("data", result);
 

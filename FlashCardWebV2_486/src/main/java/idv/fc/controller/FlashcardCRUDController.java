@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -52,11 +53,10 @@ public class FlashcardCRUDController extends BaseController {
 
 	@RequestMapping(value = FLASHCARD + "/{id}", method = RequestMethod.GET)
 	public String toEdit(HashMap<String, Object> map,
-			@PathVariable("id") String id, HttpSession session) {
+			@PathVariable("id") String id, HttpSession session,HttpServletResponse res) {
 		session.setAttribute("flashcardEditId", id);
 		
-		Debug.test(new CC() {},"xxxxx");
-
+		res.addHeader("Cache-Control", "no-cache");
 		return PAGE_FLASHCARDS + "/modelEditor/" + "flashcardEditPage.html";
 	}
 
@@ -94,14 +94,15 @@ public class FlashcardCRUDController extends BaseController {
 	}
 
 	@RequestMapping(value = FLASHCARD, method = RequestMethod.POST)
-	public String add(Flashcard flashcard) {
+	public String add(Flashcard flashcard, HttpServletRequest request) {
 		flashcardService.addNew(flashcard);
 
-		return "redirect:/" + WEB_FLASHCARDS + "/fcManager";
+		return "redirect:/" + BaseController.getStaticVersion(request) + "/"
+				+ WEB_FLASHCARDS + "/fcManager";
 	}
 
 	@RequestMapping(value = FLASHCARD, method = RequestMethod.PUT)
-	public String edit(Flashcard flashcard) {
+	public String edit(Flashcard flashcard, HttpServletRequest request) {
 		Flashcard byId = flashcardService.getById(flashcard.getId().toString());
 
 		byId.setTerm(flashcard.getTerm());
@@ -109,14 +110,17 @@ public class FlashcardCRUDController extends BaseController {
 
 		flashcardService.edit(byId);
 
-		return "redirect:/" + WEB_FLASHCARDS + "/fcManager";
+		return "redirect:/" + BaseController.getStaticVersion(request) + "/"
+				+ WEB_FLASHCARDS + "/fcManager";
 	}
 
 	@RequestMapping(value = FLASHCARD + "/{id}", method = RequestMethod.DELETE)
-	public String remove(@PathVariable("id") String id) {
+	public String remove(@PathVariable("id") String id,
+			HttpServletRequest request) {
 		flashcardService.remove(id);
 
-		return "redirect:/" + WEB_FLASHCARDS + "/fcManager";
+		return "redirect:/" + BaseController.getStaticVersion(request) + "/"
+				+ WEB_FLASHCARDS + "/fcManager";
 	}
 
 	/*
@@ -221,7 +225,6 @@ public class FlashcardCRUDController extends BaseController {
 				.queryByTermOrDefinitionUsingLikeCondition(pattern,
 						searchPageNum);
 		SimplePageInfoDTO pageInfo = (SimplePageInfoDTO) map.get("pageInfo");
-
 
 		return map;
 	}

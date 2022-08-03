@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,17 +44,19 @@ public class FlashcardHolderCRUDController extends BaseController {
 	 */
 
 	@RequestMapping(value = FLASHCARDHOLDER, method = RequestMethod.GET)
-	public String toAdd() {
-
+	public String toAdd(HttpServletResponse res) {
+		res.addHeader("Cache-Control", "no-cache");
 		return PAGE_FLASHCARDS + "/modelEditor/"
 				+ "flashcardHolderAddPage.html";
 	}
 
 	@RequestMapping(value = FLASHCARDHOLDER
 			+ "/{id}", method = RequestMethod.POST) //使用post 以解決瀏覽器緩存問題
-	public String toEdit(@PathVariable("id") String id, HttpSession session) {
+	public String toEdit(@PathVariable("id") String id, HttpSession session,
+			HttpServletResponse res) {
 		session.setAttribute("flashcardHolderEditId", id);
 
+		res.addHeader("Cache-Control", "no-cache");
 		return PAGE_FLASHCARDS + "/modelEditor/"
 				+ "flashcardHolderEditPage.html";
 	}
@@ -93,7 +97,8 @@ public class FlashcardHolderCRUDController extends BaseController {
 	}
 
 	@RequestMapping(value = FLASHCARDHOLDER, method = RequestMethod.POST)
-	public String add(FlashcardHolder flashcardHolder) {
+	public String add(FlashcardHolder flashcardHolder,
+			HttpServletRequest request) {
 
 		if (flashcardHolder.getFcId() != null
 				&& flashcardHolder.getFcId().equals("")) {
@@ -101,24 +106,13 @@ public class FlashcardHolderCRUDController extends BaseController {
 		}
 		flashcardHolderService.addNew(flashcardHolder);
 
-		return "redirect:/" + WEB_FLASHCARDS + "/fhManager";
-	}
-
-	//@RequestMapping(value = FLASHCARDHOLDER, method = RequestMethod.POST)
-	public String addOld(String[] names, String[] fcids) {
-
-		for (int i = 0; i < fcids.length; i++) {
-			FlashcardHolder holder = new FlashcardHolder();
-			holder.setName(names[i]);
-			holder.setFcId(Integer.parseInt(fcids[i]));
-			flashcardHolderService.addNew(holder);
-		}
-
-		return "redirect:/" + WEB_FLASHCARDS + "/fhManager";
+		return "redirect:/" + BaseController.getStaticVersion(request) + "/"
+				+ WEB_FLASHCARDS + "/fhManager";
 	}
 
 	@RequestMapping(value = FLASHCARDHOLDER, method = RequestMethod.PUT)
-	public String edit(FlashcardHolder flashcardHolder) {
+	public String edit(FlashcardHolder flashcardHolder,
+			HttpServletRequest request) {
 		if (flashcardHolder.getFcId() == null
 				|| flashcardHolder.getFcId().equals("")) {
 			flashcardHolder.setFcId(null);
@@ -131,15 +125,18 @@ public class FlashcardHolderCRUDController extends BaseController {
 
 		flashcardHolderService.edit(result);
 
-		return "redirect:/" + WEB_FLASHCARDS + "/fhManager";
+		return "redirect:/" + BaseController.getStaticVersion(request) + "/"
+				+ WEB_FLASHCARDS + "/fhManager";
 	}
 
 	@RequestMapping(value = FLASHCARDHOLDER
 			+ "/{id}", method = RequestMethod.DELETE)
-	public String remove(@PathVariable("id") String id) {
+	public String remove(@PathVariable("id") String id,
+			HttpServletRequest request) {
 		flashcardHolderService.remove(id);
 
-		return "redirect:/" + WEB_FLASHCARDS + "/fhManager";
+		return "redirect:/" + BaseController.getStaticVersion(request) + "/"
+				+ WEB_FLASHCARDS + "/fhManager";
 	}
 
 	/*

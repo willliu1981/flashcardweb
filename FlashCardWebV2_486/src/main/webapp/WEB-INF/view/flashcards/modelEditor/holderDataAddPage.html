@@ -33,12 +33,13 @@
 
 <!-- global variable -->
 <script type="text/javascript">
-  const contextPath = "/FlashCardWebV2";
-  var version;
   const flashcards = "flashcards";//base path
   const models = "holderDatas";//*** 修改這裡 
   const model = "holderData";//*** 修改這裡 
   const quiz = "quiz";
+  const basePath={context:"/FlashCardWebV2",version:"",path:function(){
+	return this.context+"/"+this.version;
+  }};
   const listModels = "flashcardHolders";//*** 修改這裡 
   var pageInfo;
   var data;
@@ -47,26 +48,22 @@
   var id;
 </script>
 
-<!-- import version and process nav element -->
+<!-- import version and process other  element -->
 <script type="text/javascript" src="../js/version.js"></script>
 <script type="text/javascript" src="../js/nav.js"></script>
 
-<!-- process nav url 
-processVersion() => ajax => processNav() => navDoAction()
+<!-- 
+processVersion() => ajax => processNav() => other
 -->
 <script type="text/javascript">
 $(function (){
   processVersion();
+  
+  processFormAction( basePath.path() + "/" + model);
 });
 </script>
 <!-- /import version and process nav element -->
 
-<!-- init -->
-<script type="text/javascript">
-    $(function() {
-      $("#form").attr("action",contextPath+"/"+version+"/"+model);
-    });
-</script>
 
 <!-- get data、pager and list -->
 <!-- get data 和 pager 及 list 需同時存在 -->
@@ -88,7 +85,7 @@ $(function (){
           $.ajax({
               type : "get",
               dataType:"json",
-              url :  contextPath+"/"+version+"/simple/"+listModels+"/"+num, 
+              url :  basePath.path()+"/simple/"+listModels+"/"+num, 
               success : function(resp) {
                 
                 data = [];
@@ -230,7 +227,7 @@ $(function (){
         $(".pager-pageNum-replaced").nextUntil(".pager-next").remove(); 
         
         const domElements = navigatepageNums.map( place => {
-          var path=contextPath+"/"+version+"/"+listModels+"/"+place;
+          var path=basePath.path()+"/"+listModels+"/"+place;
           
           if(pageNum==place){
             return `
@@ -263,38 +260,14 @@ $(function (){
 
 <!-- nav -->
 <script type="text/javascript">
-  $(document)
-	  .ready(
-		  function() {
+ 
+</script>
 
-			$(".navbar-header a").attr("href", contextPath);
-
-			$(".navbar-collapse .modelManager a").attr("href",
-				contextPath+"/"+version + "/" + flashcards + "/fcsManager");
-
-			let mm_fc = $(".navbar-collapse ul .dropdown ul .modelManager-flashcard a");
-			mm_fc.attr("href", contextPath+"/"+version + "/" + flashcards + "/fcManager");
-			mm_fc.text = "字卡管理";
-
-			$(
-				".navbar-collapse ul .dropdown ul .modelManager-flashcardHolder a")
-				.attr("href", contextPath+"/"+version + "/" + flashcards + "/fhManager");
-
-			$(".navbar-collapse ul .dropdown ul .modelManager-holderData a")
-				.attr("href", contextPath+"/"+version + "/" + flashcards + "/hdManager");
-
-			$(".navbar-collapse ul .quizManager a").attr("href",
-				contextPath+"/"+version + "/" + quiz + "/quizManager");
-
-			//使作用中
-			/* doNavAction(".navbar-collapse ul .dropdown ul .modelManager-flashcard"); *///*** 修改這裡 
-		  });
-
-  //使作用中
-  function doNavAction(selector) {
-	$(selector).addClass("active");
-	$(selector + " a").addClass("hrefDisabled");
-  }
+<!-- form -->
+<script type="text/javascript">
+  function processFormAction(path) {
+    $(".form-update").attr('action',path);
+  };
 </script>
 
 </head>
@@ -348,7 +321,7 @@ $(function (){
 
     <!-- form -->
     <div class="container">
-        <form id="form" class="form-horizontal" action="holderData" method="post">
+        <form  class="form-horizontal form-update" action="holderData" method="post">
             <fieldset>
                 <legend>新增 Holder Data</legend>
                 <div class="form-group">

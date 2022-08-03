@@ -6,9 +6,10 @@ function processVersion() {
 	$.ajax({
 		type: 'post',
 		dataType: 'json',
-		url: contextPath + '/v0/' + flashcards + '/version',
+		async:false,
+		url: basePath.context + '/v0/' + flashcards + '/version',
 		success: function(data) {
-			version = data.version;
+			basePath.version=data.version;
 			processNav();
 		},
 		error: function(err) {

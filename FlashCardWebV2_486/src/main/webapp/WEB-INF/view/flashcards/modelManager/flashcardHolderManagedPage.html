@@ -24,12 +24,13 @@
 
 <!-- global variable -->
 <script type="text/javascript">
-  const contextPath = "/FlashCardWebV2";
-  var version;
   const flashcards = "flashcards";//base path
   const models = "flashcardHolders";//*** 修改這裡 
   const model = "flashcardHolder";//*** 修改這裡 
   const quiz = "quiz";
+  const basePath={context:"/FlashCardWebV2",version:"",path:function(){
+    	return this.context+"/"+this.version;
+  }};
   var pageInfo;
   var data;
   var pageNum=1;
@@ -37,16 +38,17 @@
 </script>
 
 
-<!-- import version and process nav element -->
+<!-- import version and process other  element -->
 <script type="text/javascript" src="../../js/version.js"></script>
 <script type="text/javascript" src="../../js/nav.js"></script>
 
-<!-- process nav url 
-processVersion() => ajax => processNav() => navDoAction()
+<!-- 
+processVersion() => ajax => processNav() => other
 -->
 <script type="text/javascript">
 $(function (){
   processVersion();
+  
 });
 </script>
 <!-- /import version and process nav element -->
@@ -70,7 +72,7 @@ $(function (){
 	  $.ajax({
 		  type : "get",
 		  dataType:"json",
-		  url : contextPath + "/"+version+"/" + models+"/"+num, 
+		  url : basePath.path()+"/" + models+"/"+num, 
 		  success : function(resp) {
 			
 			data = [];
@@ -117,7 +119,7 @@ $(function (){
   //badge edit 重定向
   function badgeEditLocate(element) {
 	let submit=$("#listedit_hidden_submit");
-	submit.attr("action",contextPath +"/"+version+"/" + model+"/"+$(element).attr('data-id'));
+	submit.attr("action",basePath.path()+"/" + model+"/"+$(element).attr('data-id'));
 	submit.submit();
   }
 </script>
@@ -126,7 +128,7 @@ $(function (){
 <script type="text/javascript">
   $(function() {
     $(".list-group .list-group-item .badge-add").click(function(){
-      window.location.href = contextPath +"/"+version+"/" + model;
+      window.location.href = basePath.path()+"/" + model;
     }); 
   });
 </script>
@@ -137,7 +139,7 @@ $(function (){
      function modelValues(id,name,term) {
         $("#modal_name").text(name);
         $("#modal_term").text(term); 
-        $("#modal_form").attr("action", contextPath+"/"+version+"/"+model+"/"+id);
+        $("#modal_form").attr("action", basePath.path()+"/"+model+"/"+id);
       }
 </script>
 
@@ -194,7 +196,7 @@ $(function (){
   	$(".pager-pageNum-replaced").nextUntil(".pager-next").remove(); 
 	
     const domElements = navigatepageNums.map( place => {
-      var path=contextPath+"/"+version+"/"+models+"/"+place;
+      var path=basePath.path()+"/"+models+"/"+place;
       
       if(pageNum==place){
     	return `

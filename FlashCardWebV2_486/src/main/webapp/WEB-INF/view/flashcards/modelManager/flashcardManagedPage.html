@@ -25,12 +25,13 @@
 
 <!-- global variable -->
 <script type="text/javascript">
-const contextPath = "/FlashCardWebV2";
-  var version;
   const flashcards = "flashcards";//base path
   const models = "flashcards";//*** 修改這裡 
   const model = "flashcard";//*** 修改這裡 
   const quiz = "quiz"; 
+  const basePath={context:"/FlashCardWebV2",version:"",path:function(){
+	return this.context+"/"+this.version;
+  }};
   var pageInfo;
   var datas;
   var pageNum=1;
@@ -39,16 +40,17 @@ const contextPath = "/FlashCardWebV2";
   
 </script>
 
-<!-- import version and process nav element -->
+<!-- import version and process other  element -->
 <script type="text/javascript" src="../../js/version.js"></script>
 <script type="text/javascript" src="../../js/nav.js"></script>
 
-<!-- process nav url 
-processVersion() => ajax => processNav() => navDoAction()
+<!-- 
+processVersion() => ajax => processNav() => other
 -->
 <script type="text/javascript">
 $(function (){
   processVersion();
+  
 });
 </script>
 <!-- /import version and process nav element -->
@@ -57,6 +59,7 @@ $(function (){
 <script type="text/javascript">
   $(function() {
 	getData(pageNum);
+	
 	
   });
   
@@ -80,14 +83,13 @@ $(function (){
 	  if(searchMod==1){
 		//search
 		if(num>=0){
-			url=contextPath+"/"+version+"/"+ model+"/like/"+pattern+"/"+num;
+			url=basePath.path()+"/"+ model+"/like/"+pattern+"/"+num;
 		}else{
-		  	url=contextPath+"/"+version+"/"+model+"/like/"+pattern;
+		  	url=basePath.path()+"/"+model+"/like/"+pattern;
 		}
 	  }else{
 		//no search
-		url =contextPath + "/"+version+"/" + models+"/"+num;
-		console.log('xxxx '+url);
+		url =basePath.path()+"/" + models+"/"+num;
 	  }
 	  
 	 
@@ -149,8 +151,7 @@ $(function (){
   
   //badge edit 重定向
   function badgeEditLocate(element) {
-	console.log('xxxx '+version);
-	window.location.href = contextPath+"/"+version+"/"  + model+"/"+$(element).attr('data-id');
+	window.location.href = basePath.path()+"/"  + model+"/"+$(element).attr('data-id');
   }
 </script>
 
@@ -158,7 +159,7 @@ $(function (){
 <script type="text/javascript">
   $(function() {
     $(".list-group .list-group-item .badge-add").click(function(){
-      window.location.href = contextPath + "/"+version+"/" + model;
+      window.location.href = basePath.path()+"/" + model;
     }); 
     
     
@@ -181,7 +182,7 @@ $(function (){
      function modelValues(id,term,definition) {
         $("#modal_term").text(term);
         $("#modal_definition").text(definition);
-        $("#modal_form").attr("action", contextPath+ "/"+version+"/"+model+"/"+id);
+        $("#modal_form").attr("action", basePath.path()+"/"+model+"/"+id);
       }
 </script>
 
@@ -238,7 +239,7 @@ $(function (){
   	$(".pager-pageNum-replaced").nextUntil(".pager-next").remove(); 
 	
     const domElements = navigatepageNums.map( place => {
-      var path=contextPath+"/"+version+"/"+models+"/"+place;
+      var path=basePath.path()+"/"+models+"/"+place;
       
       if(pageNum==place){
     	return `
@@ -479,7 +480,9 @@ $(function (){
     </div>
     <!-- /.modal (for list delete)-->
 
-    <!-- <div><a href="FlashcardWebV2/flashcards/test">xxx </a></div>
+    <!-- 
+    <div> <button onclick="console.log('click '+basePath.path())">click</button></div>
+    <div><a href="FlashcardWebV2/flashcards/test">xxx </a></div>
 <div>xxx2</div> -->
 </body>
 </html>

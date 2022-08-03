@@ -23,11 +23,12 @@
 
 <!-- global variable -->
 <script type="text/javascript">
-  const contextPath = "/FlashCardWebV2";
-  var version;
   const flashcards = "flashcards";//base path
   const model = "flashcardHolder";//*** 修改這裡 
   const quiz = "quiz";
+  const basePath={context:"/FlashCardWebV2",version:"",path:function(){
+	return this.context+"/"+this.version;
+  }};
   listModels = "flashcards";//*** 修改這裡 
   var pageInfo;
   var pageNum = 1;
@@ -35,26 +36,21 @@
 </script>
 
 
-<!-- import version and process nav element -->
+<!-- import version and process other  element -->
 <script type="text/javascript" src="../../js/version.js"></script>
 <script type="text/javascript" src="../../js/nav.js"></script>
 
-<!-- process nav url 
-processVersion() => ajax => processNav() => navDoAction()
+<!-- 
+processVersion() => ajax => processNav() => other
 -->
 <script type="text/javascript">
 $(function (){
   processVersion();
+  
+  processFormAction( basePath.path() + "/" + model);
 });
 </script>
 <!-- /import version and process nav element -->
-
-<!-- init -->
-<script type="text/javascript">
-    $(function() {
-      $("#form").attr("action",contextPath+"/"+version+"/"+model);
-    });
-</script>
 
 <!-- echo and init -->
 <script type="text/javascript">
@@ -63,7 +59,7 @@ $(function (){
 	$.ajax({
 	  type : "get",
 	  dataType : "json",
-	  url : contextPath + "/"+version+"/" + model + "/echo",
+	  url : basePath.path()+"/" + model + "/echo",
 	  success : function(resp) {
 		$("#id").val(resp.data.id);
 		$("#name").val(resp.data.name);
@@ -97,7 +93,7 @@ $(function (){
           $.ajax({
               type : "get",
               dataType:"json",
-              url :  contextPath+"/"+version+"/simple/"+listModels+"/"+num, 
+              url :  basePath.path()+"/simple/"+listModels+"/"+num, 
               success : function(resp) {
                 
                 let data = [];
@@ -197,7 +193,7 @@ $(function (){
         $(".pager-pageNum-replaced").nextUntil(".pager-next").remove(); 
         
         const domElements = navigatepageNums.map( place => {
-          var path=contextPath+"/"+version+"/"+listModels+"/"+place;
+          var path=basePath.path()+"/"+listModels+"/"+place;
           
           if(pageNum==place){
             return `
@@ -233,6 +229,13 @@ $(function (){
 
 </script>
 <!-- /nav -->
+
+<!-- form -->
+<script type="text/javascript">
+  function processFormAction(path) {
+    $(".form-update").attr('action',path);
+  };
+</script>
 
 </head>
 <body>
@@ -286,7 +289,7 @@ $(function (){
     <!-- form -->
     <!-- //*** 修改這裡  -->
     <div class="container">
-        <form id="form" class="form-horizontal" action="" method="post">
+        <form class="form-horizontal form-update" action="" method="post">
             <fieldset>
                 <legend>編輯 Flashcard Holder</legend>
                 <div class="form-group">

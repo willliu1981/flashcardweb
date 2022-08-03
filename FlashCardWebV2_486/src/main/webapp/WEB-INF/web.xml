@@ -77,7 +77,7 @@
 
 	<context-param>
 		<param-name>version</param-name>
-		<param-value>va3</param-value>
+		<param-value>va6</param-value>
 	</context-param>
 
 	<listener>

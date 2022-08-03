@@ -3,24 +3,24 @@
  */
 
 function processNav() {
-	$(".navbar-header a").attr("href", contextPath);
+	$(".navbar-header a").attr("href", basePath.context);
 
 	$(".navbar-collapse .modelManager a").attr("href",
-		contextPath + "/" + version + "/" + flashcards + "/fcsManager");
+		basePath.path()+ "/" + flashcards + "/fcsManager");
 
 	let mm_fc = $(".navbar-collapse ul .dropdown ul .modelManager-flashcard a");
 	mm_fc
-		.attr("href", contextPath + "/" + version + "/" + flashcards + "/fcManager");
+		.attr("href", basePath.path() + "/" + flashcards + "/fcManager");
 	mm_fc.text = "字卡管理";
 
 	$(".navbar-collapse ul .dropdown ul .modelManager-flashcardHolder a")
-		.attr("href", contextPath + "/" + version + "/" + flashcards + "/fhManager");
+		.attr("href", basePath.path() + "/" + flashcards + "/fhManager");
 
 	$(".navbar-collapse ul .dropdown ul .modelManager-holderData a")
-		.attr("href", contextPath + "/" + version + "/" + flashcards + "/hdManager");
+		.attr("href", basePath.path() + "/" + flashcards + "/hdManager");
 
 	$(".navbar-collapse ul .quizManager a")
-		.attr("href", contextPath + "/" + version + "/" + quiz + "/quizManager");
+		.attr("href", basePath.path() + "/" + quiz + "/quizManager");
 
 	
 
