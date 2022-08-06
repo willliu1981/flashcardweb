@@ -77,7 +77,7 @@
 
 	<context-param>
 		<param-name>version</param-name>
-		<param-value>va7</param-value>
+		<param-value>v495</param-value>
 	</context-param>
 
 	<listener>
@@ -98,27 +98,5 @@
 		</taglib>
 	</jsp-config>
 
- 
-<!-- 防止Spring記憶體溢位監聽器 -->  
-<!-- <listener>  
-    <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>  
-</listener>  -->
-
-<!-- 	<jsp-config>
-		<taglib>
-			<taglib-uri>Taglib</taglib-uri>
-			<taglib-location>/WEB-INF/tlds/MyTaglib.tld</taglib-location>
-		</taglib>
-		<jsp-property-group>
-			<description>Special property group for JSP Configuration JSP example.</description>
-			<display-name>JSPConfiguration</display-name>
-			<url-pattern>/* </url-pattern>
-			<el-ignored>true</el-ignored>
-			<page-encoding>UTF-8</page-encoding>
-			<scripting-invalid>true</scripting-invalid>
-			<include-prelude>/include/prelude.jspf</include-prelude>
-			<include-coda>/include/coda.jspf</include-coda>
-		</jsp-property-group>
-	</jsp-config> -->
 
 </web-app>

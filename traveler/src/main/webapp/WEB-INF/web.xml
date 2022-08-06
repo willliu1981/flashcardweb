@@ -5,9 +5,9 @@
 	version="4.0">
 
 
-	<display-name>FlashCardWebV2</display-name>
+	<display-name>Traveler</display-name>
 	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 
 
@@ -18,7 +18,7 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
-				classpath:springmvc/springMVC-servlet.xml
+				classpath:spring/springMVC-servlet.xml
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
@@ -68,16 +68,13 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			classpath:spring/dao.xml,
-			classpath:spring/tool.xml,
-			classpath:springmvc/spring-mybatis.xml,
-			classpath:spring/test.xml
+			classpath:spring/spring-mybatis.xml
 		</param-value>
 	</context-param>
 
 	<context-param>
 		<param-name>version</param-name>
-		<param-value>va7</param-value>
+		<param-value>v495</param-value>
 	</context-param>
 
 	<listener>
@@ -86,39 +83,6 @@
 		</listener-class>
 	</listener>
 
-<!---->
-	<jsp-config>
-		<taglib>
-			<taglib-uri>https://idv.kw/tags/list</taglib-uri>
-			<taglib-location>/WEB-INF/lib/taglib/dataprocess/listTag.tld</taglib-location>
-		</taglib>
-		<taglib>
-			<taglib-uri>https://idv.kw/tags/editor</taglib-uri>
-			<taglib-location>/WEB-INF/lib/taglib/dataprocess/editorTag.tld</taglib-location>
-		</taglib>
-	</jsp-config>
 
- 
-<!-- 防止Spring記憶體溢位監聽器 -->  
-<!-- <listener>  
-    <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>  
-</listener>  -->
-
-<!-- 	<jsp-config>
-		<taglib>
-			<taglib-uri>Taglib</taglib-uri>
-			<taglib-location>/WEB-INF/tlds/MyTaglib.tld</taglib-location>
-		</taglib>
-		<jsp-property-group>
-			<description>Special property group for JSP Configuration JSP example.</description>
-			<display-name>JSPConfiguration</display-name>
-			<url-pattern>/* </url-pattern>
-			<el-ignored>true</el-ignored>
-			<page-encoding>UTF-8</page-encoding>
-			<scripting-invalid>true</scripting-invalid>
-			<include-prelude>/include/prelude.jspf</include-prelude>
-			<include-coda>/include/coda.jspf</include-coda>
-		</jsp-property-group>
-	</jsp-config> -->
 
 </web-app>
