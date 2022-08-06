@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>FLASH CARD</title>
+<link rel="stylesheet" href="/FlashCardWebV2/css/bootstrap.min.cyborg.css">
+<link rel="stylesheet" href="/FlashCardWebV2/webjars/bootstrap/3.4.1/css/bootstrap-theme.min.css">
+
+<script type="text/javascript" src="/FlashCardWebV2/webjars/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="/FlashCardWebV2/webjars/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style type="text/css">
+/* 用於list-group 下,改變游標圖示  */
+.myBadgeCursor>li>.badge {
+	cursor: pointer;
+}
+
+body {
+	background-image: url(/FlashCardWebV2/picture/flame1.jpg);
+}
+</style>
+
+<!-- 使 a href 失效 -->
+<script type="text/javascript">
+  $(function() {
+    $('.hrefDisabled').on("click", function(e) {
+      e.preventDefault();
+    });
+  });
+</script>
+
+
+<style type="text/css">
+#carousel-example-generic .carousel-inner>.item>img {
+	display: block;
+	width: 100%;
+	height: 750px;
+}
+
+.my-carousel {
+	height: 750px;
+	overflow: hidden;
+}
+
+.myCaption {
+	font-size: 100px;
+	height: 85%;
+	left: 0%;
+	color: rgb(225, 225, 225);
+}
+</style>
+<!-- 備註
+第一次播放在133行附近
+其餘播放在275行附近
+play() 在208附近
+ -->
+
+<!-- global variable -->
+<script type="text/javascript">
+  const flashcards = "flashcards";//base path
+  const models = "flashcards";//*** 修改這裡 
+  const model = "flashcard";//*** 修改這裡 
+  const quiz = "quiz";
+  const basePath = {
+		context : "/FlashCardWebV2",
+		version : "",
+		path : function() {
+		  return this.context + "/" + this.version;
+		}
+	  };
+  var pageInfo;
+  var pageNum = 1;
+
+  var pause = 0;//0='cycle' , 1='pause'
+  var filter;
+  var ids;//ids (json string)
+  var itemsLength;//item count
+  var musicSources;//play sound sources
+  var flashcardSources=[];//flashcards
+  
+</script>
+
+<!-- import version and process other  element -->
+<script type="text/javascript" src="../../../../js/version.js"></script>
+<script type="text/javascript" src="../../../../js/nav.js"></script>
+
+<!-- 
+processVersion() => ajax => processNav() => other
+-->
+<script type="text/javascript">
+  $(function() {
+    processVersion();
+
+  });
+</script>
+<!-- /import version and process nav element -->
+
+<!-- nav -->
+<script type="text/javascript">
+ 
+</script>
+<!-- /nav -->
+
+<!-- carousel /getData-->
+<script type="text/javascript">
+	$(function(){
+	  
+	  $.ajax({
+		  type : "get",
+		  dataType:"json",
+		  url : basePath.path() + "/quiz/simple/flashcards", 
+		  success : function(resp) {
+			
+			var fcs = resp.data.flashcards;
+			for (i = 0; i < fcs.length; i++) {
+			  flashcardSources.push(fcs[i]);
+			}
+			createItemDomElement(flashcardSources);
+			checkMusic(flashcardSources);
+			
+			filter=resp.data.filter;
+			ids=resp.data.ids;
+			itemsLength=fcs.length;
+			
+	    	if (itemsLength == 1) {
+	    	  $('.control-button .finish-slide').fadeIn("slow");
+	    	}
+	    	
+	    	window.setTimeout(function(){
+	    	    play(0);
+	    	}, 1000);
+	    	
+		  },
+		  error : function(thrownError) {
+			alert("error:" + thrownError);
+		  }
+		});
+	  
+	  
+		//創建  輪播 item
+	  function createItemDomElement(data) {
+		
+		const domElements = data.map( place => {
+	      return `
+	      <div class="item" >
+	        <img src="${basePath.context}/picture/blackboard_1.png" />
+	          <div class="carousel-caption myCaption">
+	              <div>
+	                  <span>
+	                      ${place.term }
+	                  </span>
+	              </div>
+	              <div>
+	                  <span>
+	                      ${place.definition }
+	                  </span>
+	              </div>
+	          </div>
+	      </div>
+	      `;
+	    }).join("");
+
+	    $('.carousel-inner-item-replaced').replaceWith(domElements);
+		$(".item").first().addClass("active");
+	  }
+	
+	  
+		//確認播放路徑(resources)
+	  function checkMusic(data) {
+		musicSources=new Array(data.length);
+		
+		for (i = 0; i < data.length; i++) {
+		  checkMusicItem(i,data[i].term);
+		}
+	  };
+	  
+		//確認播放路徑(item)
+	  function checkMusicItem(idx,item){
+		var music = new Audio();
+		var sources = [
+			'https://s.yimg.com/bg/dict/dreye/live/f/'+item+'.mp3',
+			'https://s.yimg.com/bg/dict/dreye/live/m/'+item+'.mp3',
+			'https://s.yimg.com/bg/dict/dreye/live/f/'+item+'@1.mp3',
+			'https://s.yimg.com/bg/dict/dreye/live/m/'+item+'@1.mp3',
+			'https://s.yimg.com/bg/dict/ox/mp3/v1/'+item+'@_us_1.mp3',
+			'https://s.yimg.com/bg/dict/ox/mp3/v1/'+item+'@_us_2.mp3'];
+
+		music.onerror = function() {
+		  if (sources[0]) {
+			this.src=sources.shift();
+			musicSources[idx]=this.src;
+		  }else{
+			musicSources[idx]='invalid';
+		  }
+		};
+		music.src=sources.shift();
+		musicSources[idx]=music.src;
+	  }
+
+	});
+	
+	//play audio
+	  function play(idx){
+	    var music=new Audio(musicSources[idx]);
+		music.play();
+		console.log('play sound : '+ flashcardSources[idx].term +' : ' +musicSources[idx]);
+	  }
+
+    	
+</script>
+<!-- /carousel -->
+
+
+<!-- process quiz finish  -->
+<script type="text/javascript">
+
+  $(document).ready(function() {
+
+    $(".control-button .finish-slide").click(function() {
+      $.ajax({
+        type : "post",
+        data : {
+          ids : ids,
+          filter : filter
+        },
+        dataType : "json",
+        url : basePath.path() + "/quiz",
+        success : function(data) {
+          console.log("data=" + data.code);
+          window.location.href = basePath.path() + "/quiz/quizManager";//quiz完成時, 導向目的地
+        },
+        error : function(data) {
+          console.log("error=" + data);
+        }
+      });
+    });
+
+  });
+</script>
+
+<!-- control button -->
+<script type="text/javascript">
+  $(function() {
+	var carousel = $('.carousel');
+
+	$('.control-button .pause-slide').click(function() {
+	  carousel.carousel('pause');
+
+	  $('.control-pauseMsg .pauseMsg').text('pause');
+	  $('.control-pauseMsg .pauseMsg').fadeIn(200);
+	  $('.control-pauseMsg .pauseMsg').fadeOut(500);
+
+	});
+
+	$('.control-button .start-slide').click(function() {
+	  carousel.carousel('cycle');
+
+	  $('.control-pauseMsg .pauseMsg').text('start');
+	  $('.control-pauseMsg .pauseMsg').fadeIn(200);
+	  $('.control-pauseMsg .pauseMsg').fadeOut(500);
+
+	});
+
+	$('.control-button .prev-slide').click(function() {
+	  carousel.carousel('prev');
+	});
+
+	$('.control-button .next-slide').click(function() {
+	  carousel.carousel('next');
+	});
+
+	$('.control-button .restart-slide').click(function() {
+	  carousel.carousel(0);
+	});
+
+	// .active and last item (使 finish 顯示)
+	$('.control-button .finish-slide').fadeOut(100);
+	carousel.on('slid.bs.carousel', function(e) {
+	  let currentIdx = carousel.find('.item').siblings('.active').index();
+	  
+	  if(musicSources[currentIdx]!='invalid'){
+		window.setTimeout(function(){
+			play(currentIdx);
+  		}, 1000);
+	  }
+	  
+	  if (currentIdx == itemsLength - 1) {
+		$('.control-button .finish-slide').fadeIn("slow");
+	  }
+	  
+	});
+
+  });
+
+  $(document).bind('keyup', function(e) {
+	if (e.keyCode == 37) {
+	  $('.control-button .prev-slide').trigger('click');
+
+	} else if (e.keyCode == 39) {
+	  $('.control-button .next-slide').trigger('click');
+
+	  //'r'
+	} else if (e.keyCode == 82) {
+	  $('.control-button .restart-slide').trigger('click');
+
+	} else if (e.keyCode == 32) {
+	  pause = 1 - pause;
+
+	  if (pause == 0) {
+		$('.control-button .start-slide').trigger('click');
+
+	  } else {
+		$('.control-button .pause-slide').trigger('click');
+
+	  }
+	}
+
+  });
+</script>
+
+</head>
+<body>
+
+    <!-- 導航欄 -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="">FlashCard </a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active??? modelManager"><a class="hrefDisabled???" href="">字卡管理 </a></li>
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-expanded="false">
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li class="active??? modelManager-flashcard"><a class="hrefDisabled???" href="">Flashcard</a></li>
+
+                            <li class="active???? modelManager-flashcardHolder"><a class="hrefDisabled???" href="">FlashcardHolder</a></li>
+
+                            <li class="active??? modelManager-holderData"><a class="hrefDisabled???" href="">HolderData</a></li>
+                        </ul></li>
+                    <li class="active??? quizManager"><a class="hrefDisabled???" href="">測驗管理 </a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#" data-target="#myModal" data-toggle="modal">關於</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- /導航欄 -->
+
+    <!-- 巨屏 -->
+    <div class="jumbotron">
+        <div class="container">
+            <h1>FlashCard</h1>
+            <p>字卡測驗</p>
+            <!-- //*** 修改這裡  -->
+        </div>
+    </div>
+
+
+    <!-- 輪播 -->
+    <div class="container">
+        <div id="carousel-example-generic" class="carousel slide my-carousel " data-ride="carousel" data-interval="5000"
+            data-pause="hover" data-wrap="false" data-keyboard="true">
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <div class="carousel-inner-item-replaced"></div>
+            </div>
+
+            <!-- Controls -->
+            <a class="left carousel-control carousel-control" href="#carousel-example-generic" role="button"
+                data-slide="prev">
+                <span class="glyphicon " style="font-size: 75px;" aria-hidden="true"></span>
+                <!-- glyphicon-triangle-left glyphicon-chevron-left -->
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                <span class="glyphicon " style="font-size: 75px;" aria-hidden="true"></span>
+                <!-- glyphicon-triangle-right glyphicon-chevron-right -->
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+    <!-- //輪播 -->
+
+    <!-- control button -->
+    <div class="container " style="text-align: center;">
+        <div class="container control-pauseMsg">
+            <span class="pauseMsg h1"></span>
+            <p></p>
+        </div>
+
+        <div class="container control-button">
+            <input type="button" class="btn finish-slide" value="Finish" style="color: rgb(255, 140, 0);">
+            <input type="button" class="btn restart-slide" value="Restart">
+            <input type="button" class="btn start-slide" value="Start">
+            <input type="button" class="btn pause-slide" value="Pause">
+            <input type="button" class="btn prev-slide" value="Previous">
+            <input type="button" class="btn next-slide" value="Next">
+
+        </div>
+    </div>
+
+
+    <!-- footer -->
+    <div class="container container-footer">
+        <h4>Copyright &copy; 2021-2022 FlashCard. All rights reserved.</h4>
+    </div>
+</body>
+</html>

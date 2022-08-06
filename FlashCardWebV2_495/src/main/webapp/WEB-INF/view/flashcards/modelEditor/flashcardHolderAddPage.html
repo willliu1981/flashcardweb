@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>FLASH CARD</title>
+<link rel="stylesheet" href="../css/bootstrap.min.cyborg.css">
+<link rel="stylesheet" href="../webjars/bootstrap/3.4.1/css/bootstrap-theme.min.css">
+
+<script type="text/javascript" src="../webjars/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="../webjars/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style type="text/css">
+/* 用於list-group 下,改變游標圖示  */
+.myBadgeCursor>li>.badge {
+	cursor: pointer;
+}
+
+.badgeSpan { /* 用於 list badge (delete)*/
+	text-align: center;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.listAdd {
+	visibility: visible;
+	background-color: orange;
+	cursor: copy;
+}
+
+.removeListAdd {
+	visibility: hidden;
+}
+</style>
+
+<!-- global variable -->
+<script type="text/javascript">
+  const flashcards = "flashcards";//base path
+  const models = "flashcardHolders";//*** 修改這裡 
+  const model = "flashcardHolder";//*** 修改這裡 
+  const quiz = "quiz";
+  const basePath={context:"/FlashCardWebV2",version:"",path:function(){
+	return this.context+"/"+this.version;
+  }};
+  const listModels = "flashcards";//*** 修改這裡 
+  var pageInfo;
+  var data;
+  var citedNums;
+  var pageNum = 1;
+  var id;
+</script>
+
+
+<!-- import version and process other  element -->
+<script type="text/javascript" src="../js/version.js"></script>
+<script type="text/javascript" src="../js/nav.js"></script>
+
+<!-- 
+processVersion() => ajax => processNav() => other
+-->
+<script type="text/javascript">
+$(function (){
+  processVersion();
+  
+  processFormAction( basePath.path() + "/" + model);
+});
+</script>
+<!-- /import version and process nav element -->
+
+
+<!-- get data、pager and list -->
+<!-- get data 和 pager 及 list 需同時存在 -->
+<!-- get data and list -->
+<script type="text/javascript">
+      $(function() {
+          getData(pageNum);
+      });
+      
+      //get data from ajax  
+      function getData(num){
+          //失效時不處理
+          //$(this) 代表某個呼叫getData 時傳入的一個物件,ex: getData(this,num)
+          if($(this).hasClass('hrefDisabled')){
+            return;
+          }
+        
+          pageNum=parseInt(num);
+          $.ajax({
+              type : "get",
+              dataType:"json",
+              url :  basePath.path()+"/simple/"+listModels+"/"+num, 
+              success : function(resp) {
+                
+                data = [];
+                pageInfo = resp.pageInfo;
+                for (i = 0; i < pageInfo.list.length; i++) {
+                  data.push(pageInfo.list[i]);
+                }
+                
+                citedNums=resp.pageInfo.citedNums;
+                
+                createListDomElement(data,citedNums);
+    
+                //處理分頁
+                doPager(); 
+              },
+              error : function(thrownError) {
+                alert("get data error:" + thrownError);
+              }
+            });
+          
+        }
+      
+      //創建list item
+      function createListDomElement(ds,citedNums) {
+        $(".list-group-item-title").next().addClass("list-group-item-replaced");
+        $(".list-group-item-replaced").nextUntil(".list-group-item-footer").remove(); 
+        
+       const domElements =  $.map(ds,function(place,i){
+            let nums=  citedNums[i];
+            
+          return `
+          <li class="list-group-item"><a href="javascript:;" class="list-group-item list-item"
+          onclick="doSelectd.call(this)" data-id="${place.id}" 
+            data-value="${place.value}" ><!-- //***selected-list  -->
+              <span class="badge badge-add removeListAdd " onclick="listAdd.call(this)"  >
+                  <font size="5">+</font>
+              </span>
+              <span class="badge" onclick="">
+                  <font size="5">${nums}</font>
+              </span>
+              <h4 class="h4" class="list-group-item-heading">${place.value}</h4>
+          </a></li>
+          ` ;
+        }).join(""); 
+        
+        $('.list-group-item-replaced').replaceWith(domElements);
+      }
+      
+      function clearListAdd(){
+    	$(".badge-add").remove("listAdd");
+    	$(".badge-add").hasClass("removeListAdd");
+      }
+      
+      function switchListAdd(_this){
+    	if(_this.find(".badge-add").hasClass("listAdd")){
+    	  _this.find(".badge-add").removeClass("listAdd");
+    	  _this.find(".badge-add").addClass("removeListAdd");
+    	}else{
+    	  _this.find(".badge-add").removeClass("removeListAdd");
+    	  _this.find(".badge-add").addClass("listAdd");
+    	}
+      } 
+    
+      //selected list item  //***selected-list //*** 修改這裡
+      function doSelectd(){
+    	let id=$(this).attr('data-id');
+    	let value=$(this).attr('data-value');
+    	
+        switchListAdd($(this));
+        $("#name").val(value);
+        $("#flashcard_id").val(id);
+        $("#flashcard_term").val(value);
+      }
+      
+      
+      function listAdd(){
+       	$(".listAdd").each(function (){
+       		clearListAdd();
+       	  	
+       		let parent=$(this).parent();
+       		let value=parent.attr('data-value');
+       		let id=parent.attr('data-id');
+       		
+        	//*** 修改這裡
+        	$.ajax({
+        	  type:"post",
+        	  url:"flashcardHolder",//*** 修改這裡
+        	  data:{name:value,fcId:id},
+        	  success:function(){
+        		getData(pageNum);
+        	  },
+        	  error:function(err){
+        		console.log("listAdd error :"+err);
+        	  }
+        	});
+      	});
+      }
+      
+</script>
+<!-- /get data and list -->
+
+<!-- pager -->
+<script type="text/javascript">
+    $(function(){
+      let pagenumElement=$(".form-control-pagenum");
+      
+      pagenumElement.change(function(){
+    	  let pagenum=pagenumElement.val();
+    	  if(pagenum<=0){
+    		pagenum=1;
+    	  }else if(pagenum>pageInfo.pages){
+    		pagenum=pageInfo.pages;
+    	  }
+    	  
+    	  $(".pager li ul .pager-goto a").attr("onclick","getData.call(this,'"+pagenum+"')");
+      });
+      
+      pagenumElement.mousedown(function (){
+		pagenumElement.val("");
+	  });
+     
+    });
+
+      //(延後載入)
+      function doPager() {
+          $(".pager li ul .pager-first a").attr("onclick","getData.call(this,"+1+")");
+          doPagerAction(".pager li ul .pager-first",pageInfo.pageNum == 1);
+          
+          $(".pager li ul .pager-previous a").attr("onclick","getData.call(this,"+(parseInt(pageInfo.pageNum)-1)+")");
+          doPagerAction(".pager li ul .pager-previous",!pageInfo.hasPreviouPage);
+        
+            createPagerDomElement(pageInfo.navigatepageNums);
+    
+          $(".pager li ul .pager-next a").attr("onclick","getData.call(this,"+(parseInt(pageInfo.pageNum)+1)+")");
+          doPagerAction(".pager li ul .pager-next",!pageInfo.hasNextPage);
+    
+          $(".pager li ul .pager-last a").attr("onclick","getData.call(this,"+pageInfo.pages+")");
+          doPagerAction(".pager li ul .pager-last",pageInfo.isLastPage);
+      }
+    
+      function createPagerDomElement(navigatepageNums) {
+        $(".pager-previous").next().addClass("pager-pageNum-replaced");
+        $(".pager-pageNum-replaced").nextUntil(".pager-next").remove(); 
+        
+        const domElements = navigatepageNums.map( place => {
+          var path=basePath.path()+"/"+listModels+"/"+place;
+          
+          if(pageNum==place){
+            return `
+            <li class="active"><a class="hrefDisabled" href='javascript:;' onclick=''>${place}</a></li>
+          `;
+          }else{
+            return `
+            <li><a href='javascript:;' onclick='getData.call(this,${place})'>${place}</a></li>
+          `;
+          }
+        }).join("");
+        
+        $('.pager-pageNum-replaced').replaceWith(domElements);
+      }
+      
+      //使失效中
+      function doPagerAction(selector,ineffective) {
+        if(ineffective){
+            $(selector).addClass("disabled");
+            $(selector + " a").addClass("hrefDisabled");
+        }else{
+            $(selector).removeClass("disabled");
+            $(selector + " a").removeClass("hrefDisabled");
+        }
+      }
+      
+    </script>
+<!-- /pager -->
+<!-- /get data、pager and list -->
+
+<!-- nav -->
+<script type="text/javascript">
+  
+</script>
+
+
+<!-- form -->
+<script type="text/javascript">
+  function processFormAction(path) {
+	$(".form-update").attr('action',path);
+  };
+</script>
+</head>
+<body>
+
+    <!-- 導航欄 -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="">FlashCard </a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active??? modelManager"><a class="hrefDisabled???" href="">字卡管理 </a></li>
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-expanded="false">
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li class="active??? modelManager-flashcard"><a class="hrefDisabled???" href="">Flashcard</a></li>
+
+                            <li class="active???? modelManager-flashcardHolder"><a class="hrefDisabled???" href="">FlashcardHolder</a></li>
+
+                            <li class="active??? modelManager-holderData"><a class="hrefDisabled???" href="">HolderData</a></li>
+                        </ul></li>
+                    <li class="active??? quizManager"><a class="hrefDisabled???" href="">測驗管理 </a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#" data-target="#myModal" data-toggle="modal">關於</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- /導航欄 -->
+
+    <!-- 巨屏 -->
+    <div class="jumbotron">
+        <div class="container">
+            <h1>FlashCard</h1>
+            <p>管理 Flashcard Holder</p>
+            <!-- //*** 修改這裡  -->
+        </div>
+    </div>
+
+    <!-- form -->
+    <div class="container">
+        <form  class="form-horizontal form-update" action="flashcard" method="post">
+            <fieldset>
+                <legend>新增 Flashcard Holder</legend>
+                <div class="form-group">
+                    <label for="name" class="col-lg-2 control-label">Name</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="ex: apple">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="flashcard_term" class="col-lg-2 control-label">Flashcard</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="flashcard_term"
+                            placeholder="Please select from list">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <input type="hidden" id="flashcard_id" name="fcId">
+                        <button type="reset" class="btn btn-default" style="color: black;">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+    <!--  list and pager -->
+    <!-- 分頁 -->
+    <div class="container">
+        <ul class="pager">
+            <li>
+                <ul class="pagination">
+                    <li></li>
+
+                    <!-- 首頁 -->
+                    <li class="disabled??? pager-first"><a class="hrefDisabled???" href="javascript:;"
+                            style="width: 55px;">&laquo;</a></li>
+
+                    <!-- 上一頁 -->
+                    <li class="disabled??? pager-previous"><a class="hrefDisabled???" href="javascript:;"
+                            style="width: 55px;">&lsaquo;</a></li>
+
+                    <!-- 中間頁數 -->
+                    <li class="pager-pageNum-replaced"></li>
+
+                    <!-- 下一頁 -->
+                    <li class="disabled??? pager-next"><a class="hrefDisabled???" href="javascript:;"
+                            style="width: 55px;">&rsaquo;</a></li>
+
+                    <!-- 最末頁 -->
+                    <li class="disabled??? pager-last"><a class="hrefDisabled???" href="javascript:;"
+                            style="width: 55px;">&raquo;</a></li>
+
+                    <li></li>
+                </ul> <!-- goto page num -->
+                <ul class="pagination" style="margin-left: 20px;">
+                    <li></li>
+                    <li class="pager-goto"><a href="javascript:;" style="height: 38px; vertical-align: middle;">Goto</a></li>
+                </ul>
+
+                <ul class="pagination">
+                    <li class="pager-goto-pagenum"><a href="javascript:;">
+                            <table>
+                                <tr>
+                                    <td><input type="text" class="form-control form-control-pagenum"
+                                            style="height: 26px;" size="4" /></td>
+                                </tr>
+                            </table>
+                        </a></li>
+                    <li></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <!-- /分頁 -->
+
+    <!-- list -->
+    <div class="container" style="width: 50%;">
+        <ul class="list-group myBadgeCursor">
+            <li class="list-group-item list-group-item-title"><span class="badge" onclick="">
+                    <font size="5">totle</font>
+                </span>
+                <h3>Flashcard</h3></li>
+            <!-- //*** 修改這裡  -->
+
+
+            <li class="list-group-item-replaced"></li>
+        </ul>
+    </div>
+    <!-- /list -->
+    <!--  /list and pager -->
+
+</body>
+</html>

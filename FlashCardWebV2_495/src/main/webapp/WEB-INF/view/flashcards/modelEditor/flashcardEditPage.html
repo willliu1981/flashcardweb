@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>FLASH CARD</title>
+<link rel="stylesheet" href="../../css/bootstrap.min.cyborg.css">
+<link rel="stylesheet" href="../../webjars/bootstrap/3.4.1/css/bootstrap-theme.min.css">
+
+<script type="text/javascript" src="../../webjars/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="../../webjars/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style type="text/css">
+/* 用於list-group 下,改變游標圖示  */
+.myBadgeCursor>li>.badge {
+	cursor: pointer;
+}
+
+.badgeSpan { /* 用於 list badge (delete)*/
+	text-align: center;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+</style>
+
+<!-- global variable -->
+<script type="text/javascript">
+  const flashcards = "flashcards";//base path
+  const model = "flashcard";//*** 修改這裡 
+  const quiz = "quiz";
+  const basePath={context:"/FlashCardWebV2",version:"",path:function(){
+	return this.context+"/"+this.version;
+  }};
+  listModels = "flashcards";//*** 修改這裡 
+  var pageInfo;
+  var pageNum = 1;
+  var id;
+</script>
+
+<!-- import version and process other  element -->
+<script type="text/javascript" src="../../js/version.js"></script>
+<script type="text/javascript" src="../../js/nav.js"></script>
+
+<!-- 
+processVersion() => ajax => processNav() => other
+-->
+<script type="text/javascript">
+$(function (){
+  processVersion();
+  
+  processFormAction( basePath.path() + "/" + model);
+});
+</script>
+<!-- /import version and process nav element -->
+
+
+<!-- echo and init -->
+<script type="text/javascript">
+  $(document).ready(function() {
+	//*** 修改這裡 
+	$.ajax({
+	  type : "get",
+	  dataType : "json",
+	  url : basePath.path()+"/" + model + "/echo",
+	  success : function(resp) {
+		$("#id").val(resp.data.id);
+		$("#term").val(resp.data.term);
+		$("#definition").val(resp.data.definition);
+	  },
+	  error : function(thrownError) {
+		alert("echo error:" + thrownError);
+	  }
+	});
+  });
+</script>
+
+<!-- nav -->
+<script type="text/javascript">
+      $(function () {
+        //使發生作用
+        //doAction(".navbar-collapse ul .dropdown ul .modelManager-flashcard");//*** 修改這裡
+      });
+</script>
+
+<!-- form -->
+<script type="text/javascript">
+  function processFormAction(path) {
+    $(".form-update").attr('action',path);
+  };
+</script>
+
+</head>
+<body>
+
+    <!-- 導航欄 -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="">FlashCard </a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active??? modelManager"><a class="hrefDisabled???" href="">字卡管理 </a></li>
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-expanded="false">
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li class="active??? modelManager-flashcard"><a class="hrefDisabled???" href="">Flashcard</a></li>
+
+                            <li class="active???? modelManager-flashcardHolder"><a class="hrefDisabled???" href="">FlashcardHolder</a></li>
+
+                            <li class="active??? modelManager-holderData"><a class="hrefDisabled???" href="">HolderData</a></li>
+                        </ul></li>
+                    <li class="active??? quizManager"><a class="hrefDisabled???" href="">測驗管理 </a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#" data-target="#myModal" data-toggle="modal">關於</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- /導航欄 -->
+
+    <!-- 巨屏 -->
+    <div class="jumbotron">
+        <div class="container">
+            <h1>FlashCard</h1>
+            <p>管理 Flashcard</p>
+            <!-- //*** 修改這裡  -->
+        </div>
+    </div>
+
+    <!-- form -->
+    <!-- //*** 修改這裡  -->
+    <div class="container">
+        <form   class="form-horizontal form-update" action="" method="post">
+            <fieldset>
+                <legend>編輯 Flashcard</legend>
+                <div class="form-group">
+                    <label for="term" class="col-lg-2 control-label">Term</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="term" name="term" placeholder="ex: apple">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="definition" class="col-lg-2 control-label">Definition</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="definition" name="definition" placeholder="ex: 蘋果">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <input type="hidden" name="_method" value="put">
+                        <input type="hidden" id="id" name="id">
+                        <button type="reset" class="btn btn-default" style="color: black;">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+    
+</body>
+</html>
