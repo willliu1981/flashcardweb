@@ -1,13 +1,13 @@
 package idv.fc.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,10 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 
-import idv.debug.CC;
-import idv.debug.Debug;
 import idv.fc.model.Flashcard;
 import idv.fc.model.dto.simpledto.SimplePageInfoDTO;
 import idv.fc.service.abstraction.IFlashcardService;
@@ -92,6 +89,9 @@ public class FlashcardCRUDController extends BaseController {
 
 		return jsonMap;
 	}
+	
+
+
 
 	@RequestMapping(value = FLASHCARD, method = RequestMethod.POST)
 	public String add(Flashcard flashcard, HttpServletRequest request) {
